@@ -7,6 +7,11 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <Button Name="btn1" Content="ClickMe" Click="btn1_Click"/>
+        <StackPanel Margin="50">
+            <Button Name="OverviewScreen" Content="Übersicht AES GCM" Click="btn1_Click"/>
+            <Button Name="StepByStep" Content="Schritt für Schritt Anleitung" Click="StepByStep_Click"/>
+            <Button Name="EncryptionDecryption" Content="Ver- und Entschlüsselung" Click="EncryptionDecryption_Click"/>
+            <Button Name="DragAndDrop" Content="Drag- und Drop - Spiel" Click="DragAndDrop_Click"/>
+        </StackPanel>
     </Grid>
 </Window>

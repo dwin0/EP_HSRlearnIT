@@ -29,5 +29,20 @@ namespace EP_HSRlearnIT
         {
             MessageBox.Show("Setup works!");
         }
+
+        private void StepByStep_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void EncryptionDecryption_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DragAndDrop_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
