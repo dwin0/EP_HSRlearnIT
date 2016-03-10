@@ -9,14 +9,14 @@ namespace EP_HSRlearnIT
     internal class AesGcmCryptoLibrary
     {
 
-        internal String Encrypt(int key, string plaintext)
+        internal String Encrypt(string key, string plaintext)
         {
-            return "encrypted/ciphertext";
+            return key+plaintext+"verschlüsselt";
         }
 
-        internal String Decrypt(int key, string ciphertext)
+        internal String Decrypt(string key, string ciphertext)
         {
-            return "decrypted/plaintext";
+            return key+ciphertext+"entschlüsselt";
         }
 
     }

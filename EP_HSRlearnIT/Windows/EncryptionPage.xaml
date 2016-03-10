@@ -8,9 +8,18 @@
       d:DesignHeight="300" d:DesignWidth="300"
       Title="EncryptionPage">
 
-    <Grid>
-        <StackPanel>
-            <TextBlock Text="Encryption/Decryption"/>
+    <Grid Background="White">
+        <StackPanel Margin="10">
+            <TextBlock Text="Klartext:"/>
+            <TextBox Height="50" Margin="0, 10"  Name="PlainTextBox"/>
+            <TextBlock Text="Passwort"/>
+            <TextBox Name="EncryptionPasswordBox"/>
+            <Button Click="OnEnryptionButtonClick" Content="Verschlüsseln" Name="EncryptionButton"/>
+            <TextBlock Text="Verschlüsselter Text:"/>
+            <TextBox Height="50" Margin="0, 10" Name="CipherTextBox"/>
+            <TextBlock Text="Passwort"/>
+            <TextBox Name="DecryptionPasswordBox"/>
+            <Button Click="OnDecryptionButtonClick" Content="Entschlüsseln" Name="DecryptionButton"/>
         </StackPanel>
     </Grid>
 </Page>

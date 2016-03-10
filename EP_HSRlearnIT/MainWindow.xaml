@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EP_HSRlearnIT"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="400" Width="600">
     <Grid>
-        <Frame x:Name="_mainFrame"/>
+        <Frame x:Name="_mainFrame" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10"/>
     </Grid>
 </Window>

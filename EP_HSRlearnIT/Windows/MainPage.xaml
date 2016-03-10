@@ -8,7 +8,7 @@
       d:DesignHeight="300" d:DesignWidth="300"
       Title="MainPage">
 
-    <Grid Margin="0,0,-170,0">
+    <Grid>
         <StackPanel Margin="50">
             <Button Click="OverviewScreen_Click" Content="Übersicht AES GCM" Name="OverviewScreen" Style="{StaticResource ResourceKey=MainButtonStyle}"/>
             <Button Click="StepByStep_Click" Content="Schritt für Schritt Anleitung" Name="StepByStep" Style="{StaticResource ResourceKey=MainButtonStyle}"/>
