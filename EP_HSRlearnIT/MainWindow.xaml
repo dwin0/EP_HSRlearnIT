@@ -8,10 +8,10 @@
         Title="MainWindow" Height="350" Width="525">
     <Grid>
         <StackPanel Margin="50">
-            <Button Name="OverviewScreen" Content="Übersicht AES GCM" Click="btn1_Click"/>
-            <Button Name="StepByStep" Content="Schritt für Schritt Anleitung" Click="StepByStep_Click"/>
-            <Button Name="EncryptionDecryption" Content="Ver- und Entschlüsselung" Click="EncryptionDecryption_Click"/>
-            <Button Name="DragAndDrop" Content="Drag- und Drop - Spiel" Click="DragAndDrop_Click"/>
+            <Button Click="btn1_Click" Content="Übersicht AES GCM" Name="OverviewScreen" Style="{StaticResource ResourceKey=MainButtonStyle}"/>
+            <Button Click="StepByStep_Click" Content="Schritt für Schritt Anleitung" Name="StepByStep" Style="{StaticResource ResourceKey=MainButtonStyle}"/>
+            <Button Click="EncryptionDecryption_Click" Content="Ver- und Entschlüsselung" Name="EncryptionDecryption" Style="{StaticResource ResourceKey=MainButtonStyle}"/>
+            <Button Click="DragAndDrop_Click" Content="Drag- und Drop - Spiel" Name="DragAndDrop" Style="{StaticResource ResourceKey=MainButtonStyle}"/>
         </StackPanel>
     </Grid>
 </Window>
