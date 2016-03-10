@@ -12,7 +12,11 @@
         <TextBox Name ="StepTitle" Text="Schritt 1"/>
         <StackPanel Orientation="Horizontal" Margin="0, 50">
             <Image Source="/images/aead.png" Height="166" Width="153"/>
-            <TextBox Text="Dies ist eine anleitung"/>
+            <TextBox Name="StepDescriptionBox"  Text="Dies ist eine anleitung"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Button Click="OnPreviousStepButton_Click" Content="Vorheriger Schritt" Name="PreviousStepButton"/>
+            <Button Click="OnNextStepButton_Click" Content="Nächster Schritt" Name="NextStepButton"/>
         </StackPanel>
     </StackPanel>
 </Page>

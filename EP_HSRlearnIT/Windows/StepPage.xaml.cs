@@ -20,9 +20,44 @@ namespace EP_HSRlearnIT.Windows
     /// </summary>
     public partial class StepPage : Page
     {
+        private int _step;
+
         public StepPage()
         {
             InitializeComponent();
+            _step = 1;
+            ReplaceText(_step);
+        }
+
+        private void OnPreviousStepButton_Click(object sender, RoutedEventArgs e)
+        {
+            ReplaceText(--_step);
+        }
+
+        private void OnNextStepButton_Click(object sender, RoutedEventArgs e)
+        {
+            ReplaceText(++_step);
+        }
+
+        private void ReplaceText(int numOfStep)
+        {
+            switch(numOfStep)
+            {
+                case 1:
+                    PreviousStepButton.IsEnabled = false;
+                    NextStepButton.IsEnabled = true;
+                    break;
+                case 3:
+                    PreviousStepButton.IsEnabled = true;
+                    NextStepButton.IsEnabled = false;
+                    break;
+                default:
+                    PreviousStepButton.IsEnabled = true;
+                    NextStepButton.IsEnabled = true;
+                    break;
+            }
+            StepDescriptionBox.Text = (string)Application.Current.FindResource("Step" + numOfStep);
+            StepTitle.Text = "Schritt " + numOfStep;
         }
     }
 }
