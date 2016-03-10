@@ -8,9 +8,9 @@
       d:DesignHeight="300" d:DesignWidth="300"
       Title="AesGcmOverviewPage">
 
-    <Grid>
-        <StackPanel>
-            <TextBlock Text="Overview"/>
-        </StackPanel>
-    </Grid>
+    <StackPanel>
+        <Viewbox Margin="40">
+            <Image Source="/images/aead.png"/>
+        </Viewbox>
+    </StackPanel>
 </Page>

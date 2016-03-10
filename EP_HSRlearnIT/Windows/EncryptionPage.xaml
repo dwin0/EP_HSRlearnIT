@@ -8,7 +8,7 @@
       d:DesignHeight="300" d:DesignWidth="300"
       Title="EncryptionPage">
 
-    <Grid Background="White">
+    <Grid>
         <StackPanel Margin="10">
             <TextBlock Text="Klartext:"/>
             <TextBox Height="50" Margin="0, 10"  Name="PlainTextBox"/>

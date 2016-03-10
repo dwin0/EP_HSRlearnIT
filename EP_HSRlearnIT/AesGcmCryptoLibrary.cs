@@ -11,12 +11,12 @@ namespace EP_HSRlearnIT
 
         internal String Encrypt(string key, string plaintext)
         {
-            return key+plaintext+"verschlüsselt";
+            return "verschlüsselt";
         }
 
         internal String Decrypt(string key, string ciphertext)
         {
-            return key+ciphertext+"entschlüsselt";
+            return "entschlüsselt";
         }
 
     }
