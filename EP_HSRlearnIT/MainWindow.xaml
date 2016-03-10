@@ -7,11 +7,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <StackPanel Margin="50">
-            <Button Click="btn1_Click" Content="Übersicht AES GCM" Name="OverviewScreen" Style="{StaticResource ResourceKey=MainButtonStyle}"/>
-            <Button Click="StepByStep_Click" Content="Schritt für Schritt Anleitung" Name="StepByStep" Style="{StaticResource ResourceKey=MainButtonStyle}"/>
-            <Button Click="EncryptionDecryption_Click" Content="Ver- und Entschlüsselung" Name="EncryptionDecryption" Style="{StaticResource ResourceKey=MainButtonStyle}"/>
-            <Button Click="DragAndDrop_Click" Content="Drag- und Drop - Spiel" Name="DragAndDrop" Style="{StaticResource ResourceKey=MainButtonStyle}"/>
-        </StackPanel>
+        <Frame x:Name="_mainFrame"/>
     </Grid>
 </Window>

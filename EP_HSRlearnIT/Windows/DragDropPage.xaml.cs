@@ -1,5 +1,4 @@
-﻿using EP_HSRlearnIT.Windows;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,18 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace EP_HSRlearnIT
+namespace EP_HSRlearnIT.Windows
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for DragDropPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class DragDropPage : Page
     {
-        public MainWindow()
+        public DragDropPage()
         {
             InitializeComponent();
-            _mainFrame.Navigate(new MainPage());
         }
-        
     }
 }

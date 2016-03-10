@@ -55,6 +55,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Windows\AesGcmOverviewPage.xaml.cs">
+      <DependentUpon>AesGcmOverviewPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\DragDropPage.xaml.cs">
+      <DependentUpon>DragDropPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\EncryptionPage.xaml.cs">
+      <DependentUpon>EncryptionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\StepPage.xaml.cs">
+      <DependentUpon>StepPage.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Windows\AesGcmOverviewPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -70,6 +89,22 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Resources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\DragDropPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\EncryptionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\StepPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
