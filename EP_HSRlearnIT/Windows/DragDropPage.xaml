@@ -7,10 +7,53 @@
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
       Title="DragDropPage">
+    <Page.Resources>
+        <DataTemplate x:Key="AesGcmPartTemplate" DataType="local:AesGcmPart">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="64"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Border BorderThickness="2" Padding="2" BorderBrush="LightGray" Grid.Column="0">
+                    <Image Source="{Binding Image}" />
+                </Border>
+                <Label Content="{Binding Name}" Grid.Column="1" VerticalAlignment="Center"/>
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
 
-    <Grid>
-        <StackPanel>
-            <TextBlock Text="DragDrop"/>
-        </StackPanel>
+    <Grid Margin="20" Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Label Content="Verfügbar:" Grid.Column="0" Grid.Row="0"/>
+        <Label Content="Gesetzt:" Grid.Column="1" Grid.Row="0"/>
+
+        <Button Name="ResetButton" Content="Zurücksetzen" Grid.Row="2" Grid.Column="1"  
+                Margin="5" Click="OnResetButtonClick" />
+
+        <ListBox Name="AvailableListBox" Grid.Row="1" Grid.Column="0"
+                 ItemsSource="{Binding AvailableParts}"  
+                 ItemTemplate="{StaticResource AesGcmPartTemplate}"
+                  
+                 PreviewMouseLeftButtonDown="AvailableListBox_OnPreviewMouseLeftButtonDown"  
+                 PreviewMouseLeftButtonUp="AvailableListBox_OnPreviewMouseLeftButtonUp" 
+                 MouseMove="AvailableListBox_OnMouseMove"/>
+
+        <ListBox Name="SetListBox" Grid.Row="1" Grid.Column="2" 
+                 ItemsSource="{Binding SetParts}"  
+                 ItemTemplate="{StaticResource AesGcmPartTemplate}"                  
+                  
+                 AllowDrop="True"
+                 DragOver="SetListBox_OnDragOver" 
+                 Drop="SetListBox_OnDrop"  
+                 />
     </Grid>
 </Page>
