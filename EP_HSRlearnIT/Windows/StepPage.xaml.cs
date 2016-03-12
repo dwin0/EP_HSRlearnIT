@@ -21,6 +21,8 @@ namespace EP_HSRlearnIT.Windows
     public partial class StepPage : Page
     {
         private int _step;
+        private const int SMALLEST_STEP = 1;
+        private const int BIGGEST_STEP = 3;
 
         public StepPage()
         {
@@ -43,11 +45,12 @@ namespace EP_HSRlearnIT.Windows
         {
             switch(numOfStep)
             {
-                case 1:
+
+                case SMALLEST_STEP:
                     PreviousStepButton.IsEnabled = false;
                     NextStepButton.IsEnabled = true;
                     break;
-                case 3:
+                case BIGGEST_STEP:
                     PreviousStepButton.IsEnabled = true;
                     NextStepButton.IsEnabled = false;
                     break;
