@@ -32,10 +32,6 @@ namespace EP_HSRlearnIT.Windows.Tests
             app.Close();
         }
 
-        [TestMethod()]
-        public void FailTest()
-        {
-            Assert.Fail();
-        }
+        
     }
 }
