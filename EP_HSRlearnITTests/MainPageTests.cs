@@ -32,6 +32,11 @@ namespace EP_HSRlearnIT.Windows.Tests
             app.Close();
         }
 
+        [TestMethod()]
+        public void OKTest()
+        {
+            Assert.IsTrue(true);
+        }
         
     }
 }
