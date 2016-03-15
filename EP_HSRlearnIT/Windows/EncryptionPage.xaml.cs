@@ -20,21 +20,33 @@ namespace EP_HSRlearnIT.Windows
     /// </summary>
     public partial class EncryptionPage : Page
     {
-        private AesGcmCryptoLibrary library;
+        #region Private Members
+
+        private AesGcmCryptoLibrary _library;
+        #endregion
+
+
+        #region Constructors
+
         public EncryptionPage()
         {
             InitializeComponent();
-            library = new AesGcmCryptoLibrary();
+            _library = new AesGcmCryptoLibrary();
         }
+        #endregion
+
+
+        #region Private Methods
 
         private void OnEnryptionButtonClick(object sender, RoutedEventArgs e)
         {
-            CipherTextBox.Text = library.Encrypt(EncryptionPasswordBox.Text, PlainTextBox.Text);
+            CipherTextBox.Text = _library.Encrypt(EncryptionPasswordBox.Text, PlainTextBox.Text);
         }
 
         private void OnDecryptionButtonClick(object sender, RoutedEventArgs e)
         {
-            PlainTextBox.Text = library.Decrypt(DecryptionPasswordBox.Text, CipherTextBox.Text);
+            PlainTextBox.Text = _library.Decrypt(DecryptionPasswordBox.Text, CipherTextBox.Text);
         }
+        #endregion
     }
 }

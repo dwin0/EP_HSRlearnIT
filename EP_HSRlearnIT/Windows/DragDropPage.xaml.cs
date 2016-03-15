@@ -21,38 +21,45 @@ namespace EP_HSRlearnIT.Windows
     /// </summary>
     public partial class DragDropPage : Page
     {
-        public ObservableCollection<AesGcmPart> AvailableParts;
-        public ObservableCollection<AesGcmPart> SetParts;
+        #region Private Members
 
+        private ObservableCollection<AesGcmPart> _availableParts;
+        private ObservableCollection<AesGcmPart> _setParts;
+        private Point? _dragStartPosition = null;
+        #endregion
+
+
+        #region Constructors
         public DragDropPage()
         {
             InitializeComponent();
             InitParts();
             DataContext = this;
         }
+        #endregion
+
+        #region Private Methods
 
         private void InitParts()
         {
-            AvailableParts = new ObservableCollection<AesGcmPart>();
-            SetParts = new ObservableCollection<AesGcmPart>();
+            _availableParts = new ObservableCollection<AesGcmPart>();
+            _setParts = new ObservableCollection<AesGcmPart>();
             new[] { "Part1", "Part2", "Part3" }
                 .ToList()
-                .ForEach(part => AvailableParts.Add(new AesGcmPart() { Name = part, Image = $"/images/{part.ToLower()}.png" }));
+                .ForEach(part => _availableParts.Add(new AesGcmPart() { Name = part, Image = $"/images/{part.ToLower()}.png" }));
 
-            AvailableListBox.ItemsSource = AvailableParts;
-            SetListBox.ItemsSource = SetParts;
+            AvailableListBox.ItemsSource = _availableParts;
+            SetListBox.ItemsSource = _setParts;
         }
-
-        private Point? dragStartPosition = null;
 
         private void AvailableListBox_OnPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            dragStartPosition = e.GetPosition(this);
+            _dragStartPosition = e.GetPosition(this);
         }
 
         private void AvailableListBox_OnPreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            dragStartPosition = null;
+            _dragStartPosition = null;
         }
 
         private bool IsMovementFarEnough(Point origPos, Point curPos)
@@ -67,29 +74,27 @@ namespace EP_HSRlearnIT.Windows
         private void AvailableListBox_OnMouseMove(object sender, MouseEventArgs e)
         {
             //Drag doesn't start if click wasn't withing available list
-            if(dragStartPosition == null)
+            if(_dragStartPosition == null)
             {
                 return;
             }
             //check if movement is far enough
             var position = e.GetPosition(this);
-            if(!IsMovementFarEnough((Point)dragStartPosition, position))
+            if(!IsMovementFarEnough((Point)_dragStartPosition, position))
             {
                 return;
             }
             //everything ok -> start Drag
-            dragStartPosition = null;
+            _dragStartPosition = null;
             StartDrag(AvailableListBox.SelectedItem as AesGcmPart);
         }
 
-
         private void StartDrag<T>(T obj)
         {
-            var dragScope = this.Content as FrameworkElement;
+            var dragScope = Content as FrameworkElement;
             var dragData = new DataObject(typeof(T), obj);
             DragDrop.DoDragDrop(dragScope, dragData, DragDropEffects.Move);
         }
-
 
         private void SetListBox_OnDragOver(object sender, DragEventArgs e)
         {
@@ -107,12 +112,13 @@ namespace EP_HSRlearnIT.Windows
         private void SetListBox_OnDrop(object sender, DragEventArgs e)
         {
             var aesGcmPart = e.Data.GetData(typeof(AesGcmPart)) as AesGcmPart;
-            SetParts.Add(aesGcmPart);
+            _setParts.Add(aesGcmPart);
         }
 
         private void OnResetButtonClick(object sender, RoutedEventArgs e)
         {
-            SetParts.Clear();
+            _setParts.Clear();
         }
+        #endregion
     }
 }

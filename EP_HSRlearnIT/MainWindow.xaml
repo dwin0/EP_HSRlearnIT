@@ -7,6 +7,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="400" Width="600">
     <Grid>
-        <Frame x:Name="_mainFrame" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10"/>
+        <Frame x:Name="MainFrame" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10"/>
     </Grid>
 </Window>

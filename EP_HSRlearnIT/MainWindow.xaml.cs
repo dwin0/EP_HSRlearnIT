@@ -21,11 +21,14 @@ namespace EP_HSRlearnIT
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        #region Constructors
+
         public MainWindow()
         {
             InitializeComponent();
-            _mainFrame.Navigate(new MainPage());
+            MainFrame.Navigate(new MainPage());
         }
-        
+        #endregion
     }
 }

@@ -20,9 +20,12 @@ namespace EP_HSRlearnIT.Windows
     /// </summary>
     public partial class AesGcmOverviewPage : Page
     {
+        #region Constructors
+
         public AesGcmOverviewPage()
         {
             InitializeComponent();
         }
+        #endregion
     }
 }

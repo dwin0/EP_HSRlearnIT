@@ -8,9 +8,12 @@ namespace EP_HSRlearnIT
 {
     internal class FileSaver
     {
+        #region Public Methods
+
         internal bool SaveFile(String text)
         {
             return false;
         }
+        #endregion
     }
 }

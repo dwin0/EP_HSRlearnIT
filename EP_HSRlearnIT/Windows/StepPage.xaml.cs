@@ -20,16 +20,24 @@ namespace EP_HSRlearnIT.Windows
     /// </summary>
     public partial class StepPage : Page
     {
-        private int _step;
-        private const int SMALLEST_STEP = 1;
-        private const int BIGGEST_STEP = 3;
+        #region Private Members
 
+        private int _step = 1;
+        private const int _SMALLEST_STEP = 1;
+        private const int _BIGGEST_STEP = 3;
+        #endregion
+
+
+        #region Constructors
         public StepPage()
         {
             InitializeComponent();
-            _step = 1;
             ReplaceText(_step);
         }
+        #endregion
+
+
+        #region Private Methods
 
         private void OnPreviousStepButton_Click(object sender, RoutedEventArgs e)
         {
@@ -41,16 +49,16 @@ namespace EP_HSRlearnIT.Windows
             ReplaceText(++_step);
         }
 
-        private void ReplaceText(int numOfStep)
+        private void ReplaceText(int stepNumber)
         {
-            switch(numOfStep)
+            switch(stepNumber)
             {
 
-                case SMALLEST_STEP:
+                case _SMALLEST_STEP:
                     PreviousStepButton.IsEnabled = false;
                     NextStepButton.IsEnabled = true;
                     break;
-                case BIGGEST_STEP:
+                case _BIGGEST_STEP:
                     PreviousStepButton.IsEnabled = true;
                     NextStepButton.IsEnabled = false;
                     break;
@@ -59,8 +67,10 @@ namespace EP_HSRlearnIT.Windows
                     NextStepButton.IsEnabled = true;
                     break;
             }
-            StepDescriptionBox.Text = (string)Application.Current.FindResource("Step" + numOfStep);
-            StepTitle.Text = "Schritt " + numOfStep;
+
+            StepDescriptionBox.Text = Application.Current.FindResource("Step" + stepNumber) as string;
+            StepTitle.Text = "Schritt " + stepNumber;
         }
+        #endregion
     }
 }

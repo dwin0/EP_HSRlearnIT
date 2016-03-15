@@ -8,6 +8,7 @@ namespace EP_HSRlearnIT
 {
     internal class AesGcmCryptoLibrary
     {
+        #region Public Methods
 
         internal String Encrypt(string key, string plaintext)
         {
@@ -19,5 +20,6 @@ namespace EP_HSRlearnIT
             return "entschlüsselt";
         }
 
+        #endregion
     }
 }

@@ -20,29 +20,36 @@ namespace EP_HSRlearnIT.Windows
     /// </summary>
     public partial class MainPage : Page
     {
+        #region Constructors
+
         public MainPage()
         {
             InitializeComponent();
         }
+        #endregion
+
+
+        #region Private Methods
 
         private void OverviewScreen_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new AesGcmOverviewPage());
+            NavigationService.Navigate(new AesGcmOverviewPage());
         }
 
         private void StepByStep_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new StepPage());
+            NavigationService.Navigate(new StepPage());
         }
 
         private void EncryptionDecryption_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new EncryptionPage());
+            NavigationService.Navigate(new EncryptionPage());
         }
 
         private void DragAndDrop_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new DragDropPage());
+            NavigationService.Navigate(new DragDropPage());
         }
+        #endregion
     }
 }
