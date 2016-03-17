@@ -20,11 +20,14 @@ namespace EP_HSRlearnIT.Windows
     /// </summary>
     public partial class MainPage : Page
     {
+        MainWindow _main;
+
         #region Constructors
 
-        public MainPage()
+        public MainPage(MainWindow main)
         {
             InitializeComponent();
+            _main = main;
         }
         #endregion
 
@@ -50,6 +53,7 @@ namespace EP_HSRlearnIT.Windows
         {
             NavigationService.Navigate(new DragDropPage());
         }
+
         #endregion
     }
 }

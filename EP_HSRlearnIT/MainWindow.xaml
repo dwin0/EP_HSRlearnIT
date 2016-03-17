@@ -7,6 +7,21 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="400" Width="600">
     <Grid>
-        <Frame x:Name="MainFrame" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10"/>
+        <StackPanel Name="MenuStackPanel" Width="150" HorizontalAlignment="Left" Visibility="Hidden" Background="White" Panel.ZIndex="2">
+            <TextBox Text="Menu"/>
+            <ListView Name="Menu" ItemsSource="{StaticResource ResourceKey=MenuStrings}" MouseDoubleClick="ListBoxItem_MouseDoubleClick"
+                      BorderBrush="Black"/>
+        </StackPanel>
+        <Button x:Name="MenuButton" Content=">>" Height="30" Click="OnMenuButton_Click"
+                VerticalAlignment="Top" HorizontalAlignment="Left" Width="20"
+                Panel.ZIndex="2"/>
+        <Button x:Name="BackButton" Content="Zurück" Height="30" Click="OnBackButton_Click"
+                VerticalAlignment="Top" HorizontalAlignment="Left" Width="50"
+                Margin="50, 0, 0, 0"/>
+        <Button x:Name="ForwardButton" Content="Weiter" Height="30" Click="OnForwardButton_Click"
+                VerticalAlignment="Top" HorizontalAlignment="Left" Width="50"
+                Margin="120, 0, 0, 0"/>
+        <Frame x:Name="MainFrame" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+               Panel.ZIndex="1" NavigationUIVisibility="Hidden" Margin="0, 50, 0, 0"/>
     </Grid>
 </Window>
