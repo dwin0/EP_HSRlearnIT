@@ -97,5 +97,12 @@ namespace EP_HSRlearnIT
             MenuButton.Margin = margin;
             MenuButton.Content = "<<";
         }
+
+
+        private void OnSaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            FileSaver newFile = new FileSaver();
+            newFile.CreateFile("AES-GCM", 20, "You are starting with the learntool!");
+        }
     }
 }
