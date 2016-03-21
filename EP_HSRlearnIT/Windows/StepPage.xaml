@@ -1,0 +1,22 @@
+﻿<Page x:Class="EP_HSRlearnIT.Windows.StepPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:EP_HSRlearnIT.Windows"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+      Title="StepPage">
+
+    <StackPanel Background="White">
+        <TextBox Name ="StepTitle" Text="Schritt 1"/>
+        <StackPanel Orientation="Horizontal" Margin="0, 50">
+            <Image Source="/images/aead.png" Height="166" Width="153"/>
+            <TextBox Name="StepDescriptionBox"  Text="Dies ist eine anleitung"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Button Click="OnPreviousStepButton_Click" Content="Vorheriger Schritt" Name="PreviousStepButton"/>
+            <Button Click="OnNextStepButton_Click" Content="Nächster Schritt" Name="NextStepButton"/>
+        </StackPanel>
+    </StackPanel>
+</Page>

@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:EP_HSRlearnIT"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+         <ResourceDictionary Source="Resources.xaml"/>
     </Application.Resources>
 </Application>
