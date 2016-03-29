@@ -55,4 +55,6 @@ using System.Windows;
 [assembly: AssemblyFileVersion("1.0.0.0")]
 [assembly: InternalsVisibleTo("EP_HSRlearnIT.Tests")]
 [assembly: InternalsVisibleTo("EP_HSRlearnIT.Explorables")]
+[assembly: InternalsVisibleTo("EP_HSRlearnITTests1")]
+[assembly: InternalsVisibleTo("Tests")]
 

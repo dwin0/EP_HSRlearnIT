@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EP_HSRlearnIT", "EP_HSRlear
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EP_HSRlearnITTests", "EP_HSRlearnITTests\EP_HSRlearnITTests.csproj", "{87D46FB0-6C27-424C-B274-6074346C363F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EP_HSRlearnITTests1", "EP_HSRlearnITTests01\EP_HSRlearnITTests1.csproj", "{8FB8FF77-EF3B-4379-991D-942FA7D705CD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{87D46FB0-6C27-424C-B274-6074346C363F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87D46FB0-6C27-424C-B274-6074346C363F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87D46FB0-6C27-424C-B274-6074346C363F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FB8FF77-EF3B-4379-991D-942FA7D705CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FB8FF77-EF3B-4379-991D-942FA7D705CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FB8FF77-EF3B-4379-991D-942FA7D705CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FB8FF77-EF3B-4379-991D-942FA7D705CD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
