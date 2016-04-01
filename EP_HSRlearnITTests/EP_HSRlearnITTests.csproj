@@ -72,11 +72,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AuthenticatedAesCngGcmTestVectorTests.cs" />
-<<<<<<< HEAD
     <Compile Include="FileSaverTests.cs" />
-=======
     <Compile Include="LoggingHandlerTest.cs" />
->>>>>>> 37752a31f2534375bba77a1863f3cbd0325bde05
     <Compile Include="MainPageTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util.cs" />
