@@ -24,6 +24,7 @@ namespace EP_HSRlearnIT.Windows.Tests
         {
             var app = Application.Launch(SutPath);
             var window = app.GetWindow("MainWindow", InitializeOption.NoCache);
+            window.WaitWhileBusy();
             var button = window.Get<Button>("OverviewScreen");
 
             Assert.AreEqual("Übersicht AES GCM", button.Text);
