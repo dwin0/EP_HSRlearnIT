@@ -27,7 +27,7 @@ namespace EP_HSRlearnIT
         public void writeToLogFile(string exmsg, string sourceMethod)
         {
             createIfMissing(path);
-            writer = new StreamWriter(path);
+            writer = new StreamWriter(path, true);
             writer.WriteLine("Exception :" + DateTime.Now.ToString() + ": " + exmsg +  " " + sourceMethod);
             writer.Close();
         }
