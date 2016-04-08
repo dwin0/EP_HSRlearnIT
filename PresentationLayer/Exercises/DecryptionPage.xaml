@@ -9,21 +9,46 @@
       Title="DecryptionPage">
 
     <Grid>
-        <StackPanel Margin="50,10,50,10">
-            <TextBlock Text="Verschlüsselter Text:"/>
-            <TextBox Height="50" Name="CipherTextBox" Margin="0,0,0,10"/>
-            <DockPanel>
-                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" VerticalAlignment="Center"/>
-                <Button Content="File Importieren" Name="ImportButton" Height="40" Width="90" Margin="2"/>
-                <Button Content="Entschlüsseln" Name="DecryptionButton" Height="40" Width="90" Margin="2"/>
-                <Button Content="Verschlüsseln" Name="EncrpytionButton" Height="40" Width="90" Margin="2" HorizontalAlignment="Left"/>
-            </DockPanel>
-            <TextBlock Text="Passwort:" Margin="0,10,0,0"/>
-            <TextBox Name="DecryptionPasswordBox" Height="20"/>
-            <TextBlock Text="Tag:" Margin="0,10,0,0"/>
-            <TextBox Name="TagBox" Height="20"/>
-            <TextBlock Text="Klartext:" Margin="0,10,0,0"/>
-            <TextBox Height="50" Name="PlainTextBox"/>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Border CornerRadius="6" BorderBrush="Gray"  Background="LightGray" BorderThickness="2" Padding="6" Margin="35,0,0,0">
+            <StackPanel Margin="15,0,15,0">
+                <Button Content="File Importieren" Name="ImportButton" Height="40" Width="90" HorizontalAlignment="Left"/>
+                <TextBlock Text="Verschlüsselter Text:" Margin="0,10,0,0"/>
+                <TextBox Height="50" Name="CipherTextBox"/>
+                <TextBlock Text="Tag:"/>
+                <TextBox Height="20" Name="TagBox"/>
+                <TextBlock Text="Key:"/>
+                <TextBox Name="DecryptionPasswordBox" Height="20"/>
+                <DockPanel>
+                    <Button Content="Entschlüsseln" Name="DecryptionButton" Height="40" Width="90" Margin="0,10,0,10" />
+                    <Button Content="Verschlüsseln" Name="EncrpytionButton" Height="40" Width="90" HorizontalAlignment="Left" Margin="10,10,0,10"/>
+                </DockPanel>
+                <TextBlock Text="IV:"/>
+                <TextBox Name="IVBox" Height="20"/>
+                <TextBlock Text="Klartext:"/>
+                <TextBox Height="50" Name="PlainTextBox"/>
+            </StackPanel>
+        </Border>
+
+
+        <StackPanel Grid.Column="1" Margin="10,0,35,0">
+            <TextBlock Text="Verschlüsselter Text Hex:" Margin="0,60,0,0"/>
+            <TextBox Height="50" Name="HexCipherTextBox" />
+            <TextBlock Text="Tag Hex:"/>
+            <TextBox Height="20" Name="HexTagBox" />
+            <TextBlock Text="Key Hex:"/>
+            <TextBox Height="20" Name="HexEncryptionPasswordBox"/>
+            <TextBlock Text="IV Hex:" Margin="0,60,0,0"/>
+            <TextBox Height="20" Name="HexIVBox" />
+            <TextBlock Text="Klartext Hex:"/>
+            <TextBox Height="50" Name="HexPlainTextBox"/>
         </StackPanel>
     </Grid>
 </Page>
