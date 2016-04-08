@@ -28,7 +28,7 @@ namespace EP_HSRlearnIT
         {
             InitializeComponent();
             MainFrame.Navigate(new MainPage(this));
-            AppDomain.CurrentDomain.UnhandledException += LoggingHandler.unhandledExceptionTrapper;
+            //AppDomain.CurrentDomain.UnhandledException += LoggingHandler.unhandledExceptionTrapper;
         }
         #endregion
 

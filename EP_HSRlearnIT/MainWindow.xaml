@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EP_HSRlearnIT"
         mc:Ignorable="d"
-        Title="MainWindow" Height="400" Width="600">
+       Icon="images/icon.png"
+    Title="MainWindow" Height="400" Width="600">
     <Grid>
         <StackPanel Name="MenuStackPanel" Width="150" HorizontalAlignment="Left" Visibility="Hidden" Background="White" Panel.ZIndex="2">
             <TextBox Text="Menu"/>

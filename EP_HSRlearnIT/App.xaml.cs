@@ -8,10 +8,14 @@ using System.Windows;
 
 namespace EP_HSRlearnIT
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
+        private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        {
+            //Noch definieren, welcher Text ausgegeben werden soll
+            MessageBox.Show("Unhandled exception occured [global exception handler] :" + e.Exception.Message);
+            ExceptionLogger loghandle = new ExceptionLogger();
+            loghandle.writeToLogFile(e.Exception.StackTrace, "unhandled exception");
+        }
     }
 }

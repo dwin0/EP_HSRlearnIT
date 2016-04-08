@@ -67,10 +67,13 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AesGcmPart.cs" />
-    <Compile Include="LoggingHandler.cs" />
+    <Compile Include="ExceptionLogger.cs" />
     <Compile Include="StringCollection.cs" />
     <Compile Include="Windows\AesGcmOverviewPage.xaml.cs">
       <DependentUpon>AesGcmOverviewPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\DecryptionPage.xaml.cs">
+      <DependentUpon>DecryptionPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\DragDropPage.xaml.cs">
       <DependentUpon>DragDropPage.xaml</DependentUpon>
@@ -80,6 +83,9 @@
     </Compile>
     <Compile Include="Windows\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\EncryptionDecyrptionPage.xaml.cs">
+      <DependentUpon>EncryptionDecyrptionPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\StepPage.xaml.cs">
       <DependentUpon>StepPage.xaml</DependentUpon>
@@ -106,6 +112,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\DecryptionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\DragDropPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -115,6 +125,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\EncryptionDecyrptionPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -159,6 +173,9 @@
     <Resource Include="images\part1.png" />
     <Resource Include="images\part2.png" />
     <Resource Include="images\part3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

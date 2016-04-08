@@ -9,17 +9,21 @@
       Title="EncryptionPage">
 
     <Grid>
-        <StackPanel Margin="10">
+        <StackPanel Margin="50,10,50,10">
+            <TextBlock Text="IV:"/>
+            <TextBox Height="50" Name="IVBox"/>
             <TextBlock Text="Klartext:"/>
-            <TextBox Height="50" Margin="0, 10"  Name="PlainTextBox"/>
-            <TextBlock Text="Passwort"/>
-            <TextBox Name="EncryptionPasswordBox"/>
-            <Button Click="OnEnryptionButtonClick" Content="Verschlüsseln" Name="EncryptionButton"/>
-            <TextBlock Text="Verschlüsselter Text:"/>
-            <TextBox Height="50" Margin="0, 10" Name="CipherTextBox"/>
-            <TextBlock Text="Passwort"/>
-            <TextBox Name="DecryptionPasswordBox"/>
-            <Button Click="OnDecryptionButtonClick" Content="Entschlüsseln" Name="DecryptionButton"/>
+            <TextBox Height="50" Name="PlainTextBox"/>
+            <TextBlock Text="Passwort:" Margin="0,10,0,0"/>
+            <TextBox Height="20" Name="EncryptionPasswordBox" Margin="0,0,0,10"/>
+            <DockPanel>
+                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" VerticalAlignment="Center"/>
+                <Button Click="OnEnryptionButtonClick" Content="Verschlüsseln" Name="EncryptionButton" Height="40" Width="85" Margin="2"/>
+                <Button Content="Exportieren" Name="ExportButton" Height="40" Width="85" Margin="2"/>
+                <Button Content="Entschlüsseln" Name="DecryptionButton" Height="40" Width="85" Margin="2" HorizontalAlignment="Left"/>
+            </DockPanel>
+            <TextBlock Text="Verschlüsselter Text:" Margin="0,15,0,0"/>
+            <TextBox Height="50" Name="CipherTextBox"/>
         </StackPanel>
     </Grid>
 </Page>

@@ -1,25 +1,35 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 
 namespace EP_HSRlearnIT.Windows
 {
     /// <summary>
-    /// Interaction logic for EncryptionPage.xaml
+    /// Interaktionslogik für DecryptionPage.xaml
     /// </summary>
-    public partial class EncryptionPage : Page
+    public partial class DecryptionPage : Page
     {
+
         #region Private Members
 
         private AesGcmCryptoLibrary _library;
 
         #endregion
 
-
         #region Constructors
 
-        public EncryptionPage()
+        public DecryptionPage()
         {
             InitializeComponent();
             _library = new AesGcmCryptoLibrary();
@@ -27,20 +37,12 @@ namespace EP_HSRlearnIT.Windows
 
         #endregion
 
-
         #region Private Methods
 
-        private void OnEnryptionButtonClick(object sender, RoutedEventArgs e)
-        {
-            byte[] ciphertext = _library.Encrypt(EncryptionPasswordBox.Text, PlainTextBox.Text);
-            CipherTextBox.Text = BytesToString(ciphertext);
-        }
-
-       /* private void OnDecryptionButtonClick(object sender, RoutedEventArgs e)
+        private void OnDecryptionButtonClick(object sender, RoutedEventArgs e)
         {
             PlainTextBox.Text = _library.Decrypt(DecryptionPasswordBox.Text, StringToBytes(CipherTextBox.Text));
         }
-        */
 
         private string BytesToString(byte[] bytes)
         {
@@ -73,5 +75,6 @@ namespace EP_HSRlearnIT.Windows
         }
 
         #endregion
+
     }
 }

@@ -14,6 +14,7 @@ namespace EP_HSRlearnIT
         private String folderName = "Test";
         private String pathString;
         private String fileName;
+
         #region Public Methods
 
         internal bool SaveFile(String text)
@@ -21,7 +22,6 @@ namespace EP_HSRlearnIT
             return false;
         }
         #endregion
-
 
         public void CreateFile(String fileName, int status, String currentContent)
         {
