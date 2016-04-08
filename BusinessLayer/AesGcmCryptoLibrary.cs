@@ -6,7 +6,7 @@ using System.IO;
 
 namespace EP_HSRlearnIT
 {
-    internal class AesGcmCryptoLibrary
+    public class AesGcmCryptoLibrary
     {
         #region Private Members
         
@@ -20,7 +20,7 @@ namespace EP_HSRlearnIT
 
         #region Public Methods
 
-        internal byte[] Encrypt(string key, string plaintext)
+        public byte[] Encrypt(string key, string plaintext)
         {
             byte[] keyByte = Encoding.UTF8.GetBytes(key);
             byte[] plaintextByte = Encoding.UTF8.GetBytes(plaintext);
@@ -29,7 +29,7 @@ namespace EP_HSRlearnIT
         }
 
         
-        internal String Decrypt(string key, byte[] ciphertext)
+        public String Decrypt(string key, byte[] ciphertext)
         {
             byte[] keyByte = Encoding.UTF8.GetBytes(key);
             byte[] DecryptedTextByte = _Decrypt(keyByte, ciphertext);

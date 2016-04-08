@@ -79,9 +79,13 @@
     <Compile Include="Util.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EP_HSRlearnIT\EP_HSRlearnIT.csproj">
+    <ProjectReference Include="..\BusinessLayer\BusinessLayer.csproj">
+      <Project>{044aa43b-e2bf-4a8e-bf81-99f35dd91778}</Project>
+      <Name>BusinessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PresentationLayer\PresentationLayer.csproj">
       <Project>{F8A7274A-C7C1-4A8E-81E7-B1458CE60B11}</Project>
-      <Name>EP_HSRlearnIT</Name>
+      <Name>PresentationLayer</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
