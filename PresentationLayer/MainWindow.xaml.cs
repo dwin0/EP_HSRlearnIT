@@ -90,7 +90,7 @@ namespace EP_HSRlearnIT.PresentationLayer
         {
             MenuStackPanel.Visibility = Visibility.Visible;
             var margin = MenuButton.Margin;
-            margin.Left = 150;
+            margin.Left = 200;
             MenuButton.Margin = margin;
             MenuButton.Content = "<<";
         }

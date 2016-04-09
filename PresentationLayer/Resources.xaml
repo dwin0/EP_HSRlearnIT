@@ -13,13 +13,25 @@
     <system:String x:Key="Step1">Als erster Schritt wird ...</system:String>
     <system:String x:Key="Step2">Als zweiter Schritt wird ...</system:String>
     <system:String x:Key="Step3">Als dritter Schritt wird ...</system:String>
-    
+
     <Style x:Key="MainButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="BorderThickness" Value="3"/>
         <Setter Property="FontSize" Value="20"/>
         <Setter Property="Padding" Value="10, 2"/>
         <Setter Property="Margin" Value="5"/>
         <Setter Property="Height" Value="50"/>
+    </Style>
+
+    <Style x:Key="MenuStyle" TargetType="{x:Type TextBox}">
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Background" Value="#ffc6b3"/>
+        <Setter Property="Padding" Value="10"/>
+
+    </Style>
+
+    <Style x:Key="ItemStyle" TargetType="{x:Type ListViewItem}">
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="Padding" Value="10"/>
     </Style>
 
 </ResourceDictionary>

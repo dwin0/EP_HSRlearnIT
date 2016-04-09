@@ -8,11 +8,12 @@
        Icon="images/icon.png"
     Title="MainWindow" Height="500" Width="700">
     <Grid>
-        <StackPanel Name="MenuStackPanel" Width="150" HorizontalAlignment="Left" Visibility="Hidden" Background="White" Panel.ZIndex="2">
-            <TextBox Text="Menu"/>
-            <ListView Name="Menu" ItemsSource="{StaticResource ResourceKey=MenuStrings}" MouseDoubleClick="ListBoxItem_MouseDoubleClick"
-                      BorderBrush="Black"/>
-        </StackPanel>
+        <StackPanel Name="MenuStackPanel" Width="200" HorizontalAlignment="Left" Visibility="Hidden" Background="White" Panel.ZIndex="2">
+                <TextBox Text="Menu" Style="{StaticResource ResourceKey=MenuStyle}"/>
+                <ListView Name="Menu" ItemsSource="{StaticResource ResourceKey=MenuStrings}" MouseDoubleClick="ListBoxItem_MouseDoubleClick"
+                      ItemContainerStyle="{StaticResource ResourceKey=ItemStyle}" BorderThickness="0"/>
+            </StackPanel>
+
         <Button x:Name="MenuButton" Content=">>" Height="30" Click="OnMenuButton_Click"
                 VerticalAlignment="Top" HorizontalAlignment="Left" Width="20"
                 Panel.ZIndex="2"/>
