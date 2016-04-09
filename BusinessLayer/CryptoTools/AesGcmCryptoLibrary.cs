@@ -1,10 +1,11 @@
 ﻿using System;
-using System.Security.Cryptography;
-using Security.Cryptography;
-using System.Text;
 using System.IO;
+using System.Text;
+using Security.Cryptography;
+using System.Security.Cryptography;
 
-namespace EP_HSRlearnIT
+
+namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
 {
     public class AesGcmCryptoLibrary
     {

@@ -1,9 +1,10 @@
-﻿using System;
+﻿using EP_HSRlearnIT.BusinessLayer.CryptoTools;
+using System;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace EP_HSRlearnIT.Windows
+namespace EP_HSRlearnIT.PresentationLayer.Exercises
 {
     /// <summary>
     /// Interaction logic for EncryptionPage.xaml

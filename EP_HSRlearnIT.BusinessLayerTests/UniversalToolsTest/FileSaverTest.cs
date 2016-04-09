@@ -1,13 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using EP_HSRlearnIT;
-using System;
 using System.IO;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using EP_HSRlearnIT.BusinessLayer.UniversalTools;
 
-namespace EP_HSRlearnIT.Tests
+namespace EP_HSRlearnIT.BusinessLayer.Testing.UniversalToolsTest
 {
     [TestClass()]
     public class FileSaverTests

@@ -3,14 +3,16 @@
 using System.IO;
 using System.Security.Cryptography;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Security.Cryptography;
+using EP_HSRlearnIT.BusinessLayer.UniversalTools;
 
-namespace Security.Cryptography.Test
+namespace EP_HSRlearnIT.BusinessLayer.Testing.CryptoToolsTest
 {
     /// <summary>
     ///    Test vectors for AES GCM mode from
     ///    http://csrc.nist.gov/groups/ST/toolkit/BCM/documents/proposedmodes/gcm/gcm-spec.pdf
     ///</summary>
-    
+
     [TestClass]
     public class AuthenticatedAesCngGcmTestVectorTests
     {

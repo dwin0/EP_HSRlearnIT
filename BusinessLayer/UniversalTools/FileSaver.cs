@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
-namespace EP_HSRlearnIT
+namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
 {
     public class FileSaver
     {

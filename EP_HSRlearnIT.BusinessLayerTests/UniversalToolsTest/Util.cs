@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 
-namespace Security.Cryptography.Test
+namespace EP_HSRlearnIT.BusinessLayer.Testing.CryptoToolsTest
 {
     internal static class Util
     {
