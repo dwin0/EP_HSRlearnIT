@@ -1,13 +1,11 @@
-﻿using EP_HSRlearnIT.BusinessLayer.UniversalTools;
-using EP_HSRlearnIT.PresentationLayer.Exercises;
-using EP_HSRlearnIT.PresentationLayer.Games;
-using EP_HSRlearnIT.PresentationLayer.Tutorials;
+﻿using BusinessLayer;
+using EP_HSRlearnIT.Windows;
+using System;
 using System.Windows;
 using System.Windows.Input;
-﻿using BusinessLayer;
-using System;
 
-namespace EP_HSRlearnIT.PresentationLayer
+
+namespace EP_HSRlearnIT
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

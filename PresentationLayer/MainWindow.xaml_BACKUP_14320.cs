@@ -1,11 +1,18 @@
+<<<<<<< HEAD
 ﻿using EP_HSRlearnIT.BusinessLayer.UniversalTools;
 using EP_HSRlearnIT.PresentationLayer.Exercises;
 using EP_HSRlearnIT.PresentationLayer.Games;
 using EP_HSRlearnIT.PresentationLayer.Tutorials;
 using System.Windows;
 using System.Windows.Input;
+=======
 ﻿using BusinessLayer;
+using EP_HSRlearnIT.Windows;
 using System;
+using System.Windows;
+using System.Windows.Input;
+
+>>>>>>> origin/Prototyp
 
 namespace EP_HSRlearnIT.PresentationLayer
 {

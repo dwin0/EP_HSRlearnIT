@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+﻿using System;
 using System.Windows.Controls;
 
 namespace EP_HSRlearnIT.PresentationLayer.Tutorials
@@ -10,6 +11,9 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
     {
         #region Private Members
 
+        //Utilities
+        private MainWindow _mainWindow;
+
         private int _step = 1;
         private const int _SMALLEST_STEP = 1;
         private const int _BIGGEST_STEP = 3;
@@ -17,10 +21,23 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
 
 
         #region Constructors
-        public StepPage()
+        public StepPage(MainWindow mainWindow)
         {
             InitializeComponent();
+
+            //Utilities
+            _mainWindow = mainWindow;
+
+            //Utilities
+            object progress =_mainWindow.utilies.progress.TryGetProgress("CurrentStep");
+            if(progress != null)
+            {
+                _step = Convert.ToInt32(progress);
+            }
+            
             ReplaceText(_step);
+
+            
         }
         #endregion
 
@@ -30,11 +47,17 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
         private void OnPreviousStepButton_Click(object sender, RoutedEventArgs e)
         {
             ReplaceText(--_step);
+
+            //Utilities
+            _mainWindow.utilies.progress.saveProgress("CurrentStep", _step);
         }
 
         private void OnNextStepButton_Click(object sender, RoutedEventArgs e)
         {
             ReplaceText(++_step);
+
+            //Utilities
+            _mainWindow.utilies.progress.saveProgress("CurrentStep", _step);
         }
 
         private void ReplaceText(int stepNumber)
