@@ -105,5 +105,10 @@ namespace EP_HSRlearnIT
             FileSaver newFile = new FileSaver();
             newFile.CreateFile("AES-GCM", 20, "You are starting with the learntool!");
         }
+
+        private void OnExceptionClick(object sender, MouseButtonEventArgs e)
+        {
+            throw new Exception("Exception in Logfile vorhanden?");
+        }
     }
 }
