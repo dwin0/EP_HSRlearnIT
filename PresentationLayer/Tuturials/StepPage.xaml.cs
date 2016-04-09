@@ -1,17 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace EP_HSRlearnIT.Windows
 {
@@ -22,6 +11,9 @@ namespace EP_HSRlearnIT.Windows
     {
         #region Private Members
 
+        //Utilities
+        private MainWindow _mainWindow;
+
         private int _step = 1;
         private const int _SMALLEST_STEP = 1;
         private const int _BIGGEST_STEP = 3;
@@ -29,10 +21,23 @@ namespace EP_HSRlearnIT.Windows
 
 
         #region Constructors
-        public StepPage()
+        public StepPage(MainWindow mainWindow)
         {
             InitializeComponent();
+
+            //Utilities
+            _mainWindow = mainWindow;
+
+            //Utilities
+            object progress =_mainWindow.utilies.progress.TryGetProgress("CurrentStep");
+            if(progress != null)
+            {
+                _step = Convert.ToInt32(progress);
+            }
+            
             ReplaceText(_step);
+
+            
         }
         #endregion
 
@@ -42,11 +47,17 @@ namespace EP_HSRlearnIT.Windows
         private void OnPreviousStepButton_Click(object sender, RoutedEventArgs e)
         {
             ReplaceText(--_step);
+
+            //Utilities
+            _mainWindow.utilies.progress.saveProgress("CurrentStep", _step);
         }
 
         private void OnNextStepButton_Click(object sender, RoutedEventArgs e)
         {
             ReplaceText(++_step);
+
+            //Utilities
+            _mainWindow.utilies.progress.saveProgress("CurrentStep", _step);
         }
 
         private void ReplaceText(int stepNumber)

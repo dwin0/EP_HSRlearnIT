@@ -1,18 +1,9 @@
-﻿using EP_HSRlearnIT.Windows;
+﻿using BusinessLayer;
+using EP_HSRlearnIT.Windows;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+
 
 namespace EP_HSRlearnIT
 {
@@ -21,6 +12,7 @@ namespace EP_HSRlearnIT
     /// </summary>
     public partial class MainWindow : Window
     {
+        public Utilities utilies { get; }
 
         #region Constructors
 
@@ -29,6 +21,9 @@ namespace EP_HSRlearnIT
             InitializeComponent();
             MainFrame.Navigate(new MainPage(this));
             //AppDomain.CurrentDomain.UnhandledException += LoggingHandler.unhandledExceptionTrapper;
+
+            //Utilities
+            utilies = new Utilities();
         }
         #endregion
 
@@ -53,7 +48,7 @@ namespace EP_HSRlearnIT
                     MainFrame.Navigate(new AesGcmOverviewPage());
                     break;
                 case "Schritt für Schritt":
-                    MainFrame.Navigate(new StepPage());
+                    MainFrame.Navigate(new StepPage(this));
                     break;
                 case "Ver- und Entschlüsselung":
                     MainFrame.Navigate(new EncryptionPage());
