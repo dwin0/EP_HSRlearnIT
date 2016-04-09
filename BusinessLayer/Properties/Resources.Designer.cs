@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BusinessLayer.Properties
+namespace EP_HSRlearnIT.BusinessLayer.UniversalTools.Properties
 {
 
 

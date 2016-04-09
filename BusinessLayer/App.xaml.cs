@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace BusinessLayer
+namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
 {
     /// <summary>
     /// Interaction logic for App.xaml

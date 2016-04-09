@@ -4,7 +4,6 @@ using EP_HSRlearnIT.PresentationLayer.Games;
 using EP_HSRlearnIT.PresentationLayer.Tutorials;
 using System.Windows;
 using System.Windows.Input;
-﻿using BusinessLayer;
 using System;
 
 namespace EP_HSRlearnIT.PresentationLayer

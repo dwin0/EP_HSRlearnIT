@@ -1,11 +1,5 @@
-﻿using EP_HSRlearnIT;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BusinessLayer
+﻿
+namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
 {
     public class Utilities
     {

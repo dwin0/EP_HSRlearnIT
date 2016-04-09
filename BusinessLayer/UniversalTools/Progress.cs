@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace BusinessLayer
+namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
 {
     public class Progress
     {

@@ -63,8 +63,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Progress.cs" />
-    <Compile Include="Utilities.cs" />
+    <Compile Include="UniversalTools\Progress.cs" />
+    <Compile Include="UniversalTools\Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="UniversalTools\ExceptionLogger.cs" />
