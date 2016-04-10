@@ -49,7 +49,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             ReplaceText(--_step);
 
             //Utilities
-            _mainWindow.utilies.progress.saveProgress("CurrentStep", _step);
+            _mainWindow.utilies.progress.SaveProgress("CurrentStep", _step);
         }
 
         private void OnNextStepButton_Click(object sender, RoutedEventArgs e)
@@ -57,7 +57,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             ReplaceText(++_step);
 
             //Utilities
-            _mainWindow.utilies.progress.saveProgress("CurrentStep", _step);
+            _mainWindow.utilies.progress.SaveProgress("CurrentStep", _step);
         }
 
         private void ReplaceText(int stepNumber)
