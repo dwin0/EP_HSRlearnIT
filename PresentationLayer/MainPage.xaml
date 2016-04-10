@@ -9,7 +9,7 @@
       Title="MainPage">
 
     <Grid>
-        <StackPanel Margin="50, 10, 50, 20">
+        <StackPanel Margin="0, 10, 0, 20" Background="White">
             <Button Click="OverviewScreen_Click" Content="Übersicht AES GCM" Name="OverviewScreen" Style="{StaticResource ResourceKey=MainButtonStyle}"/>
             <Button Click="StepByStep_Click" Content="Schritt für Schritt Anleitung" Name="StepByStep" Style="{StaticResource ResourceKey=MainButtonStyle}"/>
             <Button Click="EncryptionDecryption_Click" Content="Ver- und Entschlüsselung" Name="EncryptionDecryption" Style="{StaticResource ResourceKey=MainButtonStyle}"/>
