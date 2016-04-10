@@ -67,6 +67,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AesGcmPart.cs" />
+    <Compile Include="Games\DragDropPage1.xaml.cs">
+      <DependentUpon>DragDropPage1.xaml</DependentUpon>
+    </Compile>
     <Compile Include="StringCollection.cs" />
     <Compile Include="Tutorials\AesGcmOverviewPage.xaml.cs">
       <DependentUpon>AesGcmOverviewPage.xaml</DependentUpon>
@@ -89,6 +92,10 @@
     <Compile Include="Tutorials\StepPage.xaml.cs">
       <DependentUpon>StepPage.xaml</DependentUpon>
     </Compile>
+    <Page Include="Games\DragDropPage1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Tutorials\AesGcmOverviewPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -179,6 +186,17 @@
       <Project>{044aa43b-e2bf-4a8e-bf81-99f35dd91778}</Project>
       <Name>EP_HSRlearnIT.BusinessLayer</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\dragdrop.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\dragdrop1.png" />
+    <Resource Include="Images\dragdrop2.png" />
+    <Resource Include="Images\dragdrop3.png" />
+    <Resource Include="Images\dragdrop4.png" />
+    <Resource Include="Images\dragdrop5.png" />
+    <Resource Include="Images\dragdrop6.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

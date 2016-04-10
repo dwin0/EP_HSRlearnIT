@@ -1,0 +1,36 @@
+﻿<Page x:Class="EP_HSRlearnIT.PresentationLayer.Games.DragDropPage1"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:EP_HSRlearnIT.PresentationLayer.Games"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+      Title="DragDropPage1">
+
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <Image AllowDrop="True" Canvas.ZIndex="2" Source="pack://application:,,,/images/dragdrop.PNG" x:Name="overview" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,10,0"/>
+
+        </StackPanel>
+        <Border CornerRadius="6" BorderBrush="Darkblue"  Background="WhiteSmoke" BorderThickness="2" Padding="6" Margin="0,0,15,0" Grid.Column="1">
+            <StackPanel Margin="0,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Stretch" Height="350">
+                <Image AllowDrop="True" Canvas.ZIndex="2" Source="pack://application:,,,/images/dragdrop1.PNG" x:Name="hashsubkey" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15, 10,10,10"/>
+                <Image AllowDrop="True" Canvas.ZIndex="2" Source="pack://application:,,,/images/dragdrop2.PNG" x:Name="iv" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,10,10"/>
+                <Image AllowDrop="True" Canvas.ZIndex="2" Source="pack://application:,,,/images/dragdrop3.PNG" x:Name="counter" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,10,10"/>
+                <Image AllowDrop="True" Canvas.ZIndex="2" Source="pack://application:,,,/images/dragdrop4.PNG" x:Name="multH" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,10,10"/>
+                <Image AllowDrop="True" Canvas.ZIndex="2" Source="pack://application:,,,/images/dragdrop5.PNG" x:Name="Auth_Data" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,10,10"/>
+                <Image AllowDrop="True" Canvas.ZIndex="2" Source="pack://application:,,,/images/dragdrop6.PNG" x:Name="Auth_Tag" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,10,10"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Page>
+

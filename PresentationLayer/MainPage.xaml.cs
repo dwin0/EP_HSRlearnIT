@@ -45,7 +45,7 @@ namespace EP_HSRlearnIT.PresentationLayer
 
         private void DragAndDrop_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new DragDropPage());
+            NavigationService.Navigate(new DragDropPage1());
         }
 
         #endregion
