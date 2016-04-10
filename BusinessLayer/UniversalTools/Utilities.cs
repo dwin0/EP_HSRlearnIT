@@ -3,16 +3,21 @@ namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
 {
     public class Utilities
     {
-        public FileSaver fileSaver;
-        public Progress progress;
-        public ExceptionLogger logger;
+        #region Public Members
+        public FileSaver FileSaver;
+        public Progress Progress;
+        public ExceptionLogger ExLogger;
 
+        #endregion
+
+        #region public Methods
         public Utilities()
         {
-            fileSaver = new FileSaver();
-            progress = new Progress();
-            logger = new ExceptionLogger();
+            FileSaver = new FileSaver();
+            Progress = new Progress();
+            ExLogger = new ExceptionLogger();
         }
 
+        #endregion
     }
 }

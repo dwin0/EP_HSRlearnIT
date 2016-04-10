@@ -4,13 +4,20 @@ namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
 {
     public class Progress
     {
+        #region Private Members
         private Dictionary<object, object> AppProgress { get; set; }
 
+        #endregion
+
+        #region Constructors
         public Progress()
         {
             AppProgress = new Dictionary<object, object>();
         }
 
+        #endregion
+
+        #region Public Methods
         public void SaveProgress(Dictionary<object, object> progress)
         {
             AppProgress = progress;
@@ -18,7 +25,7 @@ namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
 
         public void SaveProgress(object key, object value)
         {
-            if(AppProgress.ContainsKey(key) == true)
+            if(AppProgress.ContainsKey(key))
             {
                 AppProgress[key] = value;
             } else
@@ -39,9 +46,11 @@ namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
 
         public object TryGetProgress(object key)
         {
-            object retVal = null;
+            object retVal;
             AppProgress.TryGetValue(key, out retVal);
             return retVal;
         }
+
+        #endregion
     }
 }

@@ -38,9 +38,11 @@ namespace EP_HSRlearnIT.BusinessLayerTests.UniversalToolsTest
         public void SaveDictonaryProgressTest()
         {
             Progress progress = new Progress();
-            Dictionary<object, object> progToSave = new Dictionary<object, object>();
-            progToSave.Add("progressA", "a");
-            progToSave.Add("progressB", "b");
+            Dictionary<object, object> progToSave = new Dictionary<object, object>
+            {
+                {"progressA", "a"},
+                {"progressB", "b"}
+            };
 
             progress.SaveProgress(progToSave);
 

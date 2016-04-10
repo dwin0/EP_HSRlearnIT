@@ -10,9 +10,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
     public partial class StepPage : Page
     {
         #region Private Members
-
-        //Utilities
-        private MainWindow _mainWindow;
+        private readonly MainWindow _mainWindow;
 
         private int _step = 1;
         private const int _SMALLEST_STEP = 1;
@@ -25,11 +23,9 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
         {
             InitializeComponent();
 
-            //Utilities
             _mainWindow = mainWindow;
 
-            //Utilities
-            object progress =_mainWindow.utilies.progress.TryGetProgress("CurrentStep");
+            var progress =_mainWindow.utilies.Progress.TryGetProgress("CurrentStep");
             if(progress != null)
             {
                 _step = Convert.ToInt32(progress);
@@ -47,17 +43,13 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
         private void OnPreviousStepButton_Click(object sender, RoutedEventArgs e)
         {
             ReplaceText(--_step);
-
-            //Utilities
-            _mainWindow.utilies.progress.SaveProgress("CurrentStep", _step);
+            _mainWindow.utilies.Progress.SaveProgress("CurrentStep", _step);
         }
 
         private void OnNextStepButton_Click(object sender, RoutedEventArgs e)
         {
             ReplaceText(++_step);
-
-            //Utilities
-            _mainWindow.utilies.progress.SaveProgress("CurrentStep", _step);
+            _mainWindow.utilies.Progress.SaveProgress("CurrentStep", _step);
         }
 
         private void ReplaceText(int stepNumber)

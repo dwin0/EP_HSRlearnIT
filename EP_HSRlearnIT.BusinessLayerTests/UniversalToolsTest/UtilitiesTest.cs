@@ -10,9 +10,9 @@ namespace EP_HSRlearnIT.BusinessLayerTests.UniversalToolsTest
         public void ProgessUtilTest()
         {
             Utilities utilities = new Utilities();
-            utilities.progress.SaveProgress("Test", 42);
+            utilities.Progress.SaveProgress("Test", 42);
 
-            Assert.AreEqual(42, utilities.progress.GetProgress("Test"));
+            Assert.AreEqual(42, utilities.Progress.GetProgress("Test"));
         }
 
         [TestMethod]
@@ -20,9 +20,9 @@ namespace EP_HSRlearnIT.BusinessLayerTests.UniversalToolsTest
         {
             Utilities utilities = new Utilities();
             //utilities.fileSaver.RemoveSaveFiles();
-            utilities.fileSaver.CreateFile("TestFile", 42, "Works!");
+            utilities.FileSaver.CreateFile("TestFile", 42, "Works!");
 
-            Assert.AreEqual("42Works!", utilities.fileSaver.ReadFile());
+            Assert.AreEqual("42Works!", utilities.FileSaver.ReadFile());
         }
     }
 }
