@@ -7,27 +7,34 @@
         mc:Ignorable="d"
         Icon="images/icon.png"
         WindowStartupLocation="CenterScreen"
-        Title="MainWindow" Height="810" Width="1200" MinHeight="810" MinWidth="1000">
-    <Grid>
-        <StackPanel Name="MenuStackPanel" Width="200" HorizontalAlignment="Left" Visibility="Hidden" Background="White" Panel.ZIndex="2">
-                <TextBox Text="Menu" Style="{StaticResource ResourceKey=MenuStyle}"/>
-                <ListView Name="Menu" ItemsSource="{StaticResource ResourceKey=MenuStrings}" MouseDoubleClick="ListBoxItem_MouseDoubleClick"
-                      ItemContainerStyle="{StaticResource ResourceKey=ItemStyle}" BorderThickness="0"/>
-            </StackPanel>
-
-        <Button x:Name="MenuButton" Content=">>" Height="30" Click="OnMenuButton_Click"
-                VerticalAlignment="Top" HorizontalAlignment="Left" Width="20"
-                Panel.ZIndex="2"/>
-        <Button x:Name="BackButton" Content="Zurück" Height="30" Click="OnBackButton_Click"
-                VerticalAlignment="Top" HorizontalAlignment="Left" Width="50"
-                Margin="50, 0, 0, 0"/>
-        <Button x:Name="ForwardButton" Content="Weiter" Height="30" Click="OnForwardButton_Click"
-                VerticalAlignment="Top" HorizontalAlignment="Left" Width="50"
-                Margin="120, 0, 0, 0"/>
-        <Button x:Name="Save" Content="Speichern" Height="30" Click="OnSaveButton_Click" MouseRightButtonDown="OnExceptionClick"
-                VerticalAlignment="Top" HorizontalAlignment="Right" Width="50"
-                Margin="0, 0, 50, 0"/>
-        <Frame x:Name="MainFrame" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-               Panel.ZIndex="1" NavigationUIVisibility="Hidden" Margin="0, 50, 0, 0"/>
+        Title="MainWindow" Height="810" Width="1200" MinWidth="1000" MinHeight="810">
+    <Grid Name="MainGrid" Margin="50, 10, 50, 0" MouseDown="OnMouseDown">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" MinWidth="200"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" Name="MenuStackPanel" HorizontalAlignment="Stretch" Visibility="Collapsed" Background="#ffe6e6" Panel.ZIndex="2"
+                    Margin="-50, 0, 0, 0">
+            <TextBlock Text="Menu" Style="{StaticResource ResourceKey=MenuStyle}"/>
+            <ListView Name="Menu" ItemsSource="{StaticResource ResourceKey=MenuStrings}" PreviewMouseDown="ListBoxItem_PreviewMouseDown"
+                      ItemContainerStyle="{StaticResource ResourceKey=MenuItemStyle}" BorderThickness="0" BorderBrush="#ffe6e6"
+                      />
+        </StackPanel>
+        <Button x:Name="MenuButton" Content="Menu" Click="OnMenuButton_Click"
+                VerticalAlignment="Top" HorizontalAlignment="Left"
+                Panel.ZIndex="2" Style="{StaticResource ResourceKey=ProgramButtonStyle}"/>
+        <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <Button x:Name="BackButton" Content="Zurück" Click="OnBackButton_Click"
+                    Style="{StaticResource ResourceKey=ProgramButtonStyle}"/>
+            <Button x:Name="ForwardButton" Content="Weiter" Click="OnForwardButton_Click"
+                    Margin="10, 0, 0, 0" Grid.Column="1" Style="{StaticResource ResourceKey=ProgramButtonStyle}"/>
+        </StackPanel>
+        <Button x:Name="Save" Content="Speichern" Click="OnSaveButton_Click" MouseRightButtonDown="OnExceptionClick"
+                HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource ResourceKey=ProgramButtonStyle}" Grid.Column="1"/>
+        <Frame Grid.ColumnSpan="2" x:Name="MainFrame" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+               Panel.ZIndex="1" NavigationUIVisibility="Hidden" Margin="0, 60, 0, 0"/>
     </Grid>
 </Window>

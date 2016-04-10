@@ -19,7 +19,7 @@ namespace EP_HSRlearnIT.BusinessLayerTests.UniversalToolsTest
         public void FileSaverUtilTest()
         {
             Utilities utilities = new Utilities();
-            utilities.fileSaver.RemoveSaveFiles();
+            //utilities.fileSaver.RemoveSaveFiles();
             utilities.fileSaver.CreateFile("TestFile", 42, "Works!");
 
             Assert.AreEqual("42Works!", utilities.fileSaver.ReadFile());

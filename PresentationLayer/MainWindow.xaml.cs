@@ -28,10 +28,11 @@ namespace EP_HSRlearnIT.PresentationLayer
 
         private void OnMenuButton_Click(object sender, RoutedEventArgs e)
         {
-            if(MenuStackPanel.IsVisible)
+            if (MenuStackPanel.IsVisible)
             {
                 CloseMenu();
-            } else
+            }
+            else
             {
                 OpenMenu();
             }
@@ -61,7 +62,7 @@ namespace EP_HSRlearnIT.PresentationLayer
 
         private void OnBackButton_Click(object sender, RoutedEventArgs e)
         {
-            if(MainFrame.NavigationService.CanGoBack)
+            if (MainFrame.NavigationService.CanGoBack)
             {
                 MainFrame.NavigationService.GoBack();
             }
@@ -69,7 +70,7 @@ namespace EP_HSRlearnIT.PresentationLayer
 
         private void OnForwardButton_Click(object sender, RoutedEventArgs e)
         {
-            if(MainFrame.NavigationService.CanGoForward)
+            if (MainFrame.NavigationService.CanGoForward)
             {
                 MainFrame.NavigationService.GoForward();
             }
@@ -106,7 +107,7 @@ namespace EP_HSRlearnIT.PresentationLayer
         {
             var point = Mouse.GetPosition(MainGrid);
 
-            if(point.X > MenuStackPanel.ActualWidth)
+            if (point.X > MenuStackPanel.ActualWidth)
             {
                 CloseMenu();
             }
