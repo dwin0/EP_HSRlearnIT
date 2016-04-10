@@ -11,12 +11,12 @@ namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
             AppProgress = new Dictionary<object, object>();
         }
 
-        public void saveProgress(Dictionary<object, object> progress)
+        public void SaveProgress(Dictionary<object, object> progress)
         {
             AppProgress = progress;
         }
 
-        public void saveProgress(object key, object value)
+        public void SaveProgress(object key, object value)
         {
             if(AppProgress.ContainsKey(key) == true)
             {
@@ -27,7 +27,7 @@ namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
             }
         }
 
-        public Dictionary<object, object> getProgress()
+        public Dictionary<object, object> GetProgress()
         {
             return AppProgress;
         }

@@ -22,8 +22,6 @@ namespace EP_HSRlearnIT.PresentationLayer
             InitializeComponent();
             MainFrame.Navigate(new MainPage(this));
             //AppDomain.CurrentDomain.UnhandledException += LoggingHandler.unhandledExceptionTrapper;
-
-            //Utilities
             utilies = new Utilities();
         }
         #endregion
@@ -40,7 +38,7 @@ namespace EP_HSRlearnIT.PresentationLayer
         }
 
 
-        private void ListBoxItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void ListBoxItem_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             var item = ((FrameworkElement)e.OriginalSource).DataContext as string;
             switch (item)
@@ -80,18 +78,14 @@ namespace EP_HSRlearnIT.PresentationLayer
         private void CloseMenu()
         {
             MenuStackPanel.Visibility = Visibility.Collapsed;
-            var margin = MenuButton.Margin;
-            margin.Left = 0;
-            MenuButton.Margin = margin;
-            MenuButton.Content = ">>";
+            MenuButton.HorizontalAlignment = HorizontalAlignment.Left;
+            MenuButton.Content = "Menu";
         }
 
         private void OpenMenu()
         {
             MenuStackPanel.Visibility = Visibility.Visible;
-            var margin = MenuButton.Margin;
-            margin.Left = 200;
-            MenuButton.Margin = margin;
+            MenuButton.HorizontalAlignment = HorizontalAlignment.Right;
             MenuButton.Content = "<<";
         }
 
@@ -105,6 +99,17 @@ namespace EP_HSRlearnIT.PresentationLayer
         private void OnExceptionClick(object sender, MouseButtonEventArgs e)
         {
             throw new Exception("Exception in Logfile vorhanden?");
+        }
+
+        //Collapse Menu Click was outside
+        private void OnMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            var point = Mouse.GetPosition(MainGrid);
+
+            if(point.X > MenuStackPanel.ActualWidth)
+            {
+                CloseMenu();
+            }
         }
     }
 }
