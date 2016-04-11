@@ -11,10 +11,9 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
     {
         #region Private Members
         
-        private byte[] nonce;
-        private byte[] tag;
-        private byte[] ciphertext;
-        private RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
+        private byte[] _nonce;
+        private byte[] _tag;
+        private byte[] _ciphertext;
 
         #endregion
 
@@ -25,17 +24,17 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
         {
             byte[] keyByte = Encoding.UTF8.GetBytes(key);
             byte[] plaintextByte = Encoding.UTF8.GetBytes(plaintext);
-            byte[] EncryptedTextByte = _Encrypt(keyByte, plaintextByte);
-            return EncryptedTextByte;
+            byte[] encryptedTextByte = _Encrypt(keyByte, plaintextByte);
+            return encryptedTextByte;
         }
 
         
         public String Decrypt(string key, byte[] ciphertext)
         {
             byte[] keyByte = Encoding.UTF8.GetBytes(key);
-            byte[] DecryptedTextByte = _Decrypt(keyByte, ciphertext);
-            String DecryptedTextString = Encoding.UTF8.GetString(DecryptedTextByte);
-            return DecryptedTextString;
+            byte[] decryptedTextByte = _Decrypt(keyByte, ciphertext);
+            String decryptedTextString = Encoding.UTF8.GetString(decryptedTextByte);
+            return decryptedTextString;
         }
 
         #endregion
@@ -64,9 +63,8 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
                 // The IV (called the nonce in many of the authenticated algorithm specs) is not sized for
                 // the input block size. Instead its size depends upon the algorithm.  12 bytes works
                 // for both GCM and CCM. Generate a random 12 byte nonce here.
-                nonce = new byte[12] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-                //rng.GetBytes(nonce);
-                aes.IV = nonce;
+                _nonce = new byte[12] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+                aes.IV = _nonce;
 
                 // Authenticated data becomes part of the authentication tag that is generated during
                 // encryption, however it is not part of the ciphertext.  That is, when decrypting the
@@ -88,9 +86,9 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
 
                     // Finish the encryption and get the output authentication tag and ciphertext
                     cs.FlushFinalBlock();
-                    tag = encryptor.GetTag();
-                    ciphertext = ms.ToArray();
-                    return ciphertext;
+                    _tag = encryptor.GetTag();
+                    _ciphertext = ms.ToArray();
+                    return _ciphertext;
                 }
             }
         }
@@ -112,8 +110,8 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
                 }
                 //aes.Key = key;
 
-                nonce = new byte[12] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-                aes.IV = nonce;
+                _nonce = new byte[12] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+                aes.IV = _nonce;
 
                 // If the authenticated data does not match between encryption and decryption, then the
                 // authentication tag will not match either, and the decryption operation will fail.
@@ -122,7 +120,7 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
                 // The tag that was generated during encryption gets set here as input to the decryption
                 // operation.  This is in contrast to the encryption code path which does not use the
                 // Tag property (since it is an output from encryption).
-                aes.Tag = tag;
+                aes.Tag = _tag;
 
                 // Decryption works the same as standard symmetric encryption
                 using (MemoryStream ms = new MemoryStream())
