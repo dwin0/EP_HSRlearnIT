@@ -13,7 +13,10 @@ namespace EP_HSRlearnIT.PresentationLayer
     /// </summary>
     public partial class MainWindow : Window
     {
-        public Utilities utilies { get; }
+        #region Public Members
+        public Utilities Utilies { get; }
+
+        #endregion
 
         #region Constructors
 
@@ -22,10 +25,11 @@ namespace EP_HSRlearnIT.PresentationLayer
             InitializeComponent();
             MainFrame.Navigate(new MainPage(this));
             //AppDomain.CurrentDomain.UnhandledException += LoggingHandler.unhandledExceptionTrapper;
-            utilies = new Utilities();
+            Utilies = new Utilities();
         }
         #endregion
 
+        #region Private Methods
         private void OnMenuButton_Click(object sender, RoutedEventArgs e)
         {
             if (MenuStackPanel.IsVisible)
@@ -112,5 +116,7 @@ namespace EP_HSRlearnIT.PresentationLayer
                 CloseMenu();
             }
         }
+
+        #endregion
     }
 }

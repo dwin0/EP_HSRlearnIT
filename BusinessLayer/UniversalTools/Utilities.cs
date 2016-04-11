@@ -10,7 +10,7 @@ namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
 
         #endregion
 
-        #region public Methods
+        #region Public Methods
         public Utilities()
         {
             FileSaver = new FileSaver();

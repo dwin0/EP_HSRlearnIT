@@ -2,8 +2,5 @@
 
 namespace EP_HSRlearnIT.PresentationLayer
 {
-    public class StringCollection : Collection<string>
-    {
-
-    }
+    public class StringCollection : Collection<string> { }
 }

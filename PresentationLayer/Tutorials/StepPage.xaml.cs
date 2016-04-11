@@ -25,7 +25,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
 
             _mainWindow = mainWindow;
 
-            var progress =_mainWindow.utilies.Progress.TryGetProgress("CurrentStep");
+            var progress =_mainWindow.Utilies.Progress.TryGetProgress("CurrentStep");
             if(progress != null)
             {
                 _step = Convert.ToInt32(progress);
@@ -43,13 +43,13 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
         private void OnPreviousStepButton_Click(object sender, RoutedEventArgs e)
         {
             ReplaceText(--_step);
-            _mainWindow.utilies.Progress.SaveProgress("CurrentStep", _step);
+            _mainWindow.Utilies.Progress.SaveProgress("CurrentStep", _step);
         }
 
         private void OnNextStepButton_Click(object sender, RoutedEventArgs e)
         {
             ReplaceText(++_step);
-            _mainWindow.utilies.Progress.SaveProgress("CurrentStep", _step);
+            _mainWindow.Utilies.Progress.SaveProgress("CurrentStep", _step);
         }
 
         private void ReplaceText(int stepNumber)

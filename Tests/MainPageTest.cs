@@ -28,7 +28,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Testing
         }
 
         [TestMethod()]
-        public void OKTest()
+        public void OkTest()
         {
             Assert.IsTrue(true);
         }
