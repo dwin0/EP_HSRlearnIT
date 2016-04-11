@@ -22,7 +22,7 @@ namespace EP_HSRlearnIT.BusinessLayerTests.UniversalToolsTest
         {
             Progress progress = new Progress();
 
-            Assert.IsNull(progress.TryGetProgress("empty"));
+            Assert.IsNull(progress.GetProgress("empty"));
         }
 
         [TestMethod]

@@ -25,7 +25,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
 
             _mainWindow = mainWindow;
 
-            var progress =_mainWindow.Utilies.Progress.TryGetProgress("CurrentStep");
+            var progress =_mainWindow.Utilies.Progress.GetProgress("CurrentStep");
             if(progress != null)
             {
                 _step = Convert.ToInt32(progress);

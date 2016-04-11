@@ -41,11 +41,6 @@ namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
 
         public object GetProgress(object key)
         {
-            return AppProgress[key];
-        }
-
-        public object TryGetProgress(object key)
-        {
             object retVal;
             AppProgress.TryGetValue(key, out retVal);
             return retVal;
