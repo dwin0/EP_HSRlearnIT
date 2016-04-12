@@ -13,7 +13,7 @@
             <ColumnDefinition Width="5*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Name="MenuStackPanel" Grid.Column="0" HorizontalAlignment="Stretch" Visibility="Collapsed" Background="{StaticResource MenuBackgroundColor}"
-                    Panel.ZIndex="2" Margin="-50, 0, 0, 0">
+                    Panel.ZIndex="2" Margin="-50, -10, 0, 0">
             <TextBlock Text="Menu" Style="{StaticResource ResourceKey=MenuStyle}"/>
             <ListView Name="Menu" ItemsSource="{StaticResource ResourceKey=MenuStrings}" ItemContainerStyle="{StaticResource ResourceKey=MenuItemStyle}"
                       PreviewMouseDown="ListBoxItem_PreviewMouseDown" BorderThickness="0" BorderBrush="{StaticResource MenuBackgroundColor}"/>

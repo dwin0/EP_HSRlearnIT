@@ -85,6 +85,9 @@ namespace EP_HSRlearnIT.PresentationLayer
             MenuStackPanel.Visibility = Visibility.Collapsed;
             MenuButton.HorizontalAlignment = HorizontalAlignment.Left;
             MenuButton.Content = "Menu";
+            var margin = MenuButton.Margin;
+            margin.Top = 0;
+            MenuButton.Margin = margin;
         }
 
         private void OpenMenu()
@@ -92,6 +95,9 @@ namespace EP_HSRlearnIT.PresentationLayer
             MenuStackPanel.Visibility = Visibility.Visible;
             MenuButton.HorizontalAlignment = HorizontalAlignment.Right;
             MenuButton.Content = "<<";
+            var margin = MenuButton.Margin;
+            margin.Top = -10;
+            MenuButton.Margin = margin;
         }
 
 
