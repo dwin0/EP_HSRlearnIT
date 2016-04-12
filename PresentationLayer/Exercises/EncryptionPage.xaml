@@ -24,11 +24,11 @@
         <Border CornerRadius="6" BorderBrush="Gray"  Background="LightGray" BorderThickness="2" Padding="6" Margin="35,0,0,0">
             <StackPanel Margin="15,0,15,0">
                 <TextBlock Text="IV: (optional)" />
-                <TextBox Height="20" Name="IvBox"/>
+                <TextBox Height="20" Name="IvBox" TextChanged="TextBox_TextChanged"/>
                 <TextBlock Text="Klartext:"/>
-                <TextBox Height="50" Name="PlainTextBox"/>
+                <TextBox Height="50" Name="PlainTextBox" TextChanged="TextBox_TextChanged"/>
                 <TextBlock Text="Key:"/>
-                <TextBox Height="20" Name="EncryptionPasswordBox"/>
+                <TextBox Height="20" Name="EncryptionPasswordBox" TextChanged="TextBox_TextChanged"/>
                 <Button Click="OnEnryptionButtonClick" Content="Verschlüsseln" Name="EncryptionButton" Height="40" Width="85" HorizontalAlignment="Left" Margin="0,10,0,10" >
                     <Button.IsEnabled>
                         <MultiBinding Converter="{StaticResource FormFilledMultiConverter}">
@@ -38,9 +38,9 @@
                     </Button.IsEnabled>
                 </Button>
                 <TextBlock Text="Verschlüsselter Text:"/>
-                <TextBox Height="70" Name="CipherTextBox"/>
+                <TextBox Height="70" Name="CipherTextBox" TextChanged="TextBox_TextChanged" Focusable="False"/>
                 <TextBlock Text="Tag:"/>
-                <TextBox Height="20" Name="TagBox"/>
+                <TextBox Height="20" Name="TagBox" TextChanged="TextBox_TextChanged" Focusable="False"/>
                 <DockPanel Margin="0,10,0,0">
                     <Button Content="Exportieren" Name="ExportButton" Height="40" Width="85" Margin="2,0,15,0"/>
                     <Button Content="Entschlüsseln" Name="DecryptionButton" Height="40" Width="85" HorizontalAlignment="Left"/>
@@ -50,15 +50,15 @@
 
         <StackPanel Grid.Column="1" Margin="10,8,35,0">
             <TextBlock Text="IV Hex:"/>
-            <TextBox Height="20" Name="HexIvBox"/>
+            <TextBox Height="20" Name="HexIvBox" TextChanged="HexTextBox_TextChanged"/>
             <TextBlock Text="Klartext Hex:"/>
-            <TextBox Height="50" Name="HexPlainTextBox"/>
+            <TextBox Height="50" Name="HexPlainTextBox" TextChanged="HexTextBox_TextChanged"/>
             <TextBlock Text="Key Hex:"/>
-            <TextBox Height="20" Name="HexEncryptionPasswordBox"/>
+            <TextBox Height="20" Name="HexEncryptionPasswordBox" TextChanged="HexTextBox_TextChanged"/>
             <TextBlock Text="Verschlüsselter Text Hex:" Margin="0,60,0,0"/>
-            <TextBox Height="70" Name="HexCipherTextBox" />
+            <TextBox Height="70" Name="HexCipherTextBox" TextChanged="HexTextBox_TextChanged" Focusable="False"/>
             <TextBlock Text="Tag Hex:"/>
-            <TextBox Height="20" Name="HexTagBox" />
+            <TextBox Height="20" Name="HexTagBox" TextChanged="HexTextBox_TextChanged" Focusable="False"/>
         </StackPanel>
     </Grid>
 </Page>

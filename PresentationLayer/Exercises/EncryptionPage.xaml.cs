@@ -1,5 +1,6 @@
 ﻿using EP_HSRlearnIT.BusinessLayer.CryptoTools;
 using System;
+using System.Collections;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -14,6 +15,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         #region Private Members
 
         private AesGcmCryptoLibrary _library;
+        
 
         #endregion
 
@@ -37,11 +39,74 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             CipherTextBox.Text = BytesToString(ciphertext);
         }
 
-       /* private void OnDecryptionButtonClick(object sender, RoutedEventArgs e)
+        /* private void OnDecryptionButtonClick(object sender, RoutedEventArgs e)
+         {
+             PlainTextBox.Text = _library.Decrypt(DecryptionPasswordBox.Text, StringToBytes(CipherTextBox.Text));
+         }
+         */
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            PlainTextBox.Text = _library.Decrypt(DecryptionPasswordBox.Text, StringToBytes(CipherTextBox.Text));
+            string hexOutput = "";
+
+            //Get control that raised this event
+            var textBox = sender as TextBox;
+
+            //Get control that will be updated
+            string nameHexField = "Hex" + textBox.Name;
+            TextBox hexBox = (TextBox)this.FindName(nameHexField);
+
+            //remove the event handler temporary, else a loop will occure
+            hexBox.TextChanged -= HexTextBox_TextChanged;
+
+            char[] values = textBox.Text.ToCharArray();
+            foreach (char letter in values)
+            {
+                // Get the integral value of the character
+                int value = Convert.ToInt32(letter);
+
+                // Convert the decimal value to a hexadecimal value in string form
+                hexOutput += string.Format("{0:X}", value);
+            }
+            hexBox.Text = hexOutput;
+            hexBox.TextChanged += HexTextBox_TextChanged;
         }
-        */
+
+        private void HexTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string textOutput = "";
+            
+            //Get control that raised this event
+            var hexTextBox = sender as TextBox;
+            string nameHexTextBox = hexTextBox.Name;
+
+            //Get control that will be updated
+            string nameTextField = nameHexTextBox.Substring(3, nameHexTextBox.Length-3);
+            TextBox textBox = (TextBox) this.FindName(nameTextField);
+
+            //remove the event handler temporary, else a loop will occure
+            textBox.TextChanged -= TextBox_TextChanged;
+
+            string hexValue = hexTextBox.Text;
+            ArrayList list = new ArrayList();
+            while (hexValue.Length > 1)
+            {
+                string str = hexValue.Substring(0, 2);
+                list.Add(str);
+                hexValue = hexValue.Substring(2, hexValue.Length-2);
+            }
+
+            foreach (string hex in list)
+            {
+                // Convert the number expressed in base-16 to an integer.
+                int value = Convert.ToInt32(hex, 16);
+
+                // Get the character corresponding to the integral value.
+                textOutput += char.ConvertFromUtf32(value);
+            }
+            textBox.Text = textOutput;
+            textBox.TextChanged += TextBox_TextChanged;
+        }
 
         private string BytesToString(byte[] bytes)
         {

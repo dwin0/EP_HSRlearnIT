@@ -14,13 +14,11 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                 {
                     return false;
                 }
-            }
-                
+            }   
 
             int plaintextLength = System.Convert.ToInt32(values[0]);
             int keyLength = System.Convert.ToInt32(values[1]);
-
-            //if some text was entered AND the password is bigger than 8, return true, else return false.
+            
             return (plaintextLength > 0 && keyLength >= 8);
         }
 
