@@ -9,10 +9,9 @@ namespace EP_HSRlearnIT.BusinessLayerTests.UniversalToolsTest
         [TestMethod]
         public void ProgessUtilTest()
         {
-            Utilities utilities = new Utilities();
-            utilities.Progress.SaveProgress("Test", 42);
+            Progress.SaveProgress("Test", 42);
 
-            Assert.AreEqual(42, utilities.Progress.GetProgress("Test"));
+            Assert.AreEqual(42, Progress.GetProgress("Test"));
         }
 
     }

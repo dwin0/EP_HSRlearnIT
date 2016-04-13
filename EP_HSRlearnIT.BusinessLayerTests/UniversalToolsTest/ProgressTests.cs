@@ -8,55 +8,37 @@ namespace EP_HSRlearnIT.BusinessLayerTests.UniversalToolsTest
     [TestClass]
     public class ProgressTest
     {
-        [TestMethod]
-        public void CleanProgressTest()
-        {
-            Progress progress = new Progress();
-            Dictionary<object, object> savedProgress = progress.GetProgress();
-
-            Assert.AreEqual(0, savedProgress.Count);
-        }
-
-        [TestMethod]
-        public void CleanTryGetProgressTest()
-        {
-            Progress progress = new Progress();
-
-            Assert.IsNull(progress.GetProgress("empty"));
-        }
 
         [TestMethod]
         public void SaveSingleProgressTest()
         {
-            Progress progress = new Progress();
-            progress.SaveProgress("progress1", 1);
+            Progress.SaveProgress("progress1", 1);
 
-            Assert.AreEqual(1, progress.GetProgress("progress1"));
+            Assert.AreEqual(1, Progress.GetProgress("progress1"));
         }
 
         [TestMethod]
         public void SaveDictonaryProgressTest()
         {
-            Progress progress = new Progress();
             Dictionary<object, object> progToSave = new Dictionary<object, object>
             {
                 {"progressA", "a"},
                 {"progressB", "b"}
             };
 
-            progress.SaveProgress(progToSave);
+            Progress.SaveProgress(progToSave);
 
-            Assert.AreEqual(progToSave, progress.GetProgress());
+            Assert.AreEqual(progToSave, Progress.GetProgress());
         }
 
         [TestMethod]
         public void UpdateProgressTest()
         {
-            Progress progress = new Progress();
-            progress.SaveProgress("testProgress", 9);
-            progress.SaveProgress("testProgress", 42);
+            
+            Progress.SaveProgress("testProgress", 9);
+            Progress.SaveProgress("testProgress", 42);
 
-            Assert.AreEqual(42, progress.GetProgress("testProgress"));
+            Assert.AreEqual(42, Progress.GetProgress("testProgress"));
         }
 
     }
