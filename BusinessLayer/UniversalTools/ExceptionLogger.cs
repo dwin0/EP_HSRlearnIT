@@ -1,30 +1,48 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
 {
-    public class ExceptionLogger
+    public static class ExceptionLogger
     {
-        static string path = @"c:\logs\log.txt";
-        StreamWriter writer;
+        #region Private Member
+        private static string _path = @"c:\logs";
+        private static string _fileName = "ExceptionLog.log";
+        private static string _filePath;
+        //Size in Byte
+        private static long _maxSize = 5 * 1024 * 1024;
+        private static int _DeleteRows = 10;
 
-        private void createIfMissing(string path)
+        #endregion
+
+        #region Public Methods
+        public static void WriteToLogfile(string exmsg, string sourceMethod)
         {
-            ExceptionLogger.path = path;
-            bool folderExists = Directory.Exists(path);
-            DirectoryInfo dinf = new DirectoryInfo(path);
-            if (!folderExists)
+            FileSaver.SaveFile(_path, _fileName);
+            _filePath = Path.Combine(_path, _fileName);
+            String entry = "Exception :" + DateTime.Now.ToString() + ": " + exmsg + " " + sourceMethod + "\n";
+            FileSaver.ContentAddToFile(_filePath, entry);
+            AvoidOverflow(_filePath);
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private static void AvoidOverflow(String filePath)
+        {
+            if (FileSaver.GetSize(filePath) >= _maxSize)
             {
-                Directory.CreateDirectory(dinf.Parent.FullName);
+                List<string> lines = File.ReadAllLines(filePath).ToList<string>();
+                lines.RemoveRange(0, _DeleteRows);
+                File.WriteAllLines(filePath, lines);
+                FileSaver.ContentAddToFile(filePath, "The oldest " + _DeleteRows + " lines are removed. \n");
             }
         }
 
-        public void writeToLogFile(string exmsg, string sourceMethod)
-        {
-            createIfMissing(path);
-            writer = new StreamWriter(path, true);
-            writer.WriteLine("Exception :" + DateTime.Now.ToString() + ": " + exmsg +  " " + sourceMethod);
-            writer.Close();
-        }
+        #endregion
+
     }
 }

@@ -103,8 +103,7 @@ namespace EP_HSRlearnIT.PresentationLayer
 
         private void OnSaveButton_Click(object sender, RoutedEventArgs e)
         {
-            FileSaver newFile = new FileSaver();
-            newFile.CreateFile("AES-GCM", 20, "You are starting with the learntool!");
+            FileSaver.UpdateFileContent(FileSaver.SaveFile(@"C:\temp\HSRlearnIT", "AES-GCM.txt"), "The program is started!");
         }
 
         private void OnExceptionClick(object sender, MouseButtonEventArgs e)

@@ -1,35 +1,55 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 using EP_HSRlearnIT.BusinessLayer.UniversalTools;
+using System;
+using System.Threading.Tasks;
 
 namespace EP_HSRlearnIT.BusinessLayer.Testing.UniversalToolsTest
 {
-    [TestClass()]
+    [TestClass]
     public class FileSaverTests
     {
-        FileSaver newFile = new FileSaver();
 
-        [TestMethod()]
-        public void CreateFileTest()
-        {        
-            newFile.CreateFile("AES-GCM.txt", 20, " You are starting with the learntool! ");
-            Assert.IsTrue(System.IO.File.Exists(@"c:\temp\HSRlearnIT\Test\AES-GCM.txt"));
+        [TestMethod]
+        public void SaveFileTest()
+        {
+            FileSaver.SaveFile(@"c:\temp\HSRlearnIT\Test", "AES-GCM.txt");
+            Assert.IsTrue(File.Exists(@"c:\temp\HSRlearnIT\Test\AES-GCM.txt"));
         }
 
-        [TestMethod()]
-        public void ReadWriteFileTest()
+        /// <summary>
+        /// Test isn't stable!
+        /// </summary>
+        public void UpdateFileTest()
         {
-            newFile.CreateFile("RWTest.txt",20 , "");
-            newFile.WriteFile(30, "Hello Member!");
-            Assert.AreEqual("2030Hello Member!", newFile.ReadFile());
+            FileSaver.SaveFile(@"c:\temp\HSRlearnIT\Test", "UpdateTest.txt");
+            String file = Path.Combine(@"c:\temp\HSRlearnIT\Test", "UpdateTest.txt");
+            FileSaver.UpdateFileContent(file, "10 Hello World!");
+            FileSaver.UpdateFileContent(file ,"30 Hello Member!");
+            Assert.AreEqual("30 Hello Member!", FileSaver.ReadFile(file));
         }
 
-        [TestMethod()]
-        public void RemoveSaveFilesTest()
+        /// <summary>
+        /// Test isn't stable!
+        /// </summary>
+        public void AddToFileTest()
         {
-            newFile.CreateFile("RemoveTest.txt", 20, " You are starting with the learntool! ");
-            newFile.RemoveSaveFiles();
-            Assert.IsFalse(File.Exists(@"c:\temp\HSRlearnIT\Test\RemoveTest.txt"));
+            FileSaver.SaveFile(@"c:\temp\HSRlearnIT\Test", "AddTest.txt");
+            String file = Path.Combine(@"c:\temp\HSRlearnIT\Test", "AddTest.txt");
+            FileSaver.ContentAddToFile(file, "10 Hello World! ");
+            FileSaver.ContentAddToFile(file, "30 Hello Member!");
+            Assert.AreEqual("10 Hello World! 30 Hello Member!", FileSaver.ReadFile(file));
+        }
+
+
+        [ClassCleanup]
+        public static void CleanUp()
+        {
+            Task cleanTask = Task.Factory.StartNew(() =>
+            {
+                Directory.Delete(@"c:\temp\HSRlearnIT\Test", true);
+            });
+            cleanTask.Wait();
         }
     }
 }

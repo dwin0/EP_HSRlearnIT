@@ -180,12 +180,6 @@
     <Resource Include="Images\icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BusinessLayer\EP_HSRlearnIT.BusinessLayer.csproj">
-      <Project>{044aa43b-e2bf-4a8e-bf81-99f35dd91778}</Project>
-      <Name>EP_HSRlearnIT.BusinessLayer</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\dragdrop.PNG" />
   </ItemGroup>
   <ItemGroup>
@@ -198,6 +192,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\aead.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessLayer\EP_HSRlearnIT.BusinessLayer.csproj">
+      <Project>{044aa43b-e2bf-4a8e-bf81-99f35dd91778}</Project>
+      <Name>EP_HSRlearnIT.BusinessLayer</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
