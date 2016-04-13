@@ -31,7 +31,7 @@
                     <Button Content="Verschlüsseln" Name="EncrpytionButton" Height="40" Width="90" HorizontalAlignment="Left" Margin="10,10,0,10"/>
                 </DockPanel>
                 <TextBlock Text="IV:"/>
-                <TextBox Name="IVBox" Height="20"/>
+                <TextBox Name="IvBox" Height="20"/>
                 <TextBlock Text="Klartext:"/>
                 <TextBox Height="50" Name="PlainTextBox"/>
             </StackPanel>
@@ -46,7 +46,7 @@
             <TextBlock Text="Key Hex:"/>
             <TextBox Height="20" Name="HexEncryptionPasswordBox"/>
             <TextBlock Text="IV Hex:" Margin="0,60,0,0"/>
-            <TextBox Height="20" Name="HexIVBox" />
+            <TextBox Height="20" Name="HexIvBox" />
             <TextBlock Text="Klartext Hex:"/>
             <TextBox Height="50" Name="HexPlainTextBox"/>
         </StackPanel>

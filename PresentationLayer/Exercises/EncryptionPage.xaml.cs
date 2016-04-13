@@ -1,9 +1,13 @@
 ﻿using EP_HSRlearnIT.BusinessLayer.CryptoTools;
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using Castle.Components.DictionaryAdapter.Xml;
+using Castle.Core.Internal;
 
 namespace EP_HSRlearnIT.PresentationLayer.Exercises
 {
@@ -34,7 +38,39 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
 
         private void OnEnryptionButtonClick(object sender, RoutedEventArgs e)
         {
-            byte[] ciphertext = _library.Encrypt(EncryptionPasswordBox.Text, PlainTextBox.Text);
+            string key = EncryptionPasswordBox.Text;
+            byte[] keyArray = StringToBytes(key);
+            int keySize = keyArray.Length;
+
+            
+            IEnumerable<byte> bigKey = keyArray;
+
+            if (keySize < 32)
+            {
+                for (int i = 1; i <= 32 / keySize; i++)
+                {
+                    bigKey = bigKey.Concat(keyArray);
+                }
+            }
+
+            bigKey = bigKey.Take(32);
+            byte[] result = new byte[32];
+            int counter = 0;
+
+            bigKey.ForEach(i =>
+            {
+                byte b = i;
+                result[counter] = b;
+                counter++;
+            });
+
+            string bigKeyString = BytesToString(result);
+
+            ChangeHexBox(bigKeyString.ToCharArray(), HexEncryptionPasswordBox);
+
+            //TODO IV-Length has to be 12bytes
+
+            byte[] ciphertext = _library.Encrypt(bigKeyString, PlainTextBox.Text, IvBox.Text);
             CipherTextBox.Text = BytesToString(ciphertext);
         }
 
@@ -46,8 +82,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            string hexOutput = "";
-
             //Get control that raised this event
             var textBox = sender as TextBox;
 
@@ -56,24 +90,29 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             {
                 string nameHexField = "Hex" + textBox.Name;
                 TextBox hexBox = (TextBox)FindName(nameHexField);
+                char[] values = textBox.Text.ToCharArray();
+                ChangeHexBox(values, hexBox);
+            }
+        }
 
-                //remove the event handler temporary, else a loop will occure
-                if (hexBox != null)
+        private void ChangeHexBox(char[] values, TextBox hexBox)
+        {
+            string hexOutput = "";
+
+            //remove the event handler temporary, else a loop will occure
+            if (hexBox != null)
+            {
+                hexBox.TextChanged -= HexTextBox_TextChanged;
+                foreach (char letter in values)
                 {
-                    hexBox.TextChanged -= HexTextBox_TextChanged;
+                    // Get the integral value of the character
+                    int value = Convert.ToInt32(letter);
 
-                    char[] values = textBox.Text.ToCharArray();
-                    foreach (char letter in values)
-                    {
-                        // Get the integral value of the character
-                        int value = Convert.ToInt32(letter);
-
-                        // Convert the decimal value to a hexadecimal value in string form
-                        hexOutput += string.Format("{0:X}", value);
-                    }
-                    hexBox.Text = hexOutput;
-                    hexBox.TextChanged += HexTextBox_TextChanged;
+                    // Convert the decimal value to a hexadecimal value in string form
+                    hexOutput += string.Format("{0:X}", value);
                 }
+                hexBox.Text = hexOutput;
+                hexBox.TextChanged += HexTextBox_TextChanged;
             }
         }
 

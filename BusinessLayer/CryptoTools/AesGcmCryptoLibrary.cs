@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using Security.Cryptography;
 using System.Security.Cryptography;
@@ -10,25 +13,43 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
     public class AesGcmCryptoLibrary
     {
         #region Private Members
-        
+
         private byte[] _nonce;
         private byte[] _tag;
         private byte[] _ciphertext;
 
         #endregion
 
-
         #region Public Methods
 
-        public byte[] Encrypt(string key, string plaintext)
+        public byte[] Encrypt(string key, string plaintext, string nonce)
         {
-            byte[] keyByte = Encoding.UTF8.GetBytes(key);
+            //byte[] keyByte = Encoding.UTF8.GetBytes(key);
+            byte[] keyByte = StringToBytes(key);
             byte[] plaintextByte = Encoding.UTF8.GetBytes(plaintext);
-            byte[] encryptedTextByte = _Encrypt(keyByte, plaintextByte);
-            return encryptedTextByte;
+            byte[] nonceByte = null;
+            if (nonce != "")
+            {
+                nonceByte = Encoding.UTF8.GetBytes(nonce);
+            }
+            return _Encrypt(keyByte, plaintextByte, nonceByte);
         }
 
-        
+        private byte[] StringToBytes(string toConvert)
+        {
+            byte[] bytes = new byte[toConvert.Length];
+
+            int i = 0;
+            foreach (char c in toConvert)
+            {
+                bytes[i] = Convert.ToByte(c);
+                i++;
+            }
+
+            return bytes;
+        }
+
+
         public String Decrypt(string key, byte[] ciphertext)
         {
             byte[] keyByte = Encoding.UTF8.GetBytes(key);
@@ -42,29 +63,32 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
 
         #region Private Methods
 
-        private byte[] _Encrypt(byte[] key, byte[] plaintext)
+        private byte[] _Encrypt(byte[] key, byte[] plaintext, byte[] nonce)
         {
             using (AuthenticatedAesCng aes = new AuthenticatedAesCng())
             {
-                // Setup an authenticated chaining mode – The two current CNG options are
-                // CngChainingMode.Gcm and CngChainingMode.Ccm.  This should be done before setting up
+                // Setup an authenticated chaining mode. This should be done before setting up
                 // the other properties, since changing the chaining mode can update things such as the
                 // valid and current tag sizes.
                 aes.CngMode = CngChainingMode.Gcm;
 
+                /*
                 // Keys work the same as standard AES
                 if(true)//key.GetLength(0) < 32)
                 {
                     byte[] keyTest = new byte[32] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
                     aes.Key = keyTest;
                 }
-                //aes.Key = key;
+                */
+              
+                aes.Key = key;
 
                 // The IV (called the nonce in many of the authenticated algorithm specs) is not sized for
                 // the input block size. Instead its size depends upon the algorithm.  12 bytes works
                 // for both GCM and CCM. Generate a random 12 byte nonce here.
-                _nonce = new byte[12] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-                aes.IV = _nonce;
+
+                nonce = nonce ?? new byte[12] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+                aes.IV = nonce;
 
                 // Authenticated data becomes part of the authentication tag that is generated during
                 // encryption, however it is not part of the ciphertext.  That is, when decrypting the
