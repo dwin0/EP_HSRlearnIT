@@ -2,25 +2,16 @@
 
 namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
 {
-    public class Utilities
+    public static class Utilities
     {
         #region Public Members
         
-        public Progress Progress;
+        //public static Progress Progress;
         
-        public string FolderPath;
-        public string FileName;
+        public static string FolderPath;
+        public static string FileName;
 
         #endregion
 
-        #region Public Methods
-        public Utilities()
-        {
-            
-            Progress = new Progress();
-            
-        }
-
-        #endregion
     }
 }

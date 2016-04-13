@@ -14,7 +14,7 @@ namespace EP_HSRlearnIT.PresentationLayer
     public partial class MainWindow : Window
     {
         #region Public Members
-        public Utilities Utilies { get; }
+        //public Utilities Utilies { get; }
 
         #endregion
 
@@ -23,9 +23,9 @@ namespace EP_HSRlearnIT.PresentationLayer
         public MainWindow()
         {
             InitializeComponent();
-            MainFrame.Navigate(new MainPage(this));
+            MainFrame.Navigate(new MainPage());
             //AppDomain.CurrentDomain.UnhandledException += LoggingHandler.unhandledExceptionTrapper;
-            Utilies = new Utilities();
+            //Utilies = new Utilities();
         }
         #endregion
 
@@ -52,7 +52,7 @@ namespace EP_HSRlearnIT.PresentationLayer
                     MainFrame.Navigate(new AesGcmOverviewPage());
                     break;
                 case "Schritt für Schritt":
-                    MainFrame.Navigate(new StepPage(this));
+                    MainFrame.Navigate(new StepPage());
                     break;
                 case "Ver- und Entschlüsselung":
                     MainFrame.Navigate(new EncryptionPage());

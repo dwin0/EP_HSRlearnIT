@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 ﻿using System;
 using System.Windows.Controls;
+using EP_HSRlearnIT.BusinessLayer.UniversalTools;
 
 namespace EP_HSRlearnIT.PresentationLayer.Tutorials
 {
@@ -10,8 +11,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
     public partial class StepPage : Page
     {
         #region Private Members
-        private readonly MainWindow _mainWindow;
-
         private int _step = 1;
         private const int _SMALLEST_STEP = 1;
         private const int _BIGGEST_STEP = 3;
@@ -19,21 +18,16 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
 
 
         #region Constructors
-        public StepPage(MainWindow mainWindow)
+        public StepPage()
         {
             InitializeComponent();
-
-            _mainWindow = mainWindow;
-
-            var progress =_mainWindow.Utilies.Progress.GetProgress("CurrentStep");
+            var progress = Progress.GetProgress("CurrentStep");
             if(progress != null)
             {
                 _step = Convert.ToInt32(progress);
             }
             
             ReplaceText(_step);
-
-            
         }
         #endregion
 
@@ -43,13 +37,13 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
         private void OnPreviousStepButton_Click(object sender, RoutedEventArgs e)
         {
             ReplaceText(--_step);
-            _mainWindow.Utilies.Progress.SaveProgress("CurrentStep", _step);
+            Progress.SaveProgress("CurrentStep", _step);
         }
 
         private void OnNextStepButton_Click(object sender, RoutedEventArgs e)
         {
             ReplaceText(++_step);
-            _mainWindow.Utilies.Progress.SaveProgress("CurrentStep", _step);
+            Progress.SaveProgress("CurrentStep", _step);
         }
 
         private void ReplaceText(int stepNumber)
