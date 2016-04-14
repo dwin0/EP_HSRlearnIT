@@ -14,12 +14,13 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                 {
                     return false;
                 }
-            }   
+            }  
 
-            int plaintextLength = System.Convert.ToInt32(values[0]);
-            int keyLength = System.Convert.ToInt32(values[1]);
+            int ivLength = System.Convert.ToInt32(values[0]);
+            int plaintextLength = System.Convert.ToInt32(values[1]);
+            int keyLength = System.Convert.ToInt32(values[2]);
             
-            return (plaintextLength > 0 && keyLength >= 8);
+            return (plaintextLength > 0 && keyLength >= 8 && (ivLength == 0 || ivLength == 12));
         }
 
         //is not needed, but must be overriden
