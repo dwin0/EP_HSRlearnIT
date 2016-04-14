@@ -38,8 +38,6 @@ namespace EP_HSRlearnIT.PresentationLayer
 
         private void EncryptionDecryption_Click(object sender, RoutedEventArgs e)
         {
-          
-     
            NavigationService.Navigate(new EncryptionDecyrptionPage());
         }
 

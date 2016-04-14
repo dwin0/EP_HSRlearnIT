@@ -23,6 +23,8 @@ namespace EP_HSRlearnIT.PresentationLayer
             MainFrame.Navigate(new MainPage(this));
             //AppDomain.CurrentDomain.UnhandledException += LoggingHandler.unhandledExceptionTrapper;
             utilies = new Utilities();
+
+            Application.Current.MainWindow = this;
         }
         #endregion
 
@@ -54,7 +56,7 @@ namespace EP_HSRlearnIT.PresentationLayer
                     MainFrame.Navigate(new EncryptionPage());
                     break;
                 case "Drag- und Drop Spiel":
-                    MainFrame.Navigate(new DragDropPage());
+                    MainFrame.Navigate(new DragDropPage1());
                     break;
             }
             CloseMenu();
@@ -103,7 +105,7 @@ namespace EP_HSRlearnIT.PresentationLayer
         }
 
         //Collapse Menu Click was outside
-        private void OnMouseDown(object sender, MouseButtonEventArgs e)
+       private void OnMouseDown(object sender, MouseButtonEventArgs e)
         {
             var point = Mouse.GetPosition(MainGrid);
 
