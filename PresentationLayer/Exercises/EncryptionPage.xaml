@@ -25,7 +25,20 @@
                 <TextBox Height="50" Name="PlainTextBox"/>
                 <TextBlock Text="Key:"/>
                 <TextBox Height="20" Name="EncryptionPasswordBox"/>
-                <Button Click="OnEnryptionButtonClick" IsEnabled="{Binding ElementName=PlainTextBox, Path=Text.Length}" Content="Verschlüsseln" Name="EncryptionButton" Height="40" Width="85" HorizontalAlignment="Left" Margin="0,10,0,10"/>
+                <Button Content="Verschlüsseln" Name="EncryptionButton" Height="40" Width="85" HorizontalAlignment="Left" Margin="0,10,0,10">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Text.Length, ElementName=PlainTextBox, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                    <Setter Property="IsEnabled" Value="False"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Text.Length, ElementName=EncryptionPasswordBox, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                    <Setter Property="IsEnabled" Value="False"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
                 <TextBlock Text="Verschlüsselter Text:"/>
                 <TextBox Height="70" Name="CipherTextBox"/>
                 <TextBlock Text="Tag:"/>

@@ -27,7 +27,25 @@
                 <TextBlock Text="Key:"/>
                 <TextBox Name="DecryptionPasswordBox" Height="20"/>
                 <DockPanel>
-                    <Button Content="Entschlüsseln" Name="DecryptionButton" Height="40" Width="90" Margin="0,10,0,10" />
+                    <Button Content="Entschlüsseln" Name="DecryptionButton" Height="40" Width="90" Margin="0,10,0,10" >
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Text.Length, ElementName=TagBox, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                    <Setter Property="IsEnabled" Value="False"/>
+                                </DataTrigger>
+                                    <DataTrigger Binding="{Binding Text.Length, ElementName=CipherTextBox, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                    <Setter Property="IsEnabled" Value="False"/>
+                                </DataTrigger>
+                                    <DataTrigger Binding="{Binding Text.Length, ElementName=DecryptionPasswordBox, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                        <Setter Property="IsEnabled" Value="False"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    </Button>
+
+
                     <Button Content="Verschlüsseln" Name="EncrpytionButton" Height="40" Width="90" HorizontalAlignment="Left" Margin="10,10,0,10"/>
                 </DockPanel>
                 <TextBlock Text="IV:"/>

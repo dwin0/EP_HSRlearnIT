@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Icon="images/icon.png"
         WindowStartupLocation="CenterScreen"
-        Title="MainWindow" Height="810" Width="1200" MinWidth="1000" MinHeight="810">
+        Title="MainWindow" Height="700" Width="900" MinWidth="900" MinHeight="700">
     <Grid Name="MainGrid" Margin="50, 10, 50, 0" MouseDown="OnMouseDown">
         <Grid.RowDefinitions>
             <RowDefinition/>

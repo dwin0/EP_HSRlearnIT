@@ -188,15 +188,20 @@
     <Resource Include="Images\dragdrop.PNG" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\aead.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\dragdrop7.png" />
+    <Resource Include="Images\dragdrop8.png" />
+    <Resource Include="Images\dragdrop9.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="Images\dragdrop1.png" />
     <Resource Include="Images\dragdrop2.png" />
     <Resource Include="Images\dragdrop3.png" />
     <Resource Include="Images\dragdrop4.png" />
     <Resource Include="Images\dragdrop5.png" />
     <Resource Include="Images\dragdrop6.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\aead.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
