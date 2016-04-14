@@ -105,7 +105,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                 hexBox.TextChanged -= HexTextBox_TextChanged;
                 foreach (char letter in values)
                 {
-                    //TODO führende 0 einbauen --> Test Case 14
                     // Get the integral value of the character
                     int value = Convert.ToInt32(letter);
 
@@ -163,9 +162,9 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         {
             char[] chars = new char[bytes.Length];
 
-            StringBuilder sb = new StringBuilder(); //StringBuilder sinnvoll?
+            StringBuilder sb = new StringBuilder();
             int i = 0;
-            foreach (byte b in bytes) //for schlaufe besser?
+            foreach (byte b in bytes)
             {
                 chars[i] = Convert.ToChar(b);
                 sb.Append(chars[i]);

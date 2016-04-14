@@ -1,15 +1,19 @@
 ﻿<Page x:Class="EP_HSRlearnIT.PresentationLayer.Exercises.EncryptionPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:local="clr-namespace:EP_HSRlearnIT.PresentationLayer.Exercises"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
       Title="EncryptionPage">
 
-    <Grid>
+    <Page.Resources>
+        <local:FormFilledMulticonverter x:Key="FormFilledMultiConverter"/>
+    </Page.Resources>
 
+
+        <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
             <ColumnDefinition Width="1*" />
@@ -20,30 +24,24 @@
         <Border CornerRadius="6" BorderBrush="Gray"  Background="LightGray" BorderThickness="2" Padding="6" Margin="35,0,0,0">
             <StackPanel Margin="15,0,15,0">
                 <TextBlock Text="IV: (optional)" />
-                <TextBox Height="20" Name="IvBox"/>
+                <TextBox Height="20" Name="IvBox" TextChanged="TextBox_TextChanged"/>
                 <TextBlock Text="Klartext:"/>
-                <TextBox Height="50" Name="PlainTextBox"/>
+                <TextBox Height="50" Name="PlainTextBox" TextChanged="TextBox_TextChanged"/>
                 <TextBlock Text="Key:"/>
-                <TextBox Height="20" Name="EncryptionPasswordBox"/>
-                <Button Content="Verschlüsseln" Name="EncryptionButton" Height="40" Width="85" HorizontalAlignment="Left" Margin="0,10,0,10">
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding Text.Length, ElementName=PlainTextBox, UpdateSourceTrigger=PropertyChanged}" Value="0">
-                                    <Setter Property="IsEnabled" Value="False"/>
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding Text.Length, ElementName=EncryptionPasswordBox, UpdateSourceTrigger=PropertyChanged}" Value="0">
-                                    <Setter Property="IsEnabled" Value="False"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
+                <TextBox Height="20" Name="EncryptionPasswordBox" TextChanged="TextBox_TextChanged"/>
+                <Button Click="OnEnryptionButtonClick" Content="Verschlüsseln" Name="EncryptionButton" Height="40" Width="85" HorizontalAlignment="Left" Margin="0,10,0,10" >
+                    <Button.IsEnabled>
+                        <MultiBinding Converter="{StaticResource FormFilledMultiConverter}">
+                            <Binding Path="Text.Length" ElementName="PlainTextBox"/>
+                            <Binding Path="Text.Length" ElementName="EncryptionPasswordBox"/>
+                        </MultiBinding>
+                    </Button.IsEnabled>
                 </Button>
                 <TextBlock Text="Verschlüsselter Text:"/>
-                <TextBox Height="70" Name="CipherTextBox"/>
+                <TextBox Height="70" Name="CipherTextBox" TextChanged="TextBox_TextChanged" Focusable="False"/>
                 <TextBlock Text="Tag:"/>
-                <TextBox Height="20" Name="TagBox"/>
-                <DockPanel Grid.Row="6 " Margin="0,10,0,0">
+                <TextBox Height="20" Name="TagBox" TextChanged="TextBox_TextChanged" Focusable="False"/>
+                <DockPanel Margin="0,10,0,0">
                     <Button Content="Exportieren" Name="ExportButton" Height="40" Width="85" Margin="2,0,15,0"/>
                     <Button Content="Entschlüsseln" Name="DecryptionButton" Height="40" Width="85" HorizontalAlignment="Left"/>
                 </DockPanel>
@@ -52,15 +50,15 @@
 
         <StackPanel Grid.Column="1" Margin="10,8,35,0">
             <TextBlock Text="IV Hex:"/>
-            <TextBox Height="20" Name="HexIvBox"/>
+            <TextBox Height="20" Name="HexIvBox" TextChanged="HexTextBox_TextChanged"/>
             <TextBlock Text="Klartext Hex:"/>
-            <TextBox Height="50" Name="HexPlainTextBox"/>
+            <TextBox Height="50" Name="HexPlainTextBox" TextChanged="HexTextBox_TextChanged"/>
             <TextBlock Text="Key Hex:"/>
-            <TextBox Height="20" Name="HexEncryptionPasswordBox"/>
+            <TextBox Height="20" Name="HexEncryptionPasswordBox" TextChanged="HexTextBox_TextChanged"/>
             <TextBlock Text="Verschlüsselter Text Hex:" Margin="0,60,0,0"/>
-            <TextBox Height="70" Name="HexCipherTextBox" />
+            <TextBox Height="70" Name="HexCipherTextBox" TextChanged="HexTextBox_TextChanged" Focusable="False"/>
             <TextBlock Text="Tag Hex:"/>
-            <TextBox Height="20" Name="HexTagBox" />
+            <TextBox Height="20" Name="HexTagBox" TextChanged="HexTextBox_TextChanged" Focusable="False"/>
         </StackPanel>
     </Grid>
 </Page>
