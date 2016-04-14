@@ -20,7 +20,7 @@
         <Border CornerRadius="6" BorderBrush="Gray"  Background="LightGray" BorderThickness="2" Padding="6" Margin="35,0,0,0">
             <StackPanel Margin="15,0,15,0">
                 <TextBlock Text="IV: (optional)" />
-                <TextBox Height="20" Name="IVBox"/>
+                <TextBox Height="20" Name="IvBox"/>
                 <TextBlock Text="Klartext:"/>
                 <TextBox Height="50" Name="PlainTextBox"/>
                 <TextBlock Text="Key:"/>
@@ -52,7 +52,7 @@
 
         <StackPanel Grid.Column="1" Margin="10,8,35,0">
             <TextBlock Text="IV Hex:"/>
-            <TextBox Height="20" Name="HexIVBox"/>
+            <TextBox Height="20" Name="HexIvBox"/>
             <TextBlock Text="Klartext Hex:"/>
             <TextBox Height="50" Name="HexPlainTextBox"/>
             <TextBlock Text="Key Hex:"/>

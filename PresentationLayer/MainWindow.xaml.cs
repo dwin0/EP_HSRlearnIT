@@ -13,7 +13,6 @@ namespace EP_HSRlearnIT.PresentationLayer
     /// </summary>
     public partial class MainWindow : Window
     {
-        public Utilities utilies { get; }
 
         #region Constructors
 
@@ -22,8 +21,6 @@ namespace EP_HSRlearnIT.PresentationLayer
             InitializeComponent();
             MainFrame.Navigate(new MainPage(this));
             //AppDomain.CurrentDomain.UnhandledException += LoggingHandler.unhandledExceptionTrapper;
-            utilies = new Utilities();
-
             Application.Current.MainWindow = this;
         }
         #endregion
@@ -50,7 +47,7 @@ namespace EP_HSRlearnIT.PresentationLayer
                     MainFrame.Navigate(new AesGcmOverviewPage());
                     break;
                 case "Schritt für Schritt":
-                    MainFrame.Navigate(new StepPage(this));
+                    MainFrame.Navigate(new StepPage());
                     break;
                 case "Ver- und Entschlüsselung":
                     MainFrame.Navigate(new EncryptionPage());
@@ -95,8 +92,7 @@ namespace EP_HSRlearnIT.PresentationLayer
 
         private void OnSaveButton_Click(object sender, RoutedEventArgs e)
         {
-            FileSaver newFile = new FileSaver();
-            newFile.CreateFile("AES-GCM", 20, "You are starting with the learntool!");
+            FileSaver.UpdateFileContent(FileSaver.SaveFile(@"C:\temp\HSRlearnIT", "AES-GCM.txt"), "The program is started!");
         }
 
         private void OnExceptionClick(object sender, MouseButtonEventArgs e)

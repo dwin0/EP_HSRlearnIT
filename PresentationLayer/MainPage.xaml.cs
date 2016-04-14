@@ -33,7 +33,7 @@ namespace EP_HSRlearnIT.PresentationLayer
 
         private void StepByStep_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new StepPage(_main));
+            NavigationService.Navigate(new StepPage());
         }
 
         private void EncryptionDecryption_Click(object sender, RoutedEventArgs e)
