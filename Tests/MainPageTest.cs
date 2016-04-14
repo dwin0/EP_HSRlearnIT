@@ -7,13 +7,12 @@ using TestStack.White.UIItems;
 
 namespace EP_HSRlearnIT.PresentationLayer.Testing
 {
-    [TestClass()]
+    //[TestClass()]
     public class MainPageTests
     {
         public string BaseDir => Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         public string SutPath => Path.Combine(BaseDir, $"{nameof(EP_HSRlearnIT)}.exe");
         
-        /*
         [TestMethod()]
         public void MainPageTest()
         {
@@ -27,7 +26,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Testing
 
             app.Close();
         }
-        */
+        
 
         [TestMethod()]
         public void OkTest()
