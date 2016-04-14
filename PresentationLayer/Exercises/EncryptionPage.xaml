@@ -32,6 +32,7 @@
                 <Button Click="OnEnryptionButtonClick" Content="Verschlüsseln" Name="EncryptionButton" Height="40" Width="85" HorizontalAlignment="Left" Margin="0,10,0,10" >
                     <Button.IsEnabled>
                         <MultiBinding Converter="{StaticResource FormFilledMultiConverter}">
+                            <Binding Path="Text.Length" ElementName="IvBox"/>
                             <Binding Path="Text.Length" ElementName="PlainTextBox"/>
                             <Binding Path="Text.Length" ElementName="EncryptionPasswordBox"/>
                         </MultiBinding>

@@ -106,6 +106,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                 foreach (char letter in values)
                 {
                     // Get the integral value of the character
+                    //TODO führende 0 einbauen --> Test Case 14
                     int value = Convert.ToInt32(letter);
 
                     // Convert the decimal value to a hexadecimal value in string form
@@ -162,9 +163,9 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         {
             char[] chars = new char[bytes.Length];
 
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new StringBuilder(); //StringBuilder sinnvoll?
             int i = 0;
-            foreach (byte b in bytes)
+            foreach (byte b in bytes) //for schlaufe besser?
             {
                 chars[i] = Convert.ToChar(b);
                 sb.Append(chars[i]);
