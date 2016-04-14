@@ -35,7 +35,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                 i++;
             }
         }
-        List<Image> AddedImages = new List<Image>();
+        List<UIElement> AddedImages = new List<UIElement>();
 
         bool isMoving = false;
         Image imgMoved = null;
@@ -75,6 +75,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
             finalImage.Height = 35;
             finalImage.Margin = imgMoved.Margin;
             finalImage.Source = imgMoved.Source;
+            finalImage.Name = "tmp" + imgMoved.Name;
             controlGrid.Children.Add(finalImage);
 
             //Set Eventhandler for new image so new image behaves as original 
@@ -138,6 +139,14 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         }
         private void reset_onclick(object sender, RoutedEventArgs e)
         {
+            var images = controlGrid.Children.OfType<Image>().ToList();
+            foreach (var image in images)
+            {
+                if (image.Name.Contains("tmp"))
+                    {
+                    controlGrid.Children.Remove(image);
+                    }
+                }
             AddedImages.Clear();
         }
     }
