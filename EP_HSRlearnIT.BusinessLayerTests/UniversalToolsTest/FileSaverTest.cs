@@ -1,12 +1,11 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.IO;
 using EP_HSRlearnIT.BusinessLayer.UniversalTools;
+using System.IO;
 using System;
-using System.Threading.Tasks;
 
 namespace EP_HSRlearnIT.BusinessLayer.Testing.UniversalToolsTest
 {
-    //[TestClass]
+    [TestClass]
     public class FileSaverTests
     {
 
@@ -20,6 +19,7 @@ namespace EP_HSRlearnIT.BusinessLayer.Testing.UniversalToolsTest
         /// <summary>
         /// Test isn't stable!
         /// </summary>
+        [TestMethod]
         public void UpdateFileTest()
         {
             FileSaver.SaveFile(@"c:\temp\HSRlearnIT\Test", "UpdateTest.txt");
@@ -32,6 +32,7 @@ namespace EP_HSRlearnIT.BusinessLayer.Testing.UniversalToolsTest
         /// <summary>
         /// Test isn't stable!
         /// </summary>
+        [TestMethod]
         public void AddToFileTest()
         {
             FileSaver.SaveFile(@"c:\temp\HSRlearnIT\Test", "AddTest.txt");
@@ -45,11 +46,8 @@ namespace EP_HSRlearnIT.BusinessLayer.Testing.UniversalToolsTest
         [ClassCleanup]
         public static void CleanUp()
         {
-            Task cleanTask = Task.Factory.StartNew(() =>
-            {
                 Directory.Delete(@"c:\temp\HSRlearnIT\Test", true);
-            });
-            cleanTask.Wait();
+
         }
     }
 }

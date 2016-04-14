@@ -1,7 +1,5 @@
 ﻿using System;
-using System.CodeDom;
 using System.IO;
-using System.Threading.Tasks;
 
 namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
 {
@@ -27,14 +25,10 @@ namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
 
         public static string ReadFile(String filePath)
         {
-            string output = "";
-            Task readTask = Task.Factory.StartNew(() =>
-            {
+            
                 StreamReader sr = new StreamReader(filePath);
-                output = sr.ReadToEnd();
+                string output = sr.ReadToEnd();
                 sr.Close();
-            });
-            readTask.Wait();
 
             return output;
         }
@@ -47,12 +41,10 @@ namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
 
         public static String SaveFile(String path, String filename)
         {
-            Task saveTask = Task.Factory.StartNew(() =>
-            {
+
                 CreateDirectory(path);
                 CreateFile(filename);
-            });
-            saveTask.Wait();
+
             return _filePath;
         }
 
@@ -78,19 +70,15 @@ namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
 
             if (!File.Exists(_filePath))
             {
-                File.Create(_filePath);
+                File.Create(_filePath).Close();
             }
         }
 
         private static void WriteFile(String filePath, String currentContent, Boolean addToFile)
         {
-            Task task = Task.Factory.StartNew(() =>
-            {
                 StreamWriter file = new StreamWriter(filePath, addToFile);
                 file.Write(currentContent);
                 file.Close();
-            });
-            task.Wait();
         }
 
         #endregion

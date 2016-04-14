@@ -7,7 +7,7 @@ using TestStack.White.UIItems;
 
 namespace EP_HSRlearnIT.PresentationLayer.Testing
 {
-    //[TestClass()]
+    [TestClass()]
     public class MainPageTests
     {
         public string BaseDir => Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
