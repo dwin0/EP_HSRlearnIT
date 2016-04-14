@@ -7,7 +7,7 @@ using TestStack.White.UIItems;
 
 namespace EP_HSRlearnIT.PresentationLayer.Testing
 {
-    [TestClass()]
+    //[TestClass()]
     public class MainPageTests
     {
         public string BaseDir => Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
@@ -26,9 +26,10 @@ namespace EP_HSRlearnIT.PresentationLayer.Testing
 
             app.Close();
         }
+        
 
         [TestMethod()]
-        public void OKTest()
+        public void OkTest()
         {
             Assert.IsTrue(true);
         }

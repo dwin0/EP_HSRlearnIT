@@ -1,23 +1,17 @@
-﻿
+﻿using System;
+
 namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
 {
-    public class Utilities
+    public static class Utilities
     {
         #region Public Members
-        public FileSaver FileSaver;
-        public Progress Progress;
-        public ExceptionLogger ExLogger;
+        
+        //public static Progress Progress;
+        
+        public static string FolderPath;
+        public static string FileName;
 
         #endregion
 
-        #region public Methods
-        public Utilities()
-        {
-            FileSaver = new FileSaver();
-            Progress = new Progress();
-            ExLogger = new ExceptionLogger();
-        }
-
-        #endregion
     }
 }

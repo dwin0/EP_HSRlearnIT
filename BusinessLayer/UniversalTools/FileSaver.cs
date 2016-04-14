@@ -1,63 +1,99 @@
 ﻿using System;
+using System.CodeDom;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
 {
-    public class FileSaver
+    public static class FileSaver
     {
-        private String topLevelFolder = @"C:\temp\HSRlearnIT";
-        private String folderName = "Test";
-        private String pathString;
-        private String fileName;
-
-        #region Public Methods
-
-        internal bool SaveFile(String text)
-        {
-            return false;
-        }
+        #region Private Member
+        private static String _folderPath;
+        private static String _filePath;
+        private static String _fileName;
+        
         #endregion
 
-        public void CreateFile(String fileName, int status, String currentContent)
+        #region Public Methods
+        public static void UpdateFileContent(String file, String currentContent)
         {
-            this.fileName = fileName;
-            pathString = Path.Combine(topLevelFolder, folderName, fileName);
-            if(!File.Exists(pathString))
+            WriteFile(file, currentContent, false);
+        }
+
+        public static void ContentAddToFile(String file, String currentContent)
+        {
+            WriteFile(file, currentContent, true);
+        }
+
+        public static string ReadFile(String filePath)
+        {
+            string output = "";
+            Task readTask = Task.Factory.StartNew(() =>
             {
+                StreamReader sr = new StreamReader(filePath);
+                output = sr.ReadToEnd();
+                sr.Close();
+            });
+            readTask.Wait();
 
-                pathString = Path.Combine(topLevelFolder, folderName);
-                Directory.CreateDirectory(pathString);
-                pathString = Path.Combine(pathString, fileName);
-
-                Console.WriteLine("Filepath: {0}\n", pathString);
-                FileStream file = File.Create(pathString);
-                file.Close();
-            }
-            WriteFile(status, currentContent);
-            String output = ReadFile();
-            //MessageBox.Show("The Content of the file is " + output);
-        }
-
-        public void WriteFile(int status, String currentContent)
-        {
-            StreamWriter file = new StreamWriter(pathString, true);
-            file.Write(status);
-            file.Write(currentContent);
-            file.Close();
-        }
-
-        public String ReadFile()
-        {
-            FileInfo info = new FileInfo(pathString);
-            StreamReader sr = new StreamReader(pathString);
-            String output = sr.ReadToEnd();
-            sr.Close();
             return output;
         }
 
-        public void RemoveSaveFiles()
+        public static long GetSize(String filePath)
         {
-            Directory.Delete(topLevelFolder, true);
+            FileInfo fileInfo = new FileInfo(filePath);
+            return fileInfo.Length;
         }
+
+        public static String SaveFile(String path, String filename)
+        {
+            Task saveTask = Task.Factory.StartNew(() =>
+            {
+                CreateDirectory(path);
+                CreateFile(filename);
+            });
+            saveTask.Wait();
+            return _filePath;
+        }
+
+        #endregion
+
+
+        #region Private Methods
+        private static void CreateDirectory(String path)
+        {
+            _folderPath = path;
+
+            if (!Directory.Exists(_folderPath))
+            {
+                Directory.CreateDirectory(_folderPath);
+            }
+
+        }
+
+        private static void CreateFile(String fileName)
+        {
+            _fileName = fileName;
+            _filePath = Path.Combine(_folderPath, _fileName);
+
+            if (!File.Exists(_filePath))
+            {
+                File.Create(_filePath);
+            }
+        }
+
+        private static void WriteFile(String filePath, String currentContent, Boolean addToFile)
+        {
+            Task task = Task.Factory.StartNew(() =>
+            {
+                StreamWriter file = new StreamWriter(filePath, addToFile);
+                file.Write(currentContent);
+                file.Close();
+            });
+            task.Wait();
+        }
+
+        #endregion
+
     }
 }
