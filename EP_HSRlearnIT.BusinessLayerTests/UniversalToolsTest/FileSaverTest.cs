@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EP_HSRlearnIT.BusinessLayer.Testing.UniversalToolsTest
 {
-    [TestClass]
+    //[TestClass]
     public class FileSaverTests
     {
 
