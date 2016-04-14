@@ -64,7 +64,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="UniversalTools\Progress.cs" />
-    <Compile Include="UniversalTools\Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="UniversalTools\ExceptionLogger.cs" />

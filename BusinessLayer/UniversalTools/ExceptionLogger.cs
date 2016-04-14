@@ -22,7 +22,7 @@ namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
         {
             FileSaver.SaveFile(_path, _fileName);
             _filePath = Path.Combine(_path, _fileName);
-            String entry = "Exception :" + DateTime.Now.ToString() + ": " + exmsg + " " + sourceMethod + "\n";
+            String entry = "\n" + "Exception :" + DateTime.Now.ToString() + ": " + exmsg + " " + sourceMethod + "\n";
             FileSaver.ContentAddToFile(_filePath, entry);
             AvoidOverflow(_filePath);
         }
