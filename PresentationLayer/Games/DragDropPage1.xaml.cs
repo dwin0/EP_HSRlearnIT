@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EP_HSRlearnIT.BusinessLayer.UniversalTools;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,13 +22,13 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         public DragDropPage1()
         {
             InitializeComponent();
-            orderImages();
+            OrderImages();
         }
-        private void orderImages()
+        private void OrderImages()
         {
             int i = 0;
-            Image[] imgs = { hashsubkey, iv, counter, multH, auth_data, auth_tag, ciphertext, plaintext, len };
-            foreach (var img in imgs)
+            Image[] images = { hashsubkey, iv, counter, multH, auth_data, auth_tag, ciphertext, plaintext, len };
+            foreach (var img in images)
             {
                 img.Width = 80;
                 img.Height = 35;
@@ -37,11 +38,11 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         }
         List<UIElement> AddedImages = new List<UIElement>();
 
-        bool isMoving = false;
-        Image imgMoved = null;
-        Thickness marginStart;
+        bool _isMoving = false;
+        Image _imgMoved = null;
+        Thickness _marginStart;
         // Position used for calculating mouse move
-        Point previousMousePosition = new Point();
+        Point _previousMousePosition = new Point();
 
         Rect[] dropLocations =
         {
@@ -68,86 +69,116 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         };
         private void image_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            //First it is checked which image is moved, then a new image is created  and set with height, width and margin, so it appears on the same position as the imgMoved.
-            imgMoved = (Image)sender;
-            Image finalImage = new Image();
-            finalImage.Width = 80;
-            finalImage.Height = 35;
-            finalImage.Margin = imgMoved.Margin;
-            finalImage.Source = imgMoved.Source;
-            finalImage.Name = "tmp" + imgMoved.Name;
-            controlGrid.Children.Add(finalImage);
+            try
+            {
+                //First it is checked which image is moved, then a new image is created  and set with height, width and margin, so it appears on the same position as the _imgMoved.
+                _imgMoved = (Image)sender;
+                Image finalImage = new Image();
+                finalImage.Width = 80;
+                finalImage.Height = 35;
+                finalImage.Margin = _imgMoved.Margin;
+                finalImage.Source = _imgMoved.Source;
+                finalImage.Name = "tmp" + _imgMoved.Name;
+                controlGrid.Children.Add(finalImage);
 
-            //Set Eventhandler for new image so new image behaves as original 
-            finalImage.PreviewMouseLeftButtonUp += image_PreviewMouseLeftButtonUp;
-            imgMoved = finalImage;
+                //Set Eventhandler for new image so new image behaves as original 
+                finalImage.PreviewMouseLeftButtonUp += image_PreviewMouseLeftButtonUp;
+                _imgMoved = finalImage;
 
-            // Remember the initial mouse position
-            previousMousePosition = e.GetPosition(this);
-            marginStart = imgMoved.Margin;
-            isMoving = true;
+                // Remember the initial mouse position
+                _previousMousePosition = e.GetPosition(this);
+                _marginStart = _imgMoved.Margin;
+                _isMoving = true;
+            }
+            catch (Exception ex)
+            {
+                ExceptionLogger.WriteToLogfile(ex.Message, "testMethod");
+            }
         }
 
         private void image_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            isMoving = false;
+            try
+            {
+                _isMoving = false;
 
-            //Check if the original image corresponds with one of the droplocations. If there is a intersection, then image can be dropped
-            Rect hashsubkeyrect = new Rect(imgMoved.Margin.Left, imgMoved.Margin.Top, imgMoved.Width, imgMoved.Height);
-            bool bIntersection = false;
-            for (int i = 0; i < dropLocations.Length; i++)
-            {
-                Rect r = dropLocations[i];
-                if (hashsubkeyrect.IntersectsWith(r))
-                {
-                    bIntersection = true;
-                    imgMoved.Margin = new Thickness(r.Left - 80, r.Top -35, 0, 0);
-                    AddedImages.Add(imgMoved);
-                    break;
-                }
-            }
-            if(!bIntersection) 
-            {
-                controlGrid.Children.Remove(imgMoved);
-            }
-        }
-        private void image_MouseMove(object sender, MouseEventArgs e) 
-        {
-            if (isMoving)
-            {
-                Point currMousePoint = e.GetPosition(this);
-                double dragHorizontal = currMousePoint.X - previousMousePosition.X; 
-                double dragVertical = currMousePoint.Y - previousMousePosition.Y; 
-                previousMousePosition = currMousePoint;
-                Thickness oldMargin = imgMoved.Margin;
-                oldMargin.Left += dragHorizontal*2;
-                oldMargin.Top += dragVertical*2;
-                imgMoved.Margin = oldMargin;
-
-                //This part is only for debugging (so that the textbox gets showsn) and will be deleted for the final version
-                Rect hashsubkeyrect = new Rect(imgMoved.Margin.Left, imgMoved.Margin.Top, imgMoved.Width, imgMoved.Height);
+                //Check if the original image corresponds with one of the droplocations. If there is a intersection, then image can be dropped
+                Rect imageRect = new Rect(_imgMoved.Margin.Left, _imgMoved.Margin.Top, _imgMoved.Width, _imgMoved.Height);
                 bool bIntersection = false;
                 for (int i = 0; i < dropLocations.Length; i++)
                 {
                     Rect r = dropLocations[i];
-                    if (hashsubkeyrect.IntersectsWith(r))
-
+                    if (imageRect.IntersectsWith(r))
+                    {
                         bIntersection = true;
+                        _imgMoved.Margin = new Thickness(r.Left - 80, r.Top - 35, 0, 0);
+                        AddedImages.Add(_imgMoved);
+                        break;
+                    }
                 }
-                textBox.Text = String.Format("X: {0}, Y:{1} INT: {2}", oldMargin.Left, oldMargin.Top, bIntersection ? "TRUE" : "FALSE");
+                if (!bIntersection)
+                {
+                    controlGrid.Children.Remove(_imgMoved);
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionLogger.WriteToLogfile(ex.Message, "testMethod");
+             
+            }
+        }
+
+        private void image_MouseMove(object sender, MouseEventArgs e) 
+        {
+            try
+            {
+                if (_isMoving)
+                {
+                    Point currMousePoint = e.GetPosition(this);
+                    double dragHorizontal = currMousePoint.X - _previousMousePosition.X;
+                    double dragVertical = currMousePoint.Y - _previousMousePosition.Y;
+                    _previousMousePosition = currMousePoint;
+                    Thickness oldMargin = _imgMoved.Margin;
+                    oldMargin.Left += dragHorizontal * 2;
+                    oldMargin.Top += dragVertical * 2;
+                    _imgMoved.Margin = oldMargin;
+
+                    //This part is only for debugging (so that the textbox gets showsn) and will be deleted for the final version
+                    Rect imageRect = new Rect(_imgMoved.Margin.Left, _imgMoved.Margin.Top, _imgMoved.Width, _imgMoved.Height);
+                    bool bIntersection = false;
+                    for (int i = 0; i < dropLocations.Length; i++)
+                    {
+                        Rect r = dropLocations[i];
+                        if (imageRect.IntersectsWith(r))
+
+                            bIntersection = true;
+                    }
+                    textBox.Text = String.Format("X: {0}, Y:{1} INT: {2}", oldMargin.Left, oldMargin.Top, bIntersection ? "TRUE" : "FALSE");
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionLogger.WriteToLogfile(ex.Message, "testMethod");
             }
         }
         private void reset_onclick(object sender, RoutedEventArgs e)
         {
-            var images = controlGrid.Children.OfType<Image>().ToList();
-            foreach (var image in images)
+            try
             {
-                if (image.Name.Contains("tmp"))
+                var images = controlGrid.Children.OfType<Image>().ToList();
+                foreach (var image in images)
+                {
+                    if (image.Name.Contains("tmp"))
                     {
-                    controlGrid.Children.Remove(image);
+                        controlGrid.Children.Remove(image);
                     }
                 }
-            AddedImages.Clear();
+                AddedImages.Clear();
+            }
+            catch (Exception ex)
+            {
+                ExceptionLogger.WriteToLogfile(ex.Message, "testMethod");
+            }
         }
     }
 }
