@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Input;
 
 namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
 {
@@ -10,21 +12,6 @@ namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
         #endregion
 
         #region Public Methods
-        public static void SaveProgress(Dictionary<object, object> progress)
-        {
-/*            if (_appProgress.Count == 0)
-                {
-                    _appProgress = progress;
-                }
-                else
-                {
-                    //2 x foreach()
-                    SaveProgress(progress.Keys, progress.Values);
-                }
-*/
-            _appProgress = progress;
-        }
-
         public static void SaveProgress(object key, object value)
         {
             if(_appProgress.ContainsKey(key))
@@ -48,6 +35,12 @@ namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
             return retVal;
         }
 
+        public static void CleanProgress()
+        {
+            _appProgress.Clear();
+        }
+
         #endregion
-    }
+
+        }
 }
