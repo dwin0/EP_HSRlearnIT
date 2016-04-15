@@ -1,13 +1,13 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:system="clr-namespace:System;assembly=mscorlib"
-                    xmlns:local="clr-namespace:EP_HSRlearnIT.PresentationLayer">
+                    xmlns:local="clr-namespace:EP_HSRlearnIT.PresentationLayer" >
+    
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Tutorials/StepByStepResources.xaml" />
+    </ResourceDictionary.MergedDictionaries>
 
     <Brush x:Key="MenuBackgroundColor">#ffe6e6</Brush>
-
-    <system:String x:Key="Step1">Als erster Schritt wird ...</system:String>
-    <system:String x:Key="Step2">Als zweiter Schritt wird ...</system:String>
-    <system:String x:Key="Step3">Als dritter Schritt wird ...</system:String>
 
     <local:StringCollection x:Key="MenuStrings">
         <system:String>AES-GCM Übersicht</system:String>

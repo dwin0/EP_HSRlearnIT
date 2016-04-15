@@ -31,6 +31,19 @@ namespace EP_HSRlearnIT.BusinessLayerTests.UniversalToolsTest
             Assert.AreEqual(progToSave, Progress.GetProgress());
         }
 
+        //[TestMethod]
+        public void SaveMultiDictonaryProgressTest()
+        {
+            Dictionary<object, object> progX = new Dictionary<object, object> { {"progressX", "x"} };
+            Dictionary<object, object> progY = new Dictionary<object, object> { {"progressY", "y"} };
+
+            Progress.SaveProgress(progX);
+            Progress.SaveProgress(progY);
+
+            Assert.AreEqual("x", Convert.ToString(Progress.GetProgress("progressX")));
+            Assert.AreEqual("y", Convert.ToString(Progress.GetProgress("progressY")));
+        }
+
         [TestMethod]
         public void UpdateProgressTest()
         {
@@ -39,6 +52,7 @@ namespace EP_HSRlearnIT.BusinessLayerTests.UniversalToolsTest
             Progress.SaveProgress("testProgress", 42);
 
             Assert.AreEqual(42, Progress.GetProgress("testProgress"));
+            Assert.AreEqual("a", Convert.ToString(Progress.GetProgress("progressA")));
         }
 
     }

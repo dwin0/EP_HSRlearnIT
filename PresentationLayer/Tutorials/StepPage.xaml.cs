@@ -1,6 +1,8 @@
 ﻿using System.Windows;
 ﻿using System;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using EP_HSRlearnIT.BusinessLayer.UniversalTools;
 
 namespace EP_HSRlearnIT.PresentationLayer.Tutorials
@@ -12,8 +14,9 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
     {
         #region Private Members
         private int _step = 1;
-        private const int _SMALLEST_STEP = 1;
-        private const int _BIGGEST_STEP = 3;
+        private const int StepMin = 1;
+        private const int StepMax = 3; //TODO: Change max. Steps
+
         #endregion
 
 
@@ -24,7 +27,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             var progress = Progress.GetProgress("CurrentStep");
             if(progress != null)
             {
-                _step = Convert.ToInt32(progress);
+                _step = Convert.ToInt32(progress);      
             }
             
             ReplaceText(_step);
@@ -37,13 +40,13 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
         private void OnPreviousStepButton_Click(object sender, RoutedEventArgs e)
         {
             ReplaceText(--_step);
-            Progress.SaveProgress("CurrentStep", _step);
+            Progress.SaveProgress("StepPage_StepImage", _step);
         }
 
         private void OnNextStepButton_Click(object sender, RoutedEventArgs e)
         {
             ReplaceText(++_step);
-            Progress.SaveProgress("CurrentStep", _step);
+            Progress.SaveProgress("StepPage_StepImage", _step);
         }
 
         private void ReplaceText(int stepNumber)
@@ -51,11 +54,11 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             switch(stepNumber)
             {
 
-                case _SMALLEST_STEP:
+                case StepMin:
                     PreviousStepButton.IsEnabled = false;
                     NextStepButton.IsEnabled = true;
                     break;
-                case _BIGGEST_STEP:
+                case StepMax:
                     PreviousStepButton.IsEnabled = true;
                     NextStepButton.IsEnabled = false;
                     break;
@@ -66,7 +69,9 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             }
 
             StepDescriptionBox.Text = Application.Current.FindResource("Step" + stepNumber) as string;
+            StepImage.Source = new BitmapImage(new Uri(@"/Images/Step" + stepNumber + ".png", UriKind.RelativeOrAbsolute));
             StepTitle.Text = "Schritt " + stepNumber;
+
         }
         #endregion
     }

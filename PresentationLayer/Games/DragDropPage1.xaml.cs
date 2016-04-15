@@ -13,16 +13,30 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using EP_HSRlearnIT.BusinessLayer.UniversalTools;
 
 
 namespace EP_HSRlearnIT.PresentationLayer.Games
 {
     public partial class DragDropPage1 : Page
     {
+        #region Private Members
+        private int _step = 1;
+      
+        #endregion
+
         public DragDropPage1()
         {
             InitializeComponent();
             OrderImages();
+
+            var progress = Progress.GetProgress("CurrentStep");
+            if (progress != null)
+            {
+                _step = Convert.ToInt32(progress);
+            }
+
+          //  ReplaceText(_step);
         }
         private void OrderImages()
         {
@@ -41,6 +55,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         bool _isMoving = false;
         Image _imgMoved = null;
         Thickness _marginStart;
+
         // Position used for calculating mouse move
         Point _previousMousePosition = new Point();
 
@@ -92,7 +107,8 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
             }
             catch (Exception ex)
             {
-                ExceptionLogger.WriteToLogfile(ex.Message, "testMethod");
+                ExceptionLogger.WriteToLogfile(ex.Message, "image_PreviewMouseLeftButtonDown");
+                Console.WriteLine("Exception occured " + ex.Message);
             }
         }
 
@@ -113,6 +129,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                         bIntersection = true;
                         _imgMoved.Margin = new Thickness(r.Left - 80, r.Top - 35, 0, 0);
                         AddedImages.Add(_imgMoved);
+                      //  Progress.SaveProgress( );
                         break;
                     }
                 }
@@ -124,7 +141,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
             catch (Exception ex)
             {
                 ExceptionLogger.WriteToLogfile(ex.Message, "testMethod");
-             
+                Console.WriteLine("Das Element konnte nicht korrekt zugeordnet werden. Fehlermeldung: " + ex.Message);
             }
         }
 
@@ -179,6 +196,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
             {
                 ExceptionLogger.WriteToLogfile(ex.Message, "testMethod");
             }
+       
         }
     }
 }
