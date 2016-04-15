@@ -1,0 +1,39 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib"
+                    xmlns:local="clr-namespace:EP_HSRlearnIT" >
+
+    <system:String x:Key="Step1">Einleitung: Weshalb AES-GCM?
+Der Galois/Counter Mode der AES-Verschlüsselung ermöglicht eine Verschlüsselung des Plaintextes 
+sowie eine Authentifizierung des Ciphertextes und zusätzlichen Daten. 
+Eine solche Art der Verschlüsselung und Authentifizierung nennt man auch Authenticated Encryption with Associated Data (AEAD).
+Schritt 1: Vorbereitung
+Schritt 2: Verschlüsselung 
+Schritt 3: Additional Authenticated Data 
+Schritt 4: Ciphertext-Authentifizierung
+Schritt 5: Wiederholung 
+Schritt 6: Abschluss und Rückgabe
+    </system:String>
+    <system:String x:Key="Step2">Vorbereitung:
+Der Hash-Subkey H wird berechnet. Dazu wird ein Block von 128 Nullen (0128) mit dem Schlüssel K AES verschlüsselt. 
+Der Subkey wird für die Berechnung des MAC, also für die Authentifizierung, benötigt. In AES-GCM wird dieser MAC Tag genannt.
+    </system:String>
+    <system:String x:Key="Step3">Der «Counter 0»-Block wird aus dem Initialisierungsvektor (IV) hergeleitet. 
+Dazu wird zum IV ein Padding hinzugefügt, so dass schlussendlich ein Block mit 128Bit resultiert.
+    </system:String>
+    <system:String x:Key="Step4">
+        Verschlüsselung:
+Auf den «Counter 0»-Block wird eine Increment-Funktion angewendet, woraus der «Counter 1» resultiert.
+    </system:String>
+    
+    
+    
+    <Image x:Key="Image1" Source="/Images/Step1.png" />
+    <Image x:Key="Image2" Source="/Images/Step16.png" />
+    <Image x:Key="Image3" Source="/Images/Step17.png" />
+    <Image x:Key="Image4" Source="/Images/Step18.png" />
+
+
+
+
+</ResourceDictionary>

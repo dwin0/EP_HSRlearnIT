@@ -5,36 +5,46 @@ namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
     public static class Progress
     {
         #region Private Members
-        private static Dictionary<object, object> AppProgress = new Dictionary<object, object>();
+        private static Dictionary<object, object> _appProgress = new Dictionary<object, object>();
 
         #endregion
 
         #region Public Methods
         public static void SaveProgress(Dictionary<object, object> progress)
         {
-            AppProgress = progress;
+/*            if (_appProgress.Count == 0)
+                {
+                    _appProgress = progress;
+                }
+                else
+                {
+                    //2 x foreach()
+                    SaveProgress(progress.Keys, progress.Values);
+                }
+*/
+            _appProgress = progress;
         }
 
         public static void SaveProgress(object key, object value)
         {
-            if(AppProgress.ContainsKey(key))
+            if(_appProgress.ContainsKey(key))
             {
-                AppProgress[key] = value;
+                _appProgress[key] = value;
             } else
             {
-                AppProgress.Add(key, value);
+                _appProgress.Add(key, value);
             }
         }
 
         public static Dictionary<object, object> GetProgress()
         {
-            return AppProgress;
+            return _appProgress;
         }
 
         public static object GetProgress(object key)
         {
             object retVal;
-            AppProgress.TryGetValue(key, out retVal);
+            _appProgress.TryGetValue(key, out retVal);
             return retVal;
         }
 
