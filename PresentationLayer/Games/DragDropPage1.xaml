@@ -26,7 +26,7 @@
     </Grid>
 </Page>
 
-<<!--Grid Name="controlGrid" AllowDrop="True" MouseMove="image_MouseMove" Width="900">
+<!--Grid Name="controlGrid" AllowDrop="True" MouseMove="image_MouseMove" Width="900">
     <Image AllowDrop="True" Canvas.ZIndex="-1" Source="pack://application:,,,/images/dragdrop.PNG" Name="overview"  HorizontalAlignment="Left" Width="600"/>
     <Image Canvas.ZIndex="2" Source="pack://application:,,,/images/dragdrop1.PNG" Name="hashsubkey" Style="{StaticResource DragImageStyle}" />
     <Image AllowDrop="True" Canvas.ZIndex="2" Source="pack://application:,,,/images/dragdrop2.PNG" Name="iv" Style="{StaticResource DragImageStyle}"/>
