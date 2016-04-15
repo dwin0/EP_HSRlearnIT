@@ -22,7 +22,7 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
 
         #region Public Methods
 
-        public byte[] Encrypt(string key, string plaintext, string nonce)
+        public Tuple<byte[], byte[]> Encrypt(string key, string plaintext, string nonce)
         {
             //byte[] keyByte = Encoding.UTF8.GetBytes(key);
             byte[] keyByte = StringToBytes(key);
@@ -63,7 +63,7 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
 
         #region Private Methods
 
-        private byte[] _Encrypt(byte[] key, byte[] plaintext, byte[] nonce)
+        private Tuple<byte[], byte[]> _Encrypt(byte[] key, byte[] plaintext, byte[] nonce)
         {
             using (AuthenticatedAesCng aes = new AuthenticatedAesCng())
             {
@@ -110,9 +110,10 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
 
                     // Finish the encryption and get the output authentication tag and ciphertext
                     cs.FlushFinalBlock();
-                    _tag = encryptor.GetTag();
-                    _ciphertext = ms.ToArray();
-                    return _ciphertext;
+                    byte[] tagEncrypt = encryptor.GetTag();
+                    byte[] ciphertextEncrypt = ms.ToArray();
+                    var returnValue = new Tuple<byte[], byte[]>(tagEncrypt, ciphertextEncrypt);
+                    return returnValue;
                 }
             }
         }

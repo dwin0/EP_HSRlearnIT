@@ -70,8 +70,11 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
 
             //TODO IV-Length has to be 12bytes
 
-            byte[] ciphertext = _library.Encrypt(bigKeyString, PlainTextBox.Text, IvBox.Text);
+            Tuple<byte[], byte[]> returnValue = _library.Encrypt(bigKeyString, PlainTextBox.Text, IvBox.Text);
+            byte[] tag = returnValue.Item1;
+            byte[] ciphertext = returnValue.Item2;
             CipherTextBox.Text = BytesToString(ciphertext);
+            TagBox.Text = BytesToString(tag);
         }
 
         /* private void OnDecryptionButtonClick(object sender, RoutedEventArgs e)
