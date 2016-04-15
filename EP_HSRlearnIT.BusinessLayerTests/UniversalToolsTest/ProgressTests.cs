@@ -17,28 +17,13 @@ namespace EP_HSRlearnIT.BusinessLayerTests.UniversalToolsTest
             Assert.AreEqual(1, Progress.GetProgress("progress1"));
         }
 
+
+
         [TestMethod]
-        public void SaveDictonaryProgressTest()
+        public void SaveMultiProgressTest()
         {
-            Dictionary<object, object> progToSave = new Dictionary<object, object>
-            {
-                {"progressA", "a"},
-                {"progressB", "b"}
-            };
-
-            Progress.SaveProgress(progToSave);
-
-            Assert.AreEqual(progToSave, Progress.GetProgress());
-        }
-
-        //[TestMethod]
-        public void SaveMultiDictonaryProgressTest()
-        {
-            Dictionary<object, object> progX = new Dictionary<object, object> { {"progressX", "x"} };
-            Dictionary<object, object> progY = new Dictionary<object, object> { {"progressY", "y"} };
-
-            Progress.SaveProgress(progX);
-            Progress.SaveProgress(progY);
+            Progress.SaveProgress("progressX", "x");
+            Progress.SaveProgress("progressY", "y");
 
             Assert.AreEqual("x", Convert.ToString(Progress.GetProgress("progressX")));
             Assert.AreEqual("y", Convert.ToString(Progress.GetProgress("progressY")));
@@ -48,12 +33,17 @@ namespace EP_HSRlearnIT.BusinessLayerTests.UniversalToolsTest
         public void UpdateProgressTest()
         {
             
-            Progress.SaveProgress("testProgress", 9);
-            Progress.SaveProgress("testProgress", 42);
+            Progress.SaveProgress("testProgress1", 9);
+            Progress.SaveProgress("testProgress2", 42);
 
-            Assert.AreEqual(42, Progress.GetProgress("testProgress"));
-            Assert.AreEqual("a", Convert.ToString(Progress.GetProgress("progressA")));
+            Assert.AreEqual(42, Progress.GetProgress("testProgress2"));
+            Assert.AreEqual(9, Progress.GetProgress("testProgress1"));
         }
 
+        [TestCleanup]
+        public void CleanUp()
+        {
+            Progress.CleanProgress();
+        }
     }
 }
