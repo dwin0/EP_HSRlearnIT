@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
 using Security.Cryptography;
 using System.Security.Cryptography;
@@ -22,33 +19,22 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
 
         #region Public Methods
 
-        public Tuple<byte[], byte[]> Encrypt(string key, string plaintext, string nonce)
+        public Tuple<byte[], byte[]> Encrypt(string key, string plaintext, string nonce, string aad)
         {
-            //byte[] keyByte = Encoding.UTF8.GetBytes(key);
-            byte[] keyByte = StringToBytes(key);
+            byte[] keyByte = Encoding.UTF8.GetBytes(key);
             byte[] plaintextByte = Encoding.UTF8.GetBytes(plaintext);
             byte[] nonceByte = null;
             if (nonce != "")
             {
                 nonceByte = Encoding.UTF8.GetBytes(nonce);
             }
-            return _Encrypt(keyByte, plaintextByte, nonceByte);
-        }
-
-        private byte[] StringToBytes(string toConvert)
-        {
-            byte[] bytes = new byte[toConvert.Length];
-
-            int i = 0;
-            foreach (char c in toConvert)
+            byte[] aadByte = null;
+            if (aad != "")
             {
-                bytes[i] = Convert.ToByte(c);
-                i++;
+                aadByte = Encoding.UTF8.GetBytes(aad);
             }
-
-            return bytes;
+            return _Encrypt(keyByte, plaintextByte, nonceByte, aadByte);
         }
-
 
         public String Decrypt(string key, byte[] ciphertext)
         {
@@ -63,7 +49,7 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
 
         #region Private Methods
 
-        private Tuple<byte[], byte[]> _Encrypt(byte[] key, byte[] plaintext, byte[] nonce)
+        private Tuple<byte[], byte[]> _Encrypt(byte[] key, byte[] plaintext, byte[] nonce, byte[] aad)
         {
             using (AuthenticatedAesCng aes = new AuthenticatedAesCng())
             {
@@ -72,21 +58,12 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
                 // valid and current tag sizes.
                 aes.CngMode = CngChainingMode.Gcm;
 
-                /*
                 // Keys work the same as standard AES
-                if(true)//key.GetLength(0) < 32)
-                {
-                    byte[] keyTest = new byte[32] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-                    aes.Key = keyTest;
-                }
-                */
-              
                 aes.Key = key;
 
                 // The IV (called the nonce in many of the authenticated algorithm specs) is not sized for
                 // the input block size. Instead its size depends upon the algorithm.  12 bytes works
-                // for both GCM and CCM. Generate a random 12 byte nonce here.
-
+                // for both GCM and CCM.
                 nonce = nonce ?? new byte[12] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
                 aes.IV = nonce;
 
@@ -95,7 +72,7 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
                 // ciphertext the authenticated data will not be produced.  However, if the
                 // authenticated data does not match at encryption and decryption time, the
                 // authentication tag will not validate.
-                //aes.AuthenticatedData = Encoding.UTF8.GetBytes("");
+                aes.AuthenticatedData = aad;
 
                 // Perform the encryption – this works nearly the same as standard symmetric encryption,
                 // however instead of using an ICryptoTransform we use an IAuthenticatedCryptoTrasform
@@ -105,7 +82,6 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
                 using (CryptoStream cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Write))
                 {
                     // Encrypt the secret message
-                    //byte[] plaintext = Encoding.UTF8.GetBytes("Secret data to be encrypted and authenticated.");
                     cs.Write(plaintext, 0, plaintext.Length);
 
                     // Finish the encryption and get the output authentication tag and ciphertext

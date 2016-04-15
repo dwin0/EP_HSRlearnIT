@@ -6,7 +6,6 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using Castle.Components.DictionaryAdapter.Xml;
 using Castle.Core.Internal;
 
 namespace EP_HSRlearnIT.PresentationLayer.Exercises
@@ -68,9 +67,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
 
             ChangeHexBox(bigKeyString.ToCharArray(), HexEncryptionPasswordBox);
 
-            //TODO IV-Length has to be 12bytes
-
-            Tuple<byte[], byte[]> returnValue = _library.Encrypt(bigKeyString, PlainTextBox.Text, IvBox.Text);
+            Tuple<byte[], byte[]> returnValue = _library.Encrypt(bigKeyString, PlainTextBox.Text, IvBox.Text, AadBox.Text);
             byte[] tag = returnValue.Item1;
             byte[] ciphertext = returnValue.Item2;
             CipherTextBox.Text = BytesToString(ciphertext);
@@ -129,6 +126,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             if (hexTextBox != null)
             {
                 string nameHexTextBox = hexTextBox.Name;
+                string nameHexBlock = nameHexTextBox.Substring(0, nameHexTextBox.Length-3) + "Block";
 
                 //Get control that will be updated
                 string nameTextField = nameHexTextBox.Substring(3, nameHexTextBox.Length-3);
@@ -140,6 +138,16 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                     textBox.TextChanged -= TextBox_TextChanged;
 
                     string hexValue = hexTextBox.Text;
+
+                    if (!IsHex(hexValue))
+                    {
+                        TextBlock textBlock = (TextBlock) FindName(nameHexBlock);
+                        textBlock.Text = "Ungültige Eingabe!";
+                        textBox.TextChanged += TextBox_TextChanged;
+                        return;
+                    }
+
+
                     ArrayList list = new ArrayList();
                     while (hexValue.Length > 1)
                     {
@@ -160,6 +168,21 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                     textBox.TextChanged += TextBox_TextChanged;
                 }
             }
+        }
+
+        private bool IsHex(IEnumerable<char> chars)
+        {
+            bool isHex;
+            foreach (var c in chars)
+            {
+                isHex = ((c >= '0' && c <= '9') ||
+                         (c >= 'a' && c <= 'f') ||
+                         (c >= 'A' && c <= 'F'));
+
+                if (!isHex)
+                    return false;
+            }
+            return true;
         }
 
         private string BytesToString(byte[] bytes)
