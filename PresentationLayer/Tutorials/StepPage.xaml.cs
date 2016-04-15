@@ -15,22 +15,9 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
         #region Private Members
         private int _step = 1;
         private const int StepMin = 1;
-        private const int StepMax = 3;
-//        private ImageSource _pic;
+        private const int StepMax = 3; //TODO: Change max. Steps
+
         #endregion
-
-/*        #region Property
-
-        public ImageSource Pic
-        {
-            get { return _pic; }
-            set
-            {
-                _pic = value;
-                NotifyOfPropertyChange(() => Pic);
-            }
-        }
-        #endregion*/
 
 
         #region Constructors
@@ -82,20 +69,8 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             }
 
             StepDescriptionBox.Text = Application.Current.FindResource("Step" + stepNumber) as string;
-
-            //StepImage.Source = StepImage.FindResource("Image2") as ImageSource;
+            StepImage.Source = new BitmapImage(new Uri(@"/Images/Step" + stepNumber + ".png", UriKind.RelativeOrAbsolute));
             StepTitle.Text = "Schritt " + stepNumber;
-
-/*            if (!string.IsNullOrEmpty("Image"+stepNumber))
-            {
-                var yourImage = new BitmapImage(new Uri(String.Format("Images/Step"+stepNumber+".png", Pic), UriKind.Relative));
-                yourImage.Freeze();
-                Pic = yourImage;
-            }
-            else
-            {
-                Pic = null;
-            }*/
 
         }
         #endregion

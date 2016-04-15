@@ -25,15 +25,4 @@ Dazu wird zum IV ein Padding hinzugefügt, so dass schlussendlich ein Block mit 
         Verschlüsselung:
 Auf den «Counter 0»-Block wird eine Increment-Funktion angewendet, woraus der «Counter 1» resultiert.
     </system:String>
-    
-    
-    
-    <Image x:Key="Image1" Source="/Images/Step1.png" />
-    <Image x:Key="Image2" Source="/Images/Step16.png" />
-    <Image x:Key="Image3" Source="/Images/Step17.png" />
-    <Image x:Key="Image4" Source="/Images/Step18.png" />
-
-
-
-
 </ResourceDictionary>

@@ -9,14 +9,21 @@
       Title="StepPage">
 
     <StackPanel Background="White">
-        <TextBox Name ="StepTitle" Text="Schritt 1"/>
-        <StackPanel Orientation="Horizontal" Margin="0, 50">
-            <Image Name="StepImage" Source="/Images/aead.png" Height="166" Width="153"/>
-            <TextBox Name="StepDescriptionBox"  Text="Dies ist eine Anleitung"/>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <Button Click="OnPreviousStepButton_Click" Content="Vorheriger Schritt" Name="PreviousStepButton"/>
-            <Button Click="OnNextStepButton_Click" Content="Nächster Schritt" Name="NextStepButton"/>
+        <TextBox Name ="StepTitle" Text="Schritt 1" FontSize="18" Margin="0, 50, 0, 10" BorderThickness="0"/>
+        <Grid Margin="0, 0, 0, 20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="20*"/>
+            </Grid.ColumnDefinitions>
+            <Image Grid.Column="0" Name="StepImage" Source="/Images/aead.png" Stretch="Uniform"/>
+            <TextBox Grid.Column="2" Name="StepDescriptionBox"  Text="Dies ist eine Anleitung" TextWrapping="Wrap" FontSize="14"/>
+        </Grid>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Click="OnPreviousStepButton_Click" Content="Vorheriger Schritt" Name="PreviousStepButton" Style="{StaticResource ResourceKey=ProgramButtonStyle}"
+                    Height="25" Width="100" Margin="5, 0"/>
+            <Button Click="OnNextStepButton_Click" Content="Nächster Schritt" Name="NextStepButton" Style="{StaticResource ResourceKey=ProgramButtonStyle}"
+                    Height="25" Width="100" Margin="5, 0"/>
         </StackPanel>
     </StackPanel>
 </Page>
