@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using Castle.Core.Internal;
 
 namespace EP_HSRlearnIT.PresentationLayer.Exercises
@@ -131,6 +132,15 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                 //Get control that will be updated
                 string nameTextField = nameHexTextBox.Substring(3, nameHexTextBox.Length-3);
                 TextBox textBox = (TextBox)FindName(nameTextField);
+                TextBlock textBlock = (TextBlock)FindName(nameHexBlock);
+                string textBlockAnzeige = textBlock.Text;
+
+                if (textBlockAnzeige.Contains(" Ungültige Eingabe!"))
+                {
+                    textBlockAnzeige = textBlockAnzeige.Substring(0, textBlockAnzeige.Length - 19);
+                    textBlock.Text = textBlockAnzeige;
+                    textBlock.Foreground = Brushes.Black;
+                }
 
                 //remove the event handler temporary, else a loop will occure
                 if (textBox != null)
@@ -141,8 +151,9 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
 
                     if (!IsHex(hexValue))
                     {
-                        TextBlock textBlock = (TextBlock) FindName(nameHexBlock);
-                        textBlock.Text = "Ungültige Eingabe!";
+                        
+                        textBlock.Text = textBlockAnzeige + " Ungültige Eingabe!";
+                        textBlock.Foreground = Brushes.Red;
                         textBox.TextChanged += TextBox_TextChanged;
                         return;
                     }
