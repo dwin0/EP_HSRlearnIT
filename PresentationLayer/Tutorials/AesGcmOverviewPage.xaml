@@ -10,13 +10,12 @@
         <Canvas Height="720" Width="960">
             <Grid>
                 <Image Source="/Images/aead.png"
-               RenderOptions.BitmapScalingMode="HighQuality"
-               Stretch="None"
-               HorizontalAlignment="Center"
-               VerticalAlignment="Center"
-               />
+                    RenderOptions.BitmapScalingMode="HighQuality"
+                    Stretch="None"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"/>
 
-                <Path Name="Vorbereitung" Stroke="Transparent" StrokeThickness="1" Fill="Transparent" Mouse.MouseEnter="Vorbereitung_MouseEnter" Mouse.MouseLeave="Vorbereitung_MouseLeave">
+                <Path Name="Vorbereitung" Stroke="Transparent" StrokeThickness="1" Fill="Transparent" Mouse.MouseEnter="OnMouseEnter" Mouse.MouseLeave="OnMouseLeave">
                     <Path.Data>
                         <PathGeometry>
                             <PathGeometry.Figures>
@@ -36,7 +35,7 @@
                     </Path.Data>
                 </Path>
 
-                <Path Name="Verschlüsselung" Stroke="Transparent" StrokeThickness="1" Fill="Transparent" Mouse.MouseEnter="Verschlüsselung_MouseEnter" Mouse.MouseLeave="Verschlüsselung_MouseLeave">
+                <Path Name="Verschlüsselung" Stroke="Transparent" StrokeThickness="1" Fill="Transparent" Mouse.MouseEnter="OnMouseEnter" Mouse.MouseLeave="OnMouseLeave">
                     <Path.Data>
                         <PathGeometry>
                             <PathGeometry.Figures>
@@ -56,7 +55,7 @@
                     </Path.Data>
                 </Path>
 
-                <Path Name="AdditionalAuthenticatedData" Stroke="Transparent" StrokeThickness="1" Fill="Transparent" Mouse.MouseEnter="AdditionalAuthenticatedData_MouseEnter" Mouse.MouseLeave="AdditionalAuthenticatedData_MouseLeave">
+                <Path Name="AdditionalAuthenticatedData" Stroke="Transparent" StrokeThickness="1" Fill="Transparent" Mouse.MouseEnter="OnMouseEnter" Mouse.MouseLeave="OnMouseLeave">
                     <Path.Data>
                         <PathGeometry>
                             <PathGeometry.Figures>
@@ -80,7 +79,7 @@
                     </Path.Data>
                 </Path>
 
-                <Path Name="CiphertextAuthentifizierung" Stroke="Transparent" StrokeThickness="1" Fill="Transparent" Mouse.MouseEnter="CiphertextAuthentifizierung_MouseEnter" Mouse.MouseLeave="CiphertextAuthentifizierung_MouseLeave">
+                <Path Name="CiphertextAuthentifizierung" Stroke="Transparent" StrokeThickness="1" Fill="Transparent" Mouse.MouseEnter="OnMouseEnter" Mouse.MouseLeave="OnMouseLeave">
                     <Path.Data>
                         <PathGeometry>
                             <PathGeometry.Figures>
@@ -100,7 +99,7 @@
                     </Path.Data>
                 </Path>
 
-                <Path Name="Wiederholung" Stroke="Transparent" StrokeThickness="1" Fill="Transparent" Mouse.MouseEnter="Wiederholung_MouseEnter" Mouse.MouseLeave="Wiederholung_MouseLeave">
+                <Path Name="Wiederholung" Stroke="Transparent" StrokeThickness="1" Fill="Transparent" Mouse.MouseEnter="OnMouseEnter" Mouse.MouseLeave="OnMouseLeave">
                     <Path.Data>
                         <PathGeometry>
                             <PathGeometry.Figures>
@@ -120,7 +119,7 @@
                     </Path.Data>
                 </Path>
 
-                <Path Name="AbschlussUndRückgabe" Stroke="Transparent" StrokeThickness="1" Fill="Transparent" Mouse.MouseEnter="AbschlussUndRückgabe_MouseEnter" Mouse.MouseLeave="AbschlussUndRückgabe_MouseLeave">
+                <Path Name="AbschlussUndRückgabe" Stroke="Transparent" StrokeThickness="1" Fill="Transparent" Mouse.MouseEnter="OnMouseEnter" Mouse.MouseLeave="OnMouseLeave">
                     <Path.Data>
                         <PathGeometry>
                             <PathGeometry.Figures>

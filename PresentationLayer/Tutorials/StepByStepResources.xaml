@@ -25,4 +25,37 @@ Dazu wird zum IV ein Padding hinzugefügt, so dass schlussendlich ein Block mit 
         Verschlüsselung:
 Auf den «Counter 0»-Block wird eine Increment-Funktion angewendet, woraus der «Counter 1» resultiert.
     </system:String>
+
+    <system:String x:Key="VorbereitungText">
+        Erklärung zu Vorbereitung
+    </system:String>
+
+    <system:String x:Key="VerschlüsselungText">
+        Erklärung zu Verschlüsselung
+    </system:String>
+
+    <system:String x:Key="AdditionalAuthenticatedDataText">
+        Erklärung zu Additional Authenticated Data
+    </system:String>
+
+    <system:String x:Key="CiphertextAuthentifizierungText">
+        Erklärung zu Ciphertext Authentifizierung
+    </system:String>
+
+    <system:String x:Key="WiederholungText">
+        Erklärung zu Wiederholung
+    </system:String>
+
+    <system:String x:Key="AbschlussUndRückgabeText">
+        Erklärung zu Abschluss und Rückgabe
+    </system:String>
+
+    
+
+
+
+
+
+
+
 </ResourceDictionary>
