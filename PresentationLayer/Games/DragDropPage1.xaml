@@ -3,27 +3,28 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:EP_HSRlearnIT.PresentationLayer.Games"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
       Title="DragDropPage1" >
 
-
-
-    <Grid Name="controlGrid" AllowDrop="True" MouseMove="image_MouseMove" Width="900">
-        <Image AllowDrop="True" Canvas.ZIndex="-1" Source="pack://application:,,,/images/dragdrop.PNG" Name="overview"  HorizontalAlignment="Left" Width="600"/>
-        <Image Canvas.ZIndex="2" Source="pack://application:,,,/images/dragdrop1.PNG" Name="hashsubkey" PreviewMouseLeftButtonDown="image_PreviewMouseLeftButtonDown" PreviewMouseLeftButtonUp="image_PreviewMouseLeftButtonUp" MouseMove="image_MouseMove"/>
-        <Image AllowDrop="True" Canvas.ZIndex="2" Source="pack://application:,,,/images/dragdrop2.PNG" Name="iv" PreviewMouseLeftButtonDown="image_PreviewMouseLeftButtonDown" PreviewMouseLeftButtonUp="image_PreviewMouseLeftButtonUp" MouseMove="image_MouseMove"/>
-        <Image AllowDrop="True" Canvas.ZIndex="2" Source="pack://application:,,,/images/dragdrop3.PNG" Name="counter" PreviewMouseLeftButtonDown="image_PreviewMouseLeftButtonDown" PreviewMouseLeftButtonUp="image_PreviewMouseLeftButtonUp" MouseMove="image_MouseMove"/>
-        <Image AllowDrop="True" Canvas.ZIndex="2" Source="pack://application:,,,/images/dragdrop4.PNG" Name="multH" PreviewMouseLeftButtonDown="image_PreviewMouseLeftButtonDown" PreviewMouseLeftButtonUp="image_PreviewMouseLeftButtonUp" MouseMove="image_MouseMove"/>
-        <Image AllowDrop="True" Canvas.ZIndex="2" Source="pack://application:,,,/images/dragdrop5.PNG" Name="auth_data" PreviewMouseLeftButtonDown="image_PreviewMouseLeftButtonDown" PreviewMouseLeftButtonUp="image_PreviewMouseLeftButtonUp" MouseMove="image_MouseMove"/>
-        <Image AllowDrop="True" Canvas.ZIndex="2" Source="pack://application:,,,/images/dragdrop6.PNG" Name="auth_tag" PreviewMouseLeftButtonDown="image_PreviewMouseLeftButtonDown" PreviewMouseLeftButtonUp="image_PreviewMouseLeftButtonUp" MouseMove="image_MouseMove"/>
-        <Image AllowDrop="True" Canvas.ZIndex="2" Source="pack://application:,,,/images/dragdrop7.PNG" Name="len" PreviewMouseLeftButtonDown="image_PreviewMouseLeftButtonDown" PreviewMouseLeftButtonUp="image_PreviewMouseLeftButtonUp" MouseMove="image_MouseMove"/>
-        <Image AllowDrop="True" Canvas.ZIndex="2" Source="pack://application:,,,/images/dragdrop8.PNG" Name="ciphertext" PreviewMouseLeftButtonDown="image_PreviewMouseLeftButtonDown" PreviewMouseLeftButtonUp="image_PreviewMouseLeftButtonUp" MouseMove="image_MouseMove"/>
-        <Image AllowDrop="True" Canvas.ZIndex="2" Source="pack://application:,,,/images/dragdrop9.PNG" Name="plaintext" PreviewMouseLeftButtonDown="image_PreviewMouseLeftButtonDown" PreviewMouseLeftButtonUp="image_PreviewMouseLeftButtonUp" MouseMove="image_MouseMove"/>
-        <Button Name="Reset" Click="reset_onclick" Margin="670,520,0,0" Height="40" Width="80" Content="Reset" HorizontalAlignment="Left"/>
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="40" Margin="70,15,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="200"/>
-    </Grid>
+    <Grid Name="ControlGrid" AllowDrop="True" MouseMove="image_MouseMove" Width="900">
+        
+        <Image AllowDrop="True" Canvas.ZIndex="-1" Source="pack://application:,,,/images/dragdrop.PNG" Name="Overview"  HorizontalAlignment="Left" Width="600"/>
+        <!--
+        <Image Canvas.ZIndex="2" Source="pack://application:,,,/images/dragdrop1.PNG" Name="Hashsubkey" PreviewMouseLeftButtonDown="image_PreviewMouseLeftButtonDown" PreviewMouseLeftButtonUp="image_PreviewMouseLeftButtonUp" MouseMove="image_MouseMove"/>
+        <Image AllowDrop="True" Canvas.ZIndex="2" Source="pack://application:,,,/images/dragdrop2.PNG" Name="Iv" PreviewMouseLeftButtonDown="image_PreviewMouseLeftButtonDown" PreviewMouseLeftButtonUp="image_PreviewMouseLeftButtonUp" MouseMove="image_MouseMove"/>
+        <Image AllowDrop="True" Canvas.ZIndex="2" Source="pack://application:,,,/images/dragdrop3.PNG" Name="Counter" PreviewMouseLeftButtonDown="image_PreviewMouseLeftButtonDown" PreviewMouseLeftButtonUp="image_PreviewMouseLeftButtonUp" MouseMove="image_MouseMove"/>
+        <Image AllowDrop="True" Canvas.ZIndex="2" Source="pack://application:,,,/images/dragdrop4.PNG" Name="MultH" PreviewMouseLeftButtonDown="image_PreviewMouseLeftButtonDown" PreviewMouseLeftButtonUp="image_PreviewMouseLeftButtonUp" MouseMove="image_MouseMove"/>
+        <Image AllowDrop="True" Canvas.ZIndex="2" Source="pack://application:,,,/images/dragdrop5.PNG" Name="AuthData" PreviewMouseLeftButtonDown="image_PreviewMouseLeftButtonDown" PreviewMouseLeftButtonUp="image_PreviewMouseLeftButtonUp" MouseMove="image_MouseMove"/>
+        <Image AllowDrop="True" Canvas.ZIndex="2" Source="pack://application:,,,/images/dragdrop6.PNG" Name="AuthTag" PreviewMouseLeftButtonDown="image_PreviewMouseLeftButtonDown" PreviewMouseLeftButtonUp="image_PreviewMouseLeftButtonUp" MouseMove="image_MouseMove"/>
+        <Image AllowDrop="True" Canvas.ZIndex="2" Source="pack://application:,,,/images/dragdrop7.PNG" Name="Len" PreviewMouseLeftButtonDown="image_PreviewMouseLeftButtonDown" PreviewMouseLeftButtonUp="image_PreviewMouseLeftButtonUp" MouseMove="image_MouseMove"/>
+        <Image AllowDrop="True" Canvas.ZIndex="2" Source="pack://application:,,,/images/dragdrop8.PNG" Name="Ciphertext" PreviewMouseLeftButtonDown="image_PreviewMouseLeftButtonDown" PreviewMouseLeftButtonUp="image_PreviewMouseLeftButtonUp" MouseMove="image_MouseMove"/>
+        <Image AllowDrop="True" Canvas.ZIndex="2" Source="pack://application:,,,/images/dragdrop9.PNG" Name="Plaintext" PreviewMouseLeftButtonDown="image_PreviewMouseLeftButtonDown" PreviewMouseLeftButtonUp="image_PreviewMouseLeftButtonUp" MouseMove="image_MouseMove"/>
+        
+        -->
+        <Button Name="Reset" Click="OnResetClick" Margin="670,520,0,0" Height="40" Width="80" Content="Reset" HorizontalAlignment="Left"/>
+        <TextBox x:Name="TextBox" HorizontalAlignment="Left" Height="40" Margin="70,15,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="200"/>
+        </Grid>
 </Page>
 
 <!--Grid Name="controlGrid" AllowDrop="True" MouseMove="image_MouseMove" Width="900">
