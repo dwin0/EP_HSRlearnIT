@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Text;
 using Security.Cryptography;
 using System.Security.Cryptography;
 
@@ -9,47 +8,8 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
 {
     public class AesGcmCryptoLibrary
     {
-        #region Private Members
-
-        private byte[] _nonce;
-        private byte[] _tag;
-        private byte[] _ciphertext;
-
-        #endregion
-
         #region Public Methods
-
-        public Tuple<byte[], byte[]> Encrypt(string key, string plaintext, string nonce, string aad)
-        {
-            byte[] keyByte = Encoding.UTF8.GetBytes(key);
-            byte[] plaintextByte = Encoding.UTF8.GetBytes(plaintext);
-            byte[] nonceByte = null;
-            if (nonce != "")
-            {
-                nonceByte = Encoding.UTF8.GetBytes(nonce);
-            }
-            byte[] aadByte = null;
-            if (aad != "")
-            {
-                aadByte = Encoding.UTF8.GetBytes(aad);
-            }
-            return _Encrypt(keyByte, plaintextByte, nonceByte, aadByte);
-        }
-
-        public String Decrypt(string key, byte[] ciphertext)
-        {
-            byte[] keyByte = Encoding.UTF8.GetBytes(key);
-            byte[] decryptedTextByte = _Decrypt(keyByte, ciphertext);
-            String decryptedTextString = Encoding.UTF8.GetString(decryptedTextByte);
-            return decryptedTextString;
-        }
-
-        #endregion
-
-
-        #region Private Methods
-
-        private Tuple<byte[], byte[]> _Encrypt(byte[] key, byte[] plaintext, byte[] nonce, byte[] aad)
+        public Tuple<byte[], byte[]> Encrypt(byte[] key, byte[] plaintext, byte[] nonce, byte[] aad)
         {
             using (AuthenticatedAesCng aes = new AuthenticatedAesCng())
             {
@@ -64,7 +24,7 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
                 // The IV (called the nonce in many of the authenticated algorithm specs) is not sized for
                 // the input block size. Instead its size depends upon the algorithm.  12 bytes works
                 // for both GCM and CCM.
-                nonce = nonce ?? new byte[12] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+                nonce = nonce ?? new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
                 aes.IV = nonce;
 
                 // Authenticated data becomes part of the authentication tag that is generated during
@@ -94,8 +54,7 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
             }
         }
 
-        
-        private byte[] _Decrypt(byte[] key, byte[] ciphertext)
+        public byte[] Decrypt(byte[] key, byte[] ciphertext, byte[] nonce, byte[] aad, byte[] tag)
         {
             // To decrypt, we need to know the nonce, key, additional authenticated data, and
             // authentication tag.
@@ -104,24 +63,19 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
                 // Chaining modes, keys, and IVs must match between encryption and decryption
                 aes.CngMode = CngChainingMode.Gcm;
 
-                if (true)//key.GetLength(0) < 32)
-                {
-                    byte[] keyTest = new byte[32] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-                    aes.Key = keyTest;
-                }
-                //aes.Key = key;
+                aes.Key = key;
 
-                _nonce = new byte[12] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-                aes.IV = _nonce;
+                nonce = nonce ?? new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+                aes.IV = nonce;
 
                 // If the authenticated data does not match between encryption and decryption, then the
                 // authentication tag will not match either, and the decryption operation will fail.
-                //aes.AuthenticatedData = Encoding.UTF8.GetBytes("");
+                aes.AuthenticatedData = aad;
 
                 // The tag that was generated during encryption gets set here as input to the decryption
                 // operation.  This is in contrast to the encryption code path which does not use the
                 // Tag property (since it is an output from encryption).
-                aes.Tag = _tag;
+                aes.Tag = tag;
 
                 // Decryption works the same as standard symmetric encryption
                 using (MemoryStream ms = new MemoryStream())
@@ -133,13 +87,11 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
                     // CryptographicException, and the ciphertext will not be decrypted.
                     cs.FlushFinalBlock();
 
-                    byte[] plaintext = ms.ToArray();
-                    return plaintext;
+                    //returns the plaintext
+                    return ms.ToArray();
                 }
             }
         }
-
-        #endregion  
-
+        #endregion
     }
 }

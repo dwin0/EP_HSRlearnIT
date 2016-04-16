@@ -4,7 +4,7 @@ using System.Windows.Data;
 
 namespace EP_HSRlearnIT.PresentationLayer.Exercises
 {
-    class FormFilledMulticonverter : IMultiValueConverter
+    public class FormFilledMulticonverter : IMultiValueConverter
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
