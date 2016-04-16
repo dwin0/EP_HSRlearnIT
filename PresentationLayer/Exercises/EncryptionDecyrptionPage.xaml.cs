@@ -1,30 +1,26 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Navigation;
+﻿using System.Windows;
 
 namespace EP_HSRlearnIT.PresentationLayer.Exercises
 {
-    /// <summary>
-    /// Interaktionslogik für Page1.xaml
-    /// </summary>
-    public partial class EncryptionDecyrptionPage : Page
+    public partial class EncryptionDecyrptionPage
     {
+        #region Public Methods
         public EncryptionDecyrptionPage()
         {
             InitializeComponent();
         }
+        #endregion
 
+        #region Private Methods
         private void Encryption_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new EncryptionPage());
-
+            NavigationService?.Navigate(new EncryptionPage());
         }
 
         private void Decryption_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new DecryptionPage());
-
+            NavigationService?.Navigate(new DecryptionPage());
         }
+        #endregion
     }
 }
