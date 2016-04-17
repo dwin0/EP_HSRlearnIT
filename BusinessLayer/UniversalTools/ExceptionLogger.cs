@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+using System.Globalization;
 
 namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
 {
@@ -10,7 +8,7 @@ namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
         #region Private Member
         private static string _path = @"c:\logs";
         private static string _fileName = "ExceptionLog.log";
-        private static string _filePath;
+        //private static string _filePath;
         //Size in Byte
         private static long _maxSize = 5 * 1024 * 1024;
         private static int _DeleteRows = 10;
@@ -18,19 +16,20 @@ namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
         #endregion
 
         #region Public Methods
-        public static void WriteToLogfile(string exmsg, string sourceMethod)
+        public static void WriteToLogfile(string exeptionMessage, string sourceMethod)
         {
-            FileSaver.CreateFile(_path, _fileName);
-            _filePath = Path.Combine(_path, _fileName);
-            String entry = "\n" + "Exception :" + DateTime.Now.ToString() + ": " + exmsg + " " + sourceMethod + "\n";
-            FileSaver.AppendContentToFile(_filePath, entry);
-            AvoidOverflow(_filePath);
+            string filePath = FileSaver.CreateFile(_path, _fileName);
+            //_filePath = Path.Combine(_path, _fileName);
+            string entry = $"{Environment.NewLine}Exception: {DateTime.Now.ToString(CultureInfo.CurrentCulture)}: {exeptionMessage} {sourceMethod}";
+            //String entry = "\n" + "Exception :" + DateTime.Now.ToString() + ": " + exmsg + " " + sourceMethod + "\n";
+            FileSaver.AppendContentToFile(filePath, entry);
+            FileSaver.AvoidOverflow(filePath, _maxSize, _DeleteRows);
         }
 
         #endregion
 
+        /* moved to FileSaver
         #region Private Methods
-
         private static void AvoidOverflow(String filePath)
         {
             if (FileSaver.GetSize(filePath) >= _maxSize)
@@ -43,6 +42,6 @@ namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
         }
 
         #endregion
-
+        */
     }
 }

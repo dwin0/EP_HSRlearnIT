@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
 {
@@ -62,6 +64,17 @@ namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
 
             return _filePath;
         }*/
+
+        public static void AvoidOverflow(string filePath, long maxFileSize, int numberOfRowsToDelete)
+        {
+            if (FileSaver.GetSize(filePath) >= maxFileSize)
+            {
+                List<string> lines = File.ReadAllLines(filePath).ToList();
+                lines.RemoveRange(0, numberOfRowsToDelete);
+                File.WriteAllLines(filePath, lines);
+                FileSaver.AppendContentToFile(filePath, "The oldest " + numberOfRowsToDelete + " lines are removed. \n");
+            }
+        }
 
         #endregion
 
