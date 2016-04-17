@@ -46,7 +46,7 @@ namespace EP_HSRlearnIT.PresentationLayer
                     MainFrame.Navigate(new StepPage());
                     break;
                 case "Ver- und Entschlüsselung":
-                    MainFrame.Navigate(new EncryptionPage());
+                    MainFrame.Navigate(new EncryptionDecyrptionPage());
                     break;
                 case "Drag- und Drop Spiel":
                     MainFrame.Navigate(new DragDropPage());

@@ -69,7 +69,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             if (hexTextBox != null)
             {
                 string nameHexTextBox = hexTextBox.Name;
-                //3 ist eine unklare Länge => Weshalb wird das hier abgezogen?
+                //get the name of the corresponding hexBlock. This name will be used, if an invalid char is entered in the HexBox. An error will be shown
                 string nameHexBlock = nameHexTextBox.Substring(0, nameHexTextBox.Length - 3) + "Block";
 
                 //Get control that will be updated
