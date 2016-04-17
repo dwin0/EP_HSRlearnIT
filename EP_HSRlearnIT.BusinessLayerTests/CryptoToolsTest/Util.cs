@@ -31,13 +31,15 @@ namespace EP_HSRlearnIT.BusinessLayer.Testing.CryptoToolsTest
         }
 
         /// <summary>
-        ///     Convert a hex string into a byte array with one byte for every 2 hex characters.  Hex bytes
+        ///     Convert a hex string into a byte array with one byte for every 2 hex characters. Hex bytes
         ///     may be seperated by 0 or more whitespace characters.
         /// </summary>
         internal static byte[] HexStringToBytes(string input)
         {
             if (input == null)
+            {
                 return null;
+            }
 
             List<byte> bytes = new List<byte>();
 

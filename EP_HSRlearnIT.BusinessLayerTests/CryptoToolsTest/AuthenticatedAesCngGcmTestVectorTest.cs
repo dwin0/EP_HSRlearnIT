@@ -4,7 +4,6 @@ using System.IO;
 using System.Security.Cryptography;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Security.Cryptography;
-using EP_HSRlearnIT.BusinessLayer.UniversalTools;
 
 namespace EP_HSRlearnIT.BusinessLayer.Testing.CryptoToolsTest
 {
@@ -19,44 +18,21 @@ namespace EP_HSRlearnIT.BusinessLayer.Testing.CryptoToolsTest
         private class GcmTestVector
         {
             // Test vector input data
-            public string K { get; set; }
-            public string P { get; set; }
-            public string A { get; set; }
-            public string IV { get; set; }
-            public string C { get; set; }
-            public string T { get; set; }
+            public string K;
+            public string P;
+            public string A;
+            public string IV;
+            public string C;
+            public string T;
 
             // Byte array versions of the input data
 
-            public byte[] Key
-            {
-                get { return Util.HexStringToBytes(K); }
-            }
-
-            public byte[] Plaintext
-            {
-                get { return Util.HexStringToBytes(P); }
-            }
-
-            public byte[] AuthenticationData
-            {
-                get { return Util.HexStringToBytes(A); }
-            }
-
-            public byte[] IVBytes
-            {
-                get { return Util.HexStringToBytes(IV); }
-            }
-
-            public byte[] Ciphertext
-            {
-                get { return Util.HexStringToBytes(C); }
-            }
-
-            public byte[] Tag
-            {
-                get { return Util.HexStringToBytes(T); }
-            }
+            public byte[] Key => Util.HexStringToBytes(K);
+            public byte[] Plaintext => Util.HexStringToBytes(P);
+            public byte[] AuthenticationData => Util.HexStringToBytes(A);
+            public byte[] IVBytes => Util.HexStringToBytes(IV);
+            public byte[] Ciphertext => Util.HexStringToBytes(C);
+            public byte[] Tag => Util.HexStringToBytes(T);
         }
 
         private static GcmTestVector[] s_testVectors = new GcmTestVector[]
@@ -302,8 +278,8 @@ namespace EP_HSRlearnIT.BusinessLayer.Testing.CryptoToolsTest
                 gcm.IV = test.IVBytes;
                 gcm.AuthenticatedData = test.AuthenticationData;
 
-                using (MemoryStream ms = new MemoryStream())
-                using (IAuthenticatedCryptoTransform encryptor = gcm.CreateAuthenticatedEncryptor())
+                MemoryStream ms = new MemoryStream();
+                IAuthenticatedCryptoTransform encryptor = gcm.CreateAuthenticatedEncryptor();
                 using (CryptoStream cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Write))
                 {
                     if (test.Plaintext != null)
@@ -333,7 +309,7 @@ namespace EP_HSRlearnIT.BusinessLayer.Testing.CryptoToolsTest
                     gcm.AuthenticatedData = test.AuthenticationData;
                     gcm.Tag = test.Tag;
 
-                    using (MemoryStream ms = new MemoryStream())
+                    MemoryStream ms = new MemoryStream();
                     using (CryptoStream cs = new CryptoStream(ms, gcm.CreateDecryptor(), CryptoStreamMode.Write))
                     {
                         cs.Write(test.Ciphertext, 0, test.Ciphertext.Length);
