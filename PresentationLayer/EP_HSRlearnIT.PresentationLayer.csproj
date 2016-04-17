@@ -66,7 +66,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AesGcmPart.cs" />
     <Compile Include="Exercises\CryptoClass.cs" />
     <Compile Include="Exercises\FormFilledMulticonverter.cs" />
     <Compile Include="Games\DragDropPage1.xaml.cs">
@@ -78,9 +77,6 @@
     </Compile>
     <Compile Include="Exercises\DecryptionPage.xaml.cs">
       <DependentUpon>DecryptionPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Games\DragDropPage.xaml.cs">
-      <DependentUpon>DragDropPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Exercises\EncryptionPage.xaml.cs">
       <DependentUpon>EncryptionPage.xaml</DependentUpon>
@@ -119,10 +115,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Exercises\DecryptionPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Games\DragDropPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -165,8 +157,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="ClassDiagram1.cd" />
-    <None Include="ClassDiagram2.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
