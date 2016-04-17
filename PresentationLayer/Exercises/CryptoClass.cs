@@ -36,8 +36,8 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             {
                 string nameHexField = "Hex" + textBox.Name;
                 TextBox hexBox = (TextBox)FindName(nameHexField);
-                char[] values = textBox.Text.ToCharArray();
-                ChangeHexBox(values, hexBox);
+                char[] value = textBox.Text.ToCharArray();
+                ChangeHexBox(value, hexBox);
             }
         }
 
@@ -45,13 +45,12 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         {
             string hexOutput = "";
 
-            //remove the event handler temporary, else a loop will occure
             if (hexBox != null)
             {
+                //remove the event handler temporary, else a loop will occure
                 hexBox.TextChanged -= HexTextBox_TextChanged;
                 foreach (char letter in values)
                 {
-                    // Get the integral value of the character
                     int value = Convert.ToInt32(letter);
 
                     // Convert the decimal value to a hexadecimal value in string form
@@ -66,29 +65,30 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         {
             string textOutput = "";
 
-            //Get control that raised this event
             var hexTextBox = sender as TextBox;
             if (hexTextBox != null)
             {
                 string nameHexTextBox = hexTextBox.Name;
+                //3 ist eine unklare Länge => Weshalb wird das hier abgezogen?
                 string nameHexBlock = nameHexTextBox.Substring(0, nameHexTextBox.Length - 3) + "Block";
 
                 //Get control that will be updated
                 string nameTextField = nameHexTextBox.Substring(3, nameHexTextBox.Length - 3);
                 TextBox textBox = (TextBox)FindName(nameTextField);
                 TextBlock textBlock = (TextBlock)FindName(nameHexBlock);
-                if (textBlock == null) return;
+                if (textBlock == null) { return; }
 
                 string textBlockAnzeige = textBlock.Text;
 
                 if (textBlockAnzeige.Contains(" Ungültige Eingabe!"))
                 {
+                    //19 is the length of suffix text
                     textBlockAnzeige = textBlockAnzeige.Substring(0, textBlockAnzeige.Length - 19);
                     textBlock.Text = textBlockAnzeige;
                     textBlock.Foreground = Brushes.Black;
                 }
 
-                if (textBox == null) return;
+                if (textBox == null) { return; }
 
                 //remove the event handler temporary, else a loop will occure
                 textBox.TextChanged -= TextBox_TextChanged;
@@ -106,8 +106,8 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                 ArrayList list = new ArrayList();
                 while (hexValue.Length > 1)
                 {
-                    string str = hexValue.Substring(0, 2);
-                    list.Add(str);
+                    //string str = hexValue.Substring(0, 2);
+                    list.Add(hexValue.Substring(0, 2));
                     hexValue = hexValue.Substring(2, hexValue.Length - 2);
                 }
 
@@ -116,7 +116,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                     // Convert the number expressed in base-16 to an integer.
                     int value = Convert.ToInt32(hex, 16);
 
-                    // Get the character corresponding to the integral value.
                     textOutput += char.ConvertFromUtf32(value);
                 }
 
@@ -197,16 +196,20 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         #region Private Methods
         private bool IsHex(IEnumerable<char> chars)
         {
-            foreach (var c in chars)
+            string check = Convert.ToString(chars);
+            return System.Text.RegularExpressions.Regex.IsMatch(check, @"\A\b[0-9a-fA-F]+\b\Z");
+/*            foreach (var c in chars)
             {
-                var isHex = ((c >= '0' && c <= '9') ||
+                bool isHex = ((c >= '0' && c <= '9') ||
                               (c >= 'a' && c <= 'f') ||
                               (c >= 'A' && c <= 'F'));
 
                 if (!isHex)
+                {
                     return false;
+                }
             }
-            return true;
+            return true;*/
         }
         #endregion
     }
