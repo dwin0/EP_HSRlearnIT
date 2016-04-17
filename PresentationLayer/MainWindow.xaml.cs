@@ -8,10 +8,7 @@ using System;
 
 namespace EP_HSRlearnIT.PresentationLayer
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
 
         #region Constructors
@@ -19,8 +16,7 @@ namespace EP_HSRlearnIT.PresentationLayer
         public MainWindow()
         {
             InitializeComponent();
-            MainFrame.Navigate(new MainPage(this));
-            //AppDomain.CurrentDomain.UnhandledException += LoggingHandler.unhandledExceptionTrapper;
+            MainFrame.Navigate(new MainPage());
             Application.Current.MainWindow = this;
         }
         #endregion
@@ -80,6 +76,9 @@ namespace EP_HSRlearnIT.PresentationLayer
             MenuStackPanel.Visibility = Visibility.Collapsed;
             MenuButton.HorizontalAlignment = HorizontalAlignment.Left;
             MenuButton.Content = "Menu";
+            var margin = MenuButton.Margin;
+            margin.Top = 0;
+            MenuButton.Margin = margin;
         }
 
         private void OpenMenu()
@@ -87,6 +86,9 @@ namespace EP_HSRlearnIT.PresentationLayer
             MenuStackPanel.Visibility = Visibility.Visible;
             MenuButton.HorizontalAlignment = HorizontalAlignment.Right;
             MenuButton.Content = "<<";
+            var margin = MenuButton.Margin;
+            margin.Top = -10;
+            MenuButton.Margin = margin;
         }
 
 

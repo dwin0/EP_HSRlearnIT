@@ -3,38 +3,32 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:EP_HSRlearnIT.PresentationLayer"
         mc:Ignorable="d"
         Icon="images/icon.png"
         WindowStartupLocation="CenterScreen"
-        Title="MainWindow" Height="700" Width="900" MinWidth="900" MinHeight="700">
+        Title="MainWindow" Height="820" Width="1200" MinWidth="960" MinHeight="720">
     <Grid Name="MainGrid" Margin="50, 10, 50, 0" MouseDown="OnMouseDown">
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*" MinWidth="200"/>
             <ColumnDefinition Width="5*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0" Name="MenuStackPanel" HorizontalAlignment="Stretch" Visibility="Collapsed" Background="#ffe6e6" Panel.ZIndex="2"
-                    Margin="-50, 0, 0, 0">
+        <StackPanel Name="MenuStackPanel" Grid.Column="0" HorizontalAlignment="Stretch" Visibility="Collapsed" Background="{StaticResource MenuBackgroundColor}"
+                    Panel.ZIndex="2" Margin="-50, -10, 0, 0">
             <TextBlock Text="Menu" Style="{StaticResource ResourceKey=MenuStyle}"/>
-            <ListView Name="Menu" ItemsSource="{StaticResource ResourceKey=MenuStrings}" PreviewMouseDown="ListBoxItem_PreviewMouseDown"
-                      ItemContainerStyle="{StaticResource ResourceKey=MenuItemStyle}" BorderThickness="0" BorderBrush="#ffe6e6"
-                      />
+            <ListView Name="Menu" ItemsSource="{StaticResource ResourceKey=MenuStrings}" ItemContainerStyle="{StaticResource ResourceKey=MenuItemStyle}"
+                      PreviewMouseDown="ListBoxItem_PreviewMouseDown" BorderThickness="0" BorderBrush="{StaticResource MenuBackgroundColor}"/>
         </StackPanel>
-        <Button x:Name="MenuButton" Content="Menu" Click="OnMenuButton_Click"
-                VerticalAlignment="Top" HorizontalAlignment="Left"
+        <Button Grid.Column="0" Name="MenuButton" Content="Menu" Click="OnMenuButton_Click" VerticalAlignment="Top" HorizontalAlignment="Left"
                 Panel.ZIndex="2" Style="{StaticResource ResourceKey=ProgramButtonStyle}"/>
-        <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
+        <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
             <Button x:Name="BackButton" Content="Zurück" Click="OnBackButton_Click"
                     Style="{StaticResource ResourceKey=ProgramButtonStyle}"/>
-            <Button x:Name="ForwardButton" Content="Weiter" Click="OnForwardButton_Click"
-                    Margin="10, 0, 0, 0" Grid.Column="1" Style="{StaticResource ResourceKey=ProgramButtonStyle}"/>
+            <Button Name="ForwardButton" Content="Weiter" Click="OnForwardButton_Click"
+                    Margin="10, 0, 0, 0" Style="{StaticResource ResourceKey=ProgramButtonStyle}"/>
         </StackPanel>
-        <Button x:Name="Save" Content="Speichern" Click="OnSaveButton_Click" MouseRightButtonDown="OnExceptionClick"
+        <Button Name="Save" Content="Speichern" Click="OnSaveButton_Click" MouseRightButtonDown="OnExceptionClick"
                 HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource ResourceKey=ProgramButtonStyle}" Grid.Column="1"/>
-        <Frame Grid.ColumnSpan="2" x:Name="MainFrame" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+        <Frame Grid.ColumnSpan="2" Grid.Column="0" x:Name="MainFrame" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                Panel.ZIndex="1" NavigationUIVisibility="Hidden" Margin="0, 60, 0, 0"/>
     </Grid>
 </Window>

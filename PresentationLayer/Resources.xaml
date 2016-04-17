@@ -49,11 +49,4 @@
         <Setter Property="BorderThickness" Value="0"/>
     </Style>
 
-    <!--  <Style x:Key="DragImageStyle" TargetType="{x:Type Image}">
-        <EventSetter Event="PreviewMouseLeftButtonDown" x:Class =" " Handler="image_PreviewMouseLeftButtonDown"/>
-        <EventSetter Event="PreviewMouseLeftButtonUp" Handler="image_PreviewMouseLeftButtonUp"/>
-        <EventSetter Event="MouseMove" Handler="MouseMove"/>
-    </Style> -->
-
-
 </ResourceDictionary>

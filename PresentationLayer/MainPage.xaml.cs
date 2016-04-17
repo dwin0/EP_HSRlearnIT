@@ -1,51 +1,43 @@
-﻿using EP_HSRlearnIT.PresentationLayer.Exercises;
-using EP_HSRlearnIT.PresentationLayer.Games;
+﻿using System.Windows;
 using EP_HSRlearnIT.PresentationLayer.Tutorials;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Navigation;
+using EP_HSRlearnIT.PresentationLayer.Exercises;
+using EP_HSRlearnIT.PresentationLayer.Games;
 
 namespace EP_HSRlearnIT.PresentationLayer
-{
-    /// <summary>
-    /// Interaction logic for MainPage.xaml
-    /// </summary>
-    public partial class MainPage : Page
-    {
-        MainWindow _main;
 
+{
+
+    public partial class MainPage
+    {
         #region Constructors
 
-        public MainPage(MainWindow main)
+        public MainPage()
         {
             InitializeComponent();
-            _main = main;
         }
         #endregion
 
 
         #region Private Methods
-
         private void OverviewScreen_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new AesGcmOverviewPage());
+            NavigationService?.Navigate(new AesGcmOverviewPage());
         }
 
         private void StepByStep_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new StepPage());
+            NavigationService?.Navigate(new StepPage());
         }
 
         private void EncryptionDecryption_Click(object sender, RoutedEventArgs e)
         {
-           NavigationService.Navigate(new EncryptionDecyrptionPage());
+            NavigationService?.Navigate(new EncryptionDecyrptionPage());
         }
 
         private void DragAndDrop_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new DragDropPage1());
+            NavigationService?.Navigate(new DragDropPage());
         }
-
         #endregion
     }
 }
