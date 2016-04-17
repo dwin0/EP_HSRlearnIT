@@ -10,7 +10,7 @@ using EP_HSRlearnIT.BusinessLayer.UniversalTools;
 
 namespace EP_HSRlearnIT.PresentationLayer.Games
 {
-    public partial class DragDropPage1
+    public partial class DragDropPage
     {
         private class SavedData
         {
@@ -26,7 +26,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
             }
         };
 
-        public DragDropPage1()
+        public DragDropPage()
         {
             InitializeComponent();
             SetImages(GetImages());

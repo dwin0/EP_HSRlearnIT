@@ -68,8 +68,8 @@
     </ApplicationDefinition>
     <Compile Include="Exercises\CryptoClass.cs" />
     <Compile Include="Exercises\FormFilledMulticonverter.cs" />
-    <Compile Include="Games\DragDropPage1.xaml.cs">
-      <DependentUpon>DragDropPage1.xaml</DependentUpon>
+    <Compile Include="Games\DragDropPage.xaml.cs">
+      <DependentUpon>DragDropPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="StringCollection.cs" />
     <Compile Include="Tutorials\AesGcmOverviewPage.xaml.cs">
@@ -90,7 +90,7 @@
     <Compile Include="Tutorials\StepPage.xaml.cs">
       <DependentUpon>StepPage.xaml</DependentUpon>
     </Compile>
-    <Page Include="Games\DragDropPage1.xaml">
+    <Page Include="Games\DragDropPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -6,6 +6,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
 {
     public class FormFilledMulticonverter : IMultiValueConverter
     {
+        #region Public Methods
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             for (int i = 0; i < values.Length; i++)
@@ -28,5 +29,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         {
             throw new NotImplementedException();
         }
+        #endregion
     }
 }

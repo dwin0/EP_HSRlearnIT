@@ -1,7 +1,7 @@
 ﻿using System.Windows;
+using EP_HSRlearnIT.PresentationLayer.Games;
 using EP_HSRlearnIT.PresentationLayer.Tutorials;
 using EP_HSRlearnIT.PresentationLayer.Exercises;
-using EP_HSRlearnIT.PresentationLayer.Games;
 
 namespace EP_HSRlearnIT.PresentationLayer
 
@@ -36,7 +36,7 @@ namespace EP_HSRlearnIT.PresentationLayer
 
         private void DragAndDrop_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService?.Navigate(new DragDropPage1());
+            NavigationService?.Navigate(new DragDropPage());
         }
         #endregion
     }

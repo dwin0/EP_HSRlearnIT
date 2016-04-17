@@ -1,10 +1,10 @@
 ﻿using EP_HSRlearnIT.BusinessLayer.UniversalTools;
 using EP_HSRlearnIT.PresentationLayer.Exercises;
-using EP_HSRlearnIT.PresentationLayer.Games;
 using EP_HSRlearnIT.PresentationLayer.Tutorials;
 using System.Windows;
 using System.Windows.Input;
 using System;
+using EP_HSRlearnIT.PresentationLayer.Games;
 
 namespace EP_HSRlearnIT.PresentationLayer
 {
@@ -49,7 +49,7 @@ namespace EP_HSRlearnIT.PresentationLayer
                     MainFrame.Navigate(new EncryptionPage());
                     break;
                 case "Drag- und Drop Spiel":
-                    MainFrame.Navigate(new DragDropPage1());
+                    MainFrame.Navigate(new DragDropPage());
                     break;
             }
             CloseMenu();
