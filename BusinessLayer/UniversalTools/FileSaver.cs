@@ -1,29 +1,38 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 
 namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
 {
     public static class FileSaver
     {
+        /*
         #region Private Member
         private static String _folderPath;
         private static String _filePath;
         private static String _fileName;
         
         #endregion
+        */
 
         #region Public Methods
-        public static void UpdateFileContent(String file, String currentContent)
+        public static void UpdateFileContent(string file, string currentContent)
         {
             WriteFile(file, currentContent, false);
         }
 
-        public static void ContentAddToFile(String file, String currentContent)
+        public static void AppendContentToFile(string file, string currentContent)
         {
             WriteFile(file, currentContent, true);
         }
 
-        public static string ReadFile(String filePath)
+        public static string ReadFile(string filePath)
+        {
+            using (StreamReader sr = new StreamReader(filePath))
+            {
+                return sr.ReadToEnd();
+            }
+        }
+        /*
+        public static string ReadFile(string filePath)
         {
             
                 StreamReader sr = new StreamReader(filePath);
@@ -31,39 +40,55 @@ namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
                 sr.Close();
 
             return output;
-        }
+        } */
 
-        public static long GetSize(String filePath)
+        public static long GetSize(string filePath)
         {
             FileInfo fileInfo = new FileInfo(filePath);
             return fileInfo.Length;
         }
 
-        public static String SaveFile(String path, String filename)
+        public static string CreateFile(string folderPath, string fileName)
+        {
+            CreateDirectory(folderPath);
+            return _CreateFile(folderPath, fileName);
+        }
+        /*
+        public static string SaveFile(string path, string filename)
         {
 
                 CreateDirectory(path);
                 CreateFile(filename);
 
             return _filePath;
-        }
+        }*/
 
         #endregion
 
 
         #region Private Methods
-        private static void CreateDirectory(String path)
+        private static void CreateDirectory(string folderPath)
         {
-            _folderPath = path;
-
-            if (!Directory.Exists(_folderPath))
+            //_folderPath = path;
+            if (!Directory.Exists(folderPath))
             {
-                Directory.CreateDirectory(_folderPath);
+                Directory.CreateDirectory(folderPath);
             }
-
         }
 
-        private static void CreateFile(String fileName)
+        private static string _CreateFile(string folderPath, string fileName)
+        {
+            string filePath = Path.Combine(folderPath, fileName);
+
+            if (!File.Exists(filePath))
+            {
+                using (File.Create(filePath)) { }
+            }
+
+            return filePath;
+        }
+        /*
+        private static vostid CreateFile(string fileName)
         {
             _fileName = fileName;
             _filePath = Path.Combine(_folderPath, _fileName);
@@ -72,13 +97,19 @@ namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
             {
                 File.Create(_filePath).Close();
             }
-        }
+        } */
 
-        private static void WriteFile(String filePath, String currentContent, Boolean addToFile)
+        private static void WriteFile(string filePath, string currentContent, bool addToFile)
         {
+            using (StreamWriter file = new StreamWriter(filePath, addToFile))
+            {
+                file.Write(currentContent);
+            }
+            /*
                 StreamWriter file = new StreamWriter(filePath, addToFile);
                 file.Write(currentContent);
                 file.Close();
+            */
         }
 
         #endregion

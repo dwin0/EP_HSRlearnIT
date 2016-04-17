@@ -20,10 +20,10 @@ namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
         #region Public Methods
         public static void WriteToLogfile(string exmsg, string sourceMethod)
         {
-            FileSaver.SaveFile(_path, _fileName);
+            FileSaver.CreateFile(_path, _fileName);
             _filePath = Path.Combine(_path, _fileName);
             String entry = "\n" + "Exception :" + DateTime.Now.ToString() + ": " + exmsg + " " + sourceMethod + "\n";
-            FileSaver.ContentAddToFile(_filePath, entry);
+            FileSaver.AppendContentToFile(_filePath, entry);
             AvoidOverflow(_filePath);
         }
 
@@ -38,7 +38,7 @@ namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
                 List<string> lines = File.ReadAllLines(filePath).ToList<string>();
                 lines.RemoveRange(0, _DeleteRows);
                 File.WriteAllLines(filePath, lines);
-                FileSaver.ContentAddToFile(filePath, "The oldest " + _DeleteRows + " lines are removed. \n");
+                FileSaver.AppendContentToFile(filePath, "The oldest " + _DeleteRows + " lines are removed. \n");
             }
         }
 
