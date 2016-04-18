@@ -96,7 +96,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         private bool _isMoving = false;
         private Image _imgMoved;
         private SavedData _addedData;
-        private bool copyImage;
+//        private bool copyImage;
 
         // Position used for calculating mouse move
         private Point _previousMousePosition;
@@ -159,7 +159,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                 // Remember the initial mouse position
                 _previousMousePosition = e.GetPosition(this);
                 _isMoving = true;
-                copyImage = false;
+//                copyImage = false;
             }
             catch (Exception ex)
             {
@@ -167,7 +167,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
             }
         }
 
-        private void image_PreviewMouseLeftButtonDown2(object sender, MouseButtonEventArgs e)
+  /*      private void image_PreviewMouseLeftButtonDown2(object sender, MouseButtonEventArgs e)
         {
             copyImage = true;
             //First it is checked which image is moved, then a new image is created  and set with height, width and margin, so it appears on the same position as the _imgMoved.
@@ -183,7 +183,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
             // Remember the initial mouse position
             _previousMousePosition = e.GetPosition(this);
         }
-
+*/
         private void image_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             try

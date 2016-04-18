@@ -94,7 +94,7 @@ namespace EP_HSRlearnIT.PresentationLayer
 
         private void OnSaveButton_Click(object sender, RoutedEventArgs e)
         {
-            FileSaver.UpdateFileContent(FileSaver.CreateFile(@"C:\temp\HSRlearnIT", "AES-GCM.txt"), "The program is started!");
+            FileSaver.UpdateFileContent(FileSaver.SaveFile(@"C:\temp\HSRlearnIT", "AES-GCM.txt"), "The program is started!");
         }
 
         private void OnExceptionClick(object sender, MouseButtonEventArgs e)
