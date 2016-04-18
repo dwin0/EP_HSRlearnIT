@@ -47,7 +47,7 @@ namespace EP_HSRlearnIT.PresentationLayer
                     MainFrame.Navigate(new StepPage());
                     break;
                 case "Ver- und Entschlüsselung":
-                    MainFrame.Navigate(new EncryptionPage());
+                    MainFrame.Navigate(new EncryptionDecyrptionPage());
                     break;
                 case "Drag- und Drop Spiel":
                     MainFrame.Navigate(new DragDropPage());
@@ -95,7 +95,7 @@ namespace EP_HSRlearnIT.PresentationLayer
 
         private void OnSaveButton_Click(object sender, RoutedEventArgs e)
         {
-            FileSaver.UpdateFileContent(FileSaver.CreateFile(@"C:\temp\HSRlearnIT", "AES-GCM.txt"), "The program is started!");
+            FileSaver.UpdateFileContent(FileSaver.SaveFile(@"C:\temp\HSRlearnIT", "AES-GCM.txt"), "The program is started!");
         }
 
         //This method is used only for a system test in order to contorl the correctness of the Global Exception Handler and will be deleted for the production code 
