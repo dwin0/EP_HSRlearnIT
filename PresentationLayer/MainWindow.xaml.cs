@@ -1,10 +1,11 @@
 ﻿using EP_HSRlearnIT.BusinessLayer.UniversalTools;
 using EP_HSRlearnIT.PresentationLayer.Exercises;
 using EP_HSRlearnIT.PresentationLayer.Tutorials;
+using EP_HSRlearnIT.PresentationLayer.Games;
+
 using System.Windows;
 using System.Windows.Input;
 using System;
-using EP_HSRlearnIT.PresentationLayer.Games;
 
 namespace EP_HSRlearnIT.PresentationLayer
 {
@@ -52,7 +53,7 @@ namespace EP_HSRlearnIT.PresentationLayer
                     MainFrame.Navigate(new DragDropPage());
                     break;
             }
-            CloseMenu();
+          CloseMenu(); 
         }
 
         private void OnBackButton_Click(object sender, RoutedEventArgs e)
@@ -97,6 +98,7 @@ namespace EP_HSRlearnIT.PresentationLayer
             FileSaver.UpdateFileContent(FileSaver.CreateFile(@"C:\temp\HSRlearnIT", "AES-GCM.txt"), "The program is started!");
         }
 
+        //This method is used only for a system test in order to contorl the correctness of the Global Exception Handler and will be deleted for the production code 
         private void OnExceptionClick(object sender, MouseButtonEventArgs e)
         {
             throw new Exception("Exception in Logfile vorhanden?");
@@ -107,7 +109,7 @@ namespace EP_HSRlearnIT.PresentationLayer
         {
             var point = Mouse.GetPosition(MainGrid);
 
-            if (point.X > MenuStackPanel.ActualWidth)
+            if (point.X > MenuStackPanel.ActualWidth-50)
             {
                 CloseMenu();
             }

@@ -14,7 +14,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
     {
         private class SavedData
         {
-            //Index and position of copied image are saved into SavaedData
+            //Index and position of copied image are saved into SavedData
             public int ImageIndex; 
             public Thickness ImageMargin; 
 
@@ -159,7 +159,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                 // Remember the initial mouse position
                 _previousMousePosition = e.GetPosition(this);
                 _isMoving = true;
-                copyImage = false;
+               // copyImage = false;
             }
             catch (Exception ex)
             {
@@ -169,19 +169,21 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
 
         private void image_PreviewMouseLeftButtonDown2(object sender, MouseButtonEventArgs e)
         {
-            copyImage = true;
+           // copyImage = true;
             //First it is checked which image is moved, then a new image is created  and set with height, width and margin, so it appears on the same position as the _imgMoved.
             _imgMoved = sender as Image;
             _addedData = new SavedData();
-            ControlGrid.Children.Add(_imgMoved);
             _addedData.ImageIndex = ControlGrid.Children.IndexOf(_imgMoved);
 
             //Set Eventhandler for new image so new image behaves as original 
             _imgMoved.PreviewMouseLeftButtonUp += image_PreviewMouseLeftButtonUp;
             _imgMoved.MouseMove += image_MouseMove;
+          //  _imgMoved.PreviewMouseLeftButtonDown += image_PreviewMouseLeftButtonDown;
+
 
             // Remember the initial mouse position
             _previousMousePosition = e.GetPosition(this);
+            _isMoving = true;
         }
 
         private void image_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -201,9 +203,10 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                         _imgMoved.Margin = new Thickness(r.Left - 80, r.Top - 35, 0, 0);
                         _addedData.ImageMargin = _imgMoved.Margin;
                         _addedImages.Add(_addedData);
-                        _imgMoved.PreviewMouseLeftButtonDown += image_PreviewMouseLeftButtonDown;
+                       // _imgMoved.PreviewMouseLeftButtonDown += image_PreviewMouseLeftButtonDown;
+                        _imgMoved.PreviewMouseLeftButtonDown += image_PreviewMouseLeftButtonDown2;
+
                         _imgMoved.MouseMove += image_MouseMove;
-                        _imgMoved.PreviewMouseLeftButtonDown += image_PreviewMouseLeftButtonDown;
 
                         Progress.SaveProgress("DragDropPage_Settings", _addedImages);
                         break;
