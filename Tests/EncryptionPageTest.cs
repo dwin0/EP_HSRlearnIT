@@ -7,7 +7,7 @@ using TestStack.White.UIItems;
 
 namespace EP_HSRlearnITTests
 {
-    [TestClass]
+    //[TestClass]
     public class EncryptionPageTest
     {
         public string BaseDir => Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);

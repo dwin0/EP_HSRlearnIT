@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
+using static System.Convert;
 
 namespace EP_HSRlearnIT.PresentationLayer.Exercises
 {
@@ -17,18 +18,19 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                 }
             }
 
-            int ivLength = System.Convert.ToInt32(values[0]);
-            int plaintextLength = System.Convert.ToInt32(values[1]);
-            int keyLength = System.Convert.ToInt32(values[2]);
+            int ivLength = ToInt32(values[0]);
+            int plaintextLength = ToInt32(values[1]);
+            int keyLength = ToInt32(values[2]);
 
-            return (plaintextLength > 0 && keyLength >= 8 && (ivLength == 0 || ivLength == 12));
+            return plaintextLength > 0 && keyLength >= 8 && (ivLength == 0 || ivLength == 12);
         }
-
+        
         //is not needed, but must be overriden
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }
+
         #endregion
     }
 }
