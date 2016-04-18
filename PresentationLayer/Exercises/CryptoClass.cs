@@ -14,7 +14,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
     public class CryptoClass : Page
     {
 
-        #region Private Members
+        #region Public Members
         public AesGcmCryptoLibrary Library;
         #endregion
 
@@ -69,7 +69,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             if (hexTextBox != null)
             {
                 string nameHexTextBox = hexTextBox.Name;
-                //get the name of the corresponding hexBlock. This name will be used, if an invalid char is entered in the HexBox. An error will be shown
+                // get the name of the corresponding hexBlock. The Box suffix (3 chars) is removed and Block is appended. 
                 string nameHexBlock = nameHexTextBox.Substring(0, nameHexTextBox.Length - 3) + "Block";
 
                 //Get control that will be updated
@@ -82,7 +82,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
 
                 if (textBlockAnzeige.Contains(" Ungültige Eingabe!"))
                 {
-                    //19 is the length of suffix text
+                    //19 is the length of suffix text " Ungültige Eingabe!"
                     textBlockAnzeige = textBlockAnzeige.Substring(0, textBlockAnzeige.Length - 19);
                     textBlock.Text = textBlockAnzeige;
                     textBlock.Foreground = Brushes.Black;
@@ -106,7 +106,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                 ArrayList list = new ArrayList();
                 while (hexValue.Length > 1)
                 {
-                    //string str = hexValue.Substring(0, 2);
                     list.Add(hexValue.Substring(0, 2));
                     hexValue = hexValue.Substring(2, hexValue.Length - 2);
                 }
@@ -194,11 +193,12 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         #endregion
 
         #region Private Methods
+        //TODO mit Regex vereinfachbar?
         private bool IsHex(IEnumerable<char> chars)
         {
-            string check = Convert.ToString(chars);
-            return System.Text.RegularExpressions.Regex.IsMatch(check, @"\A\b[0-9a-fA-F]+\b\Z");
-/*            foreach (var c in chars)
+            //string check = Convert.ToString(chars);
+            //return System.Text.RegularExpressions.Regex.IsMatch(check, @"\A\b[0-9a-fA-F]+\b\Z");
+            foreach (var c in chars)
             {
                 bool isHex = ((c >= '0' && c <= '9') ||
                               (c >= 'a' && c <= 'f') ||
@@ -209,7 +209,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                     return false;
                 }
             }
-            return true;*/
+            return true;
         }
         #endregion
     }
