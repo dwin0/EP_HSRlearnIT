@@ -3,9 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EP_HSRlearnIT", "EP_HSRlearnIT\EP_HSRlearnIT.csproj", "{F8A7274A-C7C1-4A8E-81E7-B1458CE60B11}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EP_HSRlearnIT.PresentationLayer", "PresentationLayer\EP_HSRlearnIT.PresentationLayer.csproj", "{F8A7274A-C7C1-4A8E-81E7-B1458CE60B11}"
+	ProjectSection(ProjectDependencies) = postProject
+		{044AA43B-E2BF-4A8E-BF81-99F35DD91778} = {044AA43B-E2BF-4A8E-BF81-99F35DD91778}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EP_HSRlearnITTests", "EP_HSRlearnITTests\EP_HSRlearnITTests.csproj", "{87D46FB0-6C27-424C-B274-6074346C363F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EP_HSRlearnIT.PresentationLayer.Testing", "Tests\EP_HSRlearnIT.PresentationLayer.Testing.csproj", "{87D46FB0-6C27-424C-B274-6074346C363F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EP_HSRlearnIT.BusinessLayer", "BusinessLayer\EP_HSRlearnIT.BusinessLayer.csproj", "{044AA43B-E2BF-4A8E-BF81-99F35DD91778}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EP_HSRlearnIT.BusinessLayer.Testing", "EP_HSRlearnIT.BusinessLayerTests\EP_HSRlearnIT.BusinessLayer.Testing.csproj", "{3748BDCF-F98C-4BD5-B5CF-95C976C56C02}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +28,14 @@ Global
 		{87D46FB0-6C27-424C-B274-6074346C363F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87D46FB0-6C27-424C-B274-6074346C363F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87D46FB0-6C27-424C-B274-6074346C363F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{044AA43B-E2BF-4A8E-BF81-99F35DD91778}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{044AA43B-E2BF-4A8E-BF81-99F35DD91778}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{044AA43B-E2BF-4A8E-BF81-99F35DD91778}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{044AA43B-E2BF-4A8E-BF81-99F35DD91778}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3748BDCF-F98C-4BD5-B5CF-95C976C56C02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3748BDCF-F98C-4BD5-B5CF-95C976C56C02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3748BDCF-F98C-4BD5-B5CF-95C976C56C02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3748BDCF-F98C-4BD5-B5CF-95C976C56C02}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,61 @@
+﻿<base:CryptoClass x:Class="EP_HSRlearnIT.PresentationLayer.Exercises.DecryptionPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:base="clr-namespace:EP_HSRlearnIT.PresentationLayer.Exercises"
+      mc:Ignorable="d"
+      d:DesignHeight="300" d:DesignWidth="300" 
+      Title="DecryptionPage">
+
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Border CornerRadius="6" BorderBrush="Gray"  Background="LightGray" BorderThickness="2" Padding="6" Margin="35,0,0,0">
+            <StackPanel Margin="15,0,15,0">
+                <Button Click="OnImportButtonClick" Content="File Importieren" Name="ImportButton" Height="40" Width="90" HorizontalAlignment="Left"/>
+                <TextBlock Text="Verschlüsselter Text:" Margin="0,10,0,0" Name="CipherTextBlock"/>
+                <TextBox Height="50" Name="CipherTextBox" TextChanged="TextBox_TextChanged" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                <TextBlock Text="Additional Authenticated Data: (optional)" Name="AadBlock"/>
+                <TextBox Height="50" Name="AadBox" TextChanged="TextBox_TextChanged" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                <TextBlock Text="IV: (optional)" Name="IvBlock"/>
+                <TextBox Name="IvBox" Height="20" TextChanged="TextBox_TextChanged" TextWrapping="Wrap"/>
+                <TextBlock Text="Tag:" Name="TagBlock"/>
+                <TextBox Height="20" Name="TagBox" TextChanged="TextBox_TextChanged" TextWrapping="Wrap"/>
+                <TextBlock Text="Key:" Name="DecryptionPasswortBlock"/>
+                <TextBox Name="DecryptionPasswortBox" Height="20" TextChanged="TextBox_TextChanged" TextWrapping="Wrap"/>
+                <DockPanel>
+                    <Button Click="OnDecryptionButtonClick" Content="Entschlüsseln" Name="DecryptionButton" Height="40" Width="90" Margin="0,10,0,10" />
+                    <Button Click="OnEncryptionButtonClick" Content="Verschlüsseln" Name="EncrpytionButton" Height="40" Width="90" HorizontalAlignment="Left" Margin="10,10,0,10"/>
+                </DockPanel>
+                <TextBlock Text="Klartext:" Name="PlainTextBlock"/>
+                <TextBox Height="50" Name="PlainTextBox" TextChanged="TextBox_TextChanged" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+            </StackPanel>
+        </Border>
+
+
+        <StackPanel Grid.Column="1" Margin="10,0,35,0">
+            <TextBlock Text="Verschlüsselter Text Hex:" Margin="0,60,0,0" Name="HexCipherTextBlock"/>
+            <TextBox Height="50" Name="HexCipherTextBox" TextChanged="HexTextBox_TextChanged" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+            <TextBlock Text="Additional Authenticated Data: (optional)" Name="HexAadBlock"/>
+            <TextBox Height="50" Name="HexAadBox" TextChanged="HexTextBox_TextChanged" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+            <TextBlock Text="IV Hex:" Name="HexIvBlock"/>
+            <TextBox Height="20" Name="HexIvBox" TextChanged="HexTextBox_TextChanged" TextWrapping="Wrap"/>
+            <TextBlock Text="Tag Hex:" Name="HexTagBlock"/>
+            <TextBox Height="20" Name="HexTagBox" TextChanged="HexTextBox_TextChanged" TextWrapping="Wrap"/>
+            <TextBlock Text="Key Hex:" Name="HexDecryptionPasswortBlock"/>
+            <TextBox Height="20" Name="HexDecryptionPasswortBox" TextChanged="HexTextBox_TextChanged" TextWrapping="Wrap"/>
+            <TextBlock Text="Klartext Hex:" Margin="0,60,0,0" Name="HexPlainTextBlock"/>
+            <TextBox Height="50" Name="HexPlainTextBox" TextChanged="HexTextBox_TextChanged" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+        </StackPanel>
+    </Grid>
+</base:CryptoClass>
+
+
+
