@@ -46,8 +46,7 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
                     cs.FlushFinalBlock();
                     byte[] tagEncrypt = encryptor.GetTag();
                     byte[] ciphertextEncrypt = ms.ToArray();
-                    var returnValue = new Tuple<byte[], byte[]>(tagEncrypt, ciphertextEncrypt);
-                    return returnValue;
+                    return new Tuple<byte[], byte[]>(tagEncrypt, ciphertextEncrypt);
                 }
             }
         }
