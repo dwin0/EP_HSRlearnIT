@@ -71,6 +71,7 @@
     <Compile Include="Games\DragDropPage.xaml.cs">
       <DependentUpon>DragDropPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Games\DragDropPageConstants.cs" />
     <Compile Include="StringCollection.cs" />
     <Compile Include="Tutorials\AesGcmOverviewPage.xaml.cs">
       <DependentUpon>AesGcmOverviewPage.xaml</DependentUpon>
