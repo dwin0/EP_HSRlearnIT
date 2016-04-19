@@ -13,62 +13,66 @@
         <local:FormFilledMulticonverter x:Key="FormFilledMultiConverter"/>
     </Page.Resources>
 
-
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
+            <RowDefinition Height="Auto" Name="Row0"/>
+            <RowDefinition Height="Auto" Name="Row1"/>
+            <RowDefinition Height="Auto" Name="Row2"/>
+            <RowDefinition Height="*" Name="Row3"/>
+            <RowDefinition Height="Auto" Name="Row4"/>
+            <RowDefinition Height="*" Name="Row5"/>
+            <RowDefinition Height="Auto" Name="Row6"/>
+            <RowDefinition Height="Auto" Name="Row7"/>
+            <RowDefinition Height="Auto" Name="Row8"/>
+            <RowDefinition Height="Auto" Name="Row9"/>
+            <RowDefinition Height="*" Name="Row10"/>
+            <RowDefinition Height="Auto" Name="Row11"/>
+            <RowDefinition Height="Auto" Name="Row12"/>
+            <RowDefinition Height="Auto" Name="Row13"/>
         </Grid.RowDefinitions>
-        <Border CornerRadius="6" BorderBrush="Gray"  Background="LightGray" BorderThickness="2" Padding="6" Margin="35,0,0,0">
-            <StackPanel Margin="15,0,15,0">
-                <TextBlock Text="IV: (optional)" Name="IvBlock" />
-                <TextBox Height="20" Name="IvBox" TextChanged="TextBox_TextChanged" TextWrapping="Wrap"/>
-                <TextBlock Text="Additional Authenticated Data: (optional)" Name="AadBlock" />
-                <TextBox Height="50" Name="AadBox" TextChanged="TextBox_TextChanged" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
-                <TextBlock Text="Klartext:" Name="PlainTextBlock"/>
-                <TextBox Height="50" Name="PlainTextBox" TextChanged="TextBox_TextChanged" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
-                <TextBlock Text="Key:" Name="EncryptionPasswordBlock"/>
-                <TextBox Height="20" Name="EncryptionPasswordBox" TextChanged="TextBox_TextChanged" TextWrapping="Wrap"/>
-                <Button Click="OnEnryptionButtonClick" Content="Verschlüsseln" Name="EncryptionButton" Height="40" Width="85" HorizontalAlignment="Left" Margin="0,10,0,10" >
-                    <Button.IsEnabled>
-                        <MultiBinding Converter="{StaticResource FormFilledMultiConverter}">
-                            <Binding Path="Text.Length" ElementName="IvBox"/>
-                            <Binding Path="Text.Length" ElementName="PlainTextBox"/>
-                            <Binding Path="Text.Length" ElementName="EncryptionPasswordBox"/>
-                        </MultiBinding>
-                    </Button.IsEnabled>
-                </Button>
-                <TextBlock Text="Verschlüsselter Text:" Name="CipherTextBlock"/>
-                <TextBox Height="50" Name="CipherTextBox" TextChanged="TextBox_TextChanged" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
-                <TextBlock Text="Tag:" Name="TagBlock"/>
-                <TextBox Height="20" Name="TagBox" TextChanged="TextBox_TextChanged" TextWrapping="Wrap"/>
-                <DockPanel Margin="0,10,0,0">
-                    <Button Click="OnExportButtonClick" Content="Exportieren" Name="ExportButton" Height="40" Width="85" Margin="2,0,15,0"/>
-                    <Button Click="OnDecryptionButtonClick" Content="Entschlüsseln" Name="DecryptionButton" Height="40" Width="85" HorizontalAlignment="Left"/>
-                </DockPanel>
-            </StackPanel>
-        </Border>
+        <Border CornerRadius="6" BorderBrush="Gray"  Background="LightGray" BorderThickness="2" Grid.ColumnSpan="1" Grid.RowSpan="14" Margin="0,0,0,10"/>
 
-        <StackPanel Grid.Column="1" Margin="10,8,35,0">
-            <TextBlock Text="IV Hex:" Name="HexIvBlock"/>
-            <TextBox Height="20" Name="HexIvBox" TextChanged="HexTextBox_TextChanged" TextWrapping="Wrap"/>
-            <TextBlock Text="Additional Authenticated Data: (optional)" Name="HexAadBlock"/>
-            <TextBox Height="50" Name="HexAadBox" TextChanged="HexTextBox_TextChanged" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
-            <TextBlock Text="Klartext Hex:" Name="HexPlainTextBlock"/>
-            <TextBox Height="50" Name="HexPlainTextBox" TextChanged="HexTextBox_TextChanged" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
-            <TextBlock Text="Key Hex:" Name="HexEncryptionPasswordBlock"/>
-            <TextBox Height="20" Name="HexEncryptionPasswordBox" TextChanged="HexTextBox_TextChanged" TextWrapping="Wrap" />
-            <TextBlock Text="Verschlüsselter Text Hex:" Margin="0,60,0,0" Name="HexCipherTextBlock"/>
-            <TextBox Height="50" Name="HexCipherTextBox" TextChanged="HexTextBox_TextChanged" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
-            <TextBlock Text="Tag Hex:" Name="HexTagBlock"/>
-            <TextBox Height="20" Name="HexTagBox" TextChanged="HexTextBox_TextChanged" TextWrapping="Wrap"/>
-        </StackPanel>
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="IV: (optional)" Name="IvBlock" Margin="15,2,15,0"/>
+        <TextBox Grid.Row="1" Grid.Column="0" Name="IvBox" TextChanged="TextBox_TextChanged" TextWrapping="Wrap" Margin="15,2,15,5"/>
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Additional Authenticated Data: (optional)" Name="AadBlock" Margin="15,2,15,0"/>
+        <TextBox Grid.Row="3" Grid.Column="0" Name="AadBox" TextChanged="TextBox_TextChanged" TextWrapping="Wrap" Margin="15,2,15,5" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+        <TextBlock Grid.Row="4" Grid.Column="0" Text="Klartext:" Name="PlainTextBlock" Margin="15,2,15,0"/>
+        <TextBox Grid.Row="5" Grid.Column="0" Name="PlainTextBox" TextChanged="TextBox_TextChanged" TextWrapping="Wrap" Margin="15,2,15,5" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+        <TextBlock Grid.Row="6" Grid.Column="0" Text="Key:" Name="EncryptionPasswordBlock" Margin="15,2,15,0"/>
+        <TextBox Grid.Row="7" Grid.Column="0" Name="EncryptionPasswordBox" TextChanged="TextBox_TextChanged" TextWrapping="Wrap" Margin="15,2,15,5"/>
+        <Button Grid.Row="8" Grid.Column="0" Click="OnEnryptionButtonClick" Content="Verschlüsseln" Name="EncryptionButton" Height="40" Width="85" HorizontalAlignment="Left" Margin="15,10,0,10" >
+            <Button.IsEnabled>
+                <MultiBinding Converter="{StaticResource FormFilledMultiConverter}">
+                    <Binding Path="Text.Length" ElementName="IvBox"/>
+                    <Binding Path="Text.Length" ElementName="PlainTextBox"/>
+                    <Binding Path="Text.Length" ElementName="EncryptionPasswordBox"/>
+                </MultiBinding>
+            </Button.IsEnabled>
+        </Button>
+        <TextBlock Grid.Row="9" Grid.Column="0" Text="Verschlüsselter Text:" Name="CipherTextBlock" Margin="15,2,15,0"/>
+        <TextBox Grid.Row="10" Grid.Column="0" Name="CipherTextBox" TextChanged="TextBox_TextChanged" TextWrapping="Wrap" Margin="15,2,15,5" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+        <TextBlock Grid.Row="11" Grid.Column="0" Text="Tag:" Name="TagBlock" Margin="15,2,15,0"/>
+        <TextBox Grid.Row="12" Grid.Column="0" Name="TagBox" TextChanged="TextBox_TextChanged" TextWrapping="Wrap" Margin="15,2,15,5"/>
+        <DockPanel Grid.Row="13" Grid.Column="0" Margin="15,2,15,5">
+            <Button Click="OnExportButtonClick" Content="Exportieren" Name="ExportButton" Height="40" Width="85" Margin="0,10,7.5,10"/>
+            <Button Click="OnDecryptionButtonClick" Content="Entschlüsseln" Name="DecryptionButton" HorizontalAlignment="Left" Height="40" Width="85" Margin="7.5,10,0,10"/>
+        </DockPanel>
+
+        <TextBlock Grid.Row="0" Grid.Column="1" Text="IV Hex:" Name="HexIvBlock" Margin="15,2,15,0"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Name="HexIvBox" TextChanged="HexTextBox_TextChanged" TextWrapping="Wrap" Margin="15,2,15,5"/>
+        <TextBlock Grid.Row="2" Grid.Column="1" Text="Additional Authenticated Data: (optional)" Name="HexAadBlock" Margin="15,2,15,0"/>
+        <TextBox Grid.Row="3" Grid.Column="1" Name="HexAadBox" TextChanged="HexTextBox_TextChanged" TextWrapping="Wrap" Margin="15,2,15,5" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+        <TextBlock Grid.Row="4" Grid.Column="1" Text="Klartext Hex:" Name="HexPlainTextBlock" Margin="15,2,15,0"/>
+        <TextBox Grid.Row="5" Grid.Column="1" Name="HexPlainTextBox" TextChanged="HexTextBox_TextChanged" TextWrapping="Wrap" Margin="15,2,15,5" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+        <TextBlock Grid.Row="6" Grid.Column="1" Text="Key Hex:" Name="HexEncryptionPasswordBlock" Margin="15,2,15,0"/>
+        <TextBox Grid.Row="7" Grid.Column="1" Name="HexEncryptionPasswordBox" TextChanged="HexTextBox_TextChanged" TextWrapping="Wrap" Margin="15,2,15,5"/>
+        <TextBlock Grid.Row="9" Grid.Column="1" Text="Verschlüsselter Text Hex:" Name="HexCipherTextBlock" Margin="15,2,15,0"/>
+        <TextBox Grid.Row="10" Grid.Column="1" Name="HexCipherTextBox" TextChanged="HexTextBox_TextChanged" TextWrapping="Wrap" Margin="15,2,15,5" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+        <TextBlock Grid.Row="11" Grid.Column="1" Text="Tag Hex:" Name="HexTagBlock" Margin="15,2,15,0"/>
+        <TextBox Grid.Row="12" Grid.Column="1" Name="HexTagBox" TextChanged="HexTextBox_TextChanged" TextWrapping="Wrap" Margin="15,2,15,5"/>
     </Grid>
 </base:CryptoClass>
-
-
-
-
