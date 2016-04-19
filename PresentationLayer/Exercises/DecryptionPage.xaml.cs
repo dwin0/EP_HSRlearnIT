@@ -11,11 +11,11 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             InitializeComponent();
         }
 
-        public DecryptionPage(string ciphertext, string nonce, string aad, string tag)
+        public DecryptionPage(string ciphertext, string iv, string aad, string tag)
         {
             InitializeComponent();
             HexCipherTextBox.Text = ciphertext;
-            HexIvBox.Text = nonce;
+            HexIvBox.Text = iv;
             HexAadBox.Text = aad;
             HexTagBox.Text = tag;
         }
@@ -32,22 +32,22 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             GenerateHexKey(DecryptionPasswortBox.Text, HexDecryptionPasswortBox);
             byte[] key = HexStringToByteArray(HexDecryptionPasswortBox.Text);
             byte[] ciphertext = HexStringToByteArray(HexCipherTextBox.Text);
-            byte[] nonce = null;
+            byte[] iv = null;
             if (HexIvBox.Text != "")
             {
-                nonce = HexStringToByteArray(HexIvBox.Text);
+                iv = HexStringToByteArray(HexIvBox.Text);
             }
             byte[] aad = HexStringToByteArray(HexAadBox.Text);
             byte[] tag = HexStringToByteArray(HexTagBox.Text);
-            PlainTextBox.Text = BytesToString(Library.Decrypt(key, ciphertext, nonce, aad, tag));
+            PlainTextBox.Text = BytesToString(Library.Decrypt(key, ciphertext, iv, aad, tag));
         }
 
         private void OnEncryptionButtonClick(object sender, RoutedEventArgs e)
         {
             string plaintext = HexPlainTextBox.Text;
-            string nonce = HexIvBox.Text;
+            string iv = HexIvBox.Text;
             string aad = HexAadBox.Text;
-            NavigationService?.Navigate(new EncryptionPage(plaintext, nonce, aad));
+            NavigationService?.Navigate(new EncryptionPage(plaintext, iv, aad));
         }
         #endregion
 

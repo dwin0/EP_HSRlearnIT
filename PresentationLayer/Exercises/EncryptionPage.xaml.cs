@@ -11,11 +11,11 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             InitializeComponent();
         }
 
-        public EncryptionPage(string plaintext, string nonce, string aad)
+        public EncryptionPage(string plaintext, string iv, string aad)
         {
             InitializeComponent();
             HexPlainTextBox.Text = plaintext;
-            HexIvBox.Text = nonce;
+            HexIvBox.Text = iv;
             HexAadBox.Text = aad;
         }
         #endregion
@@ -27,14 +27,14 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             GenerateHexKey(EncryptionPasswordBox.Text, HexEncryptionPasswordBox);
             byte[] key = HexStringToByteArray(HexEncryptionPasswordBox.Text);
             byte[] plaintext = HexStringToByteArray(HexPlainTextBox.Text);
-            byte[] nonce = null;
+            byte[] iv = null;
             if (HexIvBox.Text != "")
             {
-                nonce = HexStringToByteArray(HexIvBox.Text);
+                iv = HexStringToByteArray(HexIvBox.Text);
             }
             byte[] aad = HexStringToByteArray(HexAadBox.Text);
 
-            Tuple<byte[], byte[]> returnValueEncryption = Library.Encrypt(key, plaintext, nonce, aad);
+            Tuple<byte[], byte[]> returnValueEncryption = Library.Encrypt(key, plaintext, iv, aad);
 
             TagBox.Text = BytesToString(returnValueEncryption.Item1);
             CipherTextBox.Text = BytesToString(returnValueEncryption.Item2);
@@ -48,10 +48,10 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         private void OnDecryptionButtonClick(object sender, RoutedEventArgs e)
         {
             string ciphertext = HexCipherTextBox.Text;
-            string nonce = HexIvBox.Text;
+            string iv = HexIvBox.Text;
             string aad = HexAadBox.Text;
             string tag = HexTagBox.Text;
-            NavigationService?.Navigate(new DecryptionPage(ciphertext, nonce, aad, tag));
+            NavigationService?.Navigate(new DecryptionPage(ciphertext, iv, aad, tag));
         }
         #endregion
 
