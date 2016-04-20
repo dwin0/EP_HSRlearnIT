@@ -7,11 +7,36 @@
       d:DesignHeight="300" d:DesignWidth="300"
       Title="DragDropPage1" >
 
-    <Grid Name="ControlGrid" AllowDrop="True" MouseMove="image_MouseMove" Width="900">
+    <Grid Name="AvailableParts">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-        <Image AllowDrop="True" Canvas.ZIndex="-1" Source="pack://application:,,,/images/dragdrop.PNG" Name="Overview"  HorizontalAlignment="Left" Width="600"/>
-        <Button Name="Reset" Click="OnResetClick" Margin="670,520,0,0" Height="40" Width="80" Content="Reset" HorizontalAlignment="Left"/>
-        <TextBox x:Name="TextBox" HorizontalAlignment="Left" Height="40" Margin="70,15,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="200"/>
+        <Canvas AllowDrop="True" Name="MyCanvas" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Canvas.Background>
+                <ImageBrush ImageSource="pack://application:,,,/images/dragdrop.PNG" Stretch="Uniform"></ImageBrush>
+            </Canvas.Background>
+            <Rectangle Name="MyRectangle" AllowDrop="True" DragOver="SetListBox_OnDragOver" Drop="SetListBox_OnDrop"
+                Canvas.Left="60"
+                Canvas.Top="60"
+                Width="100"
+                Height="100"
+                Fill="Black">
+            </Rectangle>
+        </Canvas>
+        <Border Grid.Column="1" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <!--
+            <Grid Name="AvailableParts" Background="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            -->
+        </Border>
+
+        <Button Grid.Column="0" Grid.Row="1" Name="Reset" Click="OnResetClick" Height="30" Width="80" Content="Reset" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="0" Grid.Column="0" x:Name="TextBox" HorizontalAlignment="Left" Height="40" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="200"/>
     </Grid>
 </Page>
 
