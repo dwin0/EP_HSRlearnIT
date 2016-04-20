@@ -1,0 +1,20 @@
+﻿<Page x:Class="EP_HSRlearnIT.Games.DragDrop3"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:EP_HSRlearnIT.Games"
+      mc:Ignorable="d" 
+      Title="DragDrop3">
+
+    <Viewbox HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Canvas Name="ElementCanvas" Height="720" Width="960">
+            <Rectangle Height="600" Width="700" Margin="-50, 50, 0, 0">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource ="/Images/dragdrop.PNG"/>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle Fill="Gray" Margin="72,79,483.6,526.6"/>
+        </Canvas>
+    </Viewbox>
+</Page>
