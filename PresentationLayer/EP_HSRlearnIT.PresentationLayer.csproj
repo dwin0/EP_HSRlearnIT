@@ -67,7 +67,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Exercises\CryptoClass.cs" />
-    <Compile Include="Exercises\FormFilledMulticonverter.cs" />
+    <Compile Include="Exercises\FormFilledDecryption.cs" />
+    <Compile Include="Exercises\FormFilledEncryption.cs" />
     <Compile Include="Games\DragDropPage.xaml.cs">
       <DependentUpon>DragDropPage.xaml</DependentUpon>
     </Compile>
@@ -225,6 +226,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Step1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\info.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

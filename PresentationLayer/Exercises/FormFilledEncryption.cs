@@ -5,14 +5,24 @@ using static System.Convert;
 
 namespace EP_HSRlearnIT.PresentationLayer.Exercises
 {
-    public class FormFilledMulticonverter : IMultiValueConverter
+    public class FormFilledEncryption : IMultiValueConverter
     {
+        #region Private Members
+        //since the hex-values are checked, the values need to be multiplied with 2
+        private const int MinSizePlaintext = 0;
+        private const int MinSizeKey = 8*2;
+        private const int MinSizeOptionalIv = 0;
+        private const int MaxSizeIv = 12*2;
+
+        #endregion
+
+
         #region Public Methods
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            for (int i = 0; i < values.Length; i++)
+            foreach (var t in values)
             {
-                if (values[i] == null)
+                if (t == null)
                 {
                     return false;
                 }
@@ -21,8 +31,8 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             int ivLength = ToInt32(values[0]);
             int plaintextLength = ToInt32(values[1]);
             int keyLength = ToInt32(values[2]);
-
-            return plaintextLength > 0 && keyLength >= 8 && (ivLength == 0 || ivLength == 12);
+            
+            return plaintextLength > MinSizePlaintext && keyLength >= MinSizeKey && (ivLength == MinSizeOptionalIv || ivLength == MaxSizeIv);
         }
         
         //is not needed, but must be overriden
