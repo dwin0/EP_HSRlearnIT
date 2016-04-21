@@ -30,6 +30,9 @@
     <system:String x:Key="DecryptionInfoKey">
         Der Key muss der gleiche sein wie bei der Entschlüsselung. Falls er nicht genau 32 Byte gross ist, wird gleich vorgegangen wie bei der Verschlüsselung.
     </system:String>
+    <system:String x:Key="EncryptionInfoHexTagAndCipher">
+        Dieses Felde kann manipuliert werden, um die Auswirkungen in der Entschlüsselung zu beobachten.
+    </system:String>
     
     <system:String x:Key="EncryptionInfoIv">
         Falls dieses Feld leergelassen wird, wird der Standard IV "00 00 00 00 00 00 00 00 00 00 00 00" (Angabe in Hex) gesetzt. 
