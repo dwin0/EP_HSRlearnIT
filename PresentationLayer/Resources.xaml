@@ -47,7 +47,7 @@
         Key der eingegebene Key verlängert, bis 32 Byte erreicht wurden. Falls der Key grösser als 32 Byte ist, wird er auf die 32 Byte reduziert.
     </system:String>
 
-    <Storyboard x:Key="sbShowLeftMenu" >
+    <Storyboard x:Key="SbShowLeftMenu" >
         <ThicknessAnimation Storyboard.TargetProperty="Margin" From="-150, -10, 0, 0" To="-50, -10, 0, 0" DecelerationRatio="0.9" Duration="0:0:0.5"/>
     </Storyboard>
 

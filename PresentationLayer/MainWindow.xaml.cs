@@ -79,7 +79,7 @@ namespace EP_HSRlearnIT.PresentationLayer
             margin.Top = -10;
             MenuButton.Margin = margin;
 
-            ShowHideMenu("sbShowLeftMenu", MenuStackPanel);
+            ShowHideMenu("SbShowLeftMenu", MenuStackPanel);
         }
 
         private void ShowHideMenu(string storyboard, FrameworkElement pnl)
@@ -104,7 +104,7 @@ namespace EP_HSRlearnIT.PresentationLayer
         {
             var point = Mouse.GetPosition(MainGrid);
 
-            if (point.X > MenuStackPanel.ActualWidth-50)
+            if (point.X > MenuStackPanel.ActualWidth + MenuStackPanel.Margin.Left + MenuStackPanel.Margin.Right)
             {
                 CloseMenu();
             }

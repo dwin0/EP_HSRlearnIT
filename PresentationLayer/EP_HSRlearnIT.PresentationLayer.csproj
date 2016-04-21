@@ -69,7 +69,7 @@
     <Compile Include="Exercises\CryptoClass.cs" />
     <Compile Include="Exercises\FormFilledDecryption.cs" />
     <Compile Include="Exercises\FormFilledEncryption.cs" />
-	<Compile Include="Games\DragDrop2.xaml.cs">
+    <Compile Include="Games\DragDrop2.xaml.cs">
       <DependentUpon>DragDrop2.xaml</DependentUpon>
     </Compile>
     <Compile Include="Games\DragDrop3.xaml.cs">
@@ -79,7 +79,7 @@
       <DependentUpon>DragDropPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Games\DragDropPageConstants.cs" />
-	<Compile Include="Games\DragImage.cs" />
+    <Compile Include="Games\DragImage.cs" />
     <Compile Include="StringCollection.cs" />
     <Compile Include="Tutorials\AesGcmOverviewPage.xaml.cs">
       <DependentUpon>AesGcmOverviewPage.xaml</DependentUpon>
@@ -103,13 +103,13 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-	<Page Include="Games\DragDrop2.xaml">
-        <Generator>MSBuild:Compile</Generator>
-        <SubType>Designer</SubType>
-      </Page>
-      <Page Include="Games\DragDrop3.xaml">
-        <SubType>Designer</SubType>
-        <Generator>MSBuild:Compile</Generator>
+    <Page Include="Games\DragDrop2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Games\DragDrop3.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Tutorials\AesGcmOverviewPage.xaml">
       <SubType>Designer</SubType>
@@ -174,6 +174,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="ClassDiagram_17.04.2016.cd" />
+    <None Include="ClassDiagram_02.04.2016.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
