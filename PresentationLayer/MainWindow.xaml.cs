@@ -6,6 +6,7 @@ using EP_HSRlearnIT.PresentationLayer.Games;
 using System.Windows;
 using System.Windows.Input;
 using System;
+using System.Windows.Media.Animation;
 
 namespace EP_HSRlearnIT.PresentationLayer
 {
@@ -77,8 +78,15 @@ namespace EP_HSRlearnIT.PresentationLayer
             var margin = MenuButton.Margin;
             margin.Top = -10;
             MenuButton.Margin = margin;
+
+            ShowHideMenu("sbShowLeftMenu", MenuStackPanel);
         }
 
+        private void ShowHideMenu(string storyboard, FrameworkElement pnl)
+        {
+            Storyboard sb = Application.Current.FindResource(storyboard) as Storyboard;
+            sb?.Begin(pnl);
+        }
 
         private void OnSaveButton_Click(object sender, RoutedEventArgs e)
         {
