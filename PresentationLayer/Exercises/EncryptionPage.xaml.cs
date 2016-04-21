@@ -32,6 +32,10 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             {
                 iv = HexStringToByteArray(HexIvBox.Text);
             }
+            else
+            {
+                HexIvBox.Text = "000000000000000000000000";
+            }
             byte[] aad = HexStringToByteArray(HexAadBox.Text);
 
             Tuple<byte[], byte[]> returnValueEncryption = Library.Encrypt(key, plaintext, iv, aad);

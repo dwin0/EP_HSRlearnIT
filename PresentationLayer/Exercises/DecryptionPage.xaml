@@ -82,6 +82,7 @@
                         <Binding Path="Text.Length" ElementName="HexIvBox"/>
                         <Binding Path="Text.Length" ElementName="HexTagBox"/>
                         <Binding Path="Text.Length" ElementName="HexDecryptionPasswortBox"/>
+                        <Binding Path="Text.Length" ElementName="HexAadBox"/>
                     </MultiBinding>
                 </Button.IsEnabled>
             </Button>

@@ -27,6 +27,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
 
         }
 
+        //TODO fall nur Aad behandeln!
         private void OnDecryptionButtonClick(object sender, RoutedEventArgs e)
         {
             GenerateHexKey(DecryptionPasswortBox.Text, HexDecryptionPasswortBox);
@@ -36,6 +37,10 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             if (HexIvBox.Text != "")
             {
                 iv = HexStringToByteArray(HexIvBox.Text);
+            }
+            else
+            {
+                HexIvBox.Text = "000000000000000000000000";
             }
             byte[] aad = HexStringToByteArray(HexAadBox.Text);
             byte[] tag = HexStringToByteArray(HexTagBox.Text);

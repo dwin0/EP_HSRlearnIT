@@ -20,7 +20,8 @@
         Falls in der Verschlüsselung keine Additional Authenticated Data eingegeben wurden, muss das Feld auch in der Entschlüsselung leer sein.
     </system:String>
     <system:String x:Key="DecryptionInfoIv">
-        Falls dieses Feld leergelassen wird, wird der Standard IV "" gesetzt. Ansonsten muss der gleiche IV wie in der Verschlüsselung angegeben werden.
+        Falls dieses Feld leergelassen wird, wird der Standard IV "00 00 00 00 00 00 00 00 00 00 00 00" (Angabe in Hex) gesetzt.
+        Ansonsten muss der gleiche IV wie in der Verschlüsselung angegeben werden.
     </system:String>
     <system:String x:Key="DecryptionInfoTag">
         Muss mit dem berechneten Tag aus der Verschlüsselung übereinstimmen.s
@@ -30,7 +31,8 @@
     </system:String>
     
     <system:String x:Key="EncryptionInfoIv">
-        Falls dieses Feld leergelassen wird, wird der Standard IV "" gesetzt. Der IV muss eine Grösse von 12 Byte haben.
+        Falls dieses Feld leergelassen wird, wird der Standard IV "00 00 00 00 00 00 00 00 00 00 00 00" (Angabe in Hex) gesetzt. 
+        Der IV muss eine Grösse von 12 Byte haben.
     </system:String>
     <system:String x:Key="EncryptionInfoAad">
         Dieses Feld kann leergelassen werden. Falls es in der Verschlüsselung leer ist, muss es auch in der Entschlüsselung leer sein.

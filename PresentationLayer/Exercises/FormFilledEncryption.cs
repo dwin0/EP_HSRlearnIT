@@ -10,6 +10,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         #region Private Members
         //since the hex-values are checked, the values need to be multiplied with 2
         private const int MinSizePlaintext = 0;
+        private const int MinSizeAad = 0;
         private const int MinSizeKey = 8*2;
         private const int MinSizeOptionalIv = 0;
         private const int MaxSizeIv = 12*2;
@@ -31,8 +32,11 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             int ivLength = ToInt32(values[0]);
             int plaintextLength = ToInt32(values[1]);
             int keyLength = ToInt32(values[2]);
+            int aadLength = ToInt32(values[3]);
             
-            return plaintextLength > MinSizePlaintext && keyLength >= MinSizeKey && (ivLength == MinSizeOptionalIv || ivLength == MaxSizeIv);
+            return (plaintextLength > MinSizePlaintext || aadLength > MinSizeAad) && 
+                   keyLength >= MinSizeKey && 
+                   (ivLength == MinSizeOptionalIv || ivLength == MaxSizeIv);
         }
         
         //is not needed, but must be overriden

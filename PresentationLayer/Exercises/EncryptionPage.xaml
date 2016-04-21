@@ -70,6 +70,7 @@
                     <Binding Path="Text.Length" ElementName="HexIvBox"/>
                     <Binding Path="Text.Length" ElementName="HexPlainTextBox"/>
                     <Binding Path="Text.Length" ElementName="HexEncryptionPasswordBox"/>
+                    <Binding Path="Text.Length" ElementName="HexAadBox"/>
                 </MultiBinding>
             </Button.IsEnabled>
         </Button>
@@ -79,7 +80,7 @@
         <TextBox Grid.Row="12" Grid.Column="0" Name="TagBox" TextChanged="TextBox_TextChanged" TextWrapping="Wrap" Margin="15,2,15,5"/>
         <DockPanel Grid.Row="13" Grid.Column="0" Margin="15,2,15,5">
             <Button Click="OnExportButtonClick" Content="Exportieren" Name="ExportButton" Height="40" Width="85" Margin="0,10,7.5,10" IsEnabled="{Binding ElementName=CipherTextBox, Path=Text.Length}"/>
-            <Button Click="OnDecryptionButtonClick" Content="Entschlüsseln" Name="DecryptionButton" HorizontalAlignment="Left" Height="40" Width="85" Margin="7.5,10,0,10" IsEnabled="{Binding ElementName=CipherTextBox, Path=Text.Length}"/>
+            <Button Click="OnDecryptionButtonClick" Content="Entschlüsseln" Name="DecryptionButton" HorizontalAlignment="Left" Height="40" Width="85" Margin="7.5,10,0,10" IsEnabled="{Binding ElementName=TagBox, Path=Text.Length}"/>
         </DockPanel>
 
         <TextBlock Grid.Row="0" Grid.Column="1" Text="IV Hex:" Name="HexIvBlock" Margin="15,2,15,0"/>
