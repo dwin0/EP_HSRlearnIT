@@ -10,6 +10,7 @@
     <Brush x:Key="MenuBackgroundColor">#ffe6e6</Brush>
 
     <local:StringCollection x:Key="MenuStrings">
+        <system:String>Startseite</system:String>
         <system:String>AES-GCM Übersicht</system:String>
         <system:String>Schritt für Schritt</system:String>
         <system:String>Ver- und Entschlüsselung</system:String>

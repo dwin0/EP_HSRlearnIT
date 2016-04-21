@@ -40,6 +40,9 @@ namespace EP_HSRlearnIT.PresentationLayer
             var item = ((FrameworkElement)e.OriginalSource).DataContext as string;
             switch (item)
             {
+                case "Startseite":
+                    MainFrame.Navigate(new MainPage());
+                    break;
                 case "AES-GCM Übersicht":
                     MainFrame.Navigate(new AesGcmOverviewPage());
                     break;
@@ -54,22 +57,6 @@ namespace EP_HSRlearnIT.PresentationLayer
                     break;
             }
           CloseMenu(); 
-        }
-
-        private void OnBackButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (MainFrame.NavigationService.CanGoBack)
-            {
-                MainFrame.NavigationService.GoBack();
-            }
-        }
-
-        private void OnForwardButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (MainFrame.NavigationService.CanGoForward)
-            {
-                MainFrame.NavigationService.GoForward();
-            }
         }
 
         private void CloseMenu()
@@ -105,7 +92,7 @@ namespace EP_HSRlearnIT.PresentationLayer
         }
 
         //Collapse Menu Click was outside
-       private void OnMouseDown(object sender, MouseButtonEventArgs e)
+       private void OnPreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             var point = Mouse.GetPosition(MainGrid);
 
