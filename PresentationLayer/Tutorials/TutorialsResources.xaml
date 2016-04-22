@@ -3,7 +3,7 @@
                     xmlns:system="clr-namespace:System;assembly=mscorlib"
                     xmlns:local="EP_HSRlearnIT.PresentationLayer.Tutorials.AesGcmOverviewPage">
 
-    <system:String x:Key="Step1">Einleitung: Weshalb AES-GCM?
+    <system:String x:Key="Step0">Einleitung: Weshalb AES-GCM?
         Der Galois/Counter Mode der AES-Verschlüsselung ermöglicht eine Verschlüsselung des Plaintextes 
         sowie eine Authentifizierung des Ciphertextes und zusätzlichen Daten. 
         Eine solche Art der Verschlüsselung und Authentifizierung nennt man auch Authenticated Encryption with Associated Data (AEAD).
@@ -14,61 +14,61 @@
         Schritt 5: Wiederholung 
         Schritt 6: Abschluss und Rückgabe
     </system:String>
-    <system:String x:Key="Step2">Vorbereitung:
+    <system:String x:Key="Step1">Vorbereitung:
         Der Hash-Subkey H wird berechnet. Dazu wird ein Block von 128 Nullen (0128) mit dem Schlüssel K AES verschlüsselt. 
         Der Subkey wird für die Berechnung des MAC, also für die Authentifizierung, benötigt. In AES-GCM wird dieser MAC Tag genannt.
     </system:String>
-    <system:String x:Key="Step3">Der «Counter 0»-Block wird aus dem Initialisierungsvektor (IV) hergeleitet. 
+    <system:String x:Key="Step2">Der «Counter 0»-Block wird aus dem Initialisierungsvektor (IV) hergeleitet. 
         Dazu wird zum IV ein Padding hinzugefügt, so dass schlussendlich ein Block mit 128Bit resultiert.
     </system:String>
-    <system:String x:Key="Step4">Verschlüsselung:
+    <system:String x:Key="Step3">Verschlüsselung:
         Auf den «Counter 0»-Block wird eine Increment-Funktion angewendet, woraus der «Counter 1» resultiert.
     </system:String>
-    <system:String x:Key="Step5">Der «Counter 1»-Block wird anschliessend mit dem Schlüssel K AES-verschlüsselt.
+    <system:String x:Key="Step4">Der «Counter 1»-Block wird anschliessend mit dem Schlüssel K AES-verschlüsselt.
     </system:String>
-    <system:String x:Key="Step6">Der Plaintext wird in 128Bit-Blöcke aufgeteilt. Der erste Plaintext-Block wird mit dem zuvor AES-verschlüsselten «Counter 1»-Block XOR-verknüpft.
+    <system:String x:Key="Step5">Der Plaintext wird in 128Bit-Blöcke aufgeteilt. Der erste Plaintext-Block wird mit dem zuvor AES-verschlüsselten «Counter 1»-Block XOR-verknüpft.
         Daraus entsteht der erste Ciphertext-Block.
     </system:String>
-    <system:String x:Key="Step7">Additional Authenticated Data
+    <system:String x:Key="Step6">Additional Authenticated Data
         Die Additional Authenticated Data (AAD) ist jener Teil der Eingabedaten, welcher durch den AES-GCM-Algorithmus zwar Authentifiziert, aber nicht verschlüsselt wird.
         Die Eingabe dieser Daten ist optional. Die Authentizität wird durch die Bildung eines MAC gewährleistet.
     </system:String>
-    <system:String x:Key="Step8">Die Generierung des MAC geschieht durch die Multiplikation der AAD in einem Galois-Feld mit dem zu Beginn berechneten Hash-Subkey H.
+    <system:String x:Key="Step7">Die Generierung des MAC geschieht durch die Multiplikation der AAD in einem Galois-Feld mit dem zu Beginn berechneten Hash-Subkey H.
         Dabei steht MultH für die Multiplikation innerhalb des Galois-Feldes. Die dabei durchgeführten Berechnungen sind nicht Bestandteil dieser Anleitung.
     </system:String>
-    <system:String x:Key="Step9">Ein Beispiel für AAD ist der Versand von Daten über einen unsicheren Kanal.
+    <system:String x:Key="Step8">Ein Beispiel für AAD ist der Versand von Daten über einen unsicheren Kanal.
         Die Payload wird verschlüsselt und authentifiziert, die IP-Adressen jedoch nur authentifiziert.
         Diese dürfen für die Übertragung nicht verschlüsselt werden, da dem Router das Ziel sonst nicht bekannt ist.
         Werden keine Daten verschlüsselt, sondern nur die Integritätsprüfung durchlaufen, spricht man von einem Galois Message Authentication Code (GMAC).
     </system:String>
-    <system:String x:Key="Step10">Ciphertext – Authentifizierung
+    <system:String x:Key="Step9">Ciphertext – Authentifizierung
         Die im vorherigen Schritt berechneten Daten aus der Galois-Feld Multiplikation werden mit dem ersten Ciphertext-Block mittels XOR verknüpft.
     </system:String>
-    <system:String x:Key="Step11">Das Resultat dieser XOR-Verknüpfung wird ebenfalls wieder in einem Galois-Feld mit dem Hash-Subkey H multipliziert.
+    <system:String x:Key="Step10">Das Resultat der XOR-Verknüpfung von Ciphertext und der Galois-Feld Multiplikation wird ebenfalls wieder in einem Galois-Feld mit dem Hash-Subkey H multipliziert.
     </system:String>
-    <system:String x:Key="Step12">Wiederholung
+    <system:String x:Key="Step11">Wiederholung
 	    Der Schritt Verschlüsselung, sowie der Schritt Ciphertext-Authentifizierung, werden nun so lange wiederholt, bis alle 128Bit-Blöcke des Plaintextes verschlüsselt sind
         und der MAC darüber berechnet wurde. Ist der letzte Plaintext-Block kleiner als 128Bit wird dessen Grösse zur Berechnung verwendet.
     </system:String>
-    <system:String x:Key="Step13">Abschluss und Rückgabe
+    <system:String x:Key="Step12">Abschluss und Rückgabe
         Damit keine Attacken auf den MAC, welcher auf einer variablen Anzahl Input-Bits basiert, gemacht werden können, wird sowohl die Länge der AAD (len(A)),
         als auch die Ciphertext-Länge (len(C)) mitauthentifiziert. Dazu werden die beiden Längen, in 64Bit-Repräsentation, aneinandergehängt.
         Es folgt eine XOR-Verknüpfung mit dem Resultat aus der Galois-Feld Multiplikation des allerletzten Ciphertextes.
         Nach der Verknüpfung wird dieser Wert nochmals in einem Galois-Feld mit dem Hash-Subkey multipliziert.
     </system:String>
-    <system:String x:Key="Step14">Da der IV ebenfalls authentifiziert werden soll, und dieser bereits im «Counter 0»-Block enthalten ist,
+    <system:String x:Key="Step13">Da der IV ebenfalls authentifiziert werden soll, und dieser bereits im «Counter 0»-Block enthalten ist,
         wird dieser Block ebenfalls in den MAC miteinberechnet. Dies geschieht indem der «Counter 0»-Block zuerst, wie alle anderen Blöcke, mit dem Schlüssel K AES verschlüsselt wird.
         Anschliessend wird auf diese AES Verschlüsselung und das Resultat der vorhergehenden Galois-Multiplikation die XOR-Funktion angewendet.
     </system:String>
-    <system:String x:Key="Step15">Der berechnete MAC, bei AES-GCM Tag genannt, ist nun fast berechnet. Es findet nur noch ein Truncating, also eine Verkürzung, 
+    <system:String x:Key="Step14">Der berechnete MAC, bei AES-GCM Tag genannt, ist nun fast berechnet. Es findet nur noch ein Truncating, also eine Verkürzung, 
         der Bit-Sequenz auf die gewünschte Länge statt. Dazu wird die verlangte Anzahl Most Significant Bits aus dem Resultat der letzten XOR-Verknüpfung verwendet.
     </system:String>
-    <system:String x:Key="Step16">Zuletzt werden Ciphertext und Authentication Tag zurückgegeben.
+    <system:String x:Key="Step15">Zuletzt werden Ciphertext und Authentication Tag zurückgegeben.
         Für die Entschlüsselung und Überprüfung des MAC wird nebst diesen beiden Werten auch der IV und die AAD benötigt.
         Ersterer für die erneute Berechnung aller Counter, der Zweite für die Berechnung und den anschliessenden Vergleich mit dem MAC.
         Der Ciphertext wird am Ende dieselbe Länge wie der zu Beginn eingegebene Plaintext besitzen.
     </system:String>
-    <system:String x:Key="Step17">Erweiterung/Zu beachten:
+    <system:String x:Key="Step16">Erweiterung/Zu beachten:
         Der Initialisierungsvektor muss unique sein, ansonsten besteht die Möglichkeit Rückschlüsse auf den Plaintext zu machen. 
         Dies deshalb, weil zwei gleiche Counter-Blöcke auch genau gleich verschlüsselt werden. Unterschiede im Ciphertext stammen allein daher,
         dass Unterschiede im Plaintext vorhanden sind.
@@ -76,13 +76,13 @@
         Die Grösse des zu verschlüsselnden Plaintextes pro IV ist genau aus diesem Grund beschränkt. Werden nämlich zu viele Counter-Blöcke gebildet
         steigt die Wahrscheinlichkeit einer Wiederholung der Bit-Sequenzen immer mehr an. Der Plaintext darf deshalb eine Grösse von 64GB nicht übersteigen.
     </system:String>
-    <system:String x:Key="Step18">Rückblick:
+    <system:String x:Key="Step17">Rückblick:
         Der AES-GCM Algorithmus bietet eine Möglichkeit für die gleichzeitige Verschlüsselung und Authentifizierung von Plaintext.
         Ein grosser Vorteil dabei ist die Geschwindigkeit. Einerseits können alle Counter-Blöcke vorberechnet werden, sobald der IV und die
         Plaintext-Länge bekannt sind. Andererseits kann die Authentifizierung von Ciphertext-Blöcken (grün markiert, mit Input Plaintext X) und die
         Verschlüsselung von weiteren Plaintext-Blöcken (orange markiert, mit Input Plaintext X + 1) unabhängig voneinander, und somit parallel, ablaufen.
     </system:String>
-    <system:String x:Key="Step19">Weiter bietet die Verwendung des Counter-Block Mode (CTR) folgenden Vorteil gegenüber dem Electronic Codebook Mode (ECB-Mode): 
+    <system:String x:Key="Step18">Weiter bietet die Verwendung des Counter-Block Mode (CTR) folgenden Vorteil gegenüber dem Electronic Codebook Mode (ECB-Mode): 
         Wird beispielsweise ein Bild, mit vielen gleichen Farbpunkten, verschlüsselt, so sehen die Plaintext-Blöcke mit gleichen Farbpunkten nach
         der Verschlüsselung beim ECB-Mode alle gleich aus. Beim Counter-Block Mode wird dies mittels jeweils unterschiedlichen Counter-Blöcken
         verhindert und es können beispielsweise bei Bildern keine Muster mehr erkannt werden.
@@ -113,19 +113,546 @@
     </system:String>
 
     <!--StepAreas-->
-    
-    <Style x:Key="StepAreaRectStyle" TargetType="Rectangle">
-        <Setter Property="Height" Value="50"/>
-        <Setter Property="Width" Value="50"/>
-        <Setter Property="Stroke" Value="Green"/>
-        <Setter Property="Fill" Value="Transparent"/>
-        <Setter Property="StrokeThickness" Value="5"/>
-    </Style>
-    
-    <Rectangle x:Key="Rect1" Name="Rect1" Style="{StaticResource ResourceKey=StepAreaRectStyle}"/>
-    <Rectangle x:Key="Rect2" Name="Rect2" Margin="50, 50, 0, 0" Style="{StaticResource ResourceKey=StepAreaRectStyle}"/>
 
-    <Path x:Key="Path1" Name="Vorbereitung" Stroke="Yellow" StrokeThickness="1" Fill="Transparent">
+    <Style x:Key="StepPathStyle" TargetType="Path">
+        <Setter Property="Stroke" Value="Transparent"/>
+        <Setter Property="StrokeThickness" Value="10"/>
+        <Setter Property="Fill" Value="Transparent"/>
+    </Style>
+
+    <Path x:Key="StepPath1" Name="Step1_tutorial_overview" Style="{StaticResource ResourceKey=StepPathStyle}">
+        <Path.Data>
+            <PathGeometry>
+                <PathGeometry.Figures>
+                    <PathFigureCollection>
+                        <PathFigure IsClosed="True" StartPoint="0,0">
+                            <PathFigure.Segments>
+                                <PathSegmentCollection>
+                                    <LineSegment Point="150,0" />
+                                    <LineSegment Point="150,240" />
+                                    <LineSegment Point="0,240" />
+                                </PathSegmentCollection>
+                            </PathFigure.Segments>
+                        </PathFigure>
+                    </PathFigureCollection>
+                </PathGeometry.Figures>
+            </PathGeometry>
+        </Path.Data>
+    </Path>
+
+    <Path x:Key="StepPath2" Name="Step2_tutorial_overview" Style="{StaticResource ResourceKey=StepPathStyle}">
+        <Path.Data>
+            <PathGeometry>
+                <PathGeometry.Figures>
+                    <PathFigureCollection>
+                        <PathFigure IsClosed="True" StartPoint="150,0">
+                            <PathFigure.Segments>
+                                <PathSegmentCollection>
+                                    <LineSegment Point="300,0" />
+                                    <LineSegment Point="300,240" />
+                                    <LineSegment Point="150,240" />
+                                </PathSegmentCollection>
+                            </PathFigure.Segments>
+                        </PathFigure>
+                    </PathFigureCollection>
+                </PathGeometry.Figures>
+            </PathGeometry>
+        </Path.Data>
+    </Path>
+
+    <Path x:Key="StepPath3" Name="Step3_tutorial" Style="{StaticResource ResourceKey=StepPathStyle}">
+        <Path.Data>
+            <PathGeometry>
+                <PathGeometry.Figures>
+                    <PathFigureCollection>
+                        <PathFigure IsClosed="True" StartPoint="300,0">
+                            <PathFigure.Segments>
+                                <PathSegmentCollection>
+                                    <LineSegment Point="635,0" />
+                                    <LineSegment Point="635,160" />
+                                    <LineSegment Point="150,160" />
+                                    <LineSegment Point="150,90" />
+                                    <LineSegment Point="300,90" />
+                                </PathSegmentCollection>
+                            </PathFigure.Segments>
+                        </PathFigure>
+                    </PathFigureCollection>
+                </PathGeometry.Figures>
+            </PathGeometry>
+        </Path.Data>
+    </Path>
+
+    <Path x:Key="StepPath4" Name="Step4_tutorial" Style="{StaticResource ResourceKey=StepPathStyle}">
+        <Path.Data>
+            <PathGeometry>
+                <PathGeometry.Figures>
+                    <PathFigureCollection>
+                        <PathFigure IsClosed="True" StartPoint="450,0">
+                            <PathFigure.Segments>
+                                <PathSegmentCollection>
+                                    <LineSegment Point="635,0" />
+                                    <LineSegment Point="635,240" />
+                                    <LineSegment Point="450,240" />
+                                </PathSegmentCollection>
+                            </PathFigure.Segments>
+                        </PathFigure>
+                    </PathFigureCollection>
+                </PathGeometry.Figures>
+            </PathGeometry>
+        </Path.Data>
+    </Path>
+
+    <Path x:Key="StepPath5" Name="Step5_tutorial" Style="{StaticResource ResourceKey=StepPathStyle}">
+        <Path.Data>
+            <PathGeometry>
+                <PathGeometry.Figures>
+                    <PathFigureCollection>
+                        <PathFigure IsClosed="True" StartPoint="300,160">
+                            <PathFigure.Segments>
+                                <PathSegmentCollection>
+                                    <LineSegment Point="635,160" />
+                                    <LineSegment Point="635,340" />
+                                    <LineSegment Point="300,340" />
+                                </PathSegmentCollection>
+                            </PathFigure.Segments>
+                        </PathFigure>
+                    </PathFigureCollection>
+                </PathGeometry.Figures>
+            </PathGeometry>
+        </Path.Data>
+    </Path>
+
+    <Path x:Key="StepPath6" Name="Step6_tutorial_overview" Style="{StaticResource ResourceKey=StepPathStyle}">
+        <Path.Data>
+            <PathGeometry>
+                <PathGeometry.Figures>
+                    <PathFigureCollection>
+                        <PathFigure IsClosed="True" StartPoint="270,480">
+                            <PathFigure.Segments>
+                                <PathSegmentCollection>
+                                    <LineSegment Point="420,480" />
+                                    <LineSegment Point="420,530" />
+                                    <LineSegment Point="270,530" />
+                                </PathSegmentCollection>
+                            </PathFigure.Segments>
+                        </PathFigure>
+                    </PathFigureCollection>
+                </PathGeometry.Figures>
+            </PathGeometry>
+        </Path.Data>
+    </Path>
+
+    <!--Step7 and Step 8 are the same Path-->
+    <Path x:Key="StepPath7" Name="Step7_tutorial" Style="{StaticResource ResourceKey=StepPathStyle}">
+        <Path.Data>
+            <PathGeometry>
+                <PathGeometry.Figures>
+                    <PathFigureCollection>
+                        <PathFigure IsClosed="True" StartPoint="280,400">
+                            <PathFigure.Segments>
+                                <PathSegmentCollection>
+                                    <LineSegment Point="420,400" />
+                                    <LineSegment Point="420,530" />
+                                    <LineSegment Point="280,530" />
+                                </PathSegmentCollection>
+                            </PathFigure.Segments>
+                        </PathFigure>
+                    </PathFigureCollection>
+                </PathGeometry.Figures>
+            </PathGeometry>
+        </Path.Data>
+    </Path>
+
+    <Path x:Key="StepPath8" Name="Step8_tutorial" Style="{StaticResource ResourceKey=StepPathStyle}">
+        <Path.Data>
+            <PathGeometry>
+                <PathGeometry.Figures>
+                    <PathFigureCollection>
+                        <PathFigure IsClosed="True" StartPoint="280,400">
+                            <PathFigure.Segments>
+                                <PathSegmentCollection>
+                                    <LineSegment Point="420,400" />
+                                    <LineSegment Point="420,530" />
+                                    <LineSegment Point="280,530" />
+                                </PathSegmentCollection>
+                            </PathFigure.Segments>
+                        </PathFigure>
+                    </PathFigureCollection>
+                </PathGeometry.Figures>
+            </PathGeometry>
+        </Path.Data>
+    </Path>
+
+    <Path x:Key="StepPath9" Name="Step9_tutorial" Style="{StaticResource ResourceKey=StepPathStyle}">
+        <Path.Data>
+            <PathGeometry>
+                <PathGeometry.Figures>
+                    <PathFigureCollection>
+                        <PathFigure IsClosed="True" StartPoint="280,360">
+                            <PathFigure.Segments>
+                                <PathSegmentCollection>
+                                    <LineSegment Point="450,360" />
+                                    <LineSegment Point="450,270" />
+                                    <LineSegment Point="635,270" />
+                                    <LineSegment Point="635,390" />
+                                    <LineSegment Point="450,390" />
+                                    <LineSegment Point="450,480" />
+                                    <LineSegment Point="280,480" />
+                                </PathSegmentCollection>
+                            </PathFigure.Segments>
+                        </PathFigure>
+                    </PathFigureCollection>
+                </PathGeometry.Figures>
+            </PathGeometry>
+        </Path.Data>
+    </Path>
+
+    <Path x:Key="StepPath10" Name="Step10_tutorial" Style="{StaticResource ResourceKey=StepPathStyle}">
+        <Path.Data>
+            <PathGeometry>
+                <PathGeometry.Figures>
+                    <PathFigureCollection>
+                        <PathFigure IsClosed="True" StartPoint="450,350">
+                            <PathFigure.Segments>
+                                <PathSegmentCollection>
+                                    <LineSegment Point="610,350" />
+                                    <LineSegment Point="610,480" />
+                                    <LineSegment Point="450,480" />
+                                </PathSegmentCollection>
+                            </PathFigure.Segments>
+                        </PathFigure>
+                    </PathFigureCollection>
+                </PathGeometry.Figures>
+            </PathGeometry>
+        </Path.Data>
+    </Path>
+
+    <Path x:Key="StepPath11" Name="Step11_tutorial" Style="{StaticResource ResourceKey=StepPathStyle}">
+        <Path.Data>
+            <PathGeometry>
+                <PathGeometry.Figures>
+                    <PathFigureCollection>
+                        <PathFigure IsClosed="True" StartPoint="640,0">
+                            <PathFigure.Segments>
+                                <PathSegmentCollection>
+                                    <LineSegment Point="960,0" />
+                                    <LineSegment Point="960,460" />
+                                    <LineSegment Point="450,460" />
+                                    <LineSegment Point="450,390" />
+                                    <LineSegment Point="640,390" />
+                                </PathSegmentCollection>
+                            </PathFigure.Segments>
+                        </PathFigure>
+                    </PathFigureCollection>
+                </PathGeometry.Figures>
+            </PathGeometry>
+        </Path.Data>
+    </Path>
+
+    <Path x:Key="StepPath12" Name="Step12_tutorial" Style="{StaticResource ResourceKey=StepPathStyle}">
+        <Path.Data>
+            <PathGeometry>
+                <PathGeometry.Figures>
+                    <PathFigureCollection>
+                        <PathFigure IsClosed="True" StartPoint="800,380">
+                            <PathFigure.Segments>
+                                <PathSegmentCollection>
+                                    <LineSegment Point="960,380" />
+                                    <LineSegment Point="960,600" />
+                                    <LineSegment Point="800,600" />
+                                    <LineSegment Point="800,530" />
+                                    <LineSegment Point="650,530" />
+                                    <LineSegment Point="650,465" />
+                                    <LineSegment Point="800,465" />
+                                </PathSegmentCollection>
+                            </PathFigure.Segments>
+                        </PathFigure>
+                    </PathFigureCollection>
+                </PathGeometry.Figures>
+            </PathGeometry>
+        </Path.Data>
+    </Path>
+
+    <Path x:Key="StepPath13" Name="Step13_tutorial" Style="{StaticResource ResourceKey=StepPathStyle}">
+        <Path.Data>
+            <PathGeometry>
+                <PathGeometry.Figures>
+                    <PathFigureCollection>
+                        <PathFigure IsClosed="True" StartPoint="150,90">
+                            <PathFigure.Segments>
+                                <PathSegmentCollection>
+                                    <LineSegment Point="290,90" />
+                                    <LineSegment Point="290,600" />
+                                    <LineSegment Point="790,600" />
+                                    <LineSegment Point="790,525" />
+                                    <LineSegment Point="960,525" />
+                                    <LineSegment Point="960,670" />
+                                    <LineSegment Point="150,670" />
+                                </PathSegmentCollection>
+                            </PathFigure.Segments>
+                        </PathFigure>
+                    </PathFigureCollection>
+                </PathGeometry.Figures>
+            </PathGeometry>
+        </Path.Data>
+    </Path>
+
+    <!--Authentication Tag-->
+    <Path x:Key="StepPath14" Name="Step14_tutorial_overview" Style="{StaticResource ResourceKey=StepPathStyle}">
+        <Path.Data>
+            <PathGeometry>
+                <PathGeometry.Figures>
+                    <PathFigureCollection>
+                        <PathFigure IsClosed="True" StartPoint="800,665">
+                            <PathFigure.Segments>
+                                <PathSegmentCollection>
+                                    <LineSegment Point="960,665" />
+                                    <LineSegment Point="960,720" />
+                                    <LineSegment Point="800,720" />
+                                </PathSegmentCollection>
+                            </PathFigure.Segments>
+                        </PathFigure>
+                    </PathFigureCollection>
+                </PathGeometry.Figures>
+            </PathGeometry>
+        </Path.Data>
+    </Path>
+
+    <!--Ciphertext1-->
+    <Path x:Key="StepPath15" Name="Step15_tutorial" Style="{StaticResource ResourceKey=StepPathStyle}">
+        <Path.Data>
+            <PathGeometry>
+                <PathGeometry.Figures>
+                    <PathFigureCollection>
+                        <PathFigure IsClosed="True" StartPoint="450,280">
+                            <PathFigure.Segments>
+                                <PathSegmentCollection>
+                                    <LineSegment Point="630,280" />
+                                    <LineSegment Point="630,330" />
+                                    <LineSegment Point="450,330" />
+                                </PathSegmentCollection>
+                            </PathFigure.Segments>
+                        </PathFigure>
+                    </PathFigureCollection>
+                </PathGeometry.Figures>
+            </PathGeometry>
+        </Path.Data>
+    </Path>
+
+    <!--Ciphertext2-->
+    <Path x:Key="StepPath16" Name="Step16_tutorial" Style="{StaticResource ResourceKey=StepPathStyle}">
+        <Path.Data>
+            <PathGeometry>
+                <PathGeometry.Figures>
+                    <PathFigureCollection>
+                        <PathFigure IsClosed="True" StartPoint="780,280">
+                            <PathFigure.Segments>
+                                <PathSegmentCollection>
+                                    <LineSegment Point="960,280" />
+                                    <LineSegment Point="960,330" />
+                                    <LineSegment Point="780,330" />
+                                </PathSegmentCollection>
+                            </PathFigure.Segments>
+                        </PathFigure>
+                    </PathFigureCollection>
+                </PathGeometry.Figures>
+            </PathGeometry>
+        </Path.Data>
+    </Path>
+
+    <!-- OverviewPaths -->
+    <Path x:Key="StepPath17" Name="Step3_overview" Style="{StaticResource ResourceKey=StepPathStyle}">
+        <Path.Data>
+            <PathGeometry>
+                <PathGeometry.Figures>
+                    <PathFigureCollection>
+                        <PathFigure IsClosed="True" StartPoint="300,0">
+                            <PathFigure.Segments>
+                                <PathSegmentCollection>
+                                    <LineSegment Point="635,0" />
+                                    <LineSegment Point="635,160" />
+                                    <LineSegment Point="300, 160" />
+                                </PathSegmentCollection>
+                            </PathFigure.Segments>
+                        </PathFigure>
+                    </PathFigureCollection>
+                </PathGeometry.Figures>
+            </PathGeometry>
+        </Path.Data>
+    </Path>
+
+    <Path x:Key="StepPath18" Name="Step4_overview" Style="{StaticResource ResourceKey=StepPathStyle}">
+        <Path.Data>
+            <PathGeometry>
+                <PathGeometry.Figures>
+                    <PathFigureCollection>
+                        <PathFigure IsClosed="True" StartPoint="450,160">
+                            <PathFigure.Segments>
+                                <PathSegmentCollection>
+                                    <LineSegment Point="635,160" />
+                                    <LineSegment Point="635,235" />
+                                    <LineSegment Point="450,235" />
+                                </PathSegmentCollection>
+                            </PathFigure.Segments>
+                        </PathFigure>
+                    </PathFigureCollection>
+                </PathGeometry.Figures>
+            </PathGeometry>
+        </Path.Data>
+    </Path>
+
+    <Path x:Key="StepPath19" Name="Step5_overview" Style="{StaticResource ResourceKey=StepPathStyle}">
+        <Path.Data>
+            <PathGeometry>
+                <PathGeometry.Figures>
+                    <PathFigureCollection>
+                        <PathFigure IsClosed="True" StartPoint="300,235">
+                            <PathFigure.Segments>
+                                <PathSegmentCollection>
+                                    <LineSegment Point="635,235" />
+                                    <LineSegment Point="635,340" />
+                                    <LineSegment Point="300,340" />
+                                </PathSegmentCollection>
+                            </PathFigure.Segments>
+                        </PathFigure>
+                    </PathFigureCollection>
+                </PathGeometry.Figures>
+            </PathGeometry>
+        </Path.Data>
+    </Path>
+
+    <Path x:Key="StepPath20" Name="Step7_overview" Style="{StaticResource ResourceKey=StepPathStyle}">
+        <Path.Data>
+            <PathGeometry>
+                <PathGeometry.Figures>
+                    <PathFigureCollection>
+                        <PathFigure IsClosed="True" StartPoint="270,400">
+                            <PathFigure.Segments>
+                                <PathSegmentCollection>
+                                    <LineSegment Point="420,400" />
+                                    <LineSegment Point="420,470" />
+                                    <LineSegment Point="270,470" />
+                                </PathSegmentCollection>
+                            </PathFigure.Segments>
+                        </PathFigure>
+                    </PathFigureCollection>
+                </PathGeometry.Figures>
+            </PathGeometry>
+        </Path.Data>
+    </Path>
+
+    <!--the overview Page has no Step 8-->
+
+    <Path x:Key="StepPath21" Name="Step9_overview" Style="{StaticResource ResourceKey=StepPathStyle}">
+        <Path.Data>
+            <PathGeometry>
+                <PathGeometry.Figures>
+                    <PathFigureCollection>
+                        <PathFigure IsClosed="True" StartPoint="500,350">
+                            <PathFigure.Segments>
+                                <PathSegmentCollection>
+                                    <LineSegment Point="565,350" />
+                                    <LineSegment Point="565,395" />
+                                    <LineSegment Point="500,395" />
+                                </PathSegmentCollection>
+                            </PathFigure.Segments>
+                        </PathFigure>
+                    </PathFigureCollection>
+                </PathGeometry.Figures>
+            </PathGeometry>
+        </Path.Data>
+    </Path>
+
+    <Path x:Key="StepPath22" Name="Step10_overview" Style="{StaticResource ResourceKey=StepPathStyle}">
+        <Path.Data>
+            <PathGeometry>
+                <PathGeometry.Figures>
+                    <PathFigureCollection>
+                        <PathFigure IsClosed="True" StartPoint="450,400">
+                            <PathFigure.Segments>
+                                <PathSegmentCollection>
+                                    <LineSegment Point="610,400" />
+                                    <LineSegment Point="610,480" />
+                                    <LineSegment Point="450,480" />
+                                </PathSegmentCollection>
+                            </PathFigure.Segments>
+                        </PathFigure>
+                    </PathFigureCollection>
+                </PathGeometry.Figures>
+            </PathGeometry>
+        </Path.Data>
+    </Path>
+
+    <Path x:Key="StepPath23" Name="Step11_overview" Style="{StaticResource ResourceKey=StepPathStyle}">
+        <Path.Data>
+            <PathGeometry>
+                <PathGeometry.Figures>
+                    <PathFigureCollection>
+                        <PathFigure IsClosed="True" StartPoint="640,0">
+                            <PathFigure.Segments>
+                                <PathSegmentCollection>
+                                    <LineSegment Point="960,0" />
+                                    <LineSegment Point="960,460" />
+                                    <LineSegment Point="640, 460"/>
+                                </PathSegmentCollection>
+                            </PathFigure.Segments>
+                        </PathFigure>
+                    </PathFigureCollection>
+                </PathGeometry.Figures>
+            </PathGeometry>
+        </Path.Data>
+    </Path>
+
+    <Path x:Key="StepPath24" Name="Step12_overview" Style="{StaticResource ResourceKey=StepPathStyle}">
+        <Path.Data>
+            <PathGeometry>
+                <PathGeometry.Figures>
+                    <PathFigureCollection>
+                        <PathFigure IsClosed="True" StartPoint="640,465">
+                            <PathFigure.Segments>
+                                <PathSegmentCollection>
+                                    <LineSegment Point="960,465" />
+                                    <LineSegment Point="960,525" />
+                                    <LineSegment Point="640,525" />
+                                </PathSegmentCollection>
+                            </PathFigure.Segments>
+                        </PathFigure>
+                    </PathFigureCollection>
+                </PathGeometry.Figures>
+            </PathGeometry>
+        </Path.Data>
+    </Path>
+
+    <Path x:Key="StepPath25" Name="Step13_overview" Style="{StaticResource ResourceKey=StepPathStyle}">
+        <Path.Data>
+            <PathGeometry>
+                <PathGeometry.Figures>
+                    <PathFigureCollection>
+                        <PathFigure IsClosed="True" StartPoint="790,525">
+                            <PathFigure.Segments>
+                                <PathSegmentCollection>
+                                    <LineSegment Point="960,525" />
+                                    <LineSegment Point="960,665" />
+                                    <LineSegment Point="640,665" />
+                                    <LineSegment Point="640,600" />
+                                    <LineSegment Point="790,600" />
+                                </PathSegmentCollection>
+                            </PathFigure.Segments>
+                        </PathFigure>
+                    </PathFigureCollection>
+                </PathGeometry.Figures>
+            </PathGeometry>
+        </Path.Data>
+    </Path>
+
+
+    <!--AreaPaths-->
+    <Style x:Key="AreaPathStyle" TargetType="Path">
+        <Setter Property="StrokeThickness" Value="3"/>
+        <Setter Property="Fill" Value="Transparent"/>
+    </Style>
+
+    <Path x:Key="AreaPath1" Name="Vorbereitung" Style="{StaticResource ResourceKey=AreaPathStyle}">
         <Path.Data>
             <PathGeometry>
                 <PathGeometry.Figures>
@@ -145,8 +672,113 @@
         </Path.Data>
     </Path>
 
+    <Path x:Key="AreaPath2" Name="Verschlüsselung" Style="{StaticResource ResourceKey=AreaPathStyle}">
+        <Path.Data>
+            <PathGeometry>
+                <PathGeometry.Figures>
+                    <PathFigureCollection>
+                        <PathFigure IsClosed="True" StartPoint="305,0">
+                            <PathFigure.Segments>
+                                <PathSegmentCollection>
+                                    <LineSegment Point="305,337" />
+                                    <LineSegment Point="633,337" />
+                                    <LineSegment Point="633,0" />
+                                </PathSegmentCollection>
+                            </PathFigure.Segments>
+                        </PathFigure>
+                    </PathFigureCollection>
+                </PathGeometry.Figures>
+            </PathGeometry>
+        </Path.Data>
+    </Path>
+
+    <Path x:Key="AreaPath3" Name="AdditionalAuthenticatedData" Style="{StaticResource ResourceKey=AreaPathStyle}">
+        <Path.Data>
+            <PathGeometry>
+                <PathGeometry.Figures>
+                    <PathFigureCollection>
+                        <PathFigure IsClosed="True" StartPoint="0,245">
+                            <PathFigure.Segments>
+                                <PathSegmentCollection>
+                                    <LineSegment Point="0,725" />
+                                    <LineSegment Point="633,725" />
+                                    <LineSegment Point="633,557" />
+                                    <LineSegment Point="442,557" />
+                                    <LineSegment Point="442,343" />
+                                    <LineSegment Point="300,343" />
+                                    <LineSegment Point="300,245" />
+                                </PathSegmentCollection>
+                            </PathFigure.Segments>
+                        </PathFigure>
+                    </PathFigureCollection>
+                </PathGeometry.Figures>
+            </PathGeometry>
+        </Path.Data>
+    </Path>
+
+    <Path x:Key="AreaPath4" Name="CiphertextAuthentifizierung" Style="{StaticResource ResourceKey=AreaPathStyle}">
+        <Path.Data>
+            <PathGeometry>
+                <PathGeometry.Figures>
+                    <PathFigureCollection>
+                        <PathFigure IsClosed="True" StartPoint="448,343">
+                            <PathFigure.Segments>
+                                <PathSegmentCollection>
+                                    <LineSegment Point="448,550" />
+                                    <LineSegment Point="633,550" />
+                                    <LineSegment Point="633,343" />
+                                </PathSegmentCollection>
+                            </PathFigure.Segments>
+                        </PathFigure>
+                    </PathFigureCollection>
+                </PathGeometry.Figures>
+            </PathGeometry>
+        </Path.Data>
+    </Path>
+
+    <Path x:Key="AreaPath5" Name="Wiederholung" Style="{StaticResource ResourceKey=AreaPathStyle}">
+        <Path.Data>
+            <PathGeometry>
+                <PathGeometry.Figures>
+                    <PathFigureCollection>
+                        <PathFigure IsClosed="True" StartPoint="638,0">
+                            <PathFigure.Segments>
+                                <PathSegmentCollection>
+                                    <LineSegment Point="641,465" />
+                                    <LineSegment Point="960,465" />
+                                    <LineSegment Point="960,0" />
+                                </PathSegmentCollection>
+                            </PathFigure.Segments>
+                        </PathFigure>
+                    </PathFigureCollection>
+                </PathGeometry.Figures>
+            </PathGeometry>
+        </Path.Data>
+    </Path>
+
+    <Path x:Key="AreaPath6" Name="AbschlussUndRückgabe" Style="{StaticResource ResourceKey=AreaPathStyle}">
+        <Path.Data>
+            <PathGeometry>
+                <PathGeometry.Figures>
+                    <PathFigureCollection>
+                        <PathFigure IsClosed="True" StartPoint="640,471">
+                            <PathFigure.Segments>
+                                <PathSegmentCollection>
+                                    <LineSegment Point="640,725" />
+                                    <LineSegment Point="960,725" />
+                                    <LineSegment Point="960,470" />
+                                </PathSegmentCollection>
+                            </PathFigure.Segments>
+                        </PathFigure>
+                    </PathFigureCollection>
+                </PathGeometry.Figures>
+            </PathGeometry>
+        </Path.Data>
+    </Path>
+    
+    
     <Image x:Key="BackgroundImage" Source="/Images/aead2.png" RenderOptions.BitmapScalingMode="HighQuality" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-    <SolidColorBrush x:Key="BackAreaBrush" Color="Red"/>
+    <SolidColorBrush x:Key="BackAreaBrush" Color="#FFFFDCDC"/>
     <SolidColorBrush x:Key="NoBackAreaBrush" Color="White"/>
 
 </ResourceDictionary>

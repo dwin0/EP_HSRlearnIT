@@ -19,25 +19,28 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
 
         #region Private Members
         private readonly ToolTip _toolTip = new ToolTip();
-        private readonly Dictionary<string, Rectangle> _backImages = new Dictionary<string, Rectangle>();
-        private const int NumOfRectangles = 2;
-        private const int NumOfPaths = 1;
+        private readonly Dictionary<string, Path> _backPaths = new Dictionary<string, Path>();
+        //private const int NumOfRectangles = 2;
+        private const int NumOfAreas = 6;
+        private const int NumOfStepPaths = 25;
 
         #endregion Private Members
 
         #region Private Methods
         private void InitCanvas(Canvas canvas)
         {
-            LoadPaths(canvas);
-            LoadRectangles(canvas);
+            
+            LoadAreaPaths(canvas);
+            LoadStepPaths(canvas);
+            //LoadRectangles(canvas);
             LoadBackground(canvas);
         }
 
-        private void LoadPaths(Canvas canvas)
+        private void LoadAreaPaths(Canvas canvas)
         {
-            for (int i = 1; i <= NumOfPaths; i++)
+            for (int i = 1; i <= NumOfAreas; i++)
             {
-                Path path = Application.Current.FindResource("Path" + i) as Path;
+                Path path = Application.Current.FindResource("AreaPath" + i) as Path;
 
                 if (path == null) continue;
 
@@ -52,6 +55,26 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             }
         }
 
+        private void LoadStepPaths(Canvas canvas)
+        {
+            for (int i = 1; i <= NumOfStepPaths; i++)
+            {
+                Path path = Application.Current.FindResource("StepPath" + i) as Path;
+
+                if ( (!path.Name.Contains("_overview")) || path == null) continue;
+
+                //path has an existing Parent when this Page is opened a second time
+                (path.Parent as Canvas)?.Children.Remove(path);
+
+                path.SetValue(Panel.ZIndexProperty, 2);
+                path.MouseEnter += StepPathOnMouseEnter;
+                path.MouseLeave += StepPathOnMouseLeave;
+
+                canvas.Children.Add(path);
+            }
+        }
+
+        /*
         private void LoadRectangles(Canvas canvas)
         {
             for (int i = 1; i <= NumOfRectangles; i++)
@@ -70,6 +93,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
                 canvas.Children.Add(rectangle);
             }
         }
+        */
 
         private void LoadBackground(Canvas canvas)
         {
@@ -84,6 +108,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             canvas.Children.Add(background);
         }
 
+        /*
         private void RectOnMouseEnter(object sender, MouseEventArgs e)
         {
             Rectangle frontRectangle = sender as Rectangle;
@@ -111,7 +136,37 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
 
             backRectangle.Fill = Application.Current.FindResource("BackAreaBrush") as SolidColorBrush;
         }
+        */
 
+        private void StepPathOnMouseEnter(object sender, MouseEventArgs e)
+        {
+            Path frontPath = sender as Path;
+            Path backPath;
+
+            if (frontPath == null) return;
+
+            //When MouseOver the second time, the backRectangle already exists
+            if (!_backPaths.ContainsKey(frontPath.Name))
+            {
+                backPath = new Path
+                {
+                    Data = frontPath.Data
+                };
+
+                backPath.SetValue(Panel.ZIndexProperty, 0);
+                _backPaths.Add(frontPath.Name, backPath);
+                TestCanvas.Children.Add(backPath);
+            }
+            else
+            {
+                backPath = _backPaths[frontPath.Name];
+            }
+
+            backPath.Fill = Application.Current.FindResource("BackAreaBrush") as SolidColorBrush;
+            //TODO: auch Tooltiptext anzeigen
+        }
+
+        /*
         private void RectOnMouseLeave(object sender, MouseEventArgs e)
         {
             Rectangle frontImage = sender as Rectangle;
@@ -119,6 +174,16 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
 
             Rectangle backImage = _backImages[frontImage.Name];
             backImage.Fill = Application.Current.FindResource("NoBackAreaBrush") as SolidColorBrush;
+        }
+        */
+
+        private void StepPathOnMouseLeave(object sender, MouseEventArgs e)
+        {
+            Path frontPath = sender as Path;
+            if (frontPath == null) return;
+
+            Path backPath = _backPaths[frontPath.Name];
+            backPath.Fill = Application.Current.FindResource("NoBackAreaBrush") as SolidColorBrush;
         }
 
         private void OnMouseEnter(object sender, MouseEventArgs e)
