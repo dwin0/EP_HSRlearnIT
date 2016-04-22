@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Controls.Primitives;
 
 namespace EP_HSRlearnIT.PresentationLayer.Exercises
 {
@@ -27,7 +28,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
 
         }
 
-        //TODO fall nur Aad behandeln!
         private void OnDecryptionButtonClick(object sender, RoutedEventArgs e)
         {
             GenerateHexKey(DecryptionPasswortBox.Text, HexDecryptionPasswortBox);
@@ -45,6 +45,15 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             byte[] aad = HexStringToByteArray(HexAadBox.Text);
             byte[] tag = HexStringToByteArray(HexTagBox.Text);
             PlainTextBox.Text = BytesToString(Library.Decrypt(key, ciphertext, iv, aad, tag));
+            if (PlainTextBox.Text == "")
+            {
+                ShowAadMessageBox(sender, e);
+            }
+        }
+
+        private static void ShowAadMessageBox(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Der Text wurde erfolgreich authentifiziert.", "alleinstehenden Authentifizierung", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void OnEncryptionButtonClick(object sender, RoutedEventArgs e)
