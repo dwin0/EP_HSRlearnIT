@@ -67,7 +67,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Exercises\CryptoClass.cs" />
-    <Compile Include="Exercises\FormFilledMulticonverter.cs" />
+    <Compile Include="Exercises\FormFilledDecryption.cs" />
+    <Compile Include="Exercises\FormFilledEncryption.cs" />
     <Compile Include="Games\DragDrop2.xaml.cs">
       <DependentUpon>DragDrop2.xaml</DependentUpon>
     </Compile>
@@ -98,15 +99,15 @@
     <Compile Include="Tutorials\StepPage.xaml.cs">
       <DependentUpon>StepPage.xaml</DependentUpon>
     </Compile>
+    <Page Include="Games\DragDropPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Games\DragDrop2.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Games\DragDrop3.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Games\DragDropPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -173,6 +174,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="ClassDiagram_17.04.2016.cd" />
+    <None Include="ClassDiagram_02.04.2016.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -238,6 +241,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\recycling.png" />
+    <Resource Include="Images\info.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -6,6 +6,7 @@ using EP_HSRlearnIT.PresentationLayer.Games;
 using System.Windows;
 using System.Windows.Input;
 using System;
+using System.Windows.Media.Animation;
 using EP_HSRlearnIT.Games;
 
 namespace EP_HSRlearnIT.PresentationLayer
@@ -41,6 +42,9 @@ namespace EP_HSRlearnIT.PresentationLayer
             var item = ((FrameworkElement)e.OriginalSource).DataContext as string;
             switch (item)
             {
+                case "Startseite":
+                    MainFrame.Navigate(new MainPage());
+                    break;
                 case "AES-GCM Übersicht":
                     MainFrame.Navigate(new AesGcmOverviewPage());
                     break;
@@ -54,23 +58,7 @@ namespace EP_HSRlearnIT.PresentationLayer
                     MainFrame.Navigate(new DragDrop3());
                     break;
             }
-          CloseMenu(); 
-        }
-
-        private void OnBackButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (MainFrame.NavigationService.CanGoBack)
-            {
-                MainFrame.NavigationService.GoBack();
-            }
-        }
-
-        private void OnForwardButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (MainFrame.NavigationService.CanGoForward)
-            {
-                MainFrame.NavigationService.GoForward();
-            }
+            CloseMenu();
         }
 
         private void CloseMenu()
@@ -91,8 +79,15 @@ namespace EP_HSRlearnIT.PresentationLayer
             var margin = MenuButton.Margin;
             margin.Top = -10;
             MenuButton.Margin = margin;
+
+            ShowHideMenu("SbShowLeftMenu", MenuStackPanel);
         }
 
+        private void ShowHideMenu(string storyboard, FrameworkElement pnl)
+        {
+            Storyboard sb = Application.Current.FindResource(storyboard) as Storyboard;
+            sb?.Begin(pnl);
+        }
 
         private void OnSaveButton_Click(object sender, RoutedEventArgs e)
         {
@@ -106,11 +101,11 @@ namespace EP_HSRlearnIT.PresentationLayer
         }
 
         //Collapse Menu Click was outside
-       private void OnMouseDown(object sender, MouseButtonEventArgs e)
+        private void OnPreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             var point = Mouse.GetPosition(MainGrid);
 
-            if (point.X > MenuStackPanel.ActualWidth-50)
+            if (point.X > MenuStackPanel.ActualWidth + MenuStackPanel.Margin.Left + MenuStackPanel.Margin.Right)
             {
                 CloseMenu();
             }

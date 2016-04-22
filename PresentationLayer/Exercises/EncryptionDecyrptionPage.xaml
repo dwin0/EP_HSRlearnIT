@@ -7,7 +7,7 @@
       d:DesignHeight="300" d:DesignWidth="300"
       Title="EncryptionDecyrptionPage">
 
-    <Grid>
+    <Grid Background="White">
         <StackPanel Margin="0, 70">
             <Button Click="Encryption_Click"  Content="Verschlüsselung" Name="Encryption"  Style="{StaticResource ResourceKey=MainButtonStyle}"/>
             <Button Click="Decryption_Click"  Content="Entschlüsselung" Name="Decryption"  Style="{StaticResource ResourceKey=MainButtonStyle}"/>
