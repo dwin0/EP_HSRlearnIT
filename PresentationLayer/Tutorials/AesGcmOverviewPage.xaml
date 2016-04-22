@@ -7,6 +7,8 @@
       Title="AesGcmOverviewPage">
 
     <Viewbox>
+        <Canvas Name="TestCanvas" Height="720" Width="960"/>
+        <!--
         <Canvas Height="720" Width="960">
             <Grid>
                 <Image Source="/Images/aead.png"
@@ -141,5 +143,6 @@
 
             </Grid>
         </Canvas>
+        -->
     </Viewbox>
 </Page>
