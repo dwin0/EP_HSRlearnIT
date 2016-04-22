@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using Castle.Core.Internal;
 using EP_HSRlearnIT.BusinessLayer.CryptoTools;
+using EP_HSRlearnIT.BusinessLayer.UniversalTools;
 
 namespace EP_HSRlearnIT.PresentationLayer.Exercises
 
@@ -154,6 +155,29 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             ChangeHexBox(bigKeyString.ToCharArray(), hexPasswordBox);
         }
 
+        public void HexTextBox_LostKeyboardFocus(object sender, System.Windows.Input.KeyboardFocusChangedEventArgs e)
+        {
+            TextBox source = e.Source as TextBox;
+            if (source != null)
+            {
+                string elementName = source.Name;
+                SaveProgressHelper(source, elementName);
+            }
+        }
+
+        public void TextBox_LostKeyboardFocus(object sender, System.Windows.Input.KeyboardFocusChangedEventArgs e)
+        {
+            TextBox source = e.Source as TextBox;
+            if (source != null)
+            {
+                //get the name of the corresponding Hex field --> Progess will only be saved in Hex values!
+                string elementName = "Hex" + source.Name;
+                TextBox hexBox = (TextBox)FindName(elementName);
+                SaveProgressHelper(hexBox, elementName);
+            }
+
+        }
+
         public static byte[] HexStringToByteArray(string hex)
         {
             return Enumerable.Range(0, hex.Length)
@@ -211,6 +235,20 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             }
             return true;
         }
+
+        private void SaveProgressHelper(TextBox source, string elementName)
+        {
+            var parent = VisualTreeHelper.GetParent(source);
+            while (!(parent is Page))
+            {
+                parent = VisualTreeHelper.GetParent(parent);
+            }
+            string pageName = (parent as Page).Title;
+
+            string key = pageName + "_" + elementName;
+            Progress.SaveProgress(key, source.Text);
+        }
+
         #endregion
     }
 }

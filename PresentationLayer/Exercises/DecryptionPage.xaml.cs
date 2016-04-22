@@ -1,6 +1,5 @@
-﻿using System;
+﻿using EP_HSRlearnIT.BusinessLayer.UniversalTools;
 using System.Windows;
-using System.Windows.Controls.Primitives;
 
 namespace EP_HSRlearnIT.PresentationLayer.Exercises
 {
@@ -10,15 +9,23 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         public DecryptionPage()
         {
             InitializeComponent();
+            HexCipherTextBox.Text = Progress.GetProgress("DecryptionPage_HexCipherTextBox") as string;
+            HexAadBox.Text = Progress.GetProgress("DecryptionPage_HexAadBox") as string;
+            HexIvBox.Text = Progress.GetProgress("DecryptionPage_HexIvBox") as string;
+            HexTagBox.Text = Progress.GetProgress("DecryptionPage_HexTagBox") as string;
         }
 
         public DecryptionPage(string ciphertext, string iv, string aad, string tag)
         {
             InitializeComponent();
             HexCipherTextBox.Text = ciphertext;
-            HexIvBox.Text = iv;
             HexAadBox.Text = aad;
+            HexIvBox.Text = iv;
             HexTagBox.Text = tag;
+            Progress.SaveProgress("DecryptionPage_HexCipherTextBox", ciphertext);
+            Progress.SaveProgress("DecryptionPage_HexAadBox", aad);
+            Progress.SaveProgress("DecryptionPage_HexIvBox", iv);
+            Progress.SaveProgress("DecryptionPage_HexTagBox", tag);
         }
         #endregion
 
@@ -26,6 +33,15 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         private void OnImportButtonClick(object sender, RoutedEventArgs e)
         {
 
+            
+            string ciphertext = "";
+            string aad = "";
+            string iv = "";
+            string tag = "";
+            Progress.SaveProgress("DecryptionPage_HexCipherTextBox", ciphertext);
+            Progress.SaveProgress("DecryptionPage_HexAadBox", aad);
+            Progress.SaveProgress("DecryptionPage_HexIvBox", iv);
+            Progress.SaveProgress("DecryptionPage_HexTagBox", tag);
         }
 
         private void OnDecryptionButtonClick(object sender, RoutedEventArgs e)
@@ -63,7 +79,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             string aad = HexAadBox.Text;
             NavigationService?.Navigate(new EncryptionPage(plaintext, iv, aad));
         }
-        #endregion
 
+        #endregion
     }
 }

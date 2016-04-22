@@ -43,7 +43,7 @@
                 </ToolTip>
             </Image.ToolTip>
         </Image>
-        <TextBox Grid.Row="1" Grid.Column="0" Name="IvBox" TextChanged="TextBox_TextChanged" TextWrapping="Wrap" Margin="15,2,15,5"/>
+        <TextBox Grid.Row="1" Grid.Column="0" Name="IvBox" TextChanged="TextBox_TextChanged" LostKeyboardFocus="TextBox_LostKeyboardFocus" TextWrapping="Wrap" Margin="15,2,15,5"/>
         <TextBlock Grid.Row="2" Grid.Column="0" Text="Additional Authenticated Data: (optional)" Name="AadBlock" Margin="15,0,10,0" HorizontalAlignment="Left"/>
         <Image Grid.Row="2" Grid.Column="0" Source="/Images/info.png" Width="18" Margin="240,0,10,0" HorizontalAlignment="Left" Name="InfoAad" ToolTipService.ShowDuration="60000">
             <Image.ToolTip>
@@ -52,9 +52,9 @@
                 </ToolTip>
             </Image.ToolTip>
         </Image>
-        <TextBox Grid.Row="3" Grid.Column="0" Name="AadBox" TextChanged="TextBox_TextChanged" TextWrapping="Wrap" Margin="15,2,15,0" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+        <TextBox Grid.Row="3" Grid.Column="0" Name="AadBox" TextChanged="TextBox_TextChanged" LostKeyboardFocus="TextBox_LostKeyboardFocus" TextWrapping="Wrap" Margin="15,2,15,0" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
         <TextBlock Grid.Row="4" Grid.Column="0" Text="Klartext:" Name="PlainTextBlock" Margin="15,5,15,0"/>
-        <TextBox Grid.Row="5" Grid.Column="0" Name="PlainTextBox" TextChanged="TextBox_TextChanged" TextWrapping="Wrap" Margin="15,2,15,5" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+        <TextBox Grid.Row="5" Grid.Column="0" Name="PlainTextBox" TextChanged="TextBox_TextChanged" LostKeyboardFocus="TextBox_LostKeyboardFocus" TextWrapping="Wrap" Margin="15,2,15,5" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
         <TextBlock Grid.Row="6" Grid.Column="0" Text="Key:" Name="EncryptionPasswordBlock" Margin="15,0,15,0" HorizontalAlignment="Left"/>
         <Image Grid.Row="6" Grid.Column="0" Source="/Images/info.png" Width="18" Margin="42,0,10,0" HorizontalAlignment="Left" Name="InfoKey" ToolTipService.ShowDuration="60000">
             <Image.ToolTip>
@@ -84,11 +84,11 @@
         </DockPanel>
 
         <TextBlock Grid.Row="0" Grid.Column="1" Text="IV Hex:" Name="HexIvBlock" Margin="15,2,15,0"/>
-        <TextBox Grid.Row="1" Grid.Column="1" Name="HexIvBox" TextChanged="HexTextBox_TextChanged" TextWrapping="Wrap" Margin="15,2,15,5"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Name="HexIvBox" TextChanged="HexTextBox_TextChanged" LostKeyboardFocus="HexTextBox_LostKeyboardFocus" TextWrapping="Wrap" Margin="15,2,15,5"/>
         <TextBlock Grid.Row="2" Grid.Column="1" Text="Additional Authenticated Data: (optional)" Name="HexAadBlock" Margin="15,2,15,0"/>
-        <TextBox Grid.Row="3" Grid.Column="1" Name="HexAadBox" TextChanged="HexTextBox_TextChanged" TextWrapping="Wrap" Margin="15,2,15,0" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+        <TextBox Grid.Row="3" Grid.Column="1" Name="HexAadBox" TextChanged="HexTextBox_TextChanged" LostKeyboardFocus="HexTextBox_LostKeyboardFocus" TextWrapping="Wrap" Margin="15,2,15,0" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
         <TextBlock Grid.Row="4" Grid.Column="1" Text="Klartext Hex:" Name="HexPlainTextBlock" Margin="15,5,15,0"/>
-        <TextBox Grid.Row="5" Grid.Column="1" Name="HexPlainTextBox" TextChanged="HexTextBox_TextChanged" TextWrapping="Wrap" Margin="15,2,15,5" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+        <TextBox Grid.Row="5" Grid.Column="1" Name="HexPlainTextBox" TextChanged="HexTextBox_TextChanged" LostKeyboardFocus="HexTextBox_LostKeyboardFocus" TextWrapping="Wrap" Margin="15,2,15,5" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
         <TextBlock Grid.Row="6" Grid.Column="1" Text="Key Hex:" Name="HexEncryptionPasswordBlock" Margin="15,2,15,0"/>
         <TextBox Grid.Row="7" Grid.Column="1" Name="HexEncryptionPasswordBox" TextChanged="HexTextBox_TextChanged" TextWrapping="Wrap" Margin="15,2,15,5"/>
         <TextBlock Grid.Row="9" Grid.Column="1" Text="Verschlüsselter Text Hex:" Name="HexCipherTextBlock" Margin="15,0,15,0"/>

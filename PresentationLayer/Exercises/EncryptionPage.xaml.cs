@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using EP_HSRlearnIT.BusinessLayer.UniversalTools;
 
 namespace EP_HSRlearnIT.PresentationLayer.Exercises
 {
@@ -9,6 +10,9 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         public EncryptionPage()
         {
             InitializeComponent();
+            HexIvBox.Text = Progress.GetProgress("EncryptionPage_HexIvBox") as string;
+            HexAadBox.Text = Progress.GetProgress("EncryptionPage_HexAadBox") as string;
+            HexPlainTextBox.Text = Progress.GetProgress("EncryptionPage_HexPlainTextBox") as string;
         }
 
         public EncryptionPage(string plaintext, string iv, string aad)
