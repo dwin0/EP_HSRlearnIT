@@ -184,11 +184,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\part1.png" />
-    <Resource Include="Images\part2.png" />
-    <Resource Include="Images\part3.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\icon.png" />
   </ItemGroup>
   <ItemGroup>
@@ -240,6 +235,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Step1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\recycling.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

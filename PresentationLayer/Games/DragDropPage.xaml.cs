@@ -1,29 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using EP_HSRlearnIT.BusinessLayer.UniversalTools;
-using EP_HSRlearnIT.Games;
+
 
 
 namespace EP_HSRlearnIT.PresentationLayer.Games
 {
-    
     public partial class DragDropPage
     {
         private const string settingsName = "DragDropPage_Settings";
-
         private class SavedData
         {
             //Index and position of copied image are saved into SavedData
-            public int ImageIndex; 
+            public int ImageIndex;
             public Thickness ImageMargin;
 
-            public SavedData(){ImageIndex = -1;} 
+            public SavedData() { ImageIndex = -1; }
             public SavedData(int ImageIndex, Thickness ImageMargin)
             {
                 this.ImageIndex = ImageIndex;
@@ -31,16 +27,16 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
             }
         };
 
-        private readonly int _originalNumberOfChildren;
+        private int originalNumberOfChildren;
 
         public DragDropPage()
         {
             InitializeComponent();
             SetImages(GetImages());
 
-            _originalNumberOfChildren = AvailableParts.Children.Count;
+            originalNumberOfChildren = ControlGrid.Children.Count;
 
-            _addedImages =  (List <SavedData>)Progress.GetProgress(settingsName);
+            _addedImages = (List<SavedData>)Progress.GetProgress(settingsName);
             if (_addedImages == null)
             {
                 _addedImages = new List<SavedData>();
@@ -49,7 +45,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
             for (int i = 0; i < _addedImages.Count; i++)
             {
                 int j = _addedImages[i].ImageIndex;
-                Image origImage = (Image)AvailableParts.Children[j];
+                Image origImage = (Image)ControlGrid.Children[j];
                 Image newImage = new Image
                 {
                     Width = 80,
@@ -60,12 +56,11 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                 };
 
                 newImage.PreviewMouseLeftButtonDown += image_PreviewMouseLeftButtonDown;
-                //newImage.PreviewMouseLeftButtonUp += image_PreviewMouseLeftButtonUp;
+                newImage.PreviewMouseLeftButtonUp += image_PreviewMouseLeftButtonUp;
                 newImage.MouseMove += image_MouseMove;
 
-                AvailableParts.Children.Add(newImage);
+                ControlGrid.Children.Add(newImage);
             }
-            
         }
 
 
@@ -78,7 +73,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
             for (int i = 1; i < 10; i++)
             {
                 BitmapImage image = new BitmapImage(new Uri(@"/Images/dragdrop" + i + ".png", UriKind.RelativeOrAbsolute));
-                images[i-1] = image;
+                images[i - 1] = image;
             }
 
             return images;
@@ -92,46 +87,33 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                 Image image = new Image
                 {
                     Source = img,
-                    //Height = 35,
-                    //Width = 80,
+                    Height = 35,
+                    Width = 80,
                     AllowDrop = true,
-                    Name = "dragdrop" + i,
-                    Stretch = Stretch.Uniform,
-                    Margin = new Thickness(5)
-            };
+                    Name = "dragdrop" + i
+                };
 
-                //image.Margin = new Thickness(600, -450 + i*100, image.Width, image.Height);
+                image.Margin = new Thickness(600, -450 + i * 100, image.Width, image.Height);
                 image.PreviewMouseLeftButtonDown += image_PreviewMouseLeftButtonDown;
-                //image.MouseLeftButtonUp += image_PreviewMouseLeftButtonUp;
+                image.MouseLeftButtonUp += image_PreviewMouseLeftButtonUp;
                 image.MouseMove += image_MouseMove;
                 Panel.SetZIndex(image, 2);
-                image.SetValue(Grid.RowProperty, i);
-                image.SetValue(Grid.ColumnProperty, 1);
-                
+
+                ControlGrid.Children.Add(image);
                 i++;
-
-                RowDefinition rowDef = new RowDefinition();
-                rowDef.Height = new GridLength(1, GridUnitType.Star);
-                AvailableParts.RowDefinitions.Add(rowDef);
-
-                MyCanvas.SetValue(Grid.RowSpanProperty, i);
-
-                AvailableParts.Children.Add(image);
             }
         }
 
         private bool _isMoving = false;
         private Image _imgMoved;
         private SavedData _addedData;
-        private bool _copyImage = false;
+        private bool copyImage = false;
 
         // Position used for calculating mouse move
         private Point _previousMousePosition;
 
         private readonly Rect[] _dropLocations =
-        {
-            /*
-            new Rect(-728, -164, 0, 0),
+        {new Rect(-728, -164, 0, 0),
             new Rect(-531, -348, 60, 35),
             new Rect(-531, -261,60, 35),
             new Rect(-732, -166, 60, 35),
@@ -153,21 +135,23 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
             new Rect(289, 107,60, 35),
             new Rect(289, 298, 60, 35),
             new Rect(289, 458, 60, 35),
-            */
         };
-    
+
+
+
         private void image_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             try
             {
-                //First it is checked which image is moved. It is checked if the element has already been moved once or if Image is still on its initial placd. If it has been moved it would contain tmp in its name.
+                //First it is checked which image is moved, then a new image is created  and set with height, width and margin, so it appears on the same position as the _imgMoved.
                 _imgMoved = sender as Image;
-                    
                 if (_imgMoved != null)
                 {
-                    _copyImage = !_imgMoved.Name.Contains("tmp");
-                    
-                    if (_copyImage)
+                    copyImage = !_imgMoved.Name.Contains("tmp"); // If it doesn't contain tmp, that means it's already copied, so I need to negate it
+
+
+
+                    if (copyImage)
                     {
                         _addedData = new SavedData();
 
@@ -180,26 +164,27 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                             Name = "tmp" + _imgMoved.Name
                         };
 
-                        AvailableParts.Children.Add(finalImage);
-                        _addedData.ImageIndex = AvailableParts.Children.IndexOf(_imgMoved);
+                        ControlGrid.Children.Add(finalImage);
+                        _addedData.ImageIndex = ControlGrid.Children.IndexOf(_imgMoved);
 
                         //Set Eventhandler for new image so new image behaves as original
                         finalImage.PreviewMouseLeftButtonDown += image_PreviewMouseLeftButtonDown;
-                        //finalImage.PreviewMouseLeftButtonUp += image_PreviewMouseLeftButtonUp;
+                        finalImage.PreviewMouseLeftButtonUp += image_PreviewMouseLeftButtonUp;
                         finalImage.MouseMove += image_MouseMove;
 
                         _imgMoved = finalImage;
                     }
                     else
                     {
-                        int childIndex = AvailableParts.Children.IndexOf(_imgMoved);
-                        _addedData = _addedImages[childIndex - _originalNumberOfChildren];
+                        int childIndex = ControlGrid.Children.IndexOf(_imgMoved);
+                        _addedData = _addedImages[childIndex - originalNumberOfChildren];
                     }
                 }
 
                 // Remember the initial mouse position
                 _previousMousePosition = e.GetPosition(this);
                 _isMoving = true;
+
 
             }
             catch (Exception ex)
@@ -208,7 +193,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
             }
         }
 
-        /*
         private void image_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             try
@@ -225,17 +209,17 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                         bIntersection = true;
                         _imgMoved.Margin = new Thickness(r.Left - 80, r.Top - 35, 0, 0);
                         _addedData.ImageMargin = _imgMoved.Margin;
-                        if(_copyImage)
+                        if (copyImage)
                             _addedImages.Add(_addedData);
-                        
+
                         Progress.SaveProgress(settingsName, _addedImages);
                         break;
                     }
                 }
                 if (!bIntersection)
                 {
-                    if(_copyImage)
-                        AvailableParts.Children.Remove(_imgMoved);
+                    if (copyImage)
+                        ControlGrid.Children.Remove(_imgMoved);
                     else
                     {
                         _imgMoved.Margin = _addedData.ImageMargin;
@@ -247,31 +231,8 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                 ExceptionLogger.WriteToLogfile(ex.Message, "image_PreviewMouseLeftButtonUp");
             }
         }
-        */
 
-        private void SetListBox_OnDragOver(object sender, DragEventArgs e)
-        {
-            var data = e.Data.GetData(typeof(string)) as string;
-            //move object if available
-            if (data != null)
-            {
-                e.Effects = DragDropEffects.Copy;
-            }
-            else
-            {
-                e.Effects = DragDropEffects.None;
-            }
-        }
-
-        private void SetListBox_OnDrop(object sender, DragEventArgs e)
-        {
-            var aesGcmPart = e.Data.GetData(typeof(string)) as string;
-
-            MyRectangle.Fill = new ImageBrush(new BitmapImage(
-                new Uri(aesGcmPart, UriKind.RelativeOrAbsolute)));
-        }
-
-        private void image_MouseMove(object sender, MouseEventArgs e) 
+        private void image_MouseMove(object sender, MouseEventArgs e)
         {
             try
             {
@@ -280,19 +241,13 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                     Point currMousePoint = e.GetPosition(this);
 
                     this._imgMoved.Cursor = Cursors.No;
-                    ImageSource imgSource = _imgMoved.Source;
-                    string imgString = imgSource.ToString();
 
                     //Point topLeft = ControlGrid.TranslatePoint(new Point(0, 0), ControlGrid);
                     //Point rightBottom = new Point(topLeft.X + ControlGrid.ActualWidth, topLeft.Y + ControlGrid.ActualHeight);
                     //if (currMousePoint.X > ControlGrid.ActualWidth - 120 || currMousePoint.Y > ControlGrid.ActualHeight - 100) { return; }
                     //if (currMousePoint.X < topLeft.X + 50 || currMousePoint.Y < topLeft.Y) { return;}
 
-                    var dragScope = Content as FrameworkElement;
-                    var dragData = new DataObject(imgString);
-                    DragDrop.DoDragDrop(dragScope, dragData, DragDropEffects.Move);
 
-                    /*
                     double dragHorizontal = currMousePoint.X - _previousMousePosition.X;
                     double dragVertical = currMousePoint.Y - _previousMousePosition.Y;
                     _previousMousePosition = currMousePoint;
@@ -300,7 +255,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                     oldMargin.Left += dragHorizontal * 2;
                     oldMargin.Top += dragVertical * 2;
                     _imgMoved.Margin = oldMargin;
-                    
 
                     //This part is only for debugging (so that the textbox gets shown) and will be deleted for the final version
                     Rect imageRect = new Rect(_imgMoved.Margin.Left, _imgMoved.Margin.Top, _imgMoved.Width, _imgMoved.Height);
@@ -316,7 +270,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
 
                     }
                     TextBox.Text = $"X: {oldMargin.Left}, Y:{oldMargin.Top} INT: {(bIntersection ? "TRUE" : "FALSE")}";
-                    */
+
                 }
             }
             catch (Exception ex)
@@ -326,15 +280,11 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         }
         private void OnResetClick(object sender, RoutedEventArgs e)
         {
-            Color col = (Color)ColorConverter.ConvertFromString("Black");
-            MyRectangle.Fill = new SolidColorBrush(col);
-
-            /*
             try
             {
-                for(int i = 0; i < _addedImages.Count; i++)
+                for (int i = 0; i < _addedImages.Count; i++)
                 {
-                    AvailableParts.Children.RemoveAt(AvailableParts.Children.Count - 1); 
+                    ControlGrid.Children.RemoveAt(ControlGrid.Children.Count - 1);
                 }
 
                 _addedImages.Clear();
@@ -343,8 +293,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
             {
                 ExceptionLogger.WriteToLogfile(ex.Message, "OnResetClick");
             }
-            */
         }
     }
-    
 }
