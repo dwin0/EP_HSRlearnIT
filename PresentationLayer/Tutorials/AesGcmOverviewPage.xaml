@@ -7,7 +7,7 @@
       Title="AesGcmOverviewPage">
 
     <Viewbox>
-        <Canvas Name="TestCanvas" Height="720" Width="960" Background="White">
+        <Canvas Name="OverviewCanvas" Height="720" Width="960" Background="White">
             <Image Source="/Images/aead2.png" RenderOptions.BitmapScalingMode="HighQuality" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <!--
             <Path Data="M0,0 L150,0 150,240 0,240 z" Height="240" Width="150" Canvas.Left="0" Canvas.Top="0" Stretch="Fill" Stroke="Green" StrokeThickness="3"/>
