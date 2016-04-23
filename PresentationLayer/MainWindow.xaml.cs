@@ -19,7 +19,7 @@ namespace EP_HSRlearnIT.PresentationLayer
         public MainWindow()
         {
             InitializeComponent();
-            MainFrame.Navigate(new MainPage());
+            MainFrame.Navigate(new MainPage2());
             Application.Current.MainWindow = this;
         }
         #endregion
@@ -43,7 +43,7 @@ namespace EP_HSRlearnIT.PresentationLayer
             switch (item)
             {
                 case "Startseite":
-                    MainFrame.Navigate(new MainPage());
+                    MainFrame.Navigate(new MainPage2());
                     break;
                 case "AES-GCM Übersicht":
                     MainFrame.Navigate(new AesGcmOverviewPage());

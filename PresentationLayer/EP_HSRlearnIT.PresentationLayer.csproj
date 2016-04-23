@@ -80,6 +80,9 @@
     </Compile>
     <Compile Include="Games\DragDropPageConstants.cs" />
     <Compile Include="Games\DragImage.cs" />
+    <Compile Include="MainPage2.xaml.cs">
+      <DependentUpon>MainPage2.xaml</DependentUpon>
+    </Compile>
     <Compile Include="StringCollection.cs" />
     <Compile Include="Tutorials\AesGcmOverviewPage.xaml.cs">
       <DependentUpon>AesGcmOverviewPage.xaml</DependentUpon>
@@ -108,6 +111,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Games\DragDrop3.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainPage2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -245,6 +252,16 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\aead2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\eye-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\rightArrow-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\dragdrop-icon.png" />
+    <Resource Include="Images\encryption-icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
