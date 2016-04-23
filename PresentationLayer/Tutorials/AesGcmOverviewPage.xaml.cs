@@ -41,31 +41,23 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
         {
             for (int i = 1; i <= NumOfAreas; i++)
             {
-                Path path = Application.Current.FindResource("AreaPath" + i) as Path;
-                if (path == null) continue;
+                Path ressourcePath = Application.Current.FindResource("AreaPath" + i) as Path;
+                if (ressourcePath == null) continue;
 
-                //path has an existing Parent when this Page is opened a second time
-                if(path.Parent is Canvas)
+                //Create a copy of the Ressource Path to prevent multiple Event Listener on MouseEnter / MouseLeave
+                Path areaPath = new Path()
                 {
-                    (path.Parent as Canvas)?.Children.Remove(path);
-                } else
-                {
-                    path.SetValue(Panel.ZIndexProperty, 2);
-                    path.MouseEnter += AreaPathOnMouseEnter;
-                    path.MouseLeave += AreaPathOnMouseLeave;
-                }
+                    Data = ressourcePath.Data.Clone(),
+                    Name = ressourcePath.Name,
+                    Style = ressourcePath.Style
+                };
 
+                areaPath.SetValue(Panel.ZIndexProperty, 2);
+                areaPath.MouseEnter += AreaPathOnMouseEnter;
+                areaPath.MouseLeave += AreaPathOnMouseLeave;
 
-                /*
-                (path.Parent as Canvas)?.Children.Remove(path);
-
-                path.SetValue(Panel.ZIndexProperty, 2);
-                path.MouseEnter += AreaPathOnMouseEnter;
-                path.MouseLeave += AreaPathOnMouseLeave;
-                */
-
-                canvas.Children.Add(path);
-                _areaPaths[i - 1] = path;
+                canvas.Children.Add(areaPath);
+                _areaPaths[i - 1] = areaPath;
             }
         }
 
@@ -73,35 +65,24 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
         {
             for (int i = 1; i <= NumOfStepPaths; i++)
             {
-                Path path = Application.Current.FindResource("StepPath" + i) as Path;
+                Path ressourcePath = Application.Current.FindResource("StepPath" + i) as Path;
 
-                if (path == null || !path.Name.Contains("_overview")) continue;
+                if (ressourcePath == null || !ressourcePath.Name.Contains("_overview")) continue;
 
-                //path has an existing Parent when this Page is opened a second time
-                (path.Parent as Canvas)?.Children.Remove(path);
-
-                path.SetValue(Panel.ZIndexProperty, 3);
-                path.MouseEnter += StepPathOnMouseEnter;
-                path.MouseLeave += StepPathOnMouseLeave;
-                path.MouseDown += StepPathOnClick;
-
-                canvas.Children.Add(path);
-
-                /*
-                if(path.Parent is Canvas)
+                //Create a copy of the Ressource Path to prevent multiple Event Listener on MouseEnter / MouseLeave
+                Path stepPath = new Path()
                 {
-                    (path.Parent as Canvas)?.Children.Remove(path);
-                } else
-                {
-                    path.SetValue(Panel.ZIndexProperty, 3);
-                    path.MouseEnter += StepPathOnMouseEnter;
-                    path.MouseLeave += StepPathOnMouseLeave;
-                    path.MouseDown += StepPathOnClick;
-                }
+                    Data = ressourcePath.Data.Clone(),
+                    Name = ressourcePath.Name,
+                    Style = ressourcePath.Style
+                };
 
-                canvas.Children.Add(path);
-                */
+                stepPath.SetValue(Panel.ZIndexProperty, 3);
+                stepPath.MouseEnter += StepPathOnMouseEnter;
+                stepPath.MouseLeave += StepPathOnMouseLeave;
+                stepPath.MouseDown += StepPathOnClick;
 
+                canvas.Children.Add(stepPath);
             }
         }
 
@@ -110,10 +91,16 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             Image background = Application.Current.FindResource("BackgroundImage") as Image;
             if (background == null) return;
 
-            //image has an existing Parent when this Page is opened a second time
-            (background.Parent as Canvas)?.Children.Remove(background);
-            background.SetValue(Panel.ZIndexProperty, 1);
-
+            //Image has an existing Parent when this Page is opened a second time
+            if (background.Parent is Canvas)
+            {
+                ((Canvas) background.Parent).Children.Remove(background);
+            }
+            else
+            {
+                background.SetValue(Panel.ZIndexProperty, 1);
+            }
+            
             canvas.Children.Add(background);
         }
 
@@ -126,7 +113,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
 
             Path backPath;
 
-            //When MouseOver the second time, the backRectangle already exists
+            //When MouseOver the second time, the backPath already exists
             if (!_backPaths.ContainsKey(frontPath.Name))
             {
                 backPath = new Path
@@ -137,6 +124,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
                 backPath.SetValue(Panel.ZIndexProperty, 0);
                 _backPaths.Add(frontPath.Name, backPath);
 
+                //Add backPath to the OverviewCanvas
                 (frontPath.Parent as Canvas)?.Children.Add(backPath);
             }
             else
@@ -148,12 +136,10 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
 
             //Show Tooltip
             Geometry stepInfo = frontPath.Data;
-            Geometry areaInfo;
 
             foreach(Path area in _areaPaths)
             {
-                areaInfo = area.Data;
-
+                Geometry areaInfo = area.Data;
                 IntersectionDetail detail = stepInfo.FillContainsWithDetail(areaInfo);
 
                 if(detail == IntersectionDetail.FullyContains
@@ -163,7 +149,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
                     AreaPathOnMouseEnter(area, e);
                     _lastEnteredAreaPath = area;
                 }
-
             }
         }
 
