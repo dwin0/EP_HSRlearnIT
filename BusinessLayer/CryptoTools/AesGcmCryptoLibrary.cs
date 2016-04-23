@@ -1,7 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Security.Cryptography;
 using System.Security.Cryptography;
+using System.Text;
+using Castle.Core.Internal;
+using System.Windows.Controls;
 
 namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
 {
@@ -49,7 +54,7 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
         }
 
         /// <summary>
-        /// To decrypt, we need to know the key, the ciphertext, the authentication tag, the iv and additional authenticated data(aad) can be optional.
+        /// To decrypt, we need to know the key, the ciphertext, the authentication tag. The iv and additional authenticated data (aad) can be optional.
         /// The decryption is used like it is explained here: https://blogs.msdn.microsoft.com/b/shawnfa/archive/2009/03/17/authenticated-symmetric-encryption-in-net.aspx
         /// </summary>
         /// <param name="key"></param>
@@ -85,6 +90,93 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
                     return ms.ToArray();
                 }
             }
+        }
+
+        /// <summary>
+        /// The key needs to have a size of 32 Byte. This method generates a 32 Byte size key regardless of the input. Null value is not allowed.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="hexPasswordBox"></param>
+        /// <returns>Returns the generated 32 Byte Key</returns>
+        public string GenerateHexKey(string key, TextBox hexPasswordBox)
+        {
+            byte[] keyArray = StringToBytes(key);
+            int keySize = keyArray.Length;
+
+            IEnumerable<byte> bigKey = keyArray;
+
+            if (keySize < 32)
+            {
+                for (int i = 1; i <= 32 / keySize; i++)
+                {
+                    bigKey = bigKey.Concat(keyArray);
+                }
+            }
+
+            bigKey = bigKey.Take(32);
+            byte[] result = new byte[32];
+            int counter = 0;
+
+            bigKey.ForEach(i =>
+            {
+                byte b = i;
+                result[counter] = b;
+                counter++;
+            });
+
+            return BytesToString(result);
+        }
+
+        /// <summary>
+        /// A hex string can be converted into a byte array with this Method .
+        /// </summary>
+        /// <param name="hex"></param>
+        /// <returns>Returns an Array which contains Hex Bytes</returns>
+        public byte[] HexStringToByteArray(string hex)
+        {
+            return Enumerable.Range(0, hex.Length)
+                             .Where(x => x % 2 == 0)
+                             .Select(x => Convert.ToByte(hex.Substring(x, 2), 16))
+                             .ToArray();
+        }
+
+        /// <summary>
+        /// A byte array can be converted into a string.
+        /// </summary>
+        /// <param name="bytes"></param>
+        /// <returns></returns>
+        public string BytesToString(byte[] bytes)
+        {
+            char[] chars = new char[bytes.Length];
+
+            StringBuilder sb = new StringBuilder();
+            int i = 0;
+            foreach (byte b in bytes)
+            {
+                chars[i] = Convert.ToChar(b);
+                sb.Append(chars[i]);
+                i++;
+            }
+            return sb.ToString();
+        }
+
+        /// <summary>
+        /// A non hex string can be convertet into a byte array.
+        /// </summary>
+        /// <param name="toConvert"></param>
+        /// <returns></returns>
+        public byte[] StringToBytes(string toConvert)
+        {
+            byte[] bytes = new byte[toConvert.Length];
+
+            int i = 0;
+            foreach (char c in toConvert)
+            {
+                bytes[i] = Convert.ToByte(c);
+                i++;
+            }
+
+            return bytes;
         }
 
         #endregion

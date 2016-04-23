@@ -25,7 +25,7 @@
             <RowDefinition Height="Auto" Name="Row4"/>
             <RowDefinition Height="*" Name="Row5"/>
             <RowDefinition Height="Auto" Name="Row6"/>
-            <RowDefinition Height="Auto" Name="Row7"/>
+            <RowDefinition Height="0.75*" Name="Row7"/>
             <RowDefinition Height="Auto" Name="Row8"/>
             <RowDefinition Height="Auto" Name="Row9"/>
             <RowDefinition Height="*" Name="Row10"/>
@@ -64,7 +64,7 @@
             </Image.ToolTip>
         </Image>
         <TextBox Grid.Row="7" Grid.Column="0" Name="EncryptionPasswordBox" TextChanged="TextBox_TextChanged" TextWrapping="Wrap" Margin="15,2,15,5"/>
-        <Button Grid.Row="8" Grid.Column="0" Click="OnEnryptionButtonClick" Content="Verschlüsseln" Name="EncryptionButton" Height="40" Width="85" HorizontalAlignment="Left" Margin="15,10,0,10" >
+        <Button Grid.Row="8" Grid.Column="0" Click="OnEnryptionButtonClick" Content="Verschlüsseln" Name="EncryptionButton" Style="{StaticResource ResourceKey=ProgramButtonStyle}"  Height="40" Width="85" HorizontalAlignment="Left" Margin="15,10,0,10" >
             <Button.IsEnabled>
                 <MultiBinding Converter="{StaticResource FormFilledEncryption}">
                     <Binding Path="Text.Length" ElementName="HexIvBox"/>
@@ -79,8 +79,8 @@
         <TextBlock Grid.Row="11" Grid.Column="0" Text="Tag:" Name="TagBlock" Margin="15,2,15,0"/>
         <TextBox Grid.Row="12" Grid.Column="0" Name="TagBox" TextChanged="TextBox_TextChanged" TextWrapping="Wrap" Margin="15,2,15,5" IsReadOnly="True"/>
         <DockPanel Grid.Row="13" Grid.Column="0" Margin="15,2,15,5">
-            <Button Click="OnExportButtonClick" Content="Exportieren" Name="ExportButton" Height="40" Width="85" Margin="0,10,7.5,10" IsEnabled="{Binding ElementName=CipherTextBox, Path=Text.Length}"/>
-            <Button Click="OnDecryptionButtonClick" Content="Entschlüsseln" Name="DecryptionButton" HorizontalAlignment="Left" Height="40" Width="85" Margin="7.5,10,0,10" IsEnabled="{Binding ElementName=TagBox, Path=Text.Length}"/>
+            <Button Click="OnExportButtonClick" Content="Exportieren" Name="ExportButton" Style="{StaticResource ResourceKey=ProgramButtonStyle}" Height="40" Width="85" Margin="0,10,7.5,10" IsEnabled="{Binding ElementName=CipherTextBox, Path=Text.Length}"/>
+            <Button Click="OnDecryptionButtonClick" Content="Entschlüsseln" Name="DecryptionButton" HorizontalAlignment="Left" Style="{StaticResource ResourceKey=ProgramButtonStyle}" Height="40" Width="85" Margin="7.5,10,0,10" IsEnabled="{Binding ElementName=TagBox, Path=Text.Length}"/>
         </DockPanel>
 
         <TextBlock Grid.Row="0" Grid.Column="1" Text="IV Hex:" Name="HexIvBlock" Margin="15,2,15,0"/>
