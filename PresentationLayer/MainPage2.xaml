@@ -8,7 +8,7 @@
       d:DesignHeight="300" d:DesignWidth="300"
       Title="MainPage2">
 
-    <UniformGrid>
+    <UniformGrid Background="White">
         <UniformGrid.Resources>
             <Style TargetType="Border">
                 <Setter Property="VerticalAlignment" Value="Stretch"/>
@@ -53,7 +53,7 @@
                     <RowDefinition Height="2*"/>
                     <RowDefinition Height="2*"/>
                 </Grid.RowDefinitions>
-                <Image Grid.Row="1" Source="Images/encryption-icon.png"  Height="64" Stretch="Uniform" VerticalAlignment="Top"/>
+                <Image Grid.Row="1" Source="Images/encryption-icon.png" Stretch="Uniform"/>
                 <TextBlock Grid.Row="2" Text="Ver- und Entschlüsselung"/>
             </Grid>
         </Border>
@@ -64,7 +64,7 @@
                     <RowDefinition Height="2*"/>
                     <RowDefinition Height="2*"/>
                 </Grid.RowDefinitions>
-                <Image Grid.Row="1" Source="Images/dragdrop-icon.png"  Height="64" Stretch="Uniform" VerticalAlignment="Top"/>
+                <Image Grid.Row="1" Source="Images/dragdrop-icon.png" Stretch="Uniform"/>
                 <TextBlock Grid.Row="2" Text="Drag- und Drop - Spiel"/>
             </Grid>
         </Border>
