@@ -14,20 +14,10 @@ namespace EP_HSRlearnIT.PresentationLayer
         public MainPage()
         {
             InitializeComponent();
-            MenuSetup();
         }
         #endregion
 
         #region Private Methods
-        private void MenuSetup()
-        {
-            var menuStrings = Application.Current.FindResource("MenuStrings") as StringCollection;
-            if (menuStrings == null) return;
-            foreach (var str in menuStrings)
-            {
-                //TODO
-            }
-        }
 
         private void OverviewScreen_Click(object sender, RoutedEventArgs e)
         {

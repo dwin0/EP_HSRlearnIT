@@ -22,6 +22,8 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
         #region Private Members
         private readonly ToolTip _toolTip = new ToolTip();
         private readonly Dictionary<string, Path> _backPaths = new Dictionary<string, Path>();
+        private readonly Path[] _areaPaths = new Path[NumOfAreas];
+        private Path _lastEnteredAreaPath;
         private const int NumOfAreas = 6;
         private const int NumOfStepPaths = 25;
 
@@ -43,13 +45,27 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
                 if (path == null) continue;
 
                 //path has an existing Parent when this Page is opened a second time
+                if(path.Parent is Canvas)
+                {
+                    (path.Parent as Canvas)?.Children.Remove(path);
+                } else
+                {
+                    path.SetValue(Panel.ZIndexProperty, 2);
+                    path.MouseEnter += AreaPathOnMouseEnter;
+                    path.MouseLeave += AreaPathOnMouseLeave;
+                }
+
+
+                /*
                 (path.Parent as Canvas)?.Children.Remove(path);
 
                 path.SetValue(Panel.ZIndexProperty, 2);
                 path.MouseEnter += AreaPathOnMouseEnter;
                 path.MouseLeave += AreaPathOnMouseLeave;
+                */
 
                 canvas.Children.Add(path);
+                _areaPaths[i - 1] = path;
             }
         }
 
@@ -70,6 +86,22 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
                 path.MouseDown += StepPathOnClick;
 
                 canvas.Children.Add(path);
+
+                /*
+                if(path.Parent is Canvas)
+                {
+                    (path.Parent as Canvas)?.Children.Remove(path);
+                } else
+                {
+                    path.SetValue(Panel.ZIndexProperty, 3);
+                    path.MouseEnter += StepPathOnMouseEnter;
+                    path.MouseLeave += StepPathOnMouseLeave;
+                    path.MouseDown += StepPathOnClick;
+                }
+
+                canvas.Children.Add(path);
+                */
+
             }
         }
 
@@ -113,8 +145,26 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             }
 
             backPath.Fill = Application.Current.FindResource("BackAreaBrush") as SolidColorBrush;
-            //TODO: auch Tooltiptext anzeigen
 
+            //Show Tooltip
+            Geometry stepInfo = frontPath.Data;
+            Geometry areaInfo;
+
+            foreach(Path area in _areaPaths)
+            {
+                areaInfo = area.Data;
+
+                IntersectionDetail detail = stepInfo.FillContainsWithDetail(areaInfo);
+
+                if(detail == IntersectionDetail.FullyContains
+                    || detail == IntersectionDetail.FullyInside
+                    || detail == IntersectionDetail.Intersects)
+                {
+                    AreaPathOnMouseEnter(area, e);
+                    _lastEnteredAreaPath = area;
+                }
+
+            }
         }
 
         private void StepPathOnMouseLeave(object sender, MouseEventArgs e)
@@ -126,6 +176,8 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
 
             Path backPath = _backPaths[frontPath.Name];
             backPath.Fill = Application.Current.FindResource("NoBackAreaBrush") as SolidColorBrush;
+
+            AreaPathOnMouseLeave(_lastEnteredAreaPath, e);
         }
 
         private void AreaPathOnMouseEnter(object sender, MouseEventArgs e)
