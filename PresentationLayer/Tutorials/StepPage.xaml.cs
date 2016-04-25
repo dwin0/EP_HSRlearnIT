@@ -2,6 +2,7 @@
 ﻿using System;
 using System.Windows.Media.Imaging;
 using EP_HSRlearnIT.BusinessLayer.UniversalTools;
+using EP_HSRlearnIT.Games;
 
 namespace EP_HSRlearnIT.PresentationLayer.Tutorials
 {
@@ -19,19 +20,25 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
         public StepPage()
         {
             InitializeComponent();
-            var progress = Progress.GetProgress("StepPage_CurrentStep");
-            if(progress != null)
+            var progressCurrentStep = Progress.GetProgress("StepPage_CurrentStep");
+            if(progressCurrentStep != null)
             {
-                _step = Convert.ToInt32(progress);      
+                _step = Convert.ToInt32(progressCurrentStep);      
             }
 
             ReplaceContent(_step);
+
+            var progressActivateGame = Progress.GetProgress("StepPage_Game");
+            if (progressActivateGame != null)
+            {
+                ActivateGameButton();
+            }
         }
+
         #endregion
 
 
         #region Private Methods
-
         private void OnPreviousStepButton_Click(object sender, RoutedEventArgs e)
         {
             ReplaceContent(--_step);
@@ -42,6 +49,17 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
         {
             ReplaceContent(++_step);
             Progress.SaveProgress("StepPage_CurrentStep", _step);
+        }
+
+        private void OnStartDragDropButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.Navigate(new DragDrop3());
+        }
+
+        private void ActivateGameButton()
+        {
+            StartDragDrop.Visibility = Visibility.Visible;
+            Progress.SaveProgress("StepPage_GameButton", StartDragDrop.IsVisible);
         }
 
         private void ReplaceContent(int stepNumber)
@@ -55,6 +73,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
                 case StepMax:
                     PreviousStepButton.IsEnabled = true;
                     NextStepButton.IsEnabled = false;
+                    ActivateGameButton();
                     break;
                 default:
                     PreviousStepButton.IsEnabled = true;
@@ -66,6 +85,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             StepImage.Source = new BitmapImage(new Uri(@"/Images/Step" + stepNumber + ".png", UriKind.RelativeOrAbsolute));
             StepTitle.Text = "Schritt " + stepNumber;
         }
+
         #endregion
     }
 }
