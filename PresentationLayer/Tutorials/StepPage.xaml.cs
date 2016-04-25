@@ -8,9 +8,9 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
     public partial class StepPage
     {
         #region Private Members
-        private int _step = 1;
-        private const int StepMin = 1;
-        private const int StepMax = 19;
+        private int _step;
+        private const int StepMin = 0;
+        private const int StepMax = 18;
 
         #endregion
 

@@ -222,7 +222,8 @@
     <Resource Include="Images\dragdrop6.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Step2.png" />
+    <Resource Include="Images\Step1.png" />
+    <Resource Include="Images\Step10.png" />
     <Resource Include="Images\Step11.png" />
     <Resource Include="Images\Step12.png" />
     <Resource Include="Images\Step13.png" />
@@ -231,20 +232,19 @@
     <Resource Include="Images\Step16.png" />
     <Resource Include="Images\Step17.png" />
     <Resource Include="Images\Step18.png" />
-    <Resource Include="Images\Step19.png" />
+    <Resource Include="Images\Step2.png" />
     <Resource Include="Images\Step3.png" />
     <Resource Include="Images\Step4.png" />
     <Resource Include="Images\Step5.png" />
     <Resource Include="Images\Step6.png" />
     <Resource Include="Images\Step7.png" />
-    <Resource Include="Images\Step8.png" />
-    <Resource Include="Images\Step10.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Step9.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Step1.png" />
+    <Resource Include="Images\Step8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Step0.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\recycling.png" />
