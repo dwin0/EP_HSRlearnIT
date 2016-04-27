@@ -8,7 +8,7 @@
       Title="StepPage">
 
     <StackPanel Background="White">
-        <TextBox Name ="StepTitle" Text="Schritt 1" FontSize="18" Margin="0, 50, 0, 10" BorderThickness="0"/>
+        <TextBlock Name ="StepTitle" Text="Schritt 1" FontSize="20" FontFamily="Bold" Margin="0, 10, 0, 10" />
         <Grid Margin="0, 0, 0, 20">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="20*"/>
@@ -18,22 +18,22 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="20*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="2*"/>
                 <RowDefinition Height="20*"/>
                 <RowDefinition Height="5*"/>
             </Grid.RowDefinitions>
-            <Image Grid.Column="0" Grid.Row="0" Name="StepImage" Source="/Images/aead.png" Stretch="Uniform"/>
-            <TextBlock Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="0" Name="StepDescriptionBox" Text="Dies ist eine Anleitung" TextWrapping="Wrap" FontSize="16" ScrollViewer.VerticalScrollBarVisibility="Auto" />
+            <Image Grid.Column="0" Grid.Row="0" Name="StepImage" Source="/Images/aead.png" Stretch="Uniform" Margin="0,0,0,5"/>
+            <TextBlock Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="0" Name="StepDescriptionBox" Text="Dies ist eine Anleitung" TextWrapping="Wrap" FontSize="16" Margin="0,0,0,5" ScrollViewer.VerticalScrollBarVisibility="Auto" />
 
             <Rectangle Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Stretch" Fill="Black" Height="2" Grid.Row="2" VerticalAlignment="Top" />
 
-            <TextBlock Grid.Column="0" Grid.Row="2" Name="InputTitle" Text="Input" FontSize="18" TextAlignment="Center" Margin="0,0,5,40"/>
-            <TextBlock Grid.Column="0" Grid.Row="2" Name="Input" Text="Parameter of Input" TextWrapping="Wrap" FontSize="12" Margin="0,25,5,0" ScrollViewer.VerticalScrollBarVisibility="Auto" />
+            <TextBlock Grid.Column="0" Grid.Row="2" Name="InputTitle" Text="Input" FontFamily="Bold" FontSize="18" TextAlignment="Center" Margin="0,0,5,40"/>
+            <TextBlock Grid.Column="0" Grid.Row="2" Name="Input" Text="Parameter of Input" TextWrapping="Wrap" FontSize="15" Margin="0,25,5,0" ScrollViewer.VerticalScrollBarVisibility="Auto" />
 
             <Image Grid.Column="1" Grid.Row="2" Name="EncryptionDirection" Source="/Images/rightArrow-icon.png" Margin="5,20,5,30"></Image>
 
-            <TextBlock Grid.Column="2" Grid.Row="2" Name="OutputTitle" Text="Output" FontSize="18" TextAlignment="Center" Margin="5,0,0,40"/>
-            <TextBlock Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="2" Name="Output" Text="Output from Algorithmus" TextWrapping="Wrap" FontSize="12" Margin="5,25,0,0" ScrollViewer.VerticalScrollBarVisibility="Auto" />
+            <TextBlock Grid.Column="2" Grid.Row="2" Name="OutputTitle" Text="Output" FontFamily="Bold" FontSize="18" TextAlignment="Center" Margin="5,0,0,40"/>
+            <TextBlock Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="2" Name="Output" Text="Output from Algorithmus" TextWrapping="Wrap" FontSize="15" Margin="5,25,0,0" ScrollViewer.VerticalScrollBarVisibility="Auto" />
 
             <Button Grid.Column="0" Grid.Row="3" Click="OnPreviousStepButton_Click" HorizontalAlignment="Right" 
                     Content="Vorheriger Schritt" Name="PreviousStepButton" Style="{StaticResource ResourceKey=ProgramButtonStyle}"
