@@ -1,5 +1,8 @@
-﻿using EP_HSRlearnIT.BusinessLayer.UniversalTools;
+﻿using System;
+using System.IO;
+using EP_HSRlearnIT.BusinessLayer.UniversalTools;
 using System.Windows;
+using Microsoft.Win32;
 
 namespace EP_HSRlearnIT.PresentationLayer.Exercises
 {
@@ -32,9 +35,17 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         #region Private Methods
         private void OnImportButtonClick(object sender, RoutedEventArgs e)
         {
-
-            
             string ciphertext = "";
+
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            if (openFileDialog.ShowDialog() == true)
+            {
+                ciphertext = File.ReadAllText(openFileDialog.FileName);
+                HexCipherTextBox.Text = ciphertext;
+            }
+            
             string aad = "";
             string iv = "";
             string tag = "";
