@@ -98,29 +98,24 @@ Weiter bietet die Verwendung des Counter-Block Mode (CTR) folgenden Vorteil gege
 Wird beispielsweise ein Bild, mit vielen gleichen Farbpunkten, verschlüsselt, so sehen die Plaintext-Blöcke mit gleichen Farbpunkten nach der Verschlüsselung beim ECB-Mode alle gleich aus. Beim Counter-Block Mode wird dies mittels jeweils unterschiedlichen Counter-Blöcken verhindert und es können beispielsweise bei Bildern keine Muster mehr erkannt werden.
     </system:String>
 
-    <system:String x:Key="VorbereitungText">
-        Erklärung zu Vorbereitung
-    </system:String>
+    <system:String x:Key="VorbereitungText">In der Vorbereitungsphase wird der Hash-Subkey H
+sowie der «Counter 0»-Block berechnet.</system:String>
 
-    <system:String x:Key="VerschlüsselungText">
-        Erklärung zu Verschlüsselung
-    </system:String>
+    <system:String x:Key="VerschlüsselungText">Bei der Verschlüsselung wird der
+erste Plaintextblock AES-verschlüsselt.</system:String>
 
-    <system:String x:Key="AdditionalAuthenticatedDataText">
-        Erklärung zu Additional Authenticated Data
-    </system:String>
+    <system:String x:Key="AdditionalAuthenticatedDataText">Dem Algorithmus werden weitere authentifizierte,
+aber nicht verschlüsselte Daten hinzugefügt.</system:String>
 
-    <system:String x:Key="CiphertextAuthentifizierungText">
-        Erklärung zu Ciphertext Authentifizierung
-    </system:String>
+    <system:String x:Key="CiphertextAuthentifizierungText">Die Authentifizierung geschieht über
+eine Multiplikation in einem Galois-Feld.</system:String>
 
-    <system:String x:Key="WiederholungText">
-        Erklärung zu Wiederholung
-    </system:String>
+    <system:String x:Key="WiederholungText">Die Verschlüsselung und Authentifizierung
+werden wiederholt angewendet.</system:String>
 
-    <system:String x:Key="AbschlussUndRückgabeText">
-        Erklärung zu Abschluss und Rückgabe
-    </system:String>
+    <system:String x:Key="AbschlussUndRückgabeText">Die Textlänge und der «Counter 0»-Block werden
+ebenfalls authentifiziert. Am Ende wird
+der Ciphertext und das Tag zurückgegeben.</system:String>
 
     <!--StepAreas-->
 
@@ -790,5 +785,6 @@ Wird beispielsweise ein Bild, mit vielen gleichen Farbpunkten, verschlüsselt, s
     <Image x:Key="BackgroundImage" Source="/Images/aead2.png" RenderOptions.BitmapScalingMode="HighQuality" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center"/>
     <SolidColorBrush x:Key="BackAreaBrush" Color="#FFFFDCDC"/>
     <SolidColorBrush x:Key="NoBackAreaBrush" Color="White"/>
-
+    
+    
 </ResourceDictionary>

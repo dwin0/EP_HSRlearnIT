@@ -182,6 +182,8 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             _toolTip.Content = tooltipText;
             _toolTip.IsOpen = true;
             _toolTip.StaysOpen = true;
+            _toolTip.HorizontalOffset = 100;
+            _toolTip.VerticalOffset = -100;
         }
 
         private void StepPathOnClick(object sender, MouseEventArgs e)
