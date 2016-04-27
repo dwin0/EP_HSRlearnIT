@@ -8,11 +8,13 @@ using EP_HSRlearnIT.PresentationLayer.Tutorials;
 
 namespace EP_HSRlearnIT
 {
-    /// <summary>
-    /// Interaction logic for MainPage2.xaml
-    /// </summary>
     public partial class MainPage2 : Page
     {
+        #region Private Members
+
+        SolidColorBrush backgroundColor = Application.Current.FindResource("BackAreaBrush") as SolidColorBrush;
+        #endregion
+
         #region Constructors
 
         public MainPage2()
@@ -56,7 +58,6 @@ namespace EP_HSRlearnIT
                 };
 
                 parent.BorderBrush = black;
-                parent.BorderThickness = new Thickness(5, 5, 5, 5);
             }
         }
 
@@ -66,7 +67,7 @@ namespace EP_HSRlearnIT
 
             if (parent != null)
             {
-                parent.BorderThickness = new Thickness(0, 0, 0, 0);
+                parent.BorderBrush = backgroundColor;
             }
         }
     }

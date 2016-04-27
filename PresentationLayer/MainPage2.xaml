@@ -24,7 +24,7 @@
             </Style>
         </UniformGrid.Resources>
 
-        <Border>
+        <Border BorderThickness="5" BorderBrush="{StaticResource BackAreaBrush}">
             <Grid PreviewMouseLeftButtonDown="OverviewScreen_Click" MouseEnter="UIElement_OnMouseEnter" MouseLeave="UIElement_OnMouseLeave" Background="{StaticResource BackAreaBrush}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -35,7 +35,7 @@
                 <TextBlock Grid.Row="2" Text="Übersicht AES GCM"/>
             </Grid>
         </Border>
-        <Border>
+        <Border BorderThickness="5" BorderBrush="{StaticResource BackAreaBrush}">
             <Grid PreviewMouseLeftButtonDown="StepByStep_Click" MouseEnter="UIElement_OnMouseEnter" MouseLeave="UIElement_OnMouseLeave" Background="{StaticResource BackAreaBrush}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -46,7 +46,7 @@
                 <TextBlock  Grid.Row="2" Text="Schritt für Schritt Anleitung"/>
             </Grid>
         </Border>
-        <Border>
+        <Border BorderThickness="5" BorderBrush="{StaticResource BackAreaBrush}">
             <Grid PreviewMouseLeftButtonDown="EncryptionDecryption_Click" MouseEnter="UIElement_OnMouseEnter" MouseLeave="UIElement_OnMouseLeave" Background="{StaticResource BackAreaBrush}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -57,7 +57,7 @@
                 <TextBlock Grid.Row="2" Text="Ver- und Entschlüsselung"/>
             </Grid>
         </Border>
-        <Border>
+        <Border BorderThickness="5" BorderBrush="{StaticResource BackAreaBrush}">
             <Grid PreviewMouseLeftButtonDown="DragAndDrop_Click" MouseEnter="UIElement_OnMouseEnter" MouseLeave="UIElement_OnMouseLeave" Background="{StaticResource BackAreaBrush}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
