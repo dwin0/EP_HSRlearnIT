@@ -7,7 +7,6 @@ using System.Windows;
 using System.Windows.Input;
 using System;
 using System.Windows.Media.Animation;
-using EP_HSRlearnIT.Games;
 
 namespace EP_HSRlearnIT.PresentationLayer
 {

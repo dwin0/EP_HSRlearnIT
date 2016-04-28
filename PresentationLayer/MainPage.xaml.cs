@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-using EP_HSRlearnIT.Games;
+using EP_HSRlearnIT.PresentationLayer.Games;
 using EP_HSRlearnIT.PresentationLayer.Tutorials;
 using EP_HSRlearnIT.PresentationLayer.Exercises;
 

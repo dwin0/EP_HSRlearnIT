@@ -5,7 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace EP_HSRlearnIT.Games
+namespace EP_HSRlearnIT.PresentationLayer.Games
 {
     /// <summary>
     /// Interaction logic for DragDrop2.xaml

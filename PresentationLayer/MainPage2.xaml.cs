@@ -2,17 +2,17 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using EP_HSRlearnIT.Games;
+using EP_HSRlearnIT.PresentationLayer.Games;
 using EP_HSRlearnIT.PresentationLayer.Exercises;
 using EP_HSRlearnIT.PresentationLayer.Tutorials;
 
-namespace EP_HSRlearnIT
+namespace EP_HSRlearnIT.PresentationLayer
 {
-    public partial class MainPage2 : Page
+    public partial class MainPage2
     {
         #region Private Members
 
-        SolidColorBrush backgroundColor = Application.Current.FindResource("BackAreaBrush") as SolidColorBrush;
+        private readonly SolidColorBrush _backgroundColor = Application.Current.FindResource("BackAreaBrush") as SolidColorBrush;
         #endregion
 
         #region Constructors
@@ -67,7 +67,7 @@ namespace EP_HSRlearnIT
 
             if (parent != null)
             {
-                parent.BorderBrush = backgroundColor;
+                parent.BorderBrush = _backgroundColor;
             }
         }
     }
