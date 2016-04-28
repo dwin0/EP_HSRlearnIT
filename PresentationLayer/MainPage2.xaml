@@ -27,7 +27,7 @@
                     <RowDefinition Height="2*"/>
                     <RowDefinition Height="2*"/>
                 </Grid.RowDefinitions>
-                <Image Grid.Row="1" Source="Images/rightArrow-icon.png" Stretch="Uniform"/>
+                <Image Grid.Row="1" Source="Images/step-icon.png" Stretch="Uniform"/>
                 <TextBlock  Grid.Row="2" Text="Schritt für Schritt Anleitung" Style="{StaticResource TileContentStyle}"/>
             </Grid>
         </Border>
@@ -38,7 +38,7 @@
                     <RowDefinition Height="2*"/>
                     <RowDefinition Height="2*"/>
                 </Grid.RowDefinitions>
-                <Image Grid.Row="1" Source="Images/encryption-icon.png" Stretch="Uniform"/>
+                <Image Grid.Row="1" Source="Images/key-icon.png" Stretch="Uniform"/>
                 <TextBlock Grid.Row="2" Text="Ver- und Entschlüsselung" Style="{StaticResource TileContentStyle}"/>
             </Grid>
         </Border>
@@ -49,7 +49,7 @@
                     <RowDefinition Height="2*"/>
                     <RowDefinition Height="2*"/>
                 </Grid.RowDefinitions>
-                <Image Grid.Row="1" Source="Images/dragdrop-icon.png" Stretch="Uniform"/>
+                <Image Grid.Row="1" Source="Images/drag-icon.png" Stretch="Uniform"/>
                 <TextBlock Grid.Row="2" Text="Drag- und Drop - Spiel" Style="{StaticResource TileContentStyle}"/>
             </Grid>
         </Border>
