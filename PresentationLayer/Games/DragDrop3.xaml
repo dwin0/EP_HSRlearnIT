@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:EP_HSRlearnIT.Games"
       mc:Ignorable="d" 
-      Title="DragDrop3" MouseLeftButtonUp="DragDropPage_MouseLeftButtonUp">
+      Title="DragDrop3">
 
     <Viewbox HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Canvas Name="ElementCanvas" Height="720" Width="960" MouseMove="ElementCanvas_MouseMove">
@@ -14,32 +14,48 @@
                     <ImageBrush ImageSource ="/Images/dragdrop.PNG"/>
                 </Rectangle.Fill>
             </Rectangle>
-            <Rectangle Name="Rect1" Fill="Transparent" Height="40" Width="90" Canvas.Left="70" Canvas.Top="78" />
-            <Rectangle Name="Rect2" Fill="Transparent" Height="45" Width="90" Canvas.Left="540" Canvas.Top="500" />
-            <Rectangle Name="Rect3" Fill="Transparent" Height="40" Width="90" Canvas.Left="432" Canvas.Top="444" />
-            <Rectangle Name="Rect4" Fill="Transparent" Height="40" Width="95" Canvas.Left="155" Canvas.Top="450" />
-            <Rectangle Name="Rect5" Fill="Transparent" Height="45" Width="90" Canvas.Left="540" Canvas.Top="375" />
-            <Rectangle Name="Rect6" Fill="Transparent" Height="45" Width="90" Canvas.Left="540" Canvas.Top="285"/>
-            <Rectangle Name="Rect7" Fill="Transparent" Height="45" Width="90" Canvas.Left="540" Canvas.Top="135"/>
-            <Rectangle Name="Rect8" Fill="Transparent" Height="40" Width="90" Canvas.Left="435" Canvas.Top="237" />
-            <Rectangle Name="Rect9" Fill="Transparent" Height="45" Width="90" Canvas.Left="293" Canvas.Top="391" />
-            <Rectangle Name="Rect10" Fill="Transparent" Height="40" Width="90" Canvas.Left="157" Canvas.Top="389"/>
-            <Rectangle Name="Rect11" Fill="Transparent" Height="45" Width="95" Canvas.Left="295" Canvas.Top="295" />
-            <Rectangle Name="Rect12" Fill="Transparent" Height="40" Width="90" Canvas.Left="177" Canvas.Top="244" />
-            <Rectangle Name="Rect13" Fill="Transparent" Height="40" Width="90" Canvas.Left="-42" Canvas.Top="198" />
-            <Rectangle Name="Rect14" Fill="Transparent" Height="40" Width="90" Canvas.Left="295" Canvas.Top="200" />
-            <Rectangle Name="Rect15" Fill="Transparent" Height="40" Width="90" Canvas.Left="295" Canvas.Top="135" />
-            <Rectangle Name="Rect16" Fill="Transparent" Height="40" Width="90" Canvas.Left="540" Canvas.Top="605"/>
-            <Rectangle Name="Rect17" Fill="Transparent" Height="40" Width="90" Canvas.Left="70" Canvas.Top="134"/>
+            <Rectangle  Name="Rect1Iv" Fill="Transparent" Height="40" Width="90" Canvas.Left="70" Canvas.Top="78" />
+            <Rectangle Name="Rect2MultH" Fill="Transparent" Height="45" Width="90" Canvas.Left="540" Canvas.Top="500" />
+            <Rectangle Name="Rect3len" Fill="Transparent" Height="40" Width="90" Canvas.Left="432" Canvas.Top="444" />
+            <Rectangle Name="Rect4AD" Fill="Transparent" Height="40" Width="95" Canvas.Left="155" Canvas.Top="450" />
+            <Rectangle Name="Rect5MultH" Fill="Transparent" Height="45" Width="90" Canvas.Left="540" Canvas.Top="375" />
+            <Rectangle Name="Rect6Ciphertext" Fill="Transparent" Height="45" Width="90" Canvas.Left="540" Canvas.Top="285"/>
+            <Rectangle Name="Rect7Counter" Fill="Transparent" Height="45" Width="90" Canvas.Left="540" Canvas.Top="135"/>
+            <Rectangle Name="Rect8Plaintext" Fill="Transparent" Height="40" Width="90" Canvas.Left="435" Canvas.Top="237" />
+            <Rectangle Name="Rect9MultH" Fill="Transparent" Height="45" Width="90" Canvas.Left="293" Canvas.Top="391" />
+            <Rectangle Name="Rect10MultH" Fill="Transparent" Height="40" Width="90" Canvas.Left="157" Canvas.Top="389"/>
+            <Rectangle Name="Rect11Ciphertext" Fill="Transparent" Height="45" Width="95" Canvas.Left="295" Canvas.Top="295" />
+            <Rectangle Name="Rect12Plaintext" Fill="Transparent" Height="40" Width="90" Canvas.Left="177" Canvas.Top="244" />
+            <Rectangle Name="Rect13Hash" Fill="Transparent" Height="40" Width="90" Canvas.Left="-42" Canvas.Top="198" />
+            <Rectangle Name="Rect15Counter" Fill="Transparent" Height="40" Width="90" Canvas.Left="295" Canvas.Top="135" />
+            <Rectangle Name="Rect16Tag" Fill="Transparent" Height="40" Width="90" Canvas.Left="540" Canvas.Top="605"/>
+            <Rectangle Name="Rect17Counter" Fill="Transparent" Height="40" Width="90" Canvas.Left="70" Canvas.Top="134"/>
             <Button Name="Reset" Content="Reset" Click="OnResetClick" Height="40" Width="90" Canvas.Left="800" Canvas.Bottom="30"/>
 
-            <Rectangle Name="Recycle" Height="60" Width="50" Canvas.Bottom="30" Canvas.Top="630">
+            <Rectangle Name="Recycle" Height="60" Width="50" Canvas.Bottom="30" Canvas.Left ="-20" Canvas.Top="630">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource ="/Images/recycling.png"/>
                 </Rectangle.Fill>
             </Rectangle>
+            <TextBox Name="GameInstruction" FontSize="15" IsReadOnly="True" Background="AliceBlue" Foreground="black" BorderBrush="Blue" BorderThickness="2" Width="750" Height="350" Canvas.Left="-50" Canvas.Top="55" TextWrapping="Wrap"> Spielanleitung
+              Redete grunen gro schatz ihr besuch laufet hat. Ja lass pa ja zeit uben da feld. Wandern wahrend je weibern er nachtun wo gerbers. 
+                Zu drechslers wo geschlafen lehrlingen arbeitsame. Nieder wei fragte lachen gesund auf gut nie. Ihr grashalden ordentlich hab weg gar achthausen vorsichtig.
+            </TextBox>
 
-            <TextBox x:Name="TextBox" HorizontalAlignment="Left" Height="40" Margin="70,15,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="200"/>
+            <Button Name="ButtonCloseGameInstruction" Content="Schliessen" Canvas.Top="330" Canvas.Left="600" Width="80" Height="35" Click="CloseGameInstruction" />
+
+
+            <Button Name="Check"  Height="40" Width="90" Content="Resultat" Canvas.Left="700" Canvas.Bottom="30" Click="Check_OnClick" IsEnabled="False"/>
+
+            <StackPanel>
+                <Button Name="btnOpen" HorizontalAlignment ="Left" Width="100" Margin="580,670,0,30" Content="Spielanleitung" />
+                <Popup Name="popup" PlacementTarget="{Binding ElementName=btnOpen}" AllowsTransparency="True" >
+                    <Grid Width="200" Height="200" Background="White" Margin="150">
+                        <Button Name="btnClose" Content="Popup schließen"/>
+                    </Grid>
+                </Popup>
+            </StackPanel>
+
 
         </Canvas>
     </Viewbox>
