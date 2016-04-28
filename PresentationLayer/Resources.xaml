@@ -5,11 +5,11 @@
 
     <!--
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/Tutorials/PathRessources.xaml" />
-        <ResourceDictionary Source="/TutorialsResources.xaml" />
+        <ResourceDictionary Source="Tutorials/PathRessources.xaml" />
+        <ResourceDictionary Source="Tutorials/TutorialsResources.xaml" />
         <ResourceDictionary Source="Exercises/ExerciseRessources.xaml"/>
     </ResourceDictionary.MergedDictionaries>
--->
+    -->
     
     <!--MainWindow and MainPage-->
     

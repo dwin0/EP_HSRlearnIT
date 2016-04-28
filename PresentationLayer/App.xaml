@@ -9,8 +9,8 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources.xaml" />
                 <ResourceDictionary Source="Exercises/ExerciseRessources.xaml"/>
-                <ResourceDictionary Source="/Tutorials/PathRessources.xaml" />
-                <ResourceDictionary Source="/TutorialsResources.xaml" />
+                <ResourceDictionary Source="Tutorials/PathRessources.xaml" />
+                <ResourceDictionary Source="Tutorials/TutorialsResources.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
