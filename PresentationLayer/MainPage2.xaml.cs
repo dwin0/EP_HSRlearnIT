@@ -8,15 +8,22 @@ using EP_HSRlearnIT.PresentationLayer.Tutorials;
 
 namespace EP_HSRlearnIT.PresentationLayer
 {
+    /// <summary>
+    /// Page containing the program-navigation
+    /// </summary>
     public partial class MainPage2
     {
         #region Private Members
 
-        private readonly SolidColorBrush _backgroundColor = Application.Current.FindResource("BackAreaBrush") as SolidColorBrush;
+        private readonly SolidColorBrush _backgroundBrush = Application.Current.FindResource("TileBackgroundBrush") as SolidColorBrush;
+        private readonly SolidColorBrush _borderBrush = Application.Current.FindResource("TileBorderBrush") as SolidColorBrush;
         #endregion
 
         #region Constructors
 
+        /// <summary>
+        /// Method to initialize the XAML
+        /// </summary>
         public MainPage2()
         {
             InitializeComponent();
@@ -46,28 +53,21 @@ namespace EP_HSRlearnIT.PresentationLayer
         }
         #endregion
 
-        private void UIElement_OnMouseEnter(object sender, MouseEventArgs e)
+        private void MenuTile_OnMouseEnter(object sender, MouseEventArgs e)
         {
             Border parent = (sender as Grid)?.Parent as Border;
-
             if (parent != null)
             {
-                SolidColorBrush black = new SolidColorBrush()
-                {
-                    Color = Colors.Black
-                };
-
-                parent.BorderBrush = black;
+                parent.BorderBrush = _borderBrush;
             }
         }
 
-        private void UIElement_OnMouseLeave(object sender, MouseEventArgs e)
+        private void MenuTile_OnMouseLeave(object sender, MouseEventArgs e)
         {
             Border parent = (sender as Grid)?.Parent as Border;
-
             if (parent != null)
             {
-                parent.BorderBrush = _backgroundColor;
+                parent.BorderBrush = _backgroundBrush;
             }
         }
     }
