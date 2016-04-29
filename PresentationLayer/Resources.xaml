@@ -27,14 +27,13 @@
         <ThicknessAnimation Storyboard.TargetProperty="Margin" From="-150, -10, 0, 0" To="-50, -10, 0, 0" DecelerationRatio="0.9" Duration="0:0:0.5"/>
     </Storyboard>
     
-        <!--MainPage Tile Style-->
+    
+    <!--MainPage Tile Style-->
 
     <SolidColorBrush x:Key="TileBackgroundBrush" Color="#FFFFDCDC"/>
     <SolidColorBrush x:Key="TileBorderBrush" Color="#000000"/>
 
     <Style x:Key="TileBorderStyle" TargetType="Border">
-        <Setter Property="VerticalAlignment" Value="Stretch"/>
-        <Setter Property="HorizontalAlignment" Value="Stretch"/>
         <Setter Property="Margin" Value="20"/>
         <Setter Property="BorderBrush" Value="{StaticResource TileBackgroundBrush}"/>
         <Setter Property="BorderThickness" Value="5"/>

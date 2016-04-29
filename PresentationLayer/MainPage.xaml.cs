@@ -51,7 +51,6 @@ namespace EP_HSRlearnIT.PresentationLayer
         {
             NavigationService?.Navigate(new DragDropPage());
         }
-        #endregion
 
         private void MenuTile_OnMouseEnter(object sender, MouseEventArgs e)
         {
@@ -70,5 +69,7 @@ namespace EP_HSRlearnIT.PresentationLayer
                 parent.BorderBrush = _backgroundBrush;
             }
         }
+
+        #endregion
     }
 }
