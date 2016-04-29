@@ -7,7 +7,7 @@
         Icon="images/icon.png"
         WindowStartupLocation="CenterScreen"
         Title="MainWindow" Height="620" Width="1000" MinWidth="0" MinHeight="0">
-    <Grid Name="MainGrid" Margin="50, 10, 50, 10" PreviewMouseDown="OnPreviewMouseDown">
+    <Grid Name="MainGrid" Margin="50, 10, 50, 10" PreviewMouseDown="CollapseMenu">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*" MinWidth="200"/>
             <ColumnDefinition Width="5*"/>
@@ -16,7 +16,7 @@
                     Panel.ZIndex="5">
             <TextBlock Text="Menu" Style="{StaticResource ResourceKey=MenuStyle}"/>
             <ListView Name="Menu" ItemsSource="{StaticResource ResourceKey=MenuStrings}" ItemContainerStyle="{StaticResource ResourceKey=MenuItemStyle}"
-                      PreviewMouseDown="ListBoxItem_PreviewMouseDown" BorderThickness="0" BorderBrush="{StaticResource MenuBackgroundColor}"/>
+                      PreviewMouseDown="OnMenuItemClick" BorderThickness="0" BorderBrush="{StaticResource MenuBackgroundColor}"/>
         </StackPanel>
         <Button Grid.Column="0" Name="MenuButton" Content="Menu" Click="OnMenuButton_Click" VerticalAlignment="Top" HorizontalAlignment="Left"
                 Panel.ZIndex="2" Style="{StaticResource ResourceKey=ProgramButtonStyle}"/>

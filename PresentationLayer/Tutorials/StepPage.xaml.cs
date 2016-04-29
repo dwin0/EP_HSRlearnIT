@@ -2,7 +2,7 @@
 ﻿using System;
 using System.Windows.Media.Imaging;
 using EP_HSRlearnIT.BusinessLayer.UniversalTools;
-using EP_HSRlearnIT.Games;
+using EP_HSRlearnIT.PresentationLayer.Games;
 
 namespace EP_HSRlearnIT.PresentationLayer.Tutorials
 {

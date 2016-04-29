@@ -1,13 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using EP_HSRlearnIT.BusinessLayer.UniversalTools;
-using System.Collections.Generic;
 
 namespace EP_HSRlearnIT.BusinessLayerTests.UniversalToolsTest
 {
     [TestClass]
     public class ProgressTest
     {
+        [ClassInitialize]
+        public static void Setup(TestContext testContext)
+        {
+            Progress.CleanProgress();
+        }
 
         [TestMethod]
         public void SaveSingleProgressTest()
@@ -16,8 +21,6 @@ namespace EP_HSRlearnIT.BusinessLayerTests.UniversalToolsTest
 
             Assert.AreEqual(1, Progress.GetProgress("progress1"));
         }
-
-
 
         [TestMethod]
         public void SaveMultiProgressTest()
@@ -34,10 +37,40 @@ namespace EP_HSRlearnIT.BusinessLayerTests.UniversalToolsTest
         {
             
             Progress.SaveProgress("testProgress1", 9);
-            Progress.SaveProgress("testProgress2", 42);
+            Progress.SaveProgress("testProgress1", 42);
 
-            Assert.AreEqual(42, Progress.GetProgress("testProgress2"));
-            Assert.AreEqual(9, Progress.GetProgress("testProgress1"));
+            Assert.AreEqual(42, Progress.GetProgress("testProgress1"));
+        }
+
+        [TestMethod]
+        public void GetAllProgressesTest()
+        {
+            Progress.SaveProgress(0, 10);
+            Progress.SaveProgress(1, 11);
+            Progress.SaveProgress(2, 12);
+
+            Dictionary<object, object> allProgesses = Progress.GetProgress();
+
+            for (int i = 0; i <= 2; i++)
+            {
+                int progress = Convert.ToInt32(allProgesses[i]);
+                Assert.AreEqual(i + 10, progress);
+            }
+        }
+
+        [TestMethod]
+        public void CleanProgressTest()
+        {
+            Dictionary<object, object> allProgesses1 = Progress.GetProgress();
+            Assert.AreEqual(0, allProgesses1.Count);
+
+            Progress.SaveProgress("Progress42", 42);
+            Dictionary<object, object> allProgesses2 = Progress.GetProgress();
+            Assert.AreEqual(1, allProgesses2.Count);
+
+            Progress.CleanProgress();
+            Dictionary<object, object> allProgesses3 = Progress.GetProgress();
+            Assert.AreEqual(0, allProgesses3.Count);
         }
 
         [TestCleanup]

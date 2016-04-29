@@ -8,7 +8,8 @@
 
     <Viewbox>
         <Canvas Name="OverviewCanvas" Height="720" Width="960">
-            <Image Source="/Images/aead2.png" RenderOptions.BitmapScalingMode="HighQuality" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Image Source="/Images/aead2.png" RenderOptions.BitmapScalingMode="HighQuality"
+                   Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Canvas>
     </Viewbox>
 </Page>

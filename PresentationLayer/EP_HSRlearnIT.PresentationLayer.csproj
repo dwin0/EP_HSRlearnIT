@@ -72,16 +72,9 @@
     <Compile Include="Exercises\CryptoClass.cs" />
     <Compile Include="Exercises\FormFilledDecryption.cs" />
     <Compile Include="Exercises\FormFilledEncryption.cs" />
-    <Compile Include="Games\DragDrop2.xaml.cs">
-      <DependentUpon>DragDrop2.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Games\DragDrop3.xaml.cs">
       <DependentUpon>DragDrop3.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Games\DragDropPage.xaml.cs">
-      <DependentUpon>DragDropPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Games\DragDropPageConstants.cs" />
     <Compile Include="Games\DragImage.cs" />
     <Compile Include="MainPage2.xaml.cs">
       <DependentUpon>MainPage2.xaml</DependentUpon>
@@ -105,13 +98,10 @@
     <Compile Include="Tutorials\StepPage.xaml.cs">
       <DependentUpon>StepPage.xaml</DependentUpon>
     </Compile>
-    <Page Include="Games\DragDropPage.xaml">
+
+    <Page Include="Exercises\ExerciseRessources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Games\DragDrop2.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Games\DragDrop3.xaml">
       <SubType>Designer</SubType>
@@ -154,6 +144,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Exercises\EncryptionDecyrptionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tutorials\PathRessources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -265,6 +259,15 @@
   <ItemGroup>
     <Resource Include="Images\dragdrop-icon.png" />
     <Resource Include="Images\encryption-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\step-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\key-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\drag-icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
