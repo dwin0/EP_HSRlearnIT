@@ -28,24 +28,28 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         #region Private Methods
         private void OnEnryptionButtonClick(object sender, RoutedEventArgs e)
         {
-            GenerateHexKey(EncryptionPasswordBox.Text, HexEncryptionPasswordBox);
-            byte[] key = HexStringToByteArray(HexEncryptionPasswordBox.Text);
-            byte[] plaintext = HexStringToByteArray(HexPlainTextBox.Text);
+            //key is evaluated and will be resized to 32 Byte if necessary
+            string keyString = Library.GenerateHexKey(EncryptionPasswordBox.Text, HexEncryptionPasswordBox);
+            ChangeHexBox(keyString.ToCharArray(), HexEncryptionPasswordBox);
+
+            //get the values of all fields which are needed to start the encryption
+            byte[] key = Library.HexStringToByteArray(HexEncryptionPasswordBox.Text);
+            byte[] plaintext = Library.HexStringToByteArray(HexPlainTextBox.Text);
+            byte[] aad = Library.HexStringToByteArray(HexAadBox.Text);
+
             byte[] iv = null;
             if (HexIvBox.Text != "")
             {
-                iv = HexStringToByteArray(HexIvBox.Text);
+                iv = Library.HexStringToByteArray(HexIvBox.Text);
             }
             else
             {
                 HexIvBox.Text = "000000000000000000000000";
             }
-            byte[] aad = HexStringToByteArray(HexAadBox.Text);
 
             Tuple<byte[], byte[]> returnValueEncryption = Library.Encrypt(key, plaintext, iv, aad);
-
-            TagBox.Text = BytesToString(returnValueEncryption.Item1);
-            CipherTextBox.Text = BytesToString(returnValueEncryption.Item2);
+            TagBox.Text = Library.BytesToString(returnValueEncryption.Item1);
+            CipherTextBox.Text = Library.BytesToString(returnValueEncryption.Item2);
         }
 
         private void OnExportButtonClick(object sender, RoutedEventArgs e)

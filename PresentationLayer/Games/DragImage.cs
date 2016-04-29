@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
-namespace EP_HSRlearnIT.Games
+namespace EP_HSRlearnIT.PresentationLayer.Games
 {
     public class DragImage
     {

@@ -73,6 +73,9 @@
       <DependentUpon>DragDrop3.xaml</DependentUpon>
     </Compile>
     <Compile Include="Games\DragImage.cs" />
+    <Compile Include="MainPage2.xaml.cs">
+      <DependentUpon>MainPage2.xaml</DependentUpon>
+    </Compile>
     <Compile Include="StringCollection.cs" />
     <Compile Include="Tutorials\AesGcmOverviewPage.xaml.cs">
       <DependentUpon>AesGcmOverviewPage.xaml</DependentUpon>
@@ -92,7 +95,16 @@
     <Compile Include="Tutorials\StepPage.xaml.cs">
       <DependentUpon>StepPage.xaml</DependentUpon>
     </Compile>
+
+    <Page Include="Exercises\ExerciseRessources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Games\DragDrop3.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainPage2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -129,6 +141,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Exercises\EncryptionDecyrptionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tutorials\PathRessources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -200,7 +216,8 @@
     <Resource Include="Images\dragdrop6.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Step2.png" />
+    <Resource Include="Images\Step1.png" />
+    <Resource Include="Images\Step10.png" />
     <Resource Include="Images\Step11.png" />
     <Resource Include="Images\Step12.png" />
     <Resource Include="Images\Step13.png" />
@@ -209,20 +226,19 @@
     <Resource Include="Images\Step16.png" />
     <Resource Include="Images\Step17.png" />
     <Resource Include="Images\Step18.png" />
-    <Resource Include="Images\Step19.png" />
+    <Resource Include="Images\Step2.png" />
     <Resource Include="Images\Step3.png" />
     <Resource Include="Images\Step4.png" />
     <Resource Include="Images\Step5.png" />
     <Resource Include="Images\Step6.png" />
     <Resource Include="Images\Step7.png" />
-    <Resource Include="Images\Step8.png" />
-    <Resource Include="Images\Step10.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Step9.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Step1.png" />
+    <Resource Include="Images\Step8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Step0.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\recycling.png" />
@@ -230,6 +246,25 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\aead2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\eye-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\rightArrow-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\dragdrop-icon.png" />
+    <Resource Include="Images\encryption-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\step-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\key-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\drag-icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

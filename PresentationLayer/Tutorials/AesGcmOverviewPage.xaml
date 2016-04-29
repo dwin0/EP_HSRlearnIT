@@ -7,26 +7,9 @@
       Title="AesGcmOverviewPage">
 
     <Viewbox>
-        <Canvas Name="TestCanvas" Height="720" Width="960" Background="White">
-            <Image Source="/Images/aead2.png" RenderOptions.BitmapScalingMode="HighQuality" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <!--
-            <Path Data="M0,0 L150,0 150,240 0,240 z" Height="240" Width="150" Canvas.Left="0" Canvas.Top="0" Stretch="Fill" Stroke="Green" StrokeThickness="3"/>
-            <Path Data="M150,0 L300,0 300,240 150,240 z" Height="240" Canvas.Left="150" Stretch="Fill" Canvas.Top="0" Width="150" Stroke="Green" StrokeThickness="3"/>
-            <Path Data="M300,0 L635,0 635,160 150,160 150,90 300,90 z" Height="160" Canvas.Left="150" Stretch="Fill" Canvas.Top="0" Width="485" Stroke="Green" StrokeThickness="3"/>
-            <Path Data="M450,0 L635,0 635,240 450,240 z" Height="240" Canvas.Left="450" Stretch="Fill" Canvas.Top="0" Width="185" Stroke="Green" StrokeThickness="3"/>
-            <Path Data="M300,160 L635,160 635,340 300,340 z" Height="180" Canvas.Left="305" Stretch="Fill" Canvas.Top="160" Width="330" Stroke="Green" StrokeThickness="3"/>
-            <Path Data="M280,480 L420,480 420,530 280,530 z" Height="50" Canvas.Left="275" Stretch="Fill" Canvas.Top="475" Width="140"/>
-            <Path Data="M280,400 L420,400 420,530 280,530 z" Height="130" Canvas.Left="275" Stretch="Fill" Canvas.Top="400" Width="140"/>
-            <Path Data="M280,400 L420,400 420,530 280,530 z" Height="130" Canvas.Left="275" Stretch="Fill" Canvas.Top="400" Width="140"/>
-            <Path Data="M280,360 L450,360 450,270 635,270 635,390 450,390 450,480 280,480 z" Height="195.6" Canvas.Left="261.3" Stretch="Fill" Canvas.Top="272.7" Width="373.2"/>
-            <Path Data="M450,350 L610,350 610,480 450,480 z" Height="132" Canvas.Left="453.3" Stretch="Fill" Canvas.Top="347.1" Width="157.2"/>
-            <Path Data="M640,0 L960,0 960,460 450,460 450,390 640,390 z" Height="460.8" Canvas.Left="443.7" Stretch="Fill" Width="514.8"/>
-            <Path Data="M800,380 L960,380 960,600 800,600 800,530 650,530 650,465 800,465 z" Height="225.6" Canvas.Left="647.6" Stretch="Fill" Canvas.Top="379.4" Width="311.2"/>
-            <Path Data="M150,90 L290,90 290,600 790,600 790,525 960,525 960,670 150,670 z" Height="576" Canvas.Left="155.2" Stretch="Fill" Canvas.Top="90.8" Width="806.4"/>
-            <Path Data="M800,655 L960,655 960,720 800,720 z" Height="64" Canvas.Left="806.2" Stretch="Fill" Canvas.Top="654.2" Width="154.4"/>
-            <Path Data="M450,280 L630,280 630,330 450,330 z" Height="48.8" Canvas.Left="447.6" Stretch="Fill" Canvas.Top="283" Width="184"/>
-            <Path Data="M780,280 L960,280 960,330 780,330 z" Height="45.6" Canvas.Left="782.8" Stretch="Fill" Canvas.Top="284.6" Width="176.8"/>
-            -->
+        <Canvas Name="OverviewCanvas" Height="720" Width="960">
+            <Image Source="/Images/aead2.png" RenderOptions.BitmapScalingMode="HighQuality"
+                   Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Canvas>
     </Viewbox>
 </Page>

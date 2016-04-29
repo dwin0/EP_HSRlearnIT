@@ -46,21 +46,29 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
 
         private void OnDecryptionButtonClick(object sender, RoutedEventArgs e)
         {
-            GenerateHexKey(DecryptionPasswortBox.Text, HexDecryptionPasswortBox);
-            byte[] key = HexStringToByteArray(HexDecryptionPasswortBox.Text);
-            byte[] ciphertext = HexStringToByteArray(HexCipherTextBox.Text);
+            //key is evaluated and will be resized to 32 Byte if necessary 
+            string keyString = Library.GenerateHexKey(DecryptionPasswortBox.Text, HexDecryptionPasswortBox);
+            ChangeHexBox(keyString.ToCharArray(), HexDecryptionPasswortBox);
+
+            //get the values of all fields which are needed to start the decryption
+            byte[] key = Library.HexStringToByteArray(HexDecryptionPasswortBox.Text);
+            byte[] ciphertext = Library.HexStringToByteArray(HexCipherTextBox.Text);
+            byte[] aad = Library.HexStringToByteArray(HexAadBox.Text);
+            byte[] tag = Library.HexStringToByteArray(HexTagBox.Text);
+
             byte[] iv = null;
             if (HexIvBox.Text != "")
             {
-                iv = HexStringToByteArray(HexIvBox.Text);
+                iv = Library.HexStringToByteArray(HexIvBox.Text);
             }
             else
             {
                 HexIvBox.Text = "000000000000000000000000";
             }
-            byte[] aad = HexStringToByteArray(HexAadBox.Text);
-            byte[] tag = HexStringToByteArray(HexTagBox.Text);
-            PlainTextBox.Text = BytesToString(Library.Decrypt(key, ciphertext, iv, aad, tag));
+
+            PlainTextBox.Text = Library.BytesToString(Library.Decrypt(key, ciphertext, iv, aad, tag));
+
+            //case authentication only --> when successfull a Popup Window will be shown
             if (PlainTextBox.Text == "")
             {
                 ShowAadMessageBox(sender, e);

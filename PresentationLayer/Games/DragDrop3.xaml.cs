@@ -8,7 +8,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using EP_HSRlearnIT.BusinessLayer.UniversalTools;
 
-namespace EP_HSRlearnIT.Games
+namespace EP_HSRlearnIT.PresentationLayer.Games
 {
     public partial class DragDrop3
     {
