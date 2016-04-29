@@ -22,7 +22,7 @@
                 Panel.ZIndex="2" Style="{StaticResource ResourceKey=ProgramButtonStyle}"/>
         <Button Name="Save" Content="Speichern" Click="OnSaveButton_Click" MouseRightButtonDown="OnExceptionClick"
                 HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource ResourceKey=ProgramButtonStyle}" Grid.Column="1" 
-                Visibility="Hidden"/>
+                Visibility="Visible"/>
         <Frame Grid.ColumnSpan="2" Grid.Column="0" x:Name="MainFrame" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                Panel.ZIndex="1" NavigationUIVisibility="Hidden" Margin="0, 60, 0, 0"/>
     </Grid>

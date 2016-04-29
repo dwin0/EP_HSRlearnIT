@@ -5,7 +5,7 @@ using System.IO;
 namespace EP_HSRlearnIT.BusinessLayer.Testing.UniversalToolsTest
 {
     [TestClass]
-    public class FileSaverTests
+    public class FileManagerTest
     {
 
         [TestMethod]
