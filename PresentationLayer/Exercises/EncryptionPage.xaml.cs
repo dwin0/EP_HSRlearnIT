@@ -1,10 +1,6 @@
 ﻿using System;
-using System.IO;
 using System.Windows;
 using EP_HSRlearnIT.BusinessLayer.UniversalTools;
-using EP_HSRlearnIT.Exercises;
-using Microsoft.Win32;
-using WPFFolderBrowser;
 
 namespace EP_HSRlearnIT.PresentationLayer.Exercises
 {
@@ -59,7 +55,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         private void OnExportButtonClick(object sender, RoutedEventArgs e)
         {
             //NavigationService?.Navigate(new SaveMultiFileDialog(HexCipherTextBox.Text));
-            NavigationService?.Navigate(new SaveMultiFileDialog());
+            //NavigationService?.Navigate(new SaveMultiFileDialog());
 /*            WPFFolderBrowserDialog folderBrowserDialog = new WPFFolderBrowserDialog();
             folderBrowserDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             if (folderBrowserDialog.ShowDialog() == true)
