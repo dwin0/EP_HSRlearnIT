@@ -38,7 +38,7 @@
                     <RowDefinition Height="2*"/>
                     <RowDefinition Height="2*"/>
                 </Grid.RowDefinitions>
-                <Image Grid.Row="1" Source="Images/key-icon.png" Stretch="Uniform"/>
+                <Image Name="EncryptionDecryption" Grid.Row="1" Source="Images/key-icon.png" Stretch="Uniform"/>
                 <TextBlock Grid.Row="2" Text="Ver- und Entschlüsselung" Style="{StaticResource TileContentStyle}"/>
             </Grid>
         </Border>
