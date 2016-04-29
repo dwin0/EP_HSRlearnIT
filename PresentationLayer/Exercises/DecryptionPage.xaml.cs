@@ -47,7 +47,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         private void OnDecryptionButtonClick(object sender, RoutedEventArgs e)
         {
             //key is evaluated and will be resized to 32 Byte if necessary 
-            string keyString = Library.GenerateHexKey(DecryptionPasswortBox.Text, HexDecryptionPasswortBox);
+            string keyString = Library.GenerateKey(DecryptionPasswortBox.Text);
             ChangeHexBox(keyString.ToCharArray(), HexDecryptionPasswortBox);
 
             //get the values of all fields which are needed to start the decryption

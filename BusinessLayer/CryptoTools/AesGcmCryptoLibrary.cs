@@ -6,7 +6,6 @@ using Security.Cryptography;
 using System.Security.Cryptography;
 using System.Text;
 using Castle.Core.Internal;
-using System.Windows.Controls;
 
 namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
 {
@@ -96,9 +95,8 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
         /// The key needs to have a size of 32 Byte. This method generates a 32 Byte size key regardless of the input. Null value is not allowed.
         /// </summary>
         /// <param name="key"></param>
-        /// <param name="hexPasswordBox"></param>
         /// <returns>Returns the generated 32 Byte Key</returns>
-        public string GenerateHexKey(string key, TextBox hexPasswordBox)
+        public string GenerateKey(string key)
         {
             byte[] keyArray = StringToBytes(key);
             int keySize = keyArray.Length;
