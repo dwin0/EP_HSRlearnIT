@@ -12,6 +12,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
 {
     public partial class DragDropPage
     {
+        private static int NumOfDroppableRectanglePlaces = 17;
         private const string SettingsName = "DragDropPage_Settings";
         private static readonly Dictionary<int, List<string>> CorrectAnswers = new Dictionary<int, List<string>>();
         private List<SavedDataForProgress> _addedSavedData;
@@ -27,6 +28,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         {
             InitializeComponent();
             GenerateSideImages();
+            LoadDroppablePlaces(ElementCanvas);
 
             _originalNumberOfChildren = ElementCanvas.Children.Count;
 
@@ -44,6 +46,22 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
 
             LoadSettings();
         }
+
+        /// <summary>
+        /// This method loads all Rectangles where a solution can be dropped.
+        /// </summary>
+        /// <param name="canvas">Is the Parent where the Rectangles have to be placed</param>
+        private void LoadDroppablePlaces(Canvas canvas)
+        {
+            for (int i = 1; i <= NumOfDroppableRectanglePlaces; i++)
+            {
+                Rectangle droppablePlaces = Application.Current.FindResource("DroppablePlace" + i) as Rectangle;
+                if (droppablePlaces == null) continue;
+                canvas.Children.Add(droppablePlaces);
+            }
+        }
+
+
         /// <summary>
         /// This method loads the the data saved in SavedDataForProgress to get back the same state as before a menu change./// </summary>
         private void LoadSettings()
@@ -109,9 +127,9 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
             localCorrectAnswers.Add(new List<string> {"Rect1Iv"});
             localCorrectAnswers.Add(new List<string> {"Rect7Counter", "Rect15Counter", "Rect17Counter"});
             localCorrectAnswers.Add(new List<string> {"Rect2MultH", "Rect5MultH", "Rect9MultH", "Rect10MultH"});
-            localCorrectAnswers.Add(new List<string> {"Rect4AD"});
+            localCorrectAnswers.Add(new List<string> {"Rect4Aad"});
             localCorrectAnswers.Add(new List<string> {"Rect16Tag"});
-            localCorrectAnswers.Add(new List<string> {"Rect3len"});
+            localCorrectAnswers.Add(new List<string> {"Rect3Len"});
             localCorrectAnswers.Add(new List<string> {"Rect6Ciphertext", "Rect11Ciphertext"});
             localCorrectAnswers.Add(new List<string> {"Rect8Plaintext", "Rect12Plaintext"});
 
@@ -210,7 +228,8 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         /// <returns>if intersection then true otherwise false</returns>
         private bool CheckCollisionWithRecycleBin(Rect imageRect)
         {
-            var recycleRect = new Rect(Canvas.GetLeft(Recycle), Canvas.GetTop(Recycle), Recycle.Width, Recycle.Height);
+            Rectangle recycleBinRectangle = Application.Current.FindResource("DroppablePlace17") as Rectangle;
+            var recycleRect = new Rect(Canvas.GetLeft(recycleBinRectangle), Canvas.GetTop(recycleBinRectangle), recycleBinRectangle.Width, recycleBinRectangle.Height);
             return imageRect.IntersectsWith(recycleRect);
         }
         /// <summary>
