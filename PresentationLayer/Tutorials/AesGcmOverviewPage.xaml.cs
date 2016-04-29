@@ -214,7 +214,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
                 //TODO Call Constructor of StepByStep
                 Progress.SaveProgress("StepPage_CurrentStep", step);
             }
-            NavigationService?.Navigate(new StepPage());
+            NavigationService?.Navigate(new StepByStepPage());
         }
 
         #endregion Private Methods

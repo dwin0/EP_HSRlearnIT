@@ -10,7 +10,7 @@ using EP_HSRlearnIT.BusinessLayer.UniversalTools;
 
 namespace EP_HSRlearnIT.PresentationLayer.Games
 {
-    public partial class DragDrop3
+    public partial class DragDropPage
     {
         private const string SettingsName = "DragDropPage_Settings";
         private static readonly Dictionary<int, List<string>> CorrectAnswers = new Dictionary<int, List<string>>();
@@ -23,7 +23,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         private Rectangle _rectangleMoved;
         private Point _startPoint = new Point(0, 0);
 
-        public DragDrop3()
+        public DragDropPage()
         {
             InitializeComponent();
             GenerateSideImages();

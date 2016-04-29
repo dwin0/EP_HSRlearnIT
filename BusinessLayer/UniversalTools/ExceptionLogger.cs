@@ -20,9 +20,9 @@ namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
         #region Public Methods
         public static void WriteToLogfile(string exeptionMessage, string sourceMethod)
         {
-            string filePath = FileSaver.SaveFile(_path, _fileName);
+            string filePath = FileManager.SaveFile(_path, _fileName);
             string entry = $"{Environment.NewLine}Exception: {DateTime.Now.ToString(CultureInfo.CurrentCulture)}: {exeptionMessage} {sourceMethod}";
-            FileSaver.AppendContentToFile(filePath, entry);
+            FileManager.AppendContentToFile(filePath, entry);
             AvoidOverflow(filePath);
         }
 
@@ -32,12 +32,12 @@ namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
         #region Private Methods
         private static void AvoidOverflow(String filePath)
         {
-            if (FileSaver.GetSize(filePath) >= _maxSize)
+            if (FileManager.GetSize(filePath) >= _maxSize)
             {
                 List<string> lines = File.ReadAllLines(filePath).ToList<string>();
                 lines.RemoveRange(0, _deleteRows);
                 File.WriteAllLines(filePath, lines);
-                FileSaver.AppendContentToFile(filePath, "\n The oldest " + _deleteRows + " lines are removed. \n");
+                FileManager.AppendContentToFile(filePath, "\n The oldest " + _deleteRows + " lines are removed. \n");
             }
         }
 

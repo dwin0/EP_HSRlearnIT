@@ -26,7 +26,7 @@ namespace EP_HSRlearnIT.PresentationLayer
 
         private void StepByStep_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService?.Navigate(new StepPage());
+            NavigationService?.Navigate(new StepByStepPage());
         }
 
         private void EncryptionDecryption_Click(object sender, RoutedEventArgs e)
@@ -36,7 +36,7 @@ namespace EP_HSRlearnIT.PresentationLayer
 
         private void DragAndDrop_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService?.Navigate(new DragDrop3());
+            NavigationService?.Navigate(new DragDropPage());
         }
         #endregion
     }

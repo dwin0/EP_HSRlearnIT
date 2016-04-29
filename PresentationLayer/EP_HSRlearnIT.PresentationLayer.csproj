@@ -72,8 +72,8 @@
     <Compile Include="Exercises\CryptoClass.cs" />
     <Compile Include="Exercises\FormFilledDecryption.cs" />
     <Compile Include="Exercises\FormFilledEncryption.cs" />
-    <Compile Include="Games\DragDrop3.xaml.cs">
-      <DependentUpon>DragDrop3.xaml</DependentUpon>
+    <Compile Include="Games\DragDropPage.xaml.cs">
+      <DependentUpon>DragDropPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Games\DragImage.cs" />
     <Compile Include="MainPage2.xaml.cs">
@@ -95,15 +95,14 @@
     <Compile Include="Exercises\EncryptionDecyrptionPage.xaml.cs">
       <DependentUpon>EncryptionDecyrptionPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Tutorials\StepPage.xaml.cs">
-      <DependentUpon>StepPage.xaml</DependentUpon>
+    <Compile Include="Tutorials\StepByStepPage.xaml.cs">
+      <DependentUpon>StepByStepPage.xaml</DependentUpon>
     </Compile>
-
     <Page Include="Exercises\ExerciseRessources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Games\DragDrop3.xaml">
+    <Page Include="Games\DragDropPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -155,7 +154,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Tutorials\StepPage.xaml">
+    <Page Include="Tutorials\StepByStepPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

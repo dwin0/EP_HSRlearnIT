@@ -2,7 +2,7 @@
 
 namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
 {
-    public static class FileSaver
+    public static class FileManager
     {
 
         #region Public Methods

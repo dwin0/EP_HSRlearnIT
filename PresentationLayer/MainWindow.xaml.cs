@@ -52,13 +52,13 @@ namespace EP_HSRlearnIT.PresentationLayer
                     MainFrame.Navigate(new AesGcmOverviewPage());
                     break;
                 case "Schritt für Schritt":
-                    MainFrame.Navigate(new StepPage());
+                    MainFrame.Navigate(new StepByStepPage());
                     break;
                 case "Ver- und Entschlüsselung":
                     MainFrame.Navigate(new EncryptionDecyrptionPage());
                     break;
                 case "Drag- und Drop Spiel":
-                    MainFrame.Navigate(new DragDrop3());
+                    MainFrame.Navigate(new DragDropPage());
                     break;
             }
             CloseMenu();
@@ -83,7 +83,7 @@ namespace EP_HSRlearnIT.PresentationLayer
 
         private void OnSaveButton_Click(object sender, RoutedEventArgs e)
         {
-            FileSaver.UpdateFileContent(FileSaver.SaveFile(@"C:\temp\HSRlearnIT", "AES-GCM.txt"), "The program is started!");
+            FileManager.UpdateFileContent(FileManager.SaveFile(@"C:\temp\HSRlearnIT", "AES-GCM.txt"), "The program is started!");
         }
 
         //This method is used only for a system test in order to control the correctness

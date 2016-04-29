@@ -70,7 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="UniversalTools\ExceptionLogger.cs" />
-    <Compile Include="UniversalTools\FileSaver.cs" />
+    <Compile Include="UniversalTools\FileManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

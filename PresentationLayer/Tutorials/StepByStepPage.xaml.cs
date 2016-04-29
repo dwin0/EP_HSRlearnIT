@@ -6,7 +6,7 @@ using EP_HSRlearnIT.PresentationLayer.Games;
 
 namespace EP_HSRlearnIT.PresentationLayer.Tutorials
 {
-    public partial class StepPage
+    public partial class StepByStepPage
     {
         #region Private Members
         private int _step;
@@ -18,17 +18,17 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
 
 
         #region Constructors
-        public StepPage()
+        public StepByStepPage()
         {
             InitializeComponent();
 
-            var progressCurrentStep = Progress.GetProgress("StepPage_CurrentStep");
+            var progressCurrentStep = Progress.GetProgress("StepByStepPage_CurrentStep");
             if(progressCurrentStep != null)
             {
                 _step = Convert.ToInt32(progressCurrentStep);      
             }
 
-            var progressTitleStep = Progress.GetProgress("StepPage_Title");
+            var progressTitleStep = Progress.GetProgress("StepByStepPage_Title");
             if (progressTitleStep != null)
             {
                 _title = Convert.ToInt32(progressTitleStep);
@@ -36,7 +36,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
 
             ReplaceContent(_step);
 
-            var progressActivateGame = Progress.GetProgress("StepPage_Game");
+            var progressActivateGame = Progress.GetProgress("StepByStepPage_Game");
             if (progressActivateGame != null)
             {
                 ActivateGameButton();
@@ -50,26 +50,26 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
         private void OnPreviousStepButton_Click(object sender, RoutedEventArgs e)
         {
             ReplaceContent(--_step);
-            Progress.SaveProgress("StepPage_CurrentStep", _step);
-            Progress.SaveProgress("StepPage_Title", _title);
+            Progress.SaveProgress("StepByStepPage_CurrentStep", _step);
+            Progress.SaveProgress("StepByStepPage_Title", _title);
         }
 
         private void OnNextStepButton_Click(object sender, RoutedEventArgs e)
         {
             ReplaceContent(++_step);
-            Progress.SaveProgress("StepPage_CurrentStep", _step);
-            Progress.SaveProgress("StepPage_Title", _title);
+            Progress.SaveProgress("StepByStepPage_CurrentStep", _step);
+            Progress.SaveProgress("StepByStepPage_Title", _title);
         }
 
         private void OnStartDragDropButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService?.Navigate(new DragDrop3());
+            NavigationService?.Navigate(new DragDropPage());
         }
 
         private void ActivateGameButton()
         {
             StartDragDrop.Visibility = Visibility.Visible;
-            Progress.SaveProgress("StepPage_GameButton", StartDragDrop.IsVisible);
+            Progress.SaveProgress("StepByStepPage_GameButton", StartDragDrop.IsVisible);
         }
 
         private void ReplaceContent(int stepNumber)
