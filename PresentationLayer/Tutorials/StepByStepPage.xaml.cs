@@ -18,6 +18,20 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
 
 
         #region Constructors
+        public StepByStepPage(int stepNumber)
+        {
+            InitializeComponent();
+
+            if (StepMin <= stepNumber && stepNumber <= StepMax)
+            {
+                _title = stepNumber;
+                Progress.SaveProgress("StepByStepPage_CurrentStep", stepNumber);
+                ReplaceContent(stepNumber);
+            }
+
+            NavigationService?.Navigate(new StepByStepPage());
+        }
+
         public StepByStepPage()
         {
             InitializeComponent();
@@ -102,7 +116,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             if (title == null)
             {
                 string oldTitle = GetTitle(_title);
-                if (oldTitle == null || stepNumber < _title)
+                if (oldTitle == null || stepNumber != _title)
                 {
                     for (int i = stepNumber; i >= StepMin; i--)
                     {

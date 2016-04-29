@@ -212,7 +212,8 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
                 int step = int.Parse(stepNumber);
 
                 //TODO Call Constructor of StepByStep
-                Progress.SaveProgress("StepPage_CurrentStep", step);
+                //Progress.SaveProgress("StepByStepPage_CurrentStep", step);
+                NavigationService?.Navigate(new StepByStepPage(step));
             }
             NavigationService?.Navigate(new StepByStepPage());
         }
