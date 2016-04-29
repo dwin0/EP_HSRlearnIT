@@ -1,9 +1,12 @@
 ﻿using System.IO;
 using System.Reflection;
+using System.Windows.Forms;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TestStack.White;
 using TestStack.White.Factory;
 using TestStack.White.UIItems;
+using Application = TestStack.White.Application;
+using Button = TestStack.White.UIItems.Button;
+using TextBox = TestStack.White.UIItems.TextBox;
 
 namespace EP_HSRlearnITTests
 {
@@ -22,8 +25,9 @@ namespace EP_HSRlearnITTests
             window.WaitWhileBusy();
 
             //zu EncryptionPage navigieren
-            var buttonEncrDecr = window.Get<Button>("EncryptionDecryption");
-            buttonEncrDecr.Click();
+            var imgEncrDecr = window.Get<Image>("EncryptionDecryption");
+            imgEncrDecr.Click();
+
             var buttonEncr = window.Get<Button>("Encryption");
             buttonEncr.Click();
 
