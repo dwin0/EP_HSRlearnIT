@@ -151,7 +151,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                     _startPoint = e.GetPosition(_rectangleMoved);
                     _copyRectangle = !_rectangleMoved.Name.Contains("tmp");
 
-                    if (_copyRectangle)
+                   if (_copyRectangle)
                     {
                         _addedDataForProgress = new SavedDataForProgress();
 
@@ -233,15 +233,17 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                     _rectangleMoved.Margin = new Thickness(r.Left, r.Top, 0, 0);
                     _addedDataForProgress.ImageMargin = _rectangleMoved.Margin;
 
-                    var indexFound = -1;
+                    var indexFound = -1; // if we move it from one rectangle field to an empty rectangle field
                     for (var i = 0; i < _addedSavedData.Count; i++)
                     {
                         if (_addedSavedData[i].DropPosition != dropRectangle) continue;
                         indexFound = i;
                         break;
                     }
+
                     _addedDataForProgress.DropPosition = dropRectangle;
-                    if (indexFound != -1) // If we are replacing already existing dropped image
+
+                    if (indexFound != -1) // If we move it from one rectangle and replace already existing dropped image
                     {
                         if (_addedSavedData[indexFound].ChildReference != _rectangleMoved) 
                         {
@@ -249,12 +251,14 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                             _addedSavedData.RemoveAt(indexFound);
                         }
                     }
-                    if (_copyRectangle) 
+
+                    if (_copyRectangle) //if we move it from the intial place to an rectange field
                     {
                         _addedSavedData.Add(_addedDataForProgress);
                         if (_addedSavedData.Count == 16)
                             Check.IsEnabled = true;
                     }
+
                     for (int i = 0; i < _dropLocationsRectangles.Length; i++)
                     {
                         if (_addedDataForProgress.DropPosition == _dropLocationsRectangles[i])
