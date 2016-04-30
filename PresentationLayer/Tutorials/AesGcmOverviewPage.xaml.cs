@@ -210,9 +210,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
                 int last = pathName.IndexOf("_", StringComparison.Ordinal);
                 string stepNumber = pathName.Substring(4, last - 4);
                 int step = int.Parse(stepNumber);
-
-                //TODO Call Constructor of StepByStep
-                //Progress.SaveProgress("StepByStepPage_CurrentStep", step);
+                
                 NavigationService?.Navigate(new StepByStepPage(step));
             }
             NavigationService?.Navigate(new StepByStepPage());
