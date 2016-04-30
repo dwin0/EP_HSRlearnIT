@@ -53,7 +53,7 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
         }
 
         /// <summary>
-        /// To decrypt, we need to know the key, the ciphertext, the authentication tag. The iv and additional authenticated data (aad) can be optional.
+        /// To decrypt, we need to know the key, the ciphertext, the authentication tag. The iv and additional authenticated data (aad) are optional.
         /// The decryption is used like it is explained here: https://blogs.msdn.microsoft.com/b/shawnfa/archive/2009/03/17/authenticated-symmetric-encryption-in-net.aspx
         /// </summary>
         /// <param name="key"></param>
@@ -71,7 +71,7 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
                 aes.Key = key;
                 aes.IV = iv ?? new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
-                //If the aad doesn't match betwee encryption and decryption the tag will not match either and the decryption will fail.
+                //If the aad doesn't match between encryption and decryption the tag will not match either and the decryption will fail.
                 aes.AuthenticatedData = aad;
 
                 //The tag that was generated during encryption gets set here.
@@ -105,7 +105,7 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
 
             if (keySize < 32)
             {
-                for (int i = 1; i <= 32 / keySize; i++)
+                for (int i = 1; i <= (32 / keySize); i++)
                 {
                     bigKey = bigKey.Concat(keyArray);
                 }
@@ -145,15 +145,18 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
         /// <returns></returns>
         public string BytesToString(byte[] bytes)
         {
-            char[] chars = new char[bytes.Length];
+            //char[] chars = new char[bytes.Length];
 
             StringBuilder sb = new StringBuilder();
-            int i = 0;
+            //int i = 0;
             foreach (byte b in bytes)
             {
+                /*
                 chars[i] = Convert.ToChar(b);
                 sb.Append(chars[i]);
                 i++;
+                */
+                sb.Append(Convert.ToChar(b));
             }
             return sb.ToString();
         }

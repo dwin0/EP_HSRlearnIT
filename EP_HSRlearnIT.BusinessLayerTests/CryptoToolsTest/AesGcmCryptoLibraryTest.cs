@@ -60,7 +60,7 @@ namespace EP_HSRlearnIT.BusinessLayerTests.CryptoToolsTest
         }
 
         [TestMethod]
-        public void DecryptTestCAse14Test()
+        public void DecryptTestCase14Test()
         {
             AesGcmCryptoLibrary library = new AesGcmCryptoLibrary();
             byte[] key = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
@@ -112,6 +112,7 @@ namespace EP_HSRlearnIT.BusinessLayerTests.CryptoToolsTest
             AesGcmCryptoLibrary library = new AesGcmCryptoLibrary();
             string resultingKey = library.GenerateKey("TestTest");
             Assert.AreEqual("TestTestTestTestTestTestTestTest", resultingKey);
+            Assert.AreEqual(32, resultingKey.Length);
         }
 
         [TestMethod]
@@ -120,6 +121,7 @@ namespace EP_HSRlearnIT.BusinessLayerTests.CryptoToolsTest
             AesGcmCryptoLibrary library = new AesGcmCryptoLibrary();
             string resultingKey = library.GenerateKey("TestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTest");
             Assert.AreEqual("TestTestTestTestTestTestTestTest", resultingKey);
+            Assert.AreEqual(32, resultingKey.Length);
         }
 
 
