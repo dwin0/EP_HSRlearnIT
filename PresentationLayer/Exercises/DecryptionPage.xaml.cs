@@ -37,9 +37,12 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         {
             string ciphertext = "";
 
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
-            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*",
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+            };
+
             if (openFileDialog.ShowDialog() == true)
             {
                 ciphertext = File.ReadAllText(openFileDialog.FileName);
@@ -79,16 +82,12 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
 
             PlainTextBox.Text = Library.BytesToString(Library.Decrypt(key, ciphertext, iv, aad, tag));
 
-            //case authentication only --> when successfull a Popup Window will be shown
+            //case authentication only --> when successfull
             if (PlainTextBox.Text == "")
             {
-                ShowAadMessageBox(sender, e);
+                MessageBox.Show("Der Text wurde erfolgreich authentifiziert.", "alleinstehenden Authentifizierung",
+                    MessageBoxButton.OK, MessageBoxImage.Information);
             }
-        }
-
-        private static void ShowAadMessageBox(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Der Text wurde erfolgreich authentifiziert.", "alleinstehenden Authentifizierung", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void OnEncryptionButtonClick(object sender, RoutedEventArgs e)

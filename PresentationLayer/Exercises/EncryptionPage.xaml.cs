@@ -10,9 +10,9 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         public EncryptionPage()
         {
             InitializeComponent();
+            HexPlainTextBox.Text = Progress.GetProgress("EncryptionPage_HexPlainTextBox") as string;
             HexIvBox.Text = Progress.GetProgress("EncryptionPage_HexIvBox") as string;
             HexAadBox.Text = Progress.GetProgress("EncryptionPage_HexAadBox") as string;
-            HexPlainTextBox.Text = Progress.GetProgress("EncryptionPage_HexPlainTextBox") as string;
         }
 
         public EncryptionPage(string plaintext, string iv, string aad)
