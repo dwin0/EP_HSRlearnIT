@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Xml;
 using EP_HSRlearnIT.BusinessLayer.UniversalTools;
 
 namespace EP_HSRlearnIT.PresentationLayer.Games
@@ -57,10 +60,24 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
             {
                 Rectangle droppablePlaces = Application.Current.FindResource("DroppablePlace" + i) as Rectangle;
                 if (droppablePlaces == null) continue;
-                canvas.Children.Add(droppablePlaces);
+
+                //Rectangle dropPlaceCopy = CopyRectangle(droppablePlaces);
+                Rectangle dropPlaceCopy = Clone(droppablePlaces) as Rectangle;
+
+                if (dropPlaceCopy != null)
+                {
+                    canvas.Children.Add(dropPlaceCopy);
+                }
             }
         }
 
+        private FrameworkElement Clone(FrameworkElement e)
+        {
+            XmlDocument document = new XmlDocument();
+            document.LoadXml(XamlWriter.Save(e));
+
+            return (FrameworkElement)XamlReader.Load(new XmlNodeReader(document));
+        }
 
         /// <summary>
         /// This method loads the the data saved in SavedDataForProgress to get back the same state as before a menu change./// </summary>
@@ -100,6 +117,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                 ButtonCloseGameInstruction.Visibility = Visibility.Hidden;
             }
         }
+
         /// <summary>
         /// This method loads the images from the image-folder. These are the rectangle images to be moved. /// </summary>
         private BitmapImage[] GetImages()
@@ -108,14 +126,13 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
 
             for (var i = 0; i < 9; i++)
             {
-                var image =
-                    new BitmapImage(new Uri(@"pack://application:,,,/Images/dragdrop" + (i+1).ToString() + ".png",
-                        UriKind.RelativeOrAbsolute));
+                var image = new BitmapImage(new Uri(@"pack://application:,,,/Images/dragdrop" + (i+1) + ".png", UriKind.RelativeOrAbsolute));
                 images[i] = image;
             }
 
             return images;
         }
+
         /// <summary>
        /// This method iterates through the images and places them in the canvas. In order to map these images to a droppable rectangle the list localCorrectAnswers is used. /// </summary>
         private void GenerateSideImages()
@@ -152,6 +169,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                 CorrectAnswers.Add(index, localCorrectAnswers[i]);
             }
         }
+
         /// <summary>
         /// This method defines the functions for the PreviewMouseLeftButtonDown Event. It checks if the mouse was was pressed down on an original rectangle image
         /// or an already copied image. The moved rectangle is also saved into the progress and added as a Child to the ElementCanvas</summary>
