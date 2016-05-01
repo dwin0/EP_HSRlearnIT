@@ -59,18 +59,27 @@ namespace EP_HSRlearnIT.BusinessLayerTests.UniversalToolsTest
         }
 
         [TestMethod]
+        public void GetProgressTest()
+        {
+            Progress.SaveProgress("Input", 123);
+            Progress.SaveProgress("Key", 456);
+            Progress.SaveProgress("Output", 789);
+            Dictionary<object, object> allProgress = Progress.GetProgress();
+            Assert.AreEqual(3, allProgress.Count);
+        }
+
+
+        [TestMethod]
         public void CleanProgressTest()
         {
             Dictionary<object, object> allProgesses1 = Progress.GetProgress();
             Assert.AreEqual(0, allProgesses1.Count);
 
             Progress.SaveProgress("Progress42", 42);
-            Dictionary<object, object> allProgesses2 = Progress.GetProgress();
-            Assert.AreEqual(1, allProgesses2.Count);
+            Assert.AreEqual(1, allProgesses1.Count);
 
             Progress.CleanProgress();
-            Dictionary<object, object> allProgesses3 = Progress.GetProgress();
-            Assert.AreEqual(0, allProgesses3.Count);
+            Assert.AreEqual(0, allProgesses1.Count);
         }
 
         [TestCleanup]

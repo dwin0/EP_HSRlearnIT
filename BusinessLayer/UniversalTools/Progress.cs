@@ -16,7 +16,7 @@ namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
         /// Method to save a progress
         /// </summary>
         /// <param name="key">A unique object key</param>
-        /// <param name="value">The progress object to be stored</param>
+        /// <param name="value">The progress object to be save</param>
         #region Public Methods
         public static void SaveProgress(object key, object value)
         {
@@ -32,7 +32,7 @@ namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
         /// <summary>
         /// Method to get all the saved progresses
         /// </summary>
-        /// <returns>Dictionary containing all progresses</returns>
+        /// <returns>Dictionary contains all saved progresses</returns>
         public static Dictionary<object, object> GetProgress()
         {
             return AppProgress;
