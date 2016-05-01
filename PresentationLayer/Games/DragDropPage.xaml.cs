@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,7 +21,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         private readonly Rectangle[] _dropLocationsRectangles = new Rectangle[16];
         private readonly int _originalNumberOfChildren;
         private SavedDataForProgress _addedDataForProgress;
-        private bool _copyRectangle;
+        private bool _rectangleHasNotBeenMovedBefore;
         private bool _isMoving;
         private Rectangle _rectangleMoved;
         private Point _startPoint = new Point(0, 0);
@@ -61,7 +60,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                 Rectangle droppablePlaces = Application.Current.FindResource("DroppablePlace" + i) as Rectangle;
                 if (droppablePlaces == null) continue;
 
-                //Rectangle dropPlaceCopy = CopyRectangle(droppablePlaces);
                 Rectangle dropPlaceCopy = Clone(droppablePlaces) as Rectangle;
 
                 if (dropPlaceCopy != null)
@@ -185,9 +183,9 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                 if (_rectangleMoved != null)
                 {
                     _startPoint = e.GetPosition(_rectangleMoved);
-                    _copyRectangle = !_rectangleMoved.Name.Contains("tmp");
+                    _rectangleHasNotBeenMovedBefore = !_rectangleMoved.Name.Contains("tmp");
 
-                   if (_copyRectangle)
+                   if (_rectangleHasNotBeenMovedBefore)
                     {
                         _addedDataForProgress = new SavedDataForProgress();
 
@@ -228,6 +226,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                 ExceptionLogger.WriteToLogfile(ex.Message, "image_PreviewMouseLeftButtonDown");
             }
         }
+
         /// <summary>
         /// This method checks if there is an intersection with a dropRectangle</summary>
         private Rectangle CheckCollisionWithDropRectangles(Rect imageRect)
@@ -236,22 +235,30 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
             {
                 Rect r = new Rect(Canvas.GetLeft(dropRect), Canvas.GetTop(dropRect), dropRect.Width, dropRect.Height);
                 if (imageRect.IntersectsWith(r))
+                {
                     return dropRect;
+                }   
             }
 
             return null;
         }
+
         /// <summary>
         /// This method checks if there is an intersection with the RecycleBin</summary>
         /// <returns>if intersection then true otherwise false</returns>
         private bool CheckCollisionWithRecycleBin(Rect imageRect)
         {
             Rectangle recycleBinRectangle = Application.Current.FindResource("DroppablePlace17") as Rectangle;
-            var recycleRect = new Rect(Canvas.GetLeft(recycleBinRectangle), Canvas.GetTop(recycleBinRectangle), recycleBinRectangle.Width, recycleBinRectangle.Height);
-            return imageRect.IntersectsWith(recycleRect);
+            if (recycleBinRectangle != null)
+            {
+                var recycleRect = new Rect(Canvas.GetLeft(recycleBinRectangle), Canvas.GetTop(recycleBinRectangle), recycleBinRectangle.Width, recycleBinRectangle.Height);
+                return imageRect.IntersectsWith(recycleRect);
+            }
+            return false;
         }
+
         /// <summary>
-        /// This method defines the functions for the PreviewMouseLeftButtonup Event. If there is an intersection between an dropRectangle,respectively recycle bin
+        /// This method defines the functions for the PreviewMouseLeftButtonup Event. If there is an intersection between a dropRectangle, respectively recycle bin
         /// and the copied/moved image rectangle the image rectangle is dropped and the Margin of the _rectangleMoved is saved into the SaveDataForProgress.  </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -289,11 +296,13 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                         }
                     }
 
-                    if (_copyRectangle) //if we move it from the intial place to an rectange field
+                    if (_rectangleHasNotBeenMovedBefore) //if we move it from the intial place to an rectange field
                     {
                         _addedSavedData.Add(_addedDataForProgress);
                         if (_addedSavedData.Count == 16)
+                        {
                             Check.IsEnabled = true;
+                        }   
                     }
 
                     for (int i = 0; i < _dropLocationsRectangles.Length; i++)
@@ -309,8 +318,10 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                 }
                 else
                 {
-                    if (_copyRectangle)
+                    if (_rectangleHasNotBeenMovedBefore)
+                    {
                         ElementCanvas.Children.Remove(_rectangleMoved);
+                    }  
                     else
                     {
                         _rectangleMoved.Margin = _addedDataForProgress.ImageMargin;
@@ -331,8 +342,9 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                 MessageBox.Show("Exception :" + ex.Message); //for debugging
             }
         }
+
         /// <summary>
-        /// This method defined all the actions during the MouseMove, as change of mouse curser and setting boundries. </summary>  
+        /// This method defines all the actions during the MouseMove, as change of mouse curser and setting boundries. </summary>  
         private void ElementCanvas_MouseMove(object sender, MouseEventArgs e)
         {
             try
@@ -341,25 +353,34 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                 {
                     var currMousePoint = e.GetPosition(ElementCanvas);
 
-                    _rectangleMoved.Margin = new Thickness(currMousePoint.X - _startPoint.X,
-                        currMousePoint.Y - _startPoint.Y, 0, 0);
+                    _rectangleMoved.Margin = new Thickness(currMousePoint.X - _startPoint.X, currMousePoint.Y - _startPoint.Y, 0, 0);
 
                     #region Calculate Offset
 
                     if (_rectangleMoved.Margin.Left < -42) // Left
+                    {
                         _rectangleMoved.Margin = new Thickness(-42, _rectangleMoved.Margin.Top, 0, 0);
+                    }
+
 
                     if (_rectangleMoved.Margin.Left + _rectangleMoved.Width > ElementCanvas.Width) // Right
+                    {
                         _rectangleMoved.Margin = new Thickness(ElementCanvas.Width - _rectangleMoved.Width,
-                            _rectangleMoved.Margin.Top, 0, 0);
+                           _rectangleMoved.Margin.Top, 0, 0);
+                    }
 
                     if (_rectangleMoved.Margin.Top < 0) // Top
+                    {
                         _rectangleMoved.Margin = new Thickness(0, _rectangleMoved.Margin.Top, 0, 0);
+                    }
+
 
                     if (_rectangleMoved.Margin.Top + _rectangleMoved.Height > ElementCanvas.Height)
+                    {
                         _rectangleMoved.Margin = new Thickness(ElementCanvas.Height - _rectangleMoved.Height,
                             _rectangleMoved.Margin.Top, 0, 0);
-
+                    }
+                        
                     #endregion Calculate Offset
 
                     var imageRect = new Rect(_rectangleMoved.Margin.Left, _rectangleMoved.Margin.Top,
@@ -376,6 +397,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
 
             }
         }
+
         /// <summary>
         /// This method gets back the intial state of the game </summary> 
         private void OnResetClick(object sender, RoutedEventArgs e)
@@ -394,6 +416,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                 ExceptionLogger.WriteToLogfile(ex.Message, "OnResetClick");
             }
         }
+
         /// <summary>
         /// This methods checks the dropped elements for their correctness and gives back the amount of correct / wrong placements. Wrong dropped elements will be removed. </summary>
         private void Check_OnClick(object sender, RoutedEventArgs e)
@@ -407,7 +430,9 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
            {
                 var data = _addedSavedData[i];
                 if (data.AnswerCorrect())
+                {
                     correctAnswers++;
+                }     
                 else
                 {
                     indicesToRemove.Add(i);
@@ -431,7 +456,9 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
             var lbl = (Button) LogicalTreeHelper.FindLogicalNode(ElementCanvas, "ButtonCloseGameInstruction");
             if (lbl != null) lbl.Visibility = Visibility.Hidden;
         }
+
         #region SavedDataForProgress
+
         /// <summary>
         /// This class is needed for the progress saving. In order to restore the progress, the index,maring and dropPosition are saved.
         /// </summary>
