@@ -40,7 +40,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
                 Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*",
-                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Recent)
             };
 
             if (openFileDialog.ShowDialog() == true)

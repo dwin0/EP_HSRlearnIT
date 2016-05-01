@@ -72,6 +72,12 @@
     <Compile Include="Exercises\CryptoClass.cs" />
     <Compile Include="Exercises\FormFilledDecryption.cs" />
     <Compile Include="Exercises\FormFilledEncryption.cs" />
+    <Compile Include="Exercises\OpenMultiFileDialog.xaml.cs">
+      <DependentUpon>OpenMultiFileDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Exercises\SaveMultiFileDialog.xaml.cs">
+      <DependentUpon>SaveMultiFileDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Games\DragDropPage.xaml.cs">
       <DependentUpon>DragDropPage.xaml</DependentUpon>
     </Compile>
@@ -96,6 +102,14 @@
       <DependentUpon>StepByStepPage.xaml</DependentUpon>
     </Compile>
     <Page Include="Exercises\ExerciseRessources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Exercises\OpenMultiFileDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Exercises\SaveMultiFileDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
