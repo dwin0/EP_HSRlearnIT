@@ -60,8 +60,10 @@ namespace EP_HSRlearnIT.PresentationLayer
                 case "Drag- und Drop Spiel":
                     MainFrame.Navigate(new DragDropPage());
                     break;
+                default:
+                    CloseMenu();
+                    break;
             }
-            CloseMenu();
         }
 
         private void CloseMenu()
@@ -72,7 +74,7 @@ namespace EP_HSRlearnIT.PresentationLayer
         private void OpenMenu()
         {
             MenuStackPanel.Visibility = Visibility.Visible;
-            MenuOpenEffect("SbShowLeftMenu", MenuStackPanel);
+            MenuOpenEffect("StoryboardShowLeftMenu", MenuStackPanel);
         }
 
         private void MenuOpenEffect(string storyboard, FrameworkElement pnl)
@@ -81,6 +83,7 @@ namespace EP_HSRlearnIT.PresentationLayer
             sb?.Begin(pnl);
         }
 
+        //This method is only for manuel testing from FileManager but it will removed after implement export function
         private void OnSaveButton_Click(object sender, RoutedEventArgs e)
         {
             FileManager.UpdateFileContent(FileManager.SaveFile(@"C:\temp\HSRlearnIT", "AES-GCM.txt"), "The program is started!");
