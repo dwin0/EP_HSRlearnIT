@@ -1,5 +1,4 @@
 ﻿using System;
-using EP_HSRlearnIT.BusinessLayer.UniversalTools;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
@@ -52,7 +51,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
                 Path ressourcePath = Application.Current.FindResource("AreaPath" + i) as Path;
                 if (ressourcePath == null) continue;
 
-                //Create a copy of the Ressource Path to prevent multiple Event Listener on MouseEnter / MouseLeave
+                //Create a copy of the Ressource AreaPath to prevent multiple Event Listener on MouseEnter / MouseLeave
                 Path areaPath = CopyPath(ressourcePath);
 
                 areaPath.SetValue(Panel.ZIndexProperty, 2);
@@ -71,7 +70,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
                 Path ressourcePath = Application.Current.FindResource("StepPath" + i) as Path;
                 if (ressourcePath == null || !ressourcePath.Name.Contains("_overview")) continue;
 
-                //Create a copy of the Ressource Path to prevent multiple Event Listener on MouseEnter / MouseLeave
+                //Create a copy of the Ressource StepPath to prevent multiple Event Listener on MouseEnter / MouseLeave
                 Path stepPath = CopyPath(ressourcePath);
 
                 stepPath.SetValue(Panel.ZIndexProperty, 3);
@@ -93,10 +92,8 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             {
                 ((Canvas) background.Parent).Children.Remove(background);
             }
-            else
-            {
-                background.SetValue(Panel.ZIndexProperty, 1);
-            }
+
+            background.SetValue(Panel.ZIndexProperty, 1);
             
             canvas.Children.Add(background);
         }
