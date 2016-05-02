@@ -3,14 +3,6 @@
                     xmlns:system="clr-namespace:System;assembly=mscorlib"
                     xmlns:local="clr-namespace:EP_HSRlearnIT.PresentationLayer" >
 
-    <!--
-    <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="Tutorials/PathRessources.xaml" />
-        <ResourceDictionary Source="Tutorials/TutorialsResources.xaml" />
-        <ResourceDictionary Source="Exercises/ExerciseRessources.xaml"/>
-    </ResourceDictionary.MergedDictionaries>
-    -->
-    
     <!--MainWindow and MainPage-->
     
     <local:StringCollection x:Key="MenuStrings">
