@@ -1,8 +1,5 @@
-﻿using System;
-using System.IO;
-using EP_HSRlearnIT.BusinessLayer.UniversalTools;
+﻿using EP_HSRlearnIT.BusinessLayer.UniversalTools;
 using System.Windows;
-using Microsoft.Win32;
 
 namespace EP_HSRlearnIT.PresentationLayer.Exercises
 {
@@ -36,22 +33,27 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         private void OnImportButtonClick(object sender, RoutedEventArgs e)
         {
             string ciphertext = "";
-
-            OpenFileDialog openFileDialog = new OpenFileDialog
-            {
-                Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*",
-                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Recent)
-            };
-
-            if (openFileDialog.ShowDialog() == true)
-            {
-                ciphertext = File.ReadAllText(openFileDialog.FileName);
-                HexCipherTextBox.Text = ciphertext;
-            }
-            
             string aad = "";
             string iv = "";
             string tag = "";
+
+
+            /*            OpenFileDialog openFileDialog = new OpenFileDialog
+                        {
+                            Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*",
+                            InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Recent)
+                        };
+
+                        if (openFileDialog.ShowDialog() == true)
+                        {
+                            ciphertext = File.ReadAllText(openFileDialog.FileName);
+                            HexCipherTextBox.Text = ciphertext;
+                        }*/
+
+            OpenMultiFileDialog openMultiFileDialog = new OpenMultiFileDialog();
+            openMultiFileDialog.Show();
+
+
             Progress.SaveProgress("DecryptionPage_HexCipherTextBox", ciphertext);
             Progress.SaveProgress("DecryptionPage_HexAadBox", aad);
             Progress.SaveProgress("DecryptionPage_HexIvBox", iv);
