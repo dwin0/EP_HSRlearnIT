@@ -124,6 +124,24 @@ namespace EP_HSRlearnIT.BusinessLayerTests.CryptoToolsTest
             Assert.AreEqual(32, resultingKey.Length);
         }
 
+        [TestMethod]
+        public void GenerateHexKeyWithRightInputTest()
+        {
+            AesGcmCryptoLibrary library = new AesGcmCryptoLibrary();
+            string resultingKey = library.GenerateKey("TestTestTestTestTestTestTestTest");
+            Assert.AreEqual("TestTestTestTestTestTestTestTest", resultingKey);
+            Assert.AreEqual(32, resultingKey.Length);
+        }
+
+        [TestMethod]
+        public void HexStringToByteArrayTest()
+        {
+            AesGcmCryptoLibrary library = new AesGcmCryptoLibrary();
+            byte[] resultingHex = library.HexStringToByteArray("54657374");
+            byte[] expectedHex = { 84, 101, 115, 116 };
+
+            CollectionAssert.AreEqual(expectedHex, resultingHex);
+        }
 
     }
 }
