@@ -20,8 +20,8 @@
         </StackPanel>
         <Button Grid.Column="0" Name="MenuButton" Content="Menu" Click="OnMenuButton_Click" VerticalAlignment="Top" HorizontalAlignment="Left"
                 Panel.ZIndex="2" Style="{StaticResource ResourceKey=ProgramButtonStyle}"/>
-        <Button Name="Save" Content="Speichern" Click="OnSaveButton_Click" MouseRightButtonDown="OnExceptionClick"
-                HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource ResourceKey=ProgramButtonStyle}" Grid.Column="1" 
+        <Button Grid.Column="1" Name="Save" Content="Speichern" Click="OnSaveButton_Click" VerticalAlignment="Top" HorizontalAlignment="Right" 
+                Style="{StaticResource ResourceKey=ProgramButtonStyle}" MouseRightButtonDown="OnExceptionClick"
                 Visibility="Hidden"/>
         <Frame Grid.ColumnSpan="2" Grid.Column="0" x:Name="MainFrame" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                Panel.ZIndex="1" NavigationUIVisibility="Hidden" Margin="0, 60, 0, 0"/>
