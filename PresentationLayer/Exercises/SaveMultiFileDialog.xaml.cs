@@ -9,11 +9,15 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
     /// </summary>
     public partial class SaveMultiFileDialog : Window
     {
+        #region Constructors
         public SaveMultiFileDialog()
         {
             InitializeComponent();
         }
 
+        #endregion
+
+        #region Private Methods
         private void OnExportFilesButton_Click(object sender, RoutedEventArgs e)
         {
             WPFFolderBrowserDialog folderBrowserDialog = new WPFFolderBrowserDialog()
@@ -32,5 +36,8 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         {
             Close();
         }
+
+           #endregion
+
     }
 }

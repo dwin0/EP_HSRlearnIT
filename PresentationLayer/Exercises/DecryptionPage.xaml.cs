@@ -1,5 +1,9 @@
-﻿using EP_HSRlearnIT.BusinessLayer.UniversalTools;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using EP_HSRlearnIT.BusinessLayer.UniversalTools;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace EP_HSRlearnIT.PresentationLayer.Exercises
 {
@@ -9,7 +13,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         public DecryptionPage()
         {
             InitializeComponent();
-            HexCipherTextBox.Text = Progress.GetProgress("DecryptionPage_HexCipherTextBox") as string;
+            HexCiphertextBox.Text = Progress.GetProgress("DecryptionPage_HexCiphertextBox") as string;
             HexAadBox.Text = Progress.GetProgress("DecryptionPage_HexAadBox") as string;
             HexIvBox.Text = Progress.GetProgress("DecryptionPage_HexIvBox") as string;
             HexTagBox.Text = Progress.GetProgress("DecryptionPage_HexTagBox") as string;
@@ -18,46 +22,58 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         public DecryptionPage(string ciphertext, string iv, string aad, string tag)
         {
             InitializeComponent();
-            HexCipherTextBox.Text = ciphertext;
+            HexCiphertextBox.Text = ciphertext;
             HexAadBox.Text = aad;
             HexIvBox.Text = iv;
             HexTagBox.Text = tag;
-            Progress.SaveProgress("DecryptionPage_HexCipherTextBox", ciphertext);
+            Progress.SaveProgress("DecryptionPage_HexCiphertextBox", ciphertext);
             Progress.SaveProgress("DecryptionPage_HexAadBox", aad);
             Progress.SaveProgress("DecryptionPage_HexIvBox", iv);
             Progress.SaveProgress("DecryptionPage_HexTagBox", tag);
         }
+
         #endregion
 
         #region Private Methods
         private void OnImportButtonClick(object sender, RoutedEventArgs e)
         {
-            string ciphertext = "";
+/*            string ciphertext = "";
             string aad = "";
             string iv = "";
-            string tag = "";
+            string tag = "";*/
 
-
-            /*            OpenFileDialog openFileDialog = new OpenFileDialog
-                        {
-                            Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*",
-                            InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Recent)
-                        };
-
-                        if (openFileDialog.ShowDialog() == true)
-                        {
-                            ciphertext = File.ReadAllText(openFileDialog.FileName);
-                            HexCipherTextBox.Text = ciphertext;
-                        }*/
-
-            OpenMultiFileDialog openMultiFileDialog = new OpenMultiFileDialog();
+            OpenMultiFileDialog openMultiFileDialog = new OpenMultiFileDialog()
+            {
+                Owner = Application.Current.MainWindow,
+                WindowStartupLocation = WindowStartupLocation.CenterOwner
+            };
+            openMultiFileDialog.Closed += new EventHandler(openMultiFileDialog_Closed);
             openMultiFileDialog.Show();
 
 
-            Progress.SaveProgress("DecryptionPage_HexCipherTextBox", ciphertext);
+/*            Progress.SaveProgress("DecryptionPage_HexCiphertextBox", ciphertext);
             Progress.SaveProgress("DecryptionPage_HexAadBox", aad);
             Progress.SaveProgress("DecryptionPage_HexIvBox", iv);
-            Progress.SaveProgress("DecryptionPage_HexTagBox", tag);
+            Progress.SaveProgress("DecryptionPage_HexTagBox", tag);*/
+        }
+
+        private void openMultiFileDialog_Closed(object sender, EventArgs e)
+        {
+            //if (e == null) throw new ArgumentNullException(nameof(e));
+            //if (e == null) return;
+            var importFiles = Progress.GetProgress("OpenMultiFileDialog_Import") as Dictionary<string, string>;
+            if (importFiles != null)
+            {
+                foreach (var fileName in importFiles)
+                {
+                    TextBox textBox = FindName("Hex" + fileName.Key + "Box") as TextBox;
+                    if (textBox != null)
+                    {
+                        textBox.Text = File.ReadAllText(fileName.Value);
+                        Progress.SaveProgress("DecryptionPage_Hex" + textBox.Name + "Box", textBox.Text);
+                    }
+                }
+            }
         }
 
         private void OnDecryptionButtonClick(object sender, RoutedEventArgs e)
@@ -68,7 +84,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
 
             //get the values of all fields which are needed to start the decryption
             byte[] key = Library.HexStringToByteArray(HexDecryptionPasswortBox.Text);
-            byte[] ciphertext = Library.HexStringToByteArray(HexCipherTextBox.Text);
+            byte[] ciphertext = Library.HexStringToByteArray(HexCiphertextBox.Text);
             byte[] aad = Library.HexStringToByteArray(HexAadBox.Text);
             byte[] tag = Library.HexStringToByteArray(HexTagBox.Text);
 
@@ -82,10 +98,10 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                 HexIvBox.Text = "000000000000000000000000";
             }
 
-            PlainTextBox.Text = Library.BytesToString(Library.Decrypt(key, ciphertext, iv, aad, tag));
+            PlaintextBox.Text = Library.BytesToString(Library.Decrypt(key, ciphertext, iv, aad, tag));
 
             //case authentication only --> when successfull
-            if (PlainTextBox.Text == "")
+            if (PlaintextBox.Text == "")
             {
                 MessageBox.Show("Der Text wurde erfolgreich authentifiziert.", "alleinstehenden Authentifizierung",
                     MessageBoxButton.OK, MessageBoxImage.Information);
@@ -94,7 +110,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
 
         private void OnEncryptionButtonClick(object sender, RoutedEventArgs e)
         {
-            string plaintext = HexPlainTextBox.Text;
+            string plaintext = HexPlaintextBox.Text;
             string iv = HexIvBox.Text;
             string aad = HexAadBox.Text;
             NavigationService?.Navigate(new EncryptionPage(plaintext, iv, aad));

@@ -10,7 +10,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         public EncryptionPage()
         {
             InitializeComponent();
-            HexPlainTextBox.Text = Progress.GetProgress("EncryptionPage_HexPlainTextBox") as string;
+            HexPlaintextBox.Text = Progress.GetProgress("EncryptionPage_HexPlaintextBox") as string;
             HexIvBox.Text = Progress.GetProgress("EncryptionPage_HexIvBox") as string;
             HexAadBox.Text = Progress.GetProgress("EncryptionPage_HexAadBox") as string;
         }
@@ -18,7 +18,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         public EncryptionPage(string plaintext, string iv, string aad)
         {
             InitializeComponent();
-            HexPlainTextBox.Text = plaintext;
+            HexPlaintextBox.Text = plaintext;
             HexIvBox.Text = iv;
             HexAadBox.Text = aad;
         }
@@ -34,7 +34,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
 
             //get the values of all fields which are needed to start the encryption
             byte[] key = Library.HexStringToByteArray(HexEncryptionPasswordBox.Text);
-            byte[] plaintext = Library.HexStringToByteArray(HexPlainTextBox.Text);
+            byte[] plaintext = Library.HexStringToByteArray(HexPlaintextBox.Text);
             byte[] aad = Library.HexStringToByteArray(HexAadBox.Text);
 
             byte[] iv = null;
@@ -49,7 +49,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
 
             Tuple<byte[], byte[]> returnValueEncryption = Library.Encrypt(key, plaintext, iv, aad);
             TagBox.Text = Library.BytesToString(returnValueEncryption.Item1);
-            CipherTextBox.Text = Library.BytesToString(returnValueEncryption.Item2);
+            CiphertextBox.Text = Library.BytesToString(returnValueEncryption.Item2);
         }
 
         private void OnExportButtonClick(object sender, RoutedEventArgs e)
@@ -64,7 +64,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
 
         private void OnDecryptionButtonClick(object sender, RoutedEventArgs e)
         {
-            string ciphertext = HexCipherTextBox.Text;
+            string ciphertext = HexCiphertextBox.Text;
             string iv = HexIvBox.Text;
             string aad = HexAadBox.Text;
             string tag = HexTagBox.Text;

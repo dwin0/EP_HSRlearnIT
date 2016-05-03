@@ -8,16 +8,16 @@
     <Grid>
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="4*" />
                 <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="6*" />
+                <ColumnDefinition Width="3*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="6*" />
             </Grid.RowDefinitions>
-            <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" TextWrapping="Wrap" HorizontalAlignment="Left" >Wähle unten Bitte die Dateien aus, welche die entsprechenden Parameter enthalten für den Import dieser Angaben.</TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" TextWrapping="Wrap" HorizontalAlignment="Left" >Wähle unten Bitte die HEX-Dateien aus, welche die entsprechenden Parameter enthalten für den Import dieser Angaben.</TextBlock>
             <TextBlock Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">Parameter</TextBlock>
             <TextBlock Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center">Pfad zur ausgewählten Datei</TextBlock>
             <TextBlock Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">Suchen</TextBlock>
@@ -25,21 +25,21 @@
             <StackPanel Grid.Column="0" Grid.Row="2">
                 <TextBlock Text="IV" HorizontalAlignment="Center" Margin="5"/>
                 <TextBlock Text="AAD" HorizontalAlignment="Center" Margin="5"/>
-                <TextBlock Text="Plaintext" HorizontalAlignment="Center" Margin="5"/>
+                <TextBlock Text="Ciphertext" HorizontalAlignment="Center" Margin="5"/>
                 <TextBlock Text="Tag" HorizontalAlignment="Center" Margin="5"/>
             </StackPanel>
             
             <StackPanel Grid.Column="1" Grid.Row="2">
                 <TextBox Name="TextIv" BorderThickness="0.6" BorderBrush="Black" Margin="5" />
                 <TextBox Name="TextAad" BorderThickness="0.6" BorderBrush="Black" Margin="5" />
-                <TextBox Name="TextPlaintext" BorderThickness="0.6" BorderBrush="Black" Margin="5" />
+                <TextBox Name="TextCiphertext" BorderThickness="0.6" BorderBrush="Black" Margin="5" />
                 <TextBox Name="TextTag" BorderThickness="0.6" BorderBrush="Black" Margin="5" />
             </StackPanel>
             
             <StackPanel Grid.Column="2" Grid.Row="2">
                 <Button Name="ButtonIv" Click="Search_OnClick" Content="Durchsuchen..." HorizontalAlignment="Center" VerticalAlignment="Center" Margin="4" />
                 <Button Name="ButtonAad" Click="Search_OnClick" Content="Durchsuchen..." HorizontalAlignment="Center" VerticalAlignment="Center" Margin="4" />
-                <Button Name="ButtonPlaintext" Click="Search_OnClick" Content="Durchsuchen..." HorizontalAlignment="Center" VerticalAlignment="Center" Margin="4"/>
+                <Button Name="ButtonCiphertext" Click="Search_OnClick" Content="Durchsuchen..." HorizontalAlignment="Center" VerticalAlignment="Center" Margin="4"/>
                 <Button Name="ButtonTag" Click="Search_OnClick" Content="Durchsuchen..." HorizontalAlignment="Center" VerticalAlignment="Center" Margin="4" />
             </StackPanel>
         </Grid>
