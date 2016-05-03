@@ -3,38 +3,42 @@
                     xml:space="preserve"
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
     
-    <!--StepPage Ressources-->
+    <!--StepByStepPage Ressources-->
     
-        <!--StepPage Text-->
+        <!--StepByStepPage StepDescripton and Title-->
     
     <system:String x:Key="Step0Title">Einleitung</system:String>
     <system:String x:Key="Step0">        Weshalb AES-GCM?
         
-Der Galois/Counter Mode der AES-Verschlüsselung ermöglicht eine Verschlüsselung des Plaintextes sowie eine Authentifizierung des Ciphertextes und zusätzlichen Daten.
-Eine solche Art der Verschlüsselung und Authentifizierung nennt man auch Authenticated Encryption with Associated Data (AEAD).
+Der Galois/Counter Mode der AES-Verschlüsselung ermöglicht eine Verschlüsselung des Plaintextes und garantiert die Integrität des generierten Ciphertextes, sowie zusätzlicher unverschlüsselter Daten durch eine kryptografische Checksumme.
+Eine solche Art der Verschlüsselung und Authentisierung nennt man auch Authenticated Encryption with Associated Data (AEAD).
 
 Schritt 1: Vorbereitung
 Schritt 2: Verschlüsselung 
 Schritt 3: Additional Authenticated Data 
-Schritt 4: Ciphertext-Authentifizierung
+Schritt 4: Ciphertext-Authentisierung
 Schritt 5: Wiederholung 
 Schritt 6: Abschluss und Rückgabe
     </system:String>
     <system:String x:Key="Step1Title">Vorbereitung</system:String>
     <system:String x:Key="Step1">
-Der Hash-Subkey H wird berechnet. Dazu wird ein Block von 128 Nullen (0128) mit dem Schlüssel K AES verschlüsselt. 
-Der Subkey wird für die Berechnung des MAC, also für die Authentifizierung, benötigt. In AES-GCM wird dieser MAC Tag genannt.
+Der Hash-Subkey H wird berechnet. Dazu wird ein Block von 128 Nullen (0128) mit dem Schlüssel K AES-verschlüsselt.
+Dieser Subkey wird für die Berechnung des Message Authentication Codes (MAC), also für die Authentisierung, benötigt. In AES-GCM wird dieser MAC «Auth-Tag» genannt.
+
+Hinweis: die Daten beziehen sich auf den Test Case 16 aus der offiziellen GCM Spezifikation.
     </system:String>
     <system:String x:Key="Step2">
 Der «Counter 0»-Block wird aus dem Initialisierungsvektor (IV) hergeleitet. 
-Dazu wird zum IV ein Padding hinzugefügt, so dass schlussendlich ein Block mit 128Bit resultiert.
+Dazu wird zum 96 Bit-langen IV ein 32 Bit langes Padding von Nullbits und einer 1 am Ende hinzugefügt, so dass schlussendlich ein Block mit 128Bit resultiert.
+
+Hinweis: die Daten beziehen sich auf den Test Case 16 aus der offiziellen GCM Spezifikation.
     </system:String>
     <system:String x:Key="Step3Title">Verschlüsselung</system:String>
     <system:String x:Key="Step3">
 Auf den «Counter 0»-Block wird eine Increment-Funktion angewendet, woraus der «Counter 1» resultiert.
     </system:String>
     <system:String x:Key="Step4">
-Der «Counter 1»-Block wird anschliessend mit dem Schlüssel K AES-verschlüsselt.
+Der «Counter 1»-Block wird anschliessend mit dem Schlüssel K AES-verschlüsselt, so dass ein Output von 128 pseudo-zufälligen Bits generiert wird, die vom Schlüssel K und dem Counterwert abhängen.
     </system:String>
     <system:String x:Key="Step5">
 Der Plaintext wird in 128Bit-Blöcke aufgeteilt. Der erste Plaintext-Block wird mit dem zuvor AES-verschlüsselten «Counter 1»-Block XOR-verknüpft.
@@ -42,7 +46,7 @@ Daraus entsteht der erste Ciphertext-Block.
     </system:String>
     <system:String x:Key="Step6Title">Additional Authenticated Data</system:String>
     <system:String x:Key="Step6">
-Die Additional Authenticated Data (AAD) ist jener Teil der Eingabedaten, welcher durch den AES-GCM-Algorithmus zwar Authentifiziert, aber nicht verschlüsselt wird.
+Die Additional Authenticated Data (AAD) ist jener Teil der Eingabedaten, welcher durch den AES-GCM-Algorithmus zwar authentisiert, aber nicht verschlüsselt wird.
 Die Eingabe dieser Daten ist optional. Die Authentizität wird durch die Bildung eines MAC gewährleistet.
     </system:String>
     <system:String x:Key="Step7">
@@ -51,7 +55,7 @@ Dabei steht MultH für die Multiplikation innerhalb des Galois-Feldes. Die dabei
     </system:String>
     <system:String x:Key="Step8">
 Ein Beispiel für AAD ist der Versand von Daten über einen unsicheren Kanal.
-Die Payload wird verschlüsselt und authentifiziert, die IP-Adressen jedoch nur authentifiziert.
+Die Payload wird verschlüsselt und authentisiert, die IP-Adressen jedoch nur authentisiert.
 Diese dürfen für die Übertragung nicht verschlüsselt werden, da dem Router das Ziel sonst nicht bekannt ist.
 Werden keine Daten verschlüsselt, sondern nur die Integritätsprüfung durchlaufen, spricht man von einem Galois Message Authentication Code (GMAC).
     </system:String>
@@ -64,7 +68,8 @@ Das Resultat der XOR-Verknüpfung von Ciphertext und der Galois-Feld Multiplikat
     </system:String>
     <system:String x:Key="Step11Title">Wiederholung</system:String>
     <system:String x:Key="Step11">
-Der Schritt Verschlüsselung, sowie der Schritt Ciphertext-Authentifizierung, werden nun so lange wiederholt, bis alle 128Bit-Blöcke des Plaintextes verschlüsselt sind und der MAC darüber berechnet wurde. Ist der letzte Plaintext-Block kleiner als 128Bit wird dessen Grösse zur Berechnung verwendet.
+Der Schritt Verschlüsselung, sowie der Schritt Ciphertext-Authentifizierung, werden nun so lange wiederholt, bis alle 128 Bit-Blöcke des Plaintextes verschlüsselt sind und der MAC darüber berechnet wurde.
+Ist der letzte Plaintext-Block kleiner als 128 Bit wird dessen Grösse zur Berechnung kein Padding angewendet, sondern der restliche Plaintext bitweise mittels XOR verschlüsselt.
     </system:String>
     <system:String x:Key="Step12Title">Abschluss und Rückgabe</system:String>
     <system:String x:Key="Step12">
@@ -73,11 +78,13 @@ Es folgt eine XOR-Verknüpfung mit dem Resultat aus der Galois-Feld Multiplikati
 Nach der Verknüpfung wird dieser Wert nochmals in einem Galois-Feld mit dem Hash-Subkey multipliziert.
     </system:String>
     <system:String x:Key="Step13">
-Da der IV ebenfalls authentifiziert werden soll, und dieser bereits im «Counter 0»-Block enthalten ist, wird dieser Block ebenfalls in den MAC miteinberechnet. Dies geschieht indem der «Counter 0»-Block zuerst, wie alle anderen Blöcke, mit dem Schlüssel K AES verschlüsselt wird.
-Anschliessend wird auf diese AES Verschlüsselung und das Resultat der vorhergehenden Galois-Multiplikation die XOR-Funktion angewendet.
+Da der IV ebenfalls authentisiert werden soll, und dieser bereits im «Counter 0»-Block enthalten ist, wird dieser Block ebenfalls in den MAC miteinberechnet. Dies geschieht indem der «Counter 0»-Block zuerst, wie alle anderen Blöcke, mit dem Schlüssel K AES-verschlüsselt wird.
+Anschliessend wird auf diese AES-Verschlüsselung und das Resultat der vorhergehenden Galois-Multiplikation die XOR-Funktion angewendet.
     </system:String>
     <system:String x:Key="Step14">
-Der berechnete MAC, bei AES-GCM Tag genannt, ist nun fast berechnet. Es findet nur noch ein Truncating, also eine Verkürzung, der Bit-Sequenz auf die gewünschte Länge statt. Dazu wird die verlangte Anzahl Most Significant Bits aus dem Resultat der letzten XOR-Verknüpfung verwendet.
+Der berechnete MAC, bei AES-GCM Auth Tag genannt, ist nun fast berechnet. 
+Es findet nur noch ein Truncating, also eine Verkürzung, der Bit-Sequenz auf die gewünschte Länge statt. Dazu wird die verlangte Anzahl der Most Significant Bits aus dem Resultat der letzten XOR-Verknüpfung verwendet.
+Um eine grösstmögliche Sicherheit zu erreichen wird aber meist der ungekürzte 128 Bit grosse Auth Tag verwendet.
     </system:String>
     <system:String x:Key="Step15">
 Zuletzt werden Ciphertext und Authentication Tag zurückgegeben.
@@ -101,6 +108,9 @@ Einerseits können alle Counter-Blöcke vorberechnet werden, sobald der IV und d
 Weiter bietet die Verwendung des Counter-Block Mode (CTR) folgenden Vorteil gegenüber dem Electronic Codebook Mode (ECB-Mode): 
 Wird beispielsweise ein Bild, mit vielen gleichen Farbpunkten, verschlüsselt, so sehen die Plaintext-Blöcke mit gleichen Farbpunkten nach der Verschlüsselung beim ECB-Mode alle gleich aus. Beim Counter-Block Mode wird dies mittels jeweils unterschiedlichen Counter-Blöcken verhindert und es können beispielsweise bei Bildern keine Muster mehr erkannt werden.
     </system:String>
+    
+        <!--StepByStepPage Input & Output-->
+    
     
     
     <!--Overview Ressources-->
