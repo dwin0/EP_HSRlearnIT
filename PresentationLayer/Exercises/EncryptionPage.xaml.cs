@@ -56,9 +56,9 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         {
             SaveMultiFileDialog saveMultiFileDialog = new SaveMultiFileDialog()
             {
-                Owner = Application.Current.MainWindow
+                Owner = Application.Current.MainWindow,
+                WindowStartupLocation = WindowStartupLocation.CenterOwner
             };
-            saveMultiFileDialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             saveMultiFileDialog.Show();
         }
 

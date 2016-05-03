@@ -29,7 +29,7 @@ Hinweis: die Daten beziehen sich auf den Test Case 16 aus der offiziellen GCM Sp
     </system:String>
     <system:String x:Key="Step2">
 Der «Counter 0»-Block wird aus dem Initialisierungsvektor (IV) hergeleitet. 
-Dazu wird zum 96 Bit-langen IV ein 32 Bit langes Padding von Nullbits und einer 1 am Ende hinzugefügt, so dass schlussendlich ein Block mit 128Bit resultiert.
+Dazu wird zum 96 Bit-langen IV ein 32 Bit langes Padding von Nullbits und einer 1 am Ende hinzugefügt, so dass schlussendlich ein Block mit 128 Bit resultiert.
 
 Hinweis: die Daten beziehen sich auf den Test Case 16 aus der offiziellen GCM Spezifikation.
     </system:String>
@@ -41,7 +41,7 @@ Auf den «Counter 0»-Block wird eine Increment-Funktion angewendet, woraus der 
 Der «Counter 1»-Block wird anschliessend mit dem Schlüssel K AES-verschlüsselt, so dass ein Output von 128 pseudo-zufälligen Bits generiert wird, die vom Schlüssel K und dem Counterwert abhängen.
     </system:String>
     <system:String x:Key="Step5">
-Der Plaintext wird in 128Bit-Blöcke aufgeteilt. Der erste Plaintext-Block wird mit dem zuvor AES-verschlüsselten «Counter 1»-Block XOR-verknüpft.
+Der Plaintext wird in 128 Bit-Blöcke aufgeteilt. Der erste Plaintext-Block wird mit dem zuvor AES-verschlüsselten «Counter 1»-Block XOR-verknüpft.
 Daraus entsteht der erste Ciphertext-Block.
     </system:String>
     <system:String x:Key="Step6Title">Additional Authenticated Data</system:String>
@@ -73,7 +73,7 @@ Ist der letzte Plaintext-Block kleiner als 128 Bit wird dessen Grösse zur Berec
     </system:String>
     <system:String x:Key="Step12Title">Abschluss und Rückgabe</system:String>
     <system:String x:Key="Step12">
-Damit keine Attacken auf den MAC, welcher auf einer variablen Anzahl Input-Bits basiert, gemacht werden können, wird sowohl die Länge der AAD (len(A)), als auch die Ciphertext-Länge (len(C)) mitauthentifiziert. Dazu werden die beiden Längen, in 64Bit-Repräsentation, aneinandergehängt.
+Damit keine Attacken auf den MAC, welcher auf einer variablen Anzahl Input-Bits basiert, gemacht werden können, wird sowohl die Länge der AAD (len(A)), als auch die Ciphertext-Länge (len(C)) mitauthentifiziert. Dazu werden die beiden Längen, in 64 Bit-Repräsentation, aneinandergehängt.
 Es folgt eine XOR-Verknüpfung mit dem Resultat aus der Galois-Feld Multiplikation des allerletzten Ciphertextes.
 Nach der Verknüpfung wird dieser Wert nochmals in einem Galois-Feld mit dem Hash-Subkey multipliziert.
     </system:String>
