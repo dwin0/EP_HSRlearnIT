@@ -37,7 +37,7 @@ namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
                 List<string> lines = File.ReadAllLines(filePath).ToList<string>();
                 lines.RemoveRange(0, _deleteRows);
                 File.WriteAllLines(filePath, lines);
-                FileManager.AppendContentToFile(filePath, "\n The oldest " + _deleteRows + " lines are removed. \n");
+                FileManager.AppendContentToFile(filePath, $"{Environment.NewLine}The oldest { _deleteRows} lines are removed.{Environment.NewLine}");
             }
         }
 
