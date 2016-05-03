@@ -135,7 +135,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
 
                 if (hexValue.Length % 2 == 0)
                 {
-                    textBox.Text = Library.BytesToString(Library.HexStringToByteArray(hexValue));
+                    textBox.Text = Library.BytesToString(Library.HexStringToDecimalByteArray(hexValue));
                     textBox.TextChanged += TextBox_TextChanged;
                 }
             }

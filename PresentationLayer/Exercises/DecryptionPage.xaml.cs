@@ -83,15 +83,15 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             ChangeHexBox(keyString.ToCharArray(), HexDecryptionPasswortBox);
 
             //get the values of all fields which are needed to start the decryption
-            byte[] key = Library.HexStringToByteArray(HexDecryptionPasswortBox.Text);
-            byte[] ciphertext = Library.HexStringToByteArray(HexCiphertextBox.Text);
-            byte[] aad = Library.HexStringToByteArray(HexAadBox.Text);
-            byte[] tag = Library.HexStringToByteArray(HexTagBox.Text);
+            byte[] key = Library.HexStringToDecimalByteArray(HexDecryptionPasswortBox.Text);
+            byte[] ciphertext = Library.HexStringToDecimalByteArray(HexCiphertextBox.Text);
+            byte[] aad = Library.HexStringToDecimalByteArray(HexAadBox.Text);
+            byte[] tag = Library.HexStringToDecimalByteArray(HexTagBox.Text);
 
             byte[] iv = null;
             if (HexIvBox.Text != "")
             {
-                iv = Library.HexStringToByteArray(HexIvBox.Text);
+                iv = Library.HexStringToDecimalByteArray(HexIvBox.Text);
             }
             else
             {

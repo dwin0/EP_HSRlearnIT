@@ -33,14 +33,14 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             ChangeHexBox(keyString.ToCharArray(), HexEncryptionPasswordBox);
 
             //get the values of all fields which are needed to start the encryption
-            byte[] key = Library.HexStringToByteArray(HexEncryptionPasswordBox.Text);
-            byte[] plaintext = Library.HexStringToByteArray(HexPlaintextBox.Text);
-            byte[] aad = Library.HexStringToByteArray(HexAadBox.Text);
+            byte[] key = Library.HexStringToDecimalByteArray(HexEncryptionPasswordBox.Text);
+            byte[] plaintext = Library.HexStringToDecimalByteArray(HexPlaintextBox.Text);
+            byte[] aad = Library.HexStringToDecimalByteArray(HexAadBox.Text);
 
             byte[] iv = null;
             if (HexIvBox.Text != "")
             {
-                iv = Library.HexStringToByteArray(HexIvBox.Text);
+                iv = Library.HexStringToDecimalByteArray(HexIvBox.Text);
             }
             else
             {
