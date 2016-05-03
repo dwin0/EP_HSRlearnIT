@@ -21,8 +21,8 @@ namespace EP_HSRlearnIT.BusinessLayerTests.CryptoToolsTest
             byte[] resultingTag = returnValue.Item1;
             byte[] resultingCiphertext = returnValue.Item2;
 
-            byte[] expectedTag = library.HexStringToByteArray("d0d1c8a799996bf0265b98b5d48ab919");
-            byte[] expectedCiphertext = library.HexStringToByteArray("cea7403d4d606b6e074ec5d3baf39d18");
+            byte[] expectedTag = library.HexStringToDecimalByteArray("d0d1c8a799996bf0265b98b5d48ab919");
+            byte[] expectedCiphertext = library.HexStringToDecimalByteArray("cea7403d4d606b6e074ec5d3baf39d18");
 
             CollectionAssert.AreEqual(expectedTag, resultingTag);
             CollectionAssert.AreEqual(expectedCiphertext, resultingCiphertext);
@@ -52,8 +52,8 @@ namespace EP_HSRlearnIT.BusinessLayerTests.CryptoToolsTest
             byte[] resultingTag = returnValue.Item1;
             byte[] resultingCiphertext = returnValue.Item2;
 
-            byte[] expectedTag = library.HexStringToByteArray("d0d1c8a799996bf0265b98b5d48ab919");
-            byte[] expectedCiphertext = library.HexStringToByteArray("cea7403d4d606b6e074ec5d3baf39d18");
+            byte[] expectedTag = library.HexStringToDecimalByteArray("d0d1c8a799996bf0265b98b5d48ab919");
+            byte[] expectedCiphertext = library.HexStringToDecimalByteArray("cea7403d4d606b6e074ec5d3baf39d18");
 
             CollectionAssert.AreEqual(expectedTag, resultingTag);
             CollectionAssert.AreEqual(expectedCiphertext, resultingCiphertext);
@@ -64,10 +64,10 @@ namespace EP_HSRlearnIT.BusinessLayerTests.CryptoToolsTest
         {
             AesGcmCryptoLibrary library = new AesGcmCryptoLibrary();
             byte[] key = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            byte[] cyphertext = library.HexStringToByteArray("cea7403d4d606b6e074ec5d3baf39d18");
+            byte[] cyphertext = library.HexStringToDecimalByteArray("cea7403d4d606b6e074ec5d3baf39d18");
             byte[] iv = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
             byte[] aad = {};
-            byte[] tag = library.HexStringToByteArray("d0d1c8a799996bf0265b98b5d48ab919");
+            byte[] tag = library.HexStringToDecimalByteArray("d0d1c8a799996bf0265b98b5d48ab919");
 
             byte[] returnValue = library.Decrypt(key,cyphertext, iv, aad, tag);
 
@@ -81,10 +81,10 @@ namespace EP_HSRlearnIT.BusinessLayerTests.CryptoToolsTest
         {
             AesGcmCryptoLibrary library = new AesGcmCryptoLibrary();
             byte[] key = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            byte[] cyphertext = library.HexStringToByteArray("cea7403d4d606b6e074ec5d3baf39d18");
+            byte[] cyphertext = library.HexStringToDecimalByteArray("cea7403d4d606b6e074ec5d3baf39d18");
             byte[] iv = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
             byte[] aad = { };
-            byte[] tag = library.HexStringToByteArray("aa");
+            byte[] tag = library.HexStringToDecimalByteArray("aa");
 
             library.Decrypt(key, cyphertext, iv, aad, tag);
         }
@@ -94,10 +94,10 @@ namespace EP_HSRlearnIT.BusinessLayerTests.CryptoToolsTest
         {
             AesGcmCryptoLibrary library = new AesGcmCryptoLibrary();
             byte[] key = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            byte[] cyphertext = library.HexStringToByteArray("cea7403d4d606b6e074ec5d3baf39d18");
+            byte[] cyphertext = library.HexStringToDecimalByteArray("cea7403d4d606b6e074ec5d3baf39d18");
             byte[] iv = null;
             byte[] aad = { };
-            byte[] tag = library.HexStringToByteArray("d0d1c8a799996bf0265b98b5d48ab919");
+            byte[] tag = library.HexStringToDecimalByteArray("d0d1c8a799996bf0265b98b5d48ab919");
 
             byte[] returnValue = library.Decrypt(key, cyphertext, iv, aad, tag);
 
@@ -134,10 +134,10 @@ namespace EP_HSRlearnIT.BusinessLayerTests.CryptoToolsTest
         }
 
         [TestMethod]
-        public void HexStringToByteArrayTest()
+        public void HexStringToDecimalByteArrayTest()
         {
             AesGcmCryptoLibrary library = new AesGcmCryptoLibrary();
-            byte[] resultingHex = library.HexStringToByteArray("54657374");
+            byte[] resultingHex = library.HexStringToDecimalByteArray("54657374");
             byte[] expectedHex = { 84, 101, 115, 116 };
 
             CollectionAssert.AreEqual(expectedHex, resultingHex);

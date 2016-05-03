@@ -130,7 +130,7 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
         /// </summary>
         /// <param name="hex"></param>
         /// <returns>Returns an Array which contains Hex Bytes</returns>
-        public byte[] HexStringToByteArray(string hex)
+        public byte[] HexStringToDecimalByteArray(string hex)
         {
             return Enumerable.Range(0, hex.Length)
                              .Where(x => x % 2 == 0)

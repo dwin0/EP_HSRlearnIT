@@ -7,51 +7,5 @@
       d:DesignHeight="300" d:DesignWidth="300"
       Title="MainPage">
 
-    <UniformGrid Background="White">
-
-        <Border Style="{StaticResource TileBorderStyle}">
-            <Grid PreviewMouseLeftButtonDown="OverviewScreen_Click" MouseEnter="MenuTile_OnMouseEnter" MouseLeave="MenuTile_OnMouseLeave" Background="{StaticResource BackAreaBrush}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="2*"/>
-                    <RowDefinition Height="2*"/>
-                </Grid.RowDefinitions>
-                <Image Grid.Row="1" Source="Images/eye-icon.png" Stretch="Uniform"/>
-                <TextBlock Grid.Row="2" Text="Übersicht AES GCM" Style="{StaticResource TileContentStyle}"/>
-            </Grid>
-        </Border>
-        <Border Style="{StaticResource TileBorderStyle}">
-            <Grid PreviewMouseLeftButtonDown="StepByStep_Click" MouseEnter="MenuTile_OnMouseEnter" MouseLeave="MenuTile_OnMouseLeave" Background="{StaticResource BackAreaBrush}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="2*"/>
-                    <RowDefinition Height="2*"/>
-                </Grid.RowDefinitions>
-                <Image Grid.Row="1" Source="Images/step-icon.png" Stretch="Uniform"/>
-                <TextBlock  Grid.Row="2" Text="Schritt für Schritt Anleitung" Style="{StaticResource TileContentStyle}"/>
-            </Grid>
-        </Border>
-        <Border Style="{StaticResource TileBorderStyle}">
-            <Grid PreviewMouseLeftButtonDown="EncryptionDecryption_Click" MouseEnter="MenuTile_OnMouseEnter" MouseLeave="MenuTile_OnMouseLeave" Background="{StaticResource BackAreaBrush}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="2*"/>
-                    <RowDefinition Height="2*"/>
-                </Grid.RowDefinitions>
-                <Image Name="EncryptionDecryption" Grid.Row="1" Source="Images/key-icon.png" Stretch="Uniform"/>
-                <TextBlock Grid.Row="2" Text="Ver- und Entschlüsselung" Style="{StaticResource TileContentStyle}"/>
-            </Grid>
-        </Border>
-        <Border Style="{StaticResource TileBorderStyle}">
-            <Grid PreviewMouseLeftButtonDown="DragAndDrop_Click" MouseEnter="MenuTile_OnMouseEnter" MouseLeave="MenuTile_OnMouseLeave" Background="{StaticResource BackAreaBrush}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="2*"/>
-                    <RowDefinition Height="2*"/>
-                </Grid.RowDefinitions>
-                <Image Grid.Row="1" Source="Images/drag-icon.png" Stretch="Uniform"/>
-                <TextBlock Grid.Row="2" Text="Drag- und Drop - Spiel" Style="{StaticResource TileContentStyle}"/>
-            </Grid>
-        </Border>
-    </UniformGrid>
+    <UniformGrid Name="MenuGrid" Background="White"/>
 </Page>
