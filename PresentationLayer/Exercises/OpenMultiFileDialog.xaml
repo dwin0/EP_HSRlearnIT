@@ -23,23 +23,23 @@
             <TextBlock Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">Suchen</TextBlock>
             
             <StackPanel Grid.Column="0" Grid.Row="2">
-                <TextBlock Text="IV" HorizontalAlignment="Center" Margin="5"/>
-                <TextBlock Text="AAD" HorizontalAlignment="Center" Margin="5"/>
                 <TextBlock Text="Ciphertext" HorizontalAlignment="Center" Margin="5"/>
+                <TextBlock Text="AAD" HorizontalAlignment="Center" Margin="5"/>
+                <TextBlock Text="IV" HorizontalAlignment="Center" Margin="5"/>
                 <TextBlock Text="Tag" HorizontalAlignment="Center" Margin="5"/>
             </StackPanel>
             
             <StackPanel Grid.Column="1" Grid.Row="2">
-                <TextBox Name="TextIv" BorderThickness="0.6" BorderBrush="Black" Margin="5" />
-                <TextBox Name="TextAad" BorderThickness="0.6" BorderBrush="Black" Margin="5" />
                 <TextBox Name="TextCiphertext" BorderThickness="0.6" BorderBrush="Black" Margin="5" />
+                <TextBox Name="TextAad" BorderThickness="0.6" BorderBrush="Black" Margin="5" />
+                <TextBox Name="TextIv" BorderThickness="0.6" BorderBrush="Black" Margin="5" />
                 <TextBox Name="TextTag" BorderThickness="0.6" BorderBrush="Black" Margin="5" />
             </StackPanel>
             
             <StackPanel Grid.Column="2" Grid.Row="2">
-                <Button Name="ButtonIv" Click="Search_OnClick" Content="Durchsuchen..." HorizontalAlignment="Center" VerticalAlignment="Center" Margin="4" />
+                <Button Name="ButtonCiphertext" Click="Search_OnClick" Content="Durchsuchen..." HorizontalAlignment="Center" VerticalAlignment="Center" Margin="4" />
                 <Button Name="ButtonAad" Click="Search_OnClick" Content="Durchsuchen..." HorizontalAlignment="Center" VerticalAlignment="Center" Margin="4" />
-                <Button Name="ButtonCiphertext" Click="Search_OnClick" Content="Durchsuchen..." HorizontalAlignment="Center" VerticalAlignment="Center" Margin="4"/>
+                <Button Name="ButtonIv" Click="Search_OnClick" Content="Durchsuchen..." HorizontalAlignment="Center" VerticalAlignment="Center" Margin="4"/>
                 <Button Name="ButtonTag" Click="Search_OnClick" Content="Durchsuchen..." HorizontalAlignment="Center" VerticalAlignment="Center" Margin="4" />
             </StackPanel>
         </Grid>
