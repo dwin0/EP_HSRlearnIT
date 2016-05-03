@@ -34,7 +34,7 @@ namespace EP_HSRlearnITTests
             //input eingeben, es handelt sich um die Hex Werte des Test Case 14 aus der offiziellen GCM Spezifikation.
             var ivInput = window.Get<TextBox>("HexIvBox");
             ivInput.Text = "000000000000000000000000";
-            var plaintextInput = window.Get<TextBox>("HexPlainTextBox");
+            var plaintextInput = window.Get<TextBox>("HexPlaintextBox");
             plaintextInput.Text = "00000000000000000000000000000000";
             var keyInput = window.Get<TextBox>("HexEncryptionPasswordBox");
             keyInput.Text = "0000000000000000000000000000000000000000000000000000000000000000";
@@ -42,7 +42,7 @@ namespace EP_HSRlearnITTests
             //verschlüsseln lassen und dann auswerte, ob erwartetes Ergebnis erhalten
             var buttenEncrypt = window.Get<Button>("EncryptionButton");
             buttenEncrypt.Click();
-            var ciphertextField = window.Get<TextBox>("HexCipherTextBox");
+            var ciphertextField = window.Get<TextBox>("HexCiphertextBox");
             string ciphertextOutput = ciphertextField.Text;
             var tagField = window.Get<TextBox>("HexTagBox");
             string tagOutput = tagField.Text;
