@@ -85,6 +85,9 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MenuTile.xaml.cs">
+      <DependentUpon>MenuTile.xaml</DependentUpon>
+    </Compile>
     <Compile Include="StringCollection.cs" />
     <Compile Include="Tutorials\AesGcmOverviewPage.xaml.cs">
       <DependentUpon>AesGcmOverviewPage.xaml</DependentUpon>
@@ -122,6 +125,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MenuTile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

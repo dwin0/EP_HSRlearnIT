@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -14,6 +15,13 @@ namespace EP_HSRlearnIT.PresentationLayer
     public partial class MainPage
     {
         #region Private Members
+        private readonly Dictionary<string, KeyValuePair<string, Page>> _tileDictionary = new Dictionary<string, KeyValuePair<string, Page>>()
+            {
+                { "Übersicht AES GCM", new KeyValuePair<string, Page>(@"Images/eye-icon.png", new AesGcmOverviewPage())},
+                { "Schritt für Schritt Anleitung", new KeyValuePair<string, Page>(@"Images/step-icon.png", new StepByStepPage())},
+                { "Ver- und Entschlüsselung", new KeyValuePair<string, Page>(@"Images/key-icon.png", new EncryptionDecyrptionPage())},
+                { "Drag- und Drop - Spiel", new KeyValuePair<string, Page>("Images/drag-icon.png", new DragDropPage())}
+            };
 
         private readonly SolidColorBrush _backgroundBrush = Application.Current.FindResource("TileBackgroundBrush") as SolidColorBrush;
         private readonly SolidColorBrush _borderBrush = Application.Current.FindResource("TileBorderBrush") as SolidColorBrush;
@@ -22,51 +30,59 @@ namespace EP_HSRlearnIT.PresentationLayer
         #region Constructors
 
         /// <summary>
-        /// Method to initialize the XAML
+        /// Method to initialize the XAML and load all MenuTiles
         /// </summary>
         public MainPage()
         {
             InitializeComponent();
+            LoadTiles();
         }
         #endregion
 
         #region Private Methods
 
-        private void OverviewScreen_Click(object sender, RoutedEventArgs e)
+        private void LoadTiles()
         {
-            NavigationService?.Navigate(new AesGcmOverviewPage());
+            foreach (var tileEntry in _tileDictionary)
+            {
+                MenuTile tile = new MenuTile(tileEntry.Key, tileEntry.Value.Key);
+                tile.PreviewMouseLeftButtonDown += OnTileClick;
+                tile.MouseEnter += MenuTile_OnMouseEnter;
+                tile.MouseLeave += MenuTile_OnMouseLeave;
+                MenuGrid.Children.Add(tile);
+            }
         }
 
-        private void StepByStep_Click(object sender, RoutedEventArgs e)
+        private void OnTileClick(object sender, RoutedEventArgs e)
         {
-            NavigationService?.Navigate(new StepByStepPage());
-        }
+            MenuTile tile = sender as MenuTile;
+            if (tile == null) return;
 
-        private void EncryptionDecryption_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService?.Navigate(new EncryptionDecyrptionPage());
-        }
-
-        private void DragAndDrop_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService?.Navigate(new DragDropPage());
+            KeyValuePair<string, Page> toNavigatePage;
+            bool available = _tileDictionary.TryGetValue(tile.TileText.Text, out toNavigatePage);
+            if (available)
+            {
+                NavigationService?.Navigate(toNavigatePage.Value);
+            }
         }
 
         private void MenuTile_OnMouseEnter(object sender, MouseEventArgs e)
         {
-            Border parent = (sender as Grid)?.Parent as Border;
-            if (parent != null)
+            MenuTile tile = sender as MenuTile;
+
+            if (tile != null)
             {
-                parent.BorderBrush = _borderBrush;
+                tile.TileBorder.BorderBrush = _borderBrush;
             }
         }
 
         private void MenuTile_OnMouseLeave(object sender, MouseEventArgs e)
         {
-            Border parent = (sender as Grid)?.Parent as Border;
-            if (parent != null)
+            MenuTile tile = sender as MenuTile;
+
+            if (tile != null)
             {
-                parent.BorderBrush = _backgroundBrush;
+                tile.TileBorder.BorderBrush = _backgroundBrush;
             }
         }
 
