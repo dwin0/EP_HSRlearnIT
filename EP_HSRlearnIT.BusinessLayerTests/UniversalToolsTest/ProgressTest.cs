@@ -76,9 +76,11 @@ namespace EP_HSRlearnIT.BusinessLayerTests.UniversalToolsTest
             Assert.AreEqual(0, allProgesses1.Count);
 
             Progress.SaveProgress("Progress42", 42);
+            allProgesses1 = Progress.GetProgress();
             Assert.AreEqual(1, allProgesses1.Count);
 
             Progress.CleanProgress();
+            allProgesses1 = Progress.GetProgress();
             Assert.AreEqual(0, allProgesses1.Count);
         }
 

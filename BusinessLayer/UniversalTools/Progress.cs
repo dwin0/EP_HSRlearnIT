@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
 {
@@ -35,7 +36,7 @@ namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
         /// <returns>Dictionary contains all saved progresses</returns>
         public static Dictionary<object, object> GetProgress()
         {
-            return AppProgress;
+            return AppProgress.ToDictionary(entry => entry.Key, entry => entry.Value);
         }
 
         /// <summary>

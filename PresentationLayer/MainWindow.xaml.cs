@@ -60,10 +60,8 @@ namespace EP_HSRlearnIT.PresentationLayer
                 case "Drag- und Drop Spiel":
                     MainFrame.Navigate(new DragDropPage());
                     break;
-                default:
-                    CloseMenu();
-                    break;
             }
+            CloseMenu();
         }
 
         private void CloseMenu()

@@ -7,7 +7,7 @@
         Icon="images/icon.png"
         WindowStartupLocation="CenterScreen"
         Title="MainWindow" Height="620" Width="1000" MinWidth="0" MinHeight="0">
-    <Grid Name="MainGrid" Margin="50, 10, 50, 10" PreviewMouseDown="CollapseMenu">
+    <Grid Name="MainGrid" Margin="50, 10, 50, 10" Background="White" PreviewMouseDown="CollapseMenu">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*" MinWidth="200"/>
             <ColumnDefinition Width="5*"/>
