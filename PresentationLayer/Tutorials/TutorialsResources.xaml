@@ -128,7 +128,7 @@ der Ciphertext und das Tag zurückgegeben.</system:String>
 
         <!--Overview Background-->
     
-    <Image x:Key="BackgroundImage" Source="/Images/aead2.png" RenderOptions.BitmapScalingMode="HighQuality" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    <Image x:Key="BackgroundImage" Source="/Images/aead.png" RenderOptions.BitmapScalingMode="HighQuality" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center"/>
     <SolidColorBrush x:Key="BackAreaBrush" Color="#FFFFDCDC"/>
     <SolidColorBrush x:Key="NoBackAreaBrush" Color="White"/>
     

@@ -213,9 +213,6 @@
     <Resource Include="Images\dragdrop.PNG" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\aead.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\dragdrop7.png" />
     <Resource Include="Images\dragdrop8.png" />
     <Resource Include="Images\dragdrop9.png" />
@@ -258,9 +255,6 @@
     <Resource Include="Images\info.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\aead2.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\eye-icon.png" />
   </ItemGroup>
   <ItemGroup>
@@ -281,6 +275,9 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\aead.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
