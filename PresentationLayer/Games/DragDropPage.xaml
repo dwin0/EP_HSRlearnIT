@@ -15,22 +15,10 @@
             </Rectangle>
 
             <Button Name="Reset" Content="Reset" Click="OnResetClick" Height="40" Width="90" Canvas.Left="800" Canvas.Bottom="30"/>
-
-            <TextBox Name="GameInstruction" Text="{StaticResource ResourceKey=GameInstruction}" FontSize="15" IsReadOnly="True" Background="AliceBlue" Foreground="black" BorderBrush="Blue" BorderThickness="2" Width="750" Height="350" Canvas.Left="-50" Canvas.Top="55" TextWrapping="Wrap"/>
-
-            <Button Name="ButtonCloseGameInstruction" Content="Schliessen" Canvas.Top="330" Canvas.Left="600" Width="80" Height="35" Click="CloseGameInstruction" />
-
+            <TextBox Name="GameInstruction" Panel.ZIndex="1" Text="{StaticResource ResourceKey=GameInstruction}" FontSize="15" IsReadOnly="True" Background="AliceBlue" Foreground="black" BorderBrush="Blue" BorderThickness="2" Width="750" Height="350" Canvas.Left="-50" Canvas.Top="55" TextWrapping="Wrap"/>
+            <Button Name="ButtonCloseGameInstruction" Panel.ZIndex="2"  Content="Schliessen" Canvas.Top="330" Canvas.Left="600" Width="80" Height="35" Click="CloseGameInstruction" />
             <Button Name="Check"  Height="40" Width="90" Content="Resultat" Canvas.Left="700" Canvas.Bottom="30" Click="Check_OnClick" IsEnabled="False"/>
-
-            <StackPanel>
-                <Button Name="BtnOpen" HorizontalAlignment ="Left" Width="100" Margin="580,670,0,30" Content="Spielanleitung" />
-                <Popup Name="Popup" PlacementTarget="{Binding ElementName=BtnOpen}" AllowsTransparency="True" >
-                    <Grid Width="200" Height="200" Background="White" Margin="150">
-                        <Button Name="BtnClose" Content="Popup schließen"/>
-                    </Grid>
-                </Popup>
-            </StackPanel>
-
+            <Button Name="OpenInstructionButton" Visibility="Visible" HorizontalAlignment ="Left" Width="100" Margin="580,670,0,30" Content="Spielanleitung" Click="OpenInstruction"/>
         </Canvas>
     </Viewbox>
 </Page>
