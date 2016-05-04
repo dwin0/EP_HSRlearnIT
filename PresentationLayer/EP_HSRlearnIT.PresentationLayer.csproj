@@ -241,7 +241,6 @@
     <Resource Include="Images\Step14.png" />
     <Resource Include="Images\Step15.png" />
     <Resource Include="Images\Step16.png" />
-    <Resource Include="Images\Step17.png" />
     <Resource Include="Images\Step18.png" />
     <Resource Include="Images\Step2.png" />
     <Resource Include="Images\Step3.png" />
@@ -253,9 +252,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Step8.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Step0.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\recycling.png" />
@@ -285,6 +281,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\aead.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Step17.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Step0.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
