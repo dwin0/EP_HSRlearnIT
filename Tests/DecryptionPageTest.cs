@@ -28,15 +28,17 @@ namespace EP_HSRlearnITTests
             var buttonDecr = window.Get<Button>("Decryption");
             buttonDecr.Click();
 
-            //input eingeben, es handelt sich um die Hex Werte des Test Case 14 aus der offiziellen GCM Spezifikation.
+            //input eingeben, es handelt sich um die Hex Werte des Test Cases 16 aus der offiziellen GCM Spezifikation.
             var ciphertextInput = window.Get<TextBox>("HexCiphertextBox");
-            ciphertextInput.Text = "cea7403d4d606b6e074ec5d3baf39d18";
+            ciphertextInput.Text = "522dc1f099567d07f47f37a32a84427d643a8cdcbfe5c0c97598a2bd2555d1aa8cb08e48590dbb3da7b08b1056828838c5f61e6393ba7a0abcc9f662";
+            var aadInput = window.Get<TextBox>("HexAadBox");
+            aadInput.Text = "feedfacedeadbeeffeedfacedeadbeefabaddad2";
             var ivInput = window.Get<TextBox>("HexIvBox");
-            ivInput.Text = "000000000000000000000000";
+            ivInput.Text = "cafebabefacedbaddecaf888";
             var tagInput = window.Get<TextBox>("HexTagBox");
-            tagInput.Text = "d0d1c8a799996bf0265b98b5d48ab919";
+            tagInput.Text = "76fc6ece0f4e1768cddf8853bb2d551b";
             var keyInput = window.Get<TextBox>("HexDecryptionPasswortBox");
-            keyInput.Text = "0000000000000000000000000000000000000000000000000000000000000000";
+            keyInput.Text = "feffe9928665731c6d6a8f9467308308feffe9928665731c6d6a8f9467308308";
 
             //entschlüsseln lassen und dann auswerten, ob erwartetes Ergebnis erhalten
             var buttenEncrypt = window.Get<Button>("DecryptionButton");
@@ -44,7 +46,7 @@ namespace EP_HSRlearnITTests
             var plaintextField = window.Get<TextBox>("HexPlaintextBox");
             string plaintextOutput = plaintextField.Text;
 
-            Assert.AreEqual("00000000000000000000000000000000", plaintextOutput);
+            Assert.AreEqual("d9313225f88406e5a55909c5aff5269a86a7a9531534f7da2e4c303d8a318a721c3c0c95956809532fcf0e2449a6b525b16aedf5aa0de657ba637b39", plaintextOutput);
 
             app.Close();
         }

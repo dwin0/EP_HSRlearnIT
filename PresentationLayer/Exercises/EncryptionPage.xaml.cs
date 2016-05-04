@@ -21,6 +21,9 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             HexPlaintextBox.Text = plaintext;
             HexIvBox.Text = iv;
             HexAadBox.Text = aad;
+            Progress.SaveProgress("EncryptionPage_HexPlaintextBox", plaintext);
+            Progress.SaveProgress("EncryptionPage_HexIvBox", iv);
+            Progress.SaveProgress("EncryptionPage_HexAadBox", aad);
         }
         #endregion
 

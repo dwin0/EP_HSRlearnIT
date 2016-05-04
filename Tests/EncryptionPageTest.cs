@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using System.Reflection;
-using System.Windows.Forms;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TestStack.White.Factory;
 using TestStack.White.UIItems;
@@ -31,13 +30,15 @@ namespace EP_HSRlearnITTests
             var buttonEncr = window.Get<Button>("Encryption");
             buttonEncr.Click();
 
-            //input eingeben, es handelt sich um die Hex Werte des Test Case 14 aus der offiziellen GCM Spezifikation.
+            //input eingeben, es handelt sich um die Hex Werte des Test Cases 16 aus der offiziellen GCM Spezifikation.
             var ivInput = window.Get<TextBox>("HexIvBox");
-            ivInput.Text = "000000000000000000000000";
+            ivInput.Text = "cafebabefacedbaddecaf888";
+            var aadInput = window.Get<TextBox>("HexAadBox");
+            aadInput.Text = "feedfacedeadbeeffeedfacedeadbeefabaddad2";
             var plaintextInput = window.Get<TextBox>("HexPlaintextBox");
-            plaintextInput.Text = "00000000000000000000000000000000";
+            plaintextInput.Text = "d9313225f88406e5a55909c5aff5269a86a7a9531534f7da2e4c303d8a318a721c3c0c95956809532fcf0e2449a6b525b16aedf5aa0de657ba637b39";
             var keyInput = window.Get<TextBox>("HexEncryptionPasswordBox");
-            keyInput.Text = "0000000000000000000000000000000000000000000000000000000000000000";
+            keyInput.Text = "feffe9928665731c6d6a8f9467308308feffe9928665731c6d6a8f9467308308";
 
             //verschlüsseln lassen und dann auswerte, ob erwartetes Ergebnis erhalten
             var buttenEncrypt = window.Get<Button>("EncryptionButton");
@@ -47,8 +48,8 @@ namespace EP_HSRlearnITTests
             var tagField = window.Get<TextBox>("HexTagBox");
             string tagOutput = tagField.Text;
 
-            Assert.AreEqual("cea7403d4d606b6e074ec5d3baf39d18", ciphertextOutput);
-            Assert.AreEqual("d0d1c8a799996bf0265b98b5d48ab919", tagOutput);
+            Assert.AreEqual("522dc1f099567d07f47f37a32a84427d643a8cdcbfe5c0c97598a2bd2555d1aa8cb08e48590dbb3da7b08b1056828838c5f61e6393ba7a0abcc9f662", ciphertextOutput);
+            Assert.AreEqual("76fc6ece0f4e1768cddf8853bb2d551b", tagOutput);
 
             app.Close();
         }
