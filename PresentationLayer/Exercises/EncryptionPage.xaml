@@ -43,7 +43,7 @@
                 </ToolTip>
             </Image.ToolTip>
         </Image>
-        <TextBox Grid.Row="1" Grid.Column="0" Name="IvBox" TextChanged="TextBox_TextChanged" LostKeyboardFocus="TextBox_LostKeyboardFocus" TextWrapping="Wrap" Margin="15,2,15,5"/>
+        <TextBox Grid.Row="1" Grid.Column="0" Name="UtfIvBox" TextChanged="TextBox_TextChanged" LostKeyboardFocus="TextBox_LostKeyboardFocus" TextWrapping="Wrap" Margin="15,2,15,5"/>
         <TextBlock Grid.Row="2" Grid.Column="0" Text="Additional Authenticated Data: (optional)" Name="AadBlock" Margin="15,0,10,0" HorizontalAlignment="Left"/>
         <Image Grid.Row="2" Grid.Column="0" Source="/Images/info.png" Width="18" Margin="240,0,10,0" HorizontalAlignment="Left" Name="InfoAad" ToolTipService.ShowDuration="60000">
             <Image.ToolTip>
@@ -52,9 +52,9 @@
                 </ToolTip>
             </Image.ToolTip>
         </Image>
-        <TextBox Grid.Row="3" Grid.Column="0" Name="AadBox" TextChanged="TextBox_TextChanged" LostKeyboardFocus="TextBox_LostKeyboardFocus" TextWrapping="Wrap" Margin="15,2,15,0" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+        <TextBox Grid.Row="3" Grid.Column="0" Name="UtfAadBox" TextChanged="TextBox_TextChanged" LostKeyboardFocus="TextBox_LostKeyboardFocus" TextWrapping="Wrap" Margin="15,2,15,0" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
         <TextBlock Grid.Row="4" Grid.Column="0" Text="Klartext:" Name="PlaintextBlock" Margin="15,5,15,0"/>
-        <TextBox Grid.Row="5" Grid.Column="0" Name="PlaintextBox" TextChanged="TextBox_TextChanged" LostKeyboardFocus="TextBox_LostKeyboardFocus" TextWrapping="Wrap" Margin="15,2,15,5" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+        <TextBox Grid.Row="5" Grid.Column="0" Name="UtfPlaintextBox" TextChanged="TextBox_TextChanged" LostKeyboardFocus="TextBox_LostKeyboardFocus" TextWrapping="Wrap" Margin="15,2,15,5" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
         <TextBlock Grid.Row="6" Grid.Column="0" Text="Key:" Name="EncryptionPasswordBlock" Margin="15,0,15,0" HorizontalAlignment="Left"/>
         <Image Grid.Row="6" Grid.Column="0" Source="/Images/info.png" Width="18" Margin="42,0,10,0" HorizontalAlignment="Left" Name="InfoKey" ToolTipService.ShowDuration="60000">
             <Image.ToolTip>
@@ -63,7 +63,7 @@
                 </ToolTip>
             </Image.ToolTip>
         </Image>
-        <TextBox Grid.Row="7" Grid.Column="0" Name="EncryptionPasswordBox" TextChanged="TextBox_TextChanged" TextWrapping="Wrap" Margin="15,2,15,5"/>
+        <TextBox Grid.Row="7" Grid.Column="0" Name="UtfEncryptionPasswordBox" TextChanged="TextBox_TextChanged" TextWrapping="Wrap" Margin="15,2,15,5"/>
         <Button Grid.Row="8" Grid.Column="0" Click="OnEnryptionButtonClick" Content="Verschlüsseln" Name="EncryptionButton" Style="{StaticResource ResourceKey=ProgramButtonStyle}"  Height="40" Width="85" HorizontalAlignment="Left" Margin="15,10,0,10" >
             <Button.IsEnabled>
                 <MultiBinding Converter="{StaticResource FormFilledEncryption}">
@@ -75,9 +75,9 @@
             </Button.IsEnabled>
         </Button>
         <TextBlock Grid.Row="9" Grid.Column="0" Text="Verschlüsselter Text:" Name="CiphertextBlock" Margin="15,2,15,0"/>
-        <TextBox Grid.Row="10" Grid.Column="0" Name="CiphertextBox" TextChanged="TextBox_TextChanged" TextWrapping="Wrap" Margin="15,2,15,5" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+        <TextBox Grid.Row="10" Grid.Column="0" Name="UtfCiphertextBox" TextChanged="TextBox_TextChanged" TextWrapping="Wrap" Margin="15,2,15,5" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
         <TextBlock Grid.Row="11" Grid.Column="0" Text="Tag:" Name="TagBlock" Margin="15,2,15,0"/>
-        <TextBox Grid.Row="12" Grid.Column="0" Name="TagBox" TextChanged="TextBox_TextChanged" TextWrapping="Wrap" Margin="15,2,15,5" IsReadOnly="True"/>
+        <TextBox Grid.Row="12" Grid.Column="0" Name="UtfTagBox" TextChanged="TextBox_TextChanged" TextWrapping="Wrap" Margin="15,2,15,5" IsReadOnly="True"/>
         <DockPanel Grid.Row="13" Grid.Column="0" Margin="15,2,15,5">
             <Button Click="OnExportButtonClick" Content="Exportieren" Name="ExportButton" Style="{StaticResource ResourceKey=ProgramButtonStyle}" Height="40" Width="85" Margin="0,10,7.5,10"/> <!--IsEnabled="{Binding ElementName=CiphertextBox, Path=Text.Length}"-->
             <Button Click="OnDecryptionButtonClick" Content="Entschlüsseln" Name="DecryptionButton" HorizontalAlignment="Left" Style="{StaticResource ResourceKey=ProgramButtonStyle}" Height="40" Width="85" Margin="7.5,10,0,10" IsEnabled="{Binding ElementName=TagBox, Path=Text.Length}"/>

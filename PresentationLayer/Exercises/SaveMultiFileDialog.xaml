@@ -27,17 +27,17 @@
             <TextBlock Grid.Column="3" Grid.Row="1" Text="Dateiname" HorizontalAlignment="Center" />
             
             <StackPanel Grid.Column="0" Grid.Row="2">
-                <CheckBox x:Name="UtfIv" HorizontalAlignment="Center" Margin="5"/>
-                <CheckBox x:Name="UtfAad" HorizontalAlignment="Center" Margin="5"/>
-                <CheckBox x:Name="UtfCiphertext" HorizontalAlignment="Center" Margin="5"/>
-                <CheckBox x:Name="UtfTag" HorizontalAlignment="Center" Margin="5"/>
+                <CheckBox x:Name="UtfIv" HorizontalAlignment="Center" Margin="5" Checked="Utf_OnChecked"/>
+                <CheckBox x:Name="UtfAad" HorizontalAlignment="Center" Margin="5" Checked="Utf_OnChecked"/>
+                <CheckBox x:Name="UtfCiphertext" HorizontalAlignment="Center" Margin="5" Checked="Utf_OnChecked"/>
+                <CheckBox x:Name="UtfTag" HorizontalAlignment="Center" Margin="5" Checked="Utf_OnChecked"/>
             </StackPanel>
             
             <StackPanel Grid.Column="1" Grid.Row="2">
-                <CheckBox x:Name="HexIv" HorizontalAlignment="Center" Margin="5"/>
-                <CheckBox x:Name="HexAad" HorizontalAlignment="Center" Margin="5"/>
-                <CheckBox x:Name="HexCiphertext" HorizontalAlignment="Center" Margin="5"/>
-                <CheckBox x:Name="HexTag" HorizontalAlignment="Center" Margin="5"/>
+                <CheckBox x:Name="HexIv" HorizontalAlignment="Center" Margin="5" Checked="Hex_OnChecked"/>
+                <CheckBox x:Name="HexAad" HorizontalAlignment="Center" Margin="5" Checked="Hex_OnChecked"/>
+                <CheckBox x:Name="HexCiphertext" HorizontalAlignment="Center" Margin="5" Checked="Hex_OnChecked"/>
+                <CheckBox x:Name="HexTag" HorizontalAlignment="Center" Margin="5" Checked="Hex_OnChecked"/>
             </StackPanel>
             
             <StackPanel Grid.Column="2" Grid.Row="2">
@@ -48,10 +48,10 @@
             </StackPanel>
 
             <StackPanel Grid.Column="3" Grid.Row="2">
-                <TextBox Name="FileNameIv" Text="iv.txt" Margin="2.5" BorderThickness="2" TextChanged="OnContentChanged" />
-                <TextBox Name="FileNameAad" Text="aad.txt" Margin="2.5" BorderThickness="2" TextChanged="OnContentChanged" />
-                <TextBox Name="FileNameCiphertext" Text="ciphertext.txt" Margin="2.5" BorderThickness="2" TextChanged="OnContentChanged" />
-                <TextBox Name="FileNameTag" Text="tag.txt" Margin="2.5" BorderThickness="2" TextChanged="OnContentChanged" />
+                <TextBox Name="FileNameIv" Text="iv" Margin="2.5" BorderThickness="2" TextChanged="OnContentChanged" />
+                <TextBox Name="FileNameAad" Text="aad" Margin="2.5" BorderThickness="2" TextChanged="OnContentChanged" />
+                <TextBox Name="FileNameCiphertext" Text="ciphertext" Margin="2.5" BorderThickness="2" TextChanged="OnContentChanged" />
+                <TextBox Name="FileNameTag" Text="tag" Margin="2.5" BorderThickness="2" TextChanged="OnContentChanged" />
             </StackPanel>
 
         </Grid>

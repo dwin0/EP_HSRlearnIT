@@ -14,7 +14,7 @@ namespace EP_HSRlearnITTests
         public string SutPath => Path.Combine(BaseDir, $"{nameof(EP_HSRlearnIT)}.exe");
 
         [TestMethod()]
-        public void EncryptionTest()
+        public void DecryptionTest()
         {
             //aufstarten
             var app = Application.Launch(SutPath);

@@ -126,7 +126,7 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
         }
 
         /// <summary>
-        /// A hex string can be converted into a byte array with this Method .
+        /// A hex string can be converted into a byte array with this Method.
         /// </summary>
         /// <param name="hex"></param>
         /// <returns>Returns an Array which contains Hex Bytes</returns>

@@ -39,7 +39,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             OpenFileDialog openFileDialog = new OpenFileDialog()
             {
                 InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*"
+                Filter = "HEX files (*.hex)|*.hex|All files (*.*)|*.*"
             };
 
             if(openFileDialog.ShowDialog() != true) return;

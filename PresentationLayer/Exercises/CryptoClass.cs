@@ -39,7 +39,8 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             //Get control that will be updated
             if (textBox != null)
             {
-                string hexFieldName = "Hex" + textBox.Name;
+                
+                string hexFieldName = "Hex" + textBox.Name.Substring(3);
                 TextBox hexBox = (TextBox)FindName(hexFieldName);
                 char[] value = textBox.Text.ToCharArray();
                 ChangeHexBox(value, hexBox);
@@ -93,7 +94,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                 TextBlock hexWarningBlock = (TextBlock)FindName(hexWarningBlockName);
 
                 //Get textBox that will be updated. Ex: HexIvBox -> IvBox
-                string textBoxName = hexTextBoxName.Substring(3, hexTextBoxName.Length - 3);
+                string textBoxName = "Utf" + hexTextBoxName.Substring(3, hexTextBoxName.Length - 3);
                 TextBox textBox = (TextBox)FindName(textBoxName);
                 
                 if (hexWarningBlock == null || textBox == null) { return; }
@@ -171,7 +172,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                 string elementName = "Hex" + textBox.Name;
                 TextBox hexBox = (TextBox)FindName(elementName);
                 */
-                TextBox hexBox = (TextBox)FindName("Hex" + textBox.Name);
+                TextBox hexBox = (TextBox)FindName("Hex" + textBox.Name.Substring(3));
                 SaveProgressHelper(hexBox);
             }
         }

@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using System.Reflection;
-using System.Windows.Forms;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TestStack.White.Factory;
 using TestStack.White.UIItems;
