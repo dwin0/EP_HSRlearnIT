@@ -26,28 +26,41 @@
     <Path x:Key="StepPath12" Name="Step12_stepByStep" Data="M800,380 960,380 960,600 800,600 800,530 650,530 650,465 800,465" Style="{StaticResource ResourceKey=StepPathStyle}"/>
     <Path x:Key="StepPath13" Name="Step13_stepByStep" Data="M150,90 290,90 290,600 790,600 790,525 960,525 960,670 150,670" Style="{StaticResource ResourceKey=StepPathStyle}"/>
 
+    
     <!--Authentication Tag-->
     <Path x:Key="StepPath14" Name="Step14_stepByStep_overview" Data="M800,665 960,665 960,720 800,720" Style="{StaticResource ResourceKey=StepPathStyle}"/>
 
-    <!--Ciphertext1-->
-    <Path x:Key="StepPath15" Name="Step15_stepByStep" Data="M450,280 630,280 630,330 450,330" Style="{StaticResource ResourceKey=StepPathStyle}"/>
-
-    <!--Ciphertext2-->
-    <Path x:Key="StepPath16" Name="Step16_stepByStep" Data="M780,280 960,280 960,330 780,330" Style="{StaticResource ResourceKey=StepPathStyle}"/>
+    <!--Path with Tag, Cipher1 and Cipher2-->
+    <Path x:Key="StepPath15" Name="Step15_stepByStep" Style="{StaticResource ResourceKey=StepPathStyle}">
+        <Path.Data>
+            <CombinedGeometry>
+                <CombinedGeometry.Geometry1>
+                    <GeometryGroup>
+                        <!--Authentication Tag-->
+                        <PathGeometry Figures="M800,665 960,665 960,720 800,720"/>
+                        <!--Ciphertext1-->
+                        <PathGeometry Figures="M450,280 630,280 630,330 450,330"/>
+                        <!--Ciphertext2-->
+                        <PathGeometry Figures="M780,280 960,280 960,330 780,330"/>
+                    </GeometryGroup>
+                </CombinedGeometry.Geometry1>
+            </CombinedGeometry>
+        </Path.Data>
+    </Path>
 
     <!--Additional Pahts for OverviewPage-->
-    <Path x:Key="StepPath17" Name="Step3_overview" Data="M300,0 635,0 635,160 300,160" Style="{StaticResource ResourceKey=StepPathStyle}"/>
-    <Path x:Key="StepPath18" Name="Step4_overview" Data="M450,160 635,160 635,235 450,235" Style="{StaticResource ResourceKey=StepPathStyle}"/>
-    <Path x:Key="StepPath19" Name="Step5_overview" Data="M300,235 635,235 635,340 300,340" Style="{StaticResource ResourceKey=StepPathStyle}"/>
-    <Path x:Key="StepPath20" Name="Step7_overview" Data="M270,400 420,400 420,470 270,470" Style="{StaticResource ResourceKey=StepPathStyle}"/>
+    <Path x:Key="StepPath16" Name="Step3_overview" Data="M300,0 635,0 635,160 300,160" Style="{StaticResource ResourceKey=StepPathStyle}"/>
+    <Path x:Key="StepPath17" Name="Step4_overview" Data="M450,160 635,160 635,235 450,235" Style="{StaticResource ResourceKey=StepPathStyle}"/>
+    <Path x:Key="StepPath18" Name="Step5_overview" Data="M300,235 635,235 635,340 300,340" Style="{StaticResource ResourceKey=StepPathStyle}"/>
+    <Path x:Key="StepPath19" Name="Step7_overview" Data="M270,400 420,400 420,470 270,470" Style="{StaticResource ResourceKey=StepPathStyle}"/>
 
     <!--the OverviewPage has no Step 8-->
 
-    <Path x:Key="StepPath21" Name="Step9_overview" Data="M500,350 565,350 565,395 500,395" Style="{StaticResource ResourceKey=StepPathStyle}"/>
-    <Path x:Key="StepPath22" Name="Step10_overview" Data="M450,400 610,400 610,480 450,480" Style="{StaticResource ResourceKey=StepPathStyle}"/>
-    <Path x:Key="StepPath23" Name="Step11_overview" Data="M640,0 960,0 960,460 640,460" Style="{StaticResource ResourceKey=StepPathStyle}"/>
-    <Path x:Key="StepPath24" Name="Step12_overview" Data="M640,465 960,465 960,525 640,525" Style="{StaticResource ResourceKey=StepPathStyle}"/>
-    <Path x:Key="StepPath25" Name="Step13_overview" Data="M790,525 960,525 960,665 640,665 640,600 790,600" Style="{StaticResource ResourceKey=StepPathStyle}"/>
+    <Path x:Key="StepPath20" Name="Step9_overview" Data="M500,350 565,350 565,395 500,395" Style="{StaticResource ResourceKey=StepPathStyle}"/>
+    <Path x:Key="StepPath21" Name="Step10_overview" Data="M450,400 610,400 610,480 450,480" Style="{StaticResource ResourceKey=StepPathStyle}"/>
+    <Path x:Key="StepPath22" Name="Step11_overview" Data="M640,0 960,0 960,460 640,460" Style="{StaticResource ResourceKey=StepPathStyle}"/>
+    <Path x:Key="StepPath23" Name="Step12_overview" Data="M640,465 960,465 960,525 640,525" Style="{StaticResource ResourceKey=StepPathStyle}"/>
+    <Path x:Key="StepPath24" Name="Step13_overview" Data="M790,525 960,525 960,665 640,665 640,600 790,600" Style="{StaticResource ResourceKey=StepPathStyle}"/>
 
 
     <!--AreaPaths-->

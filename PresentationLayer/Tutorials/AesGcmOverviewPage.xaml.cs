@@ -32,7 +32,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
         private Path _lastEnteredAreaPath;
 
         private const int NumOfAreas = 6;
-        private const int NumOfStepPaths = 25;
+        private const int NumOfStepPaths = 24;
 
         #endregion Private Members
 

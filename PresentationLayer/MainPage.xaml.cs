@@ -15,12 +15,12 @@ namespace EP_HSRlearnIT.PresentationLayer
     public partial class MainPage
     {
         #region Private Members
-        private readonly Dictionary<string, KeyValuePair<string, Page>> _tileDictionary = new Dictionary<string, KeyValuePair<string, Page>>()
+        private readonly Dictionary<string, string> _tileDictionary = new Dictionary<string, string>()
             {
-                { "Übersicht AES GCM", new KeyValuePair<string, Page>(@"Images/eye-icon.png", new AesGcmOverviewPage())},
-                { "Schritt für Schritt Anleitung", new KeyValuePair<string, Page>(@"Images/step-icon.png", new StepByStepPage())},
-                { "Ver- und Entschlüsselung", new KeyValuePair<string, Page>(@"Images/key-icon.png", new EncryptionDecyrptionPage())},
-                { "Drag- und Drop - Spiel", new KeyValuePair<string, Page>("Images/drag-icon.png", new DragDropPage())}
+                { "Übersicht AES GCM", @"Images/eye-icon.png"},
+                { "Schritt für Schritt Anleitung", @"Images/step-icon.png"},
+                { "Ver- und Entschlüsselung", @"Images/key-icon.png"},
+                { "Drag- und Drop - Spiel", "Images/drag-icon.png"}
             };
 
         private readonly SolidColorBrush _backgroundBrush = Application.Current.FindResource("TileBackgroundBrush") as SolidColorBrush;
@@ -45,7 +45,7 @@ namespace EP_HSRlearnIT.PresentationLayer
         {
             foreach (var tileEntry in _tileDictionary)
             {
-                MenuTile tile = new MenuTile(tileEntry.Key, tileEntry.Value.Key);
+                MenuTile tile = new MenuTile(tileEntry.Key, tileEntry.Value);
                 tile.PreviewMouseLeftButtonDown += OnTileClick;
                 tile.MouseEnter += MenuTile_OnMouseEnter;
                 tile.MouseLeave += MenuTile_OnMouseLeave;
@@ -58,11 +58,27 @@ namespace EP_HSRlearnIT.PresentationLayer
             MenuTile tile = sender as MenuTile;
             if (tile == null) return;
 
-            KeyValuePair<string, Page> toNavigatePage;
-            bool available = _tileDictionary.TryGetValue(tile.TileText.Text, out toNavigatePage);
-            if (available)
+            Page toNavigatePage = null;
+
+            switch (tile.TileText.Text)
             {
-                NavigationService?.Navigate(toNavigatePage.Value);
+                case "Übersicht AES GCM":
+                    toNavigatePage = new AesGcmOverviewPage();
+                    break;
+                case "Schritt für Schritt Anleitung":
+                    toNavigatePage = new StepByStepPage();
+                    break;
+                case "Ver- und Entschlüsselung":
+                    toNavigatePage = new EncryptionDecyrptionPage();
+                    break;
+                case "Drag- und Drop - Spiel":
+                    toNavigatePage = new DragDropPage();
+                    break;
+            }
+
+            if (toNavigatePage != null)
+            {
+                NavigationService?.Navigate(toNavigatePage);
             }
         }
 
