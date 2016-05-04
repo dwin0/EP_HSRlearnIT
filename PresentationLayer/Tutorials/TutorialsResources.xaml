@@ -57,9 +57,7 @@ Die Generierung des MAC geschieht durch die Multiplikation der AAD in einem Galo
 Dabei steht MultH für die Multiplikation innerhalb des Galois-Feldes. Die dabei durchgeführten Berechnungen sind nicht Bestandteil dieser Anleitung.
     </system:String>
     <system:String x:Key="Step8">
-Ein Beispiel für AAD ist der Versand von Daten über einen unsicheren Kanal.
-Die Payload wird verschlüsselt und authentisiert, die IP-Adressen jedoch nur authentisiert.
-Diese dürfen für die Übertragung nicht verschlüsselt werden, da dem Router das Ziel sonst nicht bekannt ist.
+Ein Beispiel für AAD ist der Versand von Daten über einen unsicheren Kanal. Die Payload wird verschlüsselt und authentisiert, die IP-Adressen jedoch nur authentisiert. Diese dürfen für die Übertragung nicht verschlüsselt werden, da dem Router das Ziel sonst nicht bekannt ist.
 Werden keine Daten verschlüsselt, sondern nur die Integritätsprüfung durchlaufen, spricht man von einem Galois Message Authentication Code (GMAC).
     </system:String>
     <system:String x:Key="Step9Title">Ciphertext – Authentifizierung</system:String>
@@ -76,13 +74,12 @@ Ist der letzte Plaintext-Block kleiner als 128 Bit wird dessen Grösse zur Berec
     </system:String>
     <system:String x:Key="Step12Title">Abschluss und Rückgabe</system:String>
     <system:String x:Key="Step12">
-Damit keine Attacken auf den MAC, welcher auf einer variablen Anzahl Input-Bits basiert, gemacht werden können, wird sowohl die Länge der AAD (len(A)), als auch die Ciphertext-Länge (len(C)) mitauthentifiziert. Dazu werden die beiden Längen, in 64 Bit-Repräsentation, aneinandergehängt.
-Es folgt eine XOR-Verknüpfung mit dem Resultat aus der Galois-Feld Multiplikation des allerletzten Ciphertextes.
-Nach der Verknüpfung wird dieser Wert nochmals in einem Galois-Feld mit dem Hash-Subkey multipliziert.
+Damit keine Attacken auf den MAC, welcher auf einer variablen Anzahl Input-Bits basiert, gemacht werden können, wird sowohl die Länge der AAD (len(A)), als auch die Ciphertext-Länge (len(C)) mitauthentifiziert. 
+Dazu werden die beiden Längen, in 64 Bit-Repräsentation, aneinandergehängt. Es folgt eine XOR-Verknüpfung mit dem Resultat aus der Galois-Feld Multiplikation des allerletzten Ciphertextes. Nach der Verknüpfung wird dieser Wert nochmals in einem Galois-Feld mit dem Hash-Subkey multipliziert.
     </system:String>
     <system:String x:Key="Step13">
-Da der IV ebenfalls authentisiert werden soll, und dieser bereits im «Counter 0»-Block enthalten ist, wird dieser Block ebenfalls in den MAC miteinberechnet. Dies geschieht indem der «Counter 0»-Block zuerst, wie alle anderen Blöcke, mit dem Schlüssel K AES-verschlüsselt wird.
-Anschliessend wird auf diese AES-Verschlüsselung und das Resultat der vorhergehenden Galois-Multiplikation die XOR-Funktion angewendet.
+Da der IV ebenfalls authentisiert werden soll, und dieser bereits im «Counter 0»-Block enthalten ist, wird dieser Block ebenfalls in den MAC miteinberechnet. 
+Dies geschieht indem der «Counter 0»-Block zuerst, wie alle anderen Blöcke, mit dem Schlüssel K AES-verschlüsselt wird. Anschliessend wird auf diese AES-Verschlüsselung und das Resultat der vorhergehenden Galois-Multiplikation die XOR-Funktion angewendet.
     </system:String>
     <system:String x:Key="Step14">
 Der berechnete MAC, bei AES-GCM Auth Tag genannt, ist nun fast berechnet. 
@@ -91,14 +88,13 @@ Um eine grösstmögliche Sicherheit zu erreichen wird aber meist der ungekürzte
     </system:String>
     <system:String x:Key="Step15">
 Zuletzt werden Ciphertext und Authentication Tag zurückgegeben.
-Für die Entschlüsselung und Überprüfung des MAC wird nebst diesen beiden Werten auch der IV und die AAD benötigt.
-Ersterer für die erneute Berechnung aller Counter, der Zweite für die Berechnung und den anschliessenden Vergleich mit dem MAC.
+Für die Entschlüsselung und Überprüfung des MAC wird nebst diesen beiden Werten auch der IV und die AAD benötigt. Ersterer für die erneute Berechnung aller Counter, der Zweite für die Berechnung und den anschliessenden Vergleich mit dem MAC.
 Der Ciphertext wird am Ende dieselbe Länge wie der zu Beginn eingegebene Plaintext besitzen.
     </system:String>
     <system:String x:Key="Step16Title">Erweiterung/Zu beachten</system:String>
     <system:String x:Key="Step16">
-Der Initialisierungsvektor muss unique sein, ansonsten besteht die Möglichkeit Rückschlüsse auf den Plaintext zu machen. 
-Dies deshalb, weil zwei gleiche Counter-Blöcke auch genau gleich verschlüsselt werden. Unterschiede im Ciphertext stammen allein daher, dass Unterschiede im Plaintext vorhanden sind.
+Der Initialisierungsvektor muss unique sein, ansonsten besteht die Möglichkeit Rückschlüsse auf den Plaintext zu machen. Dies deshalb, weil zwei gleiche Counter-Blöcke auch genau gleich verschlüsselt werden. Unterschiede im Ciphertext stammen allein daher, dass Unterschiede im Plaintext vorhanden sind.
+
 Die Grösse des zu verschlüsselnden Plaintextes pro IV ist genau aus diesem Grund beschränkt. Werden nämlich zu viele Counter-Blöcke gebildet, steigt die Wahrscheinlichkeit einer Wiederholung der Bit-Sequenzen immer mehr an. Der Plaintext darf deshalb eine Grösse von 64GB nicht übersteigen.
     </system:String>
     <system:String x:Key="Step17Title">Rückblick</system:String>
