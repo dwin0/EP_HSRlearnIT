@@ -67,19 +67,22 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                 foreach (var fileName in importFiles)
                 {
                     TextBox textBox = FindName("Hex" + fileName.Key + "Box") as TextBox;
+                    
                     if (textBox != null)
                     {
+                        Console.WriteLine(textBox.Name);
                         textBox.Text = File.ReadAllText(fileName.Value);
                         Progress.SaveProgress("DecryptionPage_Hex" + textBox.Name + "Box", textBox.Text);
                     }
                 }
+                MessageBox.Show("Import war erfolgreich!", "Fileimport", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
         private void OnDecryptionButtonClick(object sender, RoutedEventArgs e)
         {
             //key is evaluated and will be resized to 32 Byte if necessary 
-            string keyString = Library.GenerateKey(DecryptionPasswortBox.Text);
+            string keyString = Library.GenerateKey(UtfDecryptionPasswortBox.Text);
             ChangeHexBox(keyString.ToCharArray(), HexDecryptionPasswortBox);
 
             //get the values of all fields which are needed to start the decryption
@@ -98,10 +101,10 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                 HexIvBox.Text = "000000000000000000000000";
             }
 
-            PlaintextBox.Text = Library.BytesToString(Library.Decrypt(key, ciphertext, iv, aad, tag));
+            UtfPlaintextBox.Text = Library.BytesToString(Library.Decrypt(key, ciphertext, iv, aad, tag));
 
             //case authentication only --> when successfull
-            if (PlaintextBox.Text == "")
+            if (UtfPlaintextBox.Text == "")
             {
                 MessageBox.Show("Der Text wurde erfolgreich authentifiziert.", "alleinstehenden Authentifizierung",
                     MessageBoxButton.OK, MessageBoxImage.Information);

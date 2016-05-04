@@ -270,9 +270,10 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                 var imageRect = new Rect(_rectangleMoved.Margin.Left, _rectangleMoved.Margin.Top, _rectangleMoved.Width, _rectangleMoved.Height);
                 // bIntersection = false;
 
-                var dropRectangle = CheckCollisionWithDropRectangles(imageRect);
+                var dropRectangle = CheckCollisionWithDropRectangles(imageRect); //imageRect is rectangle which is in dragged status
                 if (dropRectangle != null) // The collision happened
                 {
+                    //dropRectangle = definded rectangle on algorithm (e.g. rectMulH). 
                     Rect r = new Rect(Canvas.GetLeft(dropRectangle), Canvas.GetTop(dropRectangle), dropRectangle.Width, dropRectangle.Height);
                     _rectangleMoved.Margin = new Thickness(r.Left, r.Top, 0, 0);
                     _addedDataForProgress.ImageMargin = _rectangleMoved.Margin;
@@ -495,5 +496,13 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         }
 
         #endregion SavedDataForProgress
+
+        private void OpenInstruction(object sender, RoutedEventArgs e)
+        {
+            GameInstruction.Visibility = Visibility.Visible;
+            ButtonCloseGameInstruction.Visibility = Visibility.Visible;
+            
+            
+        }
     }
 }

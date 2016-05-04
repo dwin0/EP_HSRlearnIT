@@ -39,7 +39,7 @@
 
         <Button Grid.Row="1" Grid.Column="0" Click="OnImportButtonClick" Content="File Importieren" Name="ImportButton" Style="{StaticResource ResourceKey=ProgramButtonStyle}" Height="40" Width="95" HorizontalAlignment="Left" Margin="15,10,15,2"/>
         <TextBlock Grid.Row="2" Grid.Column="0" Text="Verschlüsselter Text:" Margin="15,2,15,0" Name="CipherTextBlock"/>
-        <TextBox Grid.Row="3" Grid.Column="0" Name="CiphertextBox" Margin="15,2,15,5" TextChanged="TextBox_TextChanged" LostKeyboardFocus="TextBox_LostKeyboardFocus" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+        <TextBox Grid.Row="3" Grid.Column="0" Name="UtfCiphertextBox" Margin="15,2,15,5" TextChanged="TextBox_TextChanged" LostKeyboardFocus="TextBox_LostKeyboardFocus" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
         <TextBlock Grid.Row="4" Grid.Column="0" Text="Additional Authenticated Data: (optional)" Name="AadBlock" Margin="15,2,15,0" HorizontalAlignment="Left"/>
         <Image Grid.Row="4" Grid.Column="0" Source="/Images/info.png" Width="18" Margin="240,0,10,0" HorizontalAlignment="Left" Name="InfoAad" ToolTipService.ShowDuration="60000">
             <Image.ToolTip>
@@ -48,7 +48,7 @@
                 </ToolTip>
             </Image.ToolTip>
         </Image>
-        <TextBox Grid.Row="5" Grid.Column="0" Name="AadBox" Margin="15,2,15,5" TextChanged="TextBox_TextChanged" LostKeyboardFocus="TextBox_LostKeyboardFocus" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+        <TextBox Grid.Row="5" Grid.Column="0" Name="UtfAadBox" Margin="15,2,15,5" TextChanged="TextBox_TextChanged" LostKeyboardFocus="TextBox_LostKeyboardFocus" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
         <TextBlock Grid.Row="6" Grid.Column="0" Text="IV: (optional)" Name="IvBlock" Margin="15,2,15,0" HorizontalAlignment="Left"/>
         <Image Grid.Row="6" Grid.Column="0" Source="/Images/info.png" Width="18" Margin="88,0,10,0" HorizontalAlignment="Left" Name="InfoIv" ToolTipService.ShowDuration="60000">
             <Image.ToolTip>
@@ -57,7 +57,7 @@
                 </ToolTip>
             </Image.ToolTip>
         </Image>
-        <TextBox Grid.Row="7" Grid.Column="0" Name="IvBox" Margin="15,2,15,5" TextChanged="TextBox_TextChanged" LostKeyboardFocus="TextBox_LostKeyboardFocus" TextWrapping="Wrap"/>
+        <TextBox Grid.Row="7" Grid.Column="0" Name="UtfIvBox" Margin="15,2,15,5" TextChanged="TextBox_TextChanged" LostKeyboardFocus="TextBox_LostKeyboardFocus" TextWrapping="Wrap"/>
         <TextBlock Grid.Row="8" Grid.Column="0" Text="Tag:" Name="TagBlock" Margin="15,2,15,0" HorizontalAlignment="left"/>
         <Image Grid.Row="8" Grid.Column="0" Source="/Images/info.png" Width="18" Margin="40,0,10,0" HorizontalAlignment="Left" Name="InfoTag" ToolTipService.ShowDuration="60000">
             <Image.ToolTip>
@@ -66,7 +66,7 @@
                 </ToolTip>
             </Image.ToolTip>
         </Image>
-        <TextBox Grid.Row="9" Grid.Column="0" Name="TagBox" Margin="15,2,15,5" TextChanged="TextBox_TextChanged" LostKeyboardFocus="TextBox_LostKeyboardFocus" TextWrapping="Wrap"/>
+        <TextBox Grid.Row="9" Grid.Column="0" Name="UtfTagBox" Margin="15,2,15,5" TextChanged="TextBox_TextChanged" LostKeyboardFocus="TextBox_LostKeyboardFocus" TextWrapping="Wrap"/>
         <TextBlock Grid.Row="10" Grid.Column="0" Text="Key:" Name="DecryptionPasswortBlock" Margin="15,2,15,0" HorizontalAlignment="Left"/>
         <Image Grid.Row="10" Grid.Column="0" Source="/Images/info.png" Width="18" Margin="42,0,10,0" HorizontalAlignment="Left" Name="InfoKey" ToolTipService.ShowDuration="60000">
             <Image.ToolTip>
@@ -75,7 +75,7 @@
                 </ToolTip>
             </Image.ToolTip>
         </Image>
-        <TextBox Grid.Row="11" Grid.Column="0" Name="DecryptionPasswortBox" Margin="15,2,15,5" TextChanged="TextBox_TextChanged" TextWrapping="Wrap"/>
+        <TextBox Grid.Row="11" Grid.Column="0" Name="UtfDecryptionPasswortBox" Margin="15,2,15,5" TextChanged="TextBox_TextChanged" TextWrapping="Wrap"/>
         <DockPanel Grid.Row="12" Grid.Column="0" Margin="15,2,15,2">
             <Button Click="OnDecryptionButtonClick" Content="Entschlüsseln" Name="DecryptionButton" Style="{StaticResource ResourceKey=ProgramButtonStyle}" Height="40" Width="85" Margin="0,10,7.5,10">
                 <Button.IsEnabled>
@@ -91,7 +91,7 @@
             <Button Click="OnEncryptionButtonClick" Content="Verschlüsseln" Name="EncrpytionButton" Style="{StaticResource ResourceKey=ProgramButtonStyle}" Height="40" Width="85" HorizontalAlignment="Left" Margin="7.5,10,0,10" IsEnabled="{Binding ElementName=PlaintextBox, Path=Text.Length}"/>
         </DockPanel>
         <TextBlock Grid.Row="13" Grid.Column="0" Text="Klartext:" Name="PlainTextBlock" Margin="15,2,15,0"/>
-        <TextBox Grid.Row="14" Grid.Column="0" Name="PlaintextBox" Margin="15,2,15,18" TextChanged="TextBox_TextChanged" IsReadOnly="True" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+        <TextBox Grid.Row="14" Grid.Column="0" Name="UtfPlaintextBox" Margin="15,2,15,18" TextChanged="TextBox_TextChanged" IsReadOnly="True" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
 
         <TextBlock Grid.Row="2" Grid.Column="1" Text="Verschlüsselter Text Hex:" Name="HexCiphertextBlock" Margin="15,2,15,0"/>
         <TextBox Grid.Row="3" Grid.Column="1" Name="HexCiphertextBox" Margin="15,2,15,5" TextChanged="HexTextBox_TextChanged" LostKeyboardFocus="HexTextBox_LostKeyboardFocus" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
@@ -107,6 +107,4 @@
         <TextBox Grid.Row="14" Grid.Column="1" Name="HexPlaintextBox" Margin="15,2,15,15" TextChanged="HexTextBox_TextChanged" IsReadOnly="True" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
     </Grid>
 </base:CryptoClass>
-
-
 
