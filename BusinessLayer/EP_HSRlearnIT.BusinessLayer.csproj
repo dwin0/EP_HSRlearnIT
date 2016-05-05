@@ -66,6 +66,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="UniversalTools\DependencyObjectExtension.cs" />
     <Compile Include="UniversalTools\Progress.cs" />
   </ItemGroup>
   <ItemGroup>

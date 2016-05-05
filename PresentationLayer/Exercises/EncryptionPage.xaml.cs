@@ -68,6 +68,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                 InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
                 OverwritePrompt = true,
                 AddExtension = true,
+                ValidateNames = true,
                 Title = "Exportieren der Verschlüsselungsparamter"
             };
 
@@ -83,7 +84,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                 StringBuilder line = new StringBuilder();
 
                 var listOfTextBox = new List<TextBox>();
-                foreach (var element in GetAllChildren(this))
+                foreach (var element in DependencyObjectExtension.GetAllChildren(this))
                 {
                     if (element is TextBox)
                     {
@@ -104,26 +105,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                 MessageBox.Show("Der Export war erfolgreich!", "Export", MessageBoxButton.OK, MessageBoxImage.Information);
             }
 
-        }
-
-        private IEnumerable<DependencyObject> GetAllChildren(DependencyObject root)
-        {
-            if (root == null)
-            {
-                yield break;
-            }
-
-            yield return root;
-            
-                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(root); i++)
-                {
-                    var child = VisualTreeHelper.GetChild(root, i);
-
-                    foreach (var subChild in GetAllChildren(child))
-                    {
-                        yield return subChild;
-                    }                       
-                }
         }
 
         private void OnDecryptionButtonClick(object sender, RoutedEventArgs e)
