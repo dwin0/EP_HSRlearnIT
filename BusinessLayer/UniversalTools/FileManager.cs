@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Linq;
 
 namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
 {
@@ -27,6 +28,19 @@ namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
         public static long GetSize(string filePath)
         {
             return new FileInfo(filePath).Length;
+        }
+
+        public static bool IsExist(string filePath)
+        {
+            return File.Exists(filePath);
+        }
+
+        public static string SaveFile(string filePath)
+        {
+            int indexOfLast = filePath.LastIndexOf('\\');
+            string folderPath = filePath.Substring(0, indexOfLast);
+            string fileName = filePath.Substring(indexOfLast + 1);
+            return SaveFile(folderPath, fileName);
         }
 
         public static string SaveFile(string folderPath, string fileName)

@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using EP_HSRlearnIT.BusinessLayer.UniversalTools;
+using Microsoft.Win32;
 
 namespace EP_HSRlearnIT.PresentationLayer.Exercises
 {
@@ -59,37 +62,68 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
 
         private void OnExportButtonClick(object sender, RoutedEventArgs e)
         {
-            SaveMultiFileDialog saveMultiFileDialog = new SaveMultiFileDialog()
+            SaveFileDialog saveFileDialog = new SaveFileDialog()
             {
-                Owner = Application.Current.MainWindow,
-                WindowStartupLocation = WindowStartupLocation.CenterOwner
+                Filter = "Text File (*.txt)|*.txt|All Files (*.*)|*.*",
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                OverwritePrompt = true,
+                AddExtension = true,
+                Title = "Exportieren der Verschlüsselungsparamter"
             };
-            saveMultiFileDialog.Closed += new EventHandler(saveMultiFileDialog_Closed);
-            saveMultiFileDialog.Show();
-        }
 
-        private void saveMultiFileDialog_Closed(object sender, EventArgs e)
-        {
-            string folderPath = Progress.GetProgress("SaveMultiFileDialog_ExportPath") as string;
-            var exportFiles = Progress.GetProgress("SaveMultiFileDialog_Export") as Dictionary<string, string>;
-            if (exportFiles != null)
+            if (saveFileDialog.ShowDialog() == true)
             {
-                foreach (var nameOfFiles in exportFiles)
+                string fullFilePath = saveFileDialog.FileName;
+                Console.WriteLine(fullFilePath);
+                if (!FileManager.IsExist(fullFilePath))
                 {
-                    Console.WriteLine(nameOfFiles.Key + " is the key of " + nameOfFiles.Value);
-                    TextBox textBox = FindName(nameOfFiles.Key + "Box") as TextBox;
+                    FileManager.SaveFile(fullFilePath);
+                }
 
-                    if (textBox != null)
+                StringBuilder line = new StringBuilder();
+
+                var listOfTextBox = new List<TextBox>();
+                foreach (var element in GetAllChildren(this))
+                {
+                    if (element is TextBox)
                     {
-                        string newFileName = FileManager.SaveFile(folderPath, nameOfFiles.Value);
-                        FileManager.UpdateFileContent(newFileName, textBox.Text);
-                        Console.WriteLine(textBox.Text);
-                        Progress.SaveProgress("EncryptionPage_" + nameOfFiles.Key, textBox.Text);
+                        TextBox box = element as TextBox;
+                        listOfTextBox.Add(box);
+                        Console.WriteLine("My name is " + box.Name.Substring(3, box.Name.Length - 6));
                     }
                 }
-                MessageBox.Show("Export war erfolgreich!", "Fileexport", MessageBoxButton.OK, MessageBoxImage.Information);
+                foreach (TextBox textBox in listOfTextBox)
+                {
+                    if (textBox.Name.Contains("Hex") && !(textBox.Name.Contains("Password")))
+                    {
+                        //cut Hex and Box, for Example: HexIvBox -> Iv
+                        line.AppendLine(textBox.Name.Substring(3, textBox.Name.Length-6) + "=0x" + textBox.Text);
+                    }
+                }
+                FileManager.UpdateFileContent(fullFilePath, line.ToString());
+                MessageBox.Show("Der Export war erfolgreich!", "Export", MessageBoxButton.OK, MessageBoxImage.Information);
             }
 
+        }
+
+        private IEnumerable<DependencyObject> GetAllChildren(DependencyObject root)
+        {
+            if (root == null)
+            {
+                yield break;
+            }
+
+            yield return root;
+            
+                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(root); i++)
+                {
+                    var child = VisualTreeHelper.GetChild(root, i);
+
+                    foreach (var subChild in GetAllChildren(child))
+                    {
+                        yield return subChild;
+                    }                       
+                }
         }
 
         private void OnDecryptionButtonClick(object sender, RoutedEventArgs e)
