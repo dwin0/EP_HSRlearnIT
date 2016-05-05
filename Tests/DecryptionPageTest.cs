@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Reflection;
+using EP_HSRlearnIT;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TestStack.White;
 using TestStack.White.Factory;
@@ -22,7 +23,7 @@ namespace EP_HSRlearnITTests
             window.WaitWhileBusy();
 
             //zu DecryptionPage navigieren
-            var imgEncrDecr = window.Get<Image>("EncryptionDecryption");
+            var imgEncrDecr = window.Get<Image>("VerundEntschluesselung");
             imgEncrDecr.Click();
 
             var buttonDecr = window.Get<Button>("Decryption");

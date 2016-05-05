@@ -14,13 +14,18 @@ namespace EP_HSRlearnIT.PresentationLayer
     /// </summary>
     public partial class MainPage
     {
+        private const string Overview = "Übersicht AES-GCM";
+        private const string StepByStep = "Schritt für Schritt - Anleitung";
+        private const string EncryptionDecryption = "Ver- und Entschlüsselung";
+        private const string DragDrop = "Drag & Drop - Spiel";
+
         #region Private Members
         private readonly Dictionary<string, string> _tileDictionary = new Dictionary<string, string>()
             {
-                { "Übersicht AES GCM", @"Images/eye-icon.png"},
-                { "Schritt für Schritt Anleitung", @"Images/step-icon.png"},
-                { "Ver- und Entschlüsselung", @"Images/key-icon.png"},
-                { "Drag- und Drop - Spiel", "Images/drag-icon.png"}
+                { Overview, @"Images/eye-icon.png"},
+                { StepByStep, @"Images/step-icon.png"},
+                { EncryptionDecryption, @"Images/key-icon.png"},
+                { DragDrop, @"Images/drag-icon.png"}
             };
 
         private readonly SolidColorBrush _backgroundBrush = Application.Current.FindResource("TileBackgroundBrush") as SolidColorBrush;
@@ -43,9 +48,19 @@ namespace EP_HSRlearnIT.PresentationLayer
 
         private void LoadTiles()
         {
+            Dictionary<string, string> stringsToReplace = new Dictionary<string, string>
+            {
+                {" ", string.Empty},
+                {"-", string.Empty},
+                {"Ü", "Ue"},
+                {"ü", "ue"},
+                {"&", "and"}
+            };
+
             foreach (var tileEntry in _tileDictionary)
             {
                 MenuTile tile = new MenuTile(tileEntry.Key, tileEntry.Value);
+                tile.TileImage.Name = tileEntry.Key.MultipleReplace(stringsToReplace);
                 tile.PreviewMouseLeftButtonDown += OnTileClick;
                 tile.MouseEnter += MenuTile_OnMouseEnter;
                 tile.MouseLeave += MenuTile_OnMouseLeave;
@@ -62,16 +77,16 @@ namespace EP_HSRlearnIT.PresentationLayer
 
             switch (tile.TileText.Text)
             {
-                case "Übersicht AES GCM":
+                case Overview:
                     toNavigatePage = new AesGcmOverviewPage();
                     break;
-                case "Schritt für Schritt Anleitung":
+                case StepByStep:
                     toNavigatePage = new StepByStepPage();
                     break;
-                case "Ver- und Entschlüsselung":
+                case EncryptionDecryption:
                     toNavigatePage = new EncryptionDecyrptionPage();
                     break;
-                case "Drag- und Drop - Spiel":
+                case DragDrop:
                     toNavigatePage = new DragDropPage();
                     break;
             }
@@ -103,5 +118,18 @@ namespace EP_HSRlearnIT.PresentationLayer
         }
 
         #endregion
+    }
+
+    public static class StringExtender
+    {
+        public static string MultipleReplace(this string text, Dictionary<string, string> replacements)
+        {
+            string retVal = text;
+            foreach (string textToReplace in replacements.Keys)
+            {
+                retVal = retVal.Replace(textToReplace, replacements[textToReplace]);
+            }
+            return retVal;
+        }
     }
 }

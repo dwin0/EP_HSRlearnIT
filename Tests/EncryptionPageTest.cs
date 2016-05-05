@@ -24,7 +24,7 @@ namespace EP_HSRlearnITTests
             window.WaitWhileBusy();
 
             //zu EncryptionPage navigieren
-            var imgEncrDecr = window.Get<Image>("EncryptionDecryption");
+            var imgEncrDecr = window.Get<Image>("VerundEntschluesselung");
             imgEncrDecr.Click();
 
             var buttonEncr = window.Get<Button>("Encryption");
