@@ -48,16 +48,16 @@ namespace EP_HSRlearnIT.PresentationLayer
                 case "Startseite":
                     MainFrame.Navigate(new MainPage());
                     break;
-                case "AES-GCM Übersicht":
+                case "Übersicht AES-GCM":
                     MainFrame.Navigate(new AesGcmOverviewPage());
                     break;
-                case "Schritt für Schritt":
+                case "Schritt für Schritt - Anleitung":
                     MainFrame.Navigate(new StepByStepPage());
                     break;
                 case "Ver- und Entschlüsselung":
                     MainFrame.Navigate(new EncryptionDecyrptionPage());
                     break;
-                case "Drag- und Drop Spiel":
+                case "Drag & Drop - Spiel":
                     MainFrame.Navigate(new DragDropPage());
                     break;
             }

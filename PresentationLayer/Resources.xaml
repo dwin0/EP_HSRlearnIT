@@ -7,10 +7,10 @@
     
     <local:StringCollection x:Key="MenuStrings">
         <system:String>Startseite</system:String>
-        <system:String>AES-GCM Übersicht</system:String>
-        <system:String>Schritt für Schritt</system:String>
+        <system:String>Übersicht AES-GCM</system:String>
+        <system:String>Schritt für Schritt - Anleitung</system:String>
         <system:String>Ver- und Entschlüsselung</system:String>
-        <system:String>Drag- und Drop Spiel</system:String>
+        <system:String>Drag &amp; Drop - Spiel</system:String>
     </local:StringCollection>
     
     <Brush x:Key="MenuBackgroundColor">#ffe6e6</Brush>
