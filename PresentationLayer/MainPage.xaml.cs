@@ -25,7 +25,7 @@ namespace EP_HSRlearnIT.PresentationLayer
                 { Overview, @"Images/eye-icon.png"},
                 { StepByStep, @"Images/step-icon.png"},
                 { EncryptionDecryption, @"Images/key-icon.png"},
-                { DragDrop, "Images/drag-icon.png"}
+                { DragDrop, @"Images/drag-icon.png"}
             };
 
         private readonly SolidColorBrush _backgroundBrush = Application.Current.FindResource("TileBackgroundBrush") as SolidColorBrush;
@@ -48,9 +48,19 @@ namespace EP_HSRlearnIT.PresentationLayer
 
         private void LoadTiles()
         {
+            Dictionary<string, string> stringsToReplace = new Dictionary<string, string>
+            {
+                {" ", string.Empty},
+                {"-", string.Empty},
+                {"Ü", "Ue"},
+                {"ü", "ue"},
+                {"&", "and"}
+            };
+
             foreach (var tileEntry in _tileDictionary)
             {
                 MenuTile tile = new MenuTile(tileEntry.Key, tileEntry.Value);
+                tile.TileImage.Name = tileEntry.Key.MultipleReplace(stringsToReplace);
                 tile.PreviewMouseLeftButtonDown += OnTileClick;
                 tile.MouseEnter += MenuTile_OnMouseEnter;
                 tile.MouseLeave += MenuTile_OnMouseLeave;
@@ -108,5 +118,18 @@ namespace EP_HSRlearnIT.PresentationLayer
         }
 
         #endregion
+    }
+
+    public static class StringExtender
+    {
+        public static string MultipleReplace(this string text, Dictionary<string, string> replacements)
+        {
+            string retVal = text;
+            foreach (string textToReplace in replacements.Keys)
+            {
+                retVal = retVal.Replace(textToReplace, replacements[textToReplace]);
+            }
+            return retVal;
+        }
     }
 }
