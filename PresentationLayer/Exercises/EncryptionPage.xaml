@@ -77,9 +77,9 @@
             </Button.IsEnabled>
         </Button>
         <TextBlock Grid.Row="10" Grid.Column="0" Text="Verschlüsselter Text:" Name="CiphertextBlock" Margin="15,2,15,0" FontWeight="Bold"/>
-        <TextBox Grid.Row="11" Grid.Column="0" Name="UtfCiphertextBox" BorderThickness="2" TextChanged="TextBox_TextChanged" TextWrapping="Wrap" Margin="15,2,15,5" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+        <TextBox Grid.Row="11" Grid.Column="0" Name="UtfCiphertextBox" Background="#F0F0F0" BorderThickness="2" TextChanged="TextBox_TextChanged" TextWrapping="Wrap" Margin="15,2,15,5" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
         <TextBlock Grid.Row="12" Grid.Column="0" Text="Tag:" Name="TagBlock" Margin="15,2,15,0" FontWeight="Bold"/>
-        <TextBox Grid.Row="13" Grid.Column="0" Name="UtfTagBox" BorderThickness="2" TextChanged="TextBox_TextChanged" TextWrapping="Wrap" Margin="15,2,15,5" IsReadOnly="True"/>
+        <TextBox Grid.Row="13" Grid.Column="0" Name="UtfTagBox" Background="#F0F0F0" BorderThickness="2" TextChanged="TextBox_TextChanged" TextWrapping="Wrap" Margin="15,2,15,5" IsReadOnly="True"/>
         <DockPanel Grid.Row="14" Grid.Column="0" Margin="15,2,15,0">
             <Button Click="OnExportButtonClick" Content="Exportieren" Name="ExportButton" Style="{StaticResource ResourceKey=ProgramButtonStyle}" Height="40" Width="85" Margin="0,10,7.5,10"/> <!--IsEnabled="{Binding ElementName=CiphertextBox, Path=Text.Length}"-->
             <Button Click="OnDecryptionButtonClick" Content="Entschlüsseln" Name="DecryptionButton" HorizontalAlignment="Left" Style="{StaticResource ResourceKey=ProgramButtonStyle}" Height="40" Width="85" Margin="7.5,10,0,10" IsEnabled="{Binding ElementName=TagBox, Path=Text.Length}"/>
@@ -94,22 +94,8 @@
         <TextBlock Grid.Row="7" Grid.Column="1" Text="Key Hex:" Name="HexEncryptionPasswordBlock" Margin="15,2,15,0" FontWeight="Bold"/>
         <TextBox Grid.Row="8" Grid.Column="1" Name="HexEncryptionPasswordBox" BorderThickness="2" TextChanged="HexTextBox_TextChanged" TextWrapping="Wrap" Margin="15,2,15,5"/>
         <TextBlock Grid.Row="10" Grid.Column="1" Text="Verschlüsselter Text Hex:" Name="HexCiphertextBlock" Margin="15,0,15,0" FontWeight="Bold"/>
-        <Image Grid.Row="10" Grid.Column="1" Source="/Images/info.png" Width="18" Margin="158,0,10,0" HorizontalAlignment="Left" Name="InfoHexCiphertext" ToolTipService.ShowDuration="60000">
-            <Image.ToolTip>
-                <ToolTip HorizontalOffset="250">
-                    <TextBlock TextWrapping="Wrap" Width="300" Text="{StaticResource ResourceKey=EncryptionInfoHexTagAndCipher}"/>
-                </ToolTip>
-            </Image.ToolTip>
-        </Image>
-        <TextBox Grid.Row="11" Grid.Column="1" Name="HexCiphertextBox" BorderThickness="2" TextChanged="HexTextBox_TextChanged" TextWrapping="Wrap" Margin="15,2,15,5" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+        <TextBox Grid.Row="11" Grid.Column="1" Name="HexCiphertextBox" Background="#F0F0F0" IsReadOnly="True" BorderThickness="2" TextChanged="HexTextBox_TextChanged" TextWrapping="Wrap" Margin="15,2,15,5" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
         <TextBlock Grid.Row="12" Grid.Column="1" Text="Tag Hex:" Name="HexTagBlock" Margin="15,0,15,0" FontWeight="Bold"/>
-        <Image Grid.Row="12" Grid.Column="1" Source="/Images/info.png" Width="18" Margin="67,0,10,0" HorizontalAlignment="Left" Name="InfoHexTag" ToolTipService.ShowDuration="60000">
-            <Image.ToolTip>
-                <ToolTip HorizontalOffset="250">
-                    <TextBlock TextWrapping="Wrap" Width="300" Text="{StaticResource ResourceKey=EncryptionInfoHexTagAndCipher}"/>
-                </ToolTip>
-            </Image.ToolTip>
-        </Image>
-        <TextBox Grid.Row="13" Grid.Column="1" Name="HexTagBox" BorderThickness="2" TextChanged="HexTextBox_TextChanged" TextWrapping="Wrap" Margin="15,2,15,5"/>
+        <TextBox Grid.Row="13" Grid.Column="1" Name="HexTagBox" Background="#F0F0F0" IsReadOnly="True" BorderThickness="2" TextChanged="HexTextBox_TextChanged" TextWrapping="Wrap" Margin="15,2,15,5"/>
     </Grid>
 </base:CryptoClass>
