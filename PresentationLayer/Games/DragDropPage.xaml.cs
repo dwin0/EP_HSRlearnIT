@@ -14,17 +14,22 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
 {
     public partial class DragDropPage
     {
-        private static int NumOfDroppableRectanglePlaces = 17;
+        #region Private Attributes
         private const string SettingsName = "DragDropPage_Settings";
         private static readonly Dictionary<int, List<string>> CorrectAnswers = new Dictionary<int, List<string>>();
-        private List<SavedDataForProgress> _addedSavedData;
-        private readonly Rectangle[] _dropLocationsRectangles = new Rectangle[16];
         private readonly int _originalNumberOfChildren;
-        private SavedDataForProgress _addedDataForProgress;
-        private bool _rectangleHasNotBeenMovedBefore;
+
+        private static int NumOfDroppableRectanglePlaces = 17;
+        private List<SavedDataForProgress> _addedSavedData;
+        private List<Rectangle> _dropLocationsRectangles = new List<Rectangle>(); 
+        
+        private SavedDataForProgress _currentlyAddedData;
+        private Rectangle _currentlyMovedRectangle;
+        private bool _rectangleHasBeenMovedBefore;
         private bool _isMoving;
-        private Rectangle _rectangleMoved;
         private Point _startPoint = new Point(0, 0);
+
+        #endregion
 
         public DragDropPage()
         {
@@ -41,7 +46,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                 {
                     var childRect = (Rectangle) child;
                     if (!childRect.Name.Contains("Rect")) continue;
-                    _dropLocationsRectangles[index] = childRect;
+                    _dropLocationsRectangles.Add(childRect);
                     index++;
                 }
             }
@@ -50,8 +55,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         }
 
         /// <summary>
-        /// This method loads all Rectangles where a solution can be dropped.
-        /// </summary>
+        /// This method loads all Rectangles where a solution can be dropped.</summary>
         /// <param name="canvas">Is the Parent where the Rectangles have to be placed</param>
         private void LoadDroppablePlaces(Canvas canvas)
         {
@@ -81,38 +85,38 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         /// This method loads the the data saved in SavedDataForProgress to get back the same state as before a menu change./// </summary>
         private void LoadSettings()
         {
-            _addedSavedData = (List<SavedDataForProgress>)Progress.GetProgress(SettingsName) ?? new List<SavedDataForProgress>();
-
-            for (var i = 0; i < _addedSavedData.Count; i++)
+            try
             {
-                var j = _addedSavedData[i].OriginalImageChildIndex;
-                var origImage = (Rectangle)ElementCanvas.Children[j];
-                var newImage = new Rectangle
+                _addedSavedData = (List<SavedDataForProgress>)Progress.GetProgress(SettingsName) ?? new List<SavedDataForProgress>();
+
+                for (var i = 0; i < _addedSavedData.Count; i++)
                 {
-                    Width = 92,
-                    Height = 43,
-                    Margin = _addedSavedData[i].ImageMargin,
-                    Fill = origImage.Fill,
-                    Name = "tmp" + i
-                };
+                    var j = _addedSavedData[i].OriginalImageChildIndex;
+                    var origImage = (Rectangle)ElementCanvas.Children[j];
+                    var newImage = CreateNewRectangle(origImage.Fill, 92, 43, "tmp" + i, _addedSavedData[i].ImageMargin,
+                        true, true, false);
 
-                _addedSavedData[i].ChildReference = newImage;
-                _addedSavedData[i].DropPosition = _dropLocationsRectangles[_addedSavedData[i].DropRectangleIndex];
+                    // here we have refreshed the original child reference and dropRectangle 
+                    _addedSavedData[i].ChildReference = newImage;
+                    _addedSavedData[i].DropRectangle = _dropLocationsRectangles[_addedSavedData[i].DropRectangleIndex];
 
-                newImage.PreviewMouseLeftButtonDown += rectangle_PreviewMouseLeftButtonDown;
-                newImage.PreviewMouseLeftButtonUp += image_PreviewMouseLeftButtonUp;
-                ElementCanvas.Children.Add(newImage);
+                    ElementCanvas.Children.Add(newImage);
+                }
+                var bShowGameInstruction = (bool?)Progress.GetProgress("ShowGameInstruction");
+
+                if (bShowGameInstruction == null)
+                {
+                    Progress.SaveProgress("ShowGameInstruction", true);
+                }
+                else
+                {
+                    GameInstruction.Visibility = Visibility.Hidden;
+                    ButtonCloseGameInstruction.Visibility = Visibility.Hidden;
+                }
             }
-            var bShowGameInstruction = (bool?)Progress.GetProgress("ShowGameInstruction");
-
-            if (bShowGameInstruction == null)
+            catch (Exception ex)
             {
-                Progress.SaveProgress("ShowGameInstruction", true);
-            }
-            else
-            {
-                GameInstruction.Visibility = Visibility.Hidden;
-                ButtonCloseGameInstruction.Visibility = Visibility.Hidden;
+                ExceptionLogger.WriteToLogfile(ex.Message, "LoadSettings");
             }
         }
 
@@ -132,41 +136,63 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         }
 
         /// <summary>
-       /// This method iterates through the images and places them in the canvas. In order to map these images to a droppable rectangle the list localCorrectAnswers is used. /// </summary>
+        /// This method is creating a new Rectangle, e.g. after a menu change or when an copy of the original retangle is created. </summary>
+        /// <param name="fill"></param>
+        /// <param name="width">Witdh of new Rectangle to be created</param>
+        /// <param name="height">Height of the new Rectangle to be created</param>
+        /// <param name="name">Name of the new Rectangle to be created</param>
+        /// <param name="margin">Margin of the Rectangle to be created</param>
+        /// <param name="bLeftButtonDown">Rectangle should/should not be associated with the Mouse-Eventhandler LeftButtonDown</param>
+        /// <param name="bLeftButtonUp">Rectange should/should not be associated with the Mouse-Eventhandler LeftbuttonUp</param>
+        /// <param name="bMouseMove">Rectangle should/should not be associated with the Mouse-Eventhandler MouseMove</param>
+        /// <returns>Return value is the newly created Rectangle</returns>
+        Rectangle CreateNewRectangle(Brush fill, double width, double height, string name, Thickness margin, bool bLeftButtonDown, bool bLeftButtonUp, bool bMouseMove)
+        {
+            Rectangle resRect = new Rectangle
+            {
+                Fill = fill,
+                Width = width,
+                Height = height,
+                Name = name,
+                Margin = margin
+            };
+            if (bLeftButtonDown) resRect.PreviewMouseLeftButtonDown += rectangle_PreviewMouseLeftButtonDown;
+            if (bLeftButtonUp) resRect.MouseLeftButtonUp += rectangle_PreviewMouseLeftButtonUp;
+            if (bMouseMove) resRect.MouseMove += ElementCanvas_MouseMove;
+            return resRect;
+        }
+
+        /// <summary>
+       /// This method iterates through the images and places them in the canvas. In order to associate these images to a droppable rectangle the list localCorrectAnswers is used. /// </summary>
         private void GenerateSideImages()
         {
-            var images = GetImages();
-            CorrectAnswers.Clear();
-            List<List<string>> localCorrectAnswers = new List<List<string>>();
-            localCorrectAnswers.Add(new List<string> {"Rect13Hash"});
-            localCorrectAnswers.Add(new List<string> {"Rect1Iv"});
-            localCorrectAnswers.Add(new List<string> {"Rect7Counter", "Rect15Counter", "Rect17Counter"});
-            localCorrectAnswers.Add(new List<string> {"Rect2MultH", "Rect5MultH", "Rect9MultH", "Rect10MultH"});
-            localCorrectAnswers.Add(new List<string> {"Rect4Aad"});
-            localCorrectAnswers.Add(new List<string> {"Rect16Tag"});
-            localCorrectAnswers.Add(new List<string> {"Rect3Len"});
-            localCorrectAnswers.Add(new List<string> {"Rect6Ciphertext", "Rect11Ciphertext"});
-            localCorrectAnswers.Add(new List<string> {"Rect8Plaintext", "Rect12Plaintext"});
-
-            for (var i = 0; i < images.Length; i++)
+            try
             {
-                var img = images[i];
-                var rect = new Rectangle
+                var images = GetImages();
+                CorrectAnswers.Clear();
+                List<List<string>> localCorrectAnswers = new List<List<string>>();
+                localCorrectAnswers.Add(new List<string> { "Rect13Hash" });
+                localCorrectAnswers.Add(new List<string> { "Rect1Iv" });
+                localCorrectAnswers.Add(new List<string> { "Rect7Counter", "Rect15Counter", "Rect17Counter" });
+                localCorrectAnswers.Add(new List<string> { "Rect2MultH", "Rect5MultH", "Rect9MultH", "Rect10MultH" });
+                localCorrectAnswers.Add(new List<string> { "Rect4Aad" });
+                localCorrectAnswers.Add(new List<string> { "Rect16Tag" });
+                localCorrectAnswers.Add(new List<string> { "Rect3Len" });
+                localCorrectAnswers.Add(new List<string> { "Rect6Ciphertext", "Rect11Ciphertext" });
+                localCorrectAnswers.Add(new List<string> { "Rect8Plaintext", "Rect12Plaintext" });
+
+                for (var i = 0; i < images.Length; i++)
                 {
-                    Fill = new ImageBrush(img),
-                    Height = 43,
-                    Width = 92,
-                    Name = "dragdrop" + i,
-                    Margin = new Thickness(800, 100 + i*55, 0, 0)
-                };
-
-                rect.PreviewMouseLeftButtonDown += rectangle_PreviewMouseLeftButtonDown;
-                rect.MouseLeftButtonUp += image_PreviewMouseLeftButtonUp;
-
-                var index = ElementCanvas.Children.Add(rect);
-                CorrectAnswers.Add(index, localCorrectAnswers[i]);
+                    var index = ElementCanvas.Children.Add(CreateNewRectangle(new ImageBrush(images[i]), 92, 43, "dragdrop" + i, new Thickness(800, 100 + i * 55, 0, 0), true, true, false));
+                    CorrectAnswers.Add(index, localCorrectAnswers[i]);
+                }
             }
-        }
+    
+	        catch (Exception ex)
+            {
+                ExceptionLogger.WriteToLogfile(ex.Message, "GenerateSideImages()");
+            }
+        }   
 
         /// <summary>
         /// This method defines the functions for the PreviewMouseLeftButtonDown Event. It checks if the mouse was was pressed down on an original rectangle image
@@ -177,46 +203,36 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         {
             try
             {
-                _rectangleMoved = sender as Rectangle;
+                _currentlyMovedRectangle = sender as Rectangle;
 
                 //Check if the element has been already moved or not. If it has been moved it would contain tmp in its name.
-                if (_rectangleMoved != null)
+                if (_currentlyMovedRectangle != null)
                 {
-                    _startPoint = e.GetPosition(_rectangleMoved);
-                    _rectangleHasNotBeenMovedBefore = !_rectangleMoved.Name.Contains("tmp");
+                    _startPoint = e.GetPosition(_currentlyMovedRectangle);
+                    _rectangleHasBeenMovedBefore = _currentlyMovedRectangle.Name.Contains("tmp");
 
-                   if (_rectangleHasNotBeenMovedBefore)
+                   if (!_rectangleHasBeenMovedBefore)
                     {
-                        _addedDataForProgress = new SavedDataForProgress();
+                        _currentlyAddedData = new SavedDataForProgress();
 
-                        var copiedRectangle = new Rectangle
-                        {
-                            Width = _rectangleMoved.Width,
-                            Height = _rectangleMoved.Height,
-                            Margin = _rectangleMoved.Margin,
-                            Fill = _rectangleMoved.Fill,
-                            Name = "tmp" + _rectangleMoved.Name
-                        };
+                        var copiedRectangle = CreateNewRectangle(_currentlyMovedRectangle.Fill,
+                            _currentlyMovedRectangle.Width, _currentlyMovedRectangle.Height,
+                            "tmp" + _currentlyMovedRectangle.Name, _currentlyMovedRectangle.Margin, true, true, true);
 
                         ElementCanvas.Children.Add(copiedRectangle);
 
                         //Index and ChildReference of copied rectangle is added to SavaData. 
-                        _addedDataForProgress.OriginalImageChildIndex = ElementCanvas.Children.IndexOf(_rectangleMoved);
-                        _addedDataForProgress.ChildReference = copiedRectangle;
+                        _currentlyAddedData.OriginalImageChildIndex = ElementCanvas.Children.IndexOf(_currentlyMovedRectangle);
+                        _currentlyAddedData.ChildReference = copiedRectangle;
 
-                        //Set Eventhandler for new rectangle, so the copyied rectangle behaves as original
-                        copiedRectangle.PreviewMouseLeftButtonDown += rectangle_PreviewMouseLeftButtonDown;
-                        copiedRectangle.PreviewMouseLeftButtonUp += image_PreviewMouseLeftButtonUp;
-                        copiedRectangle.MouseMove += ElementCanvas_MouseMove;
-
-                        _rectangleMoved = copiedRectangle;
+                        _currentlyMovedRectangle = copiedRectangle;
                     }
                     else
                     {
                         //refers to a rectangle which is moved within the fields of the algorithm. Index is saved to SaveData
-                        var childIndex = ElementCanvas.Children.IndexOf(_rectangleMoved);
-                        int addedSavedDataIndex = childIndex - _originalNumberOfChildren;
-                        _addedDataForProgress = _addedSavedData[addedSavedDataIndex];
+                        var childIndexOfMovedRectangle = ElementCanvas.Children.IndexOf(_currentlyMovedRectangle);
+                        int addedSavedDataIndex = childIndexOfMovedRectangle - _originalNumberOfChildren;
+                        _currentlyAddedData = _addedSavedData[addedSavedDataIndex];
                     }
                 }
                 _isMoving = true;
@@ -228,7 +244,8 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         }
 
         /// <summary>
-        /// This method checks if there is an intersection with a dropRectangle</summary>
+        /// This method checks if there is an intersection with a dropLocationsRectangle</summary>
+        /// <return>If intersection of an rectangle with a an rectangle from DropLocation was found then the drectangle from dropLocationsRectangles is returned, otherwise nothing</return>
         private Rectangle CheckCollisionWithDropRectangles(Rect imageRect)
         {
             foreach (var dropRect in _dropLocationsRectangles)
@@ -258,82 +275,83 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         }
 
         /// <summary>
-        /// This method defines the functions for the PreviewMouseLeftButtonup Event. If there is an intersection between a dropRectangle, respectively recycle bin
-        /// and the copied/moved image rectangle the image rectangle is dropped and the Margin of the _rectangleMoved is saved into the SaveDataForProgress.  </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void image_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        /// Method checks if a droplocation is already filled with an image rectangle/// </summary>
+        /// <param name="rect">rectangle field for which it is checked if its filled with an image rectangle or not</param>
+        /// <returns>index -1 is returned if an rectangle field is still empty otherwise the index of the rectangle is returned </returns>
+        private int IsRectangleFilled(Rectangle rect)
         {
             try
             {
-                _isMoving = false;
-                var imageRect = new Rect(_rectangleMoved.Margin.Left, _rectangleMoved.Margin.Top, _rectangleMoved.Width, _rectangleMoved.Height);
-                // bIntersection = false;
 
-                var dropRectangle = CheckCollisionWithDropRectangles(imageRect); //imageRect is rectangle which is in dragged status
+                for (var index = 0; index < _addedSavedData.Count; index++)
+                {
+                    if (_addedSavedData[index].DropRectangle == rect) //intended
+                        return index;
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionLogger.WriteToLogfile(ex.Message, "IsRectangleFilled");
+            }
+                return -1;
+        }
+
+        /// <summary>
+        /// This method defines the functions for the PreviewMouseLeftButtonup Event. If there is an intersection between a dropRectangle, respectively recycle bin
+        /// and the copied/moved image rectangle the image rectangle is dropped and the Margin of the currentlyMovedRectangle is saved into the SaveDataForProgress.  </summary>
+      
+        private void rectangle_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (_currentlyMovedRectangle == null)
+                return;
+            try
+            {
+                _isMoving = false;
+                var rectangleInDraggedStatus = new Rect(_currentlyMovedRectangle.Margin.Left, _currentlyMovedRectangle.Margin.Top, _currentlyMovedRectangle.Width, _currentlyMovedRectangle.Height);
+
+                var dropRectangle = CheckCollisionWithDropRectangles(rectangleInDraggedStatus); 
                 if (dropRectangle != null) // The collision happened
                 {
-                    //dropRectangle = definded rectangle on algorithm (e.g. rectMulH). 
+                    //dropRectangle = defined rectangle on algorithm (e.g. rectMulH). 
                     Rect r = new Rect(Canvas.GetLeft(dropRectangle), Canvas.GetTop(dropRectangle), dropRectangle.Width, dropRectangle.Height);
-                    _rectangleMoved.Margin = new Thickness(r.Left, r.Top, 0, 0);
-                    _addedDataForProgress.ImageMargin = _rectangleMoved.Margin;
+                    _currentlyMovedRectangle.Margin = new Thickness(r.Left, r.Top, 0, 0);
+                    _currentlyAddedData.ImageMargin = _currentlyMovedRectangle.Margin;
 
-                    var indexFound = -1; // if we move it from one rectangle field to an empty rectangle field
-                    for (var i = 0; i < _addedSavedData.Count; i++)
+                    var addedSavedDataIndex = IsRectangleFilled(dropRectangle);
+
+                    _currentlyAddedData.DropRectangle = dropRectangle;
+                    _currentlyAddedData.DropRectangleIndex = _dropLocationsRectangles.IndexOf(dropRectangle);
+
+                    if (addedSavedDataIndex != -1) // If it is not minus 1, that means we are putting the image to the already filled rectangle
                     {
-                        if (_addedSavedData[i].DropPosition != dropRectangle) continue;
-                        indexFound = i;
-                        break;
-                    }
-
-                    _addedDataForProgress.DropPosition = dropRectangle;
-
-                    if (indexFound != -1) // If we move it from one rectangle and replace already existing dropped image
-                    {
-                        if (_addedSavedData[indexFound].ChildReference != _rectangleMoved) 
+                        if (_addedSavedData[addedSavedDataIndex].ChildReference != _currentlyMovedRectangle) // Do not remove rectangle itself 
                         {
-                            ElementCanvas.Children.Remove(_addedSavedData[indexFound].ChildReference);
-                            _addedSavedData.RemoveAt(indexFound);
+                            ElementCanvas.Children.Remove(_addedSavedData[addedSavedDataIndex].ChildReference);
+                            _addedSavedData.RemoveAt(addedSavedDataIndex);
                         }
                     }
 
-                    if (_rectangleHasNotBeenMovedBefore) //if we move it from the intial place to an rectange field
+                    if (!_rectangleHasBeenMovedBefore) //if we move it from the intial place to an rectangle field
                     {
-                        _addedSavedData.Add(_addedDataForProgress);
+                        _addedSavedData.Add(_currentlyAddedData);
                         if (_addedSavedData.Count == 16)
-                        {
                             Check.IsEnabled = true;
-                        }   
                     }
 
-                    for (int i = 0; i < _dropLocationsRectangles.Length; i++)
-                    {
-                        if (_addedDataForProgress.DropPosition == _dropLocationsRectangles[i])
-                        {
-                            _addedDataForProgress.DropRectangleIndex = i;
-                            break;
-                        }
-                    }
-                   
                     Progress.SaveProgress(SettingsName, _addedSavedData);
                 }
-                else
+                else // The collision did not happen
                 {
-                    if (_rectangleHasNotBeenMovedBefore)
-                    {
-                        ElementCanvas.Children.Remove(_rectangleMoved);
-                    }  
-                    else
-                    {
-                        _rectangleMoved.Margin = _addedDataForProgress.ImageMargin;
-                    }
+                    if (!_rectangleHasBeenMovedBefore) // Either we get rid of the fresh copy
+                        ElementCanvas.Children.Remove(_currentlyMovedRectangle);
+                    else // Or we return child back to its original drop rectangle
+                        _currentlyMovedRectangle.Margin = _currentlyAddedData.ImageMargin;
                 }
 
-
-                if (CheckCollisionWithRecycleBin(imageRect))
+                if (CheckCollisionWithRecycleBin(rectangleInDraggedStatus))
                 {
-                    ElementCanvas.Children.Remove(_rectangleMoved);
-                    _addedSavedData.Remove(_addedDataForProgress);
+                    ElementCanvas.Children.Remove(_currentlyMovedRectangle);
+                    _addedSavedData.Remove(_currentlyAddedData);
                 }
 
             }
@@ -354,41 +372,42 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                 {
                     var currMousePoint = e.GetPosition(ElementCanvas);
 
-                    _rectangleMoved.Margin = new Thickness(currMousePoint.X - _startPoint.X, currMousePoint.Y - _startPoint.Y, 0, 0);
+                    _currentlyMovedRectangle.Margin = new Thickness(currMousePoint.X - _startPoint.X, currMousePoint.Y - _startPoint.Y, 0, 0);
 
-                    #region Calculate Offset
+                    #region Check Page Boundaries
 
-                    if (_rectangleMoved.Margin.Left < -42) // Left
+                    if (_currentlyMovedRectangle.Margin.Left < -42) // Left
                     {
-                        _rectangleMoved.Margin = new Thickness(-42, _rectangleMoved.Margin.Top, 0, 0);
+                        _currentlyMovedRectangle.Margin = new Thickness(-42, _currentlyMovedRectangle.Margin.Top, 0, 0);
                     }
 
 
-                    if (_rectangleMoved.Margin.Left + _rectangleMoved.Width > ElementCanvas.Width) // Right
+                    if (_currentlyMovedRectangle.Margin.Left + _currentlyMovedRectangle.Width > ElementCanvas.Width) // Right
                     {
-                        _rectangleMoved.Margin = new Thickness(ElementCanvas.Width - _rectangleMoved.Width,
-                           _rectangleMoved.Margin.Top, 0, 0);
+                        _currentlyMovedRectangle.Margin = new Thickness(ElementCanvas.Width - _currentlyMovedRectangle.Width,
+                           _currentlyMovedRectangle.Margin.Top, 0, 0);
                     }
 
-                    if (_rectangleMoved.Margin.Top < 0) // Top
+                    if (_currentlyMovedRectangle.Margin.Top < 0) // Top
                     {
-                        _rectangleMoved.Margin = new Thickness(0, _rectangleMoved.Margin.Top, 0, 0);
+                        _currentlyMovedRectangle.Margin = new Thickness(0, _currentlyMovedRectangle.Margin.Top, 0, 0);
                     }
 
 
-                    if (_rectangleMoved.Margin.Top + _rectangleMoved.Height > ElementCanvas.Height)
+                    if (_currentlyMovedRectangle.Margin.Top + _currentlyMovedRectangle.Height > ElementCanvas.Height)
                     {
-                        _rectangleMoved.Margin = new Thickness(ElementCanvas.Height - _rectangleMoved.Height,
-                            _rectangleMoved.Margin.Top, 0, 0);
+                        _currentlyMovedRectangle.Margin = new Thickness(ElementCanvas.Height - _currentlyMovedRectangle.Height,
+                            _currentlyMovedRectangle.Margin.Top, 0, 0);
                     }
                         
                     #endregion Calculate Offset
 
-                    var imageRect = new Rect(_rectangleMoved.Margin.Left, _rectangleMoved.Margin.Top,
-                        _rectangleMoved.Width, _rectangleMoved.Height);
+                    var imageRect = new Rect(_currentlyMovedRectangle.Margin.Left, _currentlyMovedRectangle.Margin.Top,
+                        _currentlyMovedRectangle.Width, _currentlyMovedRectangle.Height);
+
                     bool bIntersection = CheckCollisionWithDropRectangles(imageRect) != null || CheckCollisionWithRecycleBin(imageRect);
 
-                    _rectangleMoved.Cursor = bIntersection ? Cursors.Arrow : Cursors.No;
+                    _currentlyMovedRectangle.Cursor = bIntersection ? Cursors.Arrow : Cursors.No;
                 }
             }
             catch (Exception ex)
@@ -405,7 +424,8 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         {
             try
             {
-                for (var i = 0; i < _addedSavedData.Count; i++)
+                foreach (var i in _addedSavedData)
+                    //for (var i = 0; i < _addedSavedData.Count; i++)
                 {
                     ElementCanvas.Children.RemoveAt(ElementCanvas.Children.Count - 1);
                 }
@@ -422,35 +442,43 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         /// This methods checks the dropped elements for their correctness and gives back the amount of correct / wrong placements. Wrong dropped elements will be removed. </summary>
         private void Check_OnClick(object sender, RoutedEventArgs e)
         {
-           var correctAnswers = 0;
-           var wrongAnswers = 0;
-
-            List<int> indicesToRemove = new List<int>();
-            for(int i = _addedSavedData.Count-1; i>= 0; i--)
-           // (int i = 0; i < _addedSavedData.Count; i++)
-           {
-                var data = _addedSavedData[i];
-                if (data.AnswerCorrect())
-                {
-                    correctAnswers++;
-                }     
-                else
-                {
-                    indicesToRemove.Add(i);
-                    wrongAnswers++;
-                }
-            }
-
-            foreach (int i in indicesToRemove)
+            try
             {
-                _addedSavedData.RemoveAt(i);
-                ElementCanvas.Children.RemoveAt(_originalNumberOfChildren + i);
-            }
+                var correctAnswers = 0;
+                var wrongAnswers = 0;
 
-            MessageBox.Show(
-                $"Spiel ist nun beendet. Korrekte Antwort: {correctAnswers}, Falsche Anworten: {wrongAnswers}");
+                List<int> indicesToRemove = new List<int>();
+                for (int i = _addedSavedData.Count - 1; i >= 0; i--)
+                {
+                    var data = _addedSavedData[i];
+                    if (data.AnswerCorrect())
+                    {
+                        correctAnswers++;
+                    }
+                    else
+                    {
+                        indicesToRemove.Add(i);
+                        wrongAnswers++;
+                    }
+                }
+
+                foreach (int i in indicesToRemove)
+                {
+                    _addedSavedData.RemoveAt(i);
+                    ElementCanvas.Children.RemoveAt(_originalNumberOfChildren + i);
+                }
+
+                MessageBox.Show(
+                    $"Spiel ist nun beendet. Korrekte Antwort: {correctAnswers}, Falsche Anworten: {wrongAnswers}");
+            }
+            catch (Exception ex)
+            {
+                ExceptionLogger.WriteToLogfile(ex.Message, "Check_OnClick");
+            }
         }
 
+        /// <summary>
+        /// This method is responsible for closing, respectively hiding the game instruction</summary>
         private void CloseGameInstruction(object sender, RoutedEventArgs e)
         {
             GameInstruction.Visibility = Visibility.Hidden;
@@ -465,17 +493,17 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         /// </summary>
         private class SavedDataForProgress
         {
-            public Rectangle DropPosition; // Drop rectangle reference, there should be unique drop rectangles in whole _addedSavedData
+            public Rectangle DropRectangle; // Drop rectangle reference, there should be unique drop rectangles in whole _addedSavedData
             public Rectangle ChildReference;
       
             public Thickness ImageMargin; // Position of copied data, we need it when switching pages
             public int OriginalImageChildIndex; // Index of original child we made copy of, it's index of imagebrush
             public int DropRectangleIndex; // Index of original child we made copy of, it's index of imagebrush
 
-            public SavedDataForProgress()
+            public SavedDataForProgress() // TODO : Refactor with parameters
             {
                 OriginalImageChildIndex = -1;
-                DropPosition = null;
+                DropRectangle = null;
             }
 
            /* public SavedDataForProgress(int originalImageChildIndex, Thickness ImageMargin, Rectangle dropPosition)
@@ -487,7 +515,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
 
             public bool AnswerCorrect()
             {
-                if (CorrectAnswers[OriginalImageChildIndex].Contains(DropPosition.Name))
+                if (CorrectAnswers[OriginalImageChildIndex].Contains(DropRectangle.Name))
                 {
                     return true;
                 }
