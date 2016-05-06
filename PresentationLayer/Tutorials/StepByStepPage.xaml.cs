@@ -113,6 +113,10 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             }
 
             StepDescriptionBox.Text = Application.Current.FindResource("Step" + stepNumber) as string;
+            if (!StepDescriptionBox.ClipToBounds)
+            {
+                TextScrollViewer.VerticalScrollBarVisibility = (ScrollBarVisibility)Visibility.Hidden;
+            }
             StepTitle.Text = WriteTitle(stepNumber);
 
             if (_stepPaths.ContainsKey(stepNumber))
