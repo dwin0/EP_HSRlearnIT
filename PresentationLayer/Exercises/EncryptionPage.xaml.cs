@@ -99,7 +99,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                 FileManager.UpdateFileContent(fullFilePath, line.ToString());
                 MessageBox.Show("Der Export war erfolgreich!", "Export", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-
         }
 
         private void OnDecryptionButtonClick(object sender, RoutedEventArgs e)
@@ -110,7 +109,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             string tag = HexTagBox.Text;
             NavigationService?.Navigate(new DecryptionPage(ciphertext, iv, aad, tag));
         }
-        #endregion
 
+        #endregion
     }
 }

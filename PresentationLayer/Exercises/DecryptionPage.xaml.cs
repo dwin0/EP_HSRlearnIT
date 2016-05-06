@@ -38,19 +38,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         #region Private Methods
         private void OnImportButtonClick(object sender, RoutedEventArgs e)
         {
-            /*            string ciphertext = "";
-                        string aad = "";
-                        string iv = "";
-                        string tag = "";*/
-
-            /*            OpenMultiFileDialog openMultiFileDialog = new OpenMultiFileDialog()
-                        {
-                            Owner = Application.Current.MainWindow,
-                            WindowStartupLocation = WindowStartupLocation.CenterOwner
-                        };
-                        openMultiFileDialog.Closed += new EventHandler(openMultiFileDialog_Closed);
-                        openMultiFileDialog.Show();*/
-
             OpenFileDialog openFileDialog = new OpenFileDialog()
             {
                 Filter = "Text File (*.txt)|*.txt|All Files (*.*)|*.*",
@@ -94,10 +81,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                 }
             }
             MessageBox.Show("Der Import wurde erfolgreich abgeschlossen.", "Import einer Parameterdatei", MessageBoxButton.OK, MessageBoxImage.Information);
-            /*            Progress.SaveProgress("DecryptionPage_HexCiphertextBox", ciphertext);
-                        Progress.SaveProgress("DecryptionPage_HexAadBox", aad);
-                        Progress.SaveProgress("DecryptionPage_HexIvBox", iv);
-                        Progress.SaveProgress("DecryptionPage_HexTagBox", tag);*/
         }
 
         private void openMultiFileDialog_Closed(object sender, EventArgs e)
