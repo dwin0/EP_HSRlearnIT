@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 using EP_HSRlearnIT.BusinessLayer.UniversalTools;
 using Microsoft.Win32;
 
@@ -84,14 +83,10 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                 StringBuilder line = new StringBuilder();
 
                 var listOfTextBox = new List<TextBox>();
-                foreach (var element in DependencyObjectExtension.GetAllChildren(this))
+                foreach (var element in DependencyObjectExtension.GetAllChildren<TextBox>(this))
                 {
-                    if (element is TextBox)
-                    {
-                        TextBox box = element as TextBox;
-                        listOfTextBox.Add(box);
-                        Console.WriteLine("My name is " + box.Name.Substring(3, box.Name.Length - 6));
-                    }
+                        listOfTextBox.Add(element);
+                        Console.WriteLine("My name is " + element.Name.Substring(3, element.Name.Length - 6));
                 }
                 foreach (TextBox textBox in listOfTextBox)
                 {

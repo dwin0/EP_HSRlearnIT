@@ -6,6 +6,7 @@ namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
 {
     public static class DependencyObjectExtension
     {
+        #region Public Methods
         public static IEnumerable<DependencyObject> GetAllChildren(DependencyObject root)
         {
             if (root == null)
@@ -25,5 +26,19 @@ namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
                 }
             }
         }
+
+        public static IEnumerable<T> GetAllChildren<T>(DependencyObject root) where T : class
+        {
+            foreach (var element in GetAllChildren(root))
+            {
+                if (element is T)
+                {
+                    yield return element as T;
+                }
+            }
+        }
+
+        #endregion
+
     }
 }

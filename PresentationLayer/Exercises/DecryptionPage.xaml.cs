@@ -78,21 +78,17 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                     }
                     if (value.Length > 0)
                     {
-                        foreach (var element in DependencyObjectExtension.GetAllChildren(this))
+                        foreach (var element in DependencyObjectExtension.GetAllChildren<TextBox>(this))
                         {
-                            if (element is TextBox)
-                            {
-                                TextBox textBox = element as TextBox;
-                                if (textBox.Name.Contains(parameter))
+                                if (element.Name.Contains(parameter) && !(element.Name.Contains("Plaintext") || element.Name.Contains("Password")))
                                 {
-                                    TextBox fieldOnForm = FindName(textBox.Name) as TextBox;
+                                    TextBox fieldOnForm = FindName(element.Name) as TextBox;
                                     if (fieldOnForm != null)
                                     {
                                         fieldOnForm.Text = value;
                                     }
                                     break;
                                 }
-                            }
                         }
                     }
                 }

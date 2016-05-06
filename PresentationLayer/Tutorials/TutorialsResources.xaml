@@ -69,7 +69,7 @@ Das Resultat der XOR-Verknüpfung von Ciphertext und der Galois-Feld Multiplikat
     </system:String>
     <system:String x:Key="Step11Title">Wiederholung</system:String>
     <system:String x:Key="Step11">
-Der Schritt Verschlüsselung, sowie der Schritt Ciphertext-Authentifizierung, werden nun so lange wiederholt, bis alle 128 Bit-Blöcke des Plaintextes verschlüsselt sind und der MAC darüber berechnet wurde.
+Der Schritt Verschlüsselung, sowie der Schritt Ciphertext-Authentisierung, werden nun so lange wiederholt, bis alle 128 Bit-Blöcke des Plaintextes verschlüsselt sind und der MAC darüber berechnet wurde.
 Ist der letzte Plaintext-Block kleiner als 128 Bit wird dessen Grösse zur Berechnung kein Padding angewendet, sondern der restliche Plaintext bitweise mittels XOR verschlüsselt.
     </system:String>
     <system:String x:Key="Step12Title">Abschluss und Rückgabe</system:String>
