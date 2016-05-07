@@ -60,9 +60,6 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="WPFFolderBrowser">
-      <HintPath>..\externalLibraries\WPFFolderBrowser.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -72,14 +69,8 @@
     <Compile Include="Exercises\CryptoClass.cs" />
     <Compile Include="Exercises\FormFilledDecryption.cs" />
     <Compile Include="Exercises\FormFilledEncryption.cs" />
-    <Compile Include="Exercises\OpenMultiFileDialog.xaml.cs">
-      <DependentUpon>OpenMultiFileDialog.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Exercises\PageWithTabs.xaml.cs">
-      <DependentUpon>PageWithTabs.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Exercises\SaveMultiFileDialog.xaml.cs">
-      <DependentUpon>SaveMultiFileDialog.xaml</DependentUpon>
+        <DependentUpon>PageWithTabs.xaml</DependentUpon>
     </Compile>
     <Compile Include="Games\DragDropPage.xaml.cs">
       <DependentUpon>DragDropPage.xaml</DependentUpon>
@@ -111,15 +102,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Exercises\OpenMultiFileDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Exercises\PageWithTabs.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Exercises\SaveMultiFileDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -240,25 +223,8 @@
     <Resource Include="Images\dragdrop6.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Step1.png" />
-    <Resource Include="Images\Step10.png" />
-    <Resource Include="Images\Step11.png" />
-    <Resource Include="Images\Step12.png" />
-    <Resource Include="Images\Step13.png" />
-    <Resource Include="Images\Step14.png" />
-    <Resource Include="Images\Step15.png" />
     <Resource Include="Images\Step16.png" />
     <Resource Include="Images\Step18.png" />
-    <Resource Include="Images\Step2.png" />
-    <Resource Include="Images\Step3.png" />
-    <Resource Include="Images\Step4.png" />
-    <Resource Include="Images\Step5.png" />
-    <Resource Include="Images\Step6.png" />
-    <Resource Include="Images\Step7.png" />
-    <Resource Include="Images\Step9.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Step8.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\recycling.png" />

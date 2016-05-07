@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 
 namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
@@ -17,12 +16,13 @@ namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
 
         #endregion
 
+
         #region Public Methods
         public static void WriteToLogfile(string exeptionMessage, string sourceMethod)
         {
             string filePath = FileManager.SaveFile(_path, _fileName);
             string entry = $"{Environment.NewLine}Exception: {DateTime.Now.ToString(CultureInfo.CurrentCulture)}: {exeptionMessage} {sourceMethod}";
-            FileManager.AppendContentToFile(filePath, entry);
+            FileManager.AppendContent(filePath, entry);
             AvoidOverflow(filePath);
         }
 
@@ -34,10 +34,10 @@ namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
         {
             if (FileManager.GetSize(filePath) >= _maxSize)
             {
-                List<string> lines = File.ReadAllLines(filePath).ToList<string>();
+                List<string> lines = FileManager.ReadAllLines(filePath).ToList<string>();
                 lines.RemoveRange(0, _deleteRows);
-                File.WriteAllLines(filePath, lines);
-                FileManager.AppendContentToFile(filePath, $"{Environment.NewLine}The oldest { _deleteRows} lines are removed.{Environment.NewLine}");
+                FileManager.SwapContents(filePath, lines);
+                FileManager.AppendContent(filePath, $"{Environment.NewLine}The oldest { _deleteRows} lines are removed.{Environment.NewLine}");
             }
         }
 

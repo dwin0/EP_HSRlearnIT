@@ -6,6 +6,7 @@ namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
 {
     public static class DependencyObjectExtension
     {
+
         #region Public Methods
         public static IEnumerable<DependencyObject> GetAllChildren(DependencyObject root)
         {
@@ -39,6 +40,5 @@ namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
         }
 
         #endregion
-
     }
 }

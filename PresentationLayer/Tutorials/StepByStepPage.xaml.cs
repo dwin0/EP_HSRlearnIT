@@ -1,6 +1,6 @@
-﻿using System.Windows;
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -24,7 +24,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
 
         #endregion
 
-
         #region Constructors
         public StepByStepPage(int stepNumber)
         {
@@ -46,9 +45,9 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             LoadStepPaths(StepByStepCanvas);
 
             var progressCurrentStep = Progress.GetProgress("StepByStepPage_CurrentStep");
-            if(progressCurrentStep != null)
+            if (progressCurrentStep != null)
             {
-                _step = Convert.ToInt32(progressCurrentStep);      
+                _step = Convert.ToInt32(progressCurrentStep);
             }
 
             var progressTitleStep = Progress.GetProgress("StepByStepPage_Title");
@@ -67,7 +66,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
         }
 
         #endregion
-
 
         #region Private Methods
         private void OnPreviousStepButton_Click(object sender, RoutedEventArgs e)
@@ -97,7 +95,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
 
         private void ReplaceContent(int stepNumber)
         {
-            switch(stepNumber)
+            switch (stepNumber)
             {
                 case StepMin:
                     PreviousStepButton.IsEnabled = false;
@@ -115,8 +113,11 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             }
 
             StepDescriptionBox.Text = Application.Current.FindResource("Step" + stepNumber) as string;
+            if (!StepDescriptionBox.ClipToBounds)
+            {
+                TextScrollViewer.VerticalScrollBarVisibility = (ScrollBarVisibility)Visibility.Hidden;
+            }
             StepTitle.Text = WriteTitle(stepNumber);
-            //StepImage.Source = new BitmapImage(new Uri(@"/Images/Step" + stepNumber + ".png", UriKind.RelativeOrAbsolute));
 
             if (_stepPaths.ContainsKey(stepNumber))
             {
@@ -148,8 +149,8 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
                 StepImage.Source = new BitmapImage(new Uri(@"/Images/Step" + stepNumber + ".png", UriKind.RelativeOrAbsolute));
                 _highlightedPath = stepNumber;
             }
-
         }
+
         private void LoadStepPaths(Canvas canvas)
         {
             for (int i = 1; i <= NumOfStepPaths; i++)
@@ -160,7 +161,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
                 //Create a copy of the Ressource StepPath to prevent multiple Event Listener on MouseEnter / MouseLeave
                 Path stepPath = CopyPath(ressourcePath);
                 _stepPaths.Add(i, stepPath);
-                
+
                 stepPath.SetValue(Panel.ZIndexProperty, 0);
                 canvas.Children.Add(stepPath);
             }
@@ -178,7 +179,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
 
         private Path CopyPath(Path originalPath)
         {
-            Path copy = new Path()
+            Path copy = new Path
             {
                 Data = originalPath.Data.Clone(),
                 Name = originalPath.Name,
@@ -195,7 +196,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             //Image has an existing Parent when this Page is opened a second time
             if (background.Parent is Canvas)
             {
-                ((Canvas)background.Parent).Children.Remove(background);
+                ((Canvas) background.Parent).Children.Remove(background);
             }
 
             background.SetValue(Panel.ZIndexProperty, 1);
@@ -229,7 +230,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
         private string GetTitle(int titleNumber)
         {
             string titleName = "Step" + titleNumber + "Title";
-            if(Application.Current.Resources.Contains(titleName))
+            if (Application.Current.Resources.Contains(titleName))
             {
                 return Application.Current.FindResource(titleName) as string;
             }

@@ -76,35 +76,34 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             if (saveFileDialog.ShowDialog() == true)
             {
                 string fullFilePath = saveFileDialog.FileName;
-                Console.WriteLine(fullFilePath);
                 if (!FileManager.IsExist(fullFilePath))
                 {
                     FileManager.SaveFile(fullFilePath);
                 }
-
                 StringBuilder line = new StringBuilder();
-
-                var listOfTextBox = new List<TextBox>();
-                foreach (var element in DependencyObjectExtension.GetAllChildren<TextBox>(this))
+                foreach (TextBox element in DependencyObjectExtension.GetAllChildren<TextBox>(this))
                 {
-                        listOfTextBox.Add(element);
-                        Console.WriteLine("My name is " + element.Name.Substring(3, element.Name.Length - 6));
-                }
-                foreach (TextBox textBox in listOfTextBox)
-                {
-                    if (textBox.Name.Contains("Hex") && !(textBox.Name.Contains("Password")))
+                    if (element.Name.Contains("Hex") && !(element.Name.Contains("Password")))
                     {
                         //cut Hex and Box, for Example: HexIvBox -> Iv
-                        line.AppendLine(textBox.Name.Substring(3, textBox.Name.Length-6) + "=0x" + textBox.Text);
+                        line.AppendLine(element.Name.Substring(3, element.Name.Length-6) + "=0x" + element.Text);
                     }
                 }
-                FileManager.UpdateFileContent(fullFilePath, line.ToString());
+                FileManager.UpdateContent(fullFilePath, line.ToString());
                 MessageBox.Show("Der Export war erfolgreich!", "Export", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-
         }
 
-        #endregion
+        /*
+        private void OnDecryptionButtonClick(object sender, RoutedEventArgs e)
+        {
+            string ciphertext = HexCiphertextBox.Text;
+            string iv = HexIvBox.Text;
+            string aad = HexAadBox.Text;
+            string tag = HexTagBox.Text;
+            NavigationService?.Navigate(new DecryptionPage(ciphertext, iv, aad, tag));
+        } */
 
+        #endregion
     }
 }

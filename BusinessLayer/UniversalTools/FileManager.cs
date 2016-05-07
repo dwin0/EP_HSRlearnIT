@@ -1,5 +1,5 @@
-﻿using System.IO;
-using System.Linq;
+﻿using System.Collections.Generic;
+using System.IO;
 
 namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
 {
@@ -7,22 +7,33 @@ namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
     {
 
         #region Public Methods
-        public static void UpdateFileContent(string file, string currentContent)
+        public static void UpdateContent(string file, string currentContent)
         {
             WriteFile(file, currentContent, false);
         }
 
-        public static void AppendContentToFile(string file, string currentContent)
+        public static void AppendContent(string file, string currentContent)
         {
             WriteFile(file, currentContent, true);
         }
 
-        public static string ReadFile(string filePath)
+        public static void SwapContents(string filePath, IEnumerable<string> newContent)
+        {
+            UpdateContent(filePath, "");
+            File.WriteAllLines(filePath, newContent);
+        }
+
+        public static string ReadFullContent(string filePath)
         {
             using (StreamReader sr = new StreamReader(filePath))
             {
                 return sr.ReadToEnd();
             }
+        }
+
+        public static IEnumerable<string> ReadAllLines(string filePath)
+        {
+            return File.ReadLines(filePath);
         }
 
         public static long GetSize(string filePath)

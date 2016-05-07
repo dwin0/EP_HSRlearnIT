@@ -84,7 +84,7 @@ namespace EP_HSRlearnIT.PresentationLayer
         //This method is only for manuel testing from FileManager but it will removed after implement export function
         private void OnSaveButton_Click(object sender, RoutedEventArgs e)
         {
-            FileManager.UpdateFileContent(FileManager.SaveFile(@"C:\temp\HSRlearnIT", "AES-GCM.txt"), "The program is started!");
+            FileManager.UpdateContent(FileManager.SaveFile(@"C:\temp\HSRlearnIT", "AES-GCM.txt"), "The program is started!");
         }
 
         //This method is used only for a system test in order to control the correctness
