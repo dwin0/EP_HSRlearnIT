@@ -20,6 +20,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             HexTagBox.Text = Progress.GetProgress("DecryptionPage_HexTagBox") as string;
         }
 
+        /*
         public DecryptionPage(string ciphertext, string iv, string aad, string tag)
         {
             InitializeComponent();
@@ -31,7 +32,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             Progress.SaveProgress("DecryptionPage_HexAadBox", aad);
             Progress.SaveProgress("DecryptionPage_HexIvBox", iv);
             Progress.SaveProgress("DecryptionPage_HexTagBox", tag);
-        }
+        } */
 
         #endregion
 
@@ -152,14 +153,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                 MessageBox.Show("Der Text wurde erfolgreich authentifiziert.", "alleinstehenden Authentifizierung",
                     MessageBoxButton.OK, MessageBoxImage.Information);
             }
-        }
-
-        private void OnEncryptionButtonClick(object sender, RoutedEventArgs e)
-        {
-            string plaintext = HexPlaintextBox.Text;
-            string iv = HexIvBox.Text;
-            string aad = HexAadBox.Text;
-            NavigationService?.Navigate(new EncryptionPage(plaintext, iv, aad));
         }
 
         #endregion

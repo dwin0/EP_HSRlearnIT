@@ -11,7 +11,7 @@
     <Page.Resources>
         <base:FormFilledEncryption x:Key="FormFilledEncryption"/>
     </Page.Resources>
-    
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -34,7 +34,7 @@
             <RowDefinition Height="Auto" Name="Row12"/>
             <RowDefinition Height="Auto" Name="Row13"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Grid.Column="0" Name="TitleOfPage" Text="Verschlüsselung" Margin="15,5,15,10" FontWeight="Bold" FontSize="16"/>
+        <!--<TextBlock Grid.Row="0" Grid.Column="0" Name="TitleOfPage" Text="Verschlüsselung" Margin="15,5,15,10" FontWeight="Bold" FontSize="16"/>-->
         <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="6" Background="LightGray" Grid.RowSpan="14"/>
 
         <TextBlock Grid.Row="1" Grid.Column="0" Text="IV: (optional)" Name="IvBlock" Margin="15,15,15,0" FontWeight="Bold" HorizontalAlignment="Left"/>
@@ -80,10 +80,7 @@
         <TextBox Grid.Row="11" Grid.Column="0" Name="UtfCiphertextBox" Background="#F0F0F0" BorderThickness="2" TextChanged="TextBox_TextChanged" TextWrapping="Wrap" Margin="15,2,15,5" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
         <TextBlock Grid.Row="12" Grid.Column="0" Text="Tag:" Name="TagBlock" Margin="15,2,15,0" FontWeight="Bold"/>
         <TextBox Grid.Row="13" Grid.Column="0" Name="UtfTagBox" Background="#F0F0F0" BorderThickness="2" TextChanged="TextBox_TextChanged" TextWrapping="Wrap" Margin="15,2,15,5" IsReadOnly="True"/>
-        <DockPanel Grid.Row="14" Grid.Column="0" Margin="15,2,15,0">
-            <Button Click="OnExportButtonClick" Content="Exportieren" Name="ExportButton" Style="{StaticResource ResourceKey=ProgramButtonStyle}" Height="40" Width="85" Margin="0,10,7.5,10"/> <!--IsEnabled="{Binding ElementName=CiphertextBox, Path=Text.Length}"-->
-            <Button Click="OnDecryptionButtonClick" Content="Entschlüsseln" Name="DecryptionButton" HorizontalAlignment="Left" Style="{StaticResource ResourceKey=ProgramButtonStyle}" Height="40" Width="85" Margin="7.5,10,0,10" IsEnabled="{Binding ElementName=TagBox, Path=Text.Length}"/>
-        </DockPanel>
+        <Button Grid.Row="14" Grid.Column="0" HorizontalAlignment="Left" Margin="15,10,0,10" Click="OnExportButtonClick" Content="Exportieren" Name="ExportButton" Style="{StaticResource ResourceKey=ProgramButtonStyle}" Height="40" Width="85"/>
 
         <TextBlock Grid.Row="1" Grid.Column="1" Text="IV Hex:" Name="HexIvBlock" Margin="15,15,15,0" FontWeight="Bold"/>
         <TextBox Grid.Row="2" Grid.Column="1" Name="HexIvBox" BorderThickness="2" TextChanged="HexTextBox_TextChanged" LostKeyboardFocus="HexTextBox_LostKeyboardFocus" TextWrapping="Wrap" Margin="15,2,15,5"/>

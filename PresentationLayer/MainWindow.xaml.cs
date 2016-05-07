@@ -1,11 +1,11 @@
 ﻿using EP_HSRlearnIT.BusinessLayer.UniversalTools;
-using EP_HSRlearnIT.PresentationLayer.Exercises;
 using EP_HSRlearnIT.PresentationLayer.Tutorials;
 using EP_HSRlearnIT.PresentationLayer.Games;
 using System.Windows;
 using System.Windows.Input;
 using System;
 using System.Windows.Media.Animation;
+using EP_HSRlearnIT.PresentationLayer.Exercises;
 
 namespace EP_HSRlearnIT.PresentationLayer
 {
@@ -55,7 +55,7 @@ namespace EP_HSRlearnIT.PresentationLayer
                     MainFrame.Navigate(new StepByStepPage());
                     break;
                 case "Ver- und Entschlüsselung":
-                    MainFrame.Navigate(new EncryptionDecyrptionPage());
+                    MainFrame.Navigate(new PageWithTabs());
                     break;
                 case "Drag & Drop - Spiel":
                     MainFrame.Navigate(new DragDropPage());

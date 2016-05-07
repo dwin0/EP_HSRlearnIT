@@ -75,6 +75,9 @@
     <Compile Include="Exercises\OpenMultiFileDialog.xaml.cs">
       <DependentUpon>OpenMultiFileDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Exercises\PageWithTabs.xaml.cs">
+      <DependentUpon>PageWithTabs.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Exercises\SaveMultiFileDialog.xaml.cs">
       <DependentUpon>SaveMultiFileDialog.xaml</DependentUpon>
     </Compile>
@@ -109,6 +112,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Exercises\OpenMultiFileDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Exercises\PageWithTabs.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
