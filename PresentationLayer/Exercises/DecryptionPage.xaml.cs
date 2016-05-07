@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using EP_HSRlearnIT.BusinessLayer.UniversalTools;
 using System.Windows;
 using System.Windows.Controls;
@@ -35,6 +34,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
 
         #endregion
 
+
         #region Private Methods
         private void OnImportButtonClick(object sender, RoutedEventArgs e)
         {
@@ -50,58 +50,41 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             if (openFileDialog.ShowDialog() == true)
             {
                 string filePath = openFileDialog.FileName;
-                IEnumerable<string> fullFileContent = File.ReadLines(filePath);
+                IEnumerable<string> allLines = FileManager.ReadAllLines(filePath);
 
-                foreach (string line in fullFileContent)
+                foreach (string line in allLines)
                 {
                     int index = line.IndexOf(Convert.ToChar('='));
                     //the first '=' is only a delimeter symbole and not part of parameter or value
                     string parameter = line.Substring(0, index-1);
                     string value = line.Substring(index + 1);
-                    if (value.Substring(0, 2).Equals("0x"))
-                    {
-                        parameter = "Hex" + parameter;
-                        value = value.Substring(2);
-                    }
-                    if (value.Length > 0)
-                    {
-                        foreach (var element in DependencyObjectExtension.GetAllChildren<TextBox>(this))
-                        {
-                                if (element.Name.Contains(parameter) && !(element.Name.Contains("Plaintext") || element.Name.Contains("Password")))
-                                {
-                                    TextBox fieldOnForm = FindName(element.Name) as TextBox;
-                                    if (fieldOnForm != null)
-                                    {
-                                        fieldOnForm.Text = value;
-                                    }
-                                    break;
-                                }
-                        }
-                    }
+                    FillingField(parameter, value);
                 }
             }
             MessageBox.Show("Der Import wurde erfolgreich abgeschlossen.", "Import einer Parameterdatei", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
-        private void openMultiFileDialog_Closed(object sender, EventArgs e)
+        private void FillingField(string parameter, string value)
         {
-            //if (e == null) throw new ArgumentNullException(nameof(e));
-            //if (e == null) return;
-            var importFiles = Progress.GetProgress("OpenMultiFileDialog_Import") as Dictionary<string, string>;
-            if (importFiles != null)
+            if (value.Substring(0, 2).Equals("0x"))
             {
-                foreach (var fileName in importFiles)
+                parameter = "Hex" + parameter;
+                value = value.Substring(2);
+            }
+            if (value.Length > 0)
+            {
+                foreach (var element in DependencyObjectExtension.GetAllChildren<TextBox>(this))
                 {
-                    TextBox textBox = FindName("Hex" + fileName.Key + "Box") as TextBox;
-                    
-                    if (textBox != null)
+                    if (element.Name.Contains(parameter) && !(element.Name.Contains("Plaintext") || element.Name.Contains("Password")))
                     {
-                        Console.WriteLine(textBox.Name);
-                        textBox.Text = File.ReadAllText(fileName.Value);
-                        Progress.SaveProgress("DecryptionPage_Hex" + textBox.Name + "Box", textBox.Text);
+                        TextBox fieldOnForm = FindName(element.Name) as TextBox;
+                        if (fieldOnForm != null)
+                        {
+                            fieldOnForm.Text = value;
+                        }
+                        break;
                     }
                 }
-                MessageBox.Show("Import war erfolgreich!", "Fileimport", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 

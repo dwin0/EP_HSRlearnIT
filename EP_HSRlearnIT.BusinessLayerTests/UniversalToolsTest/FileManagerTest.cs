@@ -19,20 +19,18 @@ namespace EP_HSRlearnIT.BusinessLayer.Testing.UniversalToolsTest
         public void UpdateFileTest()
         {
             string file = FileManager.SaveFile(@"c:\temp\HSRlearnIT\Test", "UpdateTest.txt");
-            //string file = Path.Combine(@"c:\temp\HSRlearnIT\Test", "UpdateTest.txt");
-            FileManager.UpdateFileContent(file, "10 Hello World!");
-            FileManager.UpdateFileContent(file ,"30 Hello Member!");
-            Assert.AreEqual("30 Hello Member!", FileManager.ReadFile(file));
+            FileManager.UpdateContent(file, "10 Hello World!");
+            FileManager.UpdateContent(file ,"30 Hello Member!");
+            Assert.AreEqual("30 Hello Member!", FileManager.ReadFullContent(file));
         }
 
         [TestMethod]
         public void AppendToFileTest()
         {
-            string file = FileManager.SaveFile(@"c:\temp\HSRlearnIT\Test", "AddTest.txt");
-            //string file = Path.Combine(@"c:\temp\HSRlearnIT\Test", "AddTest.txt");
-            FileManager.AppendContentToFile(file, "10 Hello World! ");
-            FileManager.AppendContentToFile(file, "30 Hello Member!");
-            Assert.AreEqual("10 Hello World! 30 Hello Member!", FileManager.ReadFile(file));
+            string file = FileManager.SaveFile(@"c:\temp\HSRlearnIT\Test", "AppendTest.txt");
+            FileManager.AppendContent(file, "10 Hello World! ");
+            FileManager.AppendContent(file, "30 Hello Member!");
+            Assert.AreEqual("10 Hello World! 30 Hello Member!", FileManager.ReadFullContent(file));
         }
 
         [ClassCleanup]
