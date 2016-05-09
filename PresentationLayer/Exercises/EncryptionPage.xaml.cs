@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -93,17 +92,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                 MessageBox.Show("Der Export war erfolgreich!", "Export", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
-
-        /*
-        private void OnDecryptionButtonClick(object sender, RoutedEventArgs e)
-        {
-            string ciphertext = HexCiphertextBox.Text;
-            string iv = HexIvBox.Text;
-            string aad = HexAadBox.Text;
-            string tag = HexTagBox.Text;
-            NavigationService?.Navigate(new DecryptionPage(ciphertext, iv, aad, tag));
-        } */
-
         #endregion
     }
 }

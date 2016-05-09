@@ -34,7 +34,7 @@ namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
         {
             if (FileManager.GetSize(filePath) >= _maxSize)
             {
-                List<string> lines = FileManager.ReadAllLines(filePath).ToList<string>();
+                List<string> lines = FileManager.ReadAllLines(filePath).ToList();
                 lines.RemoveRange(0, _deleteRows);
                 FileManager.SwapContents(filePath, lines);
                 FileManager.AppendContent(filePath, $"{Environment.NewLine}The oldest { _deleteRows} lines are removed.{Environment.NewLine}");
