@@ -51,7 +51,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             else
             {
                 LoadStepPaths(StepByStepCanvas);
-            }
+            }   
 
             var progressCurrentStep = Progress.GetProgress("StepByStepPage_CurrentStep");
             if (progressCurrentStep != null)
