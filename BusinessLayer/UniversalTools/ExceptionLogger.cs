@@ -5,6 +5,12 @@ using System.Linq;
 
 namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
 {
+    /// <summary>
+    /// Class log all global exceptions of the program.
+    /// path and fileName are fix values.
+    /// maxSize is the favored max size of the logfile.
+    /// deleteRows is the amount of lines to delete into logfile.
+    /// </summary>
     public static class ExceptionLogger
     {
         #region Private Member

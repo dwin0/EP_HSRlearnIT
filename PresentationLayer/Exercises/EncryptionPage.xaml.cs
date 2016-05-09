@@ -79,6 +79,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                 {
                     FileManager.SaveFile(fullFilePath);
                 }
+                //Fillup all fields with name of parameter and value into exportfile.
                 StringBuilder line = new StringBuilder();
                 foreach (TextBox element in DependencyObjectExtension.GetAllChildren<TextBox>(this))
                 {

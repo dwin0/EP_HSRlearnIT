@@ -3,10 +3,18 @@ using System.IO;
 
 namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
 {
+    /// <summary>
+    /// Class is to handling with files.
+    /// </summary>
     public static class FileManager
     {
 
         #region Public Methods
+        /// <summary>
+        /// Method to change all content in the file.
+        /// </summary>
+        /// <param name="file"></param>is the file to change.
+        /// <param name="currentContent"></param>is the new content for the file.
         public static void UpdateContent(string file, string currentContent)
         {
             WriteFile(file, currentContent, false);
@@ -17,6 +25,11 @@ namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
             WriteFile(file, currentContent, true);
         }
 
+        /// <summary>
+        /// Method to fillup whole file with new content.
+        /// </summary>
+        /// <param name="filePath"></param>path from file to update.
+        /// <param name="newContent"></param>a list with the new content.
         public static void SwapContents(string filePath, IEnumerable<string> newContent)
         {
             UpdateContent(filePath, "");

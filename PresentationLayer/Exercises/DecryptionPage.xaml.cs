@@ -65,6 +65,11 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             MessageBox.Show("Der Import wurde erfolgreich abgeschlossen.", "Import einer Parameterdatei", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
+        /// <summary>
+        /// Method filling all fields from the importfile excluding the following parameternames.
+        /// </summary>
+        /// <param name="parameter"></param>fieldidentifier from file.
+        /// <param name="value"></param>value from parametername.
         private void FillingField(string parameter, string value)
         {
             if (value.Substring(0, 2).Equals("0x"))
