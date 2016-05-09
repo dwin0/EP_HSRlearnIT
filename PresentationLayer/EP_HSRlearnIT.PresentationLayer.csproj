@@ -75,7 +75,6 @@
     <Compile Include="Games\DragDropPage.xaml.cs">
       <DependentUpon>DragDropPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Games\DragImage.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -260,6 +259,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Step0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\questionmark.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

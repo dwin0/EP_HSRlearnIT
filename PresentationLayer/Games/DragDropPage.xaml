@@ -17,8 +17,9 @@
             <Button Name="Reset" Content="Reset" Click="OnResetClick" Height="40" Width="90" Canvas.Left="800" Canvas.Bottom="30"/>
             <TextBox Name="GameInstruction" Panel.ZIndex="1" Text="{StaticResource ResourceKey=GameInstruction}" FontSize="15" IsReadOnly="True" Background="AliceBlue" Foreground="black" BorderBrush="Blue" BorderThickness="2" Width="750" Height="350" Canvas.Left="-50" Canvas.Top="55" TextWrapping="Wrap"/>
             <Button Name="ButtonCloseGameInstruction" Panel.ZIndex="2"  Content="Schliessen" Canvas.Top="330" Canvas.Left="600" Width="80" Height="35" Click="CloseGameInstruction" />
-            <Button Name="Check"  Height="40" Width="90" Content="Resultat" Canvas.Left="700" Canvas.Bottom="30" Click="Check_OnClick" IsEnabled="False"/>
-            <Button Name="OpenInstructionButton" Visibility="Visible" HorizontalAlignment ="Left" Width="100" Margin="580,670,0,30" Content="Spielanleitung" Click="OpenInstruction"/>
+            <Button Name="Check"  Height="40" Width="90" Content="Resultat" Canvas.Left="700" Canvas.Bottom="30" Click="Check_OnClick" IsEnabled="True"/>
+            <Image Source="/Images/questionmark.png" Name="QuestionMarkOpenInstruction" Visibility="Visible" HorizontalAlignment ="Left" Canvas.Left="850" Canvas.Top="0" Width="40" MouseUp="OpenInstruction" />
+
         </Canvas>
     </Viewbox>
 </Page>
