@@ -1,43 +1,62 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Input;
 
 namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
 {
+    /// <summary>
+    /// Class for saving the progress
+    /// </summary>
     public static class Progress
     {
         #region Private Members
-        private static Dictionary<object, object> _appProgress = new Dictionary<object, object>();
+        private static readonly Dictionary<object, object> AppProgress = new Dictionary<object, object>();
 
         #endregion
 
+        /// <summary>
+        /// Method to save a progress
+        /// </summary>
+        /// <param name="key">A unique object key</param>
+        /// <param name="value">The progress object to be save</param>
         #region Public Methods
         public static void SaveProgress(object key, object value)
         {
-            if(_appProgress.ContainsKey(key))
+            if(AppProgress.ContainsKey(key))
             {
-                _appProgress[key] = value;
+                AppProgress[key] = value;
             } else
             {
-                _appProgress.Add(key, value);
+                AppProgress.Add(key, value);
             }
         }
 
+        /// <summary>
+        /// Method to get all the saved progresses
+        /// </summary>
+        /// <returns>Dictionary contains all saved progresses</returns>
         public static Dictionary<object, object> GetProgress()
         {
-            return _appProgress;
+            return AppProgress.ToDictionary(entry => entry.Key, entry => entry.Value);
         }
 
+        /// <summary>
+        /// Method to get a specific progress
+        /// </summary>
+        /// <param name="key">Unique key to search a progress</param>
+        /// <returns>object = a progress was found. null = no progress was found</returns>
         public static object GetProgress(object key)
         {
             object retVal;
-            _appProgress.TryGetValue(key, out retVal);
+            AppProgress.TryGetValue(key, out retVal);
             return retVal;
         }
 
+        /// <summary>
+        /// Method to remove all saved progresses
+        /// </summary>
         public static void CleanProgress()
         {
-            _appProgress.Clear();
+            AppProgress.Clear();
         }
 
         #endregion

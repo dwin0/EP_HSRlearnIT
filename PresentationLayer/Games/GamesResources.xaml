@@ -1,0 +1,34 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <system:String x:Key="GameInstruction">
+        Spielanleitung
+        Redete grunen gro schatz ihr besuch laufet hat. Ja lass pa ja zeit uben da feld. Wandern wahrend je weibern er nachtun wo gerbers. 
+        Zu drechslers wo geschlafen lehrlingen arbeitsame. Nieder wei fragte lachen gesund auf gut nie. Ihr grashalden ordentlich hab weg gar achthausen vorsichtig.
+    </system:String>
+
+    <!-- ReSharper warnings for Canvas.Left and Canvas.Top can be ignored, this parameters are used, even if ReSharp does not recognize it! -->
+    <Rectangle x:Key="DroppablePlace1" Name="Rect1Iv" Fill="Transparent" Height="40" Width="90" Canvas.Left="70" Canvas.Top="78" />
+    <Rectangle x:Key="DroppablePlace2" Name="Rect2MultH" Fill="Transparent" Height="45" Width="90" Canvas.Left="540" Canvas.Top="500" />
+    <Rectangle x:Key="DroppablePlace3" Name="Rect3Len" Fill="Transparent" Height="40" Width="90" Canvas.Left="432" Canvas.Top="444" />
+    <Rectangle x:Key="DroppablePlace4" Name="Rect4Aad" Fill="Transparent" Height="40" Width="95" Canvas.Left="155" Canvas.Top="450" />
+    <Rectangle x:Key="DroppablePlace5" Name="Rect5MultH" Fill="Transparent" Height="45" Width="90" Canvas.Left="540" Canvas.Top="375" />
+    <Rectangle x:Key="DroppablePlace6" Name="Rect6Ciphertext" Fill="Transparent" Height="45" Width="90" Canvas.Left="540" Canvas.Top="285"/>
+    <Rectangle x:Key="DroppablePlace7" Name="Rect7Counter" Fill="Transparent" Height="45" Width="90" Canvas.Left="540" Canvas.Top="135"/>
+    <Rectangle x:Key="DroppablePlace8" Name="Rect8Plaintext" Fill="Transparent" Height="40" Width="90" Canvas.Left="435" Canvas.Top="237" />
+    <Rectangle x:Key="DroppablePlace9" Name="Rect9MultH" Fill="Transparent" Height="45" Width="90" Canvas.Left="293" Canvas.Top="391" />
+    <Rectangle x:Key="DroppablePlace10" Name="Rect10MultH" Fill="Transparent" Height="40" Width="90" Canvas.Left="157" Canvas.Top="389"/>
+    <Rectangle x:Key="DroppablePlace11" Name="Rect11Ciphertext" Fill="Transparent" Height="45" Width="95" Canvas.Left="295" Canvas.Top="295" />
+    <Rectangle x:Key="DroppablePlace12" Name="Rect12Plaintext" Fill="Transparent" Height="40" Width="90" Canvas.Left="177" Canvas.Top="244" />
+    <Rectangle x:Key="DroppablePlace13" Name="Rect13Hash" Fill="Transparent" Height="40" Width="90" Canvas.Left="-42" Canvas.Top="198" />
+    <Rectangle x:Key="DroppablePlace14" Name="Rect15Counter" Fill="Transparent" Height="40" Width="90" Canvas.Left="295" Canvas.Top="135" />
+    <Rectangle x:Key="DroppablePlace15" Name="Rect16Tag" Fill="Transparent" Height="40" Width="90" Canvas.Left="540" Canvas.Top="605"/>
+    <Rectangle x:Key="DroppablePlace16" Name="Rect17Counter" Fill="Transparent" Height="40" Width="90" Canvas.Left="70" Canvas.Top="134"/>
+    <Rectangle x:Key="DroppablePlace17" Name="Recycle" Height="60" Width="50" Canvas.Bottom="30" Canvas.Left ="-20" Canvas.Top="630">
+        <Rectangle.Fill>
+            <ImageBrush ImageSource ="/Images/recycling.png"/>
+        </Rectangle.Fill>
+    </Rectangle>
+
+</ResourceDictionary>

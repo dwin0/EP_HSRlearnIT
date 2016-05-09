@@ -56,11 +56,12 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="CryptoToolsTest\AesGcmCryptoLibraryTest.cs" />
     <Compile Include="CryptoToolsTest\AuthenticatedAesCngGcmTestVectorTest.cs" />
     <Compile Include="UniversalToolsTest\ExceptionLoggerTest.cs" />
-    <Compile Include="UniversalToolsTest\FileSaverTest.cs" />
+    <Compile Include="UniversalToolsTest\FileManagerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UniversalToolsTest\ProgressTests.cs" />
+    <Compile Include="UniversalToolsTest\ProgressTest.cs" />
     <Compile Include="CryptoToolsTest\Util.cs" />
   </ItemGroup>
   <ItemGroup>

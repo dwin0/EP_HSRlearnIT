@@ -13,7 +13,7 @@ namespace EP_HSRlearnIT.BusinessLayer.Testing.CryptoToolsTest
     ///</summary>
 
     [TestClass]
-    public class AuthenticatedAesCngGcmTestVectorTests
+    public class AuthenticatedAesCngGcmTestVectorTest
     {
         private class GcmTestVector
         {

@@ -1,48 +1,49 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Security.Cryptography;
 using System.Security.Cryptography;
+using System.Text;
+using Castle.Core.Internal;
 
 namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
 {
     public class AesGcmCryptoLibrary
     {
         #region Public Methods
-        public Tuple<byte[], byte[]> Encrypt(byte[] key, byte[] plaintext, byte[] nonce, byte[] aad)
+        /// <summary>
+        /// To encrypt, we need to know the key, the plaintext, optional iv and optional additional authenticated data(aad).
+        /// The encryption is used like it is explained here: https://blogs.msdn.microsoft.com/b/shawnfa/archive/2009/03/17/authenticated-symmetric-encryption-in-net.aspx
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="plaintext"></param>
+        /// <param name="iv"></param>
+        /// <param name="aad"></param>
+        /// <returns></returns>
+        public Tuple<byte[], byte[]> Encrypt(byte[] key, byte[] plaintext, byte[] iv, byte[] aad)
         {
             using (AuthenticatedAesCng aes = new AuthenticatedAesCng())
             {
-                // Setup an authenticated chaining mode. This should be done before setting up
-                // the other properties, since changing the chaining mode can update things such as the
-                // valid and current tag sizes.
+                //Setting gcm mode. This should be done before anything else, since propertys like tagsize depend upon the mode.
                 aes.CngMode = CngChainingMode.Gcm;
-
-                // Keys work the same as standard AES
                 aes.Key = key;
 
-                // The IV (called the nonce in many of the authenticated algorithm specs) is not sized for
-                // the input block size. Instead its size depends upon the algorithm. 12 bytes works
-                // for both GCM and CCM.
-                aes.IV = nonce ?? new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+                //The iv must have a size of 12 Bytes.
+                aes.IV = iv ?? new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
-                // Authenticated data becomes part of the authentication tag that is generated during
-                // encryption, however it is not part of the ciphertext. That is, when decrypting the
-                // ciphertext the authenticated data will not be produced. However, if the
-                // authenticated data does not match at encryption and decryption time, the
-                // authentication tag will not validate.
+                //Aad is part of the generated tag. Is not part of the ciphertext, it won't be produced when decrypting.
                 aes.AuthenticatedData = aad;
 
-                // Perform the encryption – this works nearly the same as standard symmetric encryption,
-                // however instead of using an ICryptoTransform we use an IAuthenticatedCryptoTransform
-                // which provides access to the authentication tag.
+                //Perform the encryption.
                 MemoryStream ms = new MemoryStream();
                 IAuthenticatedCryptoTransform encryptor = aes.CreateAuthenticatedEncryptor();
                 using (CryptoStream cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Write))
                 {
-                    // Encrypt the secret message
+                    //Encrypt the secret message.
                     cs.Write(plaintext, 0, plaintext.Length);
 
-                    // Finish the encryption and get the output authentication tag and ciphertext
+                    //Finish the encryption and get the output authentication tag and ciphertext.
                     cs.FlushFinalBlock();
                     byte[] tagEncrypt = encryptor.GetTag();
                     byte[] ciphertextEncrypt = ms.ToArray();
@@ -51,40 +52,132 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
             }
         }
 
-        public byte[] Decrypt(byte[] key, byte[] ciphertext, byte[] nonce, byte[] aad, byte[] tag)
+        /// <summary>
+        /// To decrypt, we need to know the key, the ciphertext, the authentication tag. The iv and additional authenticated data (aad) are optional.
+        /// The decryption is used like it is explained here: https://blogs.msdn.microsoft.com/b/shawnfa/archive/2009/03/17/authenticated-symmetric-encryption-in-net.aspx
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="ciphertext"></param>
+        /// <param name="iv"></param>
+        /// <param name="aad"></param>
+        /// <param name="tag"></param>
+        /// <returns></returns>
+        public byte[] Decrypt(byte[] key, byte[] ciphertext, byte[] iv, byte[] aad, byte[] tag)
         {
-            // To decrypt, we need to know the key, the ciphertext, nonce, additional authenticated data(aad)
-            // and the authentication tag.
             using (AuthenticatedAesCng aes = new AuthenticatedAesCng())
             {
-                // Chaining modes, keys, and IVs must match between encryption and decryption
+                //Chaining modes, keys, and IVs must match between encryption and decryption.
                 aes.CngMode = CngChainingMode.Gcm;
                 aes.Key = key;
-                aes.IV = nonce ?? new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+                aes.IV = iv ?? new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
-                // If the authenticated data does not match between encryption and decryption, then the
-                // authentication tag will not match either, and the decryption operation will fail.
+                //If the aad doesn't match between encryption and decryption the tag will not match either and the decryption will fail.
                 aes.AuthenticatedData = aad;
 
-                // The tag that was generated during encryption gets set here as input to the decryption
-                // operation. This is in contrast to the encryption code path which does not use the
-                // Tag property (since it is an output from encryption).
+                //The tag that was generated during encryption gets set here.
                 aes.Tag = tag;
 
-                // Decryption works the same as standard symmetric encryption
                 MemoryStream ms = new MemoryStream();
                 using (CryptoStream cs = new CryptoStream(ms, aes.CreateDecryptor(), CryptoStreamMode.Write))
                 {
                     cs.Write(ciphertext, 0, ciphertext.Length);
 
-                    // If the authentication tag does not match, we’ll fail here with a
-                    // CryptographicException, and the ciphertext will not be decrypted.
+                    //If the authentication tag does not match, we’ll fail here with a CryptographicException, and the ciphertext will not be decrypted.
                     cs.FlushFinalBlock();
 
                     //returns the plaintext
                     return ms.ToArray();
                 }
             }
+        }
+
+        /// <summary>
+        /// The key needs to have a size of 32 Byte. This method generates a 32 Byte size key regardless of the input. Null value is not allowed.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns>Returns the generated 32 Byte Key</returns>
+        public string GenerateKey(string key)
+        {
+            byte[] keyArray = StringToBytes(key);
+            int keySize = keyArray.Length;
+
+            IEnumerable<byte> bigKey = keyArray;
+
+            if (keySize < 32)
+            {
+                for (int i = 1; i <= (32 / keySize); i++)
+                {
+                    bigKey = bigKey.Concat(keyArray);
+                }
+            }
+
+            bigKey = bigKey.Take(32);
+            byte[] result = new byte[32];
+            int counter = 0;
+
+            bigKey.ForEach(i =>
+            {
+                byte b = i;
+                result[counter] = b;
+                counter++;
+            });
+
+            return BytesToString(result);
+        }
+
+        /// <summary>
+        /// A hex string can be converted into a byte array with this Method.
+        /// </summary>
+        /// <param name="hex"></param>
+        /// <returns>Returns an Array which contains Hex Bytes</returns>
+        public byte[] HexStringToDecimalByteArray(string hex)
+        {
+            return Enumerable.Range(0, hex.Length)
+                             .Where(x => x % 2 == 0)
+                             .Select(x => Convert.ToByte(hex.Substring(x, 2), 16))
+                             .ToArray();
+        }
+
+        /// <summary>
+        /// A byte array can be converted into a string.
+        /// </summary>
+        /// <param name="bytes"></param>
+        /// <returns></returns>
+        public string BytesToString(byte[] bytes)
+        {
+            //char[] chars = new char[bytes.Length];
+
+            StringBuilder sb = new StringBuilder();
+            //int i = 0;
+            foreach (byte b in bytes)
+            {
+                /*
+                chars[i] = Convert.ToChar(b);
+                sb.Append(chars[i]);
+                i++;
+                */
+                sb.Append(Convert.ToChar(b));
+            }
+            return sb.ToString();
+        }
+
+        /// <summary>
+        /// A non hex string can be convertet into a byte array.
+        /// </summary>
+        /// <param name="toConvert"></param>
+        /// <returns></returns>
+        public byte[] StringToBytes(string toConvert)
+        {
+            byte[] bytes = new byte[toConvert.Length];
+
+            int i = 0;
+            foreach (char c in toConvert)
+            {
+                bytes[i] = Convert.ToByte(c);
+                i++;
+            }
+
+            return bytes;
         }
 
         #endregion

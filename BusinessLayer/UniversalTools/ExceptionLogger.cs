@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 
 namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
 {
+    /// <summary>
+    /// Class log all global exceptions of the program.
+    /// path and fileName are fix values.
+    /// maxSize is the favored max size of the logfile.
+    /// deleteRows is the amount of lines to delete into logfile.
+    /// </summary>
     public static class ExceptionLogger
     {
         #region Private Member
@@ -13,16 +18,17 @@ namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
         private static string _fileName = "ExceptionLog.log";
         //Size in Byte
         private static long _maxSize = 5 * 1024 * 1024;
-        private static int _DeleteRows = 10;
+        private static int _deleteRows = 10;
 
         #endregion
+
 
         #region Public Methods
         public static void WriteToLogfile(string exeptionMessage, string sourceMethod)
         {
-            string filePath = FileSaver.SaveFile(_path, _fileName);
+            string filePath = FileManager.SaveFile(_path, _fileName);
             string entry = $"{Environment.NewLine}Exception: {DateTime.Now.ToString(CultureInfo.CurrentCulture)}: {exeptionMessage} {sourceMethod}";
-            FileSaver.AppendContentToFile(filePath, entry);
+            FileManager.AppendContent(filePath, entry);
             AvoidOverflow(filePath);
         }
 
@@ -32,12 +38,12 @@ namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
         #region Private Methods
         private static void AvoidOverflow(String filePath)
         {
-            if (FileSaver.GetSize(filePath) >= _maxSize)
+            if (FileManager.GetSize(filePath) >= _maxSize)
             {
-                List<string> lines = File.ReadAllLines(filePath).ToList<string>();
-                lines.RemoveRange(0, _DeleteRows);
-                File.WriteAllLines(filePath, lines);
-                FileSaver.AppendContentToFile(filePath, "\n The oldest " + _DeleteRows + " lines are removed. \n");
+                List<string> lines = FileManager.ReadAllLines(filePath).ToList();
+                lines.RemoveRange(0, _deleteRows);
+                FileManager.SwapContents(filePath, lines);
+                FileManager.AppendContent(filePath, $"{Environment.NewLine}The oldest { _deleteRows} lines are removed.{Environment.NewLine}");
             }
         }
 

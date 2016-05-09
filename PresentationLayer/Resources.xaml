@@ -2,19 +2,43 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:system="clr-namespace:System;assembly=mscorlib"
                     xmlns:local="clr-namespace:EP_HSRlearnIT.PresentationLayer" >
-    
-    <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/Tutorials/StepByStepResources.xaml" />
-    </ResourceDictionary.MergedDictionaries>
 
+    <!--MainWindow and MainPage-->
+    
+    <local:StringCollection x:Key="MenuStrings">
+        <system:String>Startseite</system:String>
+        <system:String>Übersicht AES-GCM</system:String>
+        <system:String>Schritt für Schritt - Anleitung</system:String>
+        <system:String>Ver- und Entschlüsselung</system:String>
+        <system:String>Drag &amp; Drop - Spiel</system:String>
+    </local:StringCollection>
+    
     <Brush x:Key="MenuBackgroundColor">#ffe6e6</Brush>
 
-    <local:StringCollection x:Key="MenuStrings">
-        <system:String>AES-GCM Übersicht</system:String>
-        <system:String>Schritt für Schritt</system:String>
-        <system:String>Ver- und Entschlüsselung</system:String>
-        <system:String>Drag- und Drop Spiel</system:String>
-    </local:StringCollection>
+    <Storyboard x:Key="StoryboardShowLeftMenu" >
+        <ThicknessAnimation Storyboard.TargetProperty="Margin" From="-150, -10, 0, -10" To="-50, -10, 0, -10" DecelerationRatio="0.9" Duration="0:0:0.5"/>
+    </Storyboard>
+    
+    
+    <!--MainPage Tile Style-->
+
+    <SolidColorBrush x:Key="TileBackgroundBrush" Color="#FFFFDCDC"/>
+    <SolidColorBrush x:Key="TileBorderBrush" Color="#000000"/>
+
+    <Style x:Key="TileBorderStyle" TargetType="Border">
+        <Setter Property="Margin" Value="20"/>
+        <Setter Property="BorderBrush" Value="{StaticResource TileBackgroundBrush}"/>
+        <Setter Property="BorderThickness" Value="5"/>
+    </Style>
+
+    <Style x:Key="TileContentStyle" TargetType="TextBlock">
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Bottom"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Margin" Value="20"/>
+    </Style>
+
 
     <!-- Styles-->
     

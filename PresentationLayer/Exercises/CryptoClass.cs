@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
-using Castle.Core.Internal;
 using EP_HSRlearnIT.BusinessLayer.CryptoTools;
+using EP_HSRlearnIT.BusinessLayer.UniversalTools;
 
 namespace EP_HSRlearnIT.PresentationLayer.Exercises
 
@@ -26,6 +26,11 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         #endregion
 
         #region Public Methods
+        /// <summary>
+        /// This event is used to convert the TextBox input into Hex Values and update the correspondig HexTextBox.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             //Get control that raised this event
@@ -34,16 +39,24 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             //Get control that will be updated
             if (textBox != null)
             {
-                string nameHexField = "Hex" + textBox.Name;
-                TextBox hexBox = (TextBox)FindName(nameHexField);
+                
+                string hexFieldName = "Hex" + textBox.Name.Substring(3);
+                TextBox hexBox = (TextBox)FindName(hexFieldName);
                 char[] value = textBox.Text.ToCharArray();
                 ChangeHexBox(value, hexBox);
             }
         }
 
+        /// <summary>
+        /// This Method is used to convert the TextBox input into Hex Values and update the correspondig HexTextBox.
+        /// It can be called, if there is no way to register an event.
+        /// </summary>
+        /// <param name="values"></param>
+        /// <param name="hexBox"></param>
         public void ChangeHexBox(char[] values, TextBox hexBox)
         {
-            string hexOutput = "";
+            //string hexOutput = "";
+            StringBuilder sb = new StringBuilder();
 
             if (hexBox != null)
             {
@@ -54,55 +67,52 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                     int value = Convert.ToInt32(letter);
 
                     // Convert the decimal value to a hexadecimal value in string form
-                    hexOutput += string.Format("{0:x2}", value);
+                    //hexOutput += string.Format("{0:x2}", value);
+                    sb.AppendFormat("{0:x2}", value);
                 }
-                hexBox.Text = hexOutput;
+                //hexBox.Text = hexOutput;
+                hexBox.Text = sb.ToString();
                 hexBox.TextChanged += HexTextBox_TextChanged;
             }
         }
 
+        /// <summary>
+        /// This event is used to convert the HexTextBox input into chars and update the corresponding TextBox.
+        /// If a non hex value is entered a warning will be shown.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void HexTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            string textOutput = "";
-
             var hexTextBox = sender as TextBox;
             if (hexTextBox != null)
             {
-                string nameHexTextBox = hexTextBox.Name;
-                // get the name of the corresponding hexBlock. The Box suffix (3 chars) is removed and Block is appended. 
-                string nameHexBlock = nameHexTextBox.Substring(0, nameHexTextBox.Length - 3) + "Block";
+                //Get the corresponding hexWarningBlock (Field above the HexBox).
+                //The Box suffix (3 chars) is removed and Block is appended.
+                string hexTextBoxName = hexTextBox.Name;
+                string hexWarningBlockName = hexTextBoxName.Substring(0, hexTextBoxName.Length - 3) + "Block";
+                TextBlock hexWarningBlock = (TextBlock)FindName(hexWarningBlockName);
 
-                //Get control that will be updated
-                string nameTextField = nameHexTextBox.Substring(3, nameHexTextBox.Length - 3);
-                TextBox textBox = (TextBox)FindName(nameTextField);
-                TextBlock textBlock = (TextBlock)FindName(nameHexBlock);
-                if (textBlock == null) { return; }
+                //Get textBox that will be updated. Ex: HexIvBox -> IvBox
+                string textBoxName = "Utf" + hexTextBoxName.Substring(3, hexTextBoxName.Length - 3);
+                TextBox textBox = (TextBox)FindName(textBoxName);
+                
+                if (hexWarningBlock == null || textBox == null) { return; }
 
-                string textBlockAnzeige = textBlock.Text;
-
-                if (textBlockAnzeige.Contains(" Ungültige Eingabe!"))
-                {
-                    //19 is the length of suffix text " Ungültige Eingabe!"
-                    textBlockAnzeige = textBlockAnzeige.Substring(0, textBlockAnzeige.Length - 19);
-                    textBlock.Text = textBlockAnzeige;
-                    textBlock.Foreground = Brushes.Black;
-                }
-
-                if (textBox == null) { return; }
+                CheckIfWarningIsAlreadySet(hexWarningBlock);
 
                 //remove the event handler temporary, else a loop will occure
                 textBox.TextChanged -= TextBox_TextChanged;
 
                 string hexValue = hexTextBox.Text;
 
-                if (!IsHex(hexValue))
+                if (FoundNonHexValues(hexValue, hexWarningBlock))
                 {
-                    textBlock.Text = textBlockAnzeige + " Ungültige Eingabe!";
-                    textBlock.Foreground = Brushes.Red;
                     textBox.TextChanged += TextBox_TextChanged;
                     return;
                 }
 
+                /*
                 ArrayList list = new ArrayList();
                 while (hexValue.Length > 1)
                 {
@@ -110,107 +120,108 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                     hexValue = hexValue.Substring(2, hexValue.Length - 2);
                 }
 
+                StringBuilder sb = new StringBuilder();
+
                 foreach (string hex in list)
                 {
                     // Convert the number expressed in base-16 to an integer.
                     int value = Convert.ToInt32(hex, 16);
 
-                    textOutput += char.ConvertFromUtf32(value);
+                    sb.Append(char.ConvertFromUtf32(value));
                 }
 
-                textBox.Text = textOutput;
-                textBox.TextChanged += TextBox_TextChanged;
-            }
-        }
+                //textBox.Text = textOutput;
+                //textBox.Text = sb.ToString();
+                */
 
-        public void GenerateHexKey(string key, TextBox hexPasswordBox)
-        {
-            byte[] keyArray = StringToBytes(key);
-            int keySize = keyArray.Length;
-
-            IEnumerable<byte> bigKey = keyArray;
-
-            if (keySize < 32)
-            {
-                for (int i = 1; i <= 32 / keySize; i++)
+                if (hexValue.Length % 2 == 0)
                 {
-                    bigKey = bigKey.Concat(keyArray);
+                    textBox.Text = Library.BytesToString(Library.HexStringToDecimalByteArray(hexValue));
+                    textBox.TextChanged += TextBox_TextChanged;
                 }
             }
-
-            bigKey = bigKey.Take(32);
-            byte[] result = new byte[32];
-            int counter = 0;
-
-            bigKey.ForEach(i =>
-            {
-                byte b = i;
-                result[counter] = b;
-                counter++;
-            });
-
-            string bigKeyString = BytesToString(result);
-
-            ChangeHexBox(bigKeyString.ToCharArray(), hexPasswordBox);
         }
 
-        public static byte[] HexStringToByteArray(string hex)
+        /// <summary>
+        /// This event is used to save the Progress of a HexTextBox.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void HexTextBox_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
-            return Enumerable.Range(0, hex.Length)
-                             .Where(x => x % 2 == 0)
-                             .Select(x => Convert.ToByte(hex.Substring(x, 2), 16))
-                             .ToArray();
-        }
-
-        public string BytesToString(byte[] bytes)
-        {
-            char[] chars = new char[bytes.Length];
-
-            StringBuilder sb = new StringBuilder();
-            int i = 0;
-            foreach (byte b in bytes)
+            TextBox hexTextBox = e.Source as TextBox;
+            if (hexTextBox != null)
             {
-                chars[i] = Convert.ToChar(b);
-                sb.Append(chars[i]);
-                i++;
+                //string elementName = hexTextBox.Name;
+                SaveProgressHelper(hexTextBox);
             }
-            return sb.ToString();
         }
 
-        public byte[] StringToBytes(string toConvert)
+        /// <summary>
+        /// This event is used to save the Progress of a TextBox.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void TextBox_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
-            byte[] bytes = new byte[toConvert.Length];
-
-            int i = 0;
-            foreach (char c in toConvert)
+            TextBox textBox = e.Source as TextBox;
+            if (textBox != null)
             {
-                bytes[i] = Convert.ToByte(c);
-                i++;
+                //get the name of the corresponding Hex field --> Progess will only be saved in Hex values!
+                /*
+                string elementName = "Hex" + textBox.Name;
+                TextBox hexBox = (TextBox)FindName(elementName);
+                */
+                TextBox hexBox = (TextBox)FindName("Hex" + textBox.Name.Substring(3));
+                SaveProgressHelper(hexBox);
             }
-
-            return bytes;
         }
+
         #endregion
 
         #region Private Methods
-        //TODO mit Regex vereinfachbar?
-        private bool IsHex(IEnumerable<char> chars)
+        private void CheckIfWarningIsAlreadySet(TextBlock hexWarningBlock)
         {
-            //string check = Convert.ToString(chars);
-            //return System.Text.RegularExpressions.Regex.IsMatch(check, @"\A\b[0-9a-fA-F]+\b\Z");
-            foreach (var c in chars)
+            //check if the text was set to " Ungültige Eingabe!" in an earlier call of this method and reverse it 
+            string textBlockName = hexWarningBlock.Text;
+            if (textBlockName.Contains(" Ungültige Eingabe!"))
             {
-                bool isHex = ((c >= '0' && c <= '9') ||
-                              (c >= 'a' && c <= 'f') ||
-                              (c >= 'A' && c <= 'F'));
-
-                if (!isHex)
-                {
-                    return false;
-                }
+                //19 is the length of suffix text " Ungültige Eingabe!"
+                textBlockName = textBlockName.Substring(0, textBlockName.Length - 19);
+                hexWarningBlock.Text = textBlockName;
+                hexWarningBlock.Foreground = Brushes.Black;
             }
+        }
+
+        private bool FoundNonHexValues(string hexValue, TextBlock hexWarningBlock)
+        {
+            if (IsHex(hexValue)) { return false; }
+
+            hexWarningBlock.Text += " Ungültige Eingabe!";
+            hexWarningBlock.Foreground = Brushes.Red;
             return true;
         }
+
+        private bool IsHex(IEnumerable<char> chars)
+        {
+            return chars.Select(c => (c >= '0' && c <= '9') || (c >= 'a' && c <= 'f') || (c >= 'A' && c <= 'F')).All(isHex => isHex);
+        }
+
+        private void SaveProgressHelper(TextBox element)
+        {
+            var parent = VisualTreeHelper.GetParent(element);
+            while (!(parent is Page))
+            {
+                parent = VisualTreeHelper.GetParent(parent);
+            }
+            string pageName = (parent as Page).Title;
+
+            //string elementName = element.Name;
+            //string key = pageName + "_" + elementName;
+            string key = pageName + "_" + element.Name;
+            Progress.SaveProgress(key, element.Text);
+        }
+
         #endregion
     }
 }
