@@ -42,7 +42,16 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
         {
             InitializeComponent();
             LoadBackground(StepByStepCanvas);
-            LoadStepPaths(StepByStepCanvas);
+
+            var progressPaths = Progress.GetProgress("StepByStepPage_Paths");
+            if (progressPaths != null)
+            {
+                _stepPaths = progressPaths as Dictionary<int, Path>;
+            }
+            else
+            {
+                LoadStepPaths(StepByStepCanvas);
+            }
 
             var progressCurrentStep = Progress.GetProgress("StepByStepPage_CurrentStep");
             if (progressCurrentStep != null)
@@ -126,18 +135,17 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
 
                 Path toFillPath;
                 Path toEmptyPath;
-                bool available = _stepPaths.TryGetValue(stepNumber, out toFillPath);
+                bool newPath = _stepPaths.TryGetValue(stepNumber, out toFillPath);
 
-                int toEmpty = _highlightedPath - stepNumber;
-                bool avail = _stepPaths.TryGetValue(stepNumber + toEmpty, out toEmptyPath);
+                bool oldPath = _stepPaths.TryGetValue(_highlightedPath, out toEmptyPath);
 
-                if (available)
+                if (newPath)
                 {
                     FillPath(toFillPath);
                 }
-                if (avail)
+                if (oldPath)
                 {
-                    TransparentPath(toEmptyPath);
+                    ClearPath(toEmptyPath);
                 }
 
                 _highlightedPath = stepNumber;
@@ -165,6 +173,8 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
                 stepPath.SetValue(Panel.ZIndexProperty, 0);
                 canvas.Children.Add(stepPath);
             }
+
+            Progress.SaveProgress("StepByStepPage_StepPaths", _stepPaths);
         }
 
         private void FillPath(Path path)
@@ -172,7 +182,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             path.Fill = Application.Current.FindResource("TileSolidColor") as SolidColorBrush;
         }
 
-        private void TransparentPath(Path path)
+        private void ClearPath(Path path)
         {
             path.Fill = null;
         }
