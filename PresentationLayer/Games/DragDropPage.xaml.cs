@@ -102,6 +102,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
 
                     ElementCanvas.Children.Add(newImage);
                 }
+
                 var bShowGameInstruction = (bool?)Progress.GetProgress("ShowGameInstruction");
 
                 if (bShowGameInstruction == null)
@@ -113,6 +114,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                     GameInstruction.Visibility = Visibility.Hidden;
                     ButtonCloseGameInstruction.Visibility = Visibility.Hidden;
                 }
+
             }
             catch (Exception ex)
             {
@@ -282,7 +284,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         {
             try
             {
-
                 for (var index = 0; index < _addedSavedData.Count; index++)
                 {
                     if (_addedSavedData[index].DropRectangle == rect) //intended
@@ -312,6 +313,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                 var dropRectangle = CheckCollisionWithDropRectangles(rectangleInDraggedStatus); 
                 if (dropRectangle != null) // The collision happened
                 {
+                      //TODO: Check if r is necessary
                     //dropRectangle = defined rectangle on algorithm (e.g. rectMulH). 
                     Rect r = new Rect(Canvas.GetLeft(dropRectangle), Canvas.GetTop(dropRectangle), dropRectangle.Width, dropRectangle.Height);
                     _currentlyMovedRectangle.Margin = new Thickness(r.Left, r.Top, 0, 0);
@@ -322,6 +324,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                     _currentlyAddedData.DropRectangle = dropRectangle;
                     _currentlyAddedData.DropRectangleIndex = _dropLocationsRectangles.IndexOf(dropRectangle);
 
+                    //TODO: Extract Method
                     if (addedSavedDataIndex != -1) // If it is not minus 1, that means we are putting the image to the already filled rectangle
                     {
                         if (_addedSavedData[addedSavedDataIndex].ChildReference != _currentlyMovedRectangle) // Do not remove rectangle itself 
@@ -334,7 +337,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                     if (!_rectangleHasBeenMovedBefore) //if we move it from the intial place to an rectangle field
                     {
                         _addedSavedData.Add(_currentlyAddedData);
-                        if (_addedSavedData.Count == 16)
+                        if (_addedSavedData.Count == 16) //TODO: const 
                             Check.IsEnabled = true;
                     }
 
@@ -373,7 +376,8 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                     var currMousePoint = e.GetPosition(ElementCanvas);
 
                     _currentlyMovedRectangle.Margin = new Thickness(currMousePoint.X - _startPoint.X, currMousePoint.Y - _startPoint.Y, 0, 0);
-
+              
+                
                     #region Check Page Boundaries
 
                     if (_currentlyMovedRectangle.Margin.Left < -42) // Left
@@ -401,8 +405,8 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                     }
                         
                     #endregion Calculate Offset
-
-                    var imageRect = new Rect(_currentlyMovedRectangle.Margin.Left, _currentlyMovedRectangle.Margin.Top,
+                    
+                   var imageRect = new Rect(_currentlyMovedRectangle.Margin.Left, _currentlyMovedRectangle.Margin.Top,
                         _currentlyMovedRectangle.Width, _currentlyMovedRectangle.Height);
 
                     bool bIntersection = CheckCollisionWithDropRectangles(imageRect) != null || CheckCollisionWithRecycleBin(imageRect);
@@ -425,7 +429,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
             try
             {
                 foreach (var i in _addedSavedData)
-                    //for (var i = 0; i < _addedSavedData.Count; i++)
+               //To remove the last added element from Canvas we use ElementCanvas.Children.Count -1
                 {
                     ElementCanvas.Children.RemoveAt(ElementCanvas.Children.Count - 1);
                 }
@@ -451,7 +455,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                 for (int i = _addedSavedData.Count - 1; i >= 0; i--)
                 {
                     var data = _addedSavedData[i];
-                    if (data.AnswerCorrect())
+                    if (data.IsAnswerCorrect())
                     {
                         correctAnswers++;
                     }
@@ -513,7 +517,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                 DropPosition = dropPosition;
             }*/
 
-            public bool AnswerCorrect()
+            public bool IsAnswerCorrect()
             {
                 if (CorrectAnswers[OriginalImageChildIndex].Contains(DropRectangle.Name))
                 {
