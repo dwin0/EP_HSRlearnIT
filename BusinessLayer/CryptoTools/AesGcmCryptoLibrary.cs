@@ -13,14 +13,19 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
     {
         #region Public Methods
         /// <summary>
-        /// To encrypt, we need to know the key, the plaintext, optional iv and optional additional authenticated data(aad).
+        /// To encrypt, we need to know the key, the plaintext, iv and additional authenticated data (aad).
         /// The encryption is used like it is explained here: https://blogs.msdn.microsoft.com/b/shawnfa/archive/2009/03/17/authenticated-symmetric-encryption-in-net.aspx
         /// </summary>
-        /// <param name="key"></param>
-        /// <param name="plaintext"></param>
-        /// <param name="iv"></param>
-        /// <param name="aad"></param>
-        /// <returns></returns>
+        /// <param name="key">Has to be 32 Byte</param>
+        /// <param name="plaintext">The plaintext will be encrypted.</param>
+        /// <param name="iv">Is an opitional parameter, if the iv is null the default iv with 12 zero Bytes is set. If the iv is set it has to be 12 Bytes.</param>
+        /// <param name="aad">Is an optional parameter, the algorithm can be used without it. The additional authenticated data will not be encrypted but are used in the process of the generation of the tag.</param>
+        /// <returns>If sucessfull:
+        ///          A tuple with the following parameters:
+        ///          param1: is the generated tag, this parameter has to be used in the decryption and authentication
+        ///          param2: is the generated ciphertext
+        ///          Else an invalid argument exception will be thrown.
+        /// </returns>
         public Tuple<byte[], byte[]> Encrypt(byte[] key, byte[] plaintext, byte[] iv, byte[] aad)
         {
             using (AuthenticatedAesCng aes = new AuthenticatedAesCng())
@@ -56,12 +61,14 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
         /// To decrypt, we need to know the key, the ciphertext, the authentication tag. The iv and additional authenticated data (aad) are optional.
         /// The decryption is used like it is explained here: https://blogs.msdn.microsoft.com/b/shawnfa/archive/2009/03/17/authenticated-symmetric-encryption-in-net.aspx
         /// </summary>
-        /// <param name="key"></param>
-        /// <param name="ciphertext"></param>
-        /// <param name="iv"></param>
-        /// <param name="aad"></param>
-        /// <param name="tag"></param>
-        /// <returns></returns>
+        /// <param name="key">Has to be the same key which was used to encrypt the plaintext.</param>
+        /// <param name="ciphertext">This part of the parameters will be decrypted.</param>
+        /// <param name="iv">If the iv was set in the encryption it has to be the same in the decryption. Else the default iv with 12 zero Bytes is used.</param>
+        /// <param name="aad">If the aad was set in the encryption it has to be the same in the decryption, because the aad is used to reproduce the tag.</param>
+        /// <param name="tag">The tag was an outputparameter of the encryption. If the wrong tag is used an exception will be thrown.</param>
+        /// <returns>If sucessfull: The decrypted plaintext.
+        ///          Else an exception will be thrown.
+        /// </returns>
         public byte[] Decrypt(byte[] key, byte[] ciphertext, byte[] iv, byte[] aad, byte[] tag)
         {
             using (AuthenticatedAesCng aes = new AuthenticatedAesCng())
@@ -94,7 +101,7 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
         /// <summary>
         /// The key needs to have a size of 32 Byte. This method generates a 32 Byte size key regardless of the input. Null value is not allowed.
         /// </summary>
-        /// <param name="key"></param>
+        /// <param name="key">This key will be checked if the size is 32 Byte and if it's not 32 Byte a 32 Byte key will be generated</param>
         /// <returns>Returns the generated 32 Byte Key</returns>
         public string GenerateKey(string key)
         {
@@ -128,7 +135,7 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
         /// <summary>
         /// A hex string can be converted into a byte array with this Method.
         /// </summary>
-        /// <param name="hex"></param>
+        /// <param name="hex">The hex string that will be converted into a byte array.</param>
         /// <returns>Returns an Array which contains Hex Bytes</returns>
         public byte[] HexStringToDecimalByteArray(string hex)
         {
@@ -141,21 +148,13 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
         /// <summary>
         /// A byte array can be converted into a string.
         /// </summary>
-        /// <param name="bytes"></param>
-        /// <returns></returns>
+        /// <param name="bytes">The byte array which will be converted into a string.</param>
+        /// <returns>Returns the converted string.</returns>
         public string BytesToString(byte[] bytes)
         {
-            //char[] chars = new char[bytes.Length];
-
             StringBuilder sb = new StringBuilder();
-            //int i = 0;
             foreach (byte b in bytes)
             {
-                /*
-                chars[i] = Convert.ToChar(b);
-                sb.Append(chars[i]);
-                i++;
-                */
                 sb.Append(Convert.ToChar(b));
             }
             return sb.ToString();
@@ -164,8 +163,8 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
         /// <summary>
         /// A non hex string can be convertet into a byte array.
         /// </summary>
-        /// <param name="toConvert"></param>
-        /// <returns></returns>
+        /// <param name="toConvert">A string which contains non hex characters.</param>
+        /// <returns>Returns the converted byte array.</returns>
         public byte[] StringToBytes(string toConvert)
         {
             byte[] bytes = new byte[toConvert.Length];

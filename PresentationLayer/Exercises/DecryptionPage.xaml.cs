@@ -19,20 +19,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             HexTagBox.Text = Progress.GetProgress("DecryptionPage_HexTagBox") as string;
         }
 
-        /*
-        public DecryptionPage(string ciphertext, string iv, string aad, string tag)
-        {
-            InitializeComponent();
-            HexCiphertextBox.Text = ciphertext;
-            HexAadBox.Text = aad;
-            HexIvBox.Text = iv;
-            HexTagBox.Text = tag;
-            Progress.SaveProgress("DecryptionPage_HexCiphertextBox", ciphertext);
-            Progress.SaveProgress("DecryptionPage_HexAadBox", aad);
-            Progress.SaveProgress("DecryptionPage_HexIvBox", iv);
-            Progress.SaveProgress("DecryptionPage_HexTagBox", tag);
-        } */
-
         #endregion
 
 

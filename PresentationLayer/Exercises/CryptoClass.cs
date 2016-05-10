@@ -29,7 +29,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         /// <summary>
         /// This event is used to convert the TextBox input into Hex Values and update the correspondig HexTextBox.
         /// </summary>
-        /// <param name="sender"></param>
+        /// <param name="sender">Contains the control which raised the event.</param>
         /// <param name="e"></param>
         public void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -51,11 +51,10 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         /// This Method is used to convert the TextBox input into Hex Values and update the correspondig HexTextBox.
         /// It can be called, if there is no way to register an event.
         /// </summary>
-        /// <param name="values"></param>
-        /// <param name="hexBox"></param>
+        /// <param name="values">Values which are converted into hex.</param>
+        /// <param name="hexBox">The hexBox which will be updated with the converted values.</param>
         public void ChangeHexBox(char[] values, TextBox hexBox)
         {
-            //string hexOutput = "";
             StringBuilder sb = new StringBuilder();
 
             if (hexBox != null)
@@ -67,10 +66,8 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                     int value = Convert.ToInt32(letter);
 
                     // Convert the decimal value to a hexadecimal value in string form
-                    //hexOutput += string.Format("{0:x2}", value);
                     sb.AppendFormat("{0:x2}", value);
                 }
-                //hexBox.Text = hexOutput;
                 hexBox.Text = sb.ToString();
                 hexBox.TextChanged += HexTextBox_TextChanged;
             }
@@ -80,7 +77,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         /// This event is used to convert the HexTextBox input into chars and update the corresponding TextBox.
         /// If a non hex value is entered a warning will be shown.
         /// </summary>
-        /// <param name="sender"></param>
+        /// <param name="sender">Contains the control which raised the event.</param>
         /// <param name="e"></param>
         public void HexTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -112,28 +109,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                     return;
                 }
 
-                /*
-                ArrayList list = new ArrayList();
-                while (hexValue.Length > 1)
-                {
-                    list.Add(hexValue.Substring(0, 2));
-                    hexValue = hexValue.Substring(2, hexValue.Length - 2);
-                }
-
-                StringBuilder sb = new StringBuilder();
-
-                foreach (string hex in list)
-                {
-                    // Convert the number expressed in base-16 to an integer.
-                    int value = Convert.ToInt32(hex, 16);
-
-                    sb.Append(char.ConvertFromUtf32(value));
-                }
-
-                //textBox.Text = textOutput;
-                //textBox.Text = sb.ToString();
-                */
-
                 if (hexValue.Length % 2 == 0)
                 {
                     textBox.Text = Library.BytesToString(Library.HexStringToDecimalByteArray(hexValue));
@@ -146,13 +121,12 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         /// This event is used to save the Progress of a HexTextBox.
         /// </summary>
         /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="e">Contains the control which raised the event.</param>
         public void HexTextBox_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
             TextBox hexTextBox = e.Source as TextBox;
             if (hexTextBox != null)
             {
-                //string elementName = hexTextBox.Name;
                 SaveProgressHelper(hexTextBox);
             }
         }
@@ -161,17 +135,13 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         /// This event is used to save the Progress of a TextBox.
         /// </summary>
         /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="e">Contains the control which raised the event.</param>
         public void TextBox_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
             TextBox textBox = e.Source as TextBox;
             if (textBox != null)
             {
                 //get the name of the corresponding Hex field --> Progess will only be saved in Hex values!
-                /*
-                string elementName = "Hex" + textBox.Name;
-                TextBox hexBox = (TextBox)FindName(elementName);
-                */
                 TextBox hexBox = (TextBox)FindName("Hex" + textBox.Name.Substring(3));
                 SaveProgressHelper(hexBox);
             }
@@ -215,9 +185,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                 parent = VisualTreeHelper.GetParent(parent);
             }
             string pageName = (parent as Page).Title;
-
-            //string elementName = element.Name;
-            //string key = pageName + "_" + elementName;
             string key = pageName + "_" + element.Name;
             Progress.SaveProgress(key, element.Text);
         }

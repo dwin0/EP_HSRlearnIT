@@ -18,18 +18,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             HexAadBox.Text = Progress.GetProgress("EncryptionPage_HexAadBox") as string;
         }
 
-        /*
-        public EncryptionPage(string plaintext, string iv, string aad)
-        {
-            InitializeComponent();
-            HexPlaintextBox.Text = plaintext;
-            HexIvBox.Text = iv;
-            HexAadBox.Text = aad;
-            Progress.SaveProgress("EncryptionPage_HexPlaintextBox", plaintext);
-            Progress.SaveProgress("EncryptionPage_HexIvBox", iv);
-            Progress.SaveProgress("EncryptionPage_HexAadBox", aad);
-        } */
-
         #endregion
 
 
