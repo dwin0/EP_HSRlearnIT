@@ -337,8 +337,10 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                     if (!_rectangleHasBeenMovedBefore) //if we move it from the intial place to an rectangle field
                     {
                         _addedSavedData.Add(_currentlyAddedData);
-                        if (_addedSavedData.Count == 16) //TODO: const 
-                            Check.IsEnabled = true;
+                        if (_addedSavedData.Count == 1) //TODO: const 
+                            MessageBox.Show("Du hast alle Felder ausgefüllt. Zur Überprüfung deiner Eingabe klicke auf Auswertung!", "Spiel beendet", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                        //Check.IsEnabled = true;
                     }
 
                     Progress.SaveProgress(SettingsName, _addedSavedData);
