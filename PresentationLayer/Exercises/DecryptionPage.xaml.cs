@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using EP_HSRlearnIT.BusinessLayer.UniversalTools;
 using System.Windows;
 using System.Windows.Controls;
@@ -80,7 +81,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             }
         }
 
-        private void OnDecryptionButtonClick(object sender, RoutedEventArgs e)
+        private async void OnDecryptionButtonClick(object sender, RoutedEventArgs e)
         {
             //key is evaluated and will be resized to 32 Byte if necessary 
             string keyString = Library.GenerateKey(UtfDecryptionPasswortBox.Text);
@@ -102,7 +103,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                 HexIvBox.Text = "000000000000000000000000";
             }
 
-            UtfPlaintextBox.Text = Library.BytesToString(Library.Decrypt(key, ciphertext, iv, aad, tag));
+            UtfPlaintextBox.Text = Library.BytesToString(await DecryptionTask(key, ciphertext, iv, aad, tag));
 
             //case authentication only --> when successfull
             if (UtfPlaintextBox.Text == "")
@@ -110,6 +111,11 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                 MessageBox.Show("Der Text wurde erfolgreich authentifiziert.", "alleinstehenden Authentifizierung",
                     MessageBoxButton.OK, MessageBoxImage.Information);
             }
+        }
+
+        public async Task<byte[]> DecryptionTask(byte[] key, byte[] ciphertext, byte[] iv, byte[] aad, byte[] tag)
+        {
+            return await Task.Run(() => Library.Decrypt(key, ciphertext, iv, aad, tag));
         }
 
         #endregion

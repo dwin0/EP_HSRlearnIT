@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using EP_HSRlearnIT.BusinessLayer.UniversalTools;
@@ -22,7 +23,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
 
 
         #region Private Methods
-        private void OnEnryptionButtonClick(object sender, RoutedEventArgs e)
+        private async void OnEnryptionButtonClick(object sender, RoutedEventArgs e)
         {
             //key is evaluated and will be resized to 32 Byte if necessary
             string keyString = Library.GenerateKey(UtfEncryptionPasswordBox.Text);
@@ -43,9 +44,14 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                 HexIvBox.Text = "000000000000000000000000";
             }
 
-            Tuple<byte[], byte[]> returnValueEncryption = Library.Encrypt(key, plaintext, iv, aad);
+            Tuple<byte[], byte[]> returnValueEncryption = await EncryptionTask(key, plaintext, iv, aad);
             UtfTagBox.Text = Library.BytesToString(returnValueEncryption.Item1);
             UtfCiphertextBox.Text = Library.BytesToString(returnValueEncryption.Item2);
+        }
+
+        public async Task<Tuple<byte[], byte[]>> EncryptionTask(byte[] key, byte[] plaintext, byte[] iv, byte[] aad)
+        {
+            return await Task.Run(() => Library.Encrypt(key, plaintext, iv, aad));
         }
 
         private void OnExportButtonClick(object sender, RoutedEventArgs e)
