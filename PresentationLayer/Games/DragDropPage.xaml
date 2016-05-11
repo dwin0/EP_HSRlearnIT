@@ -14,11 +14,35 @@
                 </Rectangle.Fill>
             </Rectangle>
 
-            <Button Name="Reset" Content="Reset" Click="OnResetClick" Height="40" Width="90" Canvas.Left="800" Canvas.Bottom="30"/>
-            <TextBox Name="GameInstruction" Panel.ZIndex="1" Text="{StaticResource ResourceKey=GameInstruction}" FontSize="15" IsReadOnly="True" Background="AliceBlue" Foreground="black" BorderBrush="Blue" BorderThickness="2" Width="750" Height="350" Canvas.Left="-50" Canvas.Top="55" TextWrapping="Wrap"/>
-            <Button Name="ButtonCloseGameInstruction" Panel.ZIndex="2"  Content="Schliessen" Canvas.Top="330" Canvas.Left="600" Width="80" Height="35" Click="CloseGameInstruction" />
-            <Button Name="Check"  Height="40" Width="90" Content="Resultat" Canvas.Left="700" Canvas.Bottom="30" Click="Check_OnClick" IsEnabled="True"/>
+            
+            <Button Name="Zurücksetzen" Content="Zurücksetzen" Click="OnResetClick" Height="40" Width="90" Canvas.Left="800" Canvas.Bottom="30" Style="{StaticResource ResourceKey=ProgramButtonStyle}"/>
+            <Button Name="Auswertung"  Height="40" Width="90" Content="Auswertung" Canvas.Left="700" Canvas.Bottom="30" Click="Check_OnClick" IsEnabled="True" Style="{StaticResource ResourceKey=ProgramButtonStyle}"/>
             <Image Source="/Images/questionmark.png" Name="QuestionMarkOpenInstruction" Visibility="Visible" HorizontalAlignment ="Left" Canvas.Left="850" Canvas.Top="0" Width="40" MouseUp="OpenInstruction" />
+           
+           <Border Name="BorderGameInstruction" BorderThickness="4" BorderBrush="CornflowerBlue" Panel.ZIndex="1">
+            <StackPanel Name="GameInstruction" Panel.ZIndex="1" Width="750" Height="450" Background="AliceBlue" Canvas.Left="-50" Canvas.Top="55" >
+                    <TextBox Name="TitleGameInstruction" Margin="10,0,0,0" FontSize="23" Foreground="Black" IsReadOnly="True" Height="40" Background="Transparent" BorderThickness="0" Text="Spielanleitung" />
+                    <TextBox Name="GameInstructionText" Margin="10,0,0,0" FontSize="16" Foreground="black" Panel.ZIndex="1" Height="150" Background="Transparent" BorderThickness="0" Text="{StaticResource ResourceKey=GameInstruction}"  IsReadOnly="True" TextWrapping="Wrap" />
+                  
+                <DockPanel Margin="15,0,0,5" >
+                        <Image Source="/Images/ButtonAuswerten.png"  Name="ImageButtonAuswerten" Visibility="Visible" HorizontalAlignment ="Left" Width="100" Height="50" Canvas.Left="100"/>
+                        <TextBox Name="BeschreibungButtonAuswerten" VerticalAlignment="Top"  Background="Transparent" BorderThickness="0"  Text="{StaticResource ResourceKey=BeschreibungButtonAuswerten}" FontSize="15" TextWrapping="Wrap"></TextBox>
+                    </DockPanel>
+                    <DockPanel Margin="15,0,0,3">
+                        <Image Source="/Images/ButtonZurücksetzen.png" Name="ImageButtonZurücksetzen" Visibility="Visible" HorizontalAlignment ="Left" VerticalAlignment="Top" Width="100" Height="50"/>
+                        <TextBox Name="BeschreibungButtonZurücksetzen" VerticalAlignment="Center" Background="Transparent" BorderThickness="0" Text="{StaticResource ResourceKey=BeschreibungButtonZurücksetzen}" FontSize="15" TextWrapping="Wrap"></TextBox>
+                    </DockPanel>
+                    <DockPanel Margin="15,0,0,0">
+                        <Image Source="/Images/CorrectAnswer.png" Name="ImageButtonCorrectAnswer" Visibility="Visible" HorizontalAlignment ="Left" VerticalAlignment="Top" Width="100" Height="50"/>
+                        <TextBox Name="BeschreibungCorrectAnswer" VerticalAlignment="Center" Background="Transparent" BorderThickness="0" Text="{StaticResource ResourceKey=BeschreibungCorrectAnswer}" FontSize="15" TextWrapping="Wrap"></TextBox>
+                    </DockPanel>
+                    <DockPanel Margin="15,0,0,0">
+                        <Image Source="/Images/WrongAnswer.png" Name="ImageWrongAnswerImage" Visibility="Visible" HorizontalAlignment ="Left" VerticalAlignment="Top" Width="100" Height="50"/>
+                        <TextBox Name="BeschreibungWrongAnswer" VerticalAlignment="Center" Background="Transparent" BorderThickness="0" Text="{StaticResource ResourceKey=BeschreibungWrongAnswer}" FontSize="15" TextWrapping="Wrap"></TextBox>
+                    </DockPanel>
+                </StackPanel>
+         </Border>
+            <Button Name="ButtonCloseGameInstruction" Panel.ZIndex="2" Content="Schliessen" Canvas.Left="655" Canvas.Top="395" Width="90" Click="CloseGameInstruction" Style="{StaticResource ResourceKey=ProgramButtonStyle}"/>
 
         </Canvas>
     </Viewbox>

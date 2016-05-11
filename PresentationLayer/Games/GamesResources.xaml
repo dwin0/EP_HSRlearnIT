@@ -2,11 +2,27 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
-    <system:String x:Key="GameInstruction">
-        Spielanleitung
-        Redete grunen gro schatz ihr besuch laufet hat. Ja lass pa ja zeit uben da feld. Wandern wahrend je weibern er nachtun wo gerbers. 
-        Zu drechslers wo geschlafen lehrlingen arbeitsame. Nieder wei fragte lachen gesund auf gut nie. Ihr grashalden ordentlich hab weg gar achthausen vorsichtig.
+    <system:String x:Key="GameInstruction" >
+       Du hast nun die Möglichkeit, Dein Wissen in Form eines Drag and Drop Spiels zu testen. Wähle ein Rechteck Element aus der linken Seite  aus und ziehe 
+       es an die korrekte Stelle im Spielfeld. Du kannst jederzeit ein Rechteck Elemement mit einem anderen Rechteck überdecken und innerhalb des Spielfeldes verschieben 
+       sowie das Element in den Papierkorb verschieben.Nachfolgend noch weitere Erklärungen zum Spiel:
     </system:String>
+    <system:String x:Key="BeschreibungButtonAuswerten" >
+        Mit diesem Button kannst Du Dir anzeigen lassen, welche Elemente korrekt bzw. falsch verschoben wurden.
+    </system:String>
+
+    <system:String x:Key="BeschreibungButtonZurücksetzen" >
+        Mit diesem Button kannst Du den Spielstand zurücksetzen und von neu beginnen.
+    </system:String>
+    
+    <system:String x:Key="BeschreibungCorrectAnswer" >
+        Grüne Umrandung bedeuted bei der Auswertung, dass die Lösung korrekt ist.
+    </system:String>
+
+    <system:String x:Key="BeschreibungWrongAnswer" >
+        Rote Umrandung bedeuted bei der Auswertung, dass die Lösung falsch ist. 
+    </system:String>
+
 
     <!-- ReSharper warnings for Canvas.Left and Canvas.Top can be ignored, this parameters are used, even if ReSharp does not recognize it! -->
     <Rectangle x:Key="DroppablePlace1" Name="Rect1Iv" Fill="Transparent" Height="40" Width="90" Canvas.Left="70" Canvas.Top="78" />

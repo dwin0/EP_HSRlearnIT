@@ -128,6 +128,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
             {
                 GameInstruction.Visibility = Visibility.Hidden;
                 ButtonCloseGameInstruction.Visibility = Visibility.Hidden;
+                BorderGameInstruction.Visibility = Visibility.Hidden; 
             }
         }
 
@@ -153,6 +154,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         /// <param name="height">Height of the new Rectangle to be created</param>
         /// <param name="name">Name of the new Rectangle to be created</param>
         /// <param name="margin">Margin of the Rectangle to be created</param>
+        /// <param name="brush">Brush (Border) of Rectangle</param>
         /// <param name="bLeftButtonDown">Rectangle should/should not be associated with the Mouse-Eventhandler LeftButtonDown</param>
         /// <param name="bLeftButtonUp">Rectange should/should not be associated with the Mouse-Eventhandler LeftbuttonUp</param>
         /// <param name="bMouseMove">Rectangle should/should not be associated with the Mouse-Eventhandler MouseMove</param>
@@ -315,7 +317,8 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         /// <summary>
         /// This method defines the functions for the PreviewMouseLeftButtonup Event. If there is an intersection between a dropRectangle, respectively recycle bin
         /// and the copied/moved image rectangle the image rectangle is dropped and the Margin of the currentlyMovedRectangle is saved into the SaveDataForProgress.  </summary>
-      
+        /// <param name="sender">Contains the control which raised the event</param>
+        /// <param name="e"></param>
         private void rectangle_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             if (_currentlyMovedRectangle == null)
@@ -379,7 +382,9 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         }
 
         /// <summary>
-        /// This method defines all the actions during the MouseMove, as change of mouse curser and setting boundries. </summary>  
+        /// This method defines all the actions during the MouseMove, as change of mouse curser and setting boundries. </summary> 
+        /// <param name="sender">Contains the control which raised the event</param>
+        /// <param name="e"></param> 
         private void ElementCanvas_MouseMove(object sender, MouseEventArgs e)
         {
             //If leftButtonLeft is released on the sideborder of the canvas/boundry, then we have to assign the respective PreviewMouseLeftButtonUp event
@@ -441,6 +446,8 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
 
         /// <summary>
         /// This method makes a reset of the whole game </summary> 
+        /// <param name="sender">Contains the control which raised the event</param>
+        /// <param name="e"></param>
         private void OnResetClick(object sender, RoutedEventArgs e)
         {
             try
@@ -460,6 +467,8 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         /// <summary>
         /// This methods checks the dropped elements for their correctness. If correct, rectangle gets a green border, if wrong, the rectangle gets a red border.
         ///  and gives back the amount of correct / wrong placements
+        ///  <param name="sender">Contains the control which raised the event</param>
+        /// <param name="e"></param>
         private void Check_OnClick(object sender, RoutedEventArgs e)
         {
             try
@@ -495,10 +504,13 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
 
         /// <summary>
         /// This method is responsible for closing, respectively hiding the game instruction</summary>
+        /// <param name="sender">Contains the control which raised the event</param>
+        /// <param name="e"></param>
         private void CloseGameInstruction(object sender, RoutedEventArgs e)
         {
             GameInstruction.Visibility = Visibility.Hidden;
             ButtonCloseGameInstruction.Visibility = Visibility.Hidden;
+            BorderGameInstruction.Visibility = Visibility.Hidden;
         }
 
         #region SavedDataForProgress
@@ -544,15 +556,18 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         #endregion SavedDataForProgress
 
         /// <summary>
-        /// This method opens the game instructions.
-        /// </summary>
+        /// This method opens the game instructions. </summary>
+        /// <param name="sender">Contains the control which raised the event</param>
+        /// <param name="e"></param>
 
         private void OpenInstruction(object sender, RoutedEventArgs e)
         {
             GameInstruction.Visibility = Visibility.Visible;
             ButtonCloseGameInstruction.Visibility = Visibility.Visible;
-            
-            
+            BorderGameInstruction.Visibility = Visibility.Visible; 
+
+
+
         }
     }
 }
