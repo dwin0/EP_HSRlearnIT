@@ -34,11 +34,11 @@
                     </Setter>
                 </Style>
             </TabControl.Resources>
-            <TabItem Header="Verschlüsselung" FontSize="16">
-                <Frame Source="EncryptionPage.xaml"/>
+            <TabItem Name="EncryptionItem" Header="Verschlüsselung" FontSize="16">
+                <Frame Name="EncryptionFrame" />
             </TabItem>
-            <TabItem Header="Entschlüsselung" FontSize="16">
-                <Frame Source="DecryptionPage.xaml"/>
+            <TabItem Name="DecryptionItem"  Header="Entschlüsselung" FontSize="16">
+                <Frame Name="DecryptionFrame" />
             </TabItem>
         </TabControl>
     </Grid>
