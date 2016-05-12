@@ -2,16 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using EP_HSRlearnIT.BusinessLayer.CryptoTools;
 using EP_HSRlearnIT.BusinessLayer.UniversalTools;
+using Microsoft.Win32;
 
 namespace EP_HSRlearnIT.PresentationLayer.Exercises
 
 {
-    public class CryptoClass : Page
+    public abstract class CryptoClass : Page
     {
 
         #region Public Members
@@ -147,6 +149,81 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             }
         }
 
+        public void OnResetButtonClick(object sender, RoutedEventArgs e)
+        {
+            foreach (var element in DependencyObjectExtension.GetAllChildren<TextBox>(this))
+            {
+                if (element.Name.Contains("Hex"))
+                {
+                    element.Text = "";
+                }
+            }
+        }
+
+        //evtl, abstract?
+        public void OnExportButtonClick(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog()
+            {
+                Filter = "Text File (*.txt)|*.txt|All Files (*.*)|*.*",
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                OverwritePrompt = true,
+                AddExtension = true,
+                ValidateNames = true,
+                Title = "Exportieren der Verschlüsselungsparamter"
+            };
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                string fullFilePath = saveFileDialog.FileName;
+                if (!FileManager.IsExist(fullFilePath))
+                {
+                    FileManager.SaveFile(fullFilePath);
+                }
+                //Fillup all fields with name of parameter and value into exportfile.
+                StringBuilder line = new StringBuilder();
+                foreach (TextBox element in DependencyObjectExtension.GetAllChildren<TextBox>(this))
+                {
+                    if (element.Name.Contains("Hex") && !(element.Name.Contains("Password")))
+                    {
+                        //cut Hex and Box, for Example: HexIvBox -> Iv
+                        line.AppendLine(element.Name.Substring(3, element.Name.Length - 6) + "=0x" + element.Text);
+                    }
+                }
+                FileManager.UpdateContent(fullFilePath, line.ToString());
+                MessageBox.Show("Der Export war erfolgreich!", "Export", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+         
+        //evtl. abstract?
+        public void OnImportButtonClick(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog()
+            {
+                Filter = "Text File (*.txt)|*.txt|All Files (*.*)|*.*",
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                CheckFileExists = true,
+                CheckPathExists = true,
+                Title = "Importieren der Entschlüsselungsparameter"
+            };
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                string filePath = openFileDialog.FileName;
+                IEnumerable<string> allLines = FileManager.ReadAllLines(filePath);
+
+                foreach (string line in allLines)
+                {
+                    int index = line.IndexOf(Convert.ToChar('='));
+                    //the first '=' is only a delimeter symbole and not part of parameter or value
+                    string parameter = line.Substring(0, index - 1);
+                    string value = line.Substring(index + 1);
+                    FillingField(parameter, value);
+                }
+            }
+            MessageBox.Show("Der Import wurde erfolgreich abgeschlossen.", "Import einer Parameterdatei", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
         #endregion
 
         #region Private Methods
@@ -187,6 +264,35 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             string pageName = (parent as Page).Title;
             string key = pageName + "_" + element.Name;
             Progress.SaveProgress(key, element.Text);
+        }
+
+        /// <summary>
+        /// Method filling all fields from the importfile excluding the following parameternames.
+        /// </summary>
+        /// <param name="parameter"></param>fieldidentifier from file.
+        /// <param name="value"></param>value from parametername.
+        private void FillingField(string parameter, string value)
+        {
+            if (value.Substring(0, 2).Equals("0x"))
+            {
+                parameter = "Hex" + parameter;
+                value = value.Substring(2);
+            }
+            if (value.Length > 0)
+            {
+                foreach (var element in DependencyObjectExtension.GetAllChildren<TextBox>(this))
+                {
+                    if (element.Name.Contains(parameter) && !(element.Name.Contains("Plaintext") || element.Name.Contains("Password")))
+                    {
+                        TextBox fieldOnForm = FindName(element.Name) as TextBox;
+                        if (fieldOnForm != null)
+                        {
+                            fieldOnForm.Text = value;
+                        }
+                        break;
+                    }
+                }
+            }
         }
 
         #endregion
