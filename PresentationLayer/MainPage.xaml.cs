@@ -14,9 +14,9 @@ namespace EP_HSRlearnIT.PresentationLayer
     /// </summary>
     public partial class MainPage
     {
-        private const string Overview = "Übersicht AES-GCM";
+        private const string Overview = "AES-GCM - Übersicht";
         private const string StepByStep = "Schritt für Schritt - Anleitung";
-        private const string EncryptionDecryption = "Ver- und Entschlüsselung";
+        private const string EncryptionDecryption = "Ver- & Entschlüsselungs - Anwendung";
         private const string DragDrop = "Drag & Drop - Spiel";
 
         #region Private Members

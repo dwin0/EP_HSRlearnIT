@@ -10,14 +10,19 @@
         Title="HSRlearnIT" Height="620" Width="1000" MinWidth="400" MinHeight="250">
     <Grid Name="MainGrid" Margin="80, 10, 30, 10" Background="White" PreviewMouseDown="CollapseMenu">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*" MinWidth="200"/>
+            <ColumnDefinition Width="2*" MinWidth="200" MaxWidth="300"/>
             <ColumnDefinition Width="5*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Name="MenuStackPanel" Grid.Column="0" HorizontalAlignment="Stretch" Visibility="Hidden" Background="{StaticResource MenuBackgroundColor}"
+        <StackPanel Name="MenuStackPanel" Grid.Column="0" HorizontalAlignment="Stretch" Visibility="Hidden" Background="White"
                     Panel.ZIndex="5">
-            <TextBlock Text="Menu" Style="{StaticResource ResourceKey=MenuStyle}"/>
-            <ListView Name="Menu" ItemsSource="{StaticResource ResourceKey=MenuStrings}" ItemContainerStyle="{StaticResource ResourceKey=MenuItemStyle}"
-                      PreviewMouseDown="OnMenuItemClick" BorderThickness="0" BorderBrush="{StaticResource MenuBackgroundColor}"/>
+            <Border BorderThickness="0, 0, 3, 0" BorderBrush="{StaticResource MenuTitleBackgroundBrush}">
+                <StackPanel>
+                    <TextBlock Text="Menu" Style="{StaticResource ResourceKey=MenuStyle}"/>
+                    <ListView Name="Menu" ItemsSource="{StaticResource ResourceKey=MenuStrings}" ItemContainerStyle="{StaticResource ResourceKey=MenuItemStyle}"
+                                  PreviewMouseDown="OnMenuItemClick" BorderThickness="0" BorderBrush="{StaticResource MenuBackgroundColor}"/>
+                    <Image Source="Images/encryptionImage.png" Margin="0, 0, 0, 1000"/>
+                </StackPanel>
+            </Border>
         </StackPanel>
         <Button Grid.Column="0" Name="MenuButton" Click="OnMenuButton_Click" VerticalAlignment="Top" HorizontalAlignment="Left"
                 Panel.ZIndex="2" Margin="-60, 0, 0, 0" Width="50" Background="Transparent" BorderThickness="0">

@@ -7,13 +7,13 @@
     
     <local:StringCollection x:Key="MenuStrings">
         <system:String>Startseite</system:String>
-        <system:String>Übersicht AES-GCM</system:String>
+        <system:String>AES-GCM - Übersicht</system:String>
         <system:String>Schritt für Schritt - Anleitung</system:String>
-        <system:String>Ver- und Entschlüsselung</system:String>
+        <system:String>Ver- &amp; Entschlüsselungs - Anwendung</system:String>
         <system:String>Drag &amp; Drop - Spiel</system:String>
     </local:StringCollection>
     
-    <Brush x:Key="MenuBackgroundColor">#ffe6e6</Brush>
+    <SolidColorBrush x:Key="MenuBackgroundColor">#ffe6e6</SolidColorBrush>
 
     <Storyboard x:Key="StoryboardShowLeftMenu" >
         <ThicknessAnimation Storyboard.TargetProperty="Margin" From="-150, -10, 0, -10" To="-80, -10, 0, -10" DecelerationRatio="0.9" Duration="0:0:0.5"/>
@@ -24,6 +24,7 @@
 
     <SolidColorBrush x:Key="TileBackgroundBrush" Color="#FFFFDCDC"/>
     <SolidColorBrush x:Key="TileBorderBrush" Color="#000000"/>
+    <SolidColorBrush x:Key="MenuTitleBackgroundBrush" Color="#990000"></SolidColorBrush>
 
     <Style x:Key="TileBorderStyle" TargetType="Border">
         <Setter Property="Margin" Value="20"/>
@@ -60,8 +61,8 @@
 
     <Style x:Key="MenuStyle" TargetType="{x:Type TextBlock}">
         <Setter Property="FontSize" Value="20"/>
-        <Setter Property="Background" Value="#990000"/>
-        <Setter Property="Padding" Value="40, 10, 10, 10"/>
+        <Setter Property="Background" Value="{StaticResource MenuTitleBackgroundBrush}"/>
+        <Setter Property="Padding" Value="10"/>
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="FontWeight" Value="Bold"/>
     </Style>
@@ -70,7 +71,7 @@
         <Setter Property="FontSize" Value="15"/>
         <Setter Property="Padding" Value="10"/>
         <Setter Property="Background" Value="#ffe6e6"/>
-        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="BorderThickness" Value="1"/>
     </Style>
 
 </ResourceDictionary>

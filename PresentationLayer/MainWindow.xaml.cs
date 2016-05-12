@@ -48,13 +48,13 @@ namespace EP_HSRlearnIT.PresentationLayer
                 case "Startseite":
                     MainFrame.Navigate(new MainPage());
                     break;
-                case "Übersicht AES-GCM":
+                case "AES-GCM - Übersicht":
                     MainFrame.Navigate(new AesGcmOverviewPage());
                     break;
                 case "Schritt für Schritt - Anleitung":
                     MainFrame.Navigate(new StepByStepPage());
                     break;
-                case "Ver- und Entschlüsselung":
+                case "Ver- & Entschlüsselungs - Anwendung":
                     MainFrame.Navigate(new PageWithTabs());
                     break;
                 case "Drag & Drop - Spiel":
@@ -99,9 +99,10 @@ namespace EP_HSRlearnIT.PresentationLayer
             var point = Mouse.GetPosition(MainGrid);
 
             //Check if click was outside the menu
-            if (point.X > MenuStackPanel.ActualWidth + MenuStackPanel.Margin.Left + MenuStackPanel.Margin.Right)
+            if (MenuStackPanel.IsVisible && point.X > MenuStackPanel.ActualWidth + MenuStackPanel.Margin.Left + MenuStackPanel.Margin.Right)
             {
                 CloseMenu();
+                e.Handled = true;
             }
         }
     }
