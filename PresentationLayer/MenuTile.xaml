@@ -7,7 +7,7 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <Border Name="TileBorder" Style="{StaticResource TileBorderStyle}">
-            <Grid Background="{StaticResource BackAreaBrush}">
+            <Grid Background="{StaticResource TileBackgroundBrush}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="2*"/>

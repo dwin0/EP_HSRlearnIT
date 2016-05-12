@@ -5,7 +5,7 @@
     
     <!--StepByStepPage Ressources-->
     
-    <SolidColorBrush x:Key="TileSolidColor" Color="#FFFFDCDC"/>
+    <SolidColorBrush x:Key="TileSolidColor" Color="#AFC8E6C9"/>
     <Image x:Key="StepByStepBackground" Source="/Images/aead.png" RenderOptions.BitmapScalingMode="HighQuality" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center"/>
     
         <!--StepByStepPage StepDescripton and Title-->
@@ -138,7 +138,7 @@ der Ciphertext und das Tag zurückgegeben.</system:String>
         <!--Overview Background-->
     
     <Image x:Key="BackgroundImage" Source="/Images/aead.png" RenderOptions.BitmapScalingMode="HighQuality" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-    <SolidColorBrush x:Key="BackAreaBrush" Color="#FFFFDCDC"/>
+    <SolidColorBrush x:Key="BackAreaBrush" Color="#AFC8E6C9"/>
     <SolidColorBrush x:Key="NoBackAreaBrush" Color="White"/>
     
 </ResourceDictionary>
