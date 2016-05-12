@@ -16,7 +16,7 @@
     <Brush x:Key="MenuBackgroundColor">#ffe6e6</Brush>
 
     <Storyboard x:Key="StoryboardShowLeftMenu" >
-        <ThicknessAnimation Storyboard.TargetProperty="Margin" From="-150, -10, 0, -10" To="-50, -10, 0, -10" DecelerationRatio="0.9" Duration="0:0:0.5"/>
+        <ThicknessAnimation Storyboard.TargetProperty="Margin" From="-150, -10, 0, -10" To="-80, -10, 0, -10" DecelerationRatio="0.9" Duration="0:0:0.5"/>
     </Storyboard>
     
     
