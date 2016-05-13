@@ -15,9 +15,9 @@
             </Rectangle>
 
             
-            <Button Name="Zurücksetzen" Content="Zurücksetzen" Click="OnResetClick" Height="40" Width="90" Canvas.Left="800" Canvas.Bottom="30" Style="{StaticResource ResourceKey=ProgramButtonStyle}"/>
-            <Button Name="Auswertung"  Height="40" Width="90" Content="Auswertung" Canvas.Left="700" Canvas.Bottom="30" Click="Check_OnClick" IsEnabled="True" Style="{StaticResource ResourceKey=ProgramButtonStyle}"/>
-            <Image Source="/Images/questionmark.png" Name="QuestionMarkOpenInstruction" Visibility="Visible" HorizontalAlignment ="Left" Canvas.Left="810" Canvas.Top="0" Width="60"
+            <Button Name="Zurücksetzen" Content="Zurücksetzen" Click="OnResetClick" Height="55" Width="120" Canvas.Left="775" Canvas.Bottom="30" FontSize="16" Style="{StaticResource ResourceKey=ProgramButtonStyle}"/>
+            <Button Name="Auswertung"  Height="55" Width="120" Content="Auswertung" Canvas.Left="650" Canvas.Bottom="30" Click="Check_OnClick" IsEnabled="True" FontSize="16" Style="{StaticResource ResourceKey=ProgramButtonStyle}"/>
+            <Image Source="/Images/questionmark.png" Name="QuestionMarkOpenInstruction" Visibility="Visible" HorizontalAlignment ="Left" Canvas.Left="831" Canvas.Top="5" Width="60"
                    RenderOptions.BitmapScalingMode="HighQuality" MouseUp="OpenInstruction" />
            
            <Border Name="BorderGameInstruction" BorderThickness="4" BorderBrush="CornflowerBlue" Panel.ZIndex="1">
@@ -43,7 +43,7 @@
                     </DockPanel>
                 </StackPanel>
          </Border>
-            <Button Name="ButtonCloseGameInstruction" Panel.ZIndex="2" Content="Schliessen" Canvas.Left="655" Canvas.Top="395" Width="90" Click="CloseGameInstruction" Style="{StaticResource ResourceKey=ProgramButtonStyle}"/>
+            <Button Name="ButtonCloseGameInstruction" Panel.ZIndex="2" Content="Schliessen" Canvas.Left="630" Canvas.Top="395" Height="55" Width="120" Click="CloseGameInstruction" FontSize="16" Style="{StaticResource ResourceKey=ProgramButtonStyle}"/>
 
         </Canvas>
     </Viewbox>

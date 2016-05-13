@@ -16,7 +16,7 @@
         <Viewbox Grid.Row="0" Margin="0, 20, 0, 20">
             <Canvas Name="OverviewCanvas" Height="720" Width="960" />
         </Viewbox>
-        <Border Grid.Row="1" BorderBrush="{StaticResource MenuTitleBackgroundBrush}" BorderThickness="2" MaxWidth="850">
+        <Border Grid.Row="1" BorderBrush="{StaticResource MenuTitleBackgroundBrush}" BorderThickness="2" MaxWidth="850" MaxHeight="120">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
