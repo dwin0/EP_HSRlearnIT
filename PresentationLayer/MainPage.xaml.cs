@@ -10,16 +10,17 @@ using EP_HSRlearnIT.PresentationLayer.Tutorials;
 namespace EP_HSRlearnIT.PresentationLayer
 {
     /// <summary>
-    /// Page containing the program-navigation
+    /// Page which contains the program-navigation
     /// </summary>
     public partial class MainPage
     {
-        private const string Overview = "Übersicht AES-GCM";
+        #region Private Members
+
+        private const string Overview = "AES-GCM - Übersicht";
         private const string StepByStep = "Schritt für Schritt - Anleitung";
-        private const string EncryptionDecryption = "Ver- und Entschlüsselung";
+        private const string EncryptionDecryption = "Ver- & Entschlüsselungs - Anwendung";
         private const string DragDrop = "Drag & Drop - Spiel";
 
-        #region Private Members
         private readonly Dictionary<string, string> _tileDictionary = new Dictionary<string, string>()
             {
                 { Overview, @"Images/eye-icon.png"},
@@ -120,8 +121,21 @@ namespace EP_HSRlearnIT.PresentationLayer
         #endregion
     }
 
+
+    #region Extension Methods
+
+    /// <summary>
+    /// Extension Class for strings
+    /// </summary>
     public static class StringExtender
     {
+        /// <summary>
+        /// Extension Method to replace multiple strings within a text
+        /// </summary>
+        /// <param name="text">Text in which replacements are made</param>
+        /// <param name="replacements">Dictionary which contains a string-string - Pair.
+        /// First string: Pattern searched in text. Second string: Text to replace the pattern in the parameter text.</param>
+        /// <returns>Text in which all found patterns are replaced with a given string</returns>
         public static string MultipleReplace(this string text, Dictionary<string, string> replacements)
         {
             string retVal = text;
@@ -132,4 +146,5 @@ namespace EP_HSRlearnIT.PresentationLayer
             return retVal;
         }
     }
+    #endregion
 }

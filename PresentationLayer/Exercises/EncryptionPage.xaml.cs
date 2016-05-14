@@ -1,11 +1,7 @@
 ﻿using System;
-using System.IO;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using EP_HSRlearnIT.BusinessLayer.UniversalTools;
-using Microsoft.Win32;
 
 namespace EP_HSRlearnIT.PresentationLayer.Exercises
 {
@@ -18,6 +14,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             HexPlaintextBox.Text = Progress.GetProgress("EncryptionPage_HexPlaintextBox") as string;
             HexIvBox.Text = Progress.GetProgress("EncryptionPage_HexIvBox") as string;
             HexAadBox.Text = Progress.GetProgress("EncryptionPage_HexAadBox") as string;
+            HexEncryptionPasswordBox.Text = Progress.GetProgress("EncryptionPage_HexEncryptionPasswordBox") as string;
         }
 
         #endregion
@@ -50,53 +47,11 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             UtfCiphertextBox.Text = Library.BytesToString(returnValueEncryption.Item2);
         }
 
-        public async Task<Tuple<byte[], byte[]>> EncryptionTask(byte[] key, byte[] plaintext, byte[] iv, byte[] aad)
+        private async Task<Tuple<byte[], byte[]>> EncryptionTask(byte[] key, byte[] plaintext, byte[] iv, byte[] aad)
         {
             return await Task.Run(() => Library.Encrypt(key, plaintext, iv, aad));
         }
 
-        private void OnExportButtonClick(object sender, RoutedEventArgs e)
-        {
-            SaveFileDialog saveFileDialog = new SaveFileDialog()
-            {
-                Filter = "Text File (*.txt)|*.txt|All Files (*.*)|*.*",
-                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                OverwritePrompt = true,
-                AddExtension = true,
-                DefaultExt = "txt",
-                ValidateNames = true,
-                Title = "Exportieren der Verschlüsselungsparamter"
-            };
-
-            if (saveFileDialog.ShowDialog() == true)
-            {
-
-                string fullFilePath = saveFileDialog.FileName;
-                var extension = Path.GetExtension(fullFilePath);
-                if (extension != null && extension.ToLower() != ".txt")
-                {
-                    fullFilePath += ".txt";
-                }
-         
-                if (!FileManager.IsExist(fullFilePath))
-                {
-                    FileManager.SaveFile(fullFilePath);
-                }
-                //Fillup all fields with name of parameter and value into exportfile.
-                StringBuilder line = new StringBuilder();
-                foreach (TextBox element in DependencyObjectExtension.GetAllChildren<TextBox>(this))
-                {
-                    //Filter for fields to export
-                    if (element.Name.Contains("Hex"))
-                    {
-                        //cut Hex and Box, for Example: HexIvBox -> Iv
-                        line.AppendLine(element.Name.Substring(3, element.Name.Length-6) + "=0x" + element.Text);
-                    }
-                }
-                FileManager.UpdateContent(fullFilePath, line.ToString());
-                MessageBox.Show("Der Export war erfolgreich!", "Export", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-        }
         #endregion
     }
 }

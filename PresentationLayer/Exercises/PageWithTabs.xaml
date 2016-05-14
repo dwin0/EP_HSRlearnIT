@@ -26,6 +26,7 @@
                                         <Setter TargetName="Border" Property="Background" Value="LightSkyBlue" />
                                     </Trigger>
                                     <Trigger Property="IsSelected" Value="False">
+                                        <Setter Property="Foreground" Value="DarkGray"/>
                                         <Setter TargetName="Border" Property="Background" Value="#F0F0F0" />
                                     </Trigger>
                                 </ControlTemplate.Triggers>
@@ -41,5 +42,6 @@
                 <Frame Name="DecryptionFrame" />
             </TabItem>
         </TabControl>
+        <Button Content="Expertenmodus: aus" Click="OnExpertmodusButtonClick" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ResourceKey=ExpertModusButtonStyle}" />
     </Grid>
 </Page>

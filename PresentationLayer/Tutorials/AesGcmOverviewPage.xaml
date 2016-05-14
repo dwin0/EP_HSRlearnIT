@@ -4,9 +4,31 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       mc:Ignorable="d"
-      Title="AesGcmOverviewPage">
+      Title="AesGcmOverviewPage"
+      SizeChanged="OnPageSizeChanged">
 
-    <Viewbox>
-        <Canvas Name="OverviewCanvas" Height="720" Width="960" />
-    </Viewbox>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Viewbox Grid.Row="0" Margin="0, 20, 0, 20">
+            <Canvas Name="OverviewCanvas" Height="720" Width="960" />
+        </Viewbox>
+        <Border Grid.Row="1" BorderBrush="{StaticResource MenuTitleBackgroundBrush}" BorderThickness="2" MaxWidth="850" MaxHeight="120">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="3*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Background="{StaticResource MenuTitleBackgroundBrush}" Foreground="White" Text="Erklärung"
+                           TextAlignment="Center" FontSize="16" FontWeight="Bold" Padding="0, 3, 0, 0"/>
+                <ScrollViewer Grid.Row="1" Name="TextScrollViewer">
+                    <TextBlock Name="OverviewTextBlock" FontSize="16" HorizontalAlignment="Center" TextAlignment="Center" Margin="0, 10, 0, 0"
+                           Text="Fahre mit der Maus über das Bild, um mehr zu erfahren." TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Visible"/>
+                </ScrollViewer>
+            </Grid>
+        </Border>
+    </Grid>
 </Page>

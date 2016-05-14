@@ -2,6 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
+    <!-- Tooltips which apear behind the info signs -->
+    
     <system:String x:Key="DecryptionInfoAad">
         Falls in der Verschlüsselung keine Additional Authenticated Data eingegeben wurden, muss das Feld auch in der Entschlüsselung leer sein.
     </system:String>
@@ -10,13 +12,10 @@
         Ansonsten muss der gleiche IV wie in der Verschlüsselung angegeben werden.
     </system:String>
     <system:String x:Key="DecryptionInfoTag">
-        Muss mit dem berechneten Tag aus der Verschlüsselung übereinstimmen.s
+        Muss mit dem berechneten Tag aus der Verschlüsselung übereinstimmen.
     </system:String>
     <system:String x:Key="DecryptionInfoKey">
         Der Key muss der gleiche sein wie bei der Entschlüsselung. Falls er nicht genau 32 Byte gross ist, wird gleich vorgegangen wie bei der Verschlüsselung.
-    </system:String>
-    <system:String x:Key="EncryptionInfoHexTagAndCipher">
-        Dieses Felde kann manipuliert werden, um die Auswirkungen in der Entschlüsselung zu beobachten.
     </system:String>
 
     <system:String x:Key="EncryptionInfoIv">
@@ -31,5 +30,16 @@
         Der Key muss mindestens 8 Zeichen betragen. Da der schlussendliche Key 32 Byte gross sein muss, wird bei einem zu kleinen
         Key der eingegebene Key verlängert, bis 32 Byte erreicht wurden. Falls der Key grösser als 32 Byte ist, wird er auf die 32 Byte reduziert.
     </system:String>
+
+ 
+    
+    <!-- Styles  -->
+    
+    <Style x:Key="ExpertModusButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="BorderBrush" Value="White"/>
+        <Setter Property="Margin" Value="0,15,0,0" />
+        <Setter Property="FontSize" Value="15" />
+    </Style>
 
 </ResourceDictionary>

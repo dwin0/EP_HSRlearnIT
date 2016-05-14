@@ -5,7 +5,7 @@
     
     <!--StepByStepPage Ressources-->
     
-    <SolidColorBrush x:Key="TileSolidColor" Color="#FFFFDCDC"/>
+    <SolidColorBrush x:Key="TileSolidColor" Color="#AFC8E6C9"/>
     <Image x:Key="StepByStepBackground" Source="/Images/aead.png" RenderOptions.BitmapScalingMode="HighQuality" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center"/>
     
         <!--StepByStepPage StepDescripton and Title-->
@@ -116,29 +116,22 @@ Wird beispielsweise ein Bild, mit vielen gleichen Farbpunkten, verschlüsselt, s
     
         <!--Overview Text-->
 
-    <system:String x:Key="VorbereitungText">In der Vorbereitungsphase wird der Hash-Subkey H
-sowie der «Counter 0»-Block berechnet.</system:String>
+    <system:String x:Key="VorbereitungText">In der Vorbereitungsphase wird der Hash-Subkey H sowie der «Counter 0»-Block berechnet.</system:String>
 
-    <system:String x:Key="VerschlüsselungText">Bei der Verschlüsselung wird der
-erste Plaintextblock AES-verschlüsselt.</system:String>
+    <system:String x:Key="VerschlüsselungText">Bei der Verschlüsselung wird der erste Plaintextblock AES-verschlüsselt.</system:String>
 
-    <system:String x:Key="AdditionalAuthenticatedDataText">Dem Algorithmus werden weitere authentifizierte,
-aber nicht verschlüsselte Daten hinzugefügt.</system:String>
+    <system:String x:Key="AdditionalAuthenticatedDataText">Dem Algorithmus werden weitere authentifizierte, aber nicht verschlüsselte Daten hinzugefügt.</system:String>
 
-    <system:String x:Key="CiphertextAuthentifizierungText">Die Authentifizierung geschieht über
-eine Multiplikation in einem Galois-Feld.</system:String>
+    <system:String x:Key="CiphertextAuthentifizierungText">Die Authentifizierung geschieht über eine Multiplikation in einem Galois-Feld.</system:String>
 
-    <system:String x:Key="WiederholungText">Die Verschlüsselung und Authentifizierung
-werden wiederholt angewendet.</system:String>
+    <system:String x:Key="WiederholungText">Die Verschlüsselung und Authentifizierung werden wiederholt angewendet.</system:String>
 
-    <system:String x:Key="AbschlussUndRückgabeText">Die Textlänge und der «Counter 0»-Block werden
-ebenfalls authentifiziert. Am Ende wird
-der Ciphertext und das Tag zurückgegeben.</system:String>
+    <system:String x:Key="AbschlussUndRückgabeText">Die Textlänge und der «Counter 0»-Block werden ebenfalls authentifiziert. Am Ende wird der Ciphertext und das Tag zurückgegeben.</system:String>
 
         <!--Overview Background-->
     
     <Image x:Key="BackgroundImage" Source="/Images/aead.png" RenderOptions.BitmapScalingMode="HighQuality" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-    <SolidColorBrush x:Key="BackAreaBrush" Color="#FFFFDCDC"/>
+    <SolidColorBrush x:Key="BackAreaBrush" Color="#AFC8E6C9"/>
     <SolidColorBrush x:Key="NoBackAreaBrush" Color="White"/>
     
 </ResourceDictionary>

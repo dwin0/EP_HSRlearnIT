@@ -180,21 +180,12 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
         {
             Path path = sender as Path;
             string text = Application.Current.FindResource(path?.Name + "Text") as string;
-            ChangeToolTip(text);
+            ShowExplanation(text);
         }
 
         private void AreaPathOnMouseLeave(object sender, MouseEventArgs e)
         {
             _toolTip.IsOpen = false;
-        }
-
-        private void ChangeToolTip(string tooltipText)
-        {
-            _toolTip.Content = tooltipText;
-            _toolTip.IsOpen = true;
-            _toolTip.StaysOpen = true;
-            _toolTip.HorizontalOffset = 100;
-            _toolTip.VerticalOffset = -100;
         }
 
         private void StepPathOnClick(object sender, MouseEventArgs e)
@@ -211,6 +202,27 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
                 NavigationService?.Navigate(new StepByStepPage(step));
             }
             NavigationService?.Navigate(new StepByStepPage());
+        }
+
+        private void ShowExplanation(string text)
+        {
+            OverviewTextBlock.Text = text + "\n<<Klick auf Feld für weitere Infos>>";
+            if (!OverviewTextBlock.ClipToBounds)
+            {
+                TextScrollViewer.VerticalScrollBarVisibility = (ScrollBarVisibility)Visibility.Hidden;
+            }
+        }
+
+        public void OnPageSizeChanged(object sender, RoutedEventArgs e)
+        {
+            if (ActualWidth < 600 || ActualHeight < 450)
+            {
+                OverviewTextBlock.FontSize = 12;
+            }
+            else
+            {
+                OverviewTextBlock.FontSize = 16;
+            }
         }
 
         #endregion Private Methods
