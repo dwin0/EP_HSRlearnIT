@@ -9,7 +9,7 @@ using Castle.Core.Internal;
 
 namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
 {
-    public class AesGcmCryptoLibrary
+    public class AesGcmAdapter
     {
         #region Public Methods
         /// <summary>
@@ -26,19 +26,25 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
         ///          param2: is the generated ciphertext
         ///          Else an invalid argument exception will be thrown.
         /// </returns>
-        public Tuple<byte[], byte[]> Encrypt(byte[] key, byte[] plaintext, byte[] iv, byte[] aad)
+        public Tuple<string, string> Encrypt(string key, string plaintext, string iv, string aad)
         {
+            byte[] byteKey = HexStringToDecimalByteArray(key);
+            byte[] bytePlaintext = HexStringToDecimalByteArray(plaintext);
+            byte[] byteIv = HexStringToDecimalByteArray(iv);
+            byte[] byteAad = HexStringToDecimalByteArray(aad);
+
             using (AuthenticatedAesCng aes = new AuthenticatedAesCng())
             {
+
                 //Setting gcm mode. This should be done before anything else, since propertys like tagsize depend upon the mode.
                 aes.CngMode = CngChainingMode.Gcm;
-                aes.Key = key;
+                aes.Key = byteKey;
 
                 //The iv must have a size of 12 Bytes.
-                aes.IV = iv ?? new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+                aes.IV = byteIv ?? new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
                 //Aad is part of the generated tag. Is not part of the ciphertext, it won't be produced when decrypting.
-                aes.AuthenticatedData = aad;
+                aes.AuthenticatedData = byteAad;
 
                 //Perform the encryption.
                 MemoryStream ms = new MemoryStream();
@@ -46,13 +52,13 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
                 using (CryptoStream cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Write))
                 {
                     //Encrypt the secret message.
-                    cs.Write(plaintext, 0, plaintext.Length);
+                    cs.Write(bytePlaintext, 0, bytePlaintext.Length);
 
                     //Finish the encryption and get the output authentication tag and ciphertext.
                     cs.FlushFinalBlock();
-                    byte[] tagEncrypt = encryptor.GetTag();
-                    byte[] ciphertextEncrypt = ms.ToArray();
-                    return new Tuple<byte[], byte[]>(tagEncrypt, ciphertextEncrypt);
+                    string tagEncrypt = ConvertToHexString(BytesToString(encryptor.GetTag()));
+                    string ciphertextEncrypt = ConvertToHexString(BytesToString(ms.ToArray()));
+                    return new Tuple<string, string>(tagEncrypt, ciphertextEncrypt);
                 }
             }
         }
@@ -69,31 +75,37 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
         /// <returns>If sucessfull: The decrypted plaintext.
         ///          Else an exception will be thrown.
         /// </returns>
-        public byte[] Decrypt(byte[] key, byte[] ciphertext, byte[] iv, byte[] aad, byte[] tag)
+        public string Decrypt(string key, string ciphertext, string iv, string aad, string tag)
         {
+            byte[] byteKey = HexStringToDecimalByteArray(key);
+            byte[] byteCiphertext = HexStringToDecimalByteArray(ciphertext);
+            byte[] byteIv = HexStringToDecimalByteArray(iv);
+            byte[] byteAad = HexStringToDecimalByteArray(aad);
+            byte[] byteTag = HexStringToDecimalByteArray(tag);
+
             using (AuthenticatedAesCng aes = new AuthenticatedAesCng())
             {
                 //Chaining modes, keys, and IVs must match between encryption and decryption.
                 aes.CngMode = CngChainingMode.Gcm;
-                aes.Key = key;
-                aes.IV = iv ?? new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+                aes.Key = byteKey;
+                aes.IV = byteIv ?? new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
                 //If the aad doesn't match between encryption and decryption the tag will not match either and the decryption will fail.
-                aes.AuthenticatedData = aad;
+                aes.AuthenticatedData = byteAad;
 
                 //The tag that was generated during encryption gets set here.
-                aes.Tag = tag;
+                aes.Tag = byteTag;
 
                 MemoryStream ms = new MemoryStream();
                 using (CryptoStream cs = new CryptoStream(ms, aes.CreateDecryptor(), CryptoStreamMode.Write))
                 {
-                    cs.Write(ciphertext, 0, ciphertext.Length);
+                    cs.Write(byteCiphertext, 0, byteCiphertext.Length);
 
                     //If the authentication tag does not match, we’ll fail here with a CryptographicException, and the ciphertext will not be decrypted.
                     cs.FlushFinalBlock();
 
                     //returns the plaintext
-                    return ms.ToArray();
+                    return ConvertToHexString(BytesToString(ms.ToArray()));
                 }
             }
         }
@@ -139,10 +151,17 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
         /// <returns>Returns an Array which contains Hex Bytes</returns>
         public byte[] HexStringToDecimalByteArray(string hex)
         {
-            return Enumerable.Range(0, hex.Length)
+            if (hex == "")
+            {
+                return null;
+            }
+            else
+            {
+                return Enumerable.Range(0, hex.Length)
                              .Where(x => x % 2 == 0)
                              .Select(x => Convert.ToByte(hex.Substring(x, 2), 16))
                              .ToArray();
+            }
         }
 
         /// <summary>
@@ -153,9 +172,12 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
         public string BytesToString(byte[] bytes)
         {
             StringBuilder sb = new StringBuilder();
-            foreach (byte b in bytes)
+            if (bytes != null)
             {
-                sb.Append(Convert.ToChar(b));
+                foreach (byte b in bytes)
+                {
+                    sb.Append(Convert.ToChar(b));
+                }
             }
             return sb.ToString();
         }
@@ -177,6 +199,17 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
             }
 
             return bytes;
+        }
+
+        public string ConvertToHexString(string values)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (char letter in values)
+            {
+                int value = Convert.ToInt32(letter);
+                sb.AppendFormat("{0:x2}", value);
+            }
+            return sb.ToString();
         }
 
         #endregion

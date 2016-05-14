@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Security.Cryptography;
+using System.Text;
 using EP_HSRlearnIT.BusinessLayer.CryptoTools;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -11,80 +12,80 @@ namespace EP_HSRlearnIT.BusinessLayerTests.CryptoToolsTest
         [TestMethod]
         public void EncryptTestCase14Test()
         {
-            AesGcmCryptoLibrary library = new AesGcmCryptoLibrary();
-            byte[] key = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-            byte[] plaintext = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-            byte[] iv = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            byte[] aad = {};
-            Tuple<byte[], byte[]> returnValue = library.Encrypt(key, plaintext, iv, aad);
+            AesGcmAdapter library = new AesGcmAdapter();
+            string key = "0000000000000000000000000000000000000000000000000000000000000000";
+            string plaintext = "00000000000000000000000000000000";
+            string iv = "000000000000000000000000";
+            string aad = "";
+            Tuple<string, string> returnValue = library.Encrypt(key, plaintext, iv, aad);
 
-            byte[] resultingTag = returnValue.Item1;
-            byte[] resultingCiphertext = returnValue.Item2;
+            string resultingTag = returnValue.Item1;
+            string resultingCiphertext = returnValue.Item2;
 
-            byte[] expectedTag = library.HexStringToDecimalByteArray("d0d1c8a799996bf0265b98b5d48ab919");
-            byte[] expectedCiphertext = library.HexStringToDecimalByteArray("cea7403d4d606b6e074ec5d3baf39d18");
+            string expectedTag = "d0d1c8a799996bf0265b98b5d48ab919";
+            string expectedCiphertext = "cea7403d4d606b6e074ec5d3baf39d18";
 
-            CollectionAssert.AreEqual(expectedTag, resultingTag);
-            CollectionAssert.AreEqual(expectedCiphertext, resultingCiphertext);
+            Assert.AreEqual(expectedTag, resultingTag);
+            Assert.AreEqual(expectedCiphertext, resultingCiphertext);
         }
 
         [TestMethod, ExpectedException(typeof(CryptographicException))]
         public void EncryptWrongKeySizeTest()
         {
-            AesGcmCryptoLibrary library = new AesGcmCryptoLibrary();
-            byte[] key = { 0 };
-            byte[] plaintext = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            byte[] iv = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            byte[] aad = { };
+            AesGcmAdapter library = new AesGcmAdapter();
+            string key = "00";
+            string plaintext = "00000000000000000000000000000000";
+            string iv = "000000000000000000000000";
+            string aad = "";
             library.Encrypt(key, plaintext, iv, aad);
         }
 
         [TestMethod]
         public void EncryptOptionalIvTest()
         {
-            AesGcmCryptoLibrary library = new AesGcmCryptoLibrary();
-            byte[] key = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            byte[] plaintext = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            byte[] iv = null;
-            byte[] aad = { };
-            Tuple<byte[], byte[]> returnValue = library.Encrypt(key, plaintext, iv, aad);
+            AesGcmAdapter library = new AesGcmAdapter();
+            string key = "0000000000000000000000000000000000000000000000000000000000000000";
+            string plaintext = "00000000000000000000000000000000";
+            string iv = "";
+            string aad = "";
+            Tuple<string, string> returnValue = library.Encrypt(key, plaintext, iv, aad);
 
-            byte[] resultingTag = returnValue.Item1;
-            byte[] resultingCiphertext = returnValue.Item2;
+            string resultingTag = returnValue.Item1;
+            string resultingCiphertext = returnValue.Item2;
 
-            byte[] expectedTag = library.HexStringToDecimalByteArray("d0d1c8a799996bf0265b98b5d48ab919");
-            byte[] expectedCiphertext = library.HexStringToDecimalByteArray("cea7403d4d606b6e074ec5d3baf39d18");
+            string expectedTag = "d0d1c8a799996bf0265b98b5d48ab919";
+            string expectedCiphertext = "cea7403d4d606b6e074ec5d3baf39d18";
 
-            CollectionAssert.AreEqual(expectedTag, resultingTag);
-            CollectionAssert.AreEqual(expectedCiphertext, resultingCiphertext);
+            Assert.AreEqual(expectedTag, resultingTag);
+            Assert.AreEqual(expectedCiphertext, resultingCiphertext);
         }
 
         [TestMethod]
         public void DecryptTestCase14Test()
         {
-            AesGcmCryptoLibrary library = new AesGcmCryptoLibrary();
-            byte[] key = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            byte[] cyphertext = library.HexStringToDecimalByteArray("cea7403d4d606b6e074ec5d3baf39d18");
-            byte[] iv = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            byte[] aad = {};
-            byte[] tag = library.HexStringToDecimalByteArray("d0d1c8a799996bf0265b98b5d48ab919");
+            AesGcmAdapter library = new AesGcmAdapter();
+            string key = "0000000000000000000000000000000000000000000000000000000000000000";
+            string cyphertext = "cea7403d4d606b6e074ec5d3baf39d18";
+            string iv = "000000000000000000000000";
+            string aad = "";
+            string tag = "d0d1c8a799996bf0265b98b5d48ab919";
 
-            byte[] returnValue = library.Decrypt(key,cyphertext, iv, aad, tag);
+            string returnValue = library.Decrypt(key,cyphertext, iv, aad, tag);
 
-            byte[] expectedPlaintext = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            string expectedPlaintext = "00000000000000000000000000000000";
 
-            CollectionAssert.AreEqual(expectedPlaintext, returnValue);
+            Assert.AreEqual(expectedPlaintext, returnValue);
         }
 
         [TestMethod, ExpectedException(typeof(ArgumentException))]
         public void DecryptWrongTagTest()
         {
-            AesGcmCryptoLibrary library = new AesGcmCryptoLibrary();
-            byte[] key = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            byte[] cyphertext = library.HexStringToDecimalByteArray("cea7403d4d606b6e074ec5d3baf39d18");
-            byte[] iv = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            byte[] aad = { };
-            byte[] tag = library.HexStringToDecimalByteArray("aa");
+            AesGcmAdapter library = new AesGcmAdapter();
+            string key = "0000000000000000000000000000000000000000000000000000000000000000";
+            string cyphertext = "cea7403d4d606b6e074ec5d3baf39d18";
+            string iv = "000000000000000000000000";
+            string aad = "";
+            string tag = "aa";
 
             library.Decrypt(key, cyphertext, iv, aad, tag);
         }
@@ -92,24 +93,24 @@ namespace EP_HSRlearnIT.BusinessLayerTests.CryptoToolsTest
         [TestMethod]
         public void DecryptOptionalIvTest()
         {
-            AesGcmCryptoLibrary library = new AesGcmCryptoLibrary();
-            byte[] key = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            byte[] cyphertext = library.HexStringToDecimalByteArray("cea7403d4d606b6e074ec5d3baf39d18");
-            byte[] iv = null;
-            byte[] aad = { };
-            byte[] tag = library.HexStringToDecimalByteArray("d0d1c8a799996bf0265b98b5d48ab919");
+            AesGcmAdapter library = new AesGcmAdapter();
+            string key = "0000000000000000000000000000000000000000000000000000000000000000";
+            string cyphertext = "cea7403d4d606b6e074ec5d3baf39d18";
+            string iv = "";
+            string aad = "";
+            string tag = "d0d1c8a799996bf0265b98b5d48ab919";
 
-            byte[] returnValue = library.Decrypt(key, cyphertext, iv, aad, tag);
+            string returnValue = library.Decrypt(key, cyphertext, iv, aad, tag);
 
-            byte[] expectedPlaintext = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            string expectedPlaintext = "00000000000000000000000000000000";
 
-            CollectionAssert.AreEqual(expectedPlaintext, returnValue);
+            Assert.AreEqual(expectedPlaintext, returnValue);
         }
 
         [TestMethod]
         public void GenerateHexKeyWithLessInputTest()
         {
-            AesGcmCryptoLibrary library = new AesGcmCryptoLibrary();
+            AesGcmAdapter library = new AesGcmAdapter();
             string resultingKey = library.GenerateKey("TestTest");
             Assert.AreEqual("TestTestTestTestTestTestTestTest", resultingKey);
             Assert.AreEqual(32, resultingKey.Length);
@@ -118,7 +119,7 @@ namespace EP_HSRlearnIT.BusinessLayerTests.CryptoToolsTest
         [TestMethod]
         public void GenerateHexKeyWithToMuchInputTest()
         {
-            AesGcmCryptoLibrary library = new AesGcmCryptoLibrary();
+            AesGcmAdapter library = new AesGcmAdapter();
             string resultingKey = library.GenerateKey("TestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTest");
             Assert.AreEqual("TestTestTestTestTestTestTestTest", resultingKey);
             Assert.AreEqual(32, resultingKey.Length);
@@ -127,7 +128,7 @@ namespace EP_HSRlearnIT.BusinessLayerTests.CryptoToolsTest
         [TestMethod]
         public void GenerateHexKeyWithRightInputTest()
         {
-            AesGcmCryptoLibrary library = new AesGcmCryptoLibrary();
+            AesGcmAdapter library = new AesGcmAdapter();
             string resultingKey = library.GenerateKey("TestTestTestTestTestTestTestTest");
             Assert.AreEqual("TestTestTestTestTestTestTestTest", resultingKey);
             Assert.AreEqual(32, resultingKey.Length);
@@ -136,7 +137,7 @@ namespace EP_HSRlearnIT.BusinessLayerTests.CryptoToolsTest
         [TestMethod]
         public void HexStringToDecimalByteArrayTest()
         {
-            AesGcmCryptoLibrary library = new AesGcmCryptoLibrary();
+            AesGcmAdapter library = new AesGcmAdapter();
             byte[] resultingHex = library.HexStringToDecimalByteArray("54657374");
             byte[] expectedHex = { 84, 101, 115, 116 };
 

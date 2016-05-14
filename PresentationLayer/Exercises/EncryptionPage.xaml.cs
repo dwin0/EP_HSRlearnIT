@@ -25,29 +25,19 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         {
             //key is evaluated and will be resized to 32 Byte if necessary
             string keyString = Library.GenerateKey(UtfEncryptionPasswordBox.Text);
-            ChangeHexBox(keyString.ToCharArray(), HexEncryptionPasswordBox);
+            ChangeHexBox(keyString, HexEncryptionPasswordBox);
 
-            //get the values of all fields which are needed to start the encryption
-            byte[] key = Library.HexStringToDecimalByteArray(HexEncryptionPasswordBox.Text);
-            byte[] plaintext = Library.HexStringToDecimalByteArray(HexPlaintextBox.Text);
-            byte[] aad = Library.HexStringToDecimalByteArray(HexAadBox.Text);
-
-            byte[] iv = null;
-            if (HexIvBox.Text != "")
-            {
-                iv = Library.HexStringToDecimalByteArray(HexIvBox.Text);
-            }
-            else
+            if (HexIvBox.Text == "")
             {
                 HexIvBox.Text = "000000000000000000000000";
             }
 
-            Tuple<byte[], byte[]> returnValueEncryption = await EncryptionTask(key, plaintext, iv, aad);
-            UtfTagBox.Text = Library.BytesToString(returnValueEncryption.Item1);
-            UtfCiphertextBox.Text = Library.BytesToString(returnValueEncryption.Item2);
+            Tuple<string, string> returnValueEncryption = await EncryptionTask(HexEncryptionPasswordBox.Text, HexPlaintextBox.Text, HexIvBox.Text, HexAadBox.Text);
+            HexTagBox.Text = returnValueEncryption.Item1;
+            HexCiphertextBox.Text = returnValueEncryption.Item2;
         }
 
-        private async Task<Tuple<byte[], byte[]>> EncryptionTask(byte[] key, byte[] plaintext, byte[] iv, byte[] aad)
+        private async Task<Tuple<string, string>> EncryptionTask(string key, string plaintext, string iv, string aad)
         {
             return await Task.Run(() => Library.Encrypt(key, plaintext, iv, aad));
         }

@@ -66,11 +66,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Exercises\CryptoClass.cs" />
+    <Compile Include="Exercises\EncryptionDecryptionComponents.cs" />
     <Compile Include="Exercises\FormFilledDecryption.cs" />
     <Compile Include="Exercises\FormFilledEncryption.cs" />
-    <Compile Include="Exercises\PageWithTabs.xaml.cs">
-      <DependentUpon>PageWithTabs.xaml</DependentUpon>
+    <Compile Include="Exercises\EncryptionDecryptionTabs.xaml.cs">
+      <DependentUpon>EncryptionDecryptionTabs.xaml</DependentUpon>
     </Compile>
     <Compile Include="Games\DragDropPage.xaml.cs">
       <DependentUpon>DragDropPage.xaml</DependentUpon>
@@ -91,9 +91,6 @@
     <Compile Include="Exercises\EncryptionPage.xaml.cs">
       <DependentUpon>EncryptionPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Exercises\EncryptionDecyrptionPage.xaml.cs">
-      <DependentUpon>EncryptionDecyrptionPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Tutorials\StepByStepPage.xaml.cs">
       <DependentUpon>StepByStepPage.xaml</DependentUpon>
     </Compile>
@@ -101,7 +98,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Exercises\PageWithTabs.xaml">
+    <Page Include="Exercises\EncryptionDecryptionTabs.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -146,10 +143,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Exercises\EncryptionPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Exercises\EncryptionDecyrptionPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

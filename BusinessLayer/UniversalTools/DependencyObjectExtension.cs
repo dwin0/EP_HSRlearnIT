@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
@@ -51,6 +52,21 @@ namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
                     yield return element as T;
                 }
             }
+        }
+
+        /// <summary>
+        /// Method which returns the Page of an element
+        /// </summary>
+        /// <param name="element">The element for which the parent Page is needed</param>
+        /// <returns>The Page in which the element is existing</returns>
+        public static DependencyObject GetParentPage(DependencyObject element)
+        {
+            var parent = VisualTreeHelper.GetParent(element);
+            while (!(parent is Page))
+            {
+                parent = VisualTreeHelper.GetParent(parent);
+            }
+            return parent;
         }
 
         #endregion

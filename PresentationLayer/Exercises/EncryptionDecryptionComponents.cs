@@ -14,17 +14,18 @@ using System.IO;
 namespace EP_HSRlearnIT.PresentationLayer.Exercises
 
 {
-    public abstract class CryptoClass : Page
+    public abstract class EncryptionDecryptionComponents : Page
     {
 
         #region Public Members
-        public AesGcmCryptoLibrary Library;
+        public AesGcmAdapter Library;
+
         #endregion
 
         #region Constructors
-        public CryptoClass()
+        public EncryptionDecryptionComponents()
         {
-            Library = new AesGcmCryptoLibrary();
+            Library = new AesGcmAdapter();
         }
         #endregion
 
@@ -45,8 +46,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                 
                 string hexFieldName = "Hex" + textBox.Name.Substring(3);
                 TextBox hexBox = (TextBox)FindName(hexFieldName);
-                char[] value = textBox.Text.ToCharArray();
-                ChangeHexBox(value, hexBox);
+                ChangeHexBox(textBox.Text, hexBox);
             }
         }
 
@@ -56,22 +56,13 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         /// </summary>
         /// <param name="values">Values which are converted into hex.</param>
         /// <param name="hexBox">The hexBox which will be updated with the converted values.</param>
-        public void ChangeHexBox(char[] values, TextBox hexBox)
+        public void ChangeHexBox(string values, TextBox hexBox)
         {
-            StringBuilder sb = new StringBuilder();
-
             if (hexBox != null)
             {
                 //remove the event handler temporary, else a loop will occure
                 hexBox.TextChanged -= HexTextBox_TextChanged;
-                foreach (char letter in values)
-                {
-                    int value = Convert.ToInt32(letter);
-
-                    // Convert the decimal value to a hexadecimal value in string form
-                    sb.AppendFormat("{0:x2}", value);
-                }
-                hexBox.Text = sb.ToString();
+                hexBox.Text = Library.ConvertToHexString(values);
                 hexBox.TextChanged += HexTextBox_TextChanged;
             }
         }
@@ -154,7 +145,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         {
             foreach (var element in DependencyObjectExtension.GetAllChildren<TextBox>(this))
             {
-                if (element.Name.Contains("Hex"))
+                if (element.Text != "")
                 {
                     element.Text = "";
                 }
@@ -264,14 +255,13 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
 
         private void SaveProgressHelper(TextBox element)
         {
-            var parent = VisualTreeHelper.GetParent(element);
-            while (!(parent is Page))
+            var parentPage = DependencyObjectExtension.GetParentPage(element) as Page;
+            if (parentPage != null)
             {
-                parent = VisualTreeHelper.GetParent(parent);
+                string pageName = parentPage.Title;
+                string key = pageName + "_" + element.Name;
+                Progress.SaveProgress(key, element.Text);
             }
-            string pageName = (parent as Page).Title;
-            string key = pageName + "_" + element.Name;
-            Progress.SaveProgress(key, element.Text);
         }
 
         /// <summary>

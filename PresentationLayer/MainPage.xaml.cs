@@ -85,7 +85,7 @@ namespace EP_HSRlearnIT.PresentationLayer
                     toNavigatePage = new StepByStepPage();
                     break;
                 case EncryptionDecryption:
-                    toNavigatePage = new PageWithTabs();
+                    toNavigatePage = new EncryptionDecryptionTabs();
                     break;
                 case DragDrop:
                     toNavigatePage = new DragDropPage();

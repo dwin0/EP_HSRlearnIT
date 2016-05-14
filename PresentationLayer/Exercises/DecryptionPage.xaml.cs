@@ -25,35 +25,24 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         {
             //key is evaluated and will be resized to 32 Byte if necessary 
             string keyString = Library.GenerateKey(UtfDecryptionPasswordBox.Text);
-            ChangeHexBox(keyString.ToCharArray(), HexDecryptionPasswordBox);
+            ChangeHexBox(keyString, HexDecryptionPasswordBox);
 
-            //get the values of all fields which are needed to start the decryption
-            byte[] key = Library.HexStringToDecimalByteArray(HexDecryptionPasswordBox.Text);
-            byte[] ciphertext = Library.HexStringToDecimalByteArray(HexCiphertextBox.Text);
-            byte[] aad = Library.HexStringToDecimalByteArray(HexAadBox.Text);
-            byte[] tag = Library.HexStringToDecimalByteArray(HexTagBox.Text);
-
-            byte[] iv = null;
-            if (HexIvBox.Text != "")
-            {
-                iv = Library.HexStringToDecimalByteArray(HexIvBox.Text);
-            }
-            else
+            if (HexIvBox.Text == "")
             {
                 HexIvBox.Text = "000000000000000000000000";
             }
 
-            UtfPlaintextBox.Text = Library.BytesToString(await DecryptionTask(key, ciphertext, iv, aad, tag));
+            HexPlaintextBox.Text = await DecryptionTask(HexDecryptionPasswordBox.Text, HexCiphertextBox.Text, HexIvBox.Text, HexAadBox.Text, HexTagBox.Text);
 
             //case authentication only --> when successfull
             if (UtfPlaintextBox.Text == "")
             {
-                MessageBox.Show("Der Text wurde erfolgreich authentifiziert.", "alleinstehenden Authentifizierung",
+                MessageBox.Show("Der Text wurde erfolgreich authentifiziert.", "alleinstehende Authentisierung",
                     MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
-        private async Task<byte[]> DecryptionTask(byte[] key, byte[] ciphertext, byte[] iv, byte[] aad, byte[] tag)
+        private async Task<string> DecryptionTask(string key, string ciphertext, string iv, string aad, string tag)
         {
             return await Task.Run(() => Library.Decrypt(key, ciphertext, iv, aad, tag));
         }

@@ -5,16 +5,16 @@ using EP_HSRlearnIT.BusinessLayer.UniversalTools;
 
 namespace EP_HSRlearnIT.PresentationLayer.Exercises
 {
-    public partial class PageWithTabs
+    public partial class EncryptionDecryptionTabs
     {
         #region Constructor
-        public PageWithTabs()
+        public EncryptionDecryptionTabs()
         {
             InitializeComponent();
             EncryptionFrame.Source = new Uri("EncryptionPage.xaml", UriKind.RelativeOrAbsolute);
         }
 
-        public PageWithTabs(TabItem tabItem)
+        public EncryptionDecryptionTabs(TabItem tabItem)
         {
             InitializeComponent();
             
@@ -42,11 +42,11 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                 if (sendingPage.Title == "EncryptionPage")
                 {
                     TakeValuesToDecryption();
-                    NavigationService?.Navigate(new PageWithTabs(DecryptionItem));
+                    NavigationService?.Navigate(new EncryptionDecryptionTabs(DecryptionItem));
                 } else if (sendingPage.Title == "DecryptionPage")
                 {
                     TakeValuesToEncryption();
-                    NavigationService?.Navigate(new PageWithTabs(EncryptionItem));
+                    NavigationService?.Navigate(new EncryptionDecryptionTabs(EncryptionItem));
                 } 
             }
         }
