@@ -1,10 +1,10 @@
 ﻿using System.IO;
 using System.Reflection;
-using EP_HSRlearnIT;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TestStack.White;
 using TestStack.White.Factory;
 using TestStack.White.UIItems;
+using TestStack.White.UIItems.TabItems;
 
 namespace EP_HSRlearnITTests
 {
@@ -19,15 +19,15 @@ namespace EP_HSRlearnITTests
         {
             //aufstarten
             var app = Application.Launch(SutPath);
-            var window = app.GetWindow("MainWindow", InitializeOption.NoCache);
+            var window = app.GetWindow("HSRlearnIT", InitializeOption.NoCache);
             window.WaitWhileBusy();
 
             //zu DecryptionPage navigieren
-            var imgEncrDecr = window.Get<Image>("VerundEntschluesselung");
+            var imgEncrDecr = window.Get<Image>("VerandEntschluesselungsAnwendung");
             imgEncrDecr.Click();
 
-            var buttonDecr = window.Get<Button>("Decryption");
-            buttonDecr.Click();
+            var decryptionPage = window.Get<TabPage>("DecryptionItem");
+            decryptionPage.Click();
 
             //input eingeben, es handelt sich um die Hex Werte des Test Cases 16 aus der offiziellen GCM Spezifikation.
             var ciphertextInput = window.Get<TextBox>("HexCiphertextBox");
@@ -38,7 +38,7 @@ namespace EP_HSRlearnITTests
             ivInput.Text = "cafebabefacedbaddecaf888";
             var tagInput = window.Get<TextBox>("HexTagBox");
             tagInput.Text = "76fc6ece0f4e1768cddf8853bb2d551b";
-            var keyInput = window.Get<TextBox>("HexDecryptionPasswortBox");
+            var keyInput = window.Get<TextBox>("HexDecryptionPasswordBox");
             keyInput.Text = "feffe9928665731c6d6a8f9467308308feffe9928665731c6d6a8f9467308308";
 
             //entschlüsseln lassen und dann auswerten, ob erwartetes Ergebnis erhalten

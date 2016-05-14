@@ -20,15 +20,15 @@ namespace EP_HSRlearnITTests
         {
             //aufstarten
             var app = Application.Launch(SutPath);
-            var window = app.GetWindow("MainWindow", InitializeOption.NoCache);
+            var window = app.GetWindow("HSRlearnIT", InitializeOption.NoCache);
             window.WaitWhileBusy();
 
             //zu EncryptionPage navigieren
-            var imgEncrDecr = window.Get<Image>("VerundEntschluesselung");
+            var imgEncrDecr = window.Get<Image>("VerandEntschluesselungsAnwendung");
             imgEncrDecr.Click();
 
-            var buttonEncr = window.Get<Button>("Encryption");
-            buttonEncr.Click();
+            //var buttonEncr = window.Get<Button>("Encryption");
+            //buttonEncr.Click();
 
             //input eingeben, es handelt sich um die Hex Werte des Test Cases 16 aus der offiziellen GCM Spezifikation.
             var ivInput = window.Get<TextBox>("HexIvBox");
