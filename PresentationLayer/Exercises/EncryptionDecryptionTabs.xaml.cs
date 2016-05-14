@@ -17,18 +17,29 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         public EncryptionDecryptionTabs(TabItem tabItem)
         {
             InitializeComponent();
-            
+
+            Page page = null;
+
             if (tabItem.Name == "EncryptionItem")
             {
                 EncryptionItem.IsSelected = true;
                 DecryptionItem.IsSelected = false;
-                EncryptionFrame.Source = new Uri("EncryptionPage.xaml", UriKind.RelativeOrAbsolute);
+                page = new EncryptionPage();
+                EncryptionFrame.Navigate(page);
             }
             else if (tabItem.Name == "DecryptionItem")
             {
                 EncryptionItem.IsSelected = false;
                 DecryptionItem.IsSelected = true;
-                DecryptionFrame.Source = new Uri("DecryptionPage.xaml", UriKind.RelativeOrAbsolute);
+                page = new DecryptionPage();
+                DecryptionFrame.Navigate(page);
+            }
+
+            var visibility = Progress.GetProgress("EncryptionDecryptionTabs_visibility");
+
+            if (visibility != null)
+            {
+                SetVisibility(page?.Content as Grid, (Visibility)visibility);
             }
         }
 
@@ -98,18 +109,59 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             }
         }
 
-        public void OnExpertmodusButtonClick(object sender, RoutedEventArgs e)
+        private void OnExpertmodusButtonClick(object sender, RoutedEventArgs e)
         {
             Button expertmodus = e.Source as Button;
+            TabItem selected = TabControl.SelectedItem as TabItem;
+            Frame frame = selected?.Content as Frame;
+            Page page = frame?.Content as Page;
+            Grid grid = page?.Content as Grid;
+
             if (expertmodus != null)
             {
+                Visibility visibility;
+
                 if (expertmodus.Content.ToString().Contains("aus"))
                 {
-                    expertmodus.Content = "Expertenmodus: ein";
+                    visibility = Visibility.Visible;
                 }
                 else
                 {
-                    expertmodus.Content = "Expertenmodus: aus";
+                    visibility = Visibility.Collapsed;
+                }
+
+                SetVisibility(grid, visibility);
+                Progress.SaveProgress("EncryptionDecryptionTabs_visibility", visibility);
+            }
+        }
+
+        private void SetVisibility(Grid grid, Visibility visibility)
+        {
+            if (grid != null)
+            {
+                var children = DependencyObjectExtension.GetAllChildren<FrameworkElement>(grid);
+
+                foreach (var child in children)
+                {
+                    if (child.Name.Contains("Hex"))
+                    {
+                        child.Visibility = visibility;
+                    }
+
+                    GridLength gridLength;
+                    if (visibility == Visibility.Visible)
+                    {
+                        gridLength = new GridLength(1, GridUnitType.Star);
+                        ExpertmodusButton.Content = "Expertenmodus: ein";
+                    }
+                    else
+                    {
+                        gridLength = new GridLength(0);
+                        ExpertmodusButton.Content = "Expertenmodus: aus";
+                    }
+
+                    grid.ColumnDefinitions[1].Width = gridLength;
+
                 }
             }
         }

@@ -8,7 +8,7 @@
       Title="EncryptionDecryptionTabs">
 
     <Grid>
-        <TabControl BorderThickness="0" SelectionChanged="TabControl_SelectionChanged">
+        <TabControl Name="TabControl" BorderThickness="0" SelectionChanged="TabControl_SelectionChanged">
             <TabControl.Resources>
                 <Style TargetType="TabItem">
                     <Setter Property="Template">
@@ -42,6 +42,6 @@
                 <Frame Name="DecryptionFrame" />
             </TabItem>
         </TabControl>
-        <Button Content="Expertenmodus: aus" Click="OnExpertmodusButtonClick" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ResourceKey=ExpertModusButtonStyle}" />
+        <Button Name="ExpertmodusButton" Content="Expertenmodus: ein" Click="OnExpertmodusButtonClick" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ResourceKey=ExpertModusButtonStyle}" />
     </Grid>
 </Page>
