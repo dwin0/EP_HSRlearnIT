@@ -67,7 +67,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
 
             ReplaceContent(_step);
 
-            var progressActivateGame = Progress.GetProgress("StepByStepPage_Game");
+            var progressActivateGame = Progress.GetProgress("StepByStepPage_GameButton");
             if (progressActivateGame != null)
             {
                 ActivateGameButton();

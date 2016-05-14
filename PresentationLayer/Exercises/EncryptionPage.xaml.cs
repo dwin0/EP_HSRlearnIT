@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -62,13 +63,21 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                 InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
                 OverwritePrompt = true,
                 AddExtension = true,
+                DefaultExt = "txt",
                 ValidateNames = true,
                 Title = "Exportieren der Verschlüsselungsparamter"
             };
 
             if (saveFileDialog.ShowDialog() == true)
             {
+
                 string fullFilePath = saveFileDialog.FileName;
+                var extension = Path.GetExtension(fullFilePath);
+                if (extension != null && extension.ToLower() != ".txt")
+                {
+                    fullFilePath += ".txt";
+                }
+         
                 if (!FileManager.IsExist(fullFilePath))
                 {
                     FileManager.SaveFile(fullFilePath);
@@ -77,7 +86,8 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                 StringBuilder line = new StringBuilder();
                 foreach (TextBox element in DependencyObjectExtension.GetAllChildren<TextBox>(this))
                 {
-                    if (element.Name.Contains("Hex") && !(element.Name.Contains("Password")))
+                    //Filter for fields to export
+                    if (element.Name.Contains("Hex"))
                     {
                         //cut Hex and Box, for Example: HexIvBox -> Iv
                         line.AppendLine(element.Name.Substring(3, element.Name.Length-6) + "=0x" + element.Text);
