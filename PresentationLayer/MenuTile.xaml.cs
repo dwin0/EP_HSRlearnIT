@@ -12,7 +12,7 @@ namespace EP_HSRlearnIT
         private readonly string _imageSource;
 
         /// <summary>
-        /// Create a Tile with a Text and a Image-Source
+        /// Create a Tile with a Text and an Image-Source
         /// </summary>
         /// <param name="text">Tile-title</param>
         /// <param name="image">Image within the tile</param>

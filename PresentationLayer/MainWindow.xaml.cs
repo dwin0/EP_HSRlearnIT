@@ -28,6 +28,8 @@ namespace EP_HSRlearnIT.PresentationLayer
         }
         #endregion
 
+        #region Private Methods
+
         private void OnMenuButton_Click(object sender, RoutedEventArgs e)
         {
             if (MenuStackPanel.IsVisible)
@@ -98,12 +100,13 @@ namespace EP_HSRlearnIT.PresentationLayer
         {
             var point = Mouse.GetPosition(MainGrid);
 
-            //Check if click was outside the menu
+            //Check if the menu is open and the click was outside the menu
             if (MenuStackPanel.IsVisible && point.X > MenuStackPanel.ActualWidth + MenuStackPanel.Margin.Left + MenuStackPanel.Margin.Right)
             {
                 CloseMenu();
                 e.Handled = true;
             }
         }
+        #endregion
     }
 }
