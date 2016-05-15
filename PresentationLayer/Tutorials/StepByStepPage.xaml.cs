@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
@@ -66,19 +67,52 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             {
                 ActivateButtons();
             }
+            SetFocus(_step);
         }
 
         #endregion
 
         #region Private Methods
+        private void SetFocus(int step)
+        {
+            if (step < StepMax)
+            {
+                NextStepButton.Focus();
+            }
+            else
+            {
+                PreviousStepButton.Focus();
+            }
+        }
+
+        private void StepByStepPage_OnKeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.Left:
+                    OnPreviousStepButton_Click(sender, e);
+                    break;
+                case Key.Right:
+                    OnNextStepButton_Click(sender, e);
+                    break;
+                default:
+                    return;
+            }
+        }
+
+        
         private void OnJumpToStart_Click(object sender, RoutedEventArgs e)
         {
             foreach (var stepPath in _stepPaths)
             {
                 ClearPath(stepPath.Value);
             }
-            
-            _step = StepMin;
+            JumpToStep(StepMin);
+        }
+
+        private void JumpToStep(int step)
+        {
+            _step = step;
             Progress.SaveProgress("StepByStepPage_CurrentStep", _step);
             ReplaceContent(_step);
         }
@@ -112,8 +146,21 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             Progress.SaveProgress("StepByStepPage_ButtonState", true);
         }
 
+
         private void ReplaceContent(int stepNumber)
         {
+            if (!(StepMin <= stepNumber && stepNumber <= StepMax))
+            {
+                if (stepNumber < StepMin)
+                {
+                    stepNumber = StepMin;
+                }
+                else
+                {
+                    stepNumber = StepMax;
+                }
+            }
+
             switch (stepNumber)
             {
                 case StepMin:

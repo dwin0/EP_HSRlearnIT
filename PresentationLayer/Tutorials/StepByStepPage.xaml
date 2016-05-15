@@ -5,9 +5,9 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="600"
-      Title="StepPage">
+      Title="StepPage" KeyDown="StepByStepPage_OnKeyDown">
 
-    <DockPanel Background="White" VerticalAlignment="Stretch">
+    <DockPanel Name="MainPanel" Background="White" VerticalAlignment="Stretch">
         <TextBlock DockPanel.Dock="Top"  Name ="StepTitle" Text="Schritt 1" FontSize="20" FontFamily="Bold" Margin="0, 10, 0, 10" />
         <Grid DockPanel.Dock="Bottom" Margin="0, 0, 0, 10">
                 <Grid.ColumnDefinitions>
@@ -19,22 +19,21 @@
                     Content="Zur Einleitung" Name="JumpToStart" Style="{StaticResource ResourceKey=ProgramButtonStyle}"
                     Height="25" Width="100" Margin="5, 10, 5, 0"/>
             <Button Grid.Column="0" Click="OnPreviousStepButton_Click" HorizontalAlignment="Right" VerticalAlignment="Top"
-                    Content="Vorheriger Schritt" Name="PreviousStepButton" Style="{StaticResource ResourceKey=ProgramButtonStyle}"
-                    Height="25" Width="100" Margin="5, 10, 5, 0"/>
+                    Content="&lt; Vorheriger Schritt" Name="PreviousStepButton" Style="{StaticResource ResourceKey=ProgramButtonStyle}"
+                    Height="25" Width="100" Margin="5, 10, 5, 0" />
             <Button Grid.Column="1" Click="OnNextStepButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top"
-                    Content="Nächster Schritt" Name="NextStepButton" Style="{StaticResource ResourceKey=ProgramButtonStyle}"
+                    Content="Nächster Schritt >" Name="NextStepButton" Style="{StaticResource ResourceKey=ProgramButtonStyle}"
                     Height="25" Width="100" Margin="5, 10, 5, 0"/>
-            <Button Grid.Column="1" Click="OnStartDragDropButton_Click" HorizontalAlignment="Right" VerticalAlignment="Top"
-                    Name="StartDragDrop" Style="{StaticResource ResourceKey=ProgramButtonStyle}" 
-                    Height="50" Width="100" Margin="5, 10, 5, 0" Visibility="Hidden">
-                <TextBlock TextWrapping="Wrap" TextAlignment="Center"><![CDATA[Drag & Drop - Spiel starten]]></TextBlock>
-            </Button>
             <Button Grid.Column="1" Click="OnStartEncryptionDecryptionPages_Click" HorizontalAlignment="Right" VerticalAlignment="Top" 
                     Name="StartEncryptionDecryptionPages" Style="{StaticResource ResourceKey=ProgramButtonStyle}"
                     Height="50" Width="150" Margin="5, 10, 115, 0" Visibility="Hidden">
                 <TextBlock TextWrapping="Wrap" TextAlignment="Center"><![CDATA[Ver- & Entschlüsslung - Anwendung starten]]></TextBlock>
             </Button>
-            
+            <Button Grid.Column="1" Click="OnStartDragDropButton_Click" HorizontalAlignment="Right" VerticalAlignment="Top"
+                    Name="StartDragDrop" Style="{StaticResource ResourceKey=ProgramButtonStyle}" 
+                    Height="50" Width="100" Margin="5, 10, 5, 0" Visibility="Hidden">
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center"><![CDATA[Drag & Drop - Spiel starten]]></TextBlock>
+            </Button>
 
         </Grid>
 
