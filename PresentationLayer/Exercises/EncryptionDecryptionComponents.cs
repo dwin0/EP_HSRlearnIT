@@ -191,7 +191,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                     }
                 }
                 FileManager.UpdateContent(fullFilePath, line.ToString());
-                MessageBox.Show("Der Export war erfolgreich!", "Export", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Der Export war erfolgreich.", "Export", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 

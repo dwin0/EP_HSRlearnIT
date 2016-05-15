@@ -27,7 +27,7 @@
             <Button Grid.Column="1" Click="OnStartEncryptionDecryptionPages_Click" HorizontalAlignment="Right" VerticalAlignment="Top" 
                     Name="StartEncryptionDecryptionPages" Style="{StaticResource ResourceKey=ProgramButtonStyle}"
                     Height="50" Width="150" Margin="5, 10, 115, 0" Visibility="Hidden">
-                <TextBlock TextWrapping="Wrap" TextAlignment="Center"><![CDATA[Ver- & Entschlüsslung - Anwendung starten]]></TextBlock>
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center"><![CDATA[Ver- & Entschlüsslungs - Anwendung starten]]></TextBlock>
             </Button>
             <Button Grid.Column="1" Click="OnStartDragDropButton_Click" HorizontalAlignment="Right" VerticalAlignment="Top"
                     Name="StartDragDrop" Style="{StaticResource ResourceKey=ProgramButtonStyle}" 
