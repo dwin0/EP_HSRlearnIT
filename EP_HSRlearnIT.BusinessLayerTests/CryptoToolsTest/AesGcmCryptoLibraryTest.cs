@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Security.Cryptography;
-using System.Text;
 using EP_HSRlearnIT.BusinessLayer.CryptoTools;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

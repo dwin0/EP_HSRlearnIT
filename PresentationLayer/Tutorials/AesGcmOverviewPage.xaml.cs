@@ -206,7 +206,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
 
         private void ShowExplanation(string text)
         {
-            OverviewTextBlock.Text = text + "\n<<Klick auf Feld für weitere Infos>>";
+            OverviewTextBlock.Text = text + "\n<<Klick auf das Feld für weitere Infos>>";
             if (!OverviewTextBlock.ClipToBounds)
             {
                 TextScrollViewer.VerticalScrollBarVisibility = (ScrollBarVisibility)Visibility.Hidden;

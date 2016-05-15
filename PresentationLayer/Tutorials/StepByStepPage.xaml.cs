@@ -6,6 +6,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using EP_HSRlearnIT.BusinessLayer.UniversalTools;
+using EP_HSRlearnIT.PresentationLayer.Exercises;
 using EP_HSRlearnIT.PresentationLayer.Games;
 
 namespace EP_HSRlearnIT.PresentationLayer.Tutorials
@@ -34,7 +35,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
                 _title = stepNumber;
                 Progress.SaveProgress("StepByStepPage_CurrentStep", stepNumber);
             }
-
             NavigationService?.Navigate(new StepByStepPage());
         }
 
@@ -59,36 +59,45 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
                 _step = Convert.ToInt32(progressCurrentStep);
             }
 
-            var progressTitleStep = Progress.GetProgress("StepByStepPage_Title");
-            if (progressTitleStep != null)
-            {
-                _title = Convert.ToInt32(progressTitleStep);
-            }
-
             ReplaceContent(_step);
 
-            var progressActivateGame = Progress.GetProgress("StepByStepPage_GameButton");
-            if (progressActivateGame != null)
+            var progressActivateButtons = (bool?)Progress.GetProgress("StepByStepPage_ButtonState");
+            if (progressActivateButtons != null && progressActivateButtons.Value)
             {
-                ActivateGameButton();
+                ActivateButtons();
             }
         }
 
         #endregion
 
         #region Private Methods
+        private void OnJumpToStart_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (var stepPath in _stepPaths)
+            {
+                ClearPath(stepPath.Value);
+            }
+            
+            _step = StepMin;
+            Progress.SaveProgress("StepByStepPage_CurrentStep", _step);
+            ReplaceContent(_step);
+        }
+
         private void OnPreviousStepButton_Click(object sender, RoutedEventArgs e)
         {
             ReplaceContent(--_step);
             Progress.SaveProgress("StepByStepPage_CurrentStep", _step);
-            Progress.SaveProgress("StepByStepPage_Title", _title);
         }
 
         private void OnNextStepButton_Click(object sender, RoutedEventArgs e)
         {
             ReplaceContent(++_step);
             Progress.SaveProgress("StepByStepPage_CurrentStep", _step);
-            Progress.SaveProgress("StepByStepPage_Title", _title);
+        }
+
+        private void OnStartEncryptionDecryptionPages_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.Navigate(new EncryptionDecryptionTabs());
         }
 
         private void OnStartDragDropButton_Click(object sender, RoutedEventArgs e)
@@ -96,10 +105,11 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             NavigationService?.Navigate(new DragDropPage());
         }
 
-        private void ActivateGameButton()
+        private void ActivateButtons()
         {
             StartDragDrop.Visibility = Visibility.Visible;
-            Progress.SaveProgress("StepByStepPage_GameButton", StartDragDrop.IsVisible);
+            StartEncryptionDecryptionPages.Visibility = Visibility.Visible;
+            Progress.SaveProgress("StepByStepPage_ButtonState", true);
         }
 
         private void ReplaceContent(int stepNumber)
@@ -113,7 +123,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
                 case StepMax:
                     PreviousStepButton.IsEnabled = true;
                     NextStepButton.IsEnabled = false;
-                    ActivateGameButton();
+                    ActivateButtons();
                     break;
                 default:
                     PreviousStepButton.IsEnabled = true;
