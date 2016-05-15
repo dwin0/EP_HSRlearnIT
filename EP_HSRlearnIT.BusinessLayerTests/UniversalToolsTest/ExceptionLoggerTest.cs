@@ -21,10 +21,11 @@ namespace EP_HSRlearnIT.BusinessLayer.Testing.UniversalToolsTest
             }
             catch (NullReferenceException nre)
             {
-                ExceptionLogger.WriteToLogfile(nre.Message, "testMethod");
+                ExceptionLogger.WriteToLogfile(nre.Message, "This Exception was fired by the unit-test 'TestToWriteIntoLogFileCatchedException'");
                 //hier könnte der Test aufgrund eines Sekundenwechsels fehlschlagen!
                 var date = DateTime.Now.ToString(CultureInfo.CurrentCulture);
-                expectedStr = "Exception: " + date + ": " + nre.Message + " testMethod";
+                expectedStr = "Exception: " + date + ": " + nre.Message +
+                    " This Exception was fired by the unit-test 'TestToWriteIntoLogFileCatchedException'";
             }
 
             using (StreamReader reader = new StreamReader(@"c:\logs\ExceptionLog.log"))
@@ -35,7 +36,7 @@ namespace EP_HSRlearnIT.BusinessLayer.Testing.UniversalToolsTest
                 {
                     strToCompare = reader.ReadLine();
                 }
-                Assert.AreEqual(strToCompare, expectedStr);
+                Assert.AreEqual(expectedStr, strToCompare);
             }
         }
     }
