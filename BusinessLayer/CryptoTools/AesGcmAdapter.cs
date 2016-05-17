@@ -52,7 +52,8 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
                 using (CryptoStream cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Write))
                 {
                     //Encrypt the secret message.
-                    cs.Write(bytePlaintext, 0, bytePlaintext.Length);
+                    var notNullBytePlaintext = bytePlaintext ?? new byte[] {};
+                    cs.Write(notNullBytePlaintext, 0, notNullBytePlaintext.Length);
 
                     //Finish the encryption and get the output authentication tag and ciphertext.
                     cs.FlushFinalBlock();
@@ -99,7 +100,8 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
                 MemoryStream ms = new MemoryStream();
                 using (CryptoStream cs = new CryptoStream(ms, aes.CreateDecryptor(), CryptoStreamMode.Write))
                 {
-                    cs.Write(byteCiphertext, 0, byteCiphertext.Length);
+                    var notNullByteCiphertext = byteCiphertext ?? new byte[] { };
+                    cs.Write(notNullByteCiphertext, 0, notNullByteCiphertext.Length);
 
                     //If the authentication tag does not match, we’ll fail here with a CryptographicException, and the ciphertext will not be decrypted.
                     cs.FlushFinalBlock();
@@ -155,13 +157,10 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
             {
                 return null;
             }
-            else
-            {
-                return Enumerable.Range(0, hex.Length)
-                             .Where(x => x % 2 == 0)
-                             .Select(x => Convert.ToByte(hex.Substring(x, 2), 16))
-                             .ToArray();
-            }
+            return Enumerable.Range(0, hex.Length)
+                .Where(x => x % 2 == 0)
+                .Select(x => Convert.ToByte(hex.Substring(x, 2), 16))
+                .ToArray();
         }
 
         /// <summary>
