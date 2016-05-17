@@ -212,11 +212,13 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
 
         }
 
+        #endregion
+
+        #region Private Methods
         private void ImportData(object sender, EventArgs e)
         {
             var openFileDialog = sender as OpenFileDialog;
-//            if (openFileDialog.ShowDialog() == true)
-//            {
+
             if (openFileDialog != null)
             {
                 string filePath = openFileDialog.FileName;
@@ -229,15 +231,11 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                     string parameter = line.Substring(0, index - 1);
                     string value = line.Substring(index + 1);
                     FillingField(parameter, value);
-//                }
                 }
             }
             MessageBox.Show("Der Import wurde erfolgreich abgeschlossen.", "Import einer Parameterdatei", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
-        #endregion
-
-        #region Private Methods
         private void CheckIfWarningIsAlreadySet(TextBlock hexWarningBlock)
         {
             //check if the text was set to " Ungültige Eingabe!" in an earlier call of this method and reverse it 

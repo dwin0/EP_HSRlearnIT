@@ -72,6 +72,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
 
         #endregion
 
+
         #region Private Methods
         private void SetFocus(int step)
         {
@@ -87,6 +88,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
 
         private void StepByStepPage_OnKeyDown(object sender, KeyEventArgs e)
         {
+            
             switch (e.Key)
             {
                 case Key.Left:
@@ -146,20 +148,25 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             Progress.SaveProgress("StepByStepPage_ButtonState", true);
         }
 
-
-        private void ReplaceContent(int stepNumber)
+        private int CheckRange(int stepNumber)
         {
             if (!(StepMin <= stepNumber && stepNumber <= StepMax))
             {
                 if (stepNumber < StepMin)
                 {
-                    stepNumber = StepMin;
+                    _step = StepMin;
                 }
                 else
                 {
-                    stepNumber = StepMax;
+                    _step = StepMax;
                 }
             }
+            return _step;
+        }
+
+        private void ReplaceContent(int stepNumber)
+        {
+            stepNumber = CheckRange(stepNumber);
 
             switch (stepNumber)
             {
@@ -185,6 +192,12 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             }
             StepTitle.Text = WriteTitle(stepNumber);
 
+            DrawImage(stepNumber);
+
+        }
+
+        private void DrawImage(int stepNumber)
+        {
             if (_stepPaths.ContainsKey(stepNumber))
             {
                 StepViewBox.Visibility = Visibility.Visible;
@@ -302,6 +315,11 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
                 return Application.Current.FindResource(titleName) as string;
             }
             return null;
+        }
+
+        private void Button_OnLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            SetFocus(_step);
         }
 
         #endregion
