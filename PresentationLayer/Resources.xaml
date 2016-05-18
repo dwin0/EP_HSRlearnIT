@@ -25,7 +25,7 @@
     <SolidColorBrush x:Key="TileBackgroundBrush" Color="#B2DFDB"/>
     <SolidColorBrush x:Key="TileBorderBrush" Color="#000000"/>
     
-    <SolidColorBrush x:Key="MenuTitleBackgroundBrush" Color="#00796B"></SolidColorBrush>
+    <SolidColorBrush x:Key="MenuBackgroundBrush" Color="#00796B"></SolidColorBrush>
 
     <Style x:Key="TileBorderStyle" TargetType="Border">
         <Setter Property="Margin" Value="20"/>
@@ -62,7 +62,7 @@
 
     <Style x:Key="MenuStyle" TargetType="{x:Type TextBlock}">
         <Setter Property="FontSize" Value="20"/>
-        <Setter Property="Background" Value="{StaticResource MenuTitleBackgroundBrush}"/>
+        <Setter Property="Background" Value="{StaticResource MenuBackgroundBrush}"/>
         <Setter Property="Padding" Value="10"/>
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="FontWeight" Value="Bold"/>

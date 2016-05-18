@@ -220,18 +220,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             }
         }
 
-        public void OnPageSizeChanged(object sender, RoutedEventArgs e)
-        {
-            if (ActualWidth < 600 || ActualHeight < 450)
-            {
-                OverviewTextBlock.FontSize = 12;
-            }
-            else
-            {
-                OverviewTextBlock.FontSize = 16;
-            }
-        }
-
         #endregion Private Methods
     }
 }

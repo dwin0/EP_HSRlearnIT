@@ -27,9 +27,6 @@ namespace EP_HSRlearnITTests
             var imgEncrDecr = window.Get<Image>("VerandEntschluesselungsAnwendung");
             imgEncrDecr.Click();
 
-            //var buttonEncr = window.Get<Button>("Encryption");
-            //buttonEncr.Click();
-
             //input eingeben, es handelt sich um die Hex Werte des Test Cases 16 aus der offiziellen GCM Spezifikation.
             var ivInput = window.Get<TextBox>("HexIvBox");
             ivInput.Text = "cafebabefacedbaddecaf888";

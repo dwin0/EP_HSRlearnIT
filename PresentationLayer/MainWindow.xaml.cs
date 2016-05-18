@@ -1,10 +1,10 @@
-﻿using EP_HSRlearnIT.BusinessLayer.UniversalTools;
-using EP_HSRlearnIT.PresentationLayer.Tutorials;
+﻿using EP_HSRlearnIT.PresentationLayer.Tutorials;
 using EP_HSRlearnIT.PresentationLayer.Games;
 using System.Windows;
 using System.Windows.Input;
 using System;
 using System.Windows.Media.Animation;
+using EP_HSRlearnIT.BusinessLayer.UniversalTools;
 using EP_HSRlearnIT.PresentationLayer.Exercises;
 
 namespace EP_HSRlearnIT.PresentationLayer
@@ -14,7 +14,6 @@ namespace EP_HSRlearnIT.PresentationLayer
     /// </summary>
     public partial class MainWindow
     {
-
         #region Constructors
 
         /// <summary>
@@ -45,6 +44,11 @@ namespace EP_HSRlearnIT.PresentationLayer
         private void OnMenuItemClick(object sender, MouseButtonEventArgs e)
         {
             var item = ((FrameworkElement)e.OriginalSource).DataContext as string;
+            if (item == null)
+            {
+                ExceptionLogger.WriteToLogfile("No MenuItem-Text was found", "MainWindow: OnMenuItemClick");
+                return;
+            }
             switch (item)
             {
                 case "Startseite":
@@ -74,19 +78,8 @@ namespace EP_HSRlearnIT.PresentationLayer
         private void OpenMenu()
         {
             MenuStackPanel.Visibility = Visibility.Visible;
-            MenuOpenEffect("StoryboardShowLeftMenu", MenuStackPanel);
-        }
-
-        private void MenuOpenEffect(string storyboard, FrameworkElement pnl)
-        {
-            Storyboard sb = Application.Current.FindResource(storyboard) as Storyboard;
-            sb?.Begin(pnl);
-        }
-
-        //This method is only for manuel testing from FileManager but it will removed after implement export function
-        private void OnSaveButton_Click(object sender, RoutedEventArgs e)
-        {
-            FileManager.UpdateContent(FileManager.SaveFile(@"C:\temp\HSRlearnIT", "AES-GCM.txt"), "The program is started!");
+            Storyboard sb = Application.Current.FindResource("StoryboardShowLeftMenu") as Storyboard;
+            sb?.Begin(MenuStackPanel);
         }
 
         //This method is used only for a system test in order to control the correctness

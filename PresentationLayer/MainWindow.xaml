@@ -7,7 +7,7 @@
         Icon="images/icon.png"
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"
-        Title="HSRlearnIT" Height="620" Width="1000" MinWidth="400" MinHeight="250">
+        Title="HSRlearnIT" Height="620" Width="1000" MinWidth="1000" MinHeight="620">
     <Grid Name="MainGrid" Margin="80, 10, 30, 10" Background="White" PreviewMouseDown="CollapseMenu">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*" MinWidth="200" MaxWidth="300"/>
@@ -15,11 +15,12 @@
         </Grid.ColumnDefinitions>
         <StackPanel Name="MenuStackPanel" Grid.Column="0" HorizontalAlignment="Stretch" Visibility="Hidden" Background="White"
                     Panel.ZIndex="5">
-            <Border BorderThickness="0, 0, 3, 0" BorderBrush="{StaticResource MenuTitleBackgroundBrush}">
+            <Border BorderThickness="0, 0, 3, 0" BorderBrush="{StaticResource MenuBackgroundBrush}">
                 <StackPanel>
                     <TextBlock Text="Menu" Style="{StaticResource ResourceKey=MenuStyle}"/>
-                    <ListView Name="Menu" ItemsSource="{StaticResource ResourceKey=MenuStrings}" ItemContainerStyle="{StaticResource ResourceKey=MenuItemStyle}"
-                                  PreviewMouseDown="OnMenuItemClick" BorderThickness="0" BorderBrush="{StaticResource MenuBackgroundColor}"/>
+                    <ListView Name="Menu" PreviewMouseDown="OnMenuItemClick" ItemsSource="{StaticResource ResourceKey=MenuStrings}"
+                              ItemContainerStyle="{StaticResource ResourceKey=MenuItemStyle}"
+                              BorderThickness="0" BorderBrush="{StaticResource MenuBackgroundColor}" />
                     <Image Source="Images/encryptionImage.png" Margin="0, 0, 0, 1000"/>
                 </StackPanel>
             </Border>
@@ -28,9 +29,8 @@
                 Panel.ZIndex="2" Margin="-60, 0, 0, 0" Width="50" Background="Transparent" BorderThickness="0" Focusable="False">
             <Image Source="Images/hambugerButtonIcon.png"/>
         </Button>
-        <Button Grid.Column="1" Name="Save" Content="Speichern" Click="OnSaveButton_Click" VerticalAlignment="Top" HorizontalAlignment="Right" 
-                Style="{StaticResource ResourceKey=ProgramButtonStyle}" MouseRightButtonDown="OnExceptionClick" Panel.ZIndex="10"
-                Visibility="Hidden"/>
+        <Button Grid.Column="1" Name="Save" Content="Speichern" MouseRightButtonDown="OnExceptionClick" VerticalAlignment="Top"
+                HorizontalAlignment="Right" Style="{StaticResource ResourceKey=ProgramButtonStyle}" Panel.ZIndex="10" Visibility="Hidden"/>
         <Frame Grid.ColumnSpan="2" Grid.Column="0" x:Name="MainFrame" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                Panel.ZIndex="1" NavigationUIVisibility="Hidden" Focusable="False"/>
     </Grid>
