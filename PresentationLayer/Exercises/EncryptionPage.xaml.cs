@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using Castle.Components.DictionaryAdapter.Xml;
 using EP_HSRlearnIT.BusinessLayer.UniversalTools;
 
 namespace EP_HSRlearnIT.PresentationLayer.Exercises
@@ -55,7 +54,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                 }
                 
                 MessageBox.Show(
-                    "In dem Feld " + triggeringField +  " wurde ein ungerader Hex-Wert eingegeben. Bitte überprüfen Sie Ihre Eingabe und passen Sie sie an.",
+                    "In dem Feld " + triggeringField +  " wurde ein ungerader Hex-Wert eingegeben. Bitte überprüfen Sie Ihre Eingabe und passen Sie diese an.",
                     "Achtung", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
         }

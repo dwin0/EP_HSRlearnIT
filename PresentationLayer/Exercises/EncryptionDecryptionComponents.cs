@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -207,35 +206,26 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                 Title = "Importieren der Entschlüsselungsparameter"
             };
 
-            openFileDialog.FileOk += ImportData;
-            openFileDialog.ShowDialog();
+            if (openFileDialog.ShowDialog() == true && openFileDialog.SafeFileName != "")
+            {
+                    string filePath = openFileDialog.FileName;
+                    IEnumerable<string> allLines = FileManager.ReadAllLines(filePath);
 
+                    foreach (string line in allLines)
+                    {
+                        int index = line.IndexOf(Convert.ToChar('='));
+                        //the first '=' is only a delimeter symbole and not part of parameter or value
+                        string parameter = line.Substring(0, index - 1);
+                        string value = line.Substring(index + 1);
+                        FillingField(parameter, value);
+                    }
+                    MessageBox.Show("Der Import wurde erfolgreich abgeschlossen.", "Import einer Parameterdatei", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
 
         #endregion
 
-        #region Private Methods
-        private void ImportData(object sender, EventArgs e)
-        {
-            var openFileDialog = sender as OpenFileDialog;
-
-            if (openFileDialog != null)
-            {
-                string filePath = openFileDialog.FileName;
-                IEnumerable<string> allLines = FileManager.ReadAllLines(filePath);
-
-                foreach (string line in allLines)
-                {
-                    int index = line.IndexOf(Convert.ToChar('='));
-                    //the first '=' is only a delimeter symbole and not part of parameter or value
-                    string parameter = line.Substring(0, index - 1);
-                    string value = line.Substring(index + 1);
-                    FillingField(parameter, value);
-                }
-            }
-            MessageBox.Show("Der Import wurde erfolgreich abgeschlossen.", "Import einer Parameterdatei", MessageBoxButton.OK, MessageBoxImage.Information);
-        }
-
+        #region Private Method
         private void CheckIfWarningIsAlreadySet(TextBlock hexWarningBlock)
         {
             //check if the text was set to " Ungültige Eingabe!" in an earlier call of this method and reverse it 
