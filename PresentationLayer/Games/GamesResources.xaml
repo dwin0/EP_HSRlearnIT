@@ -4,8 +4,8 @@
 
     <system:String x:Key="GameInstruction" >
         Du hast nun die Möglichkeit, Dein Wissen in Form eines Drag and Drop Spiels zu testen. Wähle ein Rechteck Element aus der rechten Seite  aus und ziehe 
-       es an die korrekte Stelle im Spielfeld. Du kannst jederzeit ein Rechteck Elemement mit einem anderen Rechteck überdecken und innerhalb des Spielfeldes verschieben 
-       sowie das Element in den Papierkorb verschieben.Nachfolgend noch weitere Erklärungen zum Spiel:
+       es an die korrekte Stelle im Spielfeld. Du kannst jederzeit ein Rechteck Element mit einem anderen Rechteck überdecken und innerhalb des Spielfeldes verschieben 
+       sowie das Element in den Papierkorb verschieben. Nachfolgend noch weitere Erklärungen zum Spiel:
     </system:String>
     <system:String x:Key="BeschreibungButtonAuswerten" >
         Mit diesem Button kannst Du Dir anzeigen lassen, welche Elemente korrekt bzw. falsch verschoben wurden.
@@ -22,7 +22,6 @@
     <system:String x:Key="BeschreibungWrongAnswer" >
         Rote Umrandung bedeuted bei der Auswertung, dass die Lösung falsch ist.
     </system:String>
-
 
     <!-- ReSharper warnings for Canvas.Left and Canvas.Top can be ignored, this parameters are used, even if ReSharp does not recognize it! -->
     <Rectangle x:Key="DroppablePlace1" Name="Rect1Iv" Fill="Transparent" Height="40" Width="90" Canvas.Left="70" Canvas.Top="78" />
@@ -41,10 +40,15 @@
     <Rectangle x:Key="DroppablePlace14" Name="Rect15Counter" Fill="Transparent" Height="40" Width="90" Canvas.Left="295" Canvas.Top="135" />
     <Rectangle x:Key="DroppablePlace15" Name="Rect16Tag" Fill="Transparent" Height="40" Width="90" Canvas.Left="540" Canvas.Top="605"/>
     <Rectangle x:Key="DroppablePlace16" Name="Rect17Counter" Fill="Transparent" Height="40" Width="90" Canvas.Left="70" Canvas.Top="134"/>
-    <Rectangle x:Key="DroppablePlace17" Name="Recycle" Height="95" Width="80" Canvas.Left ="-40" Canvas.Top="580">
+    <Rectangle x:Key="DroppablePlace17" Name="Recycle" Height="95" Width="80" Canvas.Left ="-40" Canvas.Top="580" Visibility="Visible">
         <Rectangle.Fill>
             <ImageBrush ImageSource ="/Images/recycling.png"/>
         </Rectangle.Fill>
+    </Rectangle>
+    <Rectangle x:Key="DroppablePlace18" Name="RecycleFull" Height="95" Width="80" Canvas.Left ="-40" Canvas.Top="580" Visibility="Hidden">
+    <Rectangle.Fill>
+        <ImageBrush ImageSource ="/Images/recyclebin.png"/>
+    </Rectangle.Fill>
     </Rectangle>
 
 </ResourceDictionary>

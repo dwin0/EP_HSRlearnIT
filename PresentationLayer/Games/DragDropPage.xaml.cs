@@ -16,18 +16,23 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
     {
         #region Private Attributes
         private const string SettingsName = "DragDropPage_Settings";
+        private const string RecycleBinStatus = "dragDropPage_RecycleBinFull";
+        private const int ImageRecyclingBinEmpty = 17;
         private static readonly Dictionary<int, List<string>> CorrectAnswers = new Dictionary<int, List<string>>();
         private readonly int _originalNumberOfChildren;
 
         private static int NumOfDroppableRectanglePlaces = 17;
         private List<SavedDataForProgress> _addedSavedData;
-        private List<Rectangle> _dropLocationsRectangles = new List<Rectangle>(); 
+        private readonly List<Rectangle> _dropLocationsRectangles = new List<Rectangle>(); 
         
         private SavedDataForProgress _currentlyAddedData;
         private Rectangle _currentlyMovedRectangle;
+        private Rectangle _recycleBinRectangle;
+        private ImageBrush _brushRecycleBinEmpty, _brushRecycleBinFull;
         private bool _rectangleHasBeenMovedBefore;
         private bool _isMoving;
         private Point _startPoint = new Point(0, 0);
+        private bool _checkingFirstTime = true;
 
         #endregion
 
@@ -50,9 +55,13 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                     index++;
                 }
             }
+            _brushRecycleBinEmpty = new ImageBrush(new BitmapImage(new Uri(@"pack://application:,,,/Images/recycling.png", UriKind.RelativeOrAbsolute)));
+            _brushRecycleBinFull = new ImageBrush(new BitmapImage(new Uri(@"pack://application:,,,/Images/recyclebin.png", UriKind.RelativeOrAbsolute)));
 
             LoadSettings();
             ShowTutorial();
+
+            Focus();
         }
 
         /// <summary>
@@ -60,22 +69,31 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         /// <param name="canvas">Is the Parent where the Rectangles have to be placed</param>
         private void LoadDroppablePlaces(Canvas canvas)
         {
-            for (int i = 1; i <= NumOfDroppableRectanglePlaces; i++)
+            try
             {
-                Rectangle droppablePlaces = Application.Current.FindResource("DroppablePlace" + i) as Rectangle;
-                if (droppablePlaces == null) continue;
-
-                Rectangle dropPlaceCopy = Clone(droppablePlaces) as Rectangle;
-
-                if (dropPlaceCopy != null)
+                for (int i = 1; i <= NumOfDroppableRectanglePlaces; i++)
                 {
-                    canvas.Children.Add(dropPlaceCopy);
+                    Rectangle droppablePlaces = Application.Current.FindResource("DroppablePlace" + i) as Rectangle;
+                    if (droppablePlaces == null) continue;
+
+                    Rectangle dropPlaceCopy = Clone(droppablePlaces) as Rectangle;
+
+                    if (dropPlaceCopy != null)
+                    {
+                        if (i == ImageRecyclingBinEmpty)
+                            _recycleBinRectangle = dropPlaceCopy;
+                        canvas.Children.Add(dropPlaceCopy);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                ExceptionLogger.WriteToLogfile(ex.Message, "DragDropPage_LoadDroppablePlaces");
             }
         }
 
         /// <summary>
-        /// This method ...
+        /// This method is responsible for Cloning the Canvas Children
         /// </summary>
         private FrameworkElement Clone(FrameworkElement e)
         {
@@ -106,6 +124,11 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
 
                     ElementCanvas.Children.Add(newImage);
                 }
+                //check if object from GetProgress is null o
+                object binFull = Progress.GetProgress(RecycleBinStatus);
+                bool boolBinFull = (binFull == null ? false : (bool)binFull);
+                if (boolBinFull)
+                    _recycleBinRectangle.Fill = _brushRecycleBinFull;
             }
             catch (Exception ex)
             {
@@ -118,17 +141,24 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         /// </summary>
         private void ShowTutorial()
         {
-            var bShowGameInstruction = (bool?)Progress.GetProgress("ShowGameInstruction");
+            try
+            {
+                var bShowGameInstruction = (bool?)Progress.GetProgress("ShowGameInstruction");
 
-            if (bShowGameInstruction == null)
-            {
-                Progress.SaveProgress("ShowGameInstruction", true);
+                if (bShowGameInstruction == null)
+                {
+                    Progress.SaveProgress("ShowGameInstruction", true);
+                }
+                else
+                {
+                    GameInstruction.Visibility = Visibility.Hidden;
+                    ButtonCloseGameInstruction.Visibility = Visibility.Hidden;
+                    BorderGameInstruction.Visibility = Visibility.Hidden;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                GameInstruction.Visibility = Visibility.Hidden;
-                ButtonCloseGameInstruction.Visibility = Visibility.Hidden;
-                BorderGameInstruction.Visibility = Visibility.Hidden; 
+                ExceptionLogger.WriteToLogfile(ex.Message, "ShowTutorial");
             }
         }
 
@@ -215,7 +245,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         /// <param name="sender">This is the rectangle element which raised the event. In this method this is the _rectangleMoved</param>
         /// <param name="e">This object contains useful information in order to get the position of the mouse cursor</param>
         private void rectangle_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
+        {    
             try
             {
                 _currentlyMovedRectangle = sender as Rectangle;
@@ -275,7 +305,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                     return dropRect;
                 }   
             }
-
             return null;
         }
 
@@ -284,13 +313,8 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         /// <returns>if intersection then true otherwise false</returns>
         private bool CheckCollisionWithRecycleBin(Rect imageRect)
         {
-            Rectangle recycleBinRectangle = Application.Current.FindResource("DroppablePlace17") as Rectangle;
-            if (recycleBinRectangle != null)
-            {
-                var recycleRect = new Rect(Canvas.GetLeft(recycleBinRectangle), Canvas.GetTop(recycleBinRectangle), recycleBinRectangle.Width, recycleBinRectangle.Height);
-                return imageRect.IntersectsWith(recycleRect);
-            }
-            return false;
+            var recycleRect = new Rect(Canvas.GetLeft(_recycleBinRectangle), Canvas.GetTop(_recycleBinRectangle), _recycleBinRectangle.Width, _recycleBinRectangle.Height);
+            return imageRect.IntersectsWith(recycleRect);
         }
 
         /// <summary>
@@ -354,8 +378,10 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                     if (!_rectangleHasBeenMovedBefore) //if we move it from the intial place to an rectangle field
                     {
                         _addedSavedData.Add(_currentlyAddedData);
-                        //if (_addedSavedData.Count == 1)//_dropLocationsRectangles.Count)
-                        //MessageBox.Show("Du hast alle Felder ausgefüllt. Zur Überprüfung deiner Eingabe klicke auf Auswertung!", "Spiel beendet", MessageBoxButton.OK, MessageBoxImage.Information);
+                        if (_addedSavedData.Count == _dropLocationsRectangles.Count)
+                        {
+                            ShowDialogBox();
+                        }
                     }
 
                     Progress.SaveProgress(SettingsName, _addedSavedData);
@@ -372,12 +398,33 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                 {
                     ElementCanvas.Children.Remove(_currentlyMovedRectangle);
                     _addedSavedData.Remove(_currentlyAddedData);
+
+                    //change recycling bin Image and save it in the progress
+                    _recycleBinRectangle.Fill = _brushRecycleBinFull;
+                    Progress.SaveProgress("dragDropPage_RecycleBinFull", true);
                 }
                 _currentlyMovedRectangle = null;
             }
             catch (Exception ex)
             {
                 ExceptionLogger.WriteToLogfile(ex.Message, "DragDropPage_MouseLeftButtonUp");
+            }
+        }
+
+        /// <summary>
+        /// This method will open a dialag box, as soon as all drop rectangles are filled. User can check the solution.
+        /// </summary>
+        private void ShowDialogBox()
+        {
+            if (!_checkingFirstTime)
+                return;
+            _checkingFirstTime = false;
+            const string message = "Alle Felder sind belegt. Klicke auf JA, wenn Du die Auswertung starten möchtest!";
+            const string title = "Spiel beendet";
+            if (MessageBox.Show(message, title, MessageBoxButton.YesNo, MessageBoxImage.Information, MessageBoxResult.Yes) ==
+                MessageBoxResult.Yes)
+            {
+                Check_OnClick(this, null);
             }
         }
 
@@ -457,6 +504,8 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                 ElementCanvas.Children.RemoveRange(ElementCanvas.Children.Count - N, N);
 
                 _addedSavedData.Clear();
+                _recycleBinRectangle.Fill = _brushRecycleBinEmpty;
+                Progress.SaveProgress("dragDropPage_RecycleBinFull", false);
             }
             catch (Exception ex)
             {
@@ -469,6 +518,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         ///  and gives back the amount of correct / wrong placements
         ///  <param name="sender">Contains the control which raised the event</param>
         /// <param name="e"></param>
+
         private void Check_OnClick(object sender, RoutedEventArgs e)
         {
             try
@@ -564,10 +614,24 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         {
             GameInstruction.Visibility = Visibility.Visible;
             ButtonCloseGameInstruction.Visibility = Visibility.Visible;
-            BorderGameInstruction.Visibility = Visibility.Visible; 
+            BorderGameInstruction.Visibility = Visibility.Visible;
+        }
 
+        /// <summary>
+        /// This methods defines the behaviour when pressend on F1 or ESC
+        /// </summary>
+        
+        private void ElementCanvas_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.F1)
+                OpenInstruction(this, e);
+            else if (e.Key == Key.Escape)
+                CloseGameInstruction(this, e);
+        }
 
-
+        private void RestoreFocusToPage(object sender, MouseButtonEventArgs e)
+        {
+           Focus();
         }
     }
 }
