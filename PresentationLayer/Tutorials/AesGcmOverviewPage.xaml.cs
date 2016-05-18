@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using EP_HSRlearnIT.BusinessLayer.UniversalTools;
 
 namespace EP_HSRlearnIT.PresentationLayer.Tutorials
 {
@@ -52,7 +53,12 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
                 if (ressourcePath == null) continue;
 
                 //Create a copy of the Ressource AreaPath to prevent multiple Event Listener on MouseEnter / MouseLeave
-                Path areaPath = CopyPath(ressourcePath);
+                Path areaPath = Clone(ressourcePath) as Path;
+                if (areaPath == null)
+                {
+                    ExceptionLogger.WriteToLogfile("Path could not be copied - Copy was null", "AesGcmOverviewPage: LoadAreaPaths");
+                    return;
+                }
 
                 areaPath.SetValue(Panel.ZIndexProperty, 2);
                 areaPath.MouseEnter += AreaPathOnMouseEnter;
@@ -71,7 +77,12 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
                 if (ressourcePath == null || !ressourcePath.Name.Contains("_overview")) continue;
 
                 //Create a copy of the Ressource StepPath to prevent multiple Event Listener on MouseEnter / MouseLeave
-                Path stepPath = CopyPath(ressourcePath);
+                Path stepPath = Clone(ressourcePath) as Path;
+                if (stepPath == null)
+                {
+                    ExceptionLogger.WriteToLogfile("Path could not be copied - Copy was null", "AesGcmOverviewPage: LoadStepPaths");
+                    return;
+                }
 
                 stepPath.SetValue(Panel.ZIndexProperty, 3);
                 stepPath.MouseEnter += StepPathOnMouseEnter;
@@ -98,20 +109,15 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             canvas.Children.Add(background);
         }
 
-        private Path CopyPath(Path originalPath)
-        {
-            Path copy = new Path()
-            {
-                Data = originalPath.Data.Clone(),
-                Name = originalPath.Name,
-                Style = originalPath.Style
-            };
-            return copy;
-        }
-
         private Path AddBackPath(Path frontPath)
         {
-            Path backPath = CopyPath(frontPath);
+            Path backPath = Clone(frontPath) as Path;
+            if (backPath == null)
+            {
+                ExceptionLogger.WriteToLogfile("Path could not be copied - Copy was null", "AesGcmOverviewPage: AddBackPath");
+                return null;
+            }
+
             backPath.SetValue(Panel.ZIndexProperty, 0);
             _backPaths.Add(frontPath.Name, backPath);
 
@@ -133,6 +139,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             if (!_backPaths.ContainsKey(frontPath.Name))
             {
                 backPath = AddBackPath(frontPath);
+                if(backPath == null) { return; }
             }
             else
             {
@@ -141,10 +148,10 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
 
             backPath.Fill = Application.Current.FindResource("BackAreaBrush") as SolidColorBrush;
 
-            AddTooltip(frontPath, e);
+            FindArea(frontPath, e);
         }
 
-        private void AddTooltip(Path frontPath, MouseEventArgs e)
+        private void FindArea(Path frontPath, MouseEventArgs e)
         {
             Geometry stepInfo = frontPath.Data;
 
