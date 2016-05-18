@@ -25,13 +25,13 @@
             </Border>
         </StackPanel>
         <Button Grid.Column="0" Name="MenuButton" Click="OnMenuButton_Click" VerticalAlignment="Top" HorizontalAlignment="Left"
-                Panel.ZIndex="2" Margin="-60, 0, 0, 0" Width="50" Background="Transparent" BorderThickness="0" IsTabStop="False">
+                Panel.ZIndex="2" Margin="-60, 0, 0, 0" Width="50" Background="Transparent" BorderThickness="0" Focusable="False">
             <Image Source="Images/hambugerButtonIcon.png"/>
         </Button>
         <Button Grid.Column="1" Name="Save" Content="Speichern" Click="OnSaveButton_Click" VerticalAlignment="Top" HorizontalAlignment="Right" 
                 Style="{StaticResource ResourceKey=ProgramButtonStyle}" MouseRightButtonDown="OnExceptionClick" Panel.ZIndex="10"
                 Visibility="Hidden"/>
         <Frame Grid.ColumnSpan="2" Grid.Column="0" x:Name="MainFrame" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-               Panel.ZIndex="1" NavigationUIVisibility="Hidden" IsTabStop="False"/>
+               Panel.ZIndex="1" NavigationUIVisibility="Hidden" Focusable="False"/>
     </Grid>
 </Window>

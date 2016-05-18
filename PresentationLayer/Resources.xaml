@@ -73,6 +73,7 @@
         <Setter Property="Padding" Value="10"/>
         <Setter Property="Background" Value="LightGray"/>
         <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Focusable" Value="False"/>
     </Style>
 
 </ResourceDictionary>
