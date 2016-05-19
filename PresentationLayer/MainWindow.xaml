@@ -15,7 +15,7 @@
         </Grid.ColumnDefinitions>
         <StackPanel Name="MenuStackPanel" Grid.Column="0" HorizontalAlignment="Stretch" Visibility="Hidden" Background="White"
                     Panel.ZIndex="5">
-            <Border BorderThickness="0, 0, 3, 0" BorderBrush="{StaticResource MenuBackgroundBrush}">
+            <Border BorderThickness="0, 0, 3, 0" BorderBrush="{StaticResource MenuBorderBrush}">
                 <StackPanel>
                     <TextBlock Text="Menu" Style="{StaticResource ResourceKey=MenuStyle}"/>
                     <ListView Name="Menu" PreviewMouseDown="OnMenuItemClick" ItemsSource="{StaticResource ResourceKey=MenuStrings}"
