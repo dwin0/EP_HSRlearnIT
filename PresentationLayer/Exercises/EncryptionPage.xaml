@@ -35,34 +35,40 @@
         </Grid.RowDefinitions>
 
         <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="6" Background="LightGray" Grid.RowSpan="14"/>
-        <TextBlock Grid.Row="0" Grid.Column="0" Text="IV: (optional)" Name="IvBlock" Margin="15,15,15,0" FontWeight="Bold" HorizontalAlignment="Left"/>
-        <Image Grid.Row="0" Grid.Column="0" Source="/Images/info.png" Width="18" Margin="94,12,15,0" HorizontalAlignment="Left" Name="InfoIv" ToolTipService.ShowDuration="60000">
+        <DockPanel Grid.Row="0" Grid.Column="0" Margin="15,15,15,0">
+        <TextBlock Text="IV: (optional)" Name="IvBlock" FontWeight="Bold" HorizontalAlignment="Left"/>
+        <Image Source="/Images/info.png" Width="18" Margin="5,0,0,0" HorizontalAlignment="Left" Name="InfoIv" ToolTipService.ShowDuration="60000">
             <Image.ToolTip>
                 <ToolTip Placement="Right">
                     <TextBlock TextWrapping="Wrap" Width="300" Text ="{StaticResource ResourceKey=EncryptionInfoIv}" />
                 </ToolTip>
             </Image.ToolTip>
         </Image>
+        </DockPanel>
         <TextBox Grid.Row="1" Grid.Column="0" Name="UtfIvBox" BorderThickness="2" TextChanged="TextBox_TextChanged" LostKeyboardFocus="TextBox_LostKeyboardFocus" TextWrapping="Wrap" Margin="15,2,15,5"/>
-        <TextBlock Grid.Row="2" Grid.Column="0" Text="Additional Authenticated Data: (optional)" Name="AadBlock" Margin="15,0,10,0" FontWeight="Bold" HorizontalAlignment="Left"/>
-        <Image Grid.Row="2" Grid.Column="0" Source="/Images/info.png" Width="18" Margin="253,0,10,0" HorizontalAlignment="Left" Name="InfoAad" ToolTipService.ShowDuration="60000">
+        <DockPanel Grid.Row="2" Grid.Column="0" Margin="15,0,10,0">
+        <TextBlock Text="Additional Authenticated Data: (optional)" Name="AadBlock" FontWeight="Bold" HorizontalAlignment="Left"/>
+        <Image Source="/Images/info.png" Width="18" Margin="5,0,0,0" HorizontalAlignment="Left" Name="InfoAad" ToolTipService.ShowDuration="60000">
             <Image.ToolTip>
                 <ToolTip Placement="Right">
                     <TextBlock TextWrapping="Wrap" Width="500" Text="{StaticResource ResourceKey=EncryptionInfoAad}"/>
                 </ToolTip>
             </Image.ToolTip>
         </Image>
+        </DockPanel>
         <TextBox Grid.Row="3" Grid.Column="0" Name="UtfAadBox" BorderThickness="2" TextChanged="TextBox_TextChanged" LostKeyboardFocus="TextBox_LostKeyboardFocus" TextWrapping="Wrap" Margin="15,2,15,0" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsReturn="True"/>
         <TextBlock Grid.Row="4" Grid.Column="0" Text="Klartext:" Name="PlaintextBlock" Margin="15,5,15,0" FontWeight="Bold"/>
         <TextBox Grid.Row="5" Grid.Column="0" Name="UtfPlaintextBox" BorderThickness="2" TextChanged="TextBox_TextChanged" LostKeyboardFocus="TextBox_LostKeyboardFocus" TextWrapping="Wrap" Margin="15,2,15,5" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsReturn="True"/>
-        <TextBlock Grid.Row="6" Grid.Column="0" Text="Key:" Name="PasswordBlock" Margin="15,0,15,0" FontWeight="Bold" HorizontalAlignment="Left"/>
-        <Image Grid.Row="6" Grid.Column="0" Source="/Images/info.png" Width="18" Margin="43,0,10,0" HorizontalAlignment="Left" Name="InfoKey" ToolTipService.ShowDuration="60000">
+        <DockPanel Grid.Row="6" Grid.Column="0" Margin="15,0,15,0">
+        <TextBlock Text="Key:" Name="PasswordBlock" FontWeight="Bold" HorizontalAlignment="Left"/>
+        <Image Source="/Images/info.png" Width="18" Margin="5,0,0,0" HorizontalAlignment="Left" Name="InfoKey" ToolTipService.ShowDuration="60000">
             <Image.ToolTip>
                 <ToolTip Placement="Right">
                     <TextBlock TextWrapping="Wrap" Width="400" Text="{StaticResource ResourceKey=EncryptionInfoKey}"/>
                 </ToolTip>
             </Image.ToolTip>
         </Image>
+        </DockPanel>
         <TextBox Grid.Row="7" Grid.Column="0" Name="UtfPasswordBox" BorderThickness="2" TextChanged="TextBox_TextChanged" LostKeyboardFocus="TextBox_LostKeyboardFocus" TextWrapping="Wrap" Margin="15,2,15,5"/>
         <DockPanel Grid.Row="8" Grid.Column="0" Margin="15,10,15,10"  HorizontalAlignment="Stretch" LastChildFill="False" VerticalAlignment="Top">
             <Button Content="Datei importieren" Click="OnImportButtonClick" VerticalAlignment="Top" DockPanel.Dock="Left" Style="{StaticResource ResourceKey=ProgramButtonStyle}" Height="40" Width="105" Margin="0,0,7,0"/>

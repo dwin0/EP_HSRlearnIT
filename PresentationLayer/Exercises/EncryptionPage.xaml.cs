@@ -54,7 +54,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                 }
                 
                 MessageBox.Show(
-                    "In dem Feld " + triggeringField +  " wurde ein ungerader Hex-Wert eingegeben. Bitte überprüfen Sie Ihre Eingabe und passen Sie diese an.",
+                    "In dem Feld " + triggeringField +  " wurde ein ungerader Hex-Wert eingegeben. Bitte überprüfe die Eingabe und passe diese an.",
                     "Achtung", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
         }
@@ -65,5 +65,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         }
 
         #endregion
+
     }
 }

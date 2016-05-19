@@ -50,7 +50,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             catch (CryptographicException)
             {
                 MessageBox.Show(
-                    "Ein oder mehrere Parameter der Entschlüsselung wurde falsch eingegeben. Bitte überprüfen Sie Ihre Eingabe und passen Sie sie an.",
+                    "Ein oder mehrere Parameter der Entschlüsselung wurden falsch eingegeben. Bitte überprüfe die Eingabe und passen diese an.",
                     "Achtung", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
             catch (ArgumentOutOfRangeException)
@@ -68,7 +68,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                 }
 
                 MessageBox.Show(
-                    "In dem Feld " + triggeringField + " wurde ein ungerader Hex-Wert eingegeben. Bitte überprüfen Sie Ihre Eingabe und passen Sie sie an.",
+                    "In dem Feld " + triggeringField + " wurde ein ungerader Hex-Wert eingegeben. Bitte überprüfe die Eingabe und passe diese an.",
                     "Achtung", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
         }
