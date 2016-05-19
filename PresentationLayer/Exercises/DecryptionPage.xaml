@@ -38,7 +38,7 @@
         <TextBlock Grid.Row="1" Grid.Column="0" Text="IV: (optional)" Name="IvBlock" FontWeight="Bold" Margin="15,2,15,0" HorizontalAlignment="Left"/>
         <Image Grid.Row="1" Grid.Column="0" Source="/Images/info.png" Width="18" Margin="92,0,10,0" HorizontalAlignment="Left" Name="InfoIv" ToolTipService.ShowDuration="60000">
             <Image.ToolTip>
-                <ToolTip HorizontalOffset="300">
+                <ToolTip Placement="Right">
                     <TextBlock TextWrapping="Wrap" Width="300" Text="{StaticResource ResourceKey=DecryptionInfoIv}"/>
                 </ToolTip>
             </Image.ToolTip>
@@ -47,7 +47,7 @@
         <TextBlock Grid.Row="3" Grid.Column="0" Text="Additional Authenticated Data: (optional)" FontWeight="Bold" Name="AadBlock" Margin="15,2,15,0" HorizontalAlignment="Left"/>
         <Image Grid.Row="3" Grid.Column="0" Source="/Images/info.png" Width="18" Margin="253,0,10,0" HorizontalAlignment="Left" Name="InfoAad" ToolTipService.ShowDuration="60000">
             <Image.ToolTip>
-                <ToolTip HorizontalOffset="300">
+                <ToolTip Placement="Right">
                     <TextBlock TextWrapping="Wrap" Width="400" Text="{StaticResource ResourceKey=DecryptionInfoAad}"/>
                 </ToolTip>
             </Image.ToolTip>
@@ -58,7 +58,7 @@
         <TextBlock Grid.Row="7" Grid.Column="0" Text="Key:" Name="PasswordBlock" FontWeight="Bold" Margin="15,2,15,0" HorizontalAlignment="Left"/>
         <Image Grid.Row="7" Grid.Column="0" Source="/Images/info.png" Width="18" Margin="42,0,10,0" HorizontalAlignment="Left" Name="InfoKey" ToolTipService.ShowDuration="60000">
             <Image.ToolTip>
-                <ToolTip HorizontalOffset="350">
+                <ToolTip Placement="Right">
                     <TextBlock TextWrapping="Wrap" Width="400" Text="{StaticResource ResourceKey=DecryptionInfoKey}"/>
                 </ToolTip>
             </Image.ToolTip>
@@ -67,16 +67,16 @@
         <TextBlock Grid.Row="9" Grid.Column="0" Text="Tag:" Name="TagBlock" FontWeight="Bold" Margin="15,2,15,0" HorizontalAlignment="left"/>
         <Image Grid.Row="9" Grid.Column="0" Source="/Images/info.png" Width="18" Margin="40,0,10,0" HorizontalAlignment="Left" Name="InfoTag" ToolTipService.ShowDuration="60000">
             <Image.ToolTip>
-                <ToolTip HorizontalOffset="350">
+                <ToolTip Placement="Right">
                     <TextBlock TextWrapping="Wrap" Width="400" Text ="{StaticResource ResourceKey=DecryptionInfoTag}"/>
                 </ToolTip>
             </Image.ToolTip>
         </Image>
         <TextBox Grid.Row="10" Grid.Column="0" Name="UtfTagBox" Margin="15,2,15,5" BorderThickness="2" TextChanged="TextBox_TextChanged" LostKeyboardFocus="TextBox_LostKeyboardFocus" TextWrapping="Wrap"/>
         <DockPanel Grid.Row="11" Grid.Column="0" Margin="15,10,15,10" HorizontalAlignment="Stretch" LastChildFill="False" VerticalAlignment="Top">
-            <Button Content="Datei importieren" Click="OnImportButtonClick" VerticalAlignment="Top" DockPanel.Dock="Left" Style="{StaticResource ResourceKey=ProgramButtonStyle}" Height="40" Width="105" Margin="0,0,10,0"/>
-            <Button Content="Datei exportieren" Click="OnExportButtonClick" VerticalAlignment="Top" DockPanel.Dock="Left" Style="{StaticResource ResourceKey=ProgramButtonStyle}" Height="40" Width="105" Margin="0,0,30,0"/>
-            <Button HorizontalAlignment="Left" Click="OnDecryptionButtonClick" Content="Entschlüsseln" Name="DecryptionButton" Style="{StaticResource ResourceKey=ProgramButtonStyle}" Height="40" Width="85" Margin="0,0,10,0">
+            <Button Content="Datei importieren" Click="OnImportButtonClick" VerticalAlignment="Top" DockPanel.Dock="Left" Style="{StaticResource ResourceKey=ProgramButtonStyle}" Height="40" Width="105" Margin="0,0,8,0"/>
+            <Button Content="Datei exportieren" Click="OnExportButtonClick" VerticalAlignment="Top" DockPanel.Dock="Left" Style="{StaticResource ResourceKey=ProgramButtonStyle}" Height="40" Width="105" Margin="0,0,8,0"/>
+            <Button HorizontalAlignment="Left" Click="OnDecryptionButtonClick" Content="Entschlüsseln" Name="DecryptionButton" Style="{StaticResource ResourceKey=ProgramButtonStyle}" Height="40" Width="85" Margin="0,0,8,0">
                 <Button.IsEnabled>
                     <MultiBinding Converter="{StaticResource FormFilledDecryption}">
                         <Binding Path="Text.Length" ElementName="HexCiphertextBox"/>
