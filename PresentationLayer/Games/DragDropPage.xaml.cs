@@ -60,7 +60,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
 
             LoadSettings();
             ShowTutorial();
-
+            //Focus is needed in order to make the F1 und ECS Button work after a menu change
             Focus();
         }
 
@@ -124,7 +124,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
 
                     ElementCanvas.Children.Add(newImage);
                 }
-                //check if object from GetProgress is null o
+                //check if object from GetProgress is null 
                 object binFull = Progress.GetProgress(RecycleBinStatus);
                 bool boolBinFull = (binFull == null ? false : (bool)binFull);
                 if (boolBinFull)
@@ -282,7 +282,9 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                         _currentlyAddedData = _addedSavedData[addedSavedDataIndex];
                     }
                     _currentlyMovedRectangle.Stroke = null;
+                    _currentlyMovedRectangle.StrokeDashArray = null;
                     _currentlyAddedData.Brush = null;
+                    
                 }
                 _isMoving = true;
             }
@@ -533,14 +535,17 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                     {
                         correctAnswers++;
                         data.Brush = new SolidColorBrush(System.Windows.Media.Colors.SeaGreen);
+                        data.ChildReference.Stroke = data.Brush;
+                        data.ChildReference.StrokeThickness = 4;
+                        data.ChildReference.StrokeDashArray = new DoubleCollection() { 2 }; 
                     }
                     else
                     {  
                         wrongAnswers++;
                         data.Brush = new SolidColorBrush(System.Windows.Media.Colors.Red);
+                        data.ChildReference.Stroke = data.Brush;
+                        data.ChildReference.StrokeThickness = 4;
                     }
-                    data.ChildReference.Stroke = data.Brush;
-                    data.ChildReference.StrokeThickness = 4;
                 }
 
                 MessageBox.Show(
@@ -629,9 +634,9 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                 CloseGameInstruction(this, e);
         }
 
-        private void RestoreFocusToPage(object sender, MouseButtonEventArgs e)
+       /* private void RestoreFocusToPage(object sender, MouseButtonEventArgs e)
         {
            Focus();
-        }
+        }*/
     }
 }

@@ -3,7 +3,7 @@
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
     <system:String x:Key="GameInstruction" >
-        Du hast nun die Möglichkeit, Dein Wissen in Form eines Drag and Drop Spiels zu testen. Wähle ein Rechteck Element aus der rechten Seite  aus und ziehe 
+        Du hast nun die Möglichkeit, dein Wissen in Form eines Drag &amp; Drop Spiels zu testen. Wähle ein Rechteck Element auf der rechten Seite  aus und ziehe 
        es an die korrekte Stelle im Spielfeld. Du kannst jederzeit ein Rechteck Element mit einem anderen Rechteck überdecken und innerhalb des Spielfeldes verschieben 
        sowie das Element in den Papierkorb verschieben. Nachfolgend noch weitere Erklärungen zum Spiel:
     </system:String>
@@ -16,11 +16,11 @@
     </system:String>
 
     <system:String x:Key="BeschreibungCorrectAnswer" >
-        Grüne Umrandung bedeuted bei der Auswertung, dass die Lösung korrekt ist.
+        Grüne Umrandung bedeutet bei der Auswertung, dass die Lösung korrekt ist.
     </system:String>
 
     <system:String x:Key="BeschreibungWrongAnswer" >
-        Rote Umrandung bedeuted bei der Auswertung, dass die Lösung falsch ist.
+        Rote Umrandung bedeutet bei der Auswertung, dass die Lösung falsch ist.
     </system:String>
 
     <!-- ReSharper warnings for Canvas.Left and Canvas.Top can be ignored, this parameters are used, even if ReSharp does not recognize it! -->

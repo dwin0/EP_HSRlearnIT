@@ -47,13 +47,13 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                         MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
-            catch (CryptographicException ex)
+            catch (CryptographicException)
             {
                 MessageBox.Show(
                     "Ein oder mehrere Parameter der Entschlüsselung wurde falsch eingegeben. Bitte überprüfen Sie Ihre Eingabe und passen Sie sie an.",
                     "Achtung", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
-            catch (ArgumentOutOfRangeException ex)
+            catch (ArgumentOutOfRangeException)
             {
                 string triggeringField = "(Feld konnte leider nicht bestimmt werden)";
                 foreach (var elem in DependencyObjectExtension.GetAllChildren<TextBox>(this))

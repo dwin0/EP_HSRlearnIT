@@ -39,7 +39,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                 HexTagBox.Text = returnValueEncryption.Item1;
                 HexCiphertextBox.Text = returnValueEncryption.Item2;
             }
-            catch (ArgumentOutOfRangeException ex)
+            catch (ArgumentOutOfRangeException)
             {
                 string triggeringField = "(Feld konnte leider nicht bestimmt werden)";
                 foreach (var elem in DependencyObjectExtension.GetAllChildren<TextBox>(this))
