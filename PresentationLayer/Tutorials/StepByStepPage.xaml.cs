@@ -88,7 +88,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
 
         private void StepByStepPage_OnKeyDown(object sender, KeyEventArgs e)
         {
-            
             switch (e.Key)
             {
                 case Key.Left:
@@ -190,7 +189,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             {
                 TextScrollViewer.VerticalScrollBarVisibility = (ScrollBarVisibility)Visibility.Hidden;
             }
-            StepTitle.Text = WriteTitle(stepNumber);
+            StepTitle.Text = WriteTitle(stepNumber) + " (Schritt " + GetSubtitelNumber(stepNumber) + ")";
 
             DrawImage(stepNumber);
 
@@ -315,6 +314,17 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
                 return Application.Current.FindResource(titleName) as string;
             }
             return null;
+        }
+
+        private int GetSubtitelNumber(int stepNumber)
+        {
+            if (GetTitle(stepNumber) != null)
+            {
+                return 1;
+            }
+            stepNumber--;
+            int subtitle = 1;
+            return subtitle + GetSubtitelNumber(stepNumber);
         }
 
         private void Button_OnLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
