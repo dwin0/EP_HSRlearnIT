@@ -55,7 +55,7 @@
         <TextBox Grid.Row="3" Grid.Column="0" Name="UtfAadBox" BorderThickness="2" TextChanged="TextBox_TextChanged" LostKeyboardFocus="TextBox_LostKeyboardFocus" TextWrapping="Wrap" Margin="15,2,15,0" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsReturn="True"/>
         <TextBlock Grid.Row="4" Grid.Column="0" Text="Klartext:" Name="PlaintextBlock" Margin="15,5,15,0" FontWeight="Bold"/>
         <TextBox Grid.Row="5" Grid.Column="0" Name="UtfPlaintextBox" BorderThickness="2" TextChanged="TextBox_TextChanged" LostKeyboardFocus="TextBox_LostKeyboardFocus" TextWrapping="Wrap" Margin="15,2,15,5" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsReturn="True"/>
-        <TextBlock Grid.Row="6" Grid.Column="0" Text="Key:" Name="EncryptionPasswordBlock" Margin="15,0,15,0" FontWeight="Bold" HorizontalAlignment="Left"/>
+        <TextBlock Grid.Row="6" Grid.Column="0" Text="Key:" Name="PasswordBlock" Margin="15,0,15,0" FontWeight="Bold" HorizontalAlignment="Left"/>
         <Image Grid.Row="6" Grid.Column="0" Source="/Images/info.png" Width="18" Margin="43,0,10,0" HorizontalAlignment="Left" Name="InfoKey" ToolTipService.ShowDuration="60000">
             <Image.ToolTip>
                 <ToolTip HorizontalOffset="350">
@@ -63,7 +63,7 @@
                 </ToolTip>
             </Image.ToolTip>
         </Image>
-        <TextBox Grid.Row="7" Grid.Column="0" Name="UtfEncryptionPasswordBox" BorderThickness="2" TextChanged="TextBox_TextChanged" TextWrapping="Wrap" Margin="15,2,15,5"/>
+        <TextBox Grid.Row="7" Grid.Column="0" Name="UtfPasswordBox" BorderThickness="2" TextChanged="TextBox_TextChanged" TextWrapping="Wrap" Margin="15,2,15,5"/>
         <DockPanel Grid.Row="8" Grid.Column="0" Margin="15,10,15,10"  HorizontalAlignment="Stretch" LastChildFill="False" VerticalAlignment="Top">
             <Button Content="Datei importieren" Click="OnImportButtonClick" VerticalAlignment="Top" DockPanel.Dock="Left" Style="{StaticResource ResourceKey=ProgramButtonStyle}" Height="40" Width="105" Margin="0,0,10,0"/>
             <Button Content="Datei exportieren" Click="OnExportButtonClick" VerticalAlignment="Top" DockPanel.Dock="Left" Style="{StaticResource ResourceKey=ProgramButtonStyle}" Height="40" Width="105" Margin="0,0,30,0"/>
@@ -72,7 +72,7 @@
                     <MultiBinding Converter="{StaticResource FormFilledEncryption}">
                         <Binding Path="Text.Length" ElementName="HexIvBox"/>
                         <Binding Path="Text.Length" ElementName="HexPlaintextBox"/>
-                        <Binding Path="Text.Length" ElementName="HexEncryptionPasswordBox"/>
+                        <Binding Path="Text.Length" ElementName="HexPasswordBox"/>
                         <Binding Path="Text.Length" ElementName="HexAadBox"/>
                     </MultiBinding>
                 </Button.IsEnabled>
@@ -90,8 +90,8 @@
         <TextBox Grid.Row="3" Grid.Column="1" Name="HexAadBox" BorderThickness="2" TextChanged="HexTextBox_TextChanged" LostKeyboardFocus="HexTextBox_LostKeyboardFocus" TextWrapping="Wrap" Margin="15,2,15,0" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
         <TextBlock Grid.Row="4" Grid.Column="1" Text="Klartext Hex:" Name="HexPlaintextBlock" Margin="15,5,15,0" FontWeight="Bold"/>
         <TextBox Grid.Row="5" Grid.Column="1" Name="HexPlaintextBox" BorderThickness="2" TextChanged="HexTextBox_TextChanged" LostKeyboardFocus="HexTextBox_LostKeyboardFocus" TextWrapping="Wrap" Margin="15,2,15,5" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
-        <TextBlock Grid.Row="6" Grid.Column="1" Text="Key Hex:" Name="HexEncryptionPasswordBlock" Margin="15,2,15,0" FontWeight="Bold"/>
-        <TextBox Grid.Row="7" Grid.Column="1" Name="HexEncryptionPasswordBox" BorderThickness="2" TextChanged="HexTextBox_TextChanged" TextWrapping="Wrap" Margin="15,2,15,5"/>
+        <TextBlock Grid.Row="6" Grid.Column="1" Text="Key Hex:" Name="HexPasswordBlock" Margin="15,2,15,0" FontWeight="Bold"/>
+        <TextBox Grid.Row="7" Grid.Column="1" Name="HexPasswordBox" BorderThickness="2" TextChanged="HexTextBox_TextChanged" TextWrapping="Wrap" Margin="15,2,15,5"/>
         <TextBlock Grid.Row="9" Grid.Column="1" Text="Verschlüsselter Text Hex:" Name="HexCiphertextBlock" Margin="15,0,15,0" FontWeight="Bold"/>
         <TextBox Grid.Row="10" Grid.Column="1" Name="HexCiphertextBox" Background="#F0F0F0" IsReadOnly="True" BorderThickness="2" TextChanged="HexTextBox_TextChanged" TextWrapping="Wrap" Margin="15,2,15,5" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
         <TextBlock Grid.Row="11" Grid.Column="1" Text="Tag Hex:" Name="HexTagBlock" Margin="15,0,15,0" FontWeight="Bold"/>

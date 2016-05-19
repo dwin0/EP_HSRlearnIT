@@ -17,7 +17,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             HexAadBox.Text = Progress.GetProgress("DecryptionPage_HexAadBox") as string;
             HexIvBox.Text = Progress.GetProgress("DecryptionPage_HexIvBox") as string;
             HexTagBox.Text = Progress.GetProgress("DecryptionPage_HexTagBox") as string;
-            HexDecryptionPasswordBox.Text = Progress.GetProgress("DecryptionPage_HexDecryptionPasswordBox") as string;
+            HexPasswordBox.Text = Progress.GetProgress("DecryptionPage_HexPasswordBox") as string;
         }
 
         #endregion
@@ -27,8 +27,8 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         private async void OnDecryptionButtonClick(object sender, RoutedEventArgs e)
         {
             //key is evaluated and will be resized to 32 Byte if necessary 
-            string keyString = Library.GenerateKey(UtfDecryptionPasswordBox.Text);
-            ChangeHexBox(keyString, HexDecryptionPasswordBox);
+            string keyString = Library.GenerateKey(UtfPasswordBox.Text);
+            ChangeHexBox(keyString, HexPasswordBox);
 
             if (HexIvBox.Text == "")
             {
@@ -37,7 +37,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
 
             try
             {
-                HexPlaintextBox.Text = await DecryptionTask(HexDecryptionPasswordBox.Text, HexCiphertextBox.Text,
+                HexPlaintextBox.Text = await DecryptionTask(HexPasswordBox.Text, HexCiphertextBox.Text,
                     HexIvBox.Text, HexAadBox.Text, HexTagBox.Text);
 
                 //case authentication only --> when successfull

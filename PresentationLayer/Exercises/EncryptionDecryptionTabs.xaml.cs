@@ -80,8 +80,8 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                     case "HexTagBox":
                         Progress.SaveProgress("DecryptionPage_HexTagBox", element.Text);
                         break;
-                    case "HexEncryptionPasswordBox":
-                        Progress.SaveProgress("DecryptionPage_HexDecryptionPasswordBox", element.Text);
+                    case "HexPasswordBox":
+                        Progress.SaveProgress("DecryptionPage_HexPasswordBox", element.Text);
                         break;
                 }
             }
@@ -102,8 +102,8 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                     case "HexIvBox":
                         Progress.SaveProgress("EncryptionPage_HexIvBox", element.Text);
                         break;
-                    case "HexDecryptionPasswordBox":
-                        Progress.SaveProgress("EncryptionPage_HexEncryptionPasswordBox", element.Text);
+                    case "HexPasswordBox":
+                        Progress.SaveProgress("EncryptionPage_HexPasswordBox", element.Text);
                         break;
                 }
             }

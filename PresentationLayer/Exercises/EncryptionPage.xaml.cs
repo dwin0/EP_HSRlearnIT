@@ -15,7 +15,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             HexPlaintextBox.Text = Progress.GetProgress("EncryptionPage_HexPlaintextBox") as string;
             HexIvBox.Text = Progress.GetProgress("EncryptionPage_HexIvBox") as string;
             HexAadBox.Text = Progress.GetProgress("EncryptionPage_HexAadBox") as string;
-            HexEncryptionPasswordBox.Text = Progress.GetProgress("EncryptionPage_HexEncryptionPasswordBox") as string;
+            HexPasswordBox.Text = Progress.GetProgress("EncryptionPage_HexPasswordBox") as string;
         }
 
         #endregion
@@ -25,8 +25,8 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         private async void OnEnryptionButtonClick(object sender, RoutedEventArgs e)
         {
             //key is evaluated and will be resized to 32 Byte if necessary
-            string keyString = Library.GenerateKey(UtfEncryptionPasswordBox.Text);
-            ChangeHexBox(keyString, HexEncryptionPasswordBox);
+            string keyString = Library.GenerateKey(UtfPasswordBox.Text);
+            ChangeHexBox(keyString, HexPasswordBox);
 
             if (HexIvBox.Text == "")
             {
@@ -34,7 +34,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             }
             try
             {
-                Tuple<string, string> returnValueEncryption = await EncryptionTask(HexEncryptionPasswordBox.Text, HexPlaintextBox.Text, 
+                Tuple<string, string> returnValueEncryption = await EncryptionTask(HexPasswordBox.Text, HexPlaintextBox.Text, 
                     HexIvBox.Text, HexAadBox.Text);
                 HexTagBox.Text = returnValueEncryption.Item1;
                 HexCiphertextBox.Text = returnValueEncryption.Item2;

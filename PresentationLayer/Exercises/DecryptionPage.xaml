@@ -55,7 +55,7 @@
         <TextBox Grid.Row="4" Grid.Column="0" Name="UtfAadBox" AcceptsReturn="True" Margin="15,2,15,5" BorderThickness="2" TextChanged="TextBox_TextChanged" LostKeyboardFocus="TextBox_LostKeyboardFocus" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
         <TextBlock Grid.Row="5" Grid.Column="0" Text="Verschlüsselter Text:" Margin="15,2,15,0" FontWeight="Bold" Name="CipherTextBlock"/>
         <TextBox Grid.Row="6" Grid.Column="0" Name="UtfCiphertextBox" AcceptsReturn="True" Margin="15,2,15,5" BorderThickness="2" TextChanged="TextBox_TextChanged" LostKeyboardFocus="TextBox_LostKeyboardFocus" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
-        <TextBlock Grid.Row="7" Grid.Column="0" Text="Key:" Name="DecryptionPasswordBlock" FontWeight="Bold" Margin="15,2,15,0" HorizontalAlignment="Left"/>
+        <TextBlock Grid.Row="7" Grid.Column="0" Text="Key:" Name="PasswordBlock" FontWeight="Bold" Margin="15,2,15,0" HorizontalAlignment="Left"/>
         <Image Grid.Row="7" Grid.Column="0" Source="/Images/info.png" Width="18" Margin="42,0,10,0" HorizontalAlignment="Left" Name="InfoKey" ToolTipService.ShowDuration="60000">
             <Image.ToolTip>
                 <ToolTip HorizontalOffset="350">
@@ -63,7 +63,7 @@
                 </ToolTip>
             </Image.ToolTip>
         </Image>
-        <TextBox Grid.Row="8" Grid.Column="0" Name="UtfDecryptionPasswordBox" BorderThickness="2" Margin="15,2,15,5" TextChanged="TextBox_TextChanged" LostKeyboardFocus="TextBox_LostKeyboardFocus"  TextWrapping="Wrap"/>
+        <TextBox Grid.Row="8" Grid.Column="0" Name="UtfPasswordBox" BorderThickness="2" Margin="15,2,15,5" TextChanged="TextBox_TextChanged" LostKeyboardFocus="TextBox_LostKeyboardFocus"  TextWrapping="Wrap"/>
         <TextBlock Grid.Row="9" Grid.Column="0" Text="Tag:" Name="TagBlock" FontWeight="Bold" Margin="15,2,15,0" HorizontalAlignment="left"/>
         <Image Grid.Row="9" Grid.Column="0" Source="/Images/info.png" Width="18" Margin="40,0,10,0" HorizontalAlignment="Left" Name="InfoTag" ToolTipService.ShowDuration="60000">
             <Image.ToolTip>
@@ -82,7 +82,7 @@
                         <Binding Path="Text.Length" ElementName="HexCiphertextBox"/>
                         <Binding Path="Text.Length" ElementName="HexIvBox"/>
                         <Binding Path="Text.Length" ElementName="HexTagBox"/>
-                        <Binding Path="Text.Length" ElementName="HexDecryptionPasswordBox"/>
+                        <Binding Path="Text.Length" ElementName="HexPasswordBox"/>
                         <Binding Path="Text.Length" ElementName="HexAadBox"/>
                     </MultiBinding>
                 </Button.IsEnabled>
@@ -98,8 +98,8 @@
         <TextBox Grid.Row="4" Grid.Column="1" Name="HexAadBox" BorderThickness="2" Margin="15,2,15,5" TextChanged="HexTextBox_TextChanged" LostKeyboardFocus="HexTextBox_LostKeyboardFocus" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
         <TextBlock Grid.Row="5" Grid.Column="1" Text="Verschlüsselter Text Hex:" FontWeight="Bold" Name="HexCiphertextBlock" Margin="15,2,15,0"/>
         <TextBox Grid.Row="6" Grid.Column="1" Name="HexCiphertextBox" BorderThickness="2" Margin="15,2,15,5" TextChanged="HexTextBox_TextChanged" LostKeyboardFocus="HexTextBox_LostKeyboardFocus" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
-        <TextBlock Grid.Row="7" Grid.Column="1" Text="Key Hex:" FontWeight="Bold" Name="HexDecryptionPasswordBlock" Margin="15,2,15,0"/>
-        <TextBox Grid.Row="8" Grid.Column="1" Name="HexDecryptionPasswordBox" BorderThickness="2" Margin="15,2,15,5" LostKeyboardFocus="HexTextBox_LostKeyboardFocus" TextChanged="HexTextBox_TextChanged" TextWrapping="Wrap"/>
+        <TextBlock Grid.Row="7" Grid.Column="1" Text="Key Hex:" FontWeight="Bold" Name="HexPasswordBlock" Margin="15,2,15,0"/>
+        <TextBox Grid.Row="8" Grid.Column="1" Name="HexPasswordBox" BorderThickness="2" Margin="15,2,15,5" LostKeyboardFocus="HexTextBox_LostKeyboardFocus" TextChanged="HexTextBox_TextChanged" TextWrapping="Wrap"/>
         <TextBlock Grid.Row="9" Grid.Column="1" Text="Tag Hex:" Name="HexTagBlock" FontWeight="Bold" Margin="15,2,15,0"/>
         <TextBox Grid.Row="10" Grid.Column="1" Name="HexTagBox" BorderThickness="2" Margin="15,2,15,5" TextChanged="HexTextBox_TextChanged" LostKeyboardFocus="HexTextBox_LostKeyboardFocus" TextWrapping="Wrap"/>
         <TextBlock Grid.Row="12" Grid.Column="1" Text="Klartext Hex:" FontWeight="Bold" Name="HexPlaintextBlock" Margin="15,2,15,0"/>

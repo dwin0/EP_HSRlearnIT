@@ -215,11 +215,11 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                             parameter = "Hex" + parameter;
                             value = value.Substring(2);
                             FillingField(parameter, value);
+                            noHexData = false;
                         }
                         else
                         {
                             noHexData = true;
-                            break;
                         }
                     }
                     else
@@ -228,14 +228,9 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                         break;
                     }
                 }
-                if (noHexData && Title.Contains("EncryptionPage"))
+                if (noHexData)
                 {
-                    FillingField(filePath);
-                }
-                else
-                {
-                    MessageBox.Show("Das Importfile besitzt nicht die erwartete Struktur für die Entschlüsslung.", "Fehlerhafter Import", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    return;
+                        FillingField(filePath);
                 }
                 MessageBox.Show("Der Import wurde erfolgreich abgeschlossen.", "Import", MessageBoxButton.OK, MessageBoxImage.Information);
             }
@@ -343,9 +338,10 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         {
             foreach (var textBox in DependencyObjectExtension.GetAllChildren<TextBox>(this))
             {
-                if (textBox.Name.Contains("UtfPlaintext"))
+                if (textBox.Name.Contains("UtfPlaintext") || textBox.Name.Contains("UtfCiphertext"))
                 {
                     PostContent(textBox, FileManager.ReadFullContent(filePath));
+                    return;
                 }
             }
         }
