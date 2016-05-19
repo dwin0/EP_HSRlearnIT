@@ -13,12 +13,14 @@ namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
 
         #endregion
 
+
+        #region Public Methods
+
         /// <summary>
         /// Method to save a progress
         /// </summary>
         /// <param name="key">A unique object key</param>
         /// <param name="value">The progress object to be saved</param>
-        #region Public Methods
         public static void SaveProgress(object key, object value)
         {
             if(AppProgress.ContainsKey(key))

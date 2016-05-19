@@ -149,6 +149,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                 {
                     element.Text = "";
                 }
+                SaveProgressHelper(element);
             }
         }
 
