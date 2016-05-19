@@ -29,8 +29,8 @@ namespace EP_HSRlearnIT.BusinessLayer.Testing.UniversalToolsTest
         public void UpdateContentTest()
         {
             string file = FileManager.SaveFile(@"c:\temp\HSRlearnIT\Test\UpdateTest.txt");
-            FileManager.UpdateContent(file, "10 Hello World!");
-            FileManager.UpdateContent(file ,"30 Hello Member!");
+            FileManager.OverwriteContent(file, "10 Hello World!");
+            FileManager.OverwriteContent(file ,"30 Hello Member!");
             Assert.AreEqual("30 Hello Member!", FileManager.ReadFullContent(file));
         }
 
