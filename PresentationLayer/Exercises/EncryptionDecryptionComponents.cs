@@ -156,7 +156,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog()
             {
-                Filter = "Text File (*.txt)|*.txt|All Files (*.*)|*.*",
+                Filter = "Text File (*.txt)|*.txt",
                 InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
                 OverwritePrompt = true,
                 AddExtension = true,
@@ -167,7 +167,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
 
             if (saveFileDialog.ShowDialog() == true)
             {
-
                 string fullFilePath = saveFileDialog.FileName;
                 var extension = Path.GetExtension(fullFilePath);
                 if (extension != null && extension.ToLower() != ".txt")
@@ -179,18 +178,9 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                 {
                     FileManager.SaveFile(fullFilePath);
                 }
-                //Fillup all fields with name of parameter and value into exportfile.
-                StringBuilder line = new StringBuilder();
-                foreach (TextBox element in DependencyObjectExtension.GetAllChildren<TextBox>(this))
-                {
-                    //Filter for fields to export
-                    if (element.Name.Contains("Hex"))
-                    {
-                        //cut Hex and Box, for Example: HexIvBox -> Iv
-                        line.AppendLine(element.Name.Substring(3, element.Name.Length - 6) + "=0x" + element.Text);
-                    }
-                }
-                FileManager.UpdateContent(fullFilePath, line.ToString());
+                string line = PickoutField();
+
+                FileManager.UpdateContent(fullFilePath, line);
                 MessageBox.Show("Der Export war erfolgreich.", "Export", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
@@ -199,7 +189,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         {
             OpenFileDialog openFileDialog = new OpenFileDialog()
             {
-                Filter = "Text File (*.txt)|*.txt|All Files (*.*)|*.*",
+                Filter = "Text File (*.txt)|*.txt",
                 InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
                 CheckFileExists = true,
                 CheckPathExists = true,
@@ -208,18 +198,46 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
 
             if (openFileDialog.ShowDialog() == true && openFileDialog.SafeFileName != "")
             {
-                    string filePath = openFileDialog.FileName;
-                    IEnumerable<string> allLines = FileManager.ReadAllLines(filePath);
+                string filePath = openFileDialog.FileName;
+                IEnumerable<string> allLines = FileManager.ReadAllLines(filePath);
+                bool noHexData = false;
 
-                    foreach (string line in allLines)
+                foreach (string line in allLines)
+                {
+                    int index = line.IndexOf(Convert.ToChar('='));
+                    //the first '=' is only a delimeter symbole and not part of parameter or value
+                    if (index > 0)
                     {
-                        int index = line.IndexOf(Convert.ToChar('='));
-                        //the first '=' is only a delimeter symbole and not part of parameter or value
                         string parameter = line.Substring(0, index - 1);
                         string value = line.Substring(index + 1);
-                        FillingField(parameter, value);
+                        if (value.Substring(0, 2).Equals("0x"))
+                        {
+                            parameter = "Hex" + parameter;
+                            value = value.Substring(2);
+                            FillingField(parameter, value);
+                        }
+                        else
+                        {
+                            noHexData = true;
+                            break;
+                        }
                     }
-                    MessageBox.Show("Der Import wurde erfolgreich abgeschlossen.", "Import einer Parameterdatei", MessageBoxButton.OK, MessageBoxImage.Information);
+                    else
+                    {
+                        noHexData = true;
+                        break;
+                    }
+                }
+                if (noHexData && Title.Contains("EncryptionPage"))
+                {
+                    FillingField(filePath);
+                }
+                else
+                {
+                    MessageBox.Show("Das Importfile besitzt nicht die erwartete Struktur für die Entschlüsslung.", "Fehlerhafter Import", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+                MessageBox.Show("Der Import wurde erfolgreich abgeschlossen.", "Import", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
@@ -265,31 +283,79 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         }
 
         /// <summary>
+        /// Method fillup all HEX-fields with name of parameter and value into a string
+        /// </summary>
+        /// <returns>A string with all allowed export parameters and their value</returns>
+        private string PickoutField()
+        {
+            StringBuilder line = new StringBuilder();
+            foreach (TextBox element in DependencyObjectExtension.GetAllChildren<TextBox>(this))
+            {
+                if (Title.Contains("DecryptionPage"))
+                {
+                    //Export-Filter about all fields for DecryptionPage
+                    if (element.Name.Contains("Hex") && !(element.Name.Contains("Ciphertext") || element.Name.Contains("Tag")))
+                    {
+                        //cut Hex and Box, for Example: HexIvBox -> Iv
+                        line.AppendLine(element.Name.Substring(3, element.Name.Length - 6) + "=0x" + element.Text);
+                    }
+                }
+                //Export-Filter about all fields for EncryptionPage
+                else if (element.Name.Contains("Hex") && !element.Name.Contains("Plaintext"))
+                {
+                    line.AppendLine(element.Name.Substring(3, element.Name.Length - 6) + "=0x" + element.Text);
+                }
+            }
+            return line.ToString();
+        }
+
+        /// <summary>
         /// Method filling all fields from the importfile excluding the following parameternames.
         /// </summary>
         /// <param name="parameter"></param>fieldidentifier from file.
         /// <param name="value"></param>value from parametername.
         private void FillingField(string parameter, string value)
         {
-            if (value.Substring(0, 2).Equals("0x"))
-            {
-                parameter = "Hex" + parameter;
-                value = value.Substring(2);
-            }
             if (value.Length > 0)
             {
                 foreach (var element in DependencyObjectExtension.GetAllChildren<TextBox>(this))
                 {
-                    if (element.Name.Contains(parameter) && !(element.Name.Contains("Plaintext") || element.Name.Contains("Password")))
+                    if (Title.Equals("EncryptionPage"))
                     {
-                        TextBox fieldOnForm = FindName(element.Name) as TextBox;
-                        if (fieldOnForm != null)
+                        //Import-Filter for EncryptionPage
+                        if (element.Name.Contains(parameter) && !(element.Name.Contains("Ciphertext") || element.Name.Contains("Tag")))
                         {
-                            fieldOnForm.Text = value;
+                            PostContent(element, value);
+                            break;
                         }
+                    }
+                    //Import-Filter for DecryptionPage
+                    else if (element.Name.Contains(parameter) && !element.Name.Contains("Plaintext"))
+                    {
+                        PostContent(element, value);
                         break;
                     }
                 }
+            }
+        }
+
+        private void FillingField(string filePath)
+        {
+            foreach (var textBox in DependencyObjectExtension.GetAllChildren<TextBox>(this))
+            {
+                if (textBox.Name.Contains("UtfPlaintext"))
+                {
+                    PostContent(textBox, FileManager.ReadFullContent(filePath));
+                }
+            }
+        }
+
+        private void PostContent(TextBox element, string value)
+        {
+            TextBox fieldOnForm = FindName(element.Name) as TextBox;
+            if (fieldOnForm != null)
+            {
+                fieldOnForm.Text = value;
             }
         }
 
