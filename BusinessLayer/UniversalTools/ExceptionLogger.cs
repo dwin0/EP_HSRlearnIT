@@ -7,9 +7,9 @@ namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
 {
     /// <summary>
     /// Class log all global exceptions of the program.
-    /// path and fileName are fix values.
-    /// maxSize is the favored max size of the logfile.
-    /// deleteRows is the amount of lines to delete into logfile.
+    /// _path and _fileName are fix values.
+    /// _maxSize is the favored max size of the logfile.
+    /// _deleteRows is the amount of lines to delete into logfile when reached _maxSize.
     /// </summary>
     public static class ExceptionLogger
     {
@@ -43,7 +43,9 @@ namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
                 List<string> lines = FileManager.ReadAllLines(filePath).ToList();
                 lines.RemoveRange(0, _deleteRows);
                 FileManager.SwapContents(filePath, lines);
-                FileManager.AppendContent(filePath, $"{Environment.NewLine}The oldest { _deleteRows} lines are removed.{Environment.NewLine}");
+                FileManager.AppendContent(filePath, $"{Environment.NewLine}***" +
+                                                    $"{Environment.NewLine}The oldest { _deleteRows} rows were removed." +
+                                                    $"{Environment.NewLine}***");
             }
         }
 

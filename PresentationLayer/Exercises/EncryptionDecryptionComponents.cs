@@ -181,7 +181,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                 }
                 string line = PickoutField();
 
-                FileManager.UpdateContent(fullFilePath, line);
+                FileManager.OverwriteContent(fullFilePath, line);
                 MessageBox.Show("Der Export war erfolgreich.", "Export", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
