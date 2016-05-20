@@ -26,7 +26,8 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         private SavedDataForProgress _currentlyAddedData;
         private Rectangle _currentlyMovedRectangle;
         private Rectangle _recycleBinRectangle;
-        private ImageBrush _brushRecycleBinEmpty, _brushRecycleBinFull;
+        private readonly ImageBrush _brushRecycleBinEmpty = new ImageBrush(new BitmapImage(new Uri(@"pack://application:,,,/Images/recycling.png", UriKind.RelativeOrAbsolute)));
+        private readonly ImageBrush _brushRecycleBinFull = new ImageBrush(new BitmapImage(new Uri(@"pack://application:,,,/Images/recyclebin.png", UriKind.RelativeOrAbsolute)));
         private bool _rectangleHasBeenMovedBefore;
         private bool _isMoving;
         private Point _startPoint = new Point(0, 0);
@@ -34,6 +35,8 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
 
         #endregion
 
+
+        #region Constructor
         public DragDropPage()
         {
             InitializeComponent();
@@ -42,93 +45,74 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
 
             _originalNumberOfChildren = ElementCanvas.Children.Count;
 
-            var index = 0;
-            foreach (var child in ElementCanvas.Children)
-            {
-                if (child is Rectangle)
-                {
-                    var childRect = (Rectangle) child;
-                    if (!childRect.Name.Contains("Rect")) continue;
-                    _dropLocationsRectangles.Add(childRect);
-                    index++;
-                }
-            }
-            _brushRecycleBinEmpty = new ImageBrush(new BitmapImage(new Uri(@"pack://application:,,,/Images/recycling.png", UriKind.RelativeOrAbsolute)));
-            _brushRecycleBinFull = new ImageBrush(new BitmapImage(new Uri(@"pack://application:,,,/Images/recyclebin.png", UriKind.RelativeOrAbsolute)));
-
-            LoadSettings();
+            LoadSavedData();
             ShowTutorial();
             //Focus is needed in order to make the F1 und ECS Button work after a menu change
             Focus();
         }
+
+        #endregion
 
         /// <summary>
         /// This method loads all Rectangles where a solution can be dropped.</summary>
         /// <param name="canvas">Is the Parent where the Rectangles have to be placed</param>
         private void LoadDroppablePlaces(Canvas canvas)
         {
-            try
+            for (int i = 1; i <= NumOfDroppableRectanglePlaces; i++)
             {
-                for (int i = 1; i <= NumOfDroppableRectanglePlaces; i++)
+                Rectangle droppablePlaces = Application.Current.FindResource("DroppablePlace" + i) as Rectangle;
+                if (droppablePlaces == null) { continue; }
+
+                Rectangle dropPlaceCopy = Clone(droppablePlaces) as Rectangle;
+
+                if (dropPlaceCopy != null)
                 {
-                    Rectangle droppablePlaces = Application.Current.FindResource("DroppablePlace" + i) as Rectangle;
-                    if (droppablePlaces == null) continue;
-
-                    Rectangle dropPlaceCopy = Clone(droppablePlaces) as Rectangle;
-
-                    if (dropPlaceCopy != null)
+                    if (i == ImageRecyclingBinEmpty)
                     {
-                        if (i == ImageRecyclingBinEmpty)
-                        {
-                            _recycleBinRectangle = dropPlaceCopy;
-                        }
-                        else
-                        {
-                            dropPlaceCopy.Fill = Brushes.Transparent;
-                            dropPlaceCopy.Width = 95;
-                            dropPlaceCopy.Height = 45;
-                        }
-                        
-                        canvas.Children.Add(dropPlaceCopy);
+                        _recycleBinRectangle = dropPlaceCopy;
                     }
+                    else
+                    {
+                        dropPlaceCopy.Fill = Brushes.Transparent;
+                        dropPlaceCopy.Width = 95;
+                        dropPlaceCopy.Height = 45;
+                    }
+                        
+                    canvas.Children.Add(dropPlaceCopy);
+
+                    if (dropPlaceCopy.Name.Contains("Rect"))
+                    {
+                        _dropLocationsRectangles.Add(dropPlaceCopy);
+                    }                    
                 }
-            }
-            catch (Exception ex)
-            {
-                ExceptionLogger.WriteToLogfile(ex.Message, "DragDropPage_LoadDroppablePlaces");
             }
         }
 
         /// <summary>
-        /// This method loads the the data saved in SavedDataForProgress to get back the same state as before a menu change./// </summary>
-        private void LoadSettings()
+        /// This method loads the the data saved in SavedDataForProgress to get back the same state as before a menu change.
+        /// </summary>
+        private void LoadSavedData()
         {
-            try
+            _addedSavedData = (List<SavedDataForProgress>)Progress.GetProgress(SettingsName) ?? new List<SavedDataForProgress>();
+            int counter = 0;
+
+            foreach (var rectangleData in _addedSavedData)
             {
-                _addedSavedData = (List<SavedDataForProgress>)Progress.GetProgress(SettingsName) ?? new List<SavedDataForProgress>();
+                if(rectangleData == null) { continue; }
+                var origImage = (Rectangle)ElementCanvas.Children[rectangleData.OriginalImageChildIndex];
+                var newImage = CreateNewRectangle(origImage.Fill, 95, 45, "tmp" + counter, rectangleData.ImageMargin, rectangleData.Brush, true, true, false);
+                counter++;
 
-                for (var i = 0; i < _addedSavedData.Count; i++)
-                {
-                    var j = _addedSavedData[i].OriginalImageChildIndex;
-                    var origImage = (Rectangle)ElementCanvas.Children[j];
-                    var newImage = CreateNewRectangle(origImage.Fill, 92, 43, "tmp" + i, _addedSavedData[i].ImageMargin, _addedSavedData[i].Brush,
-                        true, true, false);
+                // here we have refreshed the original child reference and DropRectangle 
+                rectangleData.ChildReference = newImage;
+                rectangleData.DropRectangle = _dropLocationsRectangles[rectangleData.DropRectangleIndex];
 
-                    // here we have refreshed the original child reference and dropRectangle 
-                    _addedSavedData[i].ChildReference = newImage;
-                    _addedSavedData[i].DropRectangle = _dropLocationsRectangles[_addedSavedData[i].DropRectangleIndex];
-
-                    ElementCanvas.Children.Add(newImage);
-                }
-                //check if object from GetProgress is null 
-                object binFull = Progress.GetProgress(RecycleBinStatus);
-                bool boolBinFull = (binFull == null ? false : (bool)binFull);
-                if (boolBinFull)
-                    _recycleBinRectangle.Fill = _brushRecycleBinFull;
+                ElementCanvas.Children.Add(newImage);
             }
-            catch (Exception ex)
+            bool? binFull = (bool?)Progress.GetProgress(RecycleBinStatus);
+            if (binFull == true)
             {
-                ExceptionLogger.WriteToLogfile(ex.Message, "LoadSettings");
+                _recycleBinRectangle.Fill = _brushRecycleBinFull;
             }
         }
 
@@ -137,24 +121,15 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         /// </summary>
         private void ShowTutorial()
         {
-            try
-            {
-                var bShowGameInstruction = (bool?)Progress.GetProgress("ShowGameInstruction");
+            var showGameInstruction = (bool?)Progress.GetProgress("ShowGameInstruction");
 
-                if (bShowGameInstruction == null)
-                {
-                    Progress.SaveProgress("ShowGameInstruction", true);
-                }
-                else
-                {
-                    GameInstruction.Visibility = Visibility.Hidden;
-                    ButtonCloseGameInstruction.Visibility = Visibility.Hidden;
-                    BorderGameInstruction.Visibility = Visibility.Hidden;
-                }
-            }
-            catch (Exception ex)
+            if (showGameInstruction == null)
             {
-                ExceptionLogger.WriteToLogfile(ex.Message, "ShowTutorial");
+                Progress.SaveProgress("ShowGameInstruction", true);
+            }
+            else
+            {
+                BorderGameInstruction.Visibility = Visibility.Hidden;
             }
         }
 
@@ -164,12 +139,20 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         {
             var images = new BitmapImage[9];
 
-            for (var i = 0; i < 9; i++)
+            for (var i = 1; i <= 9; i++)
             {
-                var image = new BitmapImage(new Uri(@"pack://application:,,,/Images/dragdrop" + (i+1) + ".png", UriKind.RelativeOrAbsolute));
-                images[i] = image;
+                try
+                {
+                    var image =
+                        new BitmapImage(new Uri(@"pack://application:,,,/Images/dragdrop" + (i) + ".png", UriKind.RelativeOrAbsolute));
+                    images[i - 1] = image;
+                }
+                catch(Exception ex)
+                {
+                    ExceptionLogger.WriteToLogfile(ex.Message, "GetImage()");
+                    images[i - 1] = null;
+                }
             }
-
             return images;
         }
 
@@ -181,11 +164,11 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         /// <param name="name">Name of the new Rectangle to be created</param>
         /// <param name="margin">Margin of the Rectangle to be created</param>
         /// <param name="brush">Brush (Border) of Rectangle</param>
-        /// <param name="bLeftButtonDown">Rectangle should/should not be associated with the Mouse-Eventhandler LeftButtonDown</param>
-        /// <param name="bLeftButtonUp">Rectange should/should not be associated with the Mouse-Eventhandler LeftbuttonUp</param>
-        /// <param name="bMouseMove">Rectangle should/should not be associated with the Mouse-Eventhandler MouseMove</param>
+        /// <param name="leftButtonDown">Rectangle should/should not be associated with the Mouse-Eventhandler leftButtonDown</param>
+        /// <param name="leftButtonUp">Rectange should/should not be associated with the Mouse-Eventhandler LeftbuttonUp</param>
+        /// <param name="moveMouse">Rectangle should/should not be associated with the Mouse-Eventhandler moveMouse</param>
         /// <returns>Return value is the newly created Rectangle</returns>
-        Rectangle CreateNewRectangle(Brush fill, double width, double height, string name, Thickness margin, Brush brush, bool bLeftButtonDown, bool bLeftButtonUp, bool bMouseMove)
+        private Rectangle CreateNewRectangle(Brush fill, double width, double height, string name, Thickness margin, Brush brush, bool leftButtonDown, bool leftButtonUp, bool moveMouse)
         {
             Rectangle resRect = new Rectangle
             {
@@ -199,96 +182,106 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                 StrokeDashArray = {5} //TODO : unterscheidung welche Farbe
 
             };
-            if (bLeftButtonDown) resRect.PreviewMouseLeftButtonDown += rectangle_PreviewMouseLeftButtonDown;
-            if (bLeftButtonUp) resRect.MouseLeftButtonUp += rectangle_PreviewMouseLeftButtonUp;
-            if (bMouseMove) resRect.MouseMove += ElementCanvas_MouseMove;
+            SetMouseEvents(resRect, leftButtonDown, leftButtonUp, moveMouse);
             return resRect;
         }
 
+
+        //  --> Vorschlag für eine Verkürzung der Parameterliste und der Methode selbst
+        //private Rectangle CreateNewRectangle(Rectangle rectangle, string name, bool leftButtonDown, bool leftButtonUp, bool moveMouse)
+        //{
+        //    Rectangle rect = Clone(rectangle) as Rectangle;
+        //    if (rect != null)
+        //    {
+        //        rect.Name = name;
+        //        SetMouseEvents(rect, leftButtonDown, leftButtonUp, moveMouse);
+        //    }
+        //    return rect;
+        //}
+
+        private void SetMouseEvents(Rectangle resRect, bool leftButtonDown, bool leftButtonUp, bool moveMouse)
+        {
+            if (leftButtonDown) resRect.PreviewMouseLeftButtonDown += rectangle_PreviewMouseLeftButtonDown;
+            if (leftButtonUp) resRect.MouseLeftButtonUp += rectangle_PreviewMouseLeftButtonUp;
+            if (moveMouse) resRect.MouseMove += ElementCanvas_MouseMove;
+        }
+
         /// <summary>
-       /// This method iterates through the images and places them in the canvas. In order to associate these images to a droppable rectangle the list localCorrectAnswers is used. /// </summary>
+        /// This method iterates through the images and places them in the canvas. In order to associate these images to a droppable rectangle the list localCorrectAnswers is used. /// </summary>
         private void GenerateSideImages()
         {
-            try
+            var images = GetImages();
+            CorrectAnswers.Clear();
+            List<List<string>> localCorrectAnswers = new List<List<string>>
             {
-                var images = GetImages();
-                CorrectAnswers.Clear();
-                List<List<string>> localCorrectAnswers = new List<List<string>>();
-                localCorrectAnswers.Add(new List<string> { "Rect13Hash" });
-                localCorrectAnswers.Add(new List<string> { "Rect1Iv" });
-                localCorrectAnswers.Add(new List<string> { "Rect7Counter", "Rect15Counter", "Rect17Counter" });
-                localCorrectAnswers.Add(new List<string> { "Rect2MultH", "Rect5MultH", "Rect9MultH", "Rect10MultH" });
-                localCorrectAnswers.Add(new List<string> { "Rect4Aad" });
-                localCorrectAnswers.Add(new List<string> { "Rect16Tag" });
-                localCorrectAnswers.Add(new List<string> { "Rect3Len" });
-                localCorrectAnswers.Add(new List<string> { "Rect6Ciphertext", "Rect11Ciphertext" });
-                localCorrectAnswers.Add(new List<string> { "Rect8Plaintext", "Rect12Plaintext" });
+                new List<string> {"Rect13Hash"},
+                new List<string> {"Rect1Iv"},
+                new List<string> {"Rect7Counter", "Rect15Counter", "Rect17Counter"},
+                new List<string> {"Rect2MultH", "Rect5MultH", "Rect9MultH", "Rect10MultH"},
+                new List<string> {"Rect4Aad"},
+                new List<string> {"Rect16Tag"},
+                new List<string> {"Rect3Len"},
+                new List<string> {"Rect6Ciphertext", "Rect11Ciphertext"},
+                new List<string> {"Rect8Plaintext", "Rect12Plaintext"}
+            };
 
-                for (var i = 0; i < images.Length; i++)
-                {
-                    var index = ElementCanvas.Children.Add(CreateNewRectangle(new ImageBrush(images[i]), 92, 43, "dragdrop" + i, new Thickness(800, 100 + i * 55, 0, 0), null, true, true, false));
-                    CorrectAnswers.Add(index, localCorrectAnswers[i]);
-                }
-            }
-    
-	        catch (Exception ex)
+            for (var i = 0; i < images.Length; i++)
             {
-                ExceptionLogger.WriteToLogfile(ex.Message, "GenerateSideImages()");
+                if (images[i] == null) { continue; }
+                var index = ElementCanvas.Children.Add(CreateNewRectangle(new ImageBrush(images[i]), 92, 43, "dragdrop" + i, new Thickness(800, 100 + i * 55, 0, 0), null, true, true, false));
+                CorrectAnswers.Add(index, localCorrectAnswers[i]);
             }
-        }   
+        }
 
         /// <summary>
-        /// This method defines the functions for the PreviewMouseLeftButtonDown Event. It checks if the mouse was was pressed down on an original rectangle image
-        /// or an already copied image. The moved rectangle is also saved into the progress and added as a Child to the ElementCanvas</summary>
-        /// <param name="sender">This is the rectangle element which raised the event. In this method this is the _rectangleMoved</param>
+        /// It checks if the mouse was was pressed down on an original rectangle image or an already copied image. 
+        /// The moved rectangle is also saved into the progress and added as a Child to the ElementCanvas</summary>
+        /// <param name="sender">This is the rectangle element which raised the event.</param>
         /// <param name="e">This object contains useful information in order to get the position of the mouse cursor</param>
         private void rectangle_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {    
-            try
+            _currentlyMovedRectangle = sender as Rectangle;
+
+            //Check if the element has been already moved or not. If it has been moved it would contain tmp in its name.
+            if (_currentlyMovedRectangle != null)
             {
-                _currentlyMovedRectangle = sender as Rectangle;
+                _startPoint = e.GetPosition(_currentlyMovedRectangle);
+                _rectangleHasBeenMovedBefore = _currentlyMovedRectangle.Name.Contains("tmp");
 
-                //Check if the element has been already moved or not. If it has been moved it would contain tmp in its name.
-                if (_currentlyMovedRectangle != null)
+                if (!_rectangleHasBeenMovedBefore)
                 {
-                    _startPoint = e.GetPosition(_currentlyMovedRectangle);
-                    _rectangleHasBeenMovedBefore = _currentlyMovedRectangle.Name.Contains("tmp");
+                    _currentlyAddedData = new SavedDataForProgress();
 
-                   if (!_rectangleHasBeenMovedBefore)
+                    var copiedRectangle = CreateNewRectangle(_currentlyMovedRectangle.Fill,
+                        _currentlyMovedRectangle.Width, _currentlyMovedRectangle.Height,
+                        "tmp" + _currentlyMovedRectangle.Name, _currentlyMovedRectangle.Margin, null, true, true, true);
+
+                    ElementCanvas.Children.Add(copiedRectangle);
+
+                    //Index and ChildReference of copied rectangle is added to SavaData. 
+                    _currentlyAddedData.OriginalImageChildIndex = ElementCanvas.Children.IndexOf(_currentlyMovedRectangle);
+                    _currentlyAddedData.ChildReference = copiedRectangle;
+                    _currentlyMovedRectangle = copiedRectangle;
+                }
+                else
+                {
+                    //refers to a rectangle which is moved within the fields of the algorithm. Index is saved to SaveData
+                    var childIndexOfMovedRectangle = ElementCanvas.Children.IndexOf(_currentlyMovedRectangle);
+                    int addedSavedDataIndex = childIndexOfMovedRectangle - _originalNumberOfChildren;
+
+                    try
                     {
-                        _currentlyAddedData = new SavedDataForProgress();
-
-                        var copiedRectangle = CreateNewRectangle(_currentlyMovedRectangle.Fill,
-                            _currentlyMovedRectangle.Width, _currentlyMovedRectangle.Height,
-                            "tmp" + _currentlyMovedRectangle.Name, _currentlyMovedRectangle.Margin, null, true, true, true);
-
-                        ElementCanvas.Children.Add(copiedRectangle);
-
-                        //Index and ChildReference of copied rectangle is added to SavaData. 
-                        _currentlyAddedData.OriginalImageChildIndex = ElementCanvas.Children.IndexOf(_currentlyMovedRectangle);
-                        _currentlyAddedData.ChildReference = copiedRectangle;
-                        _currentlyMovedRectangle = copiedRectangle;
-                        
-                    }
-                    else
-                    {
-                        //refers to a rectangle which is moved within the fields of the algorithm. Index is saved to SaveData
-                        var childIndexOfMovedRectangle = ElementCanvas.Children.IndexOf(_currentlyMovedRectangle);
-                        int addedSavedDataIndex = childIndexOfMovedRectangle - _originalNumberOfChildren;
-
                         _currentlyAddedData = _addedSavedData[addedSavedDataIndex];
                     }
-                    _currentlyMovedRectangle.Stroke = null;
-                    _currentlyMovedRectangle.StrokeDashArray = null;
-                    _currentlyAddedData.Brush = null;
-                    
+                    catch (Exception ex)
+                    {
+                        ExceptionLogger.WriteToLogfile(ex.Message, "image_PreviewMouseLeftButtonDown");
+                    }
                 }
-                _isMoving = true;
+                _currentlyMovedRectangle.Stroke = null;
+                _currentlyMovedRectangle.StrokeDashArray = null;
             }
-            catch (Exception ex)
-            {
-                ExceptionLogger.WriteToLogfile(ex.Message, "image_PreviewMouseLeftButtonDown");
-            }
+            _isMoving = true;
         }
 
         /// <summary>
@@ -400,7 +393,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
 
                     //change recycling bin Image and save it in the progress
                     _recycleBinRectangle.Fill = _brushRecycleBinFull;
-                    Progress.SaveProgress("dragDropPage_RecycleBinFull", true);
+                    Progress.SaveProgress(RecycleBinStatus, true);
                 }
                 _currentlyMovedRectangle = null;
             }
@@ -428,7 +421,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         }
 
         /// <summary>
-        /// This method defines all the actions during the MouseMove, as change of mouse curser and setting boundries. </summary> 
+        /// This method defines all the actions during the moveMouse, as change of mouse curser and setting boundries. </summary> 
         /// <param name="sender">Contains the control which raised the event</param>
         /// <param name="e"></param> 
         private void ElementCanvas_MouseMove(object sender, MouseEventArgs e)
@@ -504,7 +497,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
 
                 _addedSavedData.Clear();
                 _recycleBinRectangle.Fill = _brushRecycleBinEmpty;
-                Progress.SaveProgress("dragDropPage_RecycleBinFull", false);
+                Progress.SaveProgress(RecycleBinStatus, false);
             }
             catch (Exception ex)
             {
