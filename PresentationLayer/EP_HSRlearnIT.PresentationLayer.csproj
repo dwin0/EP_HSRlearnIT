@@ -258,10 +258,10 @@
     <Resource Include="Images\questionmark.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\ButtonAuswerten.png" />
+    <Resource Include="Images\CheckButton.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\ButtonZurücksetzen.png" />
+    <Resource Include="Images\ResetButton.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\correctAnswer.png" />
