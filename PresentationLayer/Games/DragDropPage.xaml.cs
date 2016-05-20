@@ -199,7 +199,9 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                 Name = name,
                 Margin = margin,
                 Stroke = brush,
-                StrokeThickness = 4.0
+                StrokeThickness = 4.0,
+                StrokeDashArray = {5} //TODO : unterscheidung welche Farbe
+
             };
             if (bLeftButtonDown) resRect.PreviewMouseLeftButtonDown += rectangle_PreviewMouseLeftButtonDown;
             if (bLeftButtonUp) resRect.MouseLeftButtonUp += rectangle_PreviewMouseLeftButtonUp;
@@ -269,7 +271,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                         //Index and ChildReference of copied rectangle is added to SavaData. 
                         _currentlyAddedData.OriginalImageChildIndex = ElementCanvas.Children.IndexOf(_currentlyMovedRectangle);
                         _currentlyAddedData.ChildReference = copiedRectangle;
-
                         _currentlyMovedRectangle = copiedRectangle;
                         
                     }
@@ -535,17 +536,17 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                     {
                         correctAnswers++;
                         data.Brush = new SolidColorBrush(System.Windows.Media.Colors.SeaGreen);
-                        data.ChildReference.Stroke = data.Brush;
-                        data.ChildReference.StrokeThickness = 4;
-                        data.ChildReference.StrokeDashArray = new DoubleCollection() { 2 }; 
+                        data.ChildReference.Stroke = data.Brush;                 
                     }
                     else
                     {  
                         wrongAnswers++;
                         data.Brush = new SolidColorBrush(System.Windows.Media.Colors.Red);
                         data.ChildReference.Stroke = data.Brush;
-                        data.ChildReference.StrokeThickness = 4;
+                        data.ChildReference.StrokeDashArray = new DoubleCollection() { 5 };
+
                     }
+                    data.ChildReference.StrokeThickness = 4;
                 }
 
                 MessageBox.Show(
@@ -591,13 +592,17 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                 Brush = null;
             }
 
-           /* public SavedDataForProgress(int originalImageChildIndex, Thickness ImageMargin, Rectangle dropPosition)
-            {
-                OriginalImageChildIndex = originalImageChildIndex;
-                this.ImageMargin = ImageMargin;
-                DropPosition = dropPosition;
-            }*/
-
+            /*public SavedDataForProgress(Rectangle dropRectangle, Rectangle childReference, Thickness imageMargin,
+                    Brush brush, int originalImageChildIndex, int dropRectangleIndex)
+                {
+                    DropRectangle = dropRectangle;
+                    ChildReference = childReference;
+                    ImageMargin = imageMargin;
+                    Brush = brush;
+                    OriginalImageChildIndex = originalImageChildIndex;
+                    DropRectangleIndex = dropRectangleIndex; 
+                }
+             */
             public bool IsAnswerCorrect()
             {
                 if (CorrectAnswers[OriginalImageChildIndex].Contains(DropRectangle.Name))
@@ -638,5 +643,5 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         {
            Focus();
         }*/
+        }
     }
-}
