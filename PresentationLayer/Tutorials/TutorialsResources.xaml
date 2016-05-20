@@ -60,7 +60,7 @@ Dabei steht MultH für die Multiplikation innerhalb des Galois-Feldes. Die dabei
 Ein Beispiel für AAD ist der Versand von Daten über einen unsicheren Kanal. Die Payload wird verschlüsselt und authentisiert, die IP-Adressen jedoch nur authentisiert. Diese dürfen für die Übertragung nicht verschlüsselt werden, da dem Router das Ziel sonst nicht bekannt ist.
 Werden keine Daten verschlüsselt, sondern nur die Integritätsprüfung durchlaufen, spricht man von einem Galois Message Authentication Code (GMAC).
     </system:String>
-    <system:String x:Key="Step9Title">Ciphertext – Authentifizierung</system:String>
+    <system:String x:Key="Step9Title">Ciphertext – Authentisierung</system:String>
     <system:String x:Key="Step9">
 Die im vorherigen Schritt berechneten Daten aus der Galois-Feld Multiplikation werden mit dem ersten Ciphertext-Block mittels XOR verknüpft.
     </system:String>
@@ -74,7 +74,7 @@ Ist der letzte Plaintext-Block kleiner als 128 Bit wird dessen Grösse zur Berec
     </system:String>
     <system:String x:Key="Step12Title">Abschluss und Rückgabe</system:String>
     <system:String x:Key="Step12">
-Damit keine Attacken auf den MAC, welcher auf einer variablen Anzahl Input-Bits basiert, gemacht werden können, wird sowohl die Länge der AAD (len(A)), als auch die Ciphertext-Länge (len(C)) mitauthentifiziert. 
+Damit keine Attacken auf den MAC, welcher auf einer variablen Anzahl Input-Bits basiert, gemacht werden können, wird sowohl die Länge der AAD (len(A)), als auch die Ciphertext-Länge (len(C)) mitauthentisiert. 
 Dazu werden die beiden Längen, in 64 Bit-Repräsentation, aneinandergehängt. Es folgt eine XOR-Verknüpfung mit dem Resultat aus der Galois-Feld Multiplikation des allerletzten Ciphertextes. Nach der Verknüpfung wird dieser Wert nochmals in einem Galois-Feld mit dem Hash-Subkey multipliziert.
     </system:String>
     <system:String x:Key="Step13">
@@ -99,9 +99,9 @@ Die Grösse des zu verschlüsselnden Plaintextes pro IV ist genau aus diesem Gru
     </system:String>
     <system:String x:Key="Step17Title">Rückblick</system:String>
     <system:String x:Key="Step17">
-Der AES-GCM Algorithmus bietet eine Möglichkeit für die gleichzeitige Verschlüsselung und Authentifizierung von Plaintext.
+Der AES-GCM Algorithmus bietet eine Möglichkeit für die gleichzeitige Verschlüsselung und Authentisierung von Plaintext.
 Ein grosser Vorteil dabei ist die Geschwindigkeit. 
-Einerseits können alle Counter-Blöcke vorberechnet werden, sobald der IV und die Plaintext-Länge bekannt sind. Andererseits kann die Authentifizierung von Ciphertext-Blöcken (grün markiert, mit Input Plaintext X) und die Verschlüsselung von weiteren Plaintext-Blöcken (orange markiert, mit Input Plaintext X + 1) unabhängig voneinander, und somit parallel, ablaufen.
+Einerseits können alle Counter-Blöcke vorberechnet werden, sobald der IV und die Plaintext-Länge bekannt sind. Andererseits kann die Authentisierung von Ciphertext-Blöcken (grün markiert, mit Input Plaintext X) und die Verschlüsselung von weiteren Plaintext-Blöcken (orange markiert, mit Input Plaintext X + 1) unabhängig voneinander, und somit parallel, ablaufen.
     </system:String>
     <system:String x:Key="Step18">
 Weiter bietet die Verwendung des Counter-Block Mode (CTR) folgenden Vorteil gegenüber dem Electronic Codebook Mode (ECB-Mode): 
@@ -120,13 +120,13 @@ Wird beispielsweise ein Bild, mit vielen gleichen Farbpunkten, verschlüsselt, s
 
     <system:String x:Key="VerschlüsselungText">Bei der Verschlüsselung wird der erste Plaintextblock AES-verschlüsselt.</system:String>
 
-    <system:String x:Key="AdditionalAuthenticatedDataText">Dem Algorithmus werden weitere authentifizierte, aber nicht verschlüsselte Daten hinzugefügt.</system:String>
+    <system:String x:Key="AdditionalAuthenticatedDataText">Dem Algorithmus werden weitere authentisierte, aber nicht verschlüsselte Daten hinzugefügt.</system:String>
 
-    <system:String x:Key="CiphertextAuthentifizierungText">Die Authentifizierung geschieht über eine Multiplikation in einem Galois-Feld.</system:String>
+    <system:String x:Key="CiphertextAuthentifizierungText">Die Authentisierung geschieht über eine Multiplikation in einem Galois-Feld.</system:String>
 
-    <system:String x:Key="WiederholungText">Die Verschlüsselung und Authentifizierung werden wiederholt angewendet.</system:String>
+    <system:String x:Key="WiederholungText">Die Verschlüsselung und Authentisierung werden wiederholt angewendet.</system:String>
 
-    <system:String x:Key="AbschlussUndRückgabeText">Die Textlänge und der «Counter 0»-Block werden ebenfalls authentifiziert. Am Ende wird der Ciphertext und das Tag zurückgegeben.</system:String>
+    <system:String x:Key="AbschlussUndRückgabeText">Die Textlänge und der «Counter 0»-Block werden ebenfalls authentisiert. Am Ende wird der Ciphertext und das Tag zurückgegeben.</system:String>
 
         <!--Overview Background-->
     
