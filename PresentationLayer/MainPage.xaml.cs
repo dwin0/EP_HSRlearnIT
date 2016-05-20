@@ -32,6 +32,7 @@ namespace EP_HSRlearnIT.PresentationLayer
 
         private readonly SolidColorBrush _greenBackgroundBrush = Application.Current.FindResource("TileBackgroundBrush") as SolidColorBrush;
         private readonly SolidColorBrush _blackBorderBrush = Application.Current.FindResource("TileBorderBrush") as SolidColorBrush;
+        private MenuTile _mouseDownMenuTile;
         #endregion
 
         #region Constructors
@@ -65,47 +66,54 @@ namespace EP_HSRlearnIT.PresentationLayer
             {
                 MenuTile tile = new MenuTile(tileEntry.Key, tileEntry.Value);
                 tile.TileImage.Name = tileEntry.Key.MultipleReplace(stringsToReplace);
-                tile.PreviewMouseLeftButtonDown += OnTileClick;
+                //Mouse Up and Down - Events to make it feel lika a click. There is no Click-Event for Tiles.
+                tile.MouseDown += OnTileMouseDown;
+                tile.MouseUp += OnTileMouseUp;
                 tile.MouseEnter += MenuTile_OnMouseEnter;
                 tile.MouseLeave += MenuTile_OnMouseLeave;
                 MenuGrid.Children.Add(tile);
             }
         }
 
-        private void OnTileClick(object sender, RoutedEventArgs e)
+        private void OnTileMouseDown(object sender, RoutedEventArgs e)
+        {
+            _mouseDownMenuTile = sender as MenuTile;
+        }
+
+        private void OnTileMouseUp(object sender, RoutedEventArgs e)
         {
             MenuTile tile = sender as MenuTile;
             if (tile == null)
             {
-                ExceptionLogger.WriteToLogfile("MenuTile was null", "MainPage: OnTileClick");
-                return;
-            }
-
-            Page toNavigatePage = null;
-
-            switch (tile.TileText.Text)
+                ExceptionLogger.WriteToLogfile("No MenuTile was found - tile was null", "MainPage: OnTileMouseUp");
+            } else if (tile.Equals(_mouseDownMenuTile))
             {
-                case Overview:
-                    toNavigatePage = new AesGcmOverviewPage();
-                    break;
-                case StepByStep:
-                    toNavigatePage = new StepByStepPage();
-                    break;
-                case EncryptionDecryption:
-                    toNavigatePage = new EncryptionDecryptionTabs();
-                    break;
-                case DragDrop:
-                    toNavigatePage = new DragDropPage();
-                    break;
-            }
+                Page toNavigatePage = null;
 
-            if (toNavigatePage != null)
-            {
-                NavigationService?.Navigate(toNavigatePage);
-            }
-            else
-            {
-                ExceptionLogger.WriteToLogfile("No matching MenuTile-Text", "MainPage: OnTileClick");
+                switch (tile.TileText.Text)
+                {
+                    case Overview:
+                        toNavigatePage = new AesGcmOverviewPage();
+                        break;
+                    case StepByStep:
+                        toNavigatePage = new StepByStepPage();
+                        break;
+                    case EncryptionDecryption:
+                        toNavigatePage = new EncryptionDecryptionTabs();
+                        break;
+                    case DragDrop:
+                        toNavigatePage = new DragDropPage();
+                        break;
+                }
+
+                if (toNavigatePage != null)
+                {
+                    NavigationService?.Navigate(toNavigatePage);
+                }
+                else
+                {
+                    ExceptionLogger.WriteToLogfile("No matching MenuTile-Text", "MainPage: OnTileMouseUp");
+                }
             }
         }
 

@@ -14,6 +14,11 @@ namespace EP_HSRlearnIT.PresentationLayer
     /// </summary>
     public partial class MainWindow
     {
+        #region Private Members
+
+        private string _mouseDownMenuItem;
+        #endregion
+
         #region Constructors
 
         /// <summary>
@@ -41,33 +46,39 @@ namespace EP_HSRlearnIT.PresentationLayer
             }
         }
 
-        private void OnMenuItemClick(object sender, MouseButtonEventArgs e)
+        private void OnMenuItemMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            _mouseDownMenuItem = ((FrameworkElement)e.OriginalSource).DataContext as string;
+        }
+
+        private void OnMenuItemMouseUp(object sender, MouseButtonEventArgs e)
         {
             var item = ((FrameworkElement)e.OriginalSource).DataContext as string;
             if (item == null)
             {
-                ExceptionLogger.WriteToLogfile("No MenuItem-Text was found", "MainWindow: OnMenuItemClick");
-                return;
-            }
-            switch (item)
+                ExceptionLogger.WriteToLogfile("No MenuItem-Text was found - item was null", "MainWindow: OnMenuItemMouseUp");
+            } else if (item.Equals(_mouseDownMenuItem))
             {
-                case "Startseite":
-                    MainFrame.Navigate(new MainPage());
-                    break;
-                case "AES-GCM - Übersicht":
-                    MainFrame.Navigate(new AesGcmOverviewPage());
-                    break;
-                case "Schritt für Schritt - Anleitung":
-                    MainFrame.Navigate(new StepByStepPage());
-                    break;
-                case "Ver- & Entschlüsselungs - Anwendung":
-                    MainFrame.Navigate(new EncryptionDecryptionTabs());
-                    break;
-                case "Drag & Drop - Spiel":
-                    MainFrame.Navigate(new DragDropPage());
-                    break;
+                switch (item)
+                {
+                    case "Startseite":
+                        MainFrame.Navigate(new MainPage());
+                        break;
+                    case "AES-GCM - Übersicht":
+                        MainFrame.Navigate(new AesGcmOverviewPage());
+                        break;
+                    case "Schritt für Schritt - Anleitung":
+                        MainFrame.Navigate(new StepByStepPage());
+                        break;
+                    case "Ver- & Entschlüsselungs - Anwendung":
+                        MainFrame.Navigate(new EncryptionDecryptionTabs());
+                        break;
+                    case "Drag & Drop - Spiel":
+                        MainFrame.Navigate(new DragDropPage());
+                        break;
+                }
+                CloseMenu();
             }
-            CloseMenu();
         }
 
         private void CloseMenu()

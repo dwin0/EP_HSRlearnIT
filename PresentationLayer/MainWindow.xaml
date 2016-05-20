@@ -18,7 +18,7 @@
             <Border BorderThickness="0, 0, 3, 0" BorderBrush="{StaticResource MenuBorderBrush}">
                 <StackPanel>
                     <TextBlock Text="Menu" Style="{StaticResource ResourceKey=MenuStyle}"/>
-                    <ListView Name="Menu" PreviewMouseDown="OnMenuItemClick" ItemsSource="{StaticResource ResourceKey=MenuStrings}"
+                    <ListView Name="Menu" PreviewMouseLeftButtonDown="OnMenuItemMouseDown" MouseUp="OnMenuItemMouseUp" ItemsSource="{StaticResource ResourceKey=MenuStrings}"
                               ItemContainerStyle="{StaticResource ResourceKey=MenuItemStyle}"
                               BorderThickness="0" BorderBrush="{StaticResource MenuBackgroundColor}" />
                     <Image Source="Images/encryptionImage.png" Margin="0, 0, 0, 1000"/>

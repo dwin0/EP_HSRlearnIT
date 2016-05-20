@@ -96,7 +96,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
                 stepPath.SetValue(Panel.ZIndexProperty, 3);
                 stepPath.MouseEnter += StepPathOnMouseEnter;
                 stepPath.MouseLeave += StepPathOnMouseLeave;
-                //Mouse Up and Down - Events to make it feel lika a click. There is no Click-Events for Paths.
+                //Mouse Up and Down - Events to make it feel lika a click. There is no Click-Event for Paths.
                 stepPath.MouseDown += StepPathOnMouseDown;
                 stepPath.MouseUp += StepPathOnMouseUp;
 
