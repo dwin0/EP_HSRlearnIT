@@ -24,8 +24,8 @@ namespace EP_HSRlearnIT.BusinessLayer.Testing.UniversalToolsTest
                 ExceptionLogger.WriteToLogfile(nre.Message, "This Exception was fired by the unit-test 'TestToWriteIntoLogFileCatchedException'");
                 //hier könnte der Test aufgrund eines Sekundenwechsels fehlschlagen!
                 var date = DateTime.Now.ToString(CultureInfo.CurrentCulture);
-                expectedStr = "Exception: " + date + ": " + nre.Message +
-                    " This Exception was fired by the unit-test 'TestToWriteIntoLogFileCatchedException'";
+                expectedStr =
+                    $"Exception: {date}: {nre.Message} This Exception was fired by the unit-test \'TestToWriteIntoLogFileCatchedException\'";
             }
 
             using (StreamReader reader = new StreamReader(@"c:\logs\ExceptionLog.log"))
@@ -34,7 +34,8 @@ namespace EP_HSRlearnIT.BusinessLayer.Testing.UniversalToolsTest
 
                 while (reader.EndOfStream == false)
                 {
-                    strToCompare = reader.ReadLine();
+                    string temp = reader.ReadLine();
+                    strToCompare = temp + reader.ReadLine();
                 }
                 Assert.AreEqual(expectedStr, strToCompare);
             }

@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:base="clr-namespace:EP_HSRlearnIT.PresentationLayer"
       mc:Ignorable="d"
-      Title="AesGcmOverviewCommonPage">
+      Title="AesGcmOverviewPage">
 
     <Grid>
         <Grid.RowDefinitions>

@@ -157,12 +157,12 @@ namespace EP_HSRlearnIT.PresentationLayer
         /// <returns>Text in which all found patterns are replaced with a given string</returns>
         public static string MultipleReplace(this string text, Dictionary<string, string> replacements)
         {
-            string retVal = text;
+            string returnValue = text;
             foreach (string textToReplace in replacements.Keys)
             {
-                retVal = retVal.Replace(textToReplace, replacements[textToReplace]);
+                returnValue = returnValue.Replace(textToReplace, replacements[textToReplace]);
             }
-            return retVal;
+            return returnValue;
         }
     }
     #endregion

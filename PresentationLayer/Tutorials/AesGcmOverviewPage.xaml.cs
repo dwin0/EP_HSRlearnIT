@@ -18,7 +18,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
 
         private Path _mouseDownPath;
         private readonly Path[] _areaPaths = new Path[NumOfAreas];
-        private readonly Dictionary<string, Path> _backPaths = new Dictionary<string, Path>();
+        private readonly Dictionary<string, Path> _highlightedPaths = new Dictionary<string, Path>();
         private const int NumOfAreas = 6;
         private const int NumOfStepPaths = 24;
         #endregion
@@ -138,20 +138,20 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
                 return;
             }
 
-            Path backPath;
-            _backPaths.TryGetValue(stepPath.Name, out backPath);
-            //When the Mouse enters a second time, the backPath already exists
-            if (backPath == null)
+            Path highlightedPath;
+            _highlightedPaths.TryGetValue(stepPath.Name, out highlightedPath);
+            //When the Mouse enters a second time, the highlightedPath already exists
+            if (highlightedPath == null)
             {
-                backPath = AddBackPath(stepPath);
-                if (backPath == null)
+                highlightedPath = AddHighlightedPath(stepPath);
+                if (highlightedPath == null)
                 {
-                    ExceptionLogger.WriteToLogfile("backPath could not be added - backPath was null", "AesGcmOverviewPage: StepPathOnMouseEnter");
+                    ExceptionLogger.WriteToLogfile("highlightedPath could not be added - highlightedPath was null", "AesGcmOverviewPage: StepPathOnMouseEnter");
                     return;
                 }
             }
 
-            backPath.Fill = Application.Current.FindResource("BackAreaBrush") as SolidColorBrush;
+            highlightedPath.Fill = Application.Current.FindResource("BackAreaBrush") as SolidColorBrush;
 
             //Find Area Path to show the explanation
             Path areaPath = FindAreaPath(stepPath);
@@ -166,22 +166,22 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
         /// </summary>
         /// <param name="stepPath">StepPath to highlight</param>
         /// <returns></returns>
-        private Path AddBackPath(Path stepPath)
+        private Path AddHighlightedPath(Path stepPath)
         {
-            Path backPath = Clone(stepPath) as Path;
-            if (backPath == null)
+            Path highlightedPath = Clone(stepPath) as Path;
+            if (highlightedPath == null)
             {
-                ExceptionLogger.WriteToLogfile("Path could not be copied - Copy was null", "AesGcmOverviewPage: AddBackPath");
+                ExceptionLogger.WriteToLogfile("Path could not be copied - Copy was null", "AesGcmOverviewPage: AddHighlightedPath");
                 return null;
             }
 
-            backPath.SetValue(Panel.ZIndexProperty, 0);
-            _backPaths.Add(stepPath.Name, backPath);
+            highlightedPath.SetValue(Panel.ZIndexProperty, 0);
+            _highlightedPaths.Add(stepPath.Name, highlightedPath);
 
-            //Add backPath to the OverviewCanvas
-            (stepPath.Parent as Canvas)?.Children.Add(backPath);
+            //Add highlightedPath to the OverviewCanvas
+            (stepPath.Parent as Canvas)?.Children.Add(highlightedPath);
 
-            return backPath;
+            return highlightedPath;
         }
 
         private void StepPathOnMouseLeave(object sender, MouseEventArgs e)
@@ -195,11 +195,11 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
                 return;
             }
 
-            Path backPath;
-            _backPaths.TryGetValue(stepPath.Name, out backPath);
-            if (backPath != null)
+            Path highlightedPath;
+            _highlightedPaths.TryGetValue(stepPath.Name, out highlightedPath);
+            if (highlightedPath != null)
             {
-                backPath.Fill = Application.Current.FindResource("NoBackAreaBrush") as SolidColorBrush;
+                highlightedPath.Fill = Application.Current.FindResource("NoBackAreaBrush") as SolidColorBrush;
             }
         }
 
@@ -251,9 +251,9 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             }
         }
 
-        private Path FindAreaPath(Path frontPath)
+        private Path FindAreaPath(Path stePath)
         {
-            Geometry stepSurface = frontPath.Data;
+            Geometry stepSurface = stePath.Data;
             foreach (Path area in _areaPaths)
             {
                 Geometry areaSurface = area.Data;

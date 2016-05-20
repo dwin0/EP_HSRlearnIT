@@ -27,7 +27,7 @@ namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
         public static void WriteToLogfile(string exeptionMessage, string sourceMethod)
         {
             string filePath = FileManager.SaveFile(_path, _fileName);
-            string entry = $"{Environment.NewLine}Exception: {DateTime.Now.ToString(CultureInfo.CurrentCulture)}: {exeptionMessage} {Environment.NewLine} {sourceMethod}";
+            string entry = $"{Environment.NewLine}Exception: {DateTime.Now.ToString(CultureInfo.CurrentCulture)}: {exeptionMessage} {Environment.NewLine}{sourceMethod}";
             FileManager.AppendContent(filePath, entry);
             AvoidOverflow(filePath);
         }
