@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using System.Xml;
 using EP_HSRlearnIT.BusinessLayer.UniversalTools;
 
 namespace EP_HSRlearnIT.PresentationLayer.Games
@@ -81,7 +79,16 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                     if (dropPlaceCopy != null)
                     {
                         if (i == ImageRecyclingBinEmpty)
+                        {
                             _recycleBinRectangle = dropPlaceCopy;
+                        }
+                        else
+                        {
+                            dropPlaceCopy.Fill = Brushes.Transparent;
+                            dropPlaceCopy.Width = 95;
+                            dropPlaceCopy.Height = 45;
+                        }
+                        
                         canvas.Children.Add(dropPlaceCopy);
                     }
                 }
@@ -90,17 +97,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
             {
                 ExceptionLogger.WriteToLogfile(ex.Message, "DragDropPage_LoadDroppablePlaces");
             }
-        }
-
-        /// <summary>
-        /// This method is responsible for Cloning the Canvas Children
-        /// </summary>
-        private FrameworkElement Clone(FrameworkElement e)
-        {
-            XmlDocument document = new XmlDocument();
-            document.LoadXml(XamlWriter.Save(e));
-
-            return (FrameworkElement)XamlReader.Load(new XmlNodeReader(document));
         }
 
         /// <summary>
