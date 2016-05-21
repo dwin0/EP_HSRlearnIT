@@ -18,6 +18,8 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
         private int _step;
         private int _title;
         private const int StepMin = 0;
+        private const int SbsMin = 1;
+        private const int SbsMax = 15;
         private const int StepMax = 18;
 
         private const int NumOfStepPaths = 24;
@@ -189,7 +191,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             {
                 TextScrollViewer.VerticalScrollBarVisibility = (ScrollBarVisibility)Visibility.Hidden;
             }
-            StepTitle.Text = WriteTitle(stepNumber) + " (Schritt " + GetSubtitelNumber(stepNumber) + ")";
+            StepTitle.Text = GetTitleNumber(stepNumber) + WriteTitle(stepNumber);
 
             DrawImage(stepNumber);
 
@@ -316,7 +318,25 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             return null;
         }
 
-        private int GetSubtitelNumber(int stepNumber)
+        private string GetTitleNumber(int stepNumber)
+        {
+            string subtitle = "";
+            int mainNumber = 0;
+            if (SbsMin <= stepNumber && stepNumber <= SbsMax)
+            {
+                for (int listIndex = SbsMin; listIndex <= stepNumber; listIndex++)
+                {
+                    if (GetSubtitleNumber(listIndex) == 1)
+                    {
+                        mainNumber++;
+                    }
+                }
+                subtitle = mainNumber + "." + GetSubtitleNumber(stepNumber) + " ";
+            }
+            return subtitle;
+        }
+
+        private int GetSubtitleNumber(int stepNumber)
         {
             if (GetTitle(stepNumber) != null)
             {
@@ -324,7 +344,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             }
             stepNumber--;
             int subtitle = 1;
-            return subtitle + GetSubtitelNumber(stepNumber);
+            return subtitle + GetSubtitleNumber(stepNumber);
         }
 
         private void Button_OnLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
