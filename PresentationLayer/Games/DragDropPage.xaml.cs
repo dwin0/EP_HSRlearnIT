@@ -35,7 +35,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
 
         #endregion
 
-
         #region Constructor
         public DragDropPage()
         {
@@ -74,8 +73,8 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                     else
                     {
                         dropPlaceCopy.Fill = Brushes.Transparent;
-                        dropPlaceCopy.Width = 95;
-                        dropPlaceCopy.Height = 45;
+                        dropPlaceCopy.Width = 90;
+                        dropPlaceCopy.Height = 40;
                     }
                         
                     canvas.Children.Add(dropPlaceCopy);
@@ -100,7 +99,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
             {
                 if(rectangleData == null) { continue; }
                 var origImage = (Rectangle)ElementCanvas.Children[rectangleData.OriginalImageChildIndex];
-                var newImage = CreateNewRectangle(origImage.Fill, 95, 45, "tmp" + counter, rectangleData.ImageMargin, rectangleData.Brush, true, true, false);
+                var newImage = CreateNewRectangle(origImage.Fill, 95, 45, "tmp" + counter, rectangleData.ImageMargin, rectangleData.Brush, rectangleData.StrokeDashArray, true, true, false);
                 counter++;
 
                 // here we have refreshed the original child reference and DropRectangle 
@@ -144,7 +143,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                 try
                 {
                     var image =
-                        new BitmapImage(new Uri(@"pack://application:,,,/Images/dragdrop" + (i) + ".png", UriKind.RelativeOrAbsolute));
+                        new BitmapImage(new Uri(@"pack://application:,,,/Images/dragdrop" + i + ".png", UriKind.RelativeOrAbsolute));
                     images[i - 1] = image;
                 }
                 catch(Exception ex)
@@ -165,10 +164,11 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         /// <param name="margin">Margin of the Rectangle to be created</param>
         /// <param name="brush">Brush (Border) of Rectangle</param>
         /// <param name="leftButtonDown">Rectangle should/should not be associated with the Mouse-Eventhandler leftButtonDown</param>
+        /// <param name="strokeDashArray">Rectangle should/should not get a dotted line in the solution </param>
         /// <param name="leftButtonUp">Rectange should/should not be associated with the Mouse-Eventhandler LeftbuttonUp</param>
         /// <param name="moveMouse">Rectangle should/should not be associated with the Mouse-Eventhandler moveMouse</param>
         /// <returns>Return value is the newly created Rectangle</returns>
-        private Rectangle CreateNewRectangle(Brush fill, double width, double height, string name, Thickness margin, Brush brush, bool leftButtonDown, bool leftButtonUp, bool moveMouse)
+        private Rectangle CreateNewRectangle(Brush fill, double width, double height, string name, Thickness margin, Brush brush, double strokeDashArray, bool leftButtonDown, bool leftButtonUp, bool moveMouse)
         {
             Rectangle resRect = new Rectangle
             {
@@ -179,9 +179,11 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                 Margin = margin,
                 Stroke = brush,
                 StrokeThickness = 4.0,
-                StrokeDashArray = {5} //TODO : unterscheidung welche Farbe
-
             };
+
+            if(strokeDashArray > 0.0)
+                resRect.StrokeDashArray = new DoubleCollection{ strokeDashArray }; 
+
             SetMouseEvents(resRect, leftButtonDown, leftButtonUp, moveMouse);
             return resRect;
         }
@@ -189,7 +191,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
 
         //  --> Vorschlag für eine Verkürzung der Parameterliste und der Methode selbst
         //private Rectangle CreateNewRectangle(Rectangle rectangle, string name, bool leftButtonDown, bool leftButtonUp, bool moveMouse)
-        //{
+        // {
         //    Rectangle rect = Clone(rectangle) as Rectangle;
         //    if (rect != null)
         //    {
@@ -228,7 +230,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
             for (var i = 0; i < images.Length; i++)
             {
                 if (images[i] == null) { continue; }
-                var index = ElementCanvas.Children.Add(CreateNewRectangle(new ImageBrush(images[i]), 92, 43, "dragdrop" + i, new Thickness(800, 100 + i * 55, 0, 0), null, true, true, false));
+                var index = ElementCanvas.Children.Add(CreateNewRectangle(new ImageBrush(images[i]), 95, 45, "dragdrop" + i, new Thickness(800, 100 + i * 55, 0, 0), null, 0.0, true, true, false));
                 CorrectAnswers.Add(index, localCorrectAnswers[i]);
             }
         }
@@ -254,7 +256,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
 
                     var copiedRectangle = CreateNewRectangle(_currentlyMovedRectangle.Fill,
                         _currentlyMovedRectangle.Width, _currentlyMovedRectangle.Height,
-                        "tmp" + _currentlyMovedRectangle.Name, _currentlyMovedRectangle.Margin, null, true, true, true);
+                        "tmp" + _currentlyMovedRectangle.Name, _currentlyMovedRectangle.Margin, null, 0.0, true, true, true);
 
                     ElementCanvas.Children.Add(copiedRectangle);
 
@@ -357,7 +359,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                     _currentlyAddedData.DropRectangle = dropRectangle;
                     _currentlyAddedData.DropRectangleIndex = _dropLocationsRectangles.IndexOf(dropRectangle);
 
-                 
                     if (addedSavedDataIndex != -1) // If it is not minus 1, that means we are putting the image to the already filled rectangle
                     {
                         if (_addedSavedData[addedSavedDataIndex].ChildReference != _currentlyMovedRectangle) // Do not remove rectangle itself 
@@ -439,37 +440,10 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                     var currMousePoint = e.GetPosition(ElementCanvas);
 
                     _currentlyMovedRectangle.Margin = new Thickness(currMousePoint.X - _startPoint.X, currMousePoint.Y - _startPoint.Y, 0, 0);
-              
-                
-                    #region Check Page Boundaries
 
-                    if (_currentlyMovedRectangle.Margin.Left < -42) // Left
-                    {
-                        _currentlyMovedRectangle.Margin = new Thickness(-42, _currentlyMovedRectangle.Margin.Top, 0, 0);
-                    }
+                    CheckPageBoundaries();
 
-
-                    if (_currentlyMovedRectangle.Margin.Left + _currentlyMovedRectangle.Width > ElementCanvas.Width) // Right
-                    {
-                        _currentlyMovedRectangle.Margin = new Thickness(ElementCanvas.Width - _currentlyMovedRectangle.Width,
-                           _currentlyMovedRectangle.Margin.Top, 0, 0);
-                    }
-
-                    if (_currentlyMovedRectangle.Margin.Top < 0) // Top
-                    {
-                        _currentlyMovedRectangle.Margin = new Thickness(0, _currentlyMovedRectangle.Margin.Top, 0, 0);
-                    }
-
-
-                    if (_currentlyMovedRectangle.Margin.Top + _currentlyMovedRectangle.Height > ElementCanvas.Height)
-                    {
-                        _currentlyMovedRectangle.Margin = new Thickness(ElementCanvas.Height - _currentlyMovedRectangle.Height,
-                            _currentlyMovedRectangle.Margin.Top, 0, 0);
-                    }
-                        
-                    #endregion Calculate Offset
-                    
-                   var imageRect = new Rect(_currentlyMovedRectangle.Margin.Left, _currentlyMovedRectangle.Margin.Top,
+                    var imageRect = new Rect(_currentlyMovedRectangle.Margin.Left, _currentlyMovedRectangle.Margin.Top,
                         _currentlyMovedRectangle.Width, _currentlyMovedRectangle.Height);
 
                     bool bIntersection = CheckCollisionWithDropRectangles(imageRect) != null || CheckCollisionWithRecycleBin(imageRect);
@@ -479,8 +453,27 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
             }
             catch (Exception ex)
             {
-                ExceptionLogger.WriteToLogfile(ex.Message, "testMethod");
+                ExceptionLogger.WriteToLogfile(ex.Message, "ElementCanvas_MouseMove");
             }
+        }
+
+        /// <summary>
+        /// This method sets the boundries of the mouse for the game </summary>
+        private void CheckPageBoundaries()
+        {
+            if (_currentlyMovedRectangle.Margin.Left < -42) // Left
+                _currentlyMovedRectangle.Margin = new Thickness(-42, _currentlyMovedRectangle.Margin.Top, 0, 0);
+
+            if (_currentlyMovedRectangle.Margin.Left + _currentlyMovedRectangle.Width > ElementCanvas.Width) // Right
+                _currentlyMovedRectangle.Margin = new Thickness(ElementCanvas.Width - _currentlyMovedRectangle.Width,
+                    _currentlyMovedRectangle.Margin.Top, 0, 0);
+
+            if (_currentlyMovedRectangle.Margin.Top < 0) // Top
+                _currentlyMovedRectangle.Margin = new Thickness(_currentlyMovedRectangle.Margin.Left, 0, 0, 0);
+
+            if (_currentlyMovedRectangle.Margin.Top + _currentlyMovedRectangle.Height > ElementCanvas.Height) // Bottom
+                _currentlyMovedRectangle.Margin = new Thickness(_currentlyMovedRectangle.Margin.Left,
+                    ElementCanvas.Height - _currentlyMovedRectangle.Height, 0, 0);
         }
 
         /// <summary>
@@ -492,8 +485,8 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
             try
             {
                 // Remove last N children
-                int N = _addedSavedData.Count;
-                ElementCanvas.Children.RemoveRange(ElementCanvas.Children.Count - N, N);
+                int addedChildrenCount = _addedSavedData.Count;
+                ElementCanvas.Children.RemoveRange(ElementCanvas.Children.Count - addedChildrenCount, addedChildrenCount);
 
                 _addedSavedData.Clear();
                 _recycleBinRectangle.Fill = _brushRecycleBinEmpty;
@@ -525,7 +518,8 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                     {
                         correctAnswers++;
                         data.Brush = new SolidColorBrush(System.Windows.Media.Colors.SeaGreen);
-                        data.ChildReference.Stroke = data.Brush;                 
+                        data.ChildReference.Stroke = data.Brush;
+                        data.StrokeDashArray = 0.0;
                     }
                     else
                     {  
@@ -533,7 +527,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                         data.Brush = new SolidColorBrush(System.Windows.Media.Colors.Red);
                         data.ChildReference.Stroke = data.Brush;
                         data.ChildReference.StrokeDashArray = new DoubleCollection() { 5 };
-
+                        data.StrokeDashArray = 5.0;
                     }
                     data.ChildReference.StrokeThickness = 4;
                 }
@@ -571,27 +565,19 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
       
             public Thickness ImageMargin; // Position of copied data, we need it when switching pages
             public Brush Brush;
+            public double StrokeDashArray;
             public int OriginalImageChildIndex; // Index of original child we made copy of, it's index of imagebrush
             public int DropRectangleIndex; // Index of original child we made copy of, it's index of imagebrush
+            
 
-            public SavedDataForProgress() // TODO : Refactor with parameters
+            public SavedDataForProgress() 
             {
                 OriginalImageChildIndex = -1;
                 DropRectangle = null;
                 Brush = null;
+                StrokeDashArray = 0.0;
             }
-
-            /*public SavedDataForProgress(Rectangle dropRectangle, Rectangle childReference, Thickness imageMargin,
-                    Brush brush, int originalImageChildIndex, int dropRectangleIndex)
-                {
-                    DropRectangle = dropRectangle;
-                    ChildReference = childReference;
-                    ImageMargin = imageMargin;
-                    Brush = brush;
-                    OriginalImageChildIndex = originalImageChildIndex;
-                    DropRectangleIndex = dropRectangleIndex; 
-                }
-             */
+           
             public bool IsAnswerCorrect()
             {
                 if (CorrectAnswers[OriginalImageChildIndex].Contains(DropRectangle.Name))
@@ -628,9 +614,5 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                 CloseGameInstruction(this, e);
         }
 
-       /* private void RestoreFocusToPage(object sender, MouseButtonEventArgs e)
-        {
-           Focus();
-        }*/
-        }
     }
+}

@@ -24,22 +24,22 @@
     </system:String>
 
     <!-- ReSharper warnings for Canvas.Left and Canvas.Top can be ignored, this parameters are used, even if ReSharp does not recognize it! -->
-    <Rectangle x:Key="DroppablePlace1" Name="Rect1Iv" Canvas.Left="70" Canvas.Top="78" />
-    <Rectangle x:Key="DroppablePlace2" Name="Rect2MultH" Canvas.Left="540" Canvas.Top="500" />
-    <Rectangle x:Key="DroppablePlace3" Name="Rect3Len" Canvas.Left="432" Canvas.Top="444" />
-    <Rectangle x:Key="DroppablePlace4" Name="Rect4Aad" Canvas.Left="155" Canvas.Top="450" />
-    <Rectangle x:Key="DroppablePlace5" Name="Rect5MultH" Canvas.Left="540" Canvas.Top="375" />
-    <Rectangle x:Key="DroppablePlace6" Name="Rect6Ciphertext" Canvas.Left="540" Canvas.Top="285"/>
-    <Rectangle x:Key="DroppablePlace7" Name="Rect7Counter" Canvas.Left="540" Canvas.Top="135"/>
-    <Rectangle x:Key="DroppablePlace8" Name="Rect8Plaintext" Canvas.Left="435" Canvas.Top="237" />
-    <Rectangle x:Key="DroppablePlace9" Name="Rect9MultH" Canvas.Left="293" Canvas.Top="391" />
-    <Rectangle x:Key="DroppablePlace10" Name="Rect10MultH" Canvas.Left="157" Canvas.Top="389"/>
-    <Rectangle x:Key="DroppablePlace11" Name="Rect11Ciphertext" Canvas.Left="295" Canvas.Top="295" />
-    <Rectangle x:Key="DroppablePlace12" Name="Rect12Plaintext" Canvas.Left="177" Canvas.Top="244" />
-    <Rectangle x:Key="DroppablePlace13" Name="Rect13Hash" Canvas.Left="-42" Canvas.Top="198" />
-    <Rectangle x:Key="DroppablePlace14" Name="Rect15Counter" Canvas.Left="295" Canvas.Top="135" />
-    <Rectangle x:Key="DroppablePlace15" Name="Rect16Tag" Canvas.Left="540" Canvas.Top="605"/>
-    <Rectangle x:Key="DroppablePlace16" Name="Rect17Counter" Canvas.Left="70" Canvas.Top="134"/>
+    <Rectangle x:Key="DroppablePlace1" Name="Rect1Iv" Canvas.Left="68" Canvas.Top="76" />
+    <Rectangle x:Key="DroppablePlace2" Name="Rect2MultH" Canvas.Left="538" Canvas.Top="498" />
+    <Rectangle x:Key="DroppablePlace3" Name="Rect3Len" Canvas.Left="432" Canvas.Top="443" />
+    <Rectangle x:Key="DroppablePlace4" Name="Rect4Aad" Canvas.Left="156" Canvas.Top="448" />
+    <Rectangle x:Key="DroppablePlace5" Name="Rect5MultH" Canvas.Left="536" Canvas.Top="375" />
+    <Rectangle x:Key="DroppablePlace6" Name="Rect6Ciphertext" Canvas.Left="538" Canvas.Top="284"/>
+    <Rectangle x:Key="DroppablePlace7" Name="Rect7Counter" Canvas.Left="540" Canvas.Top="134"/>
+    <Rectangle x:Key="DroppablePlace8" Name="Rect8Plaintext" Canvas.Left="433" Canvas.Top="235" />
+    <Rectangle x:Key="DroppablePlace9" Name="Rect9MultH" Canvas.Left="293" Canvas.Top="389" />
+    <Rectangle x:Key="DroppablePlace10" Name="Rect10MultH" Canvas.Left="156" Canvas.Top="389"/>
+    <Rectangle x:Key="DroppablePlace11" Name="Rect11Ciphertext" Canvas.Left="294" Canvas.Top="295" />
+    <Rectangle x:Key="DroppablePlace12" Name="Rect12Plaintext" Canvas.Left="175" Canvas.Top="242" />
+    <Rectangle x:Key="DroppablePlace13" Name="Rect13Hash" Canvas.Left="-43" Canvas.Top="198" />
+    <Rectangle x:Key="DroppablePlace14" Name="Rect15Counter" Canvas.Left="293" Canvas.Top="133" />
+    <Rectangle x:Key="DroppablePlace15" Name="Rect16Tag" Canvas.Left="538" Canvas.Top="603"/>
+    <Rectangle x:Key="DroppablePlace16" Name="Rect17Counter" Canvas.Left="70" Canvas.Top="133"/>
     <Rectangle x:Key="DroppablePlace17" Name="Recycle" Height="95" Width="80" Canvas.Left ="-40" Canvas.Top="580">
         <Rectangle.Fill>
             <ImageBrush ImageSource ="/Images/recycling.png"/>

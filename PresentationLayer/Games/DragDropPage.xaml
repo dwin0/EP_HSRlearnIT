@@ -6,16 +6,14 @@
       xmlns:base="clr-namespace:EP_HSRlearnIT.PresentationLayer"
       mc:Ignorable="d"
       Title="DragDrop" Focusable ="True" PreviewKeyDown="ElementCanvas_PreviewKeyDown" >
-
     <Viewbox>
-        <Canvas Name="ElementCanvas" Height="720" Width="960" MouseMove="ElementCanvas_MouseMove" Focusable="False" >
+        <Canvas Name="ElementCanvas" Height="720" Width="960" MouseMove="ElementCanvas_MouseMove" Focusable="False" Background="Transparent">
             <Rectangle Height="600" Width="700" Margin="-50, 50, 0, 0">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource ="/Images/dragdrop.PNG"/>
                 </Rectangle.Fill>
             </Rectangle>
-
-
+            
             <Button Name="Zurücksetzen" Content="Zurücksetzen" Click="OnResetClick" Height="55" Width="120" Canvas.Left="775" Canvas.Bottom="30" FontSize="16" Style="{StaticResource ResourceKey=ProgramButtonStyle}" Focusable="False"/>
             <Button Name="Auswertung" Content="Auswertung" Click="Check_OnClick" Height="55" Width="120" Canvas.Left="650" Canvas.Bottom="30" FontSize="16" Style="{StaticResource ResourceKey=ProgramButtonStyle}" Focusable="False"/>
             <Image Source="/Images/questionmark.png" Name="QuestionMarkOpenInstruction" Canvas.Left="831" Canvas.Top="5" Width="60"
