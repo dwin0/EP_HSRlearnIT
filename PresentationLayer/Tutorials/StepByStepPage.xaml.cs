@@ -149,6 +149,19 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             Progress.SaveProgress("StepByStepPage_ButtonState", true);
         }
 
+        private void SwitchNextOptionsWindow()
+        {
+            var buttonStatus = (bool?)Progress.GetProgress("StepByStepPage_ButtonState");
+            if (buttonStatus == null || buttonStatus == false)
+            {
+                NextOptionsWindow.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                NextOptionsWindow.Visibility = Visibility.Hidden;
+            }
+        }
+
         private int CheckRange(int stepNumber)
         {
             if (!(StepMin <= stepNumber && stepNumber <= StepMax))
@@ -178,6 +191,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
                 case StepMax:
                     PreviousStepButton.IsEnabled = true;
                     NextStepButton.IsEnabled = false;
+                    SwitchNextOptionsWindow();
                     ActivateButtons();
                     break;
                 default:
