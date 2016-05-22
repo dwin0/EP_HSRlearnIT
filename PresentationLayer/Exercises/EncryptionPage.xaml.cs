@@ -6,15 +6,21 @@ using EP_HSRlearnIT.BusinessLayer.UniversalTools;
 
 namespace EP_HSRlearnIT.PresentationLayer.Exercises
 {
+    /// <summary>
+    /// Encryption page for the AesGcm Algorithmus
+    /// </summary>
     public partial class EncryptionPage
     {
         #region Constructors
+        /// <summary>
+        /// Initializes the EncryptionPage and loads the Progress for iv, aad, plaintext and key.
+        /// </summary>
         public EncryptionPage()
         {
             InitializeComponent();
-            HexPlaintextBox.Text = Progress.GetProgress("EncryptionPage_HexPlaintextBox") as string;
             HexIvBox.Text = Progress.GetProgress("EncryptionPage_HexIvBox") as string;
             HexAadBox.Text = Progress.GetProgress("EncryptionPage_HexAadBox") as string;
+            HexPlaintextBox.Text = Progress.GetProgress("EncryptionPage_HexPlaintextBox") as string;
             HexPasswordBox.Text = Progress.GetProgress("EncryptionPage_HexPasswordBox") as string;
         }
 
@@ -25,8 +31,18 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         private async void OnEnryptionButtonClick(object sender, RoutedEventArgs e)
         {
             //key is evaluated and will be resized to 32 Byte if necessary
-            string keyString = Library.GenerateKey(UtfPasswordBox.Text);
-            ChangeHexBox(keyString, HexPasswordBox);
+            try
+            {
+                string keyString = Library.GenerateKey(UtfPasswordBox.Text);
+                ChangeHexBox(keyString, HexPasswordBox);
+            }
+            catch (OverflowException)
+            {
+                MessageBox.Show("Es wurde ein Zeichen, welches mit mehr als einem Byte repräsentiert wird, eingegeben. Bitte überprüfe die Eingabe und passe diese an.",
+                    "Achtung", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                return;
+            }
+
 
             if (HexIvBox.Text == "")
             {

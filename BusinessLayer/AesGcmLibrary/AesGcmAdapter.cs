@@ -7,8 +7,12 @@ using System.Security.Cryptography;
 using System.Text;
 using Castle.Core.Internal;
 
-namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
+namespace EP_HSRlearnIT.BusinessLayer.AesGcmLibrary
 {
+    /// <summary>
+    /// This class handles the invocation of the Security.Cryptography Library for the Aes Gcm Algorithm.
+    /// It contains Method to invoke the Encryption and the Decryption and also Methods to convert from byte arrays to string and vice versa.
+    /// </summary>
     public class AesGcmAdapter
     {
         #region Public Methods
@@ -22,8 +26,8 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
         /// <param name="aad">Is an optional parameter, the algorithm can be used without it. The additional authenticated data will not be encrypted but are used in the process of the generation of the tag.</param>
         /// <returns>If sucessfull:
         ///          A tuple with the following parameters:
-        ///          param1: is the generated tag, this parameter has to be used in the decryption and authentication
-        ///          param2: is the generated ciphertext
+        ///          param1: is the generated tag in hex, this parameter has to be used in the decryption and authentication
+        ///          param2: is the generated ciphertext in hex
         ///          Else an invalid argument exception will be thrown.
         /// </returns>
         public Tuple<string, string> Encrypt(string key, string plaintext, string iv, string aad)
@@ -44,7 +48,7 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
                 aes.IV = byteIv ?? new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
                 //Aad is part of the generated tag. Is not part of the ciphertext, it won't be produced when decrypting.
-                aes.AuthenticatedData = byteAad;
+                aes.AuthenticatedData = byteAad ?? new byte[] {};
 
                 //Perform the encryption.
                 MemoryStream ms = new MemoryStream();
@@ -73,7 +77,7 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
         /// <param name="iv">If the iv was set in the encryption it has to be the same in the decryption. Else the default iv with 12 zero Bytes is used.</param>
         /// <param name="aad">If the aad was set in the encryption it has to be the same in the decryption, because the aad is used to reproduce the tag.</param>
         /// <param name="tag">The tag was an outputparameter of the encryption. If the wrong tag is used an exception will be thrown.</param>
-        /// <returns>If sucessfull: The decrypted plaintext.
+        /// <returns>If sucessfull: The decrypted plaintext in hex.
         ///          Else an exception will be thrown.
         /// </returns>
         public string Decrypt(string key, string ciphertext, string iv, string aad, string tag)
@@ -92,7 +96,7 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
                 aes.IV = byteIv ?? new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
                 //If the aad doesn't match between encryption and decryption the tag will not match either and the decryption will fail.
-                aes.AuthenticatedData = byteAad;
+                aes.AuthenticatedData = byteAad ?? new byte[] {};
 
                 //The tag that was generated during encryption gets set here.
                 aes.Tag = byteTag;
@@ -200,6 +204,11 @@ namespace EP_HSRlearnIT.BusinessLayer.CryptoTools
             return bytes;
         }
 
+        /// <summary>
+        /// A non hex string can be convertet into a hex string.
+        /// </summary>
+        /// <param name="values">A string which contains non hex characters.</param>
+        /// <returns>Returns the converted hex string.</returns>
         public string ConvertToHexString(string values)
         {
             StringBuilder sb = new StringBuilder();

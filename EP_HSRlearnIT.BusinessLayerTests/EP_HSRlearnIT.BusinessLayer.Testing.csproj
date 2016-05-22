@@ -56,13 +56,13 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="CryptoToolsTest\AesGcmCryptoLibraryTest.cs" />
-    <Compile Include="CryptoToolsTest\AuthenticatedAesCngGcmTestVectorTest.cs" />
+    <Compile Include="AesGcmLibraryTest\AesGcmAdapterTest.cs" />
+    <Compile Include="AesGcmLibraryTest\AuthenticatedAesCngGcmTestVectorTest.cs" />
     <Compile Include="UniversalToolsTest\ExceptionLoggerTest.cs" />
     <Compile Include="UniversalToolsTest\FileManagerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UniversalToolsTest\ProgressTest.cs" />
-    <Compile Include="CryptoToolsTest\Util.cs" />
+    <Compile Include="AesGcmLibraryTest\Util.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BusinessLayer\EP_HSRlearnIT.BusinessLayer.csproj">

@@ -1,19 +1,30 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using EP_HSRlearnIT.BusinessLayer.UniversalTools;
 
 namespace EP_HSRlearnIT.PresentationLayer.Exercises
 {
+    /// <summary>
+    /// This class contains the logic for the tabs.
+    /// </summary>
     public partial class EncryptionDecryptionTabs
     {
         #region Constructor
+        /// <summary>
+        /// This constructor can be called, if the default tab should be started. The default tab is the EncryptionPage.
+        /// </summary>
         public EncryptionDecryptionTabs()
         {
             InitializeComponent();
-            EncryptionFrame.Source = new Uri("EncryptionPage.xaml", UriKind.RelativeOrAbsolute);
+            Page page = new EncryptionPage();
+            EncryptionFrame.Navigate(page);
+            InitializeVisibility(page);
         }
 
+        /// <summary>
+        /// If a tab change is made, this constructor is called.
+        /// </summary>
+        /// <param name="tabItem"></param>
         public EncryptionDecryptionTabs(TabItem tabItem)
         {
             InitializeComponent();
@@ -22,6 +33,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
 
             if (tabItem.Name == "EncryptionItem")
             {
+                //IsSelected has to be set manually, else the switching of the tabs won't work properly
                 EncryptionItem.IsSelected = true;
                 DecryptionItem.IsSelected = false;
                 page = new EncryptionPage();
@@ -35,12 +47,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                 DecryptionFrame.Navigate(page);
             }
 
-            var visibility = Progress.GetProgress("EncryptionDecryptionTabs_visibility");
-
-            if (visibility != null)
-            {
-                SetVisibility(page?.Content as Grid, (Visibility)visibility);
-            }
+            InitializeVisibility(page);
         }
 
         #endregion
@@ -69,19 +76,11 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                 switch (element.Name)
                 {
                     case "HexCiphertextBox":
-                        Progress.SaveProgress("DecryptionPage_HexCiphertextBox", element.Text);
-                        break;
                     case "HexAadBox":
-                        Progress.SaveProgress("DecryptionPage_HexAadBox", element.Text);
-                        break;
                     case "HexIvBox":
-                        Progress.SaveProgress("DecryptionPage_HexIvBox", element.Text);
-                        break;
                     case "HexTagBox":
-                        Progress.SaveProgress("DecryptionPage_HexTagBox", element.Text);
-                        break;
                     case "HexPasswordBox":
-                        Progress.SaveProgress("DecryptionPage_HexPasswordBox", element.Text);
+                        Progress.SaveProgress("DecryptionPage_" + element.Name, element.Text);
                         break;
                 }
             }
@@ -94,16 +93,10 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                 switch (element.Name)
                 {
                     case "HexPlaintextBox":
-                        Progress.SaveProgress("EncryptionPage_HexPlaintextBox", element.Text);
-                        break;
                     case "HexAadBox":
-                        Progress.SaveProgress("EncryptionPage_HexAadBox", element.Text);
-                        break;
                     case "HexIvBox":
-                        Progress.SaveProgress("EncryptionPage_HexIvBox", element.Text);
-                        break;
                     case "HexPasswordBox":
-                        Progress.SaveProgress("EncryptionPage_HexPasswordBox", element.Text);
+                        Progress.SaveProgress("EncryptionPage_" + element.Name, element.Text);
                         break;
                 }
             }
@@ -116,53 +109,56 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             Frame frame = selected?.Content as Frame;
             Page page = frame?.Content as Page;
             Grid grid = page?.Content as Grid;
+            Visibility visibility;
 
-            if (expertmodus != null)
+            if (expertmodus == null) { return;}
+            if (expertmodus.Content.ToString().Contains("aus"))
             {
-                Visibility visibility;
+                visibility = Visibility.Visible;
+            }
+            else
+            {
+                visibility = Visibility.Collapsed;
+            }
 
-                if (expertmodus.Content.ToString().Contains("aus"))
-                {
-                    visibility = Visibility.Visible;
-                }
-                else
-                {
-                    visibility = Visibility.Collapsed;
-                }
+            SetVisibility(grid, visibility);
+            Progress.SaveProgress("EncryptionDecryptionTabs_visibility", visibility);
+        }
 
-                SetVisibility(grid, visibility);
-                Progress.SaveProgress("EncryptionDecryptionTabs_visibility", visibility);
+        private void InitializeVisibility(Page page)
+        {
+            var visibility = Progress.GetProgress("EncryptionDecryptionTabs_visibility");
+            if (visibility != null)
+            {
+                SetVisibility(page?.Content as Grid, (Visibility)visibility);
             }
         }
 
         private void SetVisibility(Grid grid, Visibility visibility)
         {
-            if (grid != null)
+            if (grid == null) { return;}
+
+            foreach (var child in DependencyObjectExtension.GetAllChildren<FrameworkElement>(grid))
             {
-                var children = DependencyObjectExtension.GetAllChildren<FrameworkElement>(grid);
-
-                foreach (var child in children)
+                if (child.Name.Contains("Hex"))
                 {
-                    if (child.Name.Contains("Hex"))
-                    {
-                        child.Visibility = visibility;
-                    }
-
-                    GridLength gridLength;
-                    if (visibility == Visibility.Visible)
-                    {
-                        gridLength = new GridLength(1, GridUnitType.Star);
-                        ExpertmodusButton.Content = "Expertenmodus: ein";
-                    }
-                    else
-                    {
-                        gridLength = new GridLength(0);
-                        ExpertmodusButton.Content = "Expertenmodus: aus";
-                    }
-
-                    grid.ColumnDefinitions[1].Width = gridLength;
-
+                    child.Visibility = visibility;
                 }
+
+                GridLength gridLength;
+                if (visibility == Visibility.Visible)
+                {
+                    gridLength = new GridLength(1, GridUnitType.Star);
+                    ExpertmodusButton.Content = "Expertenmodus: ein";
+                }
+                else
+                {
+                    gridLength = new GridLength(0);
+                    ExpertmodusButton.Content = "Expertenmodus: aus";
+                }
+
+                grid.ColumnDefinitions[1].Width = gridLength;
+
             }
         }
 

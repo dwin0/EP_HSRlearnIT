@@ -34,12 +34,78 @@
  
     
     <!-- Styles  -->
-    
+
     <Style x:Key="ExpertModusButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="Background" Value="White"/>
         <Setter Property="BorderBrush" Value="White"/>
         <Setter Property="Margin" Value="0,15,0,0" />
         <Setter Property="FontSize" Value="15" />
+    </Style>
+    
+    <Style x:Key="GridBorderStyle" TargetType="{x:Type Border}">
+        <Setter Property="Grid.Row" Value="0"/>
+        <Setter Property="Grid.RowSpan" Value="13"/>
+        <Setter Property="Grid.Column" Value="0"/>
+        <Setter Property="Grid.ColumnSpan" Value="2"/>
+        <Setter Property="CornerRadius" Value="6"/>
+        <Setter Property="Background" Value="LightGray"/>
+    </Style>
+
+    <Style x:Key="ContainerForTextBlockAndInfoImageStyle" TargetType="{x:Type DockPanel}">
+        <Setter Property="Margin" Value="15,0,15,0"/>
+    </Style>
+    
+    <Style x:Key="ContainerForButtons" TargetType="{x:Type DockPanel}">
+        <Setter Property="Margin" Value="15,10,15,10"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="LastChildFill" Value="False"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>            
+    </Style>
+    
+    <Style x:Key="TooltipImageStyle" TargetType="{x:Type Image}">
+        <Setter Property="Source" Value="/Images/info.png"/>
+        <Setter Property="Width" Value="18"/>
+        <Setter Property="Margin" Value="5,0,0,0"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="ToolTipService.ShowDuration" Value="60000"/>
+        <Setter Property="ToolTip.Placement" Value="Right"/>
+    </Style>
+    
+    <Style x:Key="TooltipTextBlockStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="Width" Value="400"/>
+    </Style>
+
+    <Style x:Key="WithImageTextBlockStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Margin" Value="0,4,0,0"/>
+    </Style>
+
+    <Style x:Key="WithoutImageTextBlockStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Margin" Value="15,5,15,0"/>
+    </Style>
+    
+    <Style x:Key="TextBoxAutoOrFixValueStyle" TargetType="{x:Type TextBox}">
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="Margin" Value="15,2,15,5"/>
+    </Style>
+    
+    <Style x:Key="TextBoxStarStyle" TargetType="{x:Type TextBox}">
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="Margin" Value="15,2,15,5"/>
+        <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="AcceptsReturn" Value="True"/>
+    </Style>
+    
+    <Style x:Key="TextBoxNonWriteableStyle" TargetType="{x:Type TextBox}">
+        <Setter Property="Background" Value="#F0F0F0"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="Margin" Value="15,2,15,5"/>
+        <Setter Property="IsReadOnly" Value="True"/>
     </Style>
 
 </ResourceDictionary>

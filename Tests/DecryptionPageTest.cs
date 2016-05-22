@@ -38,7 +38,7 @@ namespace EP_HSRlearnITTests
             ivInput.Text = "cafebabefacedbaddecaf888";
             var tagInput = window.Get<TextBox>("HexTagBox");
             tagInput.Text = "76fc6ece0f4e1768cddf8853bb2d551b";
-            var keyInput = window.Get<TextBox>("HexDecryptionPasswordBox");
+            var keyInput = window.Get<TextBox>("HexPasswordBox");
             keyInput.Text = "feffe9928665731c6d6a8f9467308308feffe9928665731c6d6a8f9467308308";
 
             //entschlüsseln lassen und dann auswerten, ob erwartetes Ergebnis erhalten

@@ -34,7 +34,7 @@ namespace EP_HSRlearnITTests
             aadInput.Text = "feedfacedeadbeeffeedfacedeadbeefabaddad2";
             var plaintextInput = window.Get<TextBox>("HexPlaintextBox");
             plaintextInput.Text = "d9313225f88406e5a55909c5aff5269a86a7a9531534f7da2e4c303d8a318a721c3c0c95956809532fcf0e2449a6b525b16aedf5aa0de657ba637b39";
-            var keyInput = window.Get<TextBox>("HexEncryptionPasswordBox");
+            var keyInput = window.Get<TextBox>("HexPasswordBox");
             keyInput.Text = "feffe9928665731c6d6a8f9467308308feffe9928665731c6d6a8f9467308308";
 
             //verschlüsseln lassen und dann auswerte, ob erwartetes Ergebnis erhalten

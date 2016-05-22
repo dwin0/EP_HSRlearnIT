@@ -31,49 +31,42 @@
             <RowDefinition Height="*" Name="Row10"/>
             <RowDefinition Height="Auto" Name="Row11"/>
             <RowDefinition Height="Auto" Name="Row12"/>
-            <RowDefinition Height="Auto" Name="Row13"/>
         </Grid.RowDefinitions>
 
-        <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="6" Background="LightGray" Grid.RowSpan="14"/>
+        <Border Style="{StaticResource GridBorderStyle}"/>
         <DockPanel Grid.Row="0" Grid.Column="0" Margin="15,15,15,0">
-        <TextBlock Text="IV: (optional)" Name="IvBlock" FontWeight="Bold" HorizontalAlignment="Left"/>
-        <Image Source="/Images/info.png" Width="18" Margin="5,0,0,0" HorizontalAlignment="Left" Name="InfoIv" ToolTipService.ShowDuration="60000">
-            <Image.ToolTip>
-                <ToolTip Placement="Right">
-                    <TextBlock TextWrapping="Wrap" Width="300" Text ="{StaticResource ResourceKey=EncryptionInfoIv}" />
-                </ToolTip>
-            </Image.ToolTip>
-        </Image>
+            <TextBlock Text="IV: (optional)" Name="IvBlock" Style="{StaticResource WithImageTextBlockStyle}"/>
+            <Image Name="InfoIv" Style="{StaticResource TooltipImageStyle}">
+                <Image.ToolTip>
+                    <TextBlock Text="{StaticResource EncryptionInfoIv}" Style="{StaticResource TooltipTextBlockStyle}"/>
+                </Image.ToolTip>
+            </Image>
         </DockPanel>
-        <TextBox Grid.Row="1" Grid.Column="0" Name="UtfIvBox" BorderThickness="2" TextChanged="TextBox_TextChanged" LostKeyboardFocus="TextBox_LostKeyboardFocus" TextWrapping="Wrap" Margin="15,2,15,5"/>
-        <DockPanel Grid.Row="2" Grid.Column="0" Margin="15,0,10,0">
-        <TextBlock Text="Additional Authenticated Data: (optional)" Name="AadBlock" FontWeight="Bold" HorizontalAlignment="Left"/>
-        <Image Source="/Images/info.png" Width="18" Margin="5,0,0,0" HorizontalAlignment="Left" Name="InfoAad" ToolTipService.ShowDuration="60000">
-            <Image.ToolTip>
-                <ToolTip Placement="Right">
-                    <TextBlock TextWrapping="Wrap" Width="500" Text="{StaticResource ResourceKey=EncryptionInfoAad}"/>
-                </ToolTip>
-            </Image.ToolTip>
-        </Image>
+        <TextBox Grid.Row="1" Grid.Column="0" Name="UtfIvBox" TextChanged="TextBox_TextChanged" LostKeyboardFocus="TextBox_LostKeyboardFocus" Style="{StaticResource TextBoxAutoOrFixValueStyle}"/>
+        <DockPanel Grid.Row="2" Grid.Column="0" Style="{StaticResource ContainerForTextBlockAndInfoImageStyle}">
+            <TextBlock Text="Additional Authenticated Data: (optional)" Name="AadBlock" Style="{StaticResource WithImageTextBlockStyle}"/>
+            <Image Name="InfoAad" Style="{StaticResource TooltipImageStyle}">
+                <Image.ToolTip>
+                    <TextBlock Text="{StaticResource ResourceKey=EncryptionInfoAad}" Style="{StaticResource TooltipTextBlockStyle}"/>
+                </Image.ToolTip>
+            </Image>
         </DockPanel>
-        <TextBox Grid.Row="3" Grid.Column="0" Name="UtfAadBox" BorderThickness="2" TextChanged="TextBox_TextChanged" LostKeyboardFocus="TextBox_LostKeyboardFocus" TextWrapping="Wrap" Margin="15,2,15,0" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsReturn="True"/>
-        <TextBlock Grid.Row="4" Grid.Column="0" Text="Klartext:" Name="PlaintextBlock" Margin="15,5,15,0" FontWeight="Bold"/>
-        <TextBox Grid.Row="5" Grid.Column="0" Name="UtfPlaintextBox" BorderThickness="2" TextChanged="TextBox_TextChanged" LostKeyboardFocus="TextBox_LostKeyboardFocus" TextWrapping="Wrap" Margin="15,2,15,5" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsReturn="True"/>
-        <DockPanel Grid.Row="6" Grid.Column="0" Margin="15,0,15,0">
-        <TextBlock Text="Key:" Name="PasswordBlock" FontWeight="Bold" HorizontalAlignment="Left"/>
-        <Image Source="/Images/info.png" Width="18" Margin="5,0,0,0" HorizontalAlignment="Left" Name="InfoKey" ToolTipService.ShowDuration="60000">
-            <Image.ToolTip>
-                <ToolTip Placement="Right">
-                    <TextBlock TextWrapping="Wrap" Width="400" Text="{StaticResource ResourceKey=EncryptionInfoKey}"/>
-                </ToolTip>
-            </Image.ToolTip>
-        </Image>
+        <TextBox Grid.Row="3" Grid.Column="0" Name="UtfAadBox" TextChanged="TextBox_TextChanged" LostKeyboardFocus="TextBox_LostKeyboardFocus" Style="{StaticResource TextBoxStarStyle}"/>
+        <TextBlock Grid.Row="4" Grid.Column="0" Text="Klartext:" Name="PlaintextBlock" Style="{StaticResource WithoutImageTextBlockStyle}"/>
+        <TextBox Grid.Row="5" Grid.Column="0" Name="UtfPlaintextBox" TextChanged="TextBox_TextChanged" LostKeyboardFocus="TextBox_LostKeyboardFocus" Style="{StaticResource TextBoxStarStyle}"/>
+        <DockPanel Grid.Row="6" Grid.Column="0" Style="{StaticResource ContainerForTextBlockAndInfoImageStyle}">
+            <TextBlock Text="Key:" Name="PasswordBlock" Style="{StaticResource WithImageTextBlockStyle}"/>
+            <Image Name="InfoKey" Style="{StaticResource TooltipImageStyle}">
+                <Image.ToolTip>
+                    <TextBlock Text="{StaticResource ResourceKey=EncryptionInfoKey}" Style="{StaticResource TooltipTextBlockStyle}"/>
+                </Image.ToolTip>
+            </Image>
         </DockPanel>
-        <TextBox Grid.Row="7" Grid.Column="0" Name="UtfPasswordBox" BorderThickness="2" TextChanged="TextBox_TextChanged" LostKeyboardFocus="TextBox_LostKeyboardFocus" TextWrapping="Wrap" Margin="15,2,15,5"/>
-        <DockPanel Grid.Row="8" Grid.Column="0" Margin="15,10,15,10"  HorizontalAlignment="Stretch" LastChildFill="False" VerticalAlignment="Top">
-            <Button Content="Datei importieren" Click="OnImportButtonClick" VerticalAlignment="Top" DockPanel.Dock="Left" Style="{StaticResource ResourceKey=ProgramButtonStyle}" Height="40" Width="105" Margin="0,0,7,0"/>
-            <Button Content="Datei exportieren" Click="OnExportButtonClick" VerticalAlignment="Top" DockPanel.Dock="Left" Style="{StaticResource ResourceKey=ProgramButtonStyle}" Height="40" Width="105" Margin="0,0,7,0"/>
-            <Button Click="OnEnryptionButtonClick" Content="Verschlüsseln" Name="EncryptionButton" Style="{StaticResource ResourceKey=ProgramButtonStyle}" Height="40" Width="85" Margin="0,0,7,0" >
+        <TextBox Grid.Row="7" Grid.Column="0" Name="UtfPasswordBox" TextChanged="TextBox_TextChanged" LostKeyboardFocus="TextBox_LostKeyboardFocus" Style="{StaticResource TextBoxAutoOrFixValueStyle}"/>
+        <DockPanel Grid.Row="8" Grid.Column="0" Style="{StaticResource ContainerForButtons}">
+            <Button Content="Datei importieren" Click="OnImportButtonClick" Style="{StaticResource ResourceKey=ProgramButtonStyle}" Height="40" Width="105" Margin="0,0,7,0"/>
+            <Button Content="Datei exportieren" Click="OnExportButtonClick" Style="{StaticResource ResourceKey=ProgramButtonStyle}" Height="40" Width="105" Margin="0,0,7,0"/>
+            <Button Content="Verschlüsseln" Click="OnEnryptionButtonClick" Name="EncryptionButton" Style="{StaticResource ResourceKey=ProgramButtonStyle}" Height="40" Width="85" Margin="0,0,7,0" >
                 <Button.IsEnabled>
                     <MultiBinding Converter="{StaticResource FormFilledEncryption}">
                         <Binding Path="Text.Length" ElementName="HexIvBox"/>
@@ -83,24 +76,24 @@
                     </MultiBinding>
                 </Button.IsEnabled>
             </Button>
-            <Button Content="Zurücksetzen" Click="OnResetButtonClick" VerticalAlignment="Top" DockPanel.Dock="Right" Style="{StaticResource ResourceKey=ProgramButtonStyle}" Height="40" Width="90"/>
+            <Button Content="Zurücksetzen" Click="OnResetButtonClick" DockPanel.Dock="Right" Style="{StaticResource ResourceKey=ProgramButtonStyle}" Height="40" Width="90"/>
         </DockPanel>
-        <TextBlock Grid.Row="9" Grid.Column="0" Text="Verschlüsselter Text:" Name="CiphertextBlock" Margin="15,2,15,0" FontWeight="Bold"/>
-        <TextBox Grid.Row="10" Grid.Column="0" Name="UtfCiphertextBox" Background="#F0F0F0" BorderThickness="2" TextChanged="TextBox_TextChanged" TextWrapping="Wrap" Margin="15,2,15,5" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
-        <TextBlock Grid.Row="11" Grid.Column="0" Text="Tag:" Name="TagBlock" Margin="15,2,15,0" FontWeight="Bold"/>
-        <TextBox Grid.Row="12" Grid.Column="0" Name="UtfTagBox" Background="#F0F0F0" BorderThickness="2" TextChanged="TextBox_TextChanged" TextWrapping="Wrap" Margin="15,2,15,5" IsReadOnly="True"/>
+        <TextBlock Grid.Row="9" Grid.Column="0" Text="Verschlüsselter Text:" Name="CiphertextBlock" Style="{StaticResource WithoutImageTextBlockStyle}"/>
+        <TextBox Grid.Row="10" Grid.Column="0" Name="UtfCiphertextBox" TextChanged="TextBox_TextChanged" Style="{StaticResource TextBoxNonWriteableStyle}" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+        <TextBlock Grid.Row="11" Grid.Column="0" Text="Tag:" Name="TagBlock" Style="{StaticResource WithoutImageTextBlockStyle}"/>
+        <TextBox Grid.Row="12" Grid.Column="0" Name="UtfTagBox" TextChanged="TextBox_TextChanged" Style="{StaticResource TextBoxNonWriteableStyle}" Margin="15,2,15,15"/>
 
-        <TextBlock Grid.Row="0" Grid.Column="1" Text="IV Hex: (optional)" Name="HexIvBlock" Margin="15,15,15,0" FontWeight="Bold"/>
-        <TextBox Grid.Row="1" Grid.Column="1" Name="HexIvBox" BorderThickness="2" TextChanged="HexTextBox_TextChanged" LostKeyboardFocus="HexTextBox_LostKeyboardFocus" TextWrapping="Wrap" Margin="15,2,15,5"/>
-        <TextBlock Grid.Row="2" Grid.Column="1" Text="Additional Authenticated Data: (optional)" Name="HexAadBlock" Margin="15,2,15,0" FontWeight="Bold"/>
-        <TextBox Grid.Row="3" Grid.Column="1" Name="HexAadBox" BorderThickness="2" TextChanged="HexTextBox_TextChanged" LostKeyboardFocus="HexTextBox_LostKeyboardFocus" TextWrapping="Wrap" Margin="15,2,15,0" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
-        <TextBlock Grid.Row="4" Grid.Column="1" Text="Klartext Hex:" Name="HexPlaintextBlock" Margin="15,5,15,0" FontWeight="Bold"/>
-            <TextBox Grid.Row="5" Grid.Column="1" Name="HexPlaintextBox" BorderThickness="2" TextChanged="HexTextBox_TextChanged" LostKeyboardFocus="HexTextBox_LostKeyboardFocus" TextWrapping="Wrap" Margin="15,2,15,5" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
-            <TextBlock Grid.Row="6" Grid.Column="1" Text="Key Hex:" Name="HexPasswordBlock" Margin="15,2,15,0" FontWeight="Bold"/>
-            <TextBox Grid.Row="7" Grid.Column="1" Name="HexPasswordBox" BorderThickness="2" TextChanged="HexTextBox_TextChanged" LostKeyboardFocus="HexTextBox_LostKeyboardFocus" TextWrapping="Wrap" Margin="15,2,15,5"/>
-            <TextBlock Grid.Row="9" Grid.Column="1" Text="Verschlüsselter Text Hex:" Name="HexCiphertextBlock" Margin="15,0,15,0" FontWeight="Bold"/>
-        <TextBox Grid.Row="10" Grid.Column="1" Name="HexCiphertextBox" Background="#F0F0F0" IsReadOnly="True" BorderThickness="2" TextChanged="HexTextBox_TextChanged" TextWrapping="Wrap" Margin="15,2,15,5" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
-        <TextBlock Grid.Row="11" Grid.Column="1" Text="Tag Hex:" Name="HexTagBlock" Margin="15,0,15,0" FontWeight="Bold"/>
-        <TextBox Grid.Row="12" Grid.Column="1" Name="HexTagBox" Background="#F0F0F0" IsReadOnly="True" BorderThickness="2" TextChanged="HexTextBox_TextChanged" TextWrapping="Wrap" Margin="15,2,15,5"/>
+        <TextBlock Grid.Row="0" Grid.Column="1" Text="IV Hex: (optional)" Name="HexIvBlock" Margin="15,19,15,0" Style="{StaticResource WithoutImageTextBlockStyle}"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Name="HexIvBox" TextChanged="HexTextBox_TextChanged" LostKeyboardFocus="HexTextBox_LostKeyboardFocus" Style="{StaticResource TextBoxAutoOrFixValueStyle}"/>
+        <TextBlock Grid.Row="2" Grid.Column="1" Text="Additional Authenticated Data: (optional)" Name="HexAadBlock" Style="{StaticResource WithoutImageTextBlockStyle}"/>
+        <TextBox Grid.Row="3" Grid.Column="1" Name="HexAadBox" TextChanged="HexTextBox_TextChanged" LostKeyboardFocus="HexTextBox_LostKeyboardFocus" Style="{StaticResource TextBoxStarStyle}"/>
+        <TextBlock Grid.Row="4" Grid.Column="1" Text="Klartext Hex:" Name="HexPlaintextBlock" Style="{StaticResource WithoutImageTextBlockStyle}"/>
+        <TextBox Grid.Row="5" Grid.Column="1" Name="HexPlaintextBox" TextChanged="HexTextBox_TextChanged" LostKeyboardFocus="HexTextBox_LostKeyboardFocus" Style="{StaticResource TextBoxStarStyle}"/>
+        <TextBlock Grid.Row="6" Grid.Column="1" Text="Key Hex:" Name="HexPasswordBlock" Style="{StaticResource WithoutImageTextBlockStyle}"/>
+        <TextBox Grid.Row="7" Grid.Column="1" Name="HexPasswordBox" TextChanged="HexTextBox_TextChanged" LostKeyboardFocus="HexTextBox_LostKeyboardFocus" Style="{StaticResource TextBoxAutoOrFixValueStyle}"/>
+        <TextBlock Grid.Row="9" Grid.Column="1" Text="Verschlüsselter Text Hex:" Name="HexCiphertextBlock" Style="{StaticResource WithoutImageTextBlockStyle}"/>
+        <TextBox Grid.Row="10" Grid.Column="1" Name="HexCiphertextBox" TextChanged="HexTextBox_TextChanged" Style="{StaticResource TextBoxNonWriteableStyle}" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+        <TextBlock Grid.Row="11" Grid.Column="1" Text="Tag Hex:" Name="HexTagBlock" Style="{StaticResource WithoutImageTextBlockStyle}"/>
+        <TextBox Grid.Row="12" Grid.Column="1" Name="HexTagBox" TextChanged="HexTextBox_TextChanged" Style="{StaticResource TextBoxNonWriteableStyle}" Margin="15,2,15,15"/>
     </Grid>
 </base:EncryptionDecryptionComponents>

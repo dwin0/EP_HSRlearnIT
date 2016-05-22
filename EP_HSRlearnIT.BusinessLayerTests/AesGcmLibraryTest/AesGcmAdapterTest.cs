@@ -1,22 +1,29 @@
 ﻿using System;
 using System.Security.Cryptography;
-using EP_HSRlearnIT.BusinessLayer.CryptoTools;
+using EP_HSRlearnIT.BusinessLayer.AesGcmLibrary;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace EP_HSRlearnIT.BusinessLayerTests.CryptoToolsTest
 {
     [TestClass]
-    public class AesGcmCryptoLibraryTest
+    public class AesGcmAdapterTest
     {
+        protected AesGcmAdapter Library;
+        
+        [TestInitialize]
+        public void Initialize()
+        {
+            Library = new AesGcmAdapter();
+        }
+
         [TestMethod]
         public void EncryptTestCase14Test()
         {
-            AesGcmAdapter library = new AesGcmAdapter();
             string key = "0000000000000000000000000000000000000000000000000000000000000000";
             string plaintext = "00000000000000000000000000000000";
             string iv = "000000000000000000000000";
             string aad = "";
-            Tuple<string, string> returnValue = library.Encrypt(key, plaintext, iv, aad);
+            Tuple<string, string> returnValue = Library.Encrypt(key, plaintext, iv, aad);
 
             string resultingTag = returnValue.Item1;
             string resultingCiphertext = returnValue.Item2;
@@ -31,23 +38,21 @@ namespace EP_HSRlearnIT.BusinessLayerTests.CryptoToolsTest
         [TestMethod, ExpectedException(typeof(CryptographicException))]
         public void EncryptWrongKeySizeTest()
         {
-            AesGcmAdapter library = new AesGcmAdapter();
             string key = "00";
             string plaintext = "00000000000000000000000000000000";
             string iv = "000000000000000000000000";
             string aad = "";
-            library.Encrypt(key, plaintext, iv, aad);
+            Library.Encrypt(key, plaintext, iv, aad);
         }
 
         [TestMethod]
         public void EncryptOptionalIvTest()
         {
-            AesGcmAdapter library = new AesGcmAdapter();
             string key = "0000000000000000000000000000000000000000000000000000000000000000";
             string plaintext = "00000000000000000000000000000000";
             string iv = "";
             string aad = "";
-            Tuple<string, string> returnValue = library.Encrypt(key, plaintext, iv, aad);
+            Tuple<string, string> returnValue = Library.Encrypt(key, plaintext, iv, aad);
 
             string resultingTag = returnValue.Item1;
             string resultingCiphertext = returnValue.Item2;
@@ -62,14 +67,13 @@ namespace EP_HSRlearnIT.BusinessLayerTests.CryptoToolsTest
         [TestMethod]
         public void DecryptTestCase14Test()
         {
-            AesGcmAdapter library = new AesGcmAdapter();
             string key = "0000000000000000000000000000000000000000000000000000000000000000";
             string cyphertext = "cea7403d4d606b6e074ec5d3baf39d18";
             string iv = "000000000000000000000000";
             string aad = "";
             string tag = "d0d1c8a799996bf0265b98b5d48ab919";
 
-            string returnValue = library.Decrypt(key,cyphertext, iv, aad, tag);
+            string returnValue = Library.Decrypt(key,cyphertext, iv, aad, tag);
 
             string expectedPlaintext = "00000000000000000000000000000000";
 
@@ -79,27 +83,25 @@ namespace EP_HSRlearnIT.BusinessLayerTests.CryptoToolsTest
         [TestMethod, ExpectedException(typeof(ArgumentException))]
         public void DecryptWrongTagTest()
         {
-            AesGcmAdapter library = new AesGcmAdapter();
             string key = "0000000000000000000000000000000000000000000000000000000000000000";
             string cyphertext = "cea7403d4d606b6e074ec5d3baf39d18";
             string iv = "000000000000000000000000";
             string aad = "";
             string tag = "aa";
 
-            library.Decrypt(key, cyphertext, iv, aad, tag);
+            Library.Decrypt(key, cyphertext, iv, aad, tag);
         }
 
         [TestMethod]
         public void DecryptOptionalIvTest()
         {
-            AesGcmAdapter library = new AesGcmAdapter();
             string key = "0000000000000000000000000000000000000000000000000000000000000000";
             string cyphertext = "cea7403d4d606b6e074ec5d3baf39d18";
             string iv = "";
             string aad = "";
             string tag = "d0d1c8a799996bf0265b98b5d48ab919";
 
-            string returnValue = library.Decrypt(key, cyphertext, iv, aad, tag);
+            string returnValue = Library.Decrypt(key, cyphertext, iv, aad, tag);
 
             string expectedPlaintext = "00000000000000000000000000000000";
 
@@ -109,8 +111,7 @@ namespace EP_HSRlearnIT.BusinessLayerTests.CryptoToolsTest
         [TestMethod]
         public void GenerateHexKeyWithLessInputTest()
         {
-            AesGcmAdapter library = new AesGcmAdapter();
-            string resultingKey = library.GenerateKey("TestTest");
+            string resultingKey = Library.GenerateKey("TestTest");
             Assert.AreEqual("TestTestTestTestTestTestTestTest", resultingKey);
             Assert.AreEqual(32, resultingKey.Length);
         }
@@ -118,8 +119,7 @@ namespace EP_HSRlearnIT.BusinessLayerTests.CryptoToolsTest
         [TestMethod]
         public void GenerateHexKeyWithToMuchInputTest()
         {
-            AesGcmAdapter library = new AesGcmAdapter();
-            string resultingKey = library.GenerateKey("TestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTest");
+            string resultingKey = Library.GenerateKey("TestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTest");
             Assert.AreEqual("TestTestTestTestTestTestTestTest", resultingKey);
             Assert.AreEqual(32, resultingKey.Length);
         }
@@ -127,8 +127,7 @@ namespace EP_HSRlearnIT.BusinessLayerTests.CryptoToolsTest
         [TestMethod]
         public void GenerateHexKeyWithRightInputTest()
         {
-            AesGcmAdapter library = new AesGcmAdapter();
-            string resultingKey = library.GenerateKey("TestTestTestTestTestTestTestTest");
+            string resultingKey = Library.GenerateKey("TestTestTestTestTestTestTestTest");
             Assert.AreEqual("TestTestTestTestTestTestTestTest", resultingKey);
             Assert.AreEqual(32, resultingKey.Length);
         }
@@ -136,11 +135,32 @@ namespace EP_HSRlearnIT.BusinessLayerTests.CryptoToolsTest
         [TestMethod]
         public void HexStringToDecimalByteArrayTest()
         {
-            AesGcmAdapter library = new AesGcmAdapter();
-            byte[] resultingHex = library.HexStringToDecimalByteArray("54657374");
+            byte[] resultingHex = Library.HexStringToDecimalByteArray("54657374");
             byte[] expectedHex = { 84, 101, 115, 116 };
-
             CollectionAssert.AreEqual(expectedHex, resultingHex);
+        }
+
+        [TestMethod]
+        public void BytesToStringTest()
+        {
+            byte[] startBytes = { 84, 101, 115, 116 };
+            string result = Library.BytesToString(startBytes);
+            Assert.AreEqual("Test", result);
+        }
+
+        [TestMethod]
+        public void StringToBytesTest()
+        {
+            byte[] result = Library.StringToBytes("Test");
+            byte[] expectedBytes = { 84, 101, 115, 116 };
+            CollectionAssert.AreEqual(expectedBytes, result);
+        }
+
+        [TestMethod]
+        public void ConvertToHexStringTest()
+        {
+            string result = Library.ConvertToHexString("Test");
+            Assert.AreEqual("54657374", result);
         }
 
     }
