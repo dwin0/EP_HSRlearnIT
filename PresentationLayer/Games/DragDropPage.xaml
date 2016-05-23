@@ -21,8 +21,8 @@
            
            <Border Name="BorderGameInstruction" BorderThickness="4" BorderBrush="CornflowerBlue" Panel.ZIndex="1">
                 <StackPanel Name="GameInstruction" Panel.ZIndex="1" Width="750" Height="470" Background="AliceBlue">
-                    <TextBlock Name="TitleGameInstruction" Margin="10,0,0,0" FontSize="23" Foreground="Black" Height="40" Background="Transparent"  Text="Spielanleitung" />
-                    <TextBlock Name="GameInstructionText" Margin="10,0,0,0" FontSize="16" Foreground="black" Panel.ZIndex="1" Height="150" Background="Transparent" Text="{StaticResource ResourceKey=GameInstruction}" TextWrapping="Wrap" />
+                    <TextBlock Name="TitleGameInstruction" Margin="10,0,0,0" FontSize="23" Height="40" Text="Spielanleitung" />
+                    <TextBlock Name="GameInstructionText" Margin="10,0,0,0" FontSize="16" Panel.ZIndex="1" Height="150" Text="{StaticResource ResourceKey=GameInstruction}" TextWrapping="Wrap" />
 
                     <DockPanel Margin="15,0,0,5" >
                         <Image Source="/Images/CheckButton.png"  Name="ImageCheckButton" Width="100" Height="50" Margin="0,0,15,0"/>

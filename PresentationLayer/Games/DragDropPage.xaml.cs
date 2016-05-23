@@ -29,7 +29,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         private readonly ImageBrush _brushRecycleBinEmpty = new ImageBrush(new BitmapImage(new Uri(@"pack://application:,,,/Images/recycling.png", UriKind.RelativeOrAbsolute)));
         private readonly ImageBrush _brushRecycleBinFull = new ImageBrush(new BitmapImage(new Uri(@"pack://application:,,,/Images/recyclebin.png", UriKind.RelativeOrAbsolute)));
         private bool _rectangleHasBeenMovedBefore;
-        private bool _isMoving;
         private Point _startPoint = new Point(0, 0);
         private bool _checkingFirstTime = true;
 
@@ -133,7 +132,8 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         }
 
         /// <summary>
-        /// This method loads the images from the image-folder. These are the rectangle images to be moved. /// </summary>
+        /// This method loads the images from the image-folder. These are the rectangle images to be moved. 
+        /// </summary>
         private BitmapImage[] GetImages()
         {
             var images = new BitmapImage[9];
@@ -283,12 +283,11 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                 _currentlyMovedRectangle.Stroke = null;
                 _currentlyMovedRectangle.StrokeDashArray = null;
             }
-            _isMoving = true;
         }
 
         /// <summary>
         /// This method checks if there is an intersection with a dropLocationsRectangle</summary>
-        /// <return>If intersection of an rectangle with a an rectangle from DropLocation was found then the drectangle from dropLocationsRectangles is returned, otherwise nothing</return>
+        /// <return>If intersection from DropLocation was found then the dropRectangle is returned, otherwise null</return>
         private Rectangle CheckCollisionWithDropRectangles(Rect imageRect)
         {
             foreach (var dropRect in _dropLocationsRectangles)
@@ -304,7 +303,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
 
         /// <summary>
         /// This method checks if there is an intersection with the RecycleBin</summary>
-        /// <returns>if intersection then true otherwise false</returns>
+        /// <returns>If intersection then true otherwise false</returns>
         private bool CheckCollisionWithRecycleBin(Rect imageRect)
         {
             var recycleRect = new Rect(Canvas.GetLeft(_recycleBinRectangle), Canvas.GetTop(_recycleBinRectangle), _recycleBinRectangle.Width, _recycleBinRectangle.Height);
@@ -312,96 +311,110 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         }
 
         /// <summary>
-        /// Method checks if a droplocation is already filled with an image rectangle/// </summary>
+        /// Method checks if a droplocation is already filled with an image rectangle</summary>
         /// <param name="rect">rectangle field for which it is checked if its filled with an image rectangle or not</param>
         /// <returns>index -1 is returned if an rectangle field is still empty otherwise the index of the rectangle is returned </returns>
         private int IsRectangleFilled(Rectangle rect)
         {
-            try
+            foreach (var data in _addedSavedData)
             {
-                for (var index = 0; index < _addedSavedData.Count; index++)
+                if (Equals(data.DropRectangle, rect))
                 {
-                    if (_addedSavedData[index].DropRectangle == rect) //intended
-                        return index;
+                    return _addedSavedData.IndexOf(data);
                 }
             }
-            catch (Exception ex)
-            {
-                ExceptionLogger.WriteToLogfile(ex.Message, "IsRectangleFilled");
-            }
-                return -1;
+            return -1;
         }
 
         /// <summary>
-        /// This method defines the functions for the PreviewMouseLeftButtonup Event. If there is an intersection between a dropRectangle, respectively recycle bin
-        /// and the copied/moved image rectangle the image rectangle is dropped and the Margin of the currentlyMovedRectangle is saved into the SaveDataForProgress.  </summary>
-        /// <param name="sender">Contains the control which raised the event</param>
+        /// If there is an intersection between a dropRectangle, respectively recycle bin
+        /// and the copied/moved image rectangle the image rectangle is dropped and 
+        /// the Margin of the currentlyMovedRectangle is saved into the SaveDataForProgress.  
+        /// </summary>
+        /// <param name="sender">Contains the rectangle which raised the event</param>
         /// <param name="e"></param>
         private void rectangle_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             if (_currentlyMovedRectangle == null)
+            {
                 return;
+            }
+
+            Rect rectangleInDraggedStatus = new Rect();
             try
             {
-                _isMoving = false;
-                var rectangleInDraggedStatus = new Rect(_currentlyMovedRectangle.Margin.Left, _currentlyMovedRectangle.Margin.Top, _currentlyMovedRectangle.Width, _currentlyMovedRectangle.Height);
-
-                var dropRectangle = CheckCollisionWithDropRectangles(rectangleInDraggedStatus); 
-                if (dropRectangle != null) // The collision happened
-                {
-                    
-                    //dropRectangle = defined rectangle on algorithm (e.g. rectMulH). 
-                    _currentlyMovedRectangle.Margin = new Thickness(Canvas.GetLeft(dropRectangle), Canvas.GetTop(dropRectangle), 0, 0);
-                    _currentlyAddedData.ImageMargin = _currentlyMovedRectangle.Margin;
-
-                    var addedSavedDataIndex = IsRectangleFilled(dropRectangle);
-
-                    _currentlyAddedData.DropRectangle = dropRectangle;
-                    _currentlyAddedData.DropRectangleIndex = _dropLocationsRectangles.IndexOf(dropRectangle);
-
-                    if (addedSavedDataIndex != -1) // If it is not minus 1, that means we are putting the image to the already filled rectangle
-                    {
-                        if (_addedSavedData[addedSavedDataIndex].ChildReference != _currentlyMovedRectangle) // Do not remove rectangle itself 
-                        {
-                            ElementCanvas.Children.Remove(_addedSavedData[addedSavedDataIndex].ChildReference);
-                            _addedSavedData.RemoveAt(addedSavedDataIndex);
-                        }
-                    }
-
-                    if (!_rectangleHasBeenMovedBefore) //if we move it from the intial place to an rectangle field
-                    {
-                        _addedSavedData.Add(_currentlyAddedData);
-                        if (_addedSavedData.Count == _dropLocationsRectangles.Count)
-                        {
-                            ShowDialogBox();
-                        }
-                    }
-
-                    Progress.SaveProgress(SettingsName, _addedSavedData);
-                }
-                else // The collision did not happen
-                {
-                    if (!_rectangleHasBeenMovedBefore) // Either we get rid of the fresh copy
-                        ElementCanvas.Children.Remove(_currentlyMovedRectangle);
-                    else // Or we return child back to its original drop rectangle
-                        _currentlyMovedRectangle.Margin = _currentlyAddedData.ImageMargin;
-                }
-
-                if (CheckCollisionWithRecycleBin(rectangleInDraggedStatus))
-                {
-                    ElementCanvas.Children.Remove(_currentlyMovedRectangle);
-                    _addedSavedData.Remove(_currentlyAddedData);
-
-                    //change recycling bin Image and save it in the progress
-                    _recycleBinRectangle.Fill = _brushRecycleBinFull;
-                    Progress.SaveProgress(RecycleBinStatus, true);
-                }
-                _currentlyMovedRectangle = null;
+                rectangleInDraggedStatus = new Rect(_currentlyMovedRectangle.Margin.Left,
+                    _currentlyMovedRectangle.Margin.Top, _currentlyMovedRectangle.Width,
+                    _currentlyMovedRectangle.Height);
             }
-            catch (Exception ex)
+            catch (ArgumentException ex)
             {
                 ExceptionLogger.WriteToLogfile(ex.Message, "DragDropPage_MouseLeftButtonUp");
             }
+
+            var dropRectangle = CheckCollisionWithDropRectangles(rectangleInDraggedStatus);
+            // The collision happened
+            if (dropRectangle != null)
+            {
+                //dropRectangle = defined rectangle on algorithm (e.g. rectMulH). 
+                _currentlyMovedRectangle.Margin = new Thickness(Canvas.GetLeft(dropRectangle),
+                    Canvas.GetTop(dropRectangle), 0, 0);
+                _currentlyAddedData.ImageMargin = _currentlyMovedRectangle.Margin;
+
+                var addedSavedDataIndex = IsRectangleFilled(dropRectangle);
+
+                _currentlyAddedData.DropRectangle = dropRectangle;
+                _currentlyAddedData.DropRectangleIndex = _dropLocationsRectangles.IndexOf(dropRectangle);
+
+                // If it is not minus 1, that means we are putting the image to the already filled rectangle
+                // Do not remove rectangle itself
+                if (addedSavedDataIndex != -1 &&
+                    !_addedSavedData[addedSavedDataIndex].ChildReference.Equals(_currentlyMovedRectangle))
+                {
+                    ElementCanvas.Children.Remove(_addedSavedData[addedSavedDataIndex].ChildReference);
+                    try
+                    {
+                        _addedSavedData.RemoveAt(addedSavedDataIndex);
+                    }
+                    catch (ArgumentOutOfRangeException ex)
+                    {
+                        ExceptionLogger.WriteToLogfile(ex.Message, "DragDropPage_MouseLeftButtonUp");
+                    }
+                }
+                //if we move it from the intial place to an rectangle field
+                if (!_rectangleHasBeenMovedBefore)
+                {
+                    _addedSavedData.Add(_currentlyAddedData);
+                    if (_addedSavedData.Count == _dropLocationsRectangles.Count)
+                    {
+                        ShowDialogBox();
+                    }
+                }
+                Progress.SaveProgress(SettingsName, _addedSavedData);
+            }
+            // The collision did not happen
+            else
+            {
+                // Get rid of the fresh copy
+                if (!_rectangleHasBeenMovedBefore)
+                {
+                    ElementCanvas.Children.Remove(_currentlyMovedRectangle);
+                }
+                // Return child back to its original drop rectangle
+                else
+                {
+                    _currentlyMovedRectangle.Margin = _currentlyAddedData.ImageMargin;
+                }
+            }
+
+            if (CheckCollisionWithRecycleBin(rectangleInDraggedStatus))
+            {
+                ElementCanvas.Children.Remove(_currentlyMovedRectangle);
+                _addedSavedData.Remove(_currentlyAddedData);
+                _recycleBinRectangle.Fill = _brushRecycleBinFull;
+                Progress.SaveProgress(RecycleBinStatus, true);
+            }
+            _currentlyMovedRectangle = null;
         }
 
         /// <summary>
@@ -410,10 +423,12 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         private void ShowDialogBox()
         {
             if (!_checkingFirstTime)
+            {
                 return;
+            }                
             _checkingFirstTime = false;
-            const string message = "Alle Felder sind belegt. Klicke auf JA, wenn Du die Auswertung starten möchtest!";
-            const string title = "Spiel beendet";
+            string message = $"Alle Felder sind belegt. {Environment.NewLine}Klicke auf JA, wenn Du die Auswertung starten möchtest!";
+            string title = "Spiel beendet";
             if (MessageBox.Show(message, title, MessageBoxButton.YesNo, MessageBoxImage.Information, MessageBoxResult.Yes) ==
                 MessageBoxResult.Yes)
             {
@@ -422,38 +437,35 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         }
 
         /// <summary>
-        /// This method defines all the actions during the moveMouse, as change of mouse curser and setting boundries. </summary> 
-        /// <param name="sender">Contains the control which raised the event</param>
+        /// This method defines all the actions during the moveMouse, as change of mouse curser and setting boundries.
+        /// </summary> 
+        /// <param name="sender">Contains the rectangle which raised the event</param>
         /// <param name="e"></param> 
         private void ElementCanvas_MouseMove(object sender, MouseEventArgs e)
         {
-            //If leftButtonLeft is released on the sideborder of the canvas/boundry, then we have to assign the respective PreviewMouseLeftButtonUp event
-            if (e.LeftButton == MouseButtonState.Released && _currentlyMovedRectangle != null)
+            if (_currentlyMovedRectangle != null)
             {
-               rectangle_PreviewMouseLeftButtonUp(sender, new MouseButtonEventArgs(InputManager.Current.PrimaryMouseDevice, 0, MouseButton.Left));
-               return;
-            }
-            try
-            {
-                if (_isMoving)
+                //If LeftButton is released on the sideborder of the canvas/boundry, then we have to assign the respective PreviewMouseLeftButtonUp event
+                if (e.LeftButton == MouseButtonState.Released)
                 {
+                    rectangle_PreviewMouseLeftButtonUp(sender, new MouseButtonEventArgs(InputManager.Current.PrimaryMouseDevice, 0, MouseButton.Left));
+                    return;
+                }
                     var currMousePoint = e.GetPosition(ElementCanvas);
 
                     _currentlyMovedRectangle.Margin = new Thickness(currMousePoint.X - _startPoint.X, currMousePoint.Y - _startPoint.Y, 0, 0);
 
                     CheckPageBoundaries();
-
-                    var imageRect = new Rect(_currentlyMovedRectangle.Margin.Left, _currentlyMovedRectangle.Margin.Top,
-                        _currentlyMovedRectangle.Width, _currentlyMovedRectangle.Height);
-
-                    bool bIntersection = CheckCollisionWithDropRectangles(imageRect) != null || CheckCollisionWithRecycleBin(imageRect);
-
-                    _currentlyMovedRectangle.Cursor = bIntersection ? Cursors.Arrow : Cursors.No;
+                try
+                {
+                    var imageRect = new Rect(_currentlyMovedRectangle.Margin.Left, _currentlyMovedRectangle.Margin.Top, _currentlyMovedRectangle.Width, _currentlyMovedRectangle.Height);
+                    bool intersection = CheckCollisionWithDropRectangles(imageRect) != null || CheckCollisionWithRecycleBin(imageRect);
+                    _currentlyMovedRectangle.Cursor = intersection ? Cursors.Arrow : Cursors.No;
                 }
-            }
-            catch (Exception ex)
-            {
-                ExceptionLogger.WriteToLogfile(ex.Message, "ElementCanvas_MouseMove");
+                catch (Exception ex)
+                {
+                    ExceptionLogger.WriteToLogfile(ex.Message, "ElementCanvas_MouseMove");
+                }
             }
         }
 
@@ -461,84 +473,78 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         /// This method sets the boundries of the mouse for the game </summary>
         private void CheckPageBoundaries()
         {
-            if (_currentlyMovedRectangle.Margin.Left < -42) // Left
+            // Left
+            if (_currentlyMovedRectangle.Margin.Left < -42)
+            {
                 _currentlyMovedRectangle.Margin = new Thickness(-42, _currentlyMovedRectangle.Margin.Top, 0, 0);
+            }
 
-            if (_currentlyMovedRectangle.Margin.Left + _currentlyMovedRectangle.Width > ElementCanvas.Width) // Right
-                _currentlyMovedRectangle.Margin = new Thickness(ElementCanvas.Width - _currentlyMovedRectangle.Width,
-                    _currentlyMovedRectangle.Margin.Top, 0, 0);
-
-            if (_currentlyMovedRectangle.Margin.Top < 0) // Top
+            // Right
+            if (_currentlyMovedRectangle.Margin.Left + _currentlyMovedRectangle.Width > ElementCanvas.Width)
+            {
+                _currentlyMovedRectangle.Margin = new Thickness(ElementCanvas.Width - _currentlyMovedRectangle.Width, _currentlyMovedRectangle.Margin.Top, 0, 0);
+            }
+            
+            // Top
+            if (_currentlyMovedRectangle.Margin.Top < 0)
+            {
                 _currentlyMovedRectangle.Margin = new Thickness(_currentlyMovedRectangle.Margin.Left, 0, 0, 0);
+            }
 
-            if (_currentlyMovedRectangle.Margin.Top + _currentlyMovedRectangle.Height > ElementCanvas.Height) // Bottom
-                _currentlyMovedRectangle.Margin = new Thickness(_currentlyMovedRectangle.Margin.Left,
-                    ElementCanvas.Height - _currentlyMovedRectangle.Height, 0, 0);
+            // Bottom
+            if (_currentlyMovedRectangle.Margin.Top + _currentlyMovedRectangle.Height > ElementCanvas.Height)
+            {
+                _currentlyMovedRectangle.Margin = new Thickness(_currentlyMovedRectangle.Margin.Left, ElementCanvas.Height - _currentlyMovedRectangle.Height, 0, 0);
+            }
         }
 
         /// <summary>
-        /// This method makes a reset of the whole game </summary> 
+        /// This method makes a reset of the whole game. </summary> 
         /// <param name="sender">Contains the control which raised the event</param>
         /// <param name="e"></param>
         private void OnResetClick(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                // Remove last N children
-                int addedChildrenCount = _addedSavedData.Count;
-                ElementCanvas.Children.RemoveRange(ElementCanvas.Children.Count - addedChildrenCount, addedChildrenCount);
+            int addedChildrenCount = _addedSavedData.Count;
+            ElementCanvas.Children.RemoveRange(ElementCanvas.Children.Count - addedChildrenCount, addedChildrenCount);
 
-                _addedSavedData.Clear();
-                _recycleBinRectangle.Fill = _brushRecycleBinEmpty;
-                Progress.SaveProgress(RecycleBinStatus, false);
-            }
-            catch (Exception ex)
-            {
-                ExceptionLogger.WriteToLogfile(ex.Message, "OnResetClick");
-            }
+            _addedSavedData.Clear();
+            _recycleBinRectangle.Fill = _brushRecycleBinEmpty;
+            Progress.SaveProgress(RecycleBinStatus, false);
         }
 
         /// <summary>
         /// This methods checks the dropped elements for their correctness. If correct, rectangle gets a green border, if wrong, the rectangle gets a red border.
+        /// </summary>
         ///  and gives back the amount of correct / wrong placements
         ///  <param name="sender">Contains the control which raised the event</param>
         /// <param name="e"></param>
-
         private void Check_OnClick(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                var correctAnswers = 0;
-                var wrongAnswers = 0;
+                int correctAnswers = 0;
+                int wrongAnswers = 0;
 
-                for (int i = _addedSavedData.Count - 1; i >= 0; i--)
+                foreach (var data in _addedSavedData)
                 {
-                    var data = _addedSavedData[i];
                     if (data.IsAnswerCorrect())
                     {
                         correctAnswers++;
-                        data.Brush = new SolidColorBrush(System.Windows.Media.Colors.SeaGreen);
+                        data.Brush = new SolidColorBrush(Colors.SeaGreen);
                         data.ChildReference.Stroke = data.Brush;
                         data.StrokeDashArray = 0.0;
                     }
                     else
                     {  
                         wrongAnswers++;
-                        data.Brush = new SolidColorBrush(System.Windows.Media.Colors.Red);
+                        data.Brush = new SolidColorBrush(Colors.Red);
                         data.ChildReference.Stroke = data.Brush;
-                        data.ChildReference.StrokeDashArray = new DoubleCollection() { 5 };
+                        data.ChildReference.StrokeDashArray = new DoubleCollection{ 5 };
                         data.StrokeDashArray = 5.0;
                     }
                     data.ChildReference.StrokeThickness = 4;
                 }
-
                 MessageBox.Show(
-                    $"Spiel ist nun beendet. Korrekte Antwort: {correctAnswers}, Falsche Anworten: {wrongAnswers}");
-            }
-            catch (Exception ex)
-            {
-                ExceptionLogger.WriteToLogfile(ex.Message, "Check_OnClick");
-            }
+                    $"Spiel ist nun beendet. {Environment.NewLine}Korrekte Antwort: {correctAnswers} {Environment.NewLine}Falsche Anworten: {wrongAnswers}",
+                    "Spielresultat", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         /// <summary>
@@ -547,8 +553,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         /// <param name="e"></param>
         private void CloseGameInstruction(object sender, RoutedEventArgs e)
         {
-            GameInstruction.Visibility = Visibility.Hidden;
-            ButtonCloseGameInstruction.Visibility = Visibility.Hidden;
             BorderGameInstruction.Visibility = Visibility.Hidden;
         }
 
@@ -580,11 +584,9 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
            
             public bool IsAnswerCorrect()
             {
-                if (CorrectAnswers[OriginalImageChildIndex].Contains(DropRectangle.Name))
-                {
-                    return true;
-                }
-                return false;
+                List<string> isCorrect;
+                CorrectAnswers.TryGetValue(OriginalImageChildIndex, out isCorrect);
+                return isCorrect != null && isCorrect.Contains(DropRectangle.Name);
             }
         }
 
@@ -594,24 +596,27 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         /// This method opens the game instructions. </summary>
         /// <param name="sender">Contains the control which raised the event</param>
         /// <param name="e"></param>
-
         private void OpenInstruction(object sender, RoutedEventArgs e)
         {
-            GameInstruction.Visibility = Visibility.Visible;
-            ButtonCloseGameInstruction.Visibility = Visibility.Visible;
             BorderGameInstruction.Visibility = Visibility.Visible;
         }
 
         /// <summary>
         /// This methods defines the behaviour when pressend on F1 or ESC
-        /// </summary>
-        
+        /// </summary>        
         private void ElementCanvas_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.F1)
-                OpenInstruction(this, e);
-            else if (e.Key == Key.Escape)
-                CloseGameInstruction(this, e);
+            switch (e.Key)
+            {
+                case Key.F1:
+                    OpenInstruction(this, e);
+                    break;
+                case Key.Escape:
+                    CloseGameInstruction(this, e);
+                    break;
+                default:
+                    return;
+            }
         }
 
     }
