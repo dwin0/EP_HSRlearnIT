@@ -152,7 +152,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
         private void SwitchNextOptionsWindow()
         {
             var buttonStatus = (bool?)Progress.GetProgress("StepByStepPage_ButtonState");
-            if (buttonStatus == null || buttonStatus == false)
+            if ((buttonStatus == null || buttonStatus == false) && _step == StepMax)
             {
                 NextOptionsWindow.Visibility = Visibility.Visible;
             }
@@ -197,6 +197,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
                 default:
                     PreviousStepButton.IsEnabled = true;
                     NextStepButton.IsEnabled = true;
+                    SwitchNextOptionsWindow();
                     break;
             }
 

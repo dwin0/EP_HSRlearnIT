@@ -79,7 +79,11 @@
                     <TextBlock Grid.Column="0" Name="NextOptions" FontSize="16" TextWrapping="Wrap" Margin="20, 10, 0, 0" TextAlignment="Left" HorizontalAlignment="Left">
                 Hier kannst du gleich den Algorithmus selbst ausprobieren oder dein Wissen mit einem Spiel testen.
                     </TextBlock>
-                    <Image Grid.Column="1" Source="../Images/curved-arrow.png" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <Image Grid.Column="1" Source="../Images/red_arrow.png"  HorizontalAlignment="Left" VerticalAlignment="Center" Margin="25">
+                        <Image.LayoutTransform>
+                            <RotateTransform CenterX="0.5" CenterY="0.5" Angle="-45"/>
+                        </Image.LayoutTransform>
+                    </Image>
                 </Grid>
             </Border>
 
