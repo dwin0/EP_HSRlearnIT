@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AnalysisInput>
+  <Settings>
+    <Setting>
+      <Key>sonar.cs.ignoreHeaderComments</Key>
+      <Value>true</Value>
+    </Setting>
+  </Settings>
+  <Rules>
+  </Rules>
+  <Files>
+    <File>C:\Programming\EP_HSRlearnIT\BusinessLayer\AesGcmLibrary\AesGcmAdapter.cs</File>
+    <File>C:\Programming\EP_HSRlearnIT\BusinessLayer\App.xaml.cs</File>
+    <File>C:\Programming\EP_HSRlearnIT\BusinessLayer\Properties\AssemblyInfo.cs</File>
+    <File>C:\Programming\EP_HSRlearnIT\BusinessLayer\UniversalTools\DependencyObjectExtension.cs</File>
+    <File>C:\Programming\EP_HSRlearnIT\BusinessLayer\UniversalTools\ExceptionLogger.cs</File>
+    <File>C:\Programming\EP_HSRlearnIT\BusinessLayer\UniversalTools\FileManager.cs</File>
+    <File>C:\Programming\EP_HSRlearnIT\BusinessLayer\UniversalTools\Progress.cs</File>
+  </Files>
+</AnalysisInput>
