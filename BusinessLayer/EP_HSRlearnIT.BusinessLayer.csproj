@@ -67,6 +67,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="UniversalTools\DependencyObjectExtension.cs" />
+    <Compile Include="UniversalTools\FrameworkElementExtension.cs" />
     <Compile Include="UniversalTools\Progress.cs" />
   </ItemGroup>
   <ItemGroup>

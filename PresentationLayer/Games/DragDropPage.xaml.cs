@@ -61,7 +61,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                 Rectangle droppablePlaces = Application.Current.FindResource("DroppablePlace" + i) as Rectangle;
                 if (droppablePlaces == null) { continue; }
 
-                Rectangle dropPlaceCopy = Clone(droppablePlaces) as Rectangle;
+                Rectangle dropPlaceCopy = droppablePlaces.Clone() as Rectangle;
 
                 if (dropPlaceCopy != null)
                 {

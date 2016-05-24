@@ -55,7 +55,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
                 }
 
                 //Create a copy of the Ressource AreaPath to prevent multiple Event Listener on MouseEnter
-                Path areaPath = Clone(ressourcePath) as Path;
+                Path areaPath = ressourcePath.Clone() as Path;
                 if (areaPath == null)
                 {
                     ExceptionLogger.WriteToLogfile("LoadAreaPaths", "areaPath - Clone was null", "");
@@ -86,7 +86,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
                 }
 
                 //Create a copy of the Ressource StepPath to prevent multiple Event Listener on MouseEnter / MouseLeave
-                Path stepPath = Clone(ressourcePath) as Path;
+                Path stepPath = ressourcePath.Clone() as Path;
                 if (stepPath == null)
                 {
                     ExceptionLogger.WriteToLogfile("LoadStepPaths", "stepPath - Clone was null", "");
@@ -168,7 +168,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
         /// <returns></returns>
         private Path AddHighlightedPath(Path stepPath)
         {
-            Path highlightedPath = Clone(stepPath) as Path;
+            Path highlightedPath = stepPath.Clone() as Path;
             if (highlightedPath == null)
             {
                 ExceptionLogger.WriteToLogfile("AddHighlightedPath", "highlightedPath - Clone was null", "");

@@ -81,7 +81,6 @@
     <Compile Include="MenuTile.xaml.cs">
       <DependentUpon>MenuTile.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CommonPageComponents.cs" />
     <Compile Include="StringCollection.cs" />
     <Compile Include="Tutorials\AesGcmOverviewPage.xaml.cs">
       <DependentUpon>AesGcmOverviewPage.xaml</DependentUpon>
