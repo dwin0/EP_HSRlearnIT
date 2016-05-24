@@ -229,7 +229,7 @@ resultierendes Auth Tag: 76fc6ece0f4e1768cddf8853bb2d551b
 
     <system:String x:Key="VerschlüsselungText">Bei der Verschlüsselung wird der erste Plaintextblock AES-verschlüsselt.</system:String>
 
-    <system:String x:Key="AdditionalAuthenticatedDataText">Dem Algorithmus werden weitere Daten, welche authentisiert, aber nicht verschlüsselt werden hinzugefügt.</system:String>
+    <system:String x:Key="AdditionalAuthenticatedDataText">Dem Algorithmus werden weitere Daten, welche authentisiert, aber nicht verschlüsselt werden, hinzugefügt.</system:String>
 
     <system:String x:Key="CiphertextAuthentisierungText">Die Authentisierung geschieht über eine Multiplikation in einem Galois-Feld.</system:String>
 

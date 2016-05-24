@@ -94,6 +94,7 @@
     <Compile Include="Tutorials\StepByStepPage.xaml.cs">
       <DependentUpon>StepByStepPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Tutorials\TutorialsComponents.cs" />
     <Page Include="Exercises\ExerciseRessources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
