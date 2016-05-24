@@ -207,7 +207,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
                 TextScrollViewer.VerticalScrollBarVisibility = (ScrollBarVisibility)Visibility.Hidden;
             }
             StepTitle.Text = GetTitleNumber(stepNumber) + WriteTitle(stepNumber);
-
+            SetInputAndOutput(stepNumber);
             DrawImage(stepNumber);
 
         }
@@ -243,6 +243,31 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
                 StepImage.Source = new BitmapImage(new Uri(@"/Images/Step" + stepNumber + ".png", UriKind.RelativeOrAbsolute));
                 _highlightedPath = stepNumber;
             }
+        }
+
+        private void SetInputAndOutput(int stepNumber)
+        {
+            if (stepNumber < SbsMin)
+            {
+                Input.Text = "Hier wird noch nichts berechnet";
+                Output.Text = "Hier wird noch nichts berechnet";
+            } else if (stepNumber > SbsMax)
+            {
+                Input.Text = "Hier wird nichts mehr berechnet.";
+                Output.Text = "Hier wird nichts mehr berechnet.";
+            }
+
+            if (!Input.ClipToBounds)
+            {
+                InputScrollViewer.VerticalScrollBarVisibility = (ScrollBarVisibility) Visibility.Hidden;
+            }
+            Input.Text = Application.Current.TryFindResource("InputStep" + stepNumber) as string;
+
+            if (!Output.ClipToBounds)
+            {
+                OutputScrollViewer.VerticalScrollBarVisibility = (ScrollBarVisibility)Visibility.Hidden;
+            }
+            Output.Text = Application.Current.TryFindResource("OutputStep" + stepNumber) as string;
         }
 
         private void LoadStepPaths(Canvas canvas)

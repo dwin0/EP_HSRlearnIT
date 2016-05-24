@@ -10,10 +10,10 @@
     <DockPanel Name="MainPanel" Background="White" VerticalAlignment="Stretch">
         <TextBlock DockPanel.Dock="Top"  Name ="StepTitle" Text="Schritt 1" FontSize="20" FontFamily="Bold" Margin="0, 10, 0, 10" />
         <Grid DockPanel.Dock="Bottom" Margin="0, 0, 0, 10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
             <Button Grid.Column="0" Click="OnJumpToStart_Click" HorizontalAlignment="Left" VerticalAlignment="Top" 
                     Content="Zur Einleitung" Name="JumpToStart" Style="{StaticResource ResourceKey=ProgramButtonStyle}"
@@ -62,14 +62,18 @@
 
             <Rectangle Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Stretch" Fill="Black" Height="2" Grid.Row="2" VerticalAlignment="Top" />
 
-            <TextBlock Grid.Column="0" Grid.Row="2" Name="InputTitle" Text="Input" FontFamily="Bold" FontSize="18" TextAlignment="Center" Margin="0,0,5,40"/>
-            <TextBlock Grid.Column="0" Grid.Row="2" Name="Input" Text="Parameter of Input" TextWrapping="Wrap" FontSize="15" Margin="0,25,5,0" ScrollViewer.VerticalScrollBarVisibility="Auto" />
+            <TextBlock Grid.Column="0" Grid.Row="1" Name="InputTitle" Text="Input in Hex" FontFamily="Bold" FontSize="18" TextAlignment="Center" Margin="0,25,0,0" Grid.RowSpan="2"/>
+            <ScrollViewer Name="InputScrollViewer" Grid.Column="0" Grid.Row="2" VerticalAlignment="Stretch" Margin="0,25,5,0">
+                <TextBlock Name="Input" Text="Parameter of Input" TextWrapping="Wrap" FontSize="15" ScrollViewer.VerticalScrollBarVisibility="Visible" />
+            </ScrollViewer>
+            
+            <Image Grid.Column="1" Grid.Row="2" Name="EncryptionDirection" Source="/Images/rightArrow-icon.png" Margin="0,-80,0,0"></Image>
 
-            <Image Grid.Column="1" Grid.Row="2" Name="EncryptionDirection" Source="/Images/rightArrow-icon.png" Margin="5,20,5,30"></Image>
-
-            <TextBlock Grid.Column="2" Grid.Row="2" Name="OutputTitle" Text="Output" FontFamily="Bold" FontSize="18" TextAlignment="Center" Margin="5,0,0,40"/>
-            <TextBlock Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="2" Name="Output" Text="Output from Algorithmus" TextWrapping="Wrap" FontSize="15" Margin="5,25,0,0" ScrollViewer.VerticalScrollBarVisibility="Auto" />
-
+            <TextBlock Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="2" Name="OutputTitle" Text="Output in Hex" FontFamily="Bold" FontSize="18" TextAlignment="Center" Margin="0,3,0,0"/>
+            <ScrollViewer Name="OutputScrollViewer" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="2" Margin="5,25,0,0">
+                <TextBlock Name="Output" Text="Output from Algorithmus" TextWrapping="Wrap" FontSize="15" ScrollViewer.VerticalScrollBarVisibility="Visible" />
+            </ScrollViewer>
+            
             <Border Name="NextOptionsWindow" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2" BorderThickness="4" BorderBrush="CornflowerBlue" Background="AliceBlue" Visibility="Hidden">
                 <Grid>
                     <Grid.ColumnDefinitions>

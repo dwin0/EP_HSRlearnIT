@@ -110,6 +110,145 @@ Wird beispielsweise ein Bild, mit vielen gleichen Farbpunkten, verschlüsselt, s
     
         <!--StepByStepPage Input & Output-->
     
+    <system:String x:Key="InputStep1">
+zu verschlüsselnder 0128 Block: 00000000000000000000000000000000
+AES Schlüssel K: feffe9928665731c6d6a8f9467308308feffe9928665731c6d6a8f9467308308
+    </system:String>
+    
+    <system:String x:Key="OutputStep1">
+Hash Subkey H: acbef20579b4b8ebce889bac8732dad7
+    </system:String>
+    
+    <system:String x:Key="InputStep2">
+IV: cafebabefacedbaddecaf888
+    </system:String>
+    
+    <system:String x:Key="OutputStep2">
+Counter0: cafebabefacedbaddecaf88800000001
+    </system:String>
+    
+    <system:String x:Key="InputStep3">
+Counter0: cafebabefacedbaddecaf88800000001
+    </system:String>
+    
+    <system:String x:Key="OutputStep3">
+Counter1: cafebabefacedbaddecaf88800000002
+    </system:String>
+    
+    <system:String x:Key="InputStep4">
+Counter1: cafebabefacedbaddecaf88800000002
+AES Schlüssel K: feffe9928665731c6d6a8f9467308308feffe9928665731c6d6a8f9467308308
+    </system:String>
+    
+    <system:String x:Key="OutputStep4">
+128 pseudozufällige Bits resultierend aus der AES-Verschlüsselung: 8b1cf3d561d27be251263e66857164e7   
+    </system:String>
+    
+    <system:String x:Key="InputStep5">
+128 pseudozufällige Bits aus vorherigem Schritt: 8b1cf3d561d27be251263e66857164e7
+128 Bit Block Plaintext1: d9313225f88406e5a55909c5aff5269a
+    </system:String>
+    
+    <system:String x:Key="OutputStep5">
+128 Bit Block Ciphertext1: 522dc1f099567d07f47f37a32a84427d
+    </system:String>
+    
+    <system:String x:Key="InputStep6">
+Additional Authenticated Data: feedfacedeadbeeffeedfacedeadbeefabaddad2
+    </system:String>
+    
+    <system:String x:Key="OutputStep6">
+hier wird noch nichts berechnet
+    </system:String>
+    
+    <system:String x:Key="InputStep7">
+Additional Authenticated Data: feedfacedeadbeeffeedfacedeadbeef
+Hash Subkey H: acbef20579b4b8ebce889bac8732dad7
+    </system:String>
+    
+    <system:String x:Key="OutputStep7">
+Wert nach Multiplikation innerhalb des Galois-Feldes: 5165d242c2592c0a6375e2622cf925d2
+    </system:String>
+    
+    <system:String x:Key="InputStep8">
+hier wird nichts berechnet
+    </system:String>
+    
+    <system:String x:Key="OutputStep8">
+hier wird nichts berechnet
+    </system:String>
+    
+    <system:String x:Key="InputStep9">
+Wert nach Multiplikation innerhalb des Galois-Feldes: 5165d242c2592c0a6375e2622cf925d2
+Ciphertext1: 522dc1f099567d07f47f37a32a84427d
+    </system:String>
+    
+    <system:String x:Key="OutputStep9">
+Wert nach der XOR Verknüpfung: 34813b25b0f510d970ad5c1067d67af
+    </system:String>
+    
+    <system:String x:Key="InputStep10">
+Wert nach der XOR Verknüpfung: 34813b25b0f510d970ad5c1067d67af
+Hash Subkey H: acbef20579b4b8ebce889bac8732dad7
+    </system:String>
+    
+    <system:String x:Key="OutputStep10">
+Wert nach Multiplikation innerhalb des Galois-Feldes: abe07e0bb62354177480b550f9f6cdcc
+    </system:String>
+    
+    <system:String x:Key="InputStep11">
+Die jeweils notwendigen Inputs wurden bereits in den vorhergehenden Schritten einzeln
+aufgelistet. Natürlich ergeben sich bei den Wiederholungen andere Werte.
+    </system:String>
+    
+    <system:String x:Key="OutputStep11">
+Für Beispiele zum Output können die vorherigen Schritte angeschaut werden.
+Natürlich ergeben sich bei den Wiederholungen andere Werte.
+    </system:String>
+    
+    <system:String x:Key="InputStep12">
+letzter Wert nach Multiplikation innerhalb des Galois-Feldes aus der Wiederholung: 9249beaf520c48b912fa120bbf391dc8
+Hash Subkey H: acbef20579b4b8ebce889bac8732dad7
+
+Zwischenberechnung:
+Längenangabe AAD 64 Bit-Repräsentation: 00000000000000a
+Längenangabe Ciphertext 64 Bit-Repräsentation: 000000000000001e0
+128 Bit Längenrepräsentation: 00000000000000a000000000000001e0
+
+XOR der Galois-Feld Multiplikation aus der Wiederholung und 128 Bit Längenrepräsentation: 9249beaf520c481912fa120bbf391c28
+    </system:String>
+    
+    <system:String x:Key="OutputStep12">
+Wert nach der Multiplikation des XOR Ergebnis innerhalb des Galois-Feldes: 8bd0c4d8aacd391e67cca447e8c38f65
+    </system:String>
+    
+    <system:String x:Key="InputStep13">
+Wert nach Multiplikation innerhalb des Galois-Feldes: 8bd0c4d8aacd391e67cca447e8c38f65
+Counter0: cafebabefacedbaddecaf88800000001
+AES Schlüssel K: feffe9928665731c6d6a8f9467308308feffe9928665731c6d6a8f9467308308
+128 pseudozufällige Bits resultierend aus der AES-Verschlüsselung: fd2caa16a5832e76aa132c1453eeda7e
+    </system:String>
+    
+    <system:String x:Key="OutputStep13">
+Auth Tag: 76fc6ece0f4e1768cddf8853bb2d551b
+    </system:String>
+    
+    <system:String x:Key="InputStep14">
+hier wird nichts berechnet
+    </system:String>
+    
+    <system:String x:Key="OutputStep14">
+Auth Tag: 76fc6ece0f4e1768cddf8853bb2d551b
+    </system:String>
+    
+    <system:String x:Key="InputStep15">
+hier wird nichts berechnet
+    </system:String>
+    
+    <system:String x:Key="OutputStep15">
+gesamter Ciphertext: 522dc1f099567d07f47f37a32a84427d643a8cdcbfe5c0c97598a2bd2555d1aa8cb08e48590dbb3da7b08b1056828838c5f61e6393ba7a0abcc9f662
+resultierendes Auth Tag: 76fc6ece0f4e1768cddf8853bb2d551b
+    </system:String>
     
     
     <!--Overview Ressources-->
