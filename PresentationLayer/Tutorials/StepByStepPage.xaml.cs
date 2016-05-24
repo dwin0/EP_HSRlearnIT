@@ -247,6 +247,18 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
 
         private void SetInputAndOutput(int stepNumber)
         {
+            if (!Input.ClipToBounds)
+            {
+                InputScrollViewer.VerticalScrollBarVisibility = (ScrollBarVisibility)Visibility.Hidden;
+            }
+            Input.Text = Application.Current.TryFindResource("InputStep" + stepNumber) as string;
+
+            if (!Output.ClipToBounds)
+            {
+                OutputScrollViewer.VerticalScrollBarVisibility = (ScrollBarVisibility)Visibility.Hidden;
+            }
+            Output.Text = Application.Current.TryFindResource("OutputStep" + stepNumber) as string;
+
             if (stepNumber < SbsMin)
             {
                 Input.Text = "Hier wird noch nichts berechnet";
@@ -256,18 +268,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
                 Input.Text = "Hier wird nichts mehr berechnet.";
                 Output.Text = "Hier wird nichts mehr berechnet.";
             }
-
-            if (!Input.ClipToBounds)
-            {
-                InputScrollViewer.VerticalScrollBarVisibility = (ScrollBarVisibility) Visibility.Hidden;
-            }
-            Input.Text = Application.Current.TryFindResource("InputStep" + stepNumber) as string;
-
-            if (!Output.ClipToBounds)
-            {
-                OutputScrollViewer.VerticalScrollBarVisibility = (ScrollBarVisibility)Visibility.Hidden;
-            }
-            Output.Text = Application.Current.TryFindResource("OutputStep" + stepNumber) as string;
         }
 
         private void LoadStepPaths(Canvas canvas)

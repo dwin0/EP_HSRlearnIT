@@ -21,11 +21,11 @@ namespace EP_HSRlearnIT.BusinessLayer.Testing.UniversalToolsTest
             }
             catch (NullReferenceException nre)
             {
-                ExceptionLogger.WriteToLogfile("This Exception was fired by the unit - test 'TestToWriteIntoLogFileCatchedException", nre.Message, nre.StackTrace);
+                ExceptionLogger.WriteToLogfile("This Exception was fired by the unit - test 'TestToWriteIntoLogFileCatchedException'", nre.Message, nre.StackTrace);
                 //hier könnte der Test aufgrund eines Sekundenwechsels fehlschlagen!
                 var date = DateTime.Now.ToString(CultureInfo.CurrentCulture);
                 expectedStr =
-                    $"Exception: {date}: This Exception was fired by the unit - test \'TestToWriteIntoLogFileCatchedException\' {nre.Message} {nre.StackTrace}";
+                    $"Exception: {date}: This Exception was fired by the unit - test \'TestToWriteIntoLogFileCatchedException\' {nre.Message} {nre.StackTrace} ";
             }
 
             using (StreamReader reader = new StreamReader(@"c:\logs\ExceptionLog.log"))
@@ -34,8 +34,9 @@ namespace EP_HSRlearnIT.BusinessLayer.Testing.UniversalToolsTest
 
                 while (reader.EndOfStream == false)
                 {
-                    string temp = reader.ReadLine();
-                    strToCompare = temp + reader.ReadLine();
+                    string temp1 = reader.ReadLine();
+                    string temp2 = reader.ReadLine();
+                    strToCompare = temp1 + temp2 + reader.ReadLine();
                 }
                 Assert.AreEqual(expectedStr, strToCompare);
             }
