@@ -11,7 +11,7 @@
   <AdditionalConfig>
     <ConfigSetting Id="BuildUri" />
     <ConfigSetting Id="TfsUri" />
-    <ConfigSetting Id="settings.file.path" Value="C:\I_Studium_HSR\4. Semester\EP\SonarQube\SonarQube.Analysis.xml" />
+    <ConfigSetting Id="settings.file.path" Value="C:\SonarQube\SonarQube.Analysis.xml" />
   </AdditionalConfig>
   <ServerSettings>
     <Property Name="sonar.qualitygate">1</Property>

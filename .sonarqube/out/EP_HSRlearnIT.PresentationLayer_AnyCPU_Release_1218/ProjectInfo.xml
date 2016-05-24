@@ -7,10 +7,10 @@
   <FullPath>C:\Programming\EP_HSRlearnIT\PresentationLayer\EP_HSRlearnIT.PresentationLayer.csproj</FullPath>
   <IsExcluded>false</IsExcluded>
   <AnalysisResults>
-    <AnalysisResult Id="FilesToAnalyze" Location="C:\Programming\EP_HSRlearnIT\.sonarqube\out\\EP_HSRlearnIT.PresentationLayer_AnyCPU_Debug_7403\FilesToAnalyze.txt" />
+    <AnalysisResult Id="FilesToAnalyze" Location="C:\Programming\EP_HSRlearnIT\.sonarqube\out\\EP_HSRlearnIT.PresentationLayer_AnyCPU_Release_1218\FilesToAnalyze.txt" />
   </AnalysisResults>
   <AnalysisSettings>
-    <Property Name="sonar.cs.roslyn.reportFilePath">C:\Programming\EP_HSRlearnIT\PresentationLayer\bin\Debug\EP_HSRlearnIT.exe.RoslynCA.json</Property>
+    <Property Name="sonar.cs.roslyn.reportFilePath">C:\Programming\EP_HSRlearnIT\PresentationLayer\bin\Release\EP_HSRlearnIT.exe.RoslynCA.json</Property>
     <Property Name="sonar.stylecop.projectFilePath">C:\Programming\EP_HSRlearnIT\PresentationLayer\EP_HSRlearnIT.PresentationLayer.csproj</Property>
   </AnalysisSettings>
 </ProjectInfo>
