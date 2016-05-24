@@ -120,11 +120,11 @@ Wird beispielsweise ein Bild, mit vielen gleichen Farbpunkten, verschlüsselt, s
 
     <system:String x:Key="VerschlüsselungText">Bei der Verschlüsselung wird der erste Plaintextblock AES-verschlüsselt.</system:String>
 
-    <system:String x:Key="AdditionalAuthenticatedDataText">Dem Algorithmus werden weitere authentisierte, aber nicht verschlüsselte Daten hinzugefügt.</system:String>
+    <system:String x:Key="AdditionalAuthenticatedDataText">Dem Algorithmus werden weitere Daten, welche authentisiert, aber nicht verschlüsselt werden hinzugefügt.</system:String>
 
-    <system:String x:Key="CiphertextAuthentifizierungText">Die Authentisierung geschieht über eine Multiplikation in einem Galois-Feld.</system:String>
+    <system:String x:Key="CiphertextAuthentisierungText">Die Authentisierung geschieht über eine Multiplikation in einem Galois-Feld.</system:String>
 
-    <system:String x:Key="WiederholungText">Die Verschlüsselung und Authentisierung werden wiederholt angewendet.</system:String>
+    <system:String x:Key="WiederholungText">Die Verschlüsselung und Authentisierung werden wiederholt angewendet, bis der gesamte Plaintext verarbeitet ist.</system:String>
 
     <system:String x:Key="AbschlussUndRückgabeText">Die Textlänge und der «Counter 0»-Block werden ebenfalls authentisiert. Am Ende wird der Ciphertext und das Tag zurückgegeben.</system:String>
 

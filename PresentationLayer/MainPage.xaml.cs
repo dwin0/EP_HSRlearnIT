@@ -85,7 +85,7 @@ namespace EP_HSRlearnIT.PresentationLayer
             MenuTile tile = sender as MenuTile;
             if (tile == null)
             {
-                ExceptionLogger.WriteToLogfile("No MenuTile was found - tile was null", "MainPage: OnTileMouseUp");
+                ExceptionLogger.WriteToLogfile("OnTileMouseUp", "tile was null", "");
             } else if (tile.Equals(_mouseDownMenuTile))
             {
                 Page toNavigatePage = null;
@@ -112,7 +112,7 @@ namespace EP_HSRlearnIT.PresentationLayer
                 }
                 else
                 {
-                    ExceptionLogger.WriteToLogfile("No matching MenuTile-Text", "MainPage: OnTileMouseUp");
+                    ExceptionLogger.WriteToLogfile("OnTileMouseUp", "toNavigatePage was null", "");
                 }
             }
         }

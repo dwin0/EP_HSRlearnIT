@@ -50,7 +50,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
                 Path ressourcePath = Application.Current.FindResource("AreaPath" + i) as Path;
                 if (ressourcePath == null)
                 {
-                    ExceptionLogger.WriteToLogfile("A ressourcePath was not found - ressourcePath was null", "AesGcmOverviewPage: LoadAreaPahts");
+                    ExceptionLogger.WriteToLogfile("LoadAreaPahts", "ressourcePath was null", "");
                     continue;
                 }
 
@@ -58,7 +58,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
                 Path areaPath = Clone(ressourcePath) as Path;
                 if (areaPath == null)
                 {
-                    ExceptionLogger.WriteToLogfile("Path could not be copied - Copy was null", "AesGcmOverviewPage: LoadAreaPaths");
+                    ExceptionLogger.WriteToLogfile("LoadAreaPaths", "areaPath - Clone was null", "");
                     return;
                 }
 
@@ -77,7 +77,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
                 Path ressourcePath = Application.Current.FindResource("StepPath" + i) as Path;
                 if (ressourcePath == null)
                 {
-                    ExceptionLogger.WriteToLogfile("A ressourcePath was not found - ressourcePath was null", "AesGcmOverviewPage: LoadStepPahts");
+                    ExceptionLogger.WriteToLogfile("LoadStepPahts", "ressourcePath was null", "");
                     continue;
                 }
                 if (!ressourcePath.Name.Contains("_overview"))
@@ -89,7 +89,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
                 Path stepPath = Clone(ressourcePath) as Path;
                 if (stepPath == null)
                 {
-                    ExceptionLogger.WriteToLogfile("Path could not be copied - Copy was null", "AesGcmOverviewPage: LoadStepPaths");
+                    ExceptionLogger.WriteToLogfile("LoadStepPaths", "stepPath - Clone was null", "");
                     continue;
                 }
 
@@ -109,7 +109,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             Image background = Application.Current.FindResource("BackgroundImage") as Image;
             if (background == null)
             {
-                ExceptionLogger.WriteToLogfile("Background-Image was not found - background was null", "AesGcmOverviewPage: LoadBackground");
+                ExceptionLogger.WriteToLogfile("LoadBackground", "background was null", "");
                 return;
             }
 
@@ -134,7 +134,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             Path stepPath = sender as Path;
             if (stepPath == null)
             {
-                ExceptionLogger.WriteToLogfile("No stepPath was found - stepPath was null", "AesGcmOverviewPage: StepPathOnMouseEnter");
+                ExceptionLogger.WriteToLogfile("StepPathOnMouseEnter", "stepPath was null", "");
                 return;
             }
 
@@ -146,7 +146,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
                 highlightedPath = AddHighlightedPath(stepPath);
                 if (highlightedPath == null)
                 {
-                    ExceptionLogger.WriteToLogfile("highlightedPath could not be added - highlightedPath was null", "AesGcmOverviewPage: StepPathOnMouseEnter");
+                    ExceptionLogger.WriteToLogfile("StepPathOnMouseEnter", "highlightedPath was null", "");
                     return;
                 }
             }
@@ -171,7 +171,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             Path highlightedPath = Clone(stepPath) as Path;
             if (highlightedPath == null)
             {
-                ExceptionLogger.WriteToLogfile("Path could not be copied - Copy was null", "AesGcmOverviewPage: AddHighlightedPath");
+                ExceptionLogger.WriteToLogfile("AddHighlightedPath", "highlightedPath - Clone was null", "");
                 return null;
             }
 
@@ -191,7 +191,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             Path stepPath = sender as Path;
             if (stepPath == null)
             {
-                ExceptionLogger.WriteToLogfile("No stepPath was found - stepPath was null", "AesGcmOverviewPage: StepPathOnMouseLeave");
+                ExceptionLogger.WriteToLogfile("StepPathOnMouseLeave", "stepPath was null", "");
                 return;
             }
 
@@ -214,7 +214,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
 
             if (stepPath == null)
             {
-                ExceptionLogger.WriteToLogfile("No stepPath was found - stepPath was null", "AesGcmOverviewPage: StepPathOnMouseUp");
+                ExceptionLogger.WriteToLogfile("StepPathOnMouseUp", "stepPath was null", "");
             }
             else if (stepPath.Equals(_mouseDownPath))
             {
@@ -247,7 +247,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             }
             else
             {
-                ExceptionLogger.WriteToLogfile("No areaPath - text was found - text was null", "AesGcmOverviewPage: AreaPathOnMouseEnter");
+                ExceptionLogger.WriteToLogfile("AreaPathOnMouseEnter", "text was null", "");
             }
         }
 

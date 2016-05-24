@@ -72,7 +72,7 @@
     <Path x:Key="AreaPath1" Name="Vorbereitung" Data="M0,0 0,240 300,240 300,0" Style="{StaticResource ResourceKey=AreaPathStyle}"/>
     <Path x:Key="AreaPath2" Name="Verschlüsselung" Data="M305,0 305,337 633,337 633,0" Style="{StaticResource ResourceKey=AreaPathStyle}"/>
     <Path x:Key="AreaPath3" Name="AdditionalAuthenticatedData" Data="M0,245 0,725 633,725 633,557 442,557 442,343 300,343 300,245" Style="{StaticResource ResourceKey=AreaPathStyle}"/>
-    <Path x:Key="AreaPath4" Name="CiphertextAuthentifizierung" Data="M448,343 448,550 633,550 633,343" Style="{StaticResource ResourceKey=AreaPathStyle}"/>
+    <Path x:Key="AreaPath4" Name="CiphertextAuthentisierung" Data="M448,343 448,550 633,550 633,343" Style="{StaticResource ResourceKey=AreaPathStyle}"/>
     <Path x:Key="AreaPath5" Name="Wiederholung" Data="M638,0 641,465 960,465 960,0" Style="{StaticResource ResourceKey=AreaPathStyle}"/>
     <Path x:Key="AreaPath6" Name="AbschlussUndRückgabe" Data="M640,471 640,725 960,725 960,470" Style="{StaticResource ResourceKey=AreaPathStyle}"/>
     

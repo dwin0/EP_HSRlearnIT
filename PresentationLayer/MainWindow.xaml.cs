@@ -56,7 +56,7 @@ namespace EP_HSRlearnIT.PresentationLayer
             var item = ((FrameworkElement)e.OriginalSource).DataContext as string;
             if (item == null)
             {
-                ExceptionLogger.WriteToLogfile("No MenuItem-Text was found - item was null", "MainWindow: OnMenuItemMouseUp");
+                ExceptionLogger.WriteToLogfile("OnMenuItemMouseUp", "item was null", "");
             } else if (item.Equals(_mouseDownMenuItem))
             {
                 switch (item)
