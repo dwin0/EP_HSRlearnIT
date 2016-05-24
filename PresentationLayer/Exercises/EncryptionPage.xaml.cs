@@ -28,7 +28,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
 
 
         #region Private Methods
-        private async void OnEnryptionButtonClick(object sender, RoutedEventArgs e)
+        private async void EnryptionButton_OnClick(object sender, RoutedEventArgs e)
         {
             //key is evaluated and will be resized to 32 Byte if necessary
             try
@@ -38,8 +38,10 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             }
             catch (OverflowException)
             {
-                MessageBox.Show("Es wurde ein Zeichen, welches mit mehr als einem Byte repräsentiert wird, eingegeben. Bitte überprüfe die Eingabe und passe diese an.",
-                    "Achtung", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                string message = "Es wurde ein Zeichen, welches mit mehr als einem Byte repräsentiert wird, eingegeben. " +
+                                 "Bitte überprüfe und korrigiere die Eingabe.";
+                string title = "Achtung";
+                MessageBox.Show(message, title, MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 return;
             }
 
@@ -57,21 +59,19 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             }
             catch (ArgumentOutOfRangeException)
             {
-                string triggeringField = "(Feld konnte leider nicht bestimmt werden)";
+                string triggeringField = "(konnte nicht bestimmt werden)";
                 foreach (var elem in DependencyObjectExtension.GetAllChildren<TextBox>(this))
                 {
-                    if (elem.Name.Contains("Hex"))
+                    if (elem.Name.Contains("Hex") && (elem.Text.Length % 2 != 0))
                     {
-                        if (elem.Text.Length%2 != 0)
-                        {
-                            triggeringField = elem.Name.Substring(3, elem.Name.Length - 6);
-                        }
+                        triggeringField = elem.Name.Substring(3, elem.Name.Length - 6);
                     }
                 }
-                
-                MessageBox.Show(
-                    "In dem Feld " + triggeringField +  " wurde ein ungerader Hex-Wert eingegeben. Bitte überprüfe die Eingabe und passe diese an.",
-                    "Achtung", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+
+                string message = "Im Feld " + triggeringField + " wurde ein ungerader Hex-Wert eingegeben. " +
+                                 "Bitte überprüfe und korrigiere die Eingabe.";
+                string title = "Achtung";
+                MessageBox.Show(message, title, MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
         }
 

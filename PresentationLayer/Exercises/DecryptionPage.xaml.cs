@@ -30,7 +30,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
 
 
         #region Private Methods
-        private async void OnDecryptionButtonClick(object sender, RoutedEventArgs e)
+        private async void DecryptionButton_OnClick(object sender, RoutedEventArgs e)
         {
             //key is evaluated and will be resized to 32 Byte if necessary 
             try
@@ -40,8 +40,10 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             }
             catch (OverflowException)
             {
-                MessageBox.Show("Es wurde ein Zeichen, welches mit mehr als einem Byte repräsentiert wird, eingegeben. Bitte überprüfe die Eingabe und passe diese an.",
-                    "Achtung", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                string message = "Es wurde ein Zeichen, welches mit mehr als einem Byte repräsentiert wird, eingegeben. " +
+                                 "Bitte überprüfe und korrigiere die Eingabe.";
+                string title = "Achtung";
+                MessageBox.Show(message, title, MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 return;
             }
 
@@ -58,34 +60,33 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                 //case authentication only --> when successfull
                 if (UtfPlaintextBox.Text == "")
                 {
-                    MessageBox.Show("Der Text wurde erfolgreich authentifiziert.", "alleinstehende Authentisierung",
-                        MessageBoxButton.OK, MessageBoxImage.Information);
+                    string message = "Der Text wurde erfolgreich authentifiziert.";
+                    string title = "alleinstehende Authentisierung";
+                    MessageBox.Show(message, title, MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
             catch (CryptographicException)
             {
-                MessageBox.Show(
-                    "Ein oder mehrere Parameter der Entschlüsselung wurden falsch eingegeben. Bitte überprüfe die Eingabe und passe diese an.",
-                    "Achtung", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                string message = "Ein oder mehrere Parameter der Entschlüsselung wurden falsch eingegeben. " +
+                                 "Bitte überprüfe und korrigiere die Eingabe.";
+                string title = "Achtung";
+                MessageBox.Show(message, title, MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
             catch (ArgumentOutOfRangeException)
             {
                 string triggeringField = "(Feld konnte leider nicht bestimmt werden)";
                 foreach (var elem in DependencyObjectExtension.GetAllChildren<TextBox>(this))
                 {
-                    if (elem.Name.Contains("Hex"))
+                    if (elem.Name.Contains("Hex") && (elem.Text.Length % 2 != 0))
                     {
-                        if (elem.Text.Length%2 != 0)
-                        {
-                            triggeringField = elem.Name.Substring(3, elem.Name.Length - 6);
-                        }
+                        triggeringField = elem.Name.Substring(3, elem.Name.Length - 6);
                     }
                 }
 
-                MessageBox.Show(
-                    "In dem Feld " + triggeringField +
-                    " wurde ein ungerader Hex-Wert eingegeben. Bitte überprüfe die Eingabe und passe diese an.",
-                    "Achtung", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                string message = "In dem Feld " + triggeringField + " wurde ein ungerader Hex-Wert eingegeben. " +
+                                 "Bitte überprüfe und korrigiere die Eingabe.";
+                string title = "Achtung";
+                MessageBox.Show(message, title, MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
         }
 

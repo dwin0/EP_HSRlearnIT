@@ -8,27 +8,28 @@
         Falls in der Verschlüsselung keine Additional Authenticated Data eingegeben wurden, muss das Feld auch in der Entschlüsselung leer sein.
     </system:String>
     <system:String x:Key="DecryptionInfoIv">
-        Falls dieses Feld leergelassen wird, wird der Standard IV "00 00 00 00 00 00 00 00 00 00 00 00" (Angabe in Hex) gesetzt.
-        Ansonsten muss der gleiche IV wie in der Verschlüsselung angegeben werden.
+        Falls das IV-Feld leer ist, wird der Standard IV "00 00 00 00 00 00 00 00 00 00 00 00" (Angabe in Hex) gesetzt.
+        Wurde bei der Verschlüsselung ein IV angegeben so muss dieser hier wiederverwendet werden.
     </system:String>
     <system:String x:Key="DecryptionInfoTag">
         Muss mit dem berechneten Tag aus der Verschlüsselung übereinstimmen.
     </system:String>
     <system:String x:Key="DecryptionInfoKey">
-        Der Key muss der gleiche sein wie bei der Entschlüsselung. Falls er nicht genau 32 Byte gross ist, wird gleich vorgegangen wie bei der Verschlüsselung.
+        Der Key muss mit demjenigen der Entschlüsselung übereinstimmen. Falls er nicht genau 32 Byte gross ist,
+        wird bei einem zu kleinen bzw. einem zu grossen Key der eingegebene Key verlängert oder verkürzt, bis 32 Byte erreicht sind.
     </system:String>
 
     <system:String x:Key="EncryptionInfoIv">
-        Falls dieses Feld leergelassen wird, wird der Standard IV "00 00 00 00 00 00 00 00 00 00 00 00" (Angabe in Hex) gesetzt. 
-        Der IV muss eine Grösse von 12 Byte haben.
+        Falls das IV-Feld leer ist, wird der Standard IV "00 00 00 00 00 00 00 00 00 00 00 00" (Angabe in Hex) gesetzt. 
+        Der IV muss eine Grösse von 12 Byte (24 Hex-Zeichen) haben.
     </system:String>
     <system:String x:Key="EncryptionInfoAad">
-        Dieses Feld kann leergelassen werden. Falls es in der Verschlüsselung leer ist, muss es auch in der Entschlüsselung leer sein.
+        Das AAD-Feld kann leergelassen werden. Bleibt es bei der Verschlüsselung leer, so muss es auch in der Entschlüsselung leer sein.
         Diese Daten werden nur authentifiziert und nicht verschlüsselt.
     </system:String>
     <system:String x:Key="EncryptionInfoKey">
-        Der Key muss mindestens 8 Zeichen betragen. Da der schlussendliche Key 32 Byte gross sein muss, wird bei einem zu kleinen
-        Key der eingegebene Key verlängert, bis 32 Byte erreicht wurden. Falls der Key grösser als 32 Byte ist, wird er auf die 32 Byte reduziert.
+        Der Key muss mindestens 8 Zeichen lang sein. Da der finale Key 32 Byte gross sein muss, wird bei einem zu kleinen bzw. 
+        einem zu grossen Key der eingegebene Key verlängert oder verkürzt, bis 32 Byte erreicht sind.
     </system:String>
 
  

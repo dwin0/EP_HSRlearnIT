@@ -44,7 +44,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         /// </summary>
         /// <param name="sender">Contains the control which raised the event.</param>
         /// <param name="e"></param>
-        public void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        public void TextBox_OnTextChanged(object sender, TextChangedEventArgs e)
         {
             //Get control that raised this event
             var textBox = sender as TextBox;
@@ -70,9 +70,9 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             if (hexBox == null) { return;}
 
             //remove the event handler temporary, else a loop will occure
-            hexBox.TextChanged -= HexTextBox_TextChanged;
+            hexBox.TextChanged -= HexTextBox_OnTextChanged;
             hexBox.Text = Library.ConvertToHexString(values);
-            hexBox.TextChanged += HexTextBox_TextChanged;
+            hexBox.TextChanged += HexTextBox_OnTextChanged;
         }
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         /// </summary>
         /// <param name="sender">Contains the control which raised the event.</param>
         /// <param name="e"></param>
-        public void HexTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        public void HexTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
         {
             var hexTextBox = sender as TextBox;
             if (hexTextBox != null)
@@ -105,20 +105,20 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                 CheckIfWarningIsAlreadySet(hexWarningBlock);
 
                 //remove the event handler temporary, else a loop will occure
-                textBox.TextChanged -= TextBox_TextChanged;
+                textBox.TextChanged -= TextBox_OnTextChanged;
 
                 string hexValue = hexTextBox.Text;
 
                 if (FoundNonHexValues(hexValue, hexWarningBlock))
                 {
-                    textBox.TextChanged += TextBox_TextChanged;
+                    textBox.TextChanged += TextBox_OnTextChanged;
                     return;
                 }
 
                 if (hexValue.Length % 2 == 0)
                 {
                     textBox.Text = Library.BytesToString(Library.HexStringToDecimalByteArray(hexValue));
-                    textBox.TextChanged += TextBox_TextChanged;
+                    textBox.TextChanged += TextBox_OnTextChanged;
                 }
             }
         }
@@ -128,7 +128,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e">Contains the control which raised the event.</param>
-        public void HexTextBox_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        public void HexTextBox_OnLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
             TextBox hexTextBox = e.Source as TextBox;
             if (hexTextBox != null)
@@ -142,7 +142,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e">Contains the control which raised the event.</param>
-        public void TextBox_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        public void TextBox_OnLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
             TextBox textBox = e.Source as TextBox;
             if (textBox != null)
@@ -165,7 +165,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             }
         }
 
-        public void OnResetButtonClick(object sender, RoutedEventArgs e)
+        public void ResetButton_OnClick(object sender, RoutedEventArgs e)
         {
             foreach (var element in DependencyObjectExtension.GetAllChildren<TextBox>(this))
             {
@@ -177,7 +177,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             }
         }
 
-        public void OnExportButtonClick(object sender, RoutedEventArgs e)
+        public void ExportButton_OnClick(object sender, RoutedEventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog()
             {
@@ -210,7 +210,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             }
         }
 
-        public void OnImportButtonClick(object sender, RoutedEventArgs e)
+        public void ImportButton_OnClick(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog()
             {
