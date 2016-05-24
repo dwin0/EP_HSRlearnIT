@@ -21,11 +21,11 @@ namespace EP_HSRlearnIT.BusinessLayer.Testing.UniversalToolsTest
             }
             catch (NullReferenceException nre)
             {
-                ExceptionLogger.WriteToLogfile(nre.Message, "This Exception was fired by the unit-test 'TestToWriteIntoLogFileCatchedException'");
+                ExceptionLogger.WriteToLogfile("This Exception was fired by the unit - test 'TestToWriteIntoLogFileCatchedException", nre.Message, nre.StackTrace);
                 //hier könnte der Test aufgrund eines Sekundenwechsels fehlschlagen!
                 var date = DateTime.Now.ToString(CultureInfo.CurrentCulture);
                 expectedStr =
-                    $"Exception: {date}: {nre.Message} This Exception was fired by the unit-test \'TestToWriteIntoLogFileCatchedException\'";
+                    $"Exception: {date}: This Exception was fired by the unit - test \'TestToWriteIntoLogFileCatchedException\' {nre.Message} {nre.StackTrace}";
             }
 
             using (StreamReader reader = new StreamReader(@"c:\logs\ExceptionLog.log"))

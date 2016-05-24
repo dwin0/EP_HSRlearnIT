@@ -24,10 +24,10 @@ namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
 
 
         #region Public Methods
-        public static void WriteToLogfile(string exeptionMessage, string sourceMethod)
+        public static void WriteToLogfile(string sourceMethod, string exceptionMessage, string stackTrace )
         {
             string filePath = FileManager.SaveFile(_path, _fileName);
-            string entry = $"{Environment.NewLine}Exception: {DateTime.Now.ToString(CultureInfo.CurrentCulture)}: {exeptionMessage} {Environment.NewLine}{sourceMethod}";
+            string entry = $"Exception: {DateTime.Now.ToString(CultureInfo.CurrentCulture)}: {sourceMethod}{Environment.NewLine} {exceptionMessage}{Environment.NewLine} {stackTrace} {Environment.NewLine}";
             FileManager.AppendContent(filePath, entry);
             AvoidOverflow(filePath);
         }

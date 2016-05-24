@@ -148,7 +148,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                 }
                 catch(Exception ex)
                 {
-                    ExceptionLogger.WriteToLogfile(ex.Message, "GetImage()");
+                    ExceptionLogger.WriteToLogfile("GetImage()", ex.Message, ex.StackTrace);
                     images[i - 1] = null;
                 }
             }
@@ -277,7 +277,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                     }
                     catch (Exception ex)
                     {
-                        ExceptionLogger.WriteToLogfile(ex.Message, "image_PreviewMouseLeftButtonDown");
+                        ExceptionLogger.WriteToLogfile("image_PreviewMouseLeftButtonDown", ex.Message, ex.StackTrace);
                     }
                 }
                 _currentlyMovedRectangle.Stroke = null;
@@ -349,7 +349,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
             }
             catch (ArgumentException ex)
             {
-                ExceptionLogger.WriteToLogfile(ex.Message, "DragDropPage_MouseLeftButtonUp");
+                ExceptionLogger.WriteToLogfile("DragDropPage_MouseLeftButtonUp", ex.Message, ex.StackTrace);
             }
 
             var dropRectangle = CheckCollisionWithDropRectangles(rectangleInDraggedStatus);
@@ -378,7 +378,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                     }
                     catch (ArgumentOutOfRangeException ex)
                     {
-                        ExceptionLogger.WriteToLogfile(ex.Message, "DragDropPage_MouseLeftButtonUp");
+                        ExceptionLogger.WriteToLogfile("DragDropPage_MouseLeftButtonUp", ex.Message, ex.StackTrace);
                     }
                 }
                 //if we move it from the intial place to an rectangle field
@@ -427,7 +427,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                 return;
             }                
             _checkingFirstTime = false;
-            string message = $"Alle Felder sind belegt. {Environment.NewLine}Klicke auf JA, wenn Du die Auswertung starten möchtest!";
+            string message = $"Alle Felder sind belegt. {Environment.NewLine}Klicke auf JA, um deine Lösung auszuwerten.";
             string title = "Spiel beendet";
             if (MessageBox.Show(message, title, MessageBoxButton.YesNo, MessageBoxImage.Information, MessageBoxResult.Yes) ==
                 MessageBoxResult.Yes)
@@ -464,7 +464,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                 }
                 catch (Exception ex)
                 {
-                    ExceptionLogger.WriteToLogfile(ex.Message, "ElementCanvas_MouseMove");
+                    ExceptionLogger.WriteToLogfile("ElementCanvas_MouseMove", ex.Message, ex.StackTrace);
                 }
             }
         }
@@ -542,9 +542,9 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                     }
                     data.ChildReference.StrokeThickness = 4;
                 }
-                MessageBox.Show(
-                    $"Spiel ist nun beendet. {Environment.NewLine}Korrekte Antwort: {correctAnswers} {Environment.NewLine}Falsche Anworten: {wrongAnswers}",
-                    "Spielresultat", MessageBoxButton.OK, MessageBoxImage.Information);
+            string message = $"Spiel ist nun beendet. {Environment.NewLine}Korrekte Antwort(en): {correctAnswers} {Environment.NewLine}Falsche Antwort(en): {wrongAnswers}";
+                string title = "Spielresultat";
+                MessageBox.Show(message, title,MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         /// <summary>

@@ -8,9 +8,10 @@ namespace EP_HSRlearnIT.PresentationLayer
         private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
             //Noch definieren, welcher Text ausgegeben werden soll
-            MessageBox.Show("Unhandled exception occured [global exception handler] :" + e.Exception.Message);
-            ExceptionLogger.WriteToLogfile(e.Exception.Message, e.Exception.StackTrace);
-            //ExceptionLogger.WriteToLogfile(e.Exception.StackTrace, "unhandled exception");
+            string message = $"Ein unerwarteter Fehler ist aufgetreten";
+            string title = "Exception Handler";
+            MessageBox.Show(message, title, MessageBoxButton.OK, MessageBoxImage.Error);
+            ExceptionLogger.WriteToLogfile("Global Exception Handler", e.Exception.Message, e.Exception.StackTrace);
         }
     }
 }
