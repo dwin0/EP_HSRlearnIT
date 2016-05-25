@@ -26,7 +26,7 @@
             </Border>
         </StackPanel>
         <Button Grid.Column="0" Name="MenuButton" Click="OnMenuButton_Click" VerticalAlignment="Top" HorizontalAlignment="Left"
-                Panel.ZIndex="2" Margin="-60, 0, 0, 0" Width="50" Background="Transparent" BorderThickness="0" Focusable="False">
+                Panel.ZIndex="2" Margin="-60, 0, 0, 0" Width="50" Background="Transparent" BorderBrush="Transparent" Focusable="False">
             <Image Source="Images/hambugerButtonIcon.png"/>
         </Button>
         <Button Grid.Column="1" Name="Save" Content="Speichern" MouseRightButtonDown="OnExceptionClick" VerticalAlignment="Top"
