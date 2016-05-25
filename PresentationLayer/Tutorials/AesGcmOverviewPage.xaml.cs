@@ -63,7 +63,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
                 }
 
                 areaPath.SetValue(Panel.ZIndexProperty, 2);
-                areaPath.MouseEnter += AreaPathOnMouseEnter;
+                areaPath.MouseEnter += AreaPath_OnMouseEnter;
 
                 canvas.Children.Add(areaPath);
                 _areaPaths[i - 1] = areaPath;
@@ -94,11 +94,11 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
                 }
 
                 stepPath.SetValue(Panel.ZIndexProperty, 3);
-                stepPath.MouseEnter += StepPathOnMouseEnter;
-                stepPath.MouseLeave += StepPathOnMouseLeave;
+                stepPath.MouseEnter += StepPath_OnMouseEnter;
+                stepPath.MouseLeave += StepPath_OnMouseLeave;
                 //Mouse Up and Down - Events to make it feel lika a click. There is no Click-Event for Paths.
-                stepPath.MouseDown += StepPathOnMouseDown;
-                stepPath.MouseUp += StepPathOnMouseUp;
+                stepPath.MouseDown += StepPath_OnMouseDown;
+                stepPath.MouseUp += StepPath_OnMouseUp;
 
                 canvas.Children.Add(stepPath);
             }
@@ -127,7 +127,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
 
         #region StepPath-Methods
 
-        private void StepPathOnMouseEnter(object sender, MouseEventArgs e)
+        private void StepPath_OnMouseEnter(object sender, MouseEventArgs e)
         {
             Cursor = Cursors.Hand;
 
@@ -157,7 +157,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             Path areaPath = FindAreaPath(stepPath);
             if (areaPath != null)
             {
-                AreaPathOnMouseEnter(areaPath, e);
+                AreaPath_OnMouseEnter(areaPath, e);
             }
         }
 
@@ -184,7 +184,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             return highlightedPath;
         }
 
-        private void StepPathOnMouseLeave(object sender, MouseEventArgs e)
+        private void StepPath_OnMouseLeave(object sender, MouseEventArgs e)
         {
             Cursor = Cursors.Arrow;
 
@@ -203,12 +203,12 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             }
         }
 
-        private void StepPathOnMouseDown(object sender, MouseEventArgs e)
+        private void StepPath_OnMouseDown(object sender, MouseEventArgs e)
         {
             _mouseDownPath = sender as Path;
         }
 
-        private void StepPathOnMouseUp(object sender, MouseEventArgs e)
+        private void StepPath_OnMouseUp(object sender, MouseEventArgs e)
         {
             Path stepPath = sender as Path;
 
@@ -237,7 +237,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
 
         #region AreaPath-Methods
 
-        private void AreaPathOnMouseEnter(object sender, MouseEventArgs e)
+        private void AreaPath_OnMouseEnter(object sender, MouseEventArgs e)
         {
             Path path = sender as Path;
             string text = Application.Current.FindResource(path?.Name + "Text") as string;

@@ -18,20 +18,21 @@
             <Border BorderThickness="0, 0, 3, 0" BorderBrush="{StaticResource MenuBorderBrush}">
                 <StackPanel>
                     <TextBlock Text="Menu" Style="{StaticResource ResourceKey=MenuStyle}"/>
-                    <ListView Name="Menu" PreviewMouseLeftButtonDown="OnMenuItemMouseDown" MouseUp="OnMenuItemMouseUp" ItemsSource="{StaticResource ResourceKey=MenuStrings}"
-                              ItemContainerStyle="{StaticResource ResourceKey=MenuItemStyle}"
-                              BorderThickness="0" BorderBrush="{StaticResource TileBackgroundBrush}" />
+                    <ListView Name="Menu" ItemsSource="{StaticResource ResourceKey=MenuStrings}" ItemContainerStyle="{StaticResource ResourceKey=MenuItemStyle}"
+                              BorderThickness="0" BorderBrush="{StaticResource TileBackgroundBrush}" PreviewMouseLeftButtonDown="MenuItem_OnPreviewMouseLeftButtonDown"
+                              MouseUp="MenuItem_OnMouseUp"/>
                     <Image Source="Images/encryptionImage.png" Margin="0, 0, 0, 1000"/>
                 </StackPanel>
             </Border>
         </StackPanel>
-        <Button Grid.Column="0" Name="MenuButton" Click="OnMenuButton_Click" VerticalAlignment="Top" HorizontalAlignment="Left"
-                Panel.ZIndex="2" Margin="-60, 0, 0, 0" Width="50" Background="Transparent" BorderBrush="Transparent" Focusable="False">
+        <Button Name="MenuButton" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left"
+                Panel.ZIndex="2" Margin="-60, 0, 0, 0" Width="50" Background="Transparent" BorderBrush="Transparent" Focusable="False" Click="MenuButton_OnClick">
             <Image Source="Images/hambugerButtonIcon.png"/>
         </Button>
-        <Button Grid.Column="1" Name="Save" Content="Speichern" MouseRightButtonDown="OnExceptionClick" VerticalAlignment="Top"
-                HorizontalAlignment="Right" Style="{StaticResource ResourceKey=ProgramButtonStyle}" Panel.ZIndex="10" Visibility="Hidden"/>
-        <Frame Grid.ColumnSpan="2" Grid.Column="0" x:Name="MainFrame" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+        <Button Name="Save" Grid.Column="1" Content="Speichern" VerticalAlignment="Top" HorizontalAlignment="Right"
+                 Panel.ZIndex="10" Style="{StaticResource ResourceKey=ProgramButtonStyle}" Visibility="Hidden"
+                MouseRightButtonDown="Save_OnMouseRightButtonDown"/>
+        <Frame Name="MainFrame" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                Panel.ZIndex="1" NavigationUIVisibility="Hidden" Focusable="False"/>
     </Grid>
 </Window>

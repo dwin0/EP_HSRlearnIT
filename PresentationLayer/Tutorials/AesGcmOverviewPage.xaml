@@ -15,17 +15,17 @@
         <Viewbox Grid.Row="0" Margin="0, 20">
             <Canvas Name="OverviewCanvas" Height="720" Width="960" />
         </Viewbox>
-        <Border Grid.Row="1" BorderBrush="{StaticResource MenuBorderBrush}" BorderThickness="2" MaxWidth="850" MaxHeight="120">
+        <Border Grid.Row="1" MaxHeight="120" MaxWidth="850" BorderThickness="2" BorderBrush="{StaticResource MenuBorderBrush}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Background="{StaticResource MenuBorderBrush}" Foreground="White" Text="Erklärung"
+                <TextBlock Grid.Row="0" Text="Erklärung" Background="{StaticResource MenuBorderBrush}" Foreground="White"
                            TextAlignment="Center" FontSize="16" FontWeight="Bold" Padding="0, 3, 0, 0"/>
                 <ScrollViewer Grid.Row="1" Name="TextScrollViewer">
-                    <TextBlock Name="OverviewTextBlock" FontSize="16" HorizontalAlignment="Center" TextAlignment="Center" Margin="0, 10, 0, 0"
-                           Text="Fahre mit der Maus über das Bild, um mehr zu erfahren." TextWrapping="Wrap"/>
+                    <TextBlock Name="OverviewTextBlock" Text="Fahre mit der Maus über das Bild, um mehr zu erfahren."
+                               TextAlignment="Center" FontSize="16" HorizontalAlignment="Center" Margin="0, 10, 0, 0" TextWrapping="Wrap"/>
                 </ScrollViewer>
             </Grid>
         </Border>
