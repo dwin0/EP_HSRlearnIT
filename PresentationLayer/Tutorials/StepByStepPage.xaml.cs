@@ -290,7 +290,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
 
         private void FillPath(Path path)
         {
-            path.Fill = Application.Current.FindResource("TileSolidColor") as SolidColorBrush;
+            path.Fill = Application.Current.FindResource("BackAreaBrush") as SolidColorBrush;
         }
 
         private void ClearPath(Path path)

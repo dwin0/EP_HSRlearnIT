@@ -13,7 +13,6 @@
         <system:String>Drag &amp; Drop - Spiel</system:String>
     </local:StringCollection>
 
-    <SolidColorBrush x:Key="MenuBackgroundColor">#B2DFDB</SolidColorBrush>
     <SolidColorBrush x:Key="MenuBorderBrush" Color="#00796B"></SolidColorBrush>
 
     <Storyboard x:Key="StoryboardShowLeftMenu" >
@@ -33,6 +32,7 @@
         <Setter Property="Padding" Value="10"/>
         <Setter Property="Background" Value="LightGray"/>
         <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="Focusable" Value="False"/>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="FontWeight" Value="Bold"/>

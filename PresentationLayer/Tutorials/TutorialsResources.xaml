@@ -5,7 +5,6 @@
     
     <!--StepByStepPage Ressources-->
     
-    <SolidColorBrush x:Key="TileSolidColor" Color="#AFC8E6C9"/>
     <Image x:Key="StepByStepBackground" Source="/Images/aead.png" RenderOptions.BitmapScalingMode="HighQuality" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center"/>
     
         <!--StepByStepPage StepDescripton and Title-->
