@@ -12,6 +12,9 @@ using EP_HSRlearnIT.PresentationLayer.Games;
 
 namespace EP_HSRlearnIT.PresentationLayer.Tutorials
 {
+    /// <summary>
+    /// Page to inform the user about AES-GCM with a StepByStep-Tutorial.
+    /// </summary>
     public partial class StepByStepPage
     {
         #region Private Members
@@ -26,8 +29,11 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
 
         #endregion
 
-
         #region Constructors
+        /// <summary>
+        /// Contains methods to generate a StepByStep-Page about a special number.
+        /// </summary>
+        /// <param name="stepNumber">Number of the page which is loaded.</param>
         public StepByStepPage(int stepNumber)
         {
             InitializeComponent();
@@ -40,6 +46,9 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             NavigationService?.Navigate(new StepByStepPage());
         }
 
+        /// <summary>
+        /// Contains methods to load a StepByStep-Page include clickable image, description and calculation of AES-GCM.
+        /// </summary>
         public StepByStepPage()
         {
             InitializeComponent();
@@ -89,23 +98,22 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             }
         }
 
-        private void StepByStepPage_OnKeyDown(object sender, KeyEventArgs e)
+        private void StepButton_OnKeyDown(object sender, KeyEventArgs e)
         {
             switch (e.Key)
             {
                 case Key.Left:
-                    OnPreviousStepButton_Click(sender, e);
+                    PreviousStepButton_OnClick(sender, e);
                     break;
                 case Key.Right:
-                    OnNextStepButton_Click(sender, e);
+                    NextStepButton_OnClick(sender, e);
                     break;
                 default:
                     return;
             }
         }
-
         
-        private void OnJumpToStart_Click(object sender, RoutedEventArgs e)
+        private void JumpToStart_OnClick(object sender, RoutedEventArgs e)
         {
             foreach (var stepPath in _stepPaths)
             {
@@ -121,24 +129,24 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             ReplaceContent(_step);
         }
 
-        private void OnPreviousStepButton_Click(object sender, RoutedEventArgs e)
+        private void PreviousStepButton_OnClick(object sender, RoutedEventArgs e)
         {
             ReplaceContent(--_step);
             Progress.SaveProgress("StepByStepPage_CurrentStep", _step);
         }
 
-        private void OnNextStepButton_Click(object sender, RoutedEventArgs e)
+        private void NextStepButton_OnClick(object sender, RoutedEventArgs e)
         {
             ReplaceContent(++_step);
             Progress.SaveProgress("StepByStepPage_CurrentStep", _step);
         }
 
-        private void OnStartEncryptionDecryptionPages_Click(object sender, RoutedEventArgs e)
+        private void StartEncryptionDecryption_OnClick(object sender, RoutedEventArgs e)
         {
             NavigationService?.Navigate(new EncryptionDecryptionTabs());
         }
 
-        private void OnStartDragDropButton_Click(object sender, RoutedEventArgs e)
+        private void StartDragDrop_OnClick(object sender, RoutedEventArgs e)
         {
             NavigationService?.Navigate(new DragDropPage());
         }
@@ -146,7 +154,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
         private void ActivateButtons()
         {
             StartDragDrop.Visibility = Visibility.Visible;
-            StartEncryptionDecryptionPages.Visibility = Visibility.Visible;
+            StartEncryptionDecryption.Visibility = Visibility.Visible;
             Progress.SaveProgress("StepByStepPage_ButtonState", true);
         }
 
@@ -235,17 +243,17 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
 
         private void SetInputAndOutput(int stepNumber)
         {
+            Input.Text = Application.Current.TryFindResource("InputStep" + stepNumber) as string;
             if (!Input.ClipToBounds)
             {
                 InputScrollViewer.VerticalScrollBarVisibility = (ScrollBarVisibility)Visibility.Hidden;
             }
-            Input.Text = Application.Current.TryFindResource("InputStep" + stepNumber) as string;
 
+            Output.Text = Application.Current.TryFindResource("OutputStep" + stepNumber) as string;
             if (!Output.ClipToBounds)
             {
                 OutputScrollViewer.VerticalScrollBarVisibility = (ScrollBarVisibility)Visibility.Hidden;
             }
-            Output.Text = Application.Current.TryFindResource("OutputStep" + stepNumber) as string;
 
             if (stepNumber < SbsMin)
             {
@@ -363,7 +371,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             return subtitle + GetSubtitleNumber(stepNumber);
         }
 
-        private void Button_OnLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        private void StepButton_OnLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
             SetFocus(_step);
         }

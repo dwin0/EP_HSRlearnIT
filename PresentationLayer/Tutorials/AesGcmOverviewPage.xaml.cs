@@ -8,13 +8,13 @@ using EP_HSRlearnIT.BusinessLayer.UniversalTools;
 namespace EP_HSRlearnIT.PresentationLayer.Tutorials
 {
     /// <summary>
-    /// Page to briefly inform about AES-GCM
+    /// Page to briefly inform about AES-GCM.
     /// </summary>
     public partial class AesGcmOverviewPage
     {
         #region Constructors
         /// <summary>
-        /// Method to initialize the XAML and the Content
+        /// Methods to initialize the XAML and the Content.
         /// </summary>
         public AesGcmOverviewPage()
         {
