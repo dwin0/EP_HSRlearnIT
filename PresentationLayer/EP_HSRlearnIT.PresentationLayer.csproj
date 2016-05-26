@@ -191,9 +191,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\BusinessLayer\EP_HSRlearnIT.BusinessLayer.csproj">
       <Project>{044aa43b-e2bf-4a8e-bf81-99f35dd91778}</Project>
       <Name>EP_HSRlearnIT.BusinessLayer</Name>
@@ -270,7 +267,7 @@
     <Resource Include="Images\WrongAnswer.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\hambugerButtonIcon.png" />
+    <Resource Include="Images\hamburgerButtonIcon.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\encryptionImage.png" />
@@ -284,6 +281,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\red_arrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -153,6 +153,10 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             }
         }
 
+        /// <summary>
+        /// A warning is shown for the Key and the Iv, if these parameter are to small.
+        /// </summary>
+        /// <param name="hexTextBox">The HexBox which should be checked</param>
         public void SetShortInputWarning(TextBox hexTextBox)
         {
             if (hexTextBox.Name == "HexPasswordBox")
@@ -165,6 +169,11 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             }
         }
 
+        /// <summary>
+        /// This event is used to reset all TextBoxes of either the Encryption or the Decryption Page.
+        /// </summary>
+        /// <param name="sender">is not used</param>
+        /// <param name="e">is not used</param>
         public void ResetButton_OnClick(object sender, RoutedEventArgs e)
         {
             foreach (var element in DependencyObjectExtension.GetAllChildren<TextBox>(this))
@@ -177,6 +186,11 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             }
         }
 
+        /// <summary>
+        /// This event is registered on the Export Button, it starts the windows explorer to save a hex file.
+        /// </summary>
+        /// <param name="sender">is not used</param>
+        /// <param name="e">is not used</param>
         public void ExportButton_OnClick(object sender, RoutedEventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog()
@@ -210,6 +224,11 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             }
         }
 
+        /// <summary>
+        /// This event is registered on the Import Button, it starts the windows explorer to import a file.
+        /// </summary>
+        /// <param name="sender">is not used</param>
+        /// <param name="e">is not used</param>
         public void ImportButton_OnClick(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog()

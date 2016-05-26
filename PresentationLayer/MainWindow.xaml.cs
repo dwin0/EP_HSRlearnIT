@@ -34,7 +34,7 @@ namespace EP_HSRlearnIT.PresentationLayer
 
         #region Private Methods
 
-        private void OnMenuButton_Click(object sender, RoutedEventArgs e)
+        private void MenuButton_OnClick(object sender, RoutedEventArgs e)
         {
             if (MenuStackPanel.IsVisible)
             {
@@ -46,17 +46,17 @@ namespace EP_HSRlearnIT.PresentationLayer
             }
         }
 
-        private void OnMenuItemMouseDown(object sender, MouseButtonEventArgs e)
+        private void MenuItem_OnPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             _mouseDownMenuItem = ((FrameworkElement)e.OriginalSource).DataContext as string;
         }
 
-        private void OnMenuItemMouseUp(object sender, MouseButtonEventArgs e)
+        private void MenuItem_OnMouseUp(object sender, MouseButtonEventArgs e)
         {
             var item = ((FrameworkElement)e.OriginalSource).DataContext as string;
             if (item == null)
             {
-                ExceptionLogger.WriteToLogfile("OnMenuItemMouseUp", "item was null", "");
+                ExceptionLogger.WriteToLogfile("MenuItem_OnMouseUp", "item was null", "");
             } else if (item.Equals(_mouseDownMenuItem))
             {
                 switch (item)
@@ -95,12 +95,12 @@ namespace EP_HSRlearnIT.PresentationLayer
 
         //This method is used only for a system test in order to control the correctness
         //of the Global Exception Handler and will be deleted for the production code
-        private void OnExceptionClick(object sender, MouseButtonEventArgs e)
+        private void Save_OnMouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             throw new Exception("Exception in Logfile vorhanden?");
         }
 
-        private void CollapseMenu(object sender, MouseButtonEventArgs e)
+        private void CollapseMenu_OnPreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             var point = Mouse.GetPosition(MainGrid);
 

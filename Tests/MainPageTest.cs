@@ -7,13 +7,13 @@ using Button = TestStack.White.UIItems.Button;
 
 namespace EP_HSRlearnIT.PresentationLayer.Testing
 {
-    //[TestClass()]
+    //[TestClass]
     public class MainPageTests
     {
         public string BaseDir => Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         public string SutPath => Path.Combine(BaseDir, $"{nameof(EP_HSRlearnIT)}.exe");
         
-        [TestMethod()]
+        [TestMethod]
         public void MainPageTest()
         {
             //Load MainPage in MainWindow

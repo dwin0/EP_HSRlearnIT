@@ -67,20 +67,20 @@ namespace EP_HSRlearnIT.PresentationLayer
                 MenuTile tile = new MenuTile(tileEntry.Key, tileEntry.Value);
                 tile.TileImage.Name = tileEntry.Key.MultipleReplace(stringsToReplace);
                 //Mouse Up and Down - Events to make it feel lika a click. There is no Click-Event for Tiles.
-                tile.MouseDown += OnTileMouseDown;
-                tile.MouseUp += OnTileMouseUp;
+                tile.MouseDown += MenuTile_OnMouseDown;
+                tile.MouseUp += MenuTile_OnMouseUp;
                 tile.MouseEnter += MenuTile_OnMouseEnter;
                 tile.MouseLeave += MenuTile_OnMouseLeave;
                 MenuGrid.Children.Add(tile);
             }
         }
 
-        private void OnTileMouseDown(object sender, RoutedEventArgs e)
+        private void MenuTile_OnMouseDown(object sender, RoutedEventArgs e)
         {
             _mouseDownMenuTile = sender as MenuTile;
         }
 
-        private void OnTileMouseUp(object sender, RoutedEventArgs e)
+        private void MenuTile_OnMouseUp(object sender, RoutedEventArgs e)
         {
             MenuTile tile = sender as MenuTile;
             if (tile == null)

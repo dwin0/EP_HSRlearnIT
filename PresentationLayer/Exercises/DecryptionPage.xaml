@@ -86,7 +86,7 @@
                     </MultiBinding>
                 </Button.IsEnabled>
             </Button>
-            <Button Content="Zurücksetzen" Click="ResetButton_OnClick" DockPanel.Dock="Right" Style="{StaticResource ResourceKey=ProgramButtonStyle}" Height="40" Width="90"/>
+            <Button Content="Zurücksetzen" Click="ResetButton_OnClick" DockPanel.Dock="Right" Style="{StaticResource ResourceKey=ProgramButtonStyle}" Height="40" Width="85"/>
         </DockPanel>
         <TextBlock Grid.Row="11" Grid.Column="0" Text="Klartext:" Name="PlainTextBlock" Style="{StaticResource WithoutImageTextBlockStyle}"/>
         <TextBox Grid.Row="12" Grid.Column="0" Name="UtfPlaintextBox" TextChanged="TextBox_OnTextChanged" Margin="15,2,15,15" Style="{StaticResource TextBoxNonWriteableStyle}" ScrollViewer.VerticalScrollBarVisibility="Auto"/>

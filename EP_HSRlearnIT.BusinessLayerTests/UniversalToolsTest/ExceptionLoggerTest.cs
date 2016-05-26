@@ -30,7 +30,7 @@ namespace EP_HSRlearnIT.BusinessLayer.Testing.UniversalToolsTest
 
             using (StreamReader reader = new StreamReader(@"c:\logs\ExceptionLog.log"))
             {
-                string strToCompare = reader.ReadLine();
+                string strToCompare = "";
 
                 while (reader.EndOfStream == false)
                 {

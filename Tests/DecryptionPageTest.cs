@@ -14,7 +14,7 @@ namespace EP_HSRlearnITTests
         public string BaseDir => Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         public string SutPath => Path.Combine(BaseDir, $"{nameof(EP_HSRlearnIT)}.exe");
 
-        [TestMethod()]
+        [TestMethod]
         public void DecryptionTest()
         {
             //aufstarten

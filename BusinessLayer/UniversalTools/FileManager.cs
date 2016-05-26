@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
 {
@@ -97,6 +99,19 @@ namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
         {
             CreateDirectory(folderPath);
             return CreateFile(folderPath, fileName);
+        }
+
+        public static void AvoidOverflow(string filePath, long maxSizeLogfile, int rowsToDelete)
+        {
+            if (GetSize(filePath) >= maxSizeLogfile)
+            {
+                List<string> lines = ReadAllLines(filePath).ToList();
+                lines.RemoveRange(0, rowsToDelete);
+                SwapContents(filePath, lines);
+                AppendContent(filePath, $"{Environment.NewLine}***" +
+                                        $"{Environment.NewLine}The oldest { rowsToDelete} rows were removed." +
+                                        $"{Environment.NewLine}***");
+            }
         }
 
         #endregion
