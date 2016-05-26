@@ -205,7 +205,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         {
             if (leftButtonDown) resRect.PreviewMouseLeftButtonDown += rectangle_PreviewMouseLeftButtonDown;
             if (leftButtonUp) resRect.MouseLeftButtonUp += rectangle_PreviewMouseLeftButtonUp;
-            if (moveMouse) resRect.MouseMove += ElementCanvas_MouseMove;
+            if (moveMouse) resRect.MouseMove += ElementCanvas_OnMouseMove;
         }
 
         /// <summary>
@@ -441,7 +441,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         /// </summary> 
         /// <param name="sender">Contains the rectangle which raised the event</param>
         /// <param name="e"></param> 
-        private void ElementCanvas_MouseMove(object sender, MouseEventArgs e)
+        private void ElementCanvas_OnMouseMove(object sender, MouseEventArgs e)
         {
             if (_currentlyMovedRectangle != null)
             {
@@ -464,7 +464,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                 }
                 catch (Exception ex)
                 {
-                    ExceptionLogger.WriteToLogfile("ElementCanvas_MouseMove", ex.Message, ex.StackTrace);
+                    ExceptionLogger.WriteToLogfile("ElementCanvas_OnMouseMove", ex.Message, ex.StackTrace);
                 }
             }
         }
@@ -502,7 +502,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         /// This method makes a reset of the whole game. </summary> 
         /// <param name="sender">Contains the control which raised the event</param>
         /// <param name="e"></param>
-        private void OnResetClick(object sender, RoutedEventArgs e)
+        private void Reset_OnClick(object sender, RoutedEventArgs e)
         {
             int addedChildrenCount = _addedSavedData.Count;
             ElementCanvas.Children.RemoveRange(ElementCanvas.Children.Count - addedChildrenCount, addedChildrenCount);
@@ -551,7 +551,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         /// This method is responsible for closing, respectively hiding the game instruction</summary>
         /// <param name="sender">Contains the control which raised the event</param>
         /// <param name="e"></param>
-        private void CloseGameInstruction(object sender, RoutedEventArgs e)
+        private void CloseInstruction_OnClick(object sender, RoutedEventArgs e)
         {
             BorderGameInstruction.Visibility = Visibility.Hidden;
         }
@@ -596,7 +596,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         /// This method opens the game instructions. </summary>
         /// <param name="sender">Contains the control which raised the event</param>
         /// <param name="e"></param>
-        private void OpenInstruction(object sender, RoutedEventArgs e)
+        private void OpenInstruction_OnMouseUp(object sender, RoutedEventArgs e)
         {
             BorderGameInstruction.Visibility = Visibility.Visible;
         }
@@ -604,15 +604,15 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         /// <summary>
         /// This methods defines the behaviour when pressend on F1 or ESC
         /// </summary>        
-        private void ElementCanvas_PreviewKeyDown(object sender, KeyEventArgs e)
+        private void DragDrop_OnPreviewKeyDown(object sender, KeyEventArgs e)
         {
             switch (e.Key)
             {
                 case Key.F1:
-                    OpenInstruction(this, e);
+                    OpenInstruction_OnMouseUp(this, e);
                     break;
                 case Key.Escape:
-                    CloseGameInstruction(this, e);
+                    CloseInstruction_OnClick(this, e);
                     break;
                 default:
                     return;

@@ -4,42 +4,41 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       mc:Ignorable="d"
-      Title="DragDrop" Focusable ="True" PreviewKeyDown="ElementCanvas_PreviewKeyDown" >
+      Title="DragDrop" Focusable ="True" PreviewKeyDown="DragDrop_OnPreviewKeyDown" >
     <Viewbox>
-        <Canvas Name="ElementCanvas" Height="720" Width="960" MouseMove="ElementCanvas_MouseMove" Focusable="False" Background="Transparent">
+        <Canvas Name="ElementCanvas" Height="720" Width="960" MouseMove="ElementCanvas_OnMouseMove" Focusable="False" Background="Transparent">
             <Rectangle Height="600" Width="700" Margin="-50, 50, 0, 0">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource ="/Images/dragdrop.PNG"/>
                 </Rectangle.Fill>
             </Rectangle>
-            
-            <Button Name="Zurücksetzen" Content="Zurücksetzen" Click="OnResetClick" Height="55" Width="120" Canvas.Left="775" Canvas.Bottom="30" FontSize="16" Style="{StaticResource ResourceKey=ProgramButtonStyle}" Focusable="False"/>
-            <Button Name="Auswertung" Content="Auswertung" Click="Check_OnClick" Height="55" Width="120" Canvas.Left="650" Canvas.Bottom="30" FontSize="16" Style="{StaticResource ResourceKey=ProgramButtonStyle}" Focusable="False"/>
-            <Image Source="/Images/questionmark.png" Name="QuestionMarkOpenInstruction" Canvas.Left="831" Canvas.Top="5" Width="60"
-                   RenderOptions.BitmapScalingMode="HighQuality" MouseUp="OpenInstruction" />
+
+            <Button Name="Reset" Content="Zurücksetzen" Height="40" Width="105" Canvas.Left="775" Canvas.Bottom="30" Click="Reset_OnClick" Style="{StaticResource ResourceKey=ProgramButtonStyle}" Focusable="False"/>
+            <Button Name="Check" Content="Auswertung"   Height="40" Width="105" Canvas.Left="650" Canvas.Bottom="30" Click="Check_OnClick" Style="{StaticResource ResourceKey=ProgramButtonStyle}" Focusable="False"/>
+            <Image Source="/Images/questionmark.png" Name="OpenInstruction" Width="60" Canvas.Left="831" Canvas.Top="5" 
+                   RenderOptions.BitmapScalingMode="HighQuality" MouseUp="OpenInstruction_OnMouseUp" />
            
            <Border Name="BorderGameInstruction" BorderThickness="4" BorderBrush="CornflowerBlue" Panel.ZIndex="1">
-                <StackPanel Name="GameInstruction" Panel.ZIndex="1" Width="750" Height="470" Background="AliceBlue">
-                    <TextBlock Name="TitleGameInstruction" Margin="10,0,0,0" FontSize="23" Height="40" Text="Spielanleitung" />
-                    <TextBlock Name="GameInstructionText" Margin="10,0,0,0" FontSize="16" Panel.ZIndex="1" Height="150" Text="{StaticResource ResourceKey=GameInstruction}" TextWrapping="Wrap" />
-
+                <StackPanel Name="GameInstruction" Height="470" Width="750" Background="AliceBlue" Panel.ZIndex="1">
+                    <TextBlock Name="TitleGameInstruction" Height="40"  Margin="10,10,0,0" FontSize="20" FontWeight="Bold" Text="Spielanleitung" />
+                    <TextBlock Name="GameInstructionText"  Height="150" Margin="10,0,10,0" FontSize="16"  Panel.ZIndex="1" TextWrapping="Wrap" Text="{StaticResource ResourceKey=GameInstruction}" />
                     <DockPanel Margin="15,0,0,5" >
-                        <Image Source="/Images/CheckButton.png"  Name="ImageCheckButton" Width="100" Height="50" Margin="0,0,15,0"/>
-                        <TextBlock Name="DescriptionCheckButton" VerticalAlignment="Top" Text="{StaticResource ResourceKey=DescriptionCheckButton}" FontSize="15" TextWrapping="Wrap"></TextBlock>
+                        <Image Source="/Images/CheckButton.png"  Name="ImageCheckButton" Height="50" Width="105" Margin="0,0,15,0"/>
+                        <TextBlock Name="DescriptionCheckButton" VerticalAlignment="Center" FontSize="16" TextWrapping="Wrap" Text="{StaticResource ResourceKey=DescriptionCheckButton}" ></TextBlock>
                     </DockPanel>
                     <DockPanel Margin="15,0,0,3">
-                        <Image Source="/Images/ResetButton.png" Name="ImageResetButton" Width="100" Height="50" Margin="0,0,15,0"/>
-                        <TextBlock Name="DescriptionResetButton" VerticalAlignment="Center" Text="{StaticResource ResourceKey=DescriptionResetButton}" FontSize="15" TextWrapping="Wrap"></TextBlock>
+                        <Image Source="/Images/ResetButton.png" Name="ImageResetButton" Height="50" Width="105" Margin="0,0,15,0"/>
+                        <TextBlock Name="DescriptionResetButton" VerticalAlignment="Center" FontSize="16" TextWrapping="Wrap" Text="{StaticResource ResourceKey=DescriptionResetButton}"></TextBlock>
                     </DockPanel>
                     <DockPanel Margin="15,0,0,0">
-                        <Image Source="/Images/CorrectAnswer.png" Name="ImageButtonCorrectAnswer" Width="100" Height="50" Margin="0,0,15,0"/>
-                        <TextBlock Name="DescriptionCorrectAnswer" VerticalAlignment="Center" Text="{StaticResource ResourceKey=DescriptionCorrectAnswer}" FontSize="15" TextWrapping="Wrap"></TextBlock>
+                        <Image Source="/Images/CorrectAnswer.png" Name="ImageButtonCorrectAnswer" Height="50" Width="105" Margin="0,0,15,0"/>
+                        <TextBlock Name="DescriptionCorrectAnswer" VerticalAlignment="Center" FontSize="16" TextWrapping="Wrap" Text="{StaticResource ResourceKey=DescriptionCorrectAnswer}" ></TextBlock>
                     </DockPanel>
                     <DockPanel Margin="15,0,0,0">
-                        <Image Source="/Images/WrongAnswer.png" Name="ImageWrongAnswer" Width="100" Height="50" Margin="0,0,15,0"/>
-                        <TextBlock Name="DescriptionWrongAnswer" VerticalAlignment="Center" Text="{StaticResource ResourceKey=DescriptionWrongAnswer}" FontSize="15" TextWrapping="Wrap"></TextBlock>
+                        <Image Source="/Images/WrongAnswer.png" Name="ImageWrongAnswer" Height="50" Width="105" Margin="0,0,15,0"/>
+                        <TextBlock Name="DescriptionWrongAnswer" VerticalAlignment="Center" FontSize="16" TextWrapping="Wrap" Text="{StaticResource ResourceKey=DescriptionWrongAnswer}" ></TextBlock>
                     </DockPanel>
-                    <Button Name="ButtonCloseGameInstruction" Panel.ZIndex="2" Content="Schliessen" Height="55" Width="120" Click="CloseGameInstruction" FontSize="16" Style="{StaticResource ResourceKey=ProgramButtonStyle}"
+                    <Button Name="ButtonCloseGameInstruction" Content="Schliessen" Height="40" Width="105" Panel.ZIndex="2" Click="CloseInstruction_OnClick" Style="{StaticResource ResourceKey=ProgramButtonStyle}"
                             HorizontalAlignment="Right" Margin="10"/>
                 </StackPanel>
             </Border>
