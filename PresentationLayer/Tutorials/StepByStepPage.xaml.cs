@@ -265,8 +265,8 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
                 Output.Text = "Hier wird noch nichts berechnet";
             } else if (stepNumber > SbsMax)
             {
-                Input.Text = "Hier wird nichts mehr berechnet.";
-                Output.Text = "Hier wird nichts mehr berechnet.";
+                Input.Text = "Hier wird nichts mehr berechnet";
+                Output.Text = "Hier wird nichts mehr berechnet";
             }
         }
 

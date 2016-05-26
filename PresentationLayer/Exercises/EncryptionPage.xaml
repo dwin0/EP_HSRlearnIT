@@ -76,7 +76,7 @@
                     </MultiBinding>
                 </Button.IsEnabled>
             </Button>
-            <Button Content="Zurücksetzen" Click="ResetButton_OnClick" DockPanel.Dock="Right" Style="{StaticResource ResourceKey=ProgramButtonStyle}" Height="40" Width="90"/>
+            <Button Content="Zurücksetzen" Click="ResetButton_OnClick" DockPanel.Dock="Right" Style="{StaticResource ResourceKey=ProgramButtonStyle}" Height="40" Width="85"/>
         </DockPanel>
         <TextBlock Grid.Row="9" Grid.Column="0" Text="Verschlüsselter Text:" Name="CiphertextBlock" Style="{StaticResource WithoutImageTextBlockStyle}"/>
         <TextBox Grid.Row="10" Grid.Column="0" Name="UtfCiphertextBox" TextChanged="TextBox_OnTextChanged" Style="{StaticResource TextBoxNonWriteableStyle}" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
