@@ -23,20 +23,20 @@
                     <TextBlock Name="TitleGameInstruction" Height="40"  Margin="10,10,0,0" FontSize="20" FontWeight="Bold" Text="Spielanleitung" />
                     <TextBlock Name="GameInstructionText"  Height="150" Margin="10,0,10,0" FontSize="16"  Panel.ZIndex="1" TextWrapping="Wrap" Text="{StaticResource ResourceKey=GameInstruction}" />
                     <DockPanel Margin="15,0,0,5" >
-                        <Image Source="/Images/CheckButton.png"  Name="ImageCheckButton" Height="50" Width="105" Margin="0,0,15,0"/>
-                        <TextBlock Name="DescriptionCheckButton" VerticalAlignment="Center" FontSize="16" TextWrapping="Wrap" Text="{StaticResource ResourceKey=DescriptionCheckButton}" ></TextBlock>
+                        <Image Source="/Images/CheckButton.png"  Name="ImageCheckButton" Style="{StaticResource ResourceKey=ImageStyle}" />
+                        <TextBlock Name="DescriptionCheckButton" Style="{StaticResource ResourceKey=TextblockStyle}" Text="{StaticResource ResourceKey=DescriptionCheckButton}" ></TextBlock>
                     </DockPanel>
                     <DockPanel Margin="15,0,0,3">
-                        <Image Source="/Images/ResetButton.png" Name="ImageResetButton" Height="50" Width="105" Margin="0,0,15,0"/>
-                        <TextBlock Name="DescriptionResetButton" VerticalAlignment="Center" FontSize="16" TextWrapping="Wrap" Text="{StaticResource ResourceKey=DescriptionResetButton}"></TextBlock>
+                        <Image Source="/Images/ResetButton.png" Name="ImageResetButton" Style="{StaticResource ResourceKey=ImageStyle}" />
+                        <TextBlock Name="DescriptionResetButton" Style="{StaticResource ResourceKey=TextblockStyle}" Text="{StaticResource ResourceKey=DescriptionResetButton}"></TextBlock>
                     </DockPanel>
                     <DockPanel Margin="15,0,0,0">
-                        <Image Source="/Images/CorrectAnswer.png" Name="ImageButtonCorrectAnswer" Height="50" Width="105" Margin="0,0,15,0"/>
-                        <TextBlock Name="DescriptionCorrectAnswer" VerticalAlignment="Center" FontSize="16" TextWrapping="Wrap" Text="{StaticResource ResourceKey=DescriptionCorrectAnswer}" ></TextBlock>
+                        <Image Source="/Images/CorrectAnswer.png" Name="ImageButtonCorrectAnswer" Style="{StaticResource ResourceKey=ImageStyle}" />
+                        <TextBlock Name="DescriptionCorrectAnswer" Style="{StaticResource ResourceKey=TextblockStyle}" Text="{StaticResource ResourceKey=DescriptionCorrectAnswer}" ></TextBlock>
                     </DockPanel>
                     <DockPanel Margin="15,0,0,0">
-                        <Image Source="/Images/WrongAnswer.png" Name="ImageWrongAnswer" Height="50" Width="105" Margin="0,0,15,0"/>
-                        <TextBlock Name="DescriptionWrongAnswer" VerticalAlignment="Center" FontSize="16" TextWrapping="Wrap" Text="{StaticResource ResourceKey=DescriptionWrongAnswer}" ></TextBlock>
+                        <Image Source="/Images/WrongAnswer.png" Name="ImageWrongAnswer" Style="{StaticResource ResourceKey=ImageStyle}" />
+                        <TextBlock Name="DescriptionWrongAnswer" Style="{StaticResource ResourceKey=TextblockStyle}" Text="{StaticResource ResourceKey=DescriptionWrongAnswer}" ></TextBlock>
                     </DockPanel>
                     <Button Name="ButtonCloseGameInstruction" Content="Schliessen" Height="40" Width="105" Panel.ZIndex="2" Click="CloseInstruction_OnClick" Style="{StaticResource ResourceKey=ProgramButtonStyle}"
                             HorizontalAlignment="Right" Margin="10"/>

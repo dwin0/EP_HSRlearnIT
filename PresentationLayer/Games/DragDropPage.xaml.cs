@@ -35,6 +35,9 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         #endregion
 
         #region Constructor
+        /// <summary>
+        /// Constructor Method to initialize the XAML, to generate the side Images, to initialise the drop places and to load the progress
+        /// </summary>
         public DragDropPage()
         {
             InitializeComponent();
@@ -238,8 +241,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         /// <summary>
         /// It checks if the mouse was was pressed down on an original rectangle image or an already copied image. 
         /// The moved rectangle is also saved into the progress and added as a Child to the ElementCanvas</summary>
-        /// <param name="sender">This is the rectangle element which raised the event.</param>
-        /// <param name="e">This object contains useful information in order to get the position of the mouse cursor</param>
         private void rectangle_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {    
             _currentlyMovedRectangle = sender as Rectangle;
@@ -331,8 +332,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         /// and the copied/moved image rectangle the image rectangle is dropped and 
         /// the Margin of the currentlyMovedRectangle is saved into the SaveDataForProgress.  
         /// </summary>
-        /// <param name="sender">Contains the rectangle which raised the event</param>
-        /// <param name="e"></param>
         private void rectangle_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             if (_currentlyMovedRectangle == null)
@@ -387,7 +386,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                     _addedSavedData.Add(_currentlyAddedData);
                     if (_addedSavedData.Count == _dropLocationsRectangles.Count)
                     {
-                        ShowDialogBox();
+                        OpenDialogBox_AskForCheck();
                     }
                 }
                 Progress.SaveProgress(SettingsName, _addedSavedData);
@@ -420,7 +419,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         /// <summary>
         /// This method will open a dialag box, as soon as all drop rectangles are filled. User can check the solution.
         /// </summary>
-        private void ShowDialogBox()
+        private void OpenDialogBox_AskForCheck()
         {
             if (!_checkingFirstTime)
             {
@@ -439,8 +438,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         /// <summary>
         /// This method defines all the actions during the moveMouse, as change of mouse curser and setting boundries.
         /// </summary> 
-        /// <param name="sender">Contains the rectangle which raised the event</param>
-        /// <param name="e"></param> 
         private void ElementCanvas_OnMouseMove(object sender, MouseEventArgs e)
         {
             if (_currentlyMovedRectangle != null)
@@ -500,8 +497,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
 
         /// <summary>
         /// This method makes a reset of the whole game. </summary> 
-        /// <param name="sender">Contains the control which raised the event</param>
-        /// <param name="e"></param>
         private void Reset_OnClick(object sender, RoutedEventArgs e)
         {
             int addedChildrenCount = _addedSavedData.Count;
@@ -513,16 +508,12 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         }
 
         /// <summary>
-        /// This methods checks the dropped elements for their correctness. If correct, rectangle gets a green border, if wrong, the rectangle gets a red border.
-        /// </summary>
-        ///  and gives back the amount of correct / wrong placements
-        ///  <param name="sender">Contains the control which raised the event</param>
-        /// <param name="e"></param>
+        /// This methods checks the dropped elements for their correctness. If correct, rectangle gets a green border, if wrong, the rectangle gets a red border.</summary>
         private void Check_OnClick(object sender, RoutedEventArgs e)
         {
                 int correctAnswers = 0;
                 int wrongAnswers = 0;
-
+            
                 foreach (var data in _addedSavedData)
                 {
                     if (data.IsAnswerCorrect())
@@ -594,8 +585,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
 
         /// <summary>
         /// This method opens the game instructions. </summary>
-        /// <param name="sender">Contains the control which raised the event</param>
-        /// <param name="e"></param>
         private void OpenInstruction_OnMouseUp(object sender, RoutedEventArgs e)
         {
             BorderGameInstruction.Visibility = Visibility.Visible;
@@ -618,6 +607,5 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                     return;
             }
         }
-
     }
 }
