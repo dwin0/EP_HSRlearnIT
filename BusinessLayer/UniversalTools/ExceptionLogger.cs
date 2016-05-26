@@ -1,54 +1,39 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 
 namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
 {
     /// <summary>
-    /// Class log all global exceptions of the program.
-    /// _path and _fileName are fix values.
-    /// _maxSize is the favored max size of the logfile.
-    /// _deleteRows is the amount of lines to delete into logfile when reached _maxSize.
+    /// Class to log all exceptions of the program.
     /// </summary>
     public static class ExceptionLogger
     {
         #region Private Member
-        private static string _path = @"c:\logs";
-        private static string _fileName = "ExceptionLog.log";
+        private const string Path = @"c:\logs";
+        private const string FileName = "ExceptionLog.log";
         //Size in Byte
-        private static long _maxSize = 5 * 1024 * 1024;
-        private static int _deleteRows = 10;
+        private const long MaxSizeLogfile = 5*1024*1024;
+        private const int RowsToDelete = 10;
 
         #endregion
 
 
         #region Public Methods
+
+        /// <summary>
+        /// This method handles the creation of the log file and saves the content of an exception.
+        /// </summary>
+        /// <param name="sourceMethod">Name of the method which threw the exception</param>
+        /// <param name="exceptionMessage">Message which describes the exception</param>
+        /// <param name="stackTrace">shows all method calls which where involved in this exception</param>
         public static void WriteToLogfile(string sourceMethod, string exceptionMessage, string stackTrace )
         {
-            string filePath = FileManager.SaveFile(_path, _fileName);
+            string filePath = FileManager.SaveFile(Path, FileName);
             string entry = $"Exception: {DateTime.Now.ToString(CultureInfo.CurrentCulture)}: {sourceMethod}{Environment.NewLine} {exceptionMessage}{Environment.NewLine} {stackTrace} {Environment.NewLine}";
             FileManager.AppendContent(filePath, entry);
-            AvoidOverflow(filePath);
+            FileManager.AvoidOverflow(filePath, MaxSizeLogfile, RowsToDelete);
         }
 
-        #endregion
-
-        
-        #region Private Methods
-        private static void AvoidOverflow(String filePath)
-        {
-            if (FileManager.GetSize(filePath) >= _maxSize)
-            {
-                List<string> lines = FileManager.ReadAllLines(filePath).ToList();
-                lines.RemoveRange(0, _deleteRows);
-                FileManager.SwapContents(filePath, lines);
-                FileManager.AppendContent(filePath, $"{Environment.NewLine}***" +
-                                                    $"{Environment.NewLine}The oldest { _deleteRows} rows were removed." +
-                                                    $"{Environment.NewLine}***");
-            }
-        }
-
-        #endregion        
+        #endregion       
     }
 }

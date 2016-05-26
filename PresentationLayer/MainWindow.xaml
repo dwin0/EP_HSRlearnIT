@@ -8,7 +8,7 @@
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"
         Title="HSRlearnIT" Height="620" Width="1000" MinWidth="1000" MinHeight="620">
-    <Grid Name="MainGrid" Margin="80, 10, 30, 10" Background="White" PreviewMouseDown="CollapseMenu">
+    <Grid Name="MainGrid" Margin="80, 10, 30, 10" Background="White" PreviewMouseDown="CollapseMenu_OnPreviewMouseDown">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*" MinWidth="200" MaxWidth="300"/>
             <ColumnDefinition Width="5*"/>
@@ -19,15 +19,14 @@
                 <StackPanel>
                     <TextBlock Text="Menu" Style="{StaticResource ResourceKey=MenuStyle}"/>
                     <ListView Name="Menu" ItemsSource="{StaticResource ResourceKey=MenuStrings}" ItemContainerStyle="{StaticResource ResourceKey=MenuItemStyle}"
-                              BorderThickness="0" BorderBrush="{StaticResource TileBackgroundBrush}" PreviewMouseLeftButtonDown="MenuItem_OnPreviewMouseLeftButtonDown"
-                              MouseUp="MenuItem_OnMouseUp"/>
+                              PreviewMouseLeftButtonDown="MenuItem_OnPreviewMouseLeftButtonDown" MouseUp="MenuItem_OnMouseUp"/>
                     <Image Source="Images/encryptionImage.png" Margin="0, 0, 0, 1000"/>
                 </StackPanel>
             </Border>
         </StackPanel>
         <Button Name="MenuButton" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left"
                 Panel.ZIndex="2" Margin="-60, 0, 0, 0" Width="50" Background="Transparent" BorderBrush="Transparent" Focusable="False" Click="MenuButton_OnClick">
-            <Image Source="Images/hambugerButtonIcon.png"/>
+            <Image Source="Images/hamburgerButtonIcon.png"/>
         </Button>
         <Button Name="Save" Grid.Column="1" Content="Speichern" VerticalAlignment="Top" HorizontalAlignment="Right"
                  Panel.ZIndex="10" Style="{StaticResource ResourceKey=ProgramButtonStyle}" Visibility="Hidden"

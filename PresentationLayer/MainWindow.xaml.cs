@@ -56,7 +56,7 @@ namespace EP_HSRlearnIT.PresentationLayer
             var item = ((FrameworkElement)e.OriginalSource).DataContext as string;
             if (item == null)
             {
-                ExceptionLogger.WriteToLogfile("OnMenuItemMouseUp", "item was null", "");
+                ExceptionLogger.WriteToLogfile("MenuItem_OnMouseUp", "item was null", "");
             } else if (item.Equals(_mouseDownMenuItem))
             {
                 switch (item)
@@ -100,7 +100,7 @@ namespace EP_HSRlearnIT.PresentationLayer
             throw new Exception("Exception in Logfile vorhanden?");
         }
 
-        private void CollapseMenu(object sender, MouseButtonEventArgs e)
+        private void CollapseMenu_OnPreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             var point = Mouse.GetPosition(MainGrid);
 
