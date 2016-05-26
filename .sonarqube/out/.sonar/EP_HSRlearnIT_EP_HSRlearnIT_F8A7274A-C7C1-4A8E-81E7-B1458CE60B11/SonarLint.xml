@@ -10,7 +10,6 @@
   </Rules>
   <Files>
     <File>C:\Programming\EP_HSRlearnIT\PresentationLayer\App.xaml.cs</File>
-    <File>C:\Programming\EP_HSRlearnIT\PresentationLayer\CommonPageComponents.cs</File>
     <File>C:\Programming\EP_HSRlearnIT\PresentationLayer\Exercises\DecryptionPage.xaml.cs</File>
     <File>C:\Programming\EP_HSRlearnIT\PresentationLayer\Exercises\EncryptionDecryptionComponents.cs</File>
     <File>C:\Programming\EP_HSRlearnIT\PresentationLayer\Exercises\EncryptionDecryptionTabs.xaml.cs</File>
@@ -25,5 +24,6 @@
     <File>C:\Programming\EP_HSRlearnIT\PresentationLayer\StringCollection.cs</File>
     <File>C:\Programming\EP_HSRlearnIT\PresentationLayer\Tutorials\AesGcmOverviewPage.xaml.cs</File>
     <File>C:\Programming\EP_HSRlearnIT\PresentationLayer\Tutorials\StepByStepPage.xaml.cs</File>
+    <File>C:\Programming\EP_HSRlearnIT\PresentationLayer\Tutorials\TutorialsComponents.cs</File>
   </Files>
 </AnalysisInput>

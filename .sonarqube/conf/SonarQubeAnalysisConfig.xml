@@ -15,15 +15,15 @@
   </AdditionalConfig>
   <ServerSettings>
     <Property Name="sonar.qualitygate">1</Property>
-    <Property Name="sonar.core.id">20160522043328</Property>
-    <Property Name="sonar.core.version">5.5</Property>
     <Property Name="sonar.permission.template.default">default_template</Property>
-    <Property Name="sonar.core.startTime">22.05.2016 04:33:28</Property>
     <Property Name="sonar.core.serverBaseURL">https://sonar.narcodex.ch</Property>
     <Property Name="email.from">sonarqube@narcodex.ch</Property>
     <Property Name="email.prefix">[SONARQUBE]</Property>
     <Property Name="sonar.allowUsersToSignUp">false</Property>
     <Property Name="sonar.forceAuthentication">true</Property>
+    <Property Name="sonar.core.id">20160525042303</Property>
+    <Property Name="sonar.core.version">5.5</Property>
+    <Property Name="sonar.core.startTime">25.05.2016 04:23:03</Property>
     <Property Name="sonar.cs.msbuild.testProjectPattern">[^\\]*test[^\\]*$</Property>
   </ServerSettings>
   <LocalSettings />
