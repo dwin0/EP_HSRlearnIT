@@ -19,6 +19,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
         private readonly Path[] _areaPaths = new Path[NumOfAreas];
         protected const int NumOfAreas = 6;
         private Path _mouseDownPath;
+        private Path _mouseEnterPath;
         protected const int NumOfStepPaths = 24;
 
         #endregion
@@ -118,7 +119,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
 
         protected virtual void AreaPath_OnMouseEnter(object sender, MouseEventArgs e)
         {
-            throw new NotImplementedException();
+            _mouseEnterPath = sender as Path;
         }
 
         #endregion
