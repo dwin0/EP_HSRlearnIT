@@ -214,7 +214,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                     fullFilePath += ".txt";
                 }
 
-                if (!FileManager.IsExist(fullFilePath))
+                if (!FileManager.IsExisting(fullFilePath))
                 {
                     FileManager.SaveFile(fullFilePath);
                 }

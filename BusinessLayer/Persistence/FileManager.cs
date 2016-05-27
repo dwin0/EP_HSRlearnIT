@@ -6,7 +6,7 @@ using System.Linq;
 namespace EP_HSRlearnIT.BusinessLayer.Persistence
 {
     /// <summary>
-    /// Class helps for the handling with files.
+    /// Class which helps with the handling of files.
     /// </summary>
     public static class FileManager
     {
@@ -15,36 +15,25 @@ namespace EP_HSRlearnIT.BusinessLayer.Persistence
         /// <summary>
         /// Method to change all content in a file.
         /// </summary>
-        /// <param name="file">File which is to override.</param>
+        /// <param name="filePath">Path to the file which is to override.</param>
         /// <param name="currentContent">This is the new content for the file.</param>
-        public static void OverwriteContent(string file, string currentContent)
+        public static void OverwriteContent(string filePath, string currentContent)
         {
-            WriteFile(file, currentContent, false);
+            WriteFile(filePath, currentContent, false);
         }
 
         /// <summary>
         /// Method to append additional content to a file.
         /// </summary>
-        /// <param name="file">File which becomes additional content.</param>
+        /// <param name="filePath">Path to the file which will get additional content.</param>
         /// <param name="currentContent">This is the additional content for the file.</param>
-        public static void AppendContent(string file, string currentContent)
+        public static void AppendContent(string filePath, string currentContent)
         {
-            WriteFile(file, currentContent, true);
+            WriteFile(filePath, currentContent, true);
         }
 
         /// <summary>
-        /// Method to exchange the content from a file with a list of new content.
-        /// </summary>
-        /// <param name="filePath">Path to the file which is change.</param>
-        /// <param name="newContent">A list with the new content.</param>
-        public static void SwapContents(string filePath, IEnumerable<string> newContent)
-        {
-            OverwriteContent(filePath, "");
-            File.WriteAllLines(filePath, newContent);
-        }
-
-        /// <summary>
-        /// Method reads the whole file content.
+        /// Method to read the whole file content.
         /// </summary>
         /// <param name="filePath">Path to the file which is read.</param>
         /// <returns>String with the whole content from a file.</returns>
@@ -57,7 +46,7 @@ namespace EP_HSRlearnIT.BusinessLayer.Persistence
         }
 
         /// <summary>
-        /// Method create a list of lines from a file.
+        /// Method which creates a list of lines from a file.
         /// </summary>
         /// <param name="filePath">Path to the file which is read.</param>
         /// <returns>A list of all lines from a file.</returns>
@@ -66,21 +55,16 @@ namespace EP_HSRlearnIT.BusinessLayer.Persistence
             return File.ReadLines(filePath);
         }
 
-        public static long GetSize(string filePath)
-        {
-            return new FileInfo(filePath).Length;
-        }
-
-        public static bool IsExist(string filePath)
+        public static bool IsExisting(string filePath)
         {
             return File.Exists(filePath);
         }
 
         /// <summary>
-        /// Method constructes a file.
+        /// Method which constructs a file.
         /// </summary>
-        /// <param name="filePath">Path who the file is save.</param>
-        /// <returns>The path who the file is save.</returns>
+        /// <param name="filePath">Path where the file will be saved.</param>
+        /// <returns>The path where the file is saved.</returns>
         public static string SaveFile(string filePath)
         {
             int indexOfLast = filePath.LastIndexOf('\\');
@@ -90,11 +74,11 @@ namespace EP_HSRlearnIT.BusinessLayer.Persistence
         }
 
         /// <summary>
-        /// Method check and create the path from the file including the folder.
+        /// Method which checks and creates the folder and the file.
         /// </summary>
-        /// <param name="folderPath">Path from the folder who want to save the file.</param>
-        /// <param name="fileName">Name of the file who is create.</param>
-        /// <returns>The path who the file is save.</returns>
+        /// <param name="folderPath">Path of the folder where the file will be saved.</param>
+        /// <param name="fileName">Name of the file which is created.</param>
+        /// <returns>The path where the file is saved.</returns>
         public static string SaveFile(string folderPath, string fileName)
         {
             CreateDirectory(folderPath);
@@ -114,10 +98,27 @@ namespace EP_HSRlearnIT.BusinessLayer.Persistence
             }
         }
 
+        /// <summary>
+        /// Method to exchange the content from a file with a list of new content.
+        /// </summary>
+        /// <param name="filePath">Path to the file which is to change.</param>
+        /// <param name="newContent">A list with the new content.</param>
+        public static void SwapContents(string filePath, IEnumerable<string> newContent)
+        {
+            OverwriteContent(filePath, "");
+            File.WriteAllLines(filePath, newContent);
+        }
+
         #endregion
 
 
         #region Private Methods
+
+        private static long GetSize(string filePath)
+        {
+            return new FileInfo(filePath).Length;
+        }
+
         private static void CreateDirectory(string folderPath)
         {
             if (!Directory.Exists(folderPath))

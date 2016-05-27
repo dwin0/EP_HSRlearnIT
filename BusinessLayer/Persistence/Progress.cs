@@ -48,9 +48,9 @@ namespace EP_HSRlearnIT.BusinessLayer.Persistence
         /// <returns>object = a progress was found. null = no progress was found</returns>
         public static object GetProgress(object key)
         {
-            object retVal;
-            AppProgress.TryGetValue(key, out retVal);
-            return retVal;
+            object returnValue;
+            AppProgress.TryGetValue(key, out returnValue);
+            return returnValue;
         }
 
         /// <summary>

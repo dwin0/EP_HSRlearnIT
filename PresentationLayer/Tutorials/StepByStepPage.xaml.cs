@@ -6,6 +6,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using EP_HSRlearnIT.BusinessLayer.Extensions;
 using EP_HSRlearnIT.BusinessLayer.Persistence;
 using EP_HSRlearnIT.PresentationLayer.Exercises;
 using EP_HSRlearnIT.PresentationLayer.Games;
@@ -19,7 +20,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
     {
         #region Private Members
         private int _step;
-        private int _title;
+        private int _titleNumber;
         private const int StepMin = 0;
         private const int SbsMin = 1;
         private const int SbsMax = 15;
@@ -31,23 +32,23 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
 
         #region Constructors
         /// <summary>
-        /// Contains methods to generate a StepByStep-Page about a special number.
+        /// Constructor which generates a StepByStep-Page starting with the given stepNumber.
         /// </summary>
-        /// <param name="stepNumber">Number of the page which is loaded.</param>
+        /// <param name="stepNumber">Number of the step which is loaded.</param>
         public StepByStepPage(int stepNumber)
         {
             InitializeComponent();
 
             if (StepMin <= stepNumber && stepNumber <= StepMax)
             {
-                _title = stepNumber;
+                _titleNumber = stepNumber;
                 Progress.SaveProgress("StepByStepPage_CurrentStep", stepNumber);
             }
             NavigationService?.Navigate(new StepByStepPage());
         }
 
         /// <summary>
-        /// Contains methods to load a StepByStep-Page include clickable image, description and calculation of AES-GCM.
+        /// Constructor which loads a StepByStep-Page including clickable image, description and calculation of AES-GCM.
         /// </summary>
         public StepByStepPage()
         {
@@ -119,12 +120,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             {
                 ClearPath(stepPath.Value);
             }
-            JumpToStep(StepMin);
-        }
-
-        private void JumpToStep(int step)
-        {
-            _step = step;
+            _step = StepMin;
             Progress.SaveProgress("StepByStepPage_CurrentStep", _step);
             ReplaceContent(_step);
         }
@@ -158,30 +154,10 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             Progress.SaveProgress("StepByStepPage_ButtonState", true);
         }
 
-        private void SwitchNextOptionsWindow()
-        {
-            var buttonStatus = (bool?)Progress.GetProgress("StepByStepPage_ButtonState");
-            if ((buttonStatus == null || buttonStatus == false) && _step == StepMax)
-            {
-                NextOptionsWindow.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                NextOptionsWindow.Visibility = Visibility.Hidden;
-            }
-        }
-
-        private int CheckRange(int stepNumber)
-        {
-            if (StepMin <= stepNumber && stepNumber <= StepMax) { return _step; }
-            _step = stepNumber < StepMin ? StepMin : StepMax;
-            return _step;
-        }
-
         private void ReplaceContent(int stepNumber)
         {
             stepNumber = CheckRange(stepNumber);
-            SwitchNextOptionsWindow();
+            ShowNextOptionsWindow();
 
             switch (stepNumber)
             {
@@ -208,6 +184,52 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             StepTitle.Text = GetTitleNumber(stepNumber) + WriteTitle(stepNumber);
             SetInputAndOutput(stepNumber);
             DrawImage(stepNumber);
+        }
+
+        private void ShowNextOptionsWindow()
+        {
+            var buttonStatus = (bool?)Progress.GetProgress("StepByStepPage_ButtonState");
+            if ((buttonStatus == null || buttonStatus == false) && _step == StepMax)
+            {
+                NextOptionsWindow.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                NextOptionsWindow.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private int CheckRange(int stepNumber)
+        {
+            if (StepMin <= stepNumber && stepNumber <= StepMax) { return _step; }
+            _step = stepNumber < StepMin ? StepMin : StepMax;
+            return _step;
+        }
+
+        private void SetInputAndOutput(int stepNumber)
+        {
+            Input.Text = Application.Current.TryFindResource("InputStep" + stepNumber) as string;
+            if (!Input.ClipToBounds)
+            {
+                InputScrollViewer.VerticalScrollBarVisibility = (ScrollBarVisibility)Visibility.Hidden;
+            }
+
+            Output.Text = Application.Current.TryFindResource("OutputStep" + stepNumber) as string;
+            if (!Output.ClipToBounds)
+            {
+                OutputScrollViewer.VerticalScrollBarVisibility = (ScrollBarVisibility)Visibility.Hidden;
+            }
+
+            if (stepNumber < SbsMin)
+            {
+                Input.Text = "Hier wird noch nichts berechnet";
+                Output.Text = "Hier wird noch nichts berechnet";
+            }
+            else if (stepNumber > SbsMax)
+            {
+                Input.Text = "Hier wird nichts mehr berechnet";
+                Output.Text = "Hier wird nichts mehr berechnet";
+            }
         }
 
         private void DrawImage(int stepNumber)
@@ -241,31 +263,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             }
         }
 
-        private void SetInputAndOutput(int stepNumber)
-        {
-            Input.Text = Application.Current.TryFindResource("InputStep" + stepNumber) as string;
-            if (!Input.ClipToBounds)
-            {
-                InputScrollViewer.VerticalScrollBarVisibility = (ScrollBarVisibility)Visibility.Hidden;
-            }
-
-            Output.Text = Application.Current.TryFindResource("OutputStep" + stepNumber) as string;
-            if (!Output.ClipToBounds)
-            {
-                OutputScrollViewer.VerticalScrollBarVisibility = (ScrollBarVisibility)Visibility.Hidden;
-            }
-
-            if (stepNumber < SbsMin)
-            {
-                Input.Text = "Hier wird noch nichts berechnet";
-                Output.Text = "Hier wird noch nichts berechnet";
-            } else if (stepNumber > SbsMax)
-            {
-                Input.Text = "Hier wird nichts mehr berechnet";
-                Output.Text = "Hier wird nichts mehr berechnet";
-            }
-        }
-
         private void LoadStepByStepPaths(Canvas canvas)
         {
             for (int i = 1; i <= NumOfStepPaths; i++)
@@ -274,11 +271,14 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
                 if (ressourcePath == null || !ressourcePath.Name.Contains("_stepByStep")) continue;
 
                 //Create a copy of the Ressource StepPath to prevent multiple Event Listener on MouseEnter / MouseLeave
-                Path stepPath = CopyPath(ressourcePath);
+                Path stepPath = ressourcePath.Clone() as Path;
                 _stepPaths.Add(i, stepPath);
 
-                stepPath.SetValue(Panel.ZIndexProperty, 0);
-                canvas.Children.Add(stepPath);
+                if (stepPath != null)
+                {
+                    stepPath.SetValue(Panel.ZIndexProperty, 0);
+                    canvas.Children.Add(stepPath);
+                }
             }
             Progress.SaveProgress("StepByStepPage_StepPaths", _stepPaths);
         }
@@ -298,24 +298,13 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             path.Stroke = null;
         }
 
-        private Path CopyPath(Path originalPath)
-        {
-            Path copy = new Path
-            {
-                Data = originalPath.Data.Clone(),
-                Name = originalPath.Name,
-                Style = originalPath.Style
-            };
-            return copy;
-        }
-
         private string WriteTitle(int stepNumber)
         {
             string title = GetTitle(stepNumber);
             if (title == null)
             {
-                string oldTitle = GetTitle(_title);
-                if (oldTitle == null || stepNumber != _title)
+                string oldTitle = GetTitle(_titleNumber);
+                if (oldTitle == null || stepNumber != _titleNumber)
                 {
                     for (int i = stepNumber; i >= StepMin; i--)
                     {
@@ -328,7 +317,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
                 }
                 return oldTitle;
             }
-            _title = stepNumber;
+            _titleNumber = stepNumber;
             return title;
         }
 

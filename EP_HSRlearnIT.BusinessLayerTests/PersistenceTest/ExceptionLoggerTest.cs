@@ -9,7 +9,7 @@ namespace EP_HSRlearnIT.BusinessLayer.Testing.UniversalToolsTest
     [TestClass]
     public class ExceptionLoggerTest
     {
-        [TestMethod()]
+        [TestMethod]
         public void TestToWriteIntoLogFileCatchedException()
         {
             string expectedStr = null;

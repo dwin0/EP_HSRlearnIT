@@ -6,14 +6,14 @@ using System.Windows.Media;
 namespace EP_HSRlearnIT.BusinessLayer.Extensions
 {
     /// <summary>
-    /// Class to service methods to create a list of objects from a xaml file.
+    /// Class with methods to create a list of objects from a xaml file.
     /// </summary>
     public static class DependencyObjectExtension
     {
 
         #region Public Methods
         /// <summary>
-        /// Method creates a list of all xmal objects from a page.
+        /// Method which creates a list of all xmal objects of a page.
         /// </summary>
         /// <param name="root">Root is the reference to the page.</param>
         /// <returns>Returns a list of all xmal objects from root.</returns>
@@ -38,11 +38,11 @@ namespace EP_HSRlearnIT.BusinessLayer.Extensions
         }
 
         /// <summary>
-        /// Method creates a list with the xamal objects from a explizit type.
+        /// Method which creates a list with the xamal objects of an explizit type.
         /// </summary>
-        /// <typeparam name="T">Type to searching the object list.</typeparam>
+        /// <typeparam name="T">Type which is searched in the object list.</typeparam>
         /// <param name="root">Is the reference to the page.</param>
-        /// <returns>Returns a list of all xmal objects from type T from root.</returns>
+        /// <returns>Returns a list of all xmal objects of the type T from root.</returns>
         public static IEnumerable<T> GetAllChildren<T>(DependencyObject root) where T : class
         {
             foreach (var element in GetAllChildren(root))
@@ -55,9 +55,9 @@ namespace EP_HSRlearnIT.BusinessLayer.Extensions
         }
 
         /// <summary>
-        /// Method returns the Page of an element.
+        /// Method which returns the parent Page of an element.
         /// </summary>
-        /// <param name="element">The element for which the parent Page is searching.</param>
+        /// <param name="element">The element for which the parent Page is searched.</param>
         /// <returns>The Page in which the element is existing.</returns>
         public static DependencyObject GetParentPage(DependencyObject element)
         {

@@ -12,21 +12,21 @@ namespace EP_HSRlearnIT.BusinessLayer.Testing.UniversalToolsTest
     {
 
         [TestMethod]
-        public void CreateFileTwoParametersTest()
+        public void SaveFileTwoParametersTest()
         {
             FileManager.SaveFile(@"c:\temp\HSRlearnIT\Test", "AES-GCM.txt");
-            Assert.IsTrue(FileManager.IsExist(@"c:\temp\HSRlearnIT\Test\AES-GCM.txt"));
+            Assert.IsTrue(File.Exists(@"c:\temp\HSRlearnIT\Test\AES-GCM.txt"));
         }
 
         [TestMethod]
-        public void CreateFileWithFilepathTest()
+        public void SaveFileWithFilepathTest()
         {
             FileManager.SaveFile(@"c:\temp\HSRlearnIT\Test\OneParameterTest.txt");
-            Assert.IsTrue(FileManager.IsExist(@"c:\temp\HSRlearnIT\Test\OneParameterTest.txt"));
+            Assert.IsTrue(File.Exists(@"c:\temp\HSRlearnIT\Test\OneParameterTest.txt"));
         }
 
         [TestMethod]
-        public void UpdateContentTest()
+        public void OverwriteContentTest()
         {
             string file = FileManager.SaveFile(@"c:\temp\HSRlearnIT\Test\UpdateTest.txt");
             FileManager.OverwriteContent(file, "10 Hello World!");
