@@ -19,13 +19,14 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             InitializeComponent();
             Page page = new EncryptionPage();
             EncryptionFrame.Navigate(page);
-            InitializeVisibility(page);
+            InitializeExpertMode(page);
         }
+
 
         /// <summary>
         /// If a tab change is made, this constructor is called.
         /// </summary>
-        /// <param name="tabItem"></param>
+        /// <param name="tabItem">Contains the name of the page to navigate next.</param>
         public EncryptionDecryptionTabs(TabItem tabItem)
         {
             InitializeComponent();
@@ -48,7 +49,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                 DecryptionFrame.Navigate(page);
             }
 
-            InitializeVisibility(page);
+            InitializeExpertMode(page);
         }
 
         #endregion
@@ -58,14 +59,16 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         {
             foreach (var sendingPage in DependencyObjectExtension.GetAllChildren<Page>(this))
             {
-                if (sendingPage.Title == "EncryptionPage")
+                switch (sendingPage.Title)
                 {
-                    TakeValuesToDecryption();
-                    NavigationService?.Navigate(new EncryptionDecryptionTabs(DecryptionItem));
-                } else if (sendingPage.Title == "DecryptionPage")
-                {
-                    TakeValuesToEncryption();
-                    NavigationService?.Navigate(new EncryptionDecryptionTabs(EncryptionItem));
+                    case "EncryptionPage":
+                        TakeValuesToDecryption();
+                        NavigationService?.Navigate(new EncryptionDecryptionTabs(DecryptionItem));
+                        break;
+                    case "DecryptionPage":
+                        TakeValuesToEncryption();
+                        NavigationService?.Navigate(new EncryptionDecryptionTabs(EncryptionItem));
+                        break;
                 } 
             }
         }
@@ -74,15 +77,9 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         {
             foreach (var element in DependencyObjectExtension.GetAllChildren<TextBox>(this))
             {
-                switch (element.Name)
+                if (element.Name != "HexPlaintextBox")
                 {
-                    case "HexCiphertextBox":
-                    case "HexAadBox":
-                    case "HexIvBox":
-                    case "HexTagBox":
-                    case "HexPasswordBox":
-                        Progress.SaveProgress("DecryptionPage_" + element.Name, element.Text);
-                        break;
+                    Progress.SaveProgress("DecryptionPage_" + element.Name, element.Text);
                 }
             }
         }
@@ -91,42 +88,23 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         {
             foreach (var element in DependencyObjectExtension.GetAllChildren<TextBox>(this))
             {
-                switch (element.Name)
+                if (element.Name != "HexCiphertextBox" || element.Name != "HexTagBox")
                 {
-                    case "HexPlaintextBox":
-                    case "HexAadBox":
-                    case "HexIvBox":
-                    case "HexPasswordBox":
-                        Progress.SaveProgress("EncryptionPage_" + element.Name, element.Text);
-                        break;
+                    Progress.SaveProgress("EncryptionPage_" + element.Name, element.Text);
                 }
             }
         }
 
-        private void OnExpertmodusButtonClick(object sender, RoutedEventArgs e)
+        private void ExpertmodusButton_OnClick(object sender, RoutedEventArgs e)
         {
-            Button expertmodus = e.Source as Button;
-            TabItem selected = TabControl.SelectedItem as TabItem;
-            Frame frame = selected?.Content as Frame;
-            Page page = frame?.Content as Page;
-            Grid grid = page?.Content as Grid;
-            Visibility visibility;
+            Grid grid = (((TabControl.SelectedItem as TabItem)?.Content as Frame)?.Content as Page)?.Content as Grid;
 
-            if (expertmodus == null) { return;}
-            if (expertmodus.Content.ToString().Contains("aus"))
-            {
-                visibility = Visibility.Visible;
-            }
-            else
-            {
-                visibility = Visibility.Collapsed;
-            }
+            Visibility visibility = ExpertmodusButton.Content.ToString().Contains("aus") ? Visibility.Visible : Visibility.Collapsed;
 
             SetVisibility(grid, visibility);
-            Progress.SaveProgress("EncryptionDecryptionTabs_visibility", visibility);
         }
 
-        private void InitializeVisibility(Page page)
+        private void InitializeExpertMode(Page page)
         {
             var visibility = Progress.GetProgress("EncryptionDecryptionTabs_visibility");
             if (visibility != null)
@@ -150,17 +128,18 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                 if (visibility == Visibility.Visible)
                 {
                     gridLength = new GridLength(1, GridUnitType.Star);
-                    ExpertmodusButton.Content = "Expertenmodus: ein";
+                    ExpertmodusButton.Content = "Expertenmodus: eingeschaltet";
                 }
                 else
                 {
                     gridLength = new GridLength(0);
-                    ExpertmodusButton.Content = "Expertenmodus: aus";
+                    ExpertmodusButton.Content = "Expertenmodus: ausgeschaltet";
                 }
 
                 grid.ColumnDefinitions[1].Width = gridLength;
 
             }
+            Progress.SaveProgress("EncryptionDecryptionTabs_visibility", visibility);
         }
 
         #endregion

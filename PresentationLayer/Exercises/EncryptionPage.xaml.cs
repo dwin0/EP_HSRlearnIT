@@ -3,26 +3,27 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using EP_HSRlearnIT.BusinessLayer.Persistence;
-using EP_HSRlearnIT.BusinessLayer.Extensions;
 
 namespace EP_HSRlearnIT.PresentationLayer.Exercises
 {
     /// <summary>
-    /// Encryption page for the AesGcm Algorithmus
+    /// Encryption page for the AesGcm Algorithm
     /// </summary>
     public partial class EncryptionPage
     {
         #region Constructors
         /// <summary>
-        /// Initializes the EncryptionPage and loads the Progress for iv, aad, plaintext and key.
+        /// Initializes the EncryptionPage and loads the Progress
         /// </summary>
         public EncryptionPage()
         {
             InitializeComponent();
-            HexIvBox.Text = Progress.GetProgress("EncryptionPage_HexIvBox") as string;
-            HexAadBox.Text = Progress.GetProgress("EncryptionPage_HexAadBox") as string;
-            HexPlaintextBox.Text = Progress.GetProgress("EncryptionPage_HexPlaintextBox") as string;
-            HexPasswordBox.Text = Progress.GetProgress("EncryptionPage_HexPasswordBox") as string;
+
+            TextBox[] textBoxesToInitialize = { HexIvBox, HexAadBox, HexPlaintextBox, HexPasswordBox };
+            foreach (var textBox in textBoxesToInitialize)
+            {
+                textBox.Text = Progress.GetProgress("EncryptionPage_" + textBox.Name) as string;
+            }
         }
 
         #endregion
@@ -39,10 +40,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             }
             catch (OverflowException)
             {
-                string message = "Es wurde ein Zeichen, welches mit mehr als einem Byte repräsentiert wird, eingegeben. " +
-                                 "Bitte überprüfe und korrigiere die Eingabe.";
-                string title = "Achtung";
-                MessageBox.Show(message, title, MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                ShowTooBigCharError();
                 return;
             }
 
@@ -60,19 +58,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             }
             catch (ArgumentOutOfRangeException)
             {
-                string triggeringField = "(konnte nicht bestimmt werden)";
-                foreach (var elem in DependencyObjectExtension.GetAllChildren<TextBox>(this))
-                {
-                    if (elem.Name.Contains("Hex") && (elem.Text.Length % 2 != 0))
-                    {
-                        triggeringField = elem.Name.Substring(3, elem.Name.Length - 6);
-                    }
-                }
-
-                string message = "Im Feld " + triggeringField + " wurde ein ungerader Hex-Wert eingegeben. " +
-                                 "Bitte überprüfe und korrigiere die Eingabe.";
-                string title = "Achtung";
-                MessageBox.Show(message, title, MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                CheckIfHexIsOdd(this);
             }
         }
 

@@ -285,6 +285,36 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             }
         }
 
+        /// <summary>
+        /// Method to show a messageBox if a char is represented as more than one byte
+        /// </summary>
+        public void ShowTooBigCharError()
+        {
+            const string message = "Es wurde ein Zeichen, welches mit mehr als einem Byte repräsentiert wird, eingegeben. " +
+                                    "Bitte überprüfe und korrigiere die Eingabe.";
+            const string title = "Achtung";
+            MessageBox.Show(message, title, MessageBoxButton.OK, MessageBoxImage.Exclamation);
+        }
+
+        /// <summary>
+        /// Method to check if an odd number of Hex-Values exists
+        /// </summary>
+        public void CheckIfHexIsOdd(Page page)
+        {
+            string triggeringField = "(Feld konnte leider nicht bestimmt werden)";
+            foreach (var elem in DependencyObjectExtension.GetAllChildren<TextBox>(page))
+            {
+                if (elem.Name.Contains("Hex") && (elem.Text.Length % 2 != 0))
+                {
+                    triggeringField = elem.Name.Substring(3, elem.Name.Length - 6);
+                }
+            }
+
+            string message = "In dem Feld " + triggeringField + " wurde ein ungerader Hex-Wert eingegeben. " +
+                             "Bitte überprüfe und korrigiere die Eingabe.";
+            const string title = "Achtung";
+            MessageBox.Show(message, title, MessageBoxButton.OK, MessageBoxImage.Exclamation);
+        }
         #endregion
 
         #region Private Method

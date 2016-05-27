@@ -117,10 +117,10 @@ namespace EP_HSRlearnIT.BusinessLayer.AesGcmLibrary
         }
 
         /// <summary>
-        /// The key needs to have a size of 32 Byte. This method generates a 32 Byte size key regardless of the input. Null value is not allowed.
+        /// This method generates a 32 Byte size key regardless of the input. Null value is not allowed.
         /// </summary>
-        /// <param name="key">This key will be checked if the size is 32 Byte and if it's not 32 Byte a 32 Byte key will be generated</param>
-        /// <returns>Returns the generated 32 Byte Key</returns>
+        /// <param name="key">This key will be checked if the size is 32 Byte and if it's not 32 Byte a 32 Byte key will be generated.</param>
+        /// <returns>Returns the generated 32 Byte Key.</returns>
         public string GenerateKey(string key)
         {
             byte[] keyArray = StringToBytes(key);

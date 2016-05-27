@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using EP_HSRlearnIT.BusinessLayer.Persistence;
-using EP_HSRlearnIT.BusinessLayer.Extensions;
 
 namespace EP_HSRlearnIT.PresentationLayer.Exercises
 {
@@ -20,11 +19,12 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         public DecryptionPage()
         {
             InitializeComponent();
-            HexIvBox.Text = Progress.GetProgress("DecryptionPage_HexIvBox") as string;
-            HexAadBox.Text = Progress.GetProgress("DecryptionPage_HexAadBox") as string;
-            HexCiphertextBox.Text = Progress.GetProgress("DecryptionPage_HexCiphertextBox") as string;
-            HexPasswordBox.Text = Progress.GetProgress("DecryptionPage_HexPasswordBox") as string;
-            HexTagBox.Text = Progress.GetProgress("DecryptionPage_HexTagBox") as string;
+
+            TextBox[] textBoxesToInitialize = { HexIvBox, HexAadBox, HexCiphertextBox, HexPasswordBox, HexTagBox };
+            foreach (var textBox in textBoxesToInitialize)
+            {
+                textBox.Text = Progress.GetProgress("DecryptionPage_" + textBox.Name) as string;
+            }
         }
 
         #endregion
@@ -41,10 +41,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             }
             catch (OverflowException)
             {
-                string message = "Es wurde ein Zeichen, welches mit mehr als einem Byte repräsentiert wird, eingegeben. " +
-                                 "Bitte überprüfe und korrigiere die Eingabe.";
-                string title = "Achtung";
-                MessageBox.Show(message, title, MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                ShowTooBigCharError();
                 return;
             }
 
@@ -61,33 +58,21 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                 //case authentication only --> when successfull
                 if (UtfPlaintextBox.Text == "")
                 {
-                    string message = "Der Text wurde erfolgreich authentifiziert.";
-                    string title = "alleinstehende Authentisierung";
+                    const string message = "Der Text wurde erfolgreich authentifiziert.";
+                    const string title = "Authentisierung";
                     MessageBox.Show(message, title, MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
             catch (CryptographicException)
             {
-                string message = "Ein oder mehrere Parameter der Entschlüsselung wurden falsch eingegeben. " +
-                                 "Bitte überprüfe und korrigiere die Eingabe.";
-                string title = "Achtung";
+                const string message = "Ein oder mehrere Parameter der Entschlüsselung wurden falsch eingegeben. " +
+                                       "Bitte überprüfe und korrigiere die Eingabe.";
+                const string title = "Achtung";
                 MessageBox.Show(message, title, MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
             catch (ArgumentOutOfRangeException)
             {
-                string triggeringField = "(Feld konnte leider nicht bestimmt werden)";
-                foreach (var elem in DependencyObjectExtension.GetAllChildren<TextBox>(this))
-                {
-                    if (elem.Name.Contains("Hex") && (elem.Text.Length % 2 != 0))
-                    {
-                        triggeringField = elem.Name.Substring(3, elem.Name.Length - 6);
-                    }
-                }
-
-                string message = "In dem Feld " + triggeringField + " wurde ein ungerader Hex-Wert eingegeben. " +
-                                 "Bitte überprüfe und korrigiere die Eingabe.";
-                string title = "Achtung";
-                MessageBox.Show(message, title, MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                CheckIfHexIsOdd(this);
             }
         }
 

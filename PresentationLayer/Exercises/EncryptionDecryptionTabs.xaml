@@ -43,6 +43,6 @@
                 <Frame Name="DecryptionFrame" />
             </TabItem>
         </TabControl>
-        <Button Name="ExpertmodusButton" Content="Expertenmodus: ein" Click="OnExpertmodusButtonClick" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ResourceKey=ExpertModusButtonStyle}" />
+        <Button Name="ExpertmodusButton" Content="Expertenmodus: eingeschaltet" Click="ExpertmodusButton_OnClick" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ResourceKey=ExpertModusButtonStyle}" />
     </Grid>
 </Page>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Linq;
 using System.Windows.Data;
 using static System.Convert;
 
@@ -21,12 +22,9 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         #region Public Methods
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            foreach (var t in values)
+            if (values.Any(t => t == null))
             {
-                if (t == null)
-                {
-                    return false;
-                }
+                return false;
             }
 
             int ivLength = ToInt32(values[0]);

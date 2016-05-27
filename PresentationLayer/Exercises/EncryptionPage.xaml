@@ -78,22 +78,22 @@
             </Button>
             <Button Content="Zurücksetzen" Click="ResetButton_OnClick" DockPanel.Dock="Right" Style="{StaticResource ResourceKey=ProgramButtonStyle}" Height="40" Width="85"/>
         </DockPanel>
-        <TextBlock Grid.Row="9" Grid.Column="0" Text="Verschlüsselter Text:" Name="CiphertextBlock" Style="{StaticResource WithoutImageTextBlockStyle}"/>
+        <TextBlock Grid.Row="9" Grid.Column="0" Name="CiphertextBlock" Text="Verschlüsselter Text:" Style="{StaticResource WithoutImageTextBlockStyle}"/>
         <TextBox Grid.Row="10" Grid.Column="0" Name="UtfCiphertextBox" TextChanged="TextBox_OnTextChanged" Style="{StaticResource TextBoxNonWriteableStyle}" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
-        <TextBlock Grid.Row="11" Grid.Column="0" Text="Tag:" Name="TagBlock" Style="{StaticResource WithoutImageTextBlockStyle}"/>
+        <TextBlock Grid.Row="11" Grid.Column="0" Name="TagBlock" Text="Tag:" Style="{StaticResource WithoutImageTextBlockStyle}"/>
         <TextBox Grid.Row="12" Grid.Column="0" Name="UtfTagBox" TextChanged="TextBox_OnTextChanged" Style="{StaticResource TextBoxNonWriteableStyle}" Margin="15,2,15,15"/>
 
-        <TextBlock Grid.Row="0" Grid.Column="1" Text="IV Hex: (optional)" Name="HexIvBlock" Margin="15,19,15,0" Style="{StaticResource WithoutImageTextBlockStyle}"/>
+        <TextBlock Grid.Row="0" Grid.Column="1" Name="HexIvBlock" Text="IV Hex: (optional)" Margin="15,19,15,0" Style="{StaticResource WithoutImageTextBlockStyle}"/>
         <TextBox Grid.Row="1" Grid.Column="1" Name="HexIvBox" TextChanged="HexTextBox_OnTextChanged" LostKeyboardFocus="HexTextBox_OnLostKeyboardFocus" Style="{StaticResource TextBoxAutoOrFixValueStyle}"/>
-        <TextBlock Grid.Row="2" Grid.Column="1" Text="Additional Authenticated Data: (optional)" Name="HexAadBlock" Style="{StaticResource WithoutImageTextBlockStyle}"/>
+        <TextBlock Grid.Row="2" Grid.Column="1" Name="HexAadBlock" Text="Additional Authenticated Data: (optional)" Style="{StaticResource WithoutImageTextBlockStyle}"/>
         <TextBox Grid.Row="3" Grid.Column="1" Name="HexAadBox" TextChanged="HexTextBox_OnTextChanged" LostKeyboardFocus="HexTextBox_OnLostKeyboardFocus" Style="{StaticResource TextBoxStarStyle}"/>
-        <TextBlock Grid.Row="4" Grid.Column="1" Text="Klartext Hex:" Name="HexPlaintextBlock" Style="{StaticResource WithoutImageTextBlockStyle}"/>
+        <TextBlock Grid.Row="4" Grid.Column="1" Name="HexPlaintextBlock" Text="Klartext Hex:" Style="{StaticResource WithoutImageTextBlockStyle}"/>
         <TextBox Grid.Row="5" Grid.Column="1" Name="HexPlaintextBox" TextChanged="HexTextBox_OnTextChanged" LostKeyboardFocus="HexTextBox_OnLostKeyboardFocus" Style="{StaticResource TextBoxStarStyle}"/>
-        <TextBlock Grid.Row="6" Grid.Column="1" Text="Key Hex:" Name="HexPasswordBlock" Style="{StaticResource WithoutImageTextBlockStyle}"/>
+        <TextBlock Grid.Row="6" Grid.Column="1" Name="HexPasswordBlock" Text="Key Hex:" Style="{StaticResource WithoutImageTextBlockStyle}"/>
         <TextBox Grid.Row="7" Grid.Column="1" Name="HexPasswordBox" TextChanged="HexTextBox_OnTextChanged" LostKeyboardFocus="HexTextBox_OnLostKeyboardFocus" Style="{StaticResource TextBoxAutoOrFixValueStyle}"/>
-        <TextBlock Grid.Row="9" Grid.Column="1" Text="Verschlüsselter Text Hex:" Name="HexCiphertextBlock" Style="{StaticResource WithoutImageTextBlockStyle}"/>
+        <TextBlock Grid.Row="9" Grid.Column="1" Name="HexCiphertextBlock" Text="Verschlüsselter Text Hex:" Style="{StaticResource WithoutImageTextBlockStyle}"/>
         <TextBox Grid.Row="10" Grid.Column="1" Name="HexCiphertextBox" TextChanged="HexTextBox_OnTextChanged" Style="{StaticResource TextBoxNonWriteableStyle}" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
-        <TextBlock Grid.Row="11" Grid.Column="1" Text="Tag Hex:" Name="HexTagBlock" Style="{StaticResource WithoutImageTextBlockStyle}"/>
+        <TextBlock Grid.Row="11" Grid.Column="1" Name="HexTagBlock" Text="Tag Hex:" Style="{StaticResource WithoutImageTextBlockStyle}"/>
         <TextBox Grid.Row="12" Grid.Column="1" Name="HexTagBox" TextChanged="HexTextBox_OnTextChanged" Style="{StaticResource TextBoxNonWriteableStyle}" Margin="15,2,15,15"/>
     </Grid>
 </base:EncryptionDecryptionComponents>
