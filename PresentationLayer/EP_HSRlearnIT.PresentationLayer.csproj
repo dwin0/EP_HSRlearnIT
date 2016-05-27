@@ -276,10 +276,6 @@
     <Resource Include="Images\recyclebin.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\curved-arrow.png" />
-    <Resource Include="Images\pitr_red_arrows_set_5.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\red_arrow.png" />
   </ItemGroup>
   <ItemGroup>
