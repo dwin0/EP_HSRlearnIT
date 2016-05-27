@@ -8,6 +8,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using EP_HSRlearnIT.BusinessLayer.Persistence;
 using EP_HSRlearnIT.BusinessLayer.Extensions;
+using EP_HSRlearnIT.Games;
 
 namespace EP_HSRlearnIT.PresentationLayer.Games
 {
@@ -17,7 +18,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         private const string SettingsName = "DragDropPage_Settings";
         private const string RecycleBinStatus = "dragDropPage_RecycleBinFull";
         private const int ImageRecyclingBinEmpty = 17;
-        private static readonly Dictionary<int, List<string>> CorrectAnswers = new Dictionary<int, List<string>>();
         private readonly int _originalNumberOfChildren;
 
         private static int NumOfDroppableRectanglePlaces = 17;
@@ -32,8 +32,9 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         private bool _rectangleHasBeenMovedBefore;
         private Point _startPoint = new Point(0, 0);
         private bool _checkingFirstTime = true;
-
         #endregion
+
+        public static readonly Dictionary<int, List<string>> CorrectAnswers = new Dictionary<int, List<string>>();
 
         #region Constructor
         /// <summary>
@@ -191,20 +192,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
             SetMouseEvents(resRect, leftButtonDown, leftButtonUp, moveMouse);
             return resRect;
         }
-
-
-        //  --> Vorschlag für eine Verkürzung der Parameterliste und der Methode selbst
-        //private Rectangle CreateNewRectangle(Rectangle rectangle, string name, bool leftButtonDown, bool leftButtonUp, bool moveMouse)
-        // {
-        //    Rectangle rect = Clone(rectangle) as Rectangle;
-        //    if (rect != null)
-        //    {
-        //        rect.Name = name;
-        //        SetMouseEvents(rect, leftButtonDown, leftButtonUp, moveMouse);
-        //    }
-        //    return rect;
-        //}
-
         private void SetMouseEvents(Rectangle resRect, bool leftButtonDown, bool leftButtonUp, bool moveMouse)
         {
             if (leftButtonDown) resRect.PreviewMouseLeftButtonDown += rectangle_PreviewMouseLeftButtonDown;
@@ -534,11 +521,20 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                     }
                     data.ChildReference.StrokeThickness = 4;
                 }
-            string message = $"Spiel ist nun beendet. {Environment.NewLine}Korrekte Antwort(en): {correctAnswers} {Environment.NewLine}Falsche Antwort(en): {wrongAnswers}";
+            if (correctAnswers == _addedSavedData.Count && correctAnswers == _dropLocationsRectangles.Count)
+            {
+                string message ="Super, du hast das Spiel korrekt ausgefüllt. Gratuliere!";
                 string title = "Spielresultat";
-                MessageBox.Show(message, title,MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show(message, title, MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                string message =$"Korrekte Antwort(en): {correctAnswers} {Environment.NewLine}Falsche Antwort(en): {wrongAnswers}";
+                string title = "Spielresultat";
+                MessageBox.Show(message, title, MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
-
+        
         /// <summary>
         /// This method is responsible for closing, respectively hiding the game instruction</summary>
         /// <param name="sender">Contains the control which raised the event</param>
@@ -547,43 +543,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         {
             BorderGameInstruction.Visibility = Visibility.Hidden;
         }
-
-        #region SavedDataForProgress
-
-        /// <summary>
-        /// This class is needed for the progress saving. In order to restore the progress, the ChildReference, Droprectangle Reference, ImageMargin, Brush,
-        /// OriginalImageChildIndex and DropRectangleIndex is needed. 
-        /// </summary>>
-        private class SavedDataForProgress
-        {
-            public Rectangle DropRectangle; // Drop rectangle reference, there should be unique drop rectangles in whole _addedSavedData
-            public Rectangle ChildReference;
-      
-            public Thickness ImageMargin; // Position of copied data, we need it when switching pages
-            public Brush Brush;
-            public double StrokeDashArray;
-            public int OriginalImageChildIndex; // Index of original child we made copy of, it's index of imagebrush
-            public int DropRectangleIndex; // Index of original child we made copy of, it's index of imagebrush
-            
-
-            public SavedDataForProgress() 
-            {
-                OriginalImageChildIndex = -1;
-                DropRectangle = null;
-                Brush = null;
-                StrokeDashArray = 0.0;
-            }
-           
-            public bool IsAnswerCorrect()
-            {
-                List<string> isCorrect;
-                CorrectAnswers.TryGetValue(OriginalImageChildIndex, out isCorrect);
-                return isCorrect != null && isCorrect.Contains(DropRectangle.Name);
-            }
-        }
-
-        #endregion SavedDataForProgress
-
+        
         /// <summary>
         /// This method opens the game instructions. </summary>
         private void OpenInstruction_OnMouseUp(object sender, RoutedEventArgs e)
