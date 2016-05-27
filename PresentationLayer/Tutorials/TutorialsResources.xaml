@@ -7,7 +7,7 @@
     
     <Image x:Key="StepByStepBackground" Source="/Images/aead.png" RenderOptions.BitmapScalingMode="HighQuality" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center"/>
     
-        <!--StepByStepPage StepDescripton and Title-->
+    <!--StepByStepPage StepDescripton and Title-->
     
     <system:String x:Key="Step0Title">Einleitung</system:String>
     <system:String x:Key="Step0">        Weshalb AES-GCM?

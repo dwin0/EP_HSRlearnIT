@@ -170,7 +170,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         }
 
         /// <summary>
-        /// This event is used to reset all TextBoxes of either the Encryption or the Decryption Page.
+        /// This event is used to reset all TextBoxes of the Encryption or the Decryption Page.
         /// </summary>
         /// <param name="sender">is not used</param>
         /// <param name="e">is not used</param>
@@ -187,10 +187,10 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         }
 
         /// <summary>
-        /// This event is registered on the Export Button, it starts the windows explorer to save a hex file.
+        /// This event starts the windows explorer to save a hex file.
         /// </summary>
-        /// <param name="sender">is not used</param>
-        /// <param name="e">is not used</param>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void ExportButton_OnClick(object sender, RoutedEventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog()
@@ -220,15 +220,17 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                 string line = PickoutField();
 
                 FileManager.OverwriteContent(fullFilePath, line);
-                MessageBox.Show("Der Export war erfolgreich.", "Export", MessageBoxButton.OK, MessageBoxImage.Information);
+                string message = "Der Export war erfolgreich.";
+                string title = "Export";
+                MessageBox.Show(message, title, MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
         /// <summary>
-        /// This event is registered on the Import Button, it starts the windows explorer to import a file.
+        /// This event starts the windows explorer to import a file.
         /// </summary>
-        /// <param name="sender">is not used</param>
-        /// <param name="e">is not used</param>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void ImportButton_OnClick(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog()
@@ -276,7 +278,9 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                 {
                         FillingField(filePath);
                 }
-                MessageBox.Show("Der Import wurde erfolgreich abgeschlossen.", "Import", MessageBoxButton.OK, MessageBoxImage.Information);
+                string message = "Der Import wurde erfolgreich abgeschlossen.";
+                string title = "Import";
+                MessageBox.Show(message, title, MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
@@ -385,9 +389,9 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         }
 
         /// <summary>
-        /// Method fillup all HEX-fields with name of parameter and value into a string
+        /// Method fillup all HEX-fields with name of parameter and value into a string.
         /// </summary>
-        /// <returns>A string with all allowed export parameters and their value</returns>
+        /// <returns>A string with all allowed export parameters and their value.</returns>
         private string PickoutField()
         {
             StringBuilder line = new StringBuilder();
@@ -412,10 +416,10 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         }
 
         /// <summary>
-        /// Method filling all fields from the importfile excluding the following parameternames.
+        /// Method filling all fields from the importfile excluding the following parameter in the filter.
         /// </summary>
-        /// <param name="parameter"></param>fieldidentifier from file.
-        /// <param name="value"></param>value from parametername.
+        /// <param name="parameter">This is the identifier of the field from the file.</param>
+        /// <param name="value">This is the value from the parameter in this function.</param>
         private void FillingField(string parameter, string value)
         {
             if (value.Length > 0)
@@ -441,6 +445,10 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             }
         }
 
+        /// <summary>
+        /// Method is filling the whole file into the Plaintext or Ciphertext regulated by the activ page.
+        /// </summary>
+        /// <param name="filePath"></param>
         private void FillingField(string filePath)
         {
             foreach (var textBox in DependencyObjectExtension.GetAllChildren<TextBox>(this))
@@ -453,6 +461,11 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             }
         }
 
+        /// <summary>
+        /// Method post the content of a parameter from a other function to a defined element.
+        /// </summary>
+        /// <param name="element">The target TextBox in which is written.</param>
+        /// <param name="value">Content which is written.</param>
         private void PostContent(TextBox element, string value)
         {
             TextBox fieldOnForm = FindName(element.Name) as TextBox;
