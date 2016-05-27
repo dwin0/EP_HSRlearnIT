@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 
 
-namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
+namespace EP_HSRlearnIT.BusinessLayer.Persistence
 {
     /// <summary>
     /// Interaction logic for App.xaml

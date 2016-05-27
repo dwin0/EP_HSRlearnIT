@@ -2,7 +2,7 @@
 using System.Windows.Markup;
 using System.Xml;
 
-namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
+namespace EP_HSRlearnIT.BusinessLayer.Extensions
 {
     /// <summary>
     /// Contains all Extensions for FrameworkElement

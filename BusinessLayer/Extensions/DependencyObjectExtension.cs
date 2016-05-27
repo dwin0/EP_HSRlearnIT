@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
+namespace EP_HSRlearnIT.BusinessLayer.Extensions
 {
     /// <summary>
     /// Class to service methods to create a list of objects from a xaml file.

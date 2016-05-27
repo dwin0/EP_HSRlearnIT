@@ -66,13 +66,13 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="UniversalTools\DependencyObjectExtension.cs" />
-    <Compile Include="UniversalTools\FrameworkElementExtension.cs" />
-    <Compile Include="UniversalTools\Progress.cs" />
+    <Compile Include="Extensions\DependencyObjectExtension.cs" />
+    <Compile Include="Extensions\FrameworkElementExtension.cs" />
+    <Compile Include="Persistence\Progress.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UniversalTools\ExceptionLogger.cs" />
-    <Compile Include="UniversalTools\FileManager.cs" />
+    <Compile Include="Persistence\ExceptionLogger.cs" />
+    <Compile Include="Persistence\FileManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

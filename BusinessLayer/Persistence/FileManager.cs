@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
+namespace EP_HSRlearnIT.BusinessLayer.Persistence
 {
     /// <summary>
     /// Class helps for the handling with files.

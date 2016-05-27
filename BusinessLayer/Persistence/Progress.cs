@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
+namespace EP_HSRlearnIT.BusinessLayer.Persistence
 {
     /// <summary>
     /// Class for saving the progress

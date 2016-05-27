@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using EP_HSRlearnIT.BusinessLayer.UniversalTools;
+using EP_HSRlearnIT.BusinessLayer.Persistence;
+using EP_HSRlearnIT.BusinessLayer.Extensions;
 
 namespace EP_HSRlearnIT.PresentationLayer.Exercises
 {

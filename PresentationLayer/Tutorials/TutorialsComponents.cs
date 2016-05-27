@@ -5,7 +5,8 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Windows.Controls;
 using System.Collections.Generic;
-using EP_HSRlearnIT.BusinessLayer.UniversalTools;
+using EP_HSRlearnIT.BusinessLayer.Persistence;
+using EP_HSRlearnIT.BusinessLayer.Extensions;
 
 namespace EP_HSRlearnIT.PresentationLayer.Tutorials
 {

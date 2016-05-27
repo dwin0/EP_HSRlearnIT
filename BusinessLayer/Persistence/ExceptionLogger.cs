@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
+namespace EP_HSRlearnIT.BusinessLayer.Persistence
 {
     /// <summary>
     /// Class to log all exceptions of the program.
@@ -13,7 +13,7 @@ namespace EP_HSRlearnIT.BusinessLayer.UniversalTools
         private const string FileName = "ExceptionLog.log";
         //Size in Byte
         private const long MaxSizeLogfile = 5*1024*1024;
-        private const int RowsToDelete = 10;
+        private const int RowsToDelete = 200;
 
         #endregion
 
