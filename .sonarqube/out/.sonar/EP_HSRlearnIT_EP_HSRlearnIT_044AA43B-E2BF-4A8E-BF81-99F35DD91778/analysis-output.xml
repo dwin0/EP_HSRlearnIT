@@ -3,7 +3,7 @@
 <AnalysisOutput>
   <Files>
     <File>
-      <Path>C:\Programming\EP_HSRlearnIT\BusinessLayer\AesGcmLibrary\AesGcmAdapter.cs</Path>
+      <Path>C:\Programming\EP_HSRlearnIT\EP_HSRlearnIT.BusinessLayer\AesGcmLibrary\AesGcmAdapter.cs</Path>
       <Metrics>
         <Lines>226</Lines>
         <Classes>1</Classes>
@@ -222,9 +222,9 @@
       <Issues />
     </File>
     <File>
-      <Path>C:\Programming\EP_HSRlearnIT\BusinessLayer\App.xaml.cs</Path>
+      <Path>C:\Programming\EP_HSRlearnIT\EP_HSRlearnIT.BusinessLayer\App.xaml.cs</Path>
       <Metrics>
-        <Lines>13</Lines>
+        <Lines>10</Lines>
         <Classes>1</Classes>
         <Accessors>0</Accessors>
         <Statements>0</Statements>
@@ -237,25 +237,24 @@
         <Comments>
           <NoSonar />
           <NonBlank>
-            <Line>6</Line>
-            <Line>7</Line>
-            <Line>8</Line>
+            <Line>3</Line>
+            <Line>4</Line>
+            <Line>5</Line>
           </NonBlank>
         </Comments>
         <LinesOfCode>
           <Line>1</Line>
-          <Line>4</Line>
-          <Line>5</Line>
+          <Line>2</Line>
+          <Line>6</Line>
+          <Line>7</Line>
+          <Line>8</Line>
           <Line>9</Line>
-          <Line>10</Line>
-          <Line>11</Line>
-          <Line>12</Line>
         </LinesOfCode>
       </Metrics>
       <Issues />
     </File>
     <File>
-      <Path>C:\Programming\EP_HSRlearnIT\BusinessLayer\Extensions\DependencyObjectExtension.cs</Path>
+      <Path>C:\Programming\EP_HSRlearnIT\EP_HSRlearnIT.BusinessLayer\Extensions\DependencyObjectExtension.cs</Path>
       <Metrics>
         <Lines>74</Lines>
         <Classes>1</Classes>
@@ -342,7 +341,7 @@
       <Issues />
     </File>
     <File>
-      <Path>C:\Programming\EP_HSRlearnIT\BusinessLayer\Extensions\FrameworkElementExtension.cs</Path>
+      <Path>C:\Programming\EP_HSRlearnIT\EP_HSRlearnIT.BusinessLayer\Extensions\FrameworkElementExtension.cs</Path>
       <Metrics>
         <Lines>26</Lines>
         <Classes>1</Classes>
@@ -388,7 +387,7 @@
       <Issues />
     </File>
     <File>
-      <Path>C:\Programming\EP_HSRlearnIT\BusinessLayer\Persistence\ExceptionLogger.cs</Path>
+      <Path>C:\Programming\EP_HSRlearnIT\EP_HSRlearnIT.BusinessLayer\Persistence\ExceptionLogger.cs</Path>
       <Metrics>
         <Lines>40</Lines>
         <Classes>1</Classes>
@@ -440,7 +439,7 @@
       <Issues />
     </File>
     <File>
-      <Path>C:\Programming\EP_HSRlearnIT\BusinessLayer\Persistence\FileManager.cs</Path>
+      <Path>C:\Programming\EP_HSRlearnIT\EP_HSRlearnIT.BusinessLayer\Persistence\FileManager.cs</Path>
       <Metrics>
         <Lines>153</Lines>
         <Classes>1</Classes>
@@ -591,7 +590,7 @@
       <Issues />
     </File>
     <File>
-      <Path>C:\Programming\EP_HSRlearnIT\BusinessLayer\Persistence\Progress.cs</Path>
+      <Path>C:\Programming\EP_HSRlearnIT\EP_HSRlearnIT.BusinessLayer\Persistence\Progress.cs</Path>
       <Metrics>
         <Lines>68</Lines>
         <Classes>1</Classes>
@@ -667,7 +666,7 @@
       <Issues />
     </File>
     <File>
-      <Path>C:\Programming\EP_HSRlearnIT\BusinessLayer\Properties\AssemblyInfo.cs</Path>
+      <Path>C:\Programming\EP_HSRlearnIT\EP_HSRlearnIT.BusinessLayer\Properties\AssemblyInfo.cs</Path>
       <Metrics>
         <Lines>54</Lines>
         <Classes>0</Classes>
