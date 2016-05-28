@@ -26,14 +26,10 @@ Schritt 6: Abschluss und Rückgabe
     <system:String x:Key="Step1">
 Der Hash-Subkey H wird berechnet. Dazu wird ein Block von 128 Nullen (0128) mit dem Schlüssel K AES-verschlüsselt.
 Dieser Subkey wird für die Berechnung des Message Authentication Codes (MAC), also für die Authentisierung, benötigt. In AES-GCM wird dieser MAC «Auth-Tag» genannt.
-
-Hinweis: die Daten beziehen sich auf den Test Case 16 aus der offiziellen GCM Spezifikation.
     </system:String>
     <system:String x:Key="Step2">
 Der «Counter 0»-Block wird aus dem Initialisierungsvektor (IV) hergeleitet. 
 Dazu wird zum 96 Bit-langen IV ein 32 Bit langes Padding von Nullbits und einer 1 am Ende hinzugefügt, so dass schlussendlich ein Block mit 128 Bit resultiert.
-
-Hinweis: die Daten beziehen sich auf den Test Case 16 aus der offiziellen GCM Spezifikation.
     </system:String>
     <system:String x:Key="Step3Title">Verschlüsselung</system:String>
     <system:String x:Key="Step3">
@@ -94,7 +90,7 @@ Der Ciphertext wird am Ende dieselbe Länge wie der zu Beginn eingegebene Plaint
     <system:String x:Key="Step16">
 Der Initialisierungsvektor muss unique sein, ansonsten besteht die Möglichkeit Rückschlüsse auf den Plaintext zu machen. Dies deshalb, weil zwei gleiche Counter-Blöcke auch genau gleich verschlüsselt werden. Unterschiede im Ciphertext stammen allein daher, dass Unterschiede im Plaintext vorhanden sind.
 
-Die Grösse des zu verschlüsselnden Plaintextes pro IV ist genau aus diesem Grund beschränkt. Werden nämlich zu viele Counter-Blöcke gebildet, steigt die Wahrscheinlichkeit einer Wiederholung der Bit-Sequenzen immer mehr an. Der Plaintext darf deshalb eine Grösse von 64GB nicht übersteigen.
+Die Grösse des zu verschlüsselnden Plaintextes pro IV ist genau aus diesem Grund beschränkt. Werden nämlich zu viele Counter-Blöcke gebildet, steigt die Wahrscheinlichkeit einer Wiederholung der Bit-Sequenzen immer mehr an. Der Plaintext darf deshalb eine Grösse von ungefähr 64GB (2^39 Bit - 256 Bit) nicht übersteigen.
     </system:String>
     <system:String x:Key="Step17Title">Rückblick</system:String>
     <system:String x:Key="Step17">
