@@ -1,11 +1,11 @@
 ﻿// Copyright (c) Microsoft Corporation.  All rights reserved.
 
 using System.IO;
+using Security.Cryptography;
 using System.Security.Cryptography;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Security.Cryptography;
 
-namespace EP_HSRlearnIT.BusinessLayer.Testing.CryptoToolsTest
+namespace EP_HSRlearnIT.BusinessLayer.Testing.AesGcmLibraryTest
 {
     /// <summary>
     ///    Test vectors for AES GCM mode from

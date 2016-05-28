@@ -29,7 +29,7 @@ namespace EP_HSRlearnIT.BusinessLayer.Persistence
         public static void WriteToLogfile(string sourceMethod, string exceptionMessage, string stackTrace )
         {
             string filePath = FileManager.SaveFile(Path, FileName);
-            string entry = $"Exception: {DateTime.Now.ToString(CultureInfo.CurrentCulture)}: {sourceMethod}{Environment.NewLine} {exceptionMessage}{Environment.NewLine} {stackTrace} {Environment.NewLine}";
+            string entry = $"Exception: {DateTime.Now.ToString(CultureInfo.CurrentCulture)}: {sourceMethod}{Environment.NewLine}{exceptionMessage}{Environment.NewLine}{stackTrace}{Environment.NewLine}";
             FileManager.AppendContent(filePath, entry);
             FileManager.AvoidOverflow(filePath, MaxSizeLogfile, RowsToDelete);
         }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using EP_HSRlearnIT.BusinessLayer.Persistence;
 
-namespace EP_HSRlearnIT.BusinessLayerTests.UniversalToolsTest
+namespace EP_HSRlearnIT.BusinessLayer.Testing.PersistenceTest
 {
     [TestClass]
     public class ProgressTest

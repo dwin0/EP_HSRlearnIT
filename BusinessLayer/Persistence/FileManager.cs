@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace EP_HSRlearnIT.BusinessLayer.Persistence
 {
@@ -33,6 +33,17 @@ namespace EP_HSRlearnIT.BusinessLayer.Persistence
         }
 
         /// <summary>
+        /// Method to exchange the content from a file with a list of new content.
+        /// </summary>
+        /// <param name="filePath">Path to the file which is to change.</param>
+        /// <param name="newContent">A list with the new content.</param>
+        public static void SwapContents(string filePath, IEnumerable<string> newContent)
+        {
+            OverwriteContent(filePath, "");
+            File.WriteAllLines(filePath, newContent);
+        }
+
+        /// <summary>
         /// Method to read the whole file content.
         /// </summary>
         /// <param name="filePath">Path to the file which is read.</param>
@@ -55,7 +66,7 @@ namespace EP_HSRlearnIT.BusinessLayer.Persistence
             return File.ReadLines(filePath);
         }
 
-        public static bool IsExisting(string filePath)
+        public static bool IsExist(string filePath)
         {
             return File.Exists(filePath);
         }
@@ -93,20 +104,9 @@ namespace EP_HSRlearnIT.BusinessLayer.Persistence
                 lines.RemoveRange(0, rowsToDelete);
                 SwapContents(filePath, lines);
                 AppendContent(filePath, $"{Environment.NewLine}***" +
-                                        $"{Environment.NewLine}The oldest { rowsToDelete} rows were removed." +
+                                        $"{Environment.NewLine}The oldest {rowsToDelete} rows were removed." +
                                         $"{Environment.NewLine}***");
             }
-        }
-
-        /// <summary>
-        /// Method to exchange the content from a file with a list of new content.
-        /// </summary>
-        /// <param name="filePath">Path to the file which is to change.</param>
-        /// <param name="newContent">A list with the new content.</param>
-        public static void SwapContents(string filePath, IEnumerable<string> newContent)
-        {
-            OverwriteContent(filePath, "");
-            File.WriteAllLines(filePath, newContent);
         }
 
         #endregion

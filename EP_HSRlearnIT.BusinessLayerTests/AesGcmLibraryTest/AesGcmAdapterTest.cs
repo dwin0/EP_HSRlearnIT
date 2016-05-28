@@ -3,7 +3,7 @@ using System.Security.Cryptography;
 using EP_HSRlearnIT.BusinessLayer.AesGcmLibrary;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace EP_HSRlearnIT.BusinessLayerTests.CryptoToolsTest
+namespace EP_HSRlearnIT.BusinessLayer.Testing.AesGcmLibraryTest
 {
     [TestClass]
     public class AesGcmAdapterTest

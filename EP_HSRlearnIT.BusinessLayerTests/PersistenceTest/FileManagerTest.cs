@@ -1,11 +1,11 @@
 ﻿using System;
+using System.IO;
+using System.Linq;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using EP_HSRlearnIT.BusinessLayer.Persistence;
-using System.IO;
-using System.Linq;
 
-namespace EP_HSRlearnIT.BusinessLayer.Testing.UniversalToolsTest
+namespace EP_HSRlearnIT.BusinessLayer.Testing.PersistenceTest
 {
     [TestClass]
     public class FileManagerTest
@@ -71,6 +71,29 @@ namespace EP_HSRlearnIT.BusinessLayer.Testing.UniversalToolsTest
                 i++;
             }
         }
+
+        [TestMethod]
+        public void IsExistTest()
+        {
+            FileManager.SaveFile(@"c:\temp\HSRlearnIT\Test\ExistTest.txt");
+            Assert.IsTrue(FileManager.IsExist(@"c:\temp\HSRlearnIT\Test\ExistTest.txt"));
+        }
+
+        [TestMethod]
+        public void AvoidOverflowTest()
+        {
+            string fileName = @"c:\temp\HSRlearnIT\Test\OverflowTest.txt";
+            var sizeInMb = 5;
+            byte[] data = new byte[(sizeInMb+1) * 1024 * 1024];
+            Random random = new Random();
+            random.NextBytes(data);
+            File.WriteAllBytes(fileName, data);
+            FileManager.AvoidOverflow(fileName, sizeInMb, 20);
+            List<string> fileContent = FileManager.ReadAllLines(fileName).ToList();
+            string lastSecondLine = fileContent[fileContent.Count - 2];
+            Assert.AreEqual("The oldest 20 rows were removed.", lastSecondLine);
+        }
+
 
         [ClassCleanup]
         public static void CleanUp()
