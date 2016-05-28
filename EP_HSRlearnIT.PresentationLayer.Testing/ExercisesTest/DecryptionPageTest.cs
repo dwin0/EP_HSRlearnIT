@@ -12,7 +12,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Testing.ExercisesTest
     public class DecryptionPageTest
     {
         public string BaseDir => Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-        public string SutPath => Path.Combine(BaseDir, $"{nameof(EP_HSRlearnIT)}.exe");
+        public string SutPath => Path.Combine(BaseDir, "EP_HSRlearnIT.PresentationLayer.exe");
 
         [TestMethod]
         public void DecryptionTest()

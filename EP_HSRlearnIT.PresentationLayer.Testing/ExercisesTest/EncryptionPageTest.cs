@@ -14,7 +14,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Testing.ExercisesTest
     public class EncryptionPageTest
     {
         public string BaseDir => Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-        public string SutPath => Path.Combine(BaseDir, $"{nameof(EP_HSRlearnIT)}.exe");
+        public string SutPath => Path.Combine(BaseDir, "EP_HSRlearnIT.PresentationLayer.exe");
 
         [TestMethod]
         public void EncryptionTest()
@@ -27,9 +27,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Testing.ExercisesTest
             //zu EncryptionPage navigieren
             var imgEncrDecr = window.Get<Image>("VerandEntschluesselungsAnwendung");
             imgEncrDecr.Click();
-
-            var encryptionPage = window.Get<TabPage>("EncryptionItem");
-            encryptionPage.Click();
 
             //input eingeben, es handelt sich um die Hex Werte des Test Cases 16 aus der offiziellen GCM Spezifikation.
             var ivInput = window.Get<TextBox>("HexIvBox");
