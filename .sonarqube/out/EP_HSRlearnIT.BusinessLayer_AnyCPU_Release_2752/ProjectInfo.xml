@@ -7,7 +7,7 @@
   <FullPath>C:\Programming\EP_HSRlearnIT\BusinessLayer\EP_HSRlearnIT.BusinessLayer.csproj</FullPath>
   <IsExcluded>false</IsExcluded>
   <AnalysisResults>
-    <AnalysisResult Id="FilesToAnalyze" Location="C:\Programming\EP_HSRlearnIT\.sonarqube\out\\EP_HSRlearnIT.BusinessLayer_AnyCPU_Release_1257\FilesToAnalyze.txt" />
+    <AnalysisResult Id="FilesToAnalyze" Location="C:\Programming\EP_HSRlearnIT\.sonarqube\out\\EP_HSRlearnIT.BusinessLayer_AnyCPU_Release_2752\FilesToAnalyze.txt" />
   </AnalysisResults>
   <AnalysisSettings>
     <Property Name="sonar.cs.roslyn.reportFilePath">C:\Programming\EP_HSRlearnIT\BusinessLayer\bin\Release\BusinessLayer.exe.RoslynCA.json</Property>

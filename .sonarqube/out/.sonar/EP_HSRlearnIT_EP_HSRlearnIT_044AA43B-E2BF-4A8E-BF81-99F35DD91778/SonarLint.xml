@@ -11,11 +11,11 @@
   <Files>
     <File>C:\Programming\EP_HSRlearnIT\BusinessLayer\AesGcmLibrary\AesGcmAdapter.cs</File>
     <File>C:\Programming\EP_HSRlearnIT\BusinessLayer\App.xaml.cs</File>
+    <File>C:\Programming\EP_HSRlearnIT\BusinessLayer\Extensions\DependencyObjectExtension.cs</File>
+    <File>C:\Programming\EP_HSRlearnIT\BusinessLayer\Extensions\FrameworkElementExtension.cs</File>
+    <File>C:\Programming\EP_HSRlearnIT\BusinessLayer\Persistence\ExceptionLogger.cs</File>
+    <File>C:\Programming\EP_HSRlearnIT\BusinessLayer\Persistence\FileManager.cs</File>
+    <File>C:\Programming\EP_HSRlearnIT\BusinessLayer\Persistence\Progress.cs</File>
     <File>C:\Programming\EP_HSRlearnIT\BusinessLayer\Properties\AssemblyInfo.cs</File>
-    <File>C:\Programming\EP_HSRlearnIT\BusinessLayer\UniversalTools\DependencyObjectExtension.cs</File>
-    <File>C:\Programming\EP_HSRlearnIT\BusinessLayer\UniversalTools\ExceptionLogger.cs</File>
-    <File>C:\Programming\EP_HSRlearnIT\BusinessLayer\UniversalTools\FileManager.cs</File>
-    <File>C:\Programming\EP_HSRlearnIT\BusinessLayer\UniversalTools\FrameworkElementExtension.cs</File>
-    <File>C:\Programming\EP_HSRlearnIT\BusinessLayer\UniversalTools\Progress.cs</File>
   </Files>
 </AnalysisInput>

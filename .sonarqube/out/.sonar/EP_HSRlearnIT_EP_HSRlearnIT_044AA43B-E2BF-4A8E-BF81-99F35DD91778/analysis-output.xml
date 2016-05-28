@@ -255,75 +255,7 @@
       <Issues />
     </File>
     <File>
-      <Path>C:\Programming\EP_HSRlearnIT\BusinessLayer\Properties\AssemblyInfo.cs</Path>
-      <Metrics>
-        <Lines>54</Lines>
-        <Classes>0</Classes>
-        <Accessors>0</Accessors>
-        <Statements>0</Statements>
-        <Functions>0</Functions>
-        <PublicApi>0</PublicApi>
-        <PublicUndocumentedApi>0</PublicUndocumentedApi>
-        <Complexity>0</Complexity>
-        <FileComplexityDistribution>0=1;5=0;10=0;20=0;30=0;60=0;90=0</FileComplexityDistribution>
-        <FunctionComplexityDistribution>1=0;2=0;4=0;6=0;8=0;10=0;12=0</FunctionComplexityDistribution>
-        <Comments>
-          <NoSonar />
-          <NonBlank>
-            <Line>5</Line>
-            <Line>6</Line>
-            <Line>7</Line>
-            <Line>17</Line>
-            <Line>18</Line>
-            <Line>19</Line>
-            <Line>22</Line>
-            <Line>23</Line>
-            <Line>24</Line>
-            <Line>25</Line>
-            <Line>26</Line>
-            <Line>27</Line>
-            <Line>29</Line>
-            <Line>33</Line>
-            <Line>34</Line>
-            <Line>35</Line>
-            <Line>36</Line>
-            <Line>37</Line>
-            <Line>38</Line>
-            <Line>42</Line>
-            <Line>44</Line>
-            <Line>45</Line>
-            <Line>46</Line>
-            <Line>47</Line>
-            <Line>49</Line>
-            <Line>50</Line>
-            <Line>51</Line>
-          </NonBlank>
-        </Comments>
-        <LinesOfCode>
-          <Line>1</Line>
-          <Line>2</Line>
-          <Line>3</Line>
-          <Line>8</Line>
-          <Line>9</Line>
-          <Line>10</Line>
-          <Line>11</Line>
-          <Line>12</Line>
-          <Line>13</Line>
-          <Line>14</Line>
-          <Line>15</Line>
-          <Line>20</Line>
-          <Line>32</Line>
-          <Line>33</Line>
-          <Line>36</Line>
-          <Line>39</Line>
-          <Line>52</Line>
-          <Line>53</Line>
-        </LinesOfCode>
-      </Metrics>
-      <Issues />
-    </File>
-    <File>
-      <Path>C:\Programming\EP_HSRlearnIT\BusinessLayer\UniversalTools\DependencyObjectExtension.cs</Path>
+      <Path>C:\Programming\EP_HSRlearnIT\BusinessLayer\Extensions\DependencyObjectExtension.cs</Path>
       <Metrics>
         <Lines>74</Lines>
         <Classes>1</Classes>
@@ -410,7 +342,53 @@
       <Issues />
     </File>
     <File>
-      <Path>C:\Programming\EP_HSRlearnIT\BusinessLayer\UniversalTools\ExceptionLogger.cs</Path>
+      <Path>C:\Programming\EP_HSRlearnIT\BusinessLayer\Extensions\FrameworkElementExtension.cs</Path>
+      <Metrics>
+        <Lines>26</Lines>
+        <Classes>1</Classes>
+        <Accessors>0</Accessors>
+        <Statements>3</Statements>
+        <Functions>1</Functions>
+        <PublicApi>2</PublicApi>
+        <PublicUndocumentedApi>0</PublicUndocumentedApi>
+        <Complexity>1</Complexity>
+        <FileComplexityDistribution>0=1;5=0;10=0;20=0;30=0;60=0;90=0</FileComplexityDistribution>
+        <FunctionComplexityDistribution>1=1;2=0;4=0;6=0;8=0;10=0;12=0</FunctionComplexityDistribution>
+        <Comments>
+          <NoSonar />
+          <NonBlank>
+            <Line>7</Line>
+            <Line>8</Line>
+            <Line>9</Line>
+            <Line>12</Line>
+            <Line>13</Line>
+            <Line>14</Line>
+            <Line>15</Line>
+            <Line>16</Line>
+          </NonBlank>
+        </Comments>
+        <LinesOfCode>
+          <Line>1</Line>
+          <Line>2</Line>
+          <Line>3</Line>
+          <Line>5</Line>
+          <Line>6</Line>
+          <Line>10</Line>
+          <Line>11</Line>
+          <Line>17</Line>
+          <Line>18</Line>
+          <Line>19</Line>
+          <Line>20</Line>
+          <Line>22</Line>
+          <Line>23</Line>
+          <Line>24</Line>
+          <Line>25</Line>
+        </LinesOfCode>
+      </Metrics>
+      <Issues />
+    </File>
+    <File>
+      <Path>C:\Programming\EP_HSRlearnIT\BusinessLayer\Persistence\ExceptionLogger.cs</Path>
       <Metrics>
         <Lines>40</Lines>
         <Classes>1</Classes>
@@ -462,15 +440,15 @@
       <Issues />
     </File>
     <File>
-      <Path>C:\Programming\EP_HSRlearnIT\BusinessLayer\UniversalTools\FileManager.cs</Path>
+      <Path>C:\Programming\EP_HSRlearnIT\BusinessLayer\Persistence\FileManager.cs</Path>
       <Metrics>
-        <Lines>152</Lines>
+        <Lines>153</Lines>
         <Classes>1</Classes>
         <Accessors>0</Accessors>
         <Statements>28</Statements>
         <Functions>13</Functions>
-        <PublicApi>11</PublicApi>
-        <PublicUndocumentedApi>3</PublicUndocumentedApi>
+        <PublicApi>10</PublicApi>
+        <PublicUndocumentedApi>2</PublicUndocumentedApi>
         <Complexity>17</Complexity>
         <FileComplexityDistribution>0=0;5=0;10=1;20=0;30=0;60=0;90=0</FileComplexityDistribution>
         <FunctionComplexityDistribution>1=9;2=4;4=0;6=0;8=0;10=0;12=0</FunctionComplexityDistribution>
@@ -505,17 +483,17 @@
             <Line>61</Line>
             <Line>62</Line>
             <Line>63</Line>
-            <Line>79</Line>
-            <Line>80</Line>
-            <Line>81</Line>
-            <Line>82</Line>
-            <Line>83</Line>
+            <Line>74</Line>
+            <Line>75</Line>
+            <Line>76</Line>
+            <Line>77</Line>
+            <Line>78</Line>
+            <Line>87</Line>
+            <Line>88</Line>
+            <Line>89</Line>
+            <Line>90</Line>
+            <Line>91</Line>
             <Line>92</Line>
-            <Line>93</Line>
-            <Line>94</Line>
-            <Line>95</Line>
-            <Line>96</Line>
-            <Line>97</Line>
           </NonBlank>
         </Comments>
         <LinesOfCode>
@@ -555,22 +533,23 @@
           <Line>70</Line>
           <Line>71</Line>
           <Line>72</Line>
-          <Line>74</Line>
-          <Line>75</Line>
-          <Line>76</Line>
-          <Line>77</Line>
+          <Line>79</Line>
+          <Line>80</Line>
+          <Line>81</Line>
+          <Line>82</Line>
+          <Line>83</Line>
           <Line>84</Line>
           <Line>85</Line>
-          <Line>86</Line>
-          <Line>87</Line>
-          <Line>88</Line>
-          <Line>89</Line>
-          <Line>90</Line>
-          <Line>98</Line>
+          <Line>93</Line>
+          <Line>94</Line>
+          <Line>95</Line>
+          <Line>96</Line>
+          <Line>97</Line>
           <Line>99</Line>
           <Line>100</Line>
           <Line>101</Line>
           <Line>102</Line>
+          <Line>103</Line>
           <Line>104</Line>
           <Line>105</Line>
           <Line>106</Line>
@@ -578,88 +557,41 @@
           <Line>108</Line>
           <Line>109</Line>
           <Line>110</Line>
-          <Line>111</Line>
-          <Line>112</Line>
-          <Line>113</Line>
-          <Line>114</Line>
-          <Line>115</Line>
-          <Line>121</Line>
+          <Line>117</Line>
+          <Line>118</Line>
+          <Line>119</Line>
+          <Line>120</Line>
           <Line>122</Line>
           <Line>123</Line>
           <Line>124</Line>
           <Line>125</Line>
           <Line>126</Line>
           <Line>127</Line>
-          <Line>129</Line>
+          <Line>128</Line>
           <Line>130</Line>
           <Line>131</Line>
-          <Line>133</Line>
+          <Line>132</Line>
           <Line>134</Line>
           <Line>135</Line>
           <Line>136</Line>
-          <Line>138</Line>
+          <Line>137</Line>
           <Line>139</Line>
-          <Line>141</Line>
+          <Line>140</Line>
           <Line>142</Line>
           <Line>143</Line>
           <Line>144</Line>
           <Line>145</Line>
           <Line>146</Line>
           <Line>147</Line>
-          <Line>150</Line>
+          <Line>148</Line>
           <Line>151</Line>
+          <Line>152</Line>
         </LinesOfCode>
       </Metrics>
       <Issues />
     </File>
     <File>
-      <Path>C:\Programming\EP_HSRlearnIT\BusinessLayer\UniversalTools\FrameworkElementExtension.cs</Path>
-      <Metrics>
-        <Lines>26</Lines>
-        <Classes>1</Classes>
-        <Accessors>0</Accessors>
-        <Statements>3</Statements>
-        <Functions>1</Functions>
-        <PublicApi>2</PublicApi>
-        <PublicUndocumentedApi>0</PublicUndocumentedApi>
-        <Complexity>1</Complexity>
-        <FileComplexityDistribution>0=1;5=0;10=0;20=0;30=0;60=0;90=0</FileComplexityDistribution>
-        <FunctionComplexityDistribution>1=1;2=0;4=0;6=0;8=0;10=0;12=0</FunctionComplexityDistribution>
-        <Comments>
-          <NoSonar />
-          <NonBlank>
-            <Line>7</Line>
-            <Line>8</Line>
-            <Line>9</Line>
-            <Line>12</Line>
-            <Line>13</Line>
-            <Line>14</Line>
-            <Line>15</Line>
-            <Line>16</Line>
-          </NonBlank>
-        </Comments>
-        <LinesOfCode>
-          <Line>1</Line>
-          <Line>2</Line>
-          <Line>3</Line>
-          <Line>5</Line>
-          <Line>6</Line>
-          <Line>10</Line>
-          <Line>11</Line>
-          <Line>17</Line>
-          <Line>18</Line>
-          <Line>19</Line>
-          <Line>20</Line>
-          <Line>22</Line>
-          <Line>23</Line>
-          <Line>24</Line>
-          <Line>25</Line>
-        </LinesOfCode>
-      </Metrics>
-      <Issues />
-    </File>
-    <File>
-      <Path>C:\Programming\EP_HSRlearnIT\BusinessLayer\UniversalTools\Progress.cs</Path>
+      <Path>C:\Programming\EP_HSRlearnIT\BusinessLayer\Persistence\Progress.cs</Path>
       <Metrics>
         <Lines>68</Lines>
         <Classes>1</Classes>
@@ -730,6 +662,74 @@
           <Line>62</Line>
           <Line>66</Line>
           <Line>67</Line>
+        </LinesOfCode>
+      </Metrics>
+      <Issues />
+    </File>
+    <File>
+      <Path>C:\Programming\EP_HSRlearnIT\BusinessLayer\Properties\AssemblyInfo.cs</Path>
+      <Metrics>
+        <Lines>54</Lines>
+        <Classes>0</Classes>
+        <Accessors>0</Accessors>
+        <Statements>0</Statements>
+        <Functions>0</Functions>
+        <PublicApi>0</PublicApi>
+        <PublicUndocumentedApi>0</PublicUndocumentedApi>
+        <Complexity>0</Complexity>
+        <FileComplexityDistribution>0=1;5=0;10=0;20=0;30=0;60=0;90=0</FileComplexityDistribution>
+        <FunctionComplexityDistribution>1=0;2=0;4=0;6=0;8=0;10=0;12=0</FunctionComplexityDistribution>
+        <Comments>
+          <NoSonar />
+          <NonBlank>
+            <Line>5</Line>
+            <Line>6</Line>
+            <Line>7</Line>
+            <Line>17</Line>
+            <Line>18</Line>
+            <Line>19</Line>
+            <Line>22</Line>
+            <Line>23</Line>
+            <Line>24</Line>
+            <Line>25</Line>
+            <Line>26</Line>
+            <Line>27</Line>
+            <Line>29</Line>
+            <Line>33</Line>
+            <Line>34</Line>
+            <Line>35</Line>
+            <Line>36</Line>
+            <Line>37</Line>
+            <Line>38</Line>
+            <Line>42</Line>
+            <Line>44</Line>
+            <Line>45</Line>
+            <Line>46</Line>
+            <Line>47</Line>
+            <Line>49</Line>
+            <Line>50</Line>
+            <Line>51</Line>
+          </NonBlank>
+        </Comments>
+        <LinesOfCode>
+          <Line>1</Line>
+          <Line>2</Line>
+          <Line>3</Line>
+          <Line>8</Line>
+          <Line>9</Line>
+          <Line>10</Line>
+          <Line>11</Line>
+          <Line>12</Line>
+          <Line>13</Line>
+          <Line>14</Line>
+          <Line>15</Line>
+          <Line>20</Line>
+          <Line>32</Line>
+          <Line>33</Line>
+          <Line>36</Line>
+          <Line>39</Line>
+          <Line>52</Line>
+          <Line>53</Line>
         </LinesOfCode>
       </Metrics>
       <Issues />

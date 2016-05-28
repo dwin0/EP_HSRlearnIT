@@ -1,5 +1,5 @@
 projectKey=EP_HSRlearnIT
 serverUrl=https://sonar.narcodex.ch
 dashboardUrl=https://sonar.narcodex.ch/dashboard/index/EP_HSRlearnIT
-ceTaskId=AVTuqh9_5SbbgqfkLijG
-ceTaskUrl=https://sonar.narcodex.ch/api/ce/task?id=AVTuqh9_5SbbgqfkLijG
+ceTaskId=AVT3McT55SbbgqfkLijY
+ceTaskUrl=https://sonar.narcodex.ch/api/ce/task?id=AVT3McT55SbbgqfkLijY
