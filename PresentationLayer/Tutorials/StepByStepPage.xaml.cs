@@ -79,7 +79,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
                 ActivateButtons();
             }
             SetFocus(_step);
-            LoadAreaPaths(StepByStepCanvas);
             LoadStepPaths(StepByStepCanvas);
         }
 

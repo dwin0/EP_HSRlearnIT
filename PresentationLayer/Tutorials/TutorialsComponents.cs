@@ -17,10 +17,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
     {
         #region Private Members
         private readonly Dictionary<string, Path> _highlightedPaths = new Dictionary<string, Path>();
-        private readonly Path[] _areaPaths = new Path[NumOfAreas];
-        protected const int NumOfAreas = 6;
         private Path _mouseDownPath;
-        private Path _mouseEnterPath;
         protected const int NumOfStepPaths = 24;
 
         #endregion
@@ -81,46 +78,9 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             }
         }
 
-        protected void LoadAreaPaths(Canvas canvas)
+        protected virtual void ShowExplanation(Path stepPath, MouseEventArgs e)
         {
-            for (int i = 1; i <= NumOfAreas; i++)
-            {
-                Path ressourcePath = Application.Current.FindResource("AreaPath" + i) as Path;
-                if (ressourcePath == null)
-                {
-                    ExceptionLogger.WriteToLogfile("LoadAreaPahts", "ressourcePath was null", "");
-                    continue;
-                }
-
-                //Create a copy of the Ressource AreaPath to prevent multiple Event Listener on MouseEnter
-                Path areaPath = ressourcePath.Clone() as Path;
-                if (areaPath == null)
-                {
-                    ExceptionLogger.WriteToLogfile("LoadAreaPaths", "areaPath - Clone was null", "");
-                    return;
-                }
-
-                areaPath.SetValue(Panel.ZIndexProperty, 2);
-                if (canvas.FindName("Overview") != null)
-                {
-                    try
-                    {
-                        areaPath.MouseEnter += AreaPath_OnMouseEnter;
-                    }
-                    catch (Exception ex)
-                    {
-                        ExceptionLogger.WriteToLogfile("AreaPath_OnMouseEnter", ex.Message, ex.StackTrace);
-                    }
-                }
-
-                canvas.Children.Add(areaPath);
-                _areaPaths[i - 1] = areaPath;
-            }
-        }
-
-        protected virtual void AreaPath_OnMouseEnter(object sender, MouseEventArgs e)
-        {
-            _mouseEnterPath = sender as Path;
+            throw new NotImplementedException();
         }
 
         #endregion
@@ -153,19 +113,9 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
 
             highlightedPath.Fill = Application.Current.FindResource("BackAreaBrush") as SolidColorBrush;
 
-            //Find Area Path to show the explanation
-            Path areaPath = FindAreaPath(stepPath);
-            if (areaPath != null)
-            {
-                try
-                {
-                    AreaPath_OnMouseEnter(areaPath, e);
-                }
-                catch (Exception ex)
-                {
-                    ExceptionLogger.WriteToLogfile("AreaPath_OnMouseEnter", ex.Message, ex.StackTrace);
-                }
-            }
+            var parentPage = DependencyObjectExtension.GetParentPage(stepPath) as Page;
+            if (parentPage == null || parentPage.Title != "AesGcmOverviewPage") return;
+            ShowExplanation(stepPath, e);
         }
 
         private void StepPath_OnMouseLeave(object sender, MouseEventArgs e)
@@ -238,24 +188,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             (stepPath.Parent as Canvas)?.Children.Add(highlightedPath);
 
             return highlightedPath;
-        }
-
-        private Path FindAreaPath(Path stePath)
-        {
-            Geometry stepSurface = stePath.Data;
-            foreach (Path area in _areaPaths)
-            {
-                Geometry areaSurface = area.Data;
-                IntersectionDetail detail = stepSurface.FillContainsWithDetail(areaSurface);
-
-                if (detail == IntersectionDetail.FullyContains
-                    || detail == IntersectionDetail.FullyInside
-                    || detail == IntersectionDetail.Intersects)
-                {
-                    return area;
-                }
-            }
-            return null;
         }
 
         #endregion Private Methods
