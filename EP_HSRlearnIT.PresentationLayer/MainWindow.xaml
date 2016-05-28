@@ -28,9 +28,7 @@
                 Panel.ZIndex="2" Margin="-60, 0, 0, 0" Width="50" Background="Transparent" BorderBrush="Transparent" Focusable="False" Click="MenuButton_OnClick">
             <Image Source="Images/hamburgerButtonIcon.png"/>
         </Button>
-        <Button Name="Save" Grid.Column="1" Content="Speichern" VerticalAlignment="Top" HorizontalAlignment="Right"
-                 Panel.ZIndex="10" Style="{StaticResource ResourceKey=ProgramButtonStyle}" Visibility="Hidden"
-                MouseRightButtonDown="Save_OnMouseRightButtonDown"/>
+        
         <Frame Name="MainFrame" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                Panel.ZIndex="1" NavigationUIVisibility="Hidden" Focusable="False"/>
     </Grid>

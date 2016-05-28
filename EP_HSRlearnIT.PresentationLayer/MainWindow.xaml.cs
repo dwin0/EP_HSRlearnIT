@@ -93,13 +93,6 @@ namespace EP_HSRlearnIT.PresentationLayer
             sb?.Begin(MenuStackPanel);
         }
 
-        //This method is used only for a system test in order to control the correctness
-        //of the Global Exception Handler and will be deleted for the production code
-        private void Save_OnMouseRightButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            throw new Exception("Exception in Logfile vorhanden?");
-        }
-
         private void CollapseMenu_OnPreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             var point = Mouse.GetPosition(MainGrid);
