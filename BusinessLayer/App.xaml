@@ -1,9 +1,0 @@
-﻿<Application x:Class="EP_HSRlearnIT.BusinessLayer.Persistence.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:EP_HSRlearnIT.BusinessLayer.Persistence"
-             StartupUri="MainWindow.xaml">
-    <Application.Resources>
-         
-    </Application.Resources>
-</Application>

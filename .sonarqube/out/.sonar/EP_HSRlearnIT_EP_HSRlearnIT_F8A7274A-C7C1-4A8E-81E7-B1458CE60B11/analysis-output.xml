@@ -137,7 +137,7 @@
     <File>
       <Path>C:\Programming\EP_HSRlearnIT\PresentationLayer\Exercises\EncryptionDecryptionComponents.cs</Path>
       <Metrics>
-        <Lines>511</Lines>
+        <Lines>512</Lines>
         <Classes>1</Classes>
         <Accessors>0</Accessors>
         <Statements>156</Statements>
@@ -150,29 +150,28 @@
         <Comments>
           <NoSonar />
           <NonBlank>
-            <Line>18</Line>
             <Line>19</Line>
             <Line>20</Line>
-            <Line>30</Line>
+            <Line>21</Line>
             <Line>31</Line>
             <Line>32</Line>
-            <Line>41</Line>
+            <Line>33</Line>
             <Line>42</Line>
             <Line>43</Line>
             <Line>44</Line>
             <Line>45</Line>
             <Line>46</Line>
             <Line>47</Line>
-            <Line>50</Line>
-            <Line>53</Line>
-            <Line>63</Line>
+            <Line>48</Line>
+            <Line>51</Line>
+            <Line>54</Line>
             <Line>64</Line>
             <Line>65</Line>
             <Line>66</Line>
             <Line>67</Line>
             <Line>68</Line>
-            <Line>73</Line>
-            <Line>79</Line>
+            <Line>69</Line>
+            <Line>74</Line>
             <Line>80</Line>
             <Line>81</Line>
             <Line>82</Line>
@@ -180,72 +179,73 @@
             <Line>84</Line>
             <Line>85</Line>
             <Line>86</Line>
-            <Line>94</Line>
+            <Line>87</Line>
             <Line>95</Line>
-            <Line>100</Line>
-            <Line>108</Line>
-            <Line>127</Line>
+            <Line>96</Line>
+            <Line>101</Line>
+            <Line>109</Line>
             <Line>128</Line>
             <Line>129</Line>
             <Line>130</Line>
             <Line>131</Line>
-            <Line>141</Line>
+            <Line>132</Line>
             <Line>142</Line>
             <Line>143</Line>
             <Line>144</Line>
             <Line>145</Line>
-            <Line>151</Line>
-            <Line>157</Line>
+            <Line>146</Line>
+            <Line>152</Line>
             <Line>158</Line>
             <Line>159</Line>
             <Line>160</Line>
-            <Line>173</Line>
+            <Line>161</Line>
             <Line>174</Line>
             <Line>175</Line>
             <Line>176</Line>
             <Line>177</Line>
-            <Line>190</Line>
+            <Line>178</Line>
             <Line>191</Line>
             <Line>192</Line>
             <Line>193</Line>
             <Line>194</Line>
-            <Line>230</Line>
+            <Line>195</Line>
             <Line>231</Line>
             <Line>232</Line>
             <Line>233</Line>
             <Line>234</Line>
-            <Line>255</Line>
-            <Line>288</Line>
+            <Line>235</Line>
+            <Line>256</Line>
             <Line>289</Line>
             <Line>290</Line>
-            <Line>299</Line>
+            <Line>291</Line>
             <Line>300</Line>
             <Line>301</Line>
-            <Line>323</Line>
-            <Line>327</Line>
-            <Line>422</Line>
+            <Line>302</Line>
+            <Line>324</Line>
+            <Line>328</Line>
             <Line>423</Line>
             <Line>424</Line>
             <Line>425</Line>
-            <Line>433</Line>
-            <Line>436</Line>
-            <Line>440</Line>
-            <Line>449</Line>
+            <Line>426</Line>
+            <Line>434</Line>
+            <Line>437</Line>
+            <Line>441</Line>
             <Line>450</Line>
             <Line>451</Line>
             <Line>452</Line>
             <Line>453</Line>
-            <Line>462</Line>
-            <Line>469</Line>
-            <Line>479</Line>
+            <Line>454</Line>
+            <Line>463</Line>
+            <Line>470</Line>
             <Line>480</Line>
             <Line>481</Line>
             <Line>482</Line>
-            <Line>495</Line>
+            <Line>483</Line>
             <Line>496</Line>
             <Line>497</Line>
             <Line>498</Line>
             <Line>499</Line>
+            <Line>500</Line>
           </NonBlank>
         </Comments>
         <LinesOfCode>
@@ -262,19 +262,19 @@
           <Line>11</Line>
           <Line>12</Line>
           <Line>13</Line>
-          <Line>15</Line>
-          <Line>17</Line>
-          <Line>21</Line>
+          <Line>14</Line>
+          <Line>16</Line>
+          <Line>18</Line>
           <Line>22</Line>
-          <Line>25</Line>
-          <Line>33</Line>
+          <Line>23</Line>
+          <Line>26</Line>
           <Line>34</Line>
           <Line>35</Line>
           <Line>36</Line>
-          <Line>48</Line>
+          <Line>37</Line>
           <Line>49</Line>
-          <Line>51</Line>
-          <Line>54</Line>
+          <Line>50</Line>
+          <Line>52</Line>
           <Line>55</Line>
           <Line>56</Line>
           <Line>57</Line>
@@ -282,41 +282,41 @@
           <Line>59</Line>
           <Line>60</Line>
           <Line>61</Line>
-          <Line>69</Line>
+          <Line>62</Line>
           <Line>70</Line>
           <Line>71</Line>
-          <Line>74</Line>
+          <Line>72</Line>
           <Line>75</Line>
           <Line>76</Line>
           <Line>77</Line>
-          <Line>87</Line>
+          <Line>78</Line>
           <Line>88</Line>
           <Line>89</Line>
           <Line>90</Line>
           <Line>91</Line>
           <Line>92</Line>
-          <Line>96</Line>
+          <Line>93</Line>
           <Line>97</Line>
           <Line>98</Line>
-          <Line>101</Line>
+          <Line>99</Line>
           <Line>102</Line>
-          <Line>104</Line>
-          <Line>106</Line>
-          <Line>109</Line>
-          <Line>111</Line>
-          <Line>113</Line>
+          <Line>103</Line>
+          <Line>105</Line>
+          <Line>107</Line>
+          <Line>110</Line>
+          <Line>112</Line>
           <Line>114</Line>
           <Line>115</Line>
           <Line>116</Line>
           <Line>117</Line>
-          <Line>119</Line>
+          <Line>118</Line>
           <Line>120</Line>
           <Line>121</Line>
           <Line>122</Line>
           <Line>123</Line>
           <Line>124</Line>
           <Line>125</Line>
-          <Line>132</Line>
+          <Line>126</Line>
           <Line>133</Line>
           <Line>134</Line>
           <Line>135</Line>
@@ -324,16 +324,16 @@
           <Line>137</Line>
           <Line>138</Line>
           <Line>139</Line>
-          <Line>146</Line>
+          <Line>140</Line>
           <Line>147</Line>
           <Line>148</Line>
           <Line>149</Line>
           <Line>150</Line>
-          <Line>152</Line>
+          <Line>151</Line>
           <Line>153</Line>
           <Line>154</Line>
           <Line>155</Line>
-          <Line>161</Line>
+          <Line>156</Line>
           <Line>162</Line>
           <Line>163</Line>
           <Line>164</Line>
@@ -344,7 +344,7 @@
           <Line>169</Line>
           <Line>170</Line>
           <Line>171</Line>
-          <Line>178</Line>
+          <Line>172</Line>
           <Line>179</Line>
           <Line>180</Line>
           <Line>181</Line>
@@ -355,7 +355,7 @@
           <Line>186</Line>
           <Line>187</Line>
           <Line>188</Line>
-          <Line>195</Line>
+          <Line>189</Line>
           <Line>196</Line>
           <Line>197</Line>
           <Line>198</Line>
@@ -367,7 +367,7 @@
           <Line>204</Line>
           <Line>205</Line>
           <Line>206</Line>
-          <Line>208</Line>
+          <Line>207</Line>
           <Line>209</Line>
           <Line>210</Line>
           <Line>211</Line>
@@ -375,18 +375,18 @@
           <Line>213</Line>
           <Line>214</Line>
           <Line>215</Line>
-          <Line>217</Line>
+          <Line>216</Line>
           <Line>218</Line>
           <Line>219</Line>
           <Line>220</Line>
           <Line>221</Line>
-          <Line>223</Line>
+          <Line>222</Line>
           <Line>224</Line>
           <Line>225</Line>
           <Line>226</Line>
           <Line>227</Line>
           <Line>228</Line>
-          <Line>235</Line>
+          <Line>229</Line>
           <Line>236</Line>
           <Line>237</Line>
           <Line>238</Line>
@@ -396,15 +396,15 @@
           <Line>242</Line>
           <Line>243</Line>
           <Line>244</Line>
-          <Line>246</Line>
+          <Line>245</Line>
           <Line>247</Line>
           <Line>248</Line>
           <Line>249</Line>
           <Line>250</Line>
-          <Line>252</Line>
+          <Line>251</Line>
           <Line>253</Line>
           <Line>254</Line>
-          <Line>256</Line>
+          <Line>255</Line>
           <Line>257</Line>
           <Line>258</Line>
           <Line>259</Line>
@@ -435,14 +435,14 @@
           <Line>284</Line>
           <Line>285</Line>
           <Line>286</Line>
-          <Line>291</Line>
+          <Line>287</Line>
           <Line>292</Line>
           <Line>293</Line>
           <Line>294</Line>
           <Line>295</Line>
           <Line>296</Line>
           <Line>297</Line>
-          <Line>302</Line>
+          <Line>298</Line>
           <Line>303</Line>
           <Line>304</Line>
           <Line>305</Line>
@@ -452,22 +452,22 @@
           <Line>309</Line>
           <Line>310</Line>
           <Line>311</Line>
-          <Line>313</Line>
+          <Line>312</Line>
           <Line>314</Line>
           <Line>315</Line>
           <Line>316</Line>
           <Line>317</Line>
-          <Line>321</Line>
+          <Line>318</Line>
           <Line>322</Line>
-          <Line>324</Line>
+          <Line>323</Line>
           <Line>325</Line>
           <Line>326</Line>
-          <Line>328</Line>
+          <Line>327</Line>
           <Line>329</Line>
           <Line>330</Line>
           <Line>331</Line>
           <Line>332</Line>
-          <Line>334</Line>
+          <Line>333</Line>
           <Line>335</Line>
           <Line>336</Line>
           <Line>337</Line>
@@ -506,7 +506,7 @@
           <Line>370</Line>
           <Line>371</Line>
           <Line>372</Line>
-          <Line>374</Line>
+          <Line>373</Line>
           <Line>375</Line>
           <Line>376</Line>
           <Line>377</Line>
@@ -528,18 +528,18 @@
           <Line>393</Line>
           <Line>394</Line>
           <Line>395</Line>
-          <Line>397</Line>
+          <Line>396</Line>
           <Line>398</Line>
           <Line>399</Line>
-          <Line>401</Line>
+          <Line>400</Line>
           <Line>402</Line>
           <Line>403</Line>
           <Line>404</Line>
-          <Line>406</Line>
+          <Line>405</Line>
           <Line>407</Line>
           <Line>408</Line>
           <Line>409</Line>
-          <Line>411</Line>
+          <Line>410</Line>
           <Line>412</Line>
           <Line>413</Line>
           <Line>414</Line>
@@ -549,26 +549,26 @@
           <Line>418</Line>
           <Line>419</Line>
           <Line>420</Line>
-          <Line>426</Line>
+          <Line>421</Line>
           <Line>427</Line>
           <Line>428</Line>
           <Line>429</Line>
           <Line>430</Line>
           <Line>431</Line>
           <Line>432</Line>
-          <Line>434</Line>
+          <Line>433</Line>
           <Line>435</Line>
-          <Line>437</Line>
+          <Line>436</Line>
           <Line>438</Line>
           <Line>439</Line>
-          <Line>441</Line>
+          <Line>440</Line>
           <Line>442</Line>
           <Line>443</Line>
           <Line>444</Line>
           <Line>445</Line>
           <Line>446</Line>
           <Line>447</Line>
-          <Line>454</Line>
+          <Line>448</Line>
           <Line>455</Line>
           <Line>456</Line>
           <Line>457</Line>
@@ -576,13 +576,13 @@
           <Line>459</Line>
           <Line>460</Line>
           <Line>461</Line>
-          <Line>463</Line>
+          <Line>462</Line>
           <Line>464</Line>
           <Line>465</Line>
           <Line>466</Line>
           <Line>467</Line>
           <Line>468</Line>
-          <Line>470</Line>
+          <Line>469</Line>
           <Line>471</Line>
           <Line>472</Line>
           <Line>473</Line>
@@ -590,7 +590,7 @@
           <Line>475</Line>
           <Line>476</Line>
           <Line>477</Line>
-          <Line>483</Line>
+          <Line>478</Line>
           <Line>484</Line>
           <Line>485</Line>
           <Line>486</Line>
@@ -601,7 +601,7 @@
           <Line>491</Line>
           <Line>492</Line>
           <Line>493</Line>
-          <Line>500</Line>
+          <Line>494</Line>
           <Line>501</Line>
           <Line>502</Line>
           <Line>503</Line>
@@ -609,8 +609,9 @@
           <Line>505</Line>
           <Line>506</Line>
           <Line>507</Line>
-          <Line>510</Line>
+          <Line>508</Line>
           <Line>511</Line>
+          <Line>512</Line>
         </LinesOfCode>
       </Metrics>
       <Issues />
@@ -1566,10 +1567,10 @@
     <File>
       <Path>C:\Programming\EP_HSRlearnIT\PresentationLayer\MainPage.xaml.cs</Path>
       <Metrics>
-        <Lines>170</Lines>
+        <Lines>172</Lines>
         <Classes>2</Classes>
         <Accessors>0</Accessors>
-        <Statements>38</Statements>
+        <Statements>37</Statements>
         <Functions>8</Functions>
         <PublicApi>4</PublicApi>
         <PublicUndocumentedApi>0</PublicUndocumentedApi>
@@ -1587,17 +1588,17 @@
             <Line>42</Line>
             <Line>54</Line>
             <Line>55</Line>
-            <Line>69</Line>
-            <Line>146</Line>
-            <Line>147</Line>
+            <Line>71</Line>
             <Line>148</Line>
-            <Line>151</Line>
-            <Line>152</Line>
+            <Line>149</Line>
+            <Line>150</Line>
             <Line>153</Line>
             <Line>154</Line>
             <Line>155</Line>
             <Line>156</Line>
             <Line>157</Line>
+            <Line>158</Line>
+            <Line>159</Line>
           </NonBlank>
         </Comments>
         <LinesOfCode>
@@ -1647,19 +1648,19 @@
           <Line>66</Line>
           <Line>67</Line>
           <Line>68</Line>
+          <Line>69</Line>
           <Line>70</Line>
-          <Line>71</Line>
           <Line>72</Line>
           <Line>73</Line>
           <Line>74</Line>
           <Line>75</Line>
           <Line>76</Line>
+          <Line>77</Line>
           <Line>78</Line>
-          <Line>79</Line>
           <Line>80</Line>
           <Line>81</Line>
+          <Line>82</Line>
           <Line>83</Line>
-          <Line>84</Line>
           <Line>85</Line>
           <Line>86</Line>
           <Line>87</Line>
@@ -1667,8 +1668,8 @@
           <Line>89</Line>
           <Line>90</Line>
           <Line>91</Line>
+          <Line>92</Line>
           <Line>93</Line>
-          <Line>94</Line>
           <Line>95</Line>
           <Line>96</Line>
           <Line>97</Line>
@@ -1682,8 +1683,8 @@
           <Line>105</Line>
           <Line>106</Line>
           <Line>107</Line>
+          <Line>108</Line>
           <Line>109</Line>
-          <Line>110</Line>
           <Line>111</Line>
           <Line>112</Line>
           <Line>113</Line>
@@ -1692,27 +1693,27 @@
           <Line>116</Line>
           <Line>117</Line>
           <Line>118</Line>
+          <Line>119</Line>
           <Line>120</Line>
-          <Line>121</Line>
           <Line>122</Line>
           <Line>123</Line>
+          <Line>124</Line>
           <Line>125</Line>
-          <Line>126</Line>
           <Line>127</Line>
           <Line>128</Line>
+          <Line>129</Line>
           <Line>130</Line>
-          <Line>131</Line>
           <Line>132</Line>
+          <Line>133</Line>
           <Line>134</Line>
-          <Line>135</Line>
           <Line>136</Line>
           <Line>137</Line>
           <Line>138</Line>
-          <Line>141</Line>
-          <Line>149</Line>
-          <Line>150</Line>
-          <Line>158</Line>
-          <Line>159</Line>
+          <Line>139</Line>
+          <Line>140</Line>
+          <Line>143</Line>
+          <Line>151</Line>
+          <Line>152</Line>
           <Line>160</Line>
           <Line>161</Line>
           <Line>162</Line>
@@ -1721,7 +1722,9 @@
           <Line>165</Line>
           <Line>166</Line>
           <Line>167</Line>
+          <Line>168</Line>
           <Line>169</Line>
+          <Line>171</Line>
         </LinesOfCode>
       </Metrics>
       <Issues />
@@ -2002,25 +2005,27 @@
     <File>
       <Path>C:\Programming\EP_HSRlearnIT\PresentationLayer\Tutorials\AesGcmOverviewPage.xaml.cs</Path>
       <Metrics>
-        <Lines>67</Lines>
+        <Lines>140</Lines>
         <Classes>1</Classes>
         <Accessors>0</Accessors>
-        <Statements>13</Statements>
-        <Functions>4</Functions>
+        <Statements>39</Statements>
+        <Functions>7</Functions>
         <PublicApi>2</PublicApi>
         <PublicUndocumentedApi>0</PublicUndocumentedApi>
-        <Complexity>6</Complexity>
-        <FileComplexityDistribution>0=0;5=1;10=0;20=0;30=0;60=0;90=0</FileComplexityDistribution>
-        <FunctionComplexityDistribution>1=2;2=2;4=0;6=0;8=0;10=0;12=0</FunctionComplexityDistribution>
+        <Complexity>20</Complexity>
+        <FileComplexityDistribution>0=0;5=0;10=0;20=1;30=0;60=0;90=0</FileComplexityDistribution>
+        <FunctionComplexityDistribution>1=2;2=3;4=0;6=2;8=0;10=0;12=0</FunctionComplexityDistribution>
         <Comments>
           <NoSonar />
           <NonBlank>
-            <Line>10</Line>
-            <Line>11</Line>
             <Line>12</Line>
-            <Line>16</Line>
-            <Line>17</Line>
-            <Line>18</Line>
+            <Line>13</Line>
+            <Line>14</Line>
+            <Line>24</Line>
+            <Line>25</Line>
+            <Line>26</Line>
+            <Line>73</Line>
+            <Line>97</Line>
           </NonBlank>
         </Comments>
         <LinesOfCode>
@@ -2030,32 +2035,33 @@
           <Line>4</Line>
           <Line>5</Line>
           <Line>6</Line>
+          <Line>7</Line>
           <Line>8</Line>
-          <Line>9</Line>
-          <Line>13</Line>
-          <Line>14</Line>
+          <Line>10</Line>
+          <Line>11</Line>
+          <Line>15</Line>
+          <Line>16</Line>
+          <Line>18</Line>
           <Line>19</Line>
-          <Line>20</Line>
-          <Line>21</Line>
-          <Line>22</Line>
-          <Line>23</Line>
+          <Line>27</Line>
+          <Line>28</Line>
           <Line>29</Line>
           <Line>30</Line>
           <Line>31</Line>
-          <Line>32</Line>
-          <Line>33</Line>
-          <Line>34</Line>
-          <Line>36</Line>
           <Line>37</Line>
           <Line>38</Line>
           <Line>39</Line>
           <Line>40</Line>
           <Line>41</Line>
           <Line>42</Line>
-          <Line>43</Line>
+          <Line>44</Line>
+          <Line>45</Line>
+          <Line>46</Line>
+          <Line>47</Line>
+          <Line>48</Line>
+          <Line>49</Line>
           <Line>50</Line>
           <Line>51</Line>
-          <Line>52</Line>
           <Line>53</Line>
           <Line>54</Line>
           <Line>55</Line>
@@ -2063,11 +2069,70 @@
           <Line>57</Line>
           <Line>58</Line>
           <Line>59</Line>
-          <Line>60</Line>
           <Line>61</Line>
           <Line>62</Line>
+          <Line>63</Line>
+          <Line>64</Line>
           <Line>65</Line>
           <Line>66</Line>
+          <Line>67</Line>
+          <Line>68</Line>
+          <Line>69</Line>
+          <Line>71</Line>
+          <Line>72</Line>
+          <Line>74</Line>
+          <Line>75</Line>
+          <Line>76</Line>
+          <Line>77</Line>
+          <Line>78</Line>
+          <Line>79</Line>
+          <Line>86</Line>
+          <Line>87</Line>
+          <Line>88</Line>
+          <Line>89</Line>
+          <Line>90</Line>
+          <Line>91</Line>
+          <Line>92</Line>
+          <Line>93</Line>
+          <Line>94</Line>
+          <Line>95</Line>
+          <Line>98</Line>
+          <Line>99</Line>
+          <Line>100</Line>
+          <Line>101</Line>
+          <Line>102</Line>
+          <Line>103</Line>
+          <Line>105</Line>
+          <Line>106</Line>
+          <Line>107</Line>
+          <Line>108</Line>
+          <Line>109</Line>
+          <Line>110</Line>
+          <Line>111</Line>
+          <Line>112</Line>
+          <Line>113</Line>
+          <Line>114</Line>
+          <Line>115</Line>
+          <Line>116</Line>
+          <Line>118</Line>
+          <Line>119</Line>
+          <Line>120</Line>
+          <Line>121</Line>
+          <Line>123</Line>
+          <Line>124</Line>
+          <Line>125</Line>
+          <Line>126</Line>
+          <Line>127</Line>
+          <Line>128</Line>
+          <Line>129</Line>
+          <Line>130</Line>
+          <Line>131</Line>
+          <Line>132</Line>
+          <Line>133</Line>
+          <Line>134</Line>
+          <Line>135</Line>
+          <Line>138</Line>
+          <Line>139</Line>
         </LinesOfCode>
       </Metrics>
       <Issues />
@@ -2075,10 +2140,10 @@
     <File>
       <Path>C:\Programming\EP_HSRlearnIT\PresentationLayer\Tutorials\StepByStepPage.xaml.cs</Path>
       <Metrics>
-        <Lines>370</Lines>
+        <Lines>369</Lines>
         <Classes>1</Classes>
         <Accessors>0</Accessors>
-        <Statements>145</Statements>
+        <Statements>144</Statements>
         <Functions>23</Functions>
         <PublicApi>3</PublicApi>
         <PublicUndocumentedApi>0</PublicUndocumentedApi>
@@ -2098,7 +2163,7 @@
             <Line>50</Line>
             <Line>51</Line>
             <Line>52</Line>
-            <Line>273</Line>
+            <Line>272</Line>
           </NonBlank>
         </Comments>
         <LinesOfCode>
@@ -2163,7 +2228,7 @@
           <Line>81</Line>
           <Line>82</Line>
           <Line>83</Line>
-          <Line>84</Line>
+          <Line>89</Line>
           <Line>90</Line>
           <Line>91</Line>
           <Line>92</Line>
@@ -2174,7 +2239,7 @@
           <Line>97</Line>
           <Line>98</Line>
           <Line>99</Line>
-          <Line>100</Line>
+          <Line>101</Line>
           <Line>102</Line>
           <Line>103</Line>
           <Line>104</Line>
@@ -2188,7 +2253,7 @@
           <Line>112</Line>
           <Line>113</Line>
           <Line>114</Line>
-          <Line>115</Line>
+          <Line>116</Line>
           <Line>117</Line>
           <Line>118</Line>
           <Line>119</Line>
@@ -2198,35 +2263,35 @@
           <Line>123</Line>
           <Line>124</Line>
           <Line>125</Line>
-          <Line>126</Line>
+          <Line>127</Line>
           <Line>128</Line>
           <Line>129</Line>
           <Line>130</Line>
           <Line>131</Line>
-          <Line>132</Line>
+          <Line>133</Line>
           <Line>134</Line>
           <Line>135</Line>
           <Line>136</Line>
           <Line>137</Line>
-          <Line>138</Line>
+          <Line>139</Line>
           <Line>140</Line>
           <Line>141</Line>
           <Line>142</Line>
-          <Line>143</Line>
+          <Line>144</Line>
           <Line>145</Line>
           <Line>146</Line>
           <Line>147</Line>
-          <Line>148</Line>
+          <Line>149</Line>
           <Line>150</Line>
           <Line>151</Line>
           <Line>152</Line>
           <Line>153</Line>
           <Line>154</Line>
-          <Line>155</Line>
+          <Line>156</Line>
           <Line>157</Line>
           <Line>158</Line>
           <Line>159</Line>
-          <Line>160</Line>
+          <Line>161</Line>
           <Line>162</Line>
           <Line>163</Line>
           <Line>164</Line>
@@ -2242,7 +2307,7 @@
           <Line>174</Line>
           <Line>175</Line>
           <Line>176</Line>
-          <Line>177</Line>
+          <Line>178</Line>
           <Line>179</Line>
           <Line>180</Line>
           <Line>181</Line>
@@ -2251,7 +2316,7 @@
           <Line>184</Line>
           <Line>185</Line>
           <Line>186</Line>
-          <Line>187</Line>
+          <Line>188</Line>
           <Line>189</Line>
           <Line>190</Line>
           <Line>191</Line>
@@ -2263,25 +2328,25 @@
           <Line>197</Line>
           <Line>198</Line>
           <Line>199</Line>
-          <Line>200</Line>
+          <Line>201</Line>
           <Line>202</Line>
           <Line>203</Line>
           <Line>204</Line>
           <Line>205</Line>
           <Line>206</Line>
-          <Line>207</Line>
+          <Line>208</Line>
           <Line>209</Line>
           <Line>210</Line>
           <Line>211</Line>
           <Line>212</Line>
           <Line>213</Line>
           <Line>214</Line>
-          <Line>215</Line>
+          <Line>216</Line>
           <Line>217</Line>
           <Line>218</Line>
           <Line>219</Line>
           <Line>220</Line>
-          <Line>221</Line>
+          <Line>222</Line>
           <Line>223</Line>
           <Line>224</Line>
           <Line>225</Line>
@@ -2292,7 +2357,7 @@
           <Line>230</Line>
           <Line>231</Line>
           <Line>232</Line>
-          <Line>233</Line>
+          <Line>234</Line>
           <Line>235</Line>
           <Line>236</Line>
           <Line>237</Line>
@@ -2301,8 +2366,8 @@
           <Line>240</Line>
           <Line>241</Line>
           <Line>242</Line>
-          <Line>243</Line>
-          <Line>245</Line>
+          <Line>244</Line>
+          <Line>246</Line>
           <Line>247</Line>
           <Line>248</Line>
           <Line>249</Line>
@@ -2320,15 +2385,15 @@
           <Line>261</Line>
           <Line>262</Line>
           <Line>263</Line>
-          <Line>264</Line>
+          <Line>265</Line>
           <Line>266</Line>
           <Line>267</Line>
           <Line>268</Line>
           <Line>269</Line>
           <Line>270</Line>
-          <Line>271</Line>
+          <Line>273</Line>
           <Line>274</Line>
-          <Line>275</Line>
+          <Line>276</Line>
           <Line>277</Line>
           <Line>278</Line>
           <Line>279</Line>
@@ -2336,20 +2401,20 @@
           <Line>281</Line>
           <Line>282</Line>
           <Line>283</Line>
-          <Line>284</Line>
+          <Line>285</Line>
           <Line>286</Line>
           <Line>287</Line>
           <Line>288</Line>
           <Line>289</Line>
           <Line>290</Line>
           <Line>291</Line>
-          <Line>292</Line>
+          <Line>293</Line>
           <Line>294</Line>
           <Line>295</Line>
           <Line>296</Line>
           <Line>297</Line>
           <Line>298</Line>
-          <Line>299</Line>
+          <Line>300</Line>
           <Line>301</Line>
           <Line>302</Line>
           <Line>303</Line>
@@ -2371,7 +2436,7 @@
           <Line>319</Line>
           <Line>320</Line>
           <Line>321</Line>
-          <Line>322</Line>
+          <Line>323</Line>
           <Line>324</Line>
           <Line>325</Line>
           <Line>326</Line>
@@ -2380,7 +2445,7 @@
           <Line>329</Line>
           <Line>330</Line>
           <Line>331</Line>
-          <Line>332</Line>
+          <Line>333</Line>
           <Line>334</Line>
           <Line>335</Line>
           <Line>336</Line>
@@ -2397,7 +2462,7 @@
           <Line>347</Line>
           <Line>348</Line>
           <Line>349</Line>
-          <Line>350</Line>
+          <Line>351</Line>
           <Line>352</Line>
           <Line>353</Line>
           <Line>354</Line>
@@ -2407,13 +2472,12 @@
           <Line>358</Line>
           <Line>359</Line>
           <Line>360</Line>
-          <Line>361</Line>
+          <Line>362</Line>
           <Line>363</Line>
           <Line>364</Line>
           <Line>365</Line>
-          <Line>366</Line>
+          <Line>368</Line>
           <Line>369</Line>
-          <Line>370</Line>
         </LinesOfCode>
       </Metrics>
       <Issues />
@@ -2421,35 +2485,33 @@
     <File>
       <Path>C:\Programming\EP_HSRlearnIT\PresentationLayer\Tutorials\TutorialsComponents.cs</Path>
       <Metrics>
-        <Lines>264</Lines>
+        <Lines>196</Lines>
         <Classes>1</Classes>
         <Accessors>0</Accessors>
-        <Statements>96</Statements>
-        <Functions>10</Functions>
+        <Statements>72</Statements>
+        <Functions>8</Functions>
         <PublicApi>1</PublicApi>
         <PublicUndocumentedApi>0</PublicUndocumentedApi>
-        <Complexity>41</Complexity>
+        <Complexity>31</Complexity>
         <FileComplexityDistribution>0=0;5=0;10=0;20=0;30=1;60=0;90=0</FileComplexityDistribution>
-        <FunctionComplexityDistribution>1=2;2=1;4=4;6=3;8=0;10=0;12=0</FunctionComplexityDistribution>
+        <FunctionComplexityDistribution>1=2;2=1;4=4;6=0;8=1;10=0;12=0</FunctionComplexityDistribution>
         <Comments>
           <NoSonar />
           <NonBlank>
             <Line>13</Line>
             <Line>14</Line>
             <Line>15</Line>
-            <Line>39</Line>
-            <Line>65</Line>
-            <Line>76</Line>
-            <Line>95</Line>
-            <Line>143</Line>
-            <Line>156</Line>
-            <Line>207</Line>
-            <Line>220</Line>
-            <Line>221</Line>
-            <Line>222</Line>
-            <Line>223</Line>
-            <Line>224</Line>
-            <Line>237</Line>
+            <Line>36</Line>
+            <Line>62</Line>
+            <Line>73</Line>
+            <Line>103</Line>
+            <Line>157</Line>
+            <Line>170</Line>
+            <Line>171</Line>
+            <Line>172</Line>
+            <Line>173</Line>
+            <Line>174</Line>
+            <Line>187</Line>
           </NonBlank>
         </Comments>
         <LinesOfCode>
@@ -2469,24 +2531,24 @@
           <Line>19</Line>
           <Line>20</Line>
           <Line>21</Line>
-          <Line>22</Line>
-          <Line>23</Line>
-          <Line>24</Line>
+          <Line>27</Line>
+          <Line>28</Line>
+          <Line>29</Line>
           <Line>30</Line>
           <Line>31</Line>
           <Line>32</Line>
           <Line>33</Line>
           <Line>34</Line>
-          <Line>35</Line>
-          <Line>36</Line>
           <Line>37</Line>
+          <Line>38</Line>
+          <Line>39</Line>
           <Line>40</Line>
-          <Line>41</Line>
           <Line>42</Line>
-          <Line>43</Line>
+          <Line>44</Line>
           <Line>45</Line>
           <Line>47</Line>
           <Line>48</Line>
+          <Line>49</Line>
           <Line>50</Line>
           <Line>51</Line>
           <Line>52</Line>
@@ -2498,40 +2560,35 @@
           <Line>58</Line>
           <Line>59</Line>
           <Line>60</Line>
-          <Line>61</Line>
-          <Line>62</Line>
           <Line>63</Line>
+          <Line>64</Line>
+          <Line>65</Line>
           <Line>66</Line>
           <Line>67</Line>
           <Line>68</Line>
-          <Line>69</Line>
           <Line>70</Line>
           <Line>71</Line>
-          <Line>73</Line>
+          <Line>72</Line>
           <Line>74</Line>
           <Line>75</Line>
           <Line>77</Line>
           <Line>78</Line>
-          <Line>80</Line>
+          <Line>79</Line>
           <Line>81</Line>
           <Line>82</Line>
+          <Line>83</Line>
           <Line>84</Line>
-          <Line>85</Line>
-          <Line>86</Line>
-          <Line>87</Line>
-          <Line>88</Line>
-          <Line>89</Line>
           <Line>90</Line>
           <Line>91</Line>
           <Line>92</Line>
-          <Line>93</Line>
+          <Line>94</Line>
+          <Line>95</Line>
           <Line>96</Line>
           <Line>97</Line>
           <Line>98</Line>
           <Line>99</Line>
-          <Line>100</Line>
           <Line>101</Line>
-          <Line>103</Line>
+          <Line>102</Line>
           <Line>104</Line>
           <Line>105</Line>
           <Line>106</Line>
@@ -2541,7 +2598,6 @@
           <Line>110</Line>
           <Line>111</Line>
           <Line>112</Line>
-          <Line>113</Line>
           <Line>114</Line>
           <Line>116</Line>
           <Line>117</Line>
@@ -2550,112 +2606,58 @@
           <Line>121</Line>
           <Line>122</Line>
           <Line>123</Line>
-          <Line>124</Line>
+          <Line>125</Line>
+          <Line>126</Line>
+          <Line>127</Line>
+          <Line>128</Line>
+          <Line>129</Line>
           <Line>130</Line>
-          <Line>131</Line>
           <Line>132</Line>
+          <Line>133</Line>
           <Line>134</Line>
           <Line>135</Line>
           <Line>136</Line>
           <Line>137</Line>
           <Line>138</Line>
-          <Line>139</Line>
+          <Line>140</Line>
           <Line>141</Line>
           <Line>142</Line>
-          <Line>144</Line>
+          <Line>143</Line>
           <Line>145</Line>
           <Line>146</Line>
           <Line>147</Line>
-          <Line>148</Line>
           <Line>149</Line>
           <Line>150</Line>
           <Line>151</Line>
           <Line>152</Line>
+          <Line>153</Line>
           <Line>154</Line>
-          <Line>157</Line>
+          <Line>155</Line>
           <Line>158</Line>
           <Line>159</Line>
           <Line>160</Line>
           <Line>161</Line>
           <Line>162</Line>
-          <Line>163</Line>
           <Line>164</Line>
           <Line>165</Line>
           <Line>166</Line>
           <Line>167</Line>
           <Line>168</Line>
-          <Line>169</Line>
-          <Line>171</Line>
-          <Line>172</Line>
-          <Line>173</Line>
           <Line>175</Line>
           <Line>176</Line>
           <Line>177</Line>
           <Line>178</Line>
           <Line>179</Line>
           <Line>180</Line>
+          <Line>181</Line>
           <Line>182</Line>
-          <Line>183</Line>
           <Line>184</Line>
           <Line>185</Line>
-          <Line>186</Line>
-          <Line>187</Line>
           <Line>188</Line>
           <Line>190</Line>
           <Line>191</Line>
-          <Line>192</Line>
-          <Line>193</Line>
+          <Line>194</Line>
           <Line>195</Line>
-          <Line>196</Line>
-          <Line>197</Line>
-          <Line>199</Line>
-          <Line>200</Line>
-          <Line>201</Line>
-          <Line>202</Line>
-          <Line>203</Line>
-          <Line>204</Line>
-          <Line>205</Line>
-          <Line>208</Line>
-          <Line>209</Line>
-          <Line>210</Line>
-          <Line>211</Line>
-          <Line>212</Line>
-          <Line>214</Line>
-          <Line>215</Line>
-          <Line>216</Line>
-          <Line>217</Line>
-          <Line>218</Line>
-          <Line>225</Line>
-          <Line>226</Line>
-          <Line>227</Line>
-          <Line>228</Line>
-          <Line>229</Line>
-          <Line>230</Line>
-          <Line>231</Line>
-          <Line>232</Line>
-          <Line>234</Line>
-          <Line>235</Line>
-          <Line>238</Line>
-          <Line>240</Line>
-          <Line>241</Line>
-          <Line>243</Line>
-          <Line>244</Line>
-          <Line>245</Line>
-          <Line>246</Line>
-          <Line>247</Line>
-          <Line>248</Line>
-          <Line>249</Line>
-          <Line>251</Line>
-          <Line>252</Line>
-          <Line>253</Line>
-          <Line>254</Line>
-          <Line>255</Line>
-          <Line>256</Line>
-          <Line>257</Line>
-          <Line>258</Line>
-          <Line>259</Line>
-          <Line>262</Line>
-          <Line>263</Line>
         </LinesOfCode>
       </Metrics>
       <Issues />
