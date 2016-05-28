@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -209,7 +210,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             {
                 string fullFilePath = saveFileDialog.FileName;
                 var extension = Path.GetExtension(fullFilePath);
-                if (extension != null && extension.ToLower() != ".txt")
+                if (extension != null && extension.ToLower(CultureInfo.InvariantCulture) != ".txt")
                 {
                     fullFilePath += ".txt";
                 }

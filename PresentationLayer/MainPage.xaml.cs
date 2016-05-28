@@ -64,8 +64,10 @@ namespace EP_HSRlearnIT.PresentationLayer
 
             foreach (var tileEntry in _tileDictionary)
             {
-                MenuTile tile = new MenuTile(tileEntry.Key, tileEntry.Value);
-                tile.TileImage.Name = tileEntry.Key.MultipleReplace(stringsToReplace);
+                MenuTile tile = new MenuTile(tileEntry.Key, tileEntry.Value)
+                {
+                    TileImage = {Name = tileEntry.Key.MultipleReplace(stringsToReplace)}
+                };
                 //Mouse Up and Down - Events to make it feel lika a click. There is no Click-Event for Tiles.
                 tile.MouseDown += MenuTile_OnMouseDown;
                 tile.MouseUp += MenuTile_OnMouseUp;

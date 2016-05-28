@@ -6,6 +6,7 @@ using TestStack.White.UIItems;
 using Application = TestStack.White.Application;
 using Button = TestStack.White.UIItems.Button;
 using TextBox = TestStack.White.UIItems.TextBox;
+using TestStack.White.UIItems.TabItems;
 
 namespace EP_HSRlearnITTests
 {
@@ -26,6 +27,9 @@ namespace EP_HSRlearnITTests
             //zu EncryptionPage navigieren
             var imgEncrDecr = window.Get<Image>("VerandEntschluesselungsAnwendung");
             imgEncrDecr.Click();
+
+            var encryptionPage = window.Get<TabPage>("EncryptionItem");
+            encryptionPage.Click();
 
             //input eingeben, es handelt sich um die Hex Werte des Test Cases 16 aus der offiziellen GCM Spezifikation.
             var ivInput = window.Get<TextBox>("HexIvBox");
