@@ -1,0 +1,47 @@
+﻿<Page x:Class="EP_HSRlearnIT.PresentationLayer.Games.DragDropPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      mc:Ignorable="d"
+      Title="DragDrop" Focusable ="True" PreviewKeyDown="DragDrop_OnPreviewKeyDown" >
+    <Viewbox>
+        <Canvas Name="ElementCanvas" Height="720" Width="960" MouseMove="ElementCanvas_OnMouseMove" Focusable="False" Background="Transparent">
+            <Rectangle Height="600" Width="700" Margin="-50, 50, 0, 0">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource ="/Images/dragdrop.PNG"/>
+                </Rectangle.Fill>
+            </Rectangle>
+
+            <Button Name="Reset" Content="Zurücksetzen" Height="40" Width="105" Canvas.Left="775" Canvas.Bottom="30" Click="Reset_OnClick" Style="{StaticResource ResourceKey=ProgramButtonStyle}" Focusable="False"/>
+            <Button Name="Check" Content="Auswertung"   Height="40" Width="105" Canvas.Left="650" Canvas.Bottom="30" Click="Check_OnClick" Style="{StaticResource ResourceKey=ProgramButtonStyle}" Focusable="False"/>
+            <Image Source="/Images/questionmark.png" Name="OpenInstruction" Width="60" Canvas.Left="831" Canvas.Top="5" 
+                   RenderOptions.BitmapScalingMode="HighQuality" MouseUp="OpenInstruction_OnMouseUp" />
+           
+           <Border Name="BorderGameInstruction" BorderThickness="4" BorderBrush="CornflowerBlue" Panel.ZIndex="1">
+                <StackPanel Name="GameInstruction" Height="470" Width="750" Background="AliceBlue" Panel.ZIndex="1">
+                    <TextBlock Name="TitleGameInstruction" Height="40"  Margin="10,10,0,0" FontSize="20" FontWeight="Bold" Text="Spielanleitung" />
+                    <TextBlock Name="GameInstructionText"  Height="150" Margin="10,0,10,0" FontSize="16"  Panel.ZIndex="1" TextWrapping="Wrap" Text="{StaticResource ResourceKey=GameInstruction}" />
+                    <DockPanel Margin="15,0,0,5" >
+                        <Image Source="/Images/CheckButton.png"  Name="ImageCheckButton" Style="{StaticResource ResourceKey=ImageStyle}" />
+                        <TextBlock Name="DescriptionCheckButton" Style="{StaticResource ResourceKey=TextblockStyle}" Text="{StaticResource ResourceKey=DescriptionCheckButton}" ></TextBlock>
+                    </DockPanel>
+                    <DockPanel Margin="15,0,0,3">
+                        <Image Source="/Images/ResetButton.png" Name="ImageResetButton" Style="{StaticResource ResourceKey=ImageStyle}" />
+                        <TextBlock Name="DescriptionResetButton" Style="{StaticResource ResourceKey=TextblockStyle}" Text="{StaticResource ResourceKey=DescriptionResetButton}"></TextBlock>
+                    </DockPanel>
+                    <DockPanel Margin="15,0,0,0">
+                        <Image Source="/Images/CorrectAnswer.png" Name="ImageButtonCorrectAnswer" Style="{StaticResource ResourceKey=ImageStyle}" />
+                        <TextBlock Name="DescriptionCorrectAnswer" Style="{StaticResource ResourceKey=TextblockStyle}" Text="{StaticResource ResourceKey=DescriptionCorrectAnswer}" ></TextBlock>
+                    </DockPanel>
+                    <DockPanel Margin="15,0,0,0">
+                        <Image Source="/Images/WrongAnswer.png" Name="ImageWrongAnswer" Style="{StaticResource ResourceKey=ImageStyle}" />
+                        <TextBlock Name="DescriptionWrongAnswer" Style="{StaticResource ResourceKey=TextblockStyle}" Text="{StaticResource ResourceKey=DescriptionWrongAnswer}" ></TextBlock>
+                    </DockPanel>
+                    <Button Name="ButtonCloseGameInstruction" Content="Schliessen" Height="40" Width="105" Panel.ZIndex="2" Click="CloseInstruction_OnClick" Style="{StaticResource ResourceKey=ProgramButtonStyle}"
+                            HorizontalAlignment="Right" Margin="10"/>
+                </StackPanel>
+            </Border>
+        </Canvas>
+    </Viewbox>
+</Page>

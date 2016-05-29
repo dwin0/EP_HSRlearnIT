@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AnalysisConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sonarsource.com/msbuild/integration/2015/1">
+  <SonarConfigDir>C:\Programming\EP_HSRlearnIT\.sonarqube\conf</SonarConfigDir>
+  <SonarOutputDir>C:\Programming\EP_HSRlearnIT\.sonarqube\out</SonarOutputDir>
+  <SonarBinDir>C:\Programming\EP_HSRlearnIT\.sonarqube\bin</SonarBinDir>
+  <SonarRunnerWorkingDirectory>C:\Programming\EP_HSRlearnIT</SonarRunnerWorkingDirectory>
+  <SonarQubeHostUrl>http://sonar.narcodex.ch</SonarQubeHostUrl>
+  <SonarProjectKey>EP_HSRlearnIT</SonarProjectKey>
+  <SonarProjectVersion>1.0</SonarProjectVersion>
+  <SonarProjectName>EP_HSRlearnIT</SonarProjectName>
+  <AdditionalConfig>
+    <ConfigSetting Id="BuildUri" />
+    <ConfigSetting Id="TfsUri" />
+    <ConfigSetting Id="settings.file.path" Value="C:\SonarQube\SonarQube.Analysis.xml" />
+  </AdditionalConfig>
+  <ServerSettings>
+    <Property Name="sonar.qualitygate">1</Property>
+    <Property Name="sonar.permission.template.default">default_template</Property>
+    <Property Name="sonar.core.serverBaseURL">https://sonar.narcodex.ch</Property>
+    <Property Name="email.from">sonarqube@narcodex.ch</Property>
+    <Property Name="email.prefix">[SONARQUBE]</Property>
+    <Property Name="sonar.allowUsersToSignUp">false</Property>
+    <Property Name="sonar.forceAuthentication">true</Property>
+    <Property Name="sonar.core.id">20160529043533</Property>
+    <Property Name="sonar.core.version">5.5</Property>
+    <Property Name="sonar.core.startTime">29.05.2016 04:35:33</Property>
+    <Property Name="sonar.cs.msbuild.testProjectPattern">[^\\]*test[^\\]*$</Property>
+  </ServerSettings>
+  <LocalSettings />
+  <AnalyzerSettings>
+    <RuleSetFilePath>C:\Programming\EP_HSRlearnIT\.sonarqube\conf\SonarQubeRoslyn-cs.ruleset</RuleSetFilePath>
+    <AnalyzerAssemblyPaths>
+      <Path>C:\Users\Andi Eder\AppData\Local\Temp\.sonarqube\.static\csharp_1.10.0\SonarAnalyzer.zip\SonarAnalyzer.CSharp.dll</Path>
+      <Path>C:\Users\Andi Eder\AppData\Local\Temp\.sonarqube\.static\csharp_1.10.0\SonarAnalyzer.zip\SonarAnalyzer.dll</Path>
+      <Path>C:\Users\Andi Eder\AppData\Local\Temp\.sonarqube\.static\csharp_1.10.0\SonarAnalyzer.zip\SonarAnalyzer.zip</Path>
+    </AnalyzerAssemblyPaths>
+    <AdditionalFilePaths>
+      <Path>C:\Programming\EP_HSRlearnIT\.sonarqube\conf\SonarLint.xml</Path>
+    </AdditionalFilePaths>
+  </AnalyzerSettings>
+</AnalysisConfig>

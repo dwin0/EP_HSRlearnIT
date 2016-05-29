@@ -1,0 +1,229 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xml:space="preserve"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    
+    <!--StepByStepPage Ressources-->
+    
+    <Image x:Key="StepByStepBackground" Source="/Images/aead.png" RenderOptions.BitmapScalingMode="HighQuality" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    
+    <!--StepByStepPage StepDescripton and Title-->
+    
+    <system:String x:Key="Step0Title">Einleitung</system:String>
+    <system:String x:Key="Step0">        Weshalb AES-GCM?
+        
+Der Galois/Counter Mode der AES-Verschlüsselung ermöglicht eine Verschlüsselung des Plaintextes und garantiert die Integrität des generierten Ciphertextes, sowie zusätzlicher unverschlüsselter Daten durch eine kryptografische Checksumme.
+Eine solche Art der Verschlüsselung und Authentisierung nennt man auch Authenticated Encryption with Associated Data (AEAD).
+
+Schritt 1: Vorbereitung
+Schritt 2: Verschlüsselung 
+Schritt 3: Additional Authenticated Data 
+Schritt 4: Ciphertext-Authentisierung
+Schritt 5: Wiederholung 
+Schritt 6: Abschluss und Rückgabe
+    </system:String>
+    <system:String x:Key="Step1Title">Vorbereitung</system:String>
+    <system:String x:Key="Step1">
+Der Hash-Subkey H wird berechnet. Dazu wird ein Block von 128 Nullen (0^128) mit dem Schlüssel K AES-verschlüsselt.
+Dieser Subkey wird für die Berechnung des Message Authentication Codes (MAC), also für die Authentisierung, benötigt. In AES-GCM wird dieser MAC «Auth-Tag» genannt.
+    </system:String>
+    <system:String x:Key="Step2">
+Der «Counter 0»-Block wird aus dem Initialisierungsvektor (IV) hergeleitet. 
+Dazu wird zum 96 Bit-langen IV ein 32 Bit langes Padding von Nullbits und einer 1 am Ende hinzugefügt, so dass schlussendlich ein Block mit 128 Bit resultiert.
+    </system:String>
+    <system:String x:Key="Step3Title">Verschlüsselung</system:String>
+    <system:String x:Key="Step3">
+Auf den «Counter 0»-Block wird eine Increment-Funktion angewendet, woraus der «Counter 1» resultiert.
+    </system:String>
+    <system:String x:Key="Step4">
+Der «Counter 1»-Block wird anschliessend mit dem Schlüssel K AES-verschlüsselt, so dass ein Output von 128 pseudo-zufälligen Bits generiert wird, die vom Schlüssel K und dem Counterwert abhängen.
+    </system:String>
+    <system:String x:Key="Step5">
+Der Plaintext wird in 128 Bit-Blöcke aufgeteilt. Der erste Plaintext-Block wird mit dem zuvor AES-verschlüsselten «Counter 1»-Block XOR-verknüpft.
+Daraus entsteht der erste Ciphertext-Block.
+    </system:String>
+    <system:String x:Key="Step6Title">Additional Authenticated Data</system:String>
+    <system:String x:Key="Step6">
+Die Additional Authenticated Data (AAD) ist jener Teil der Eingabedaten, welcher durch den AES-GCM-Algorithmus zwar authentisiert, aber nicht verschlüsselt wird.
+Die Eingabe dieser Daten ist optional. Die Authentizität wird durch die Bildung eines MAC gewährleistet.
+    </system:String>
+    <system:String x:Key="Step7">
+Die Generierung des MAC geschieht durch die Multiplikation der AAD in einem Galois-Feld mit dem zu Beginn berechneten Hash-Subkey H.
+Dabei steht MultH für die Multiplikation innerhalb des Galois-Feldes. Die dabei durchgeführten Berechnungen sind nicht Bestandteil dieser Anleitung.
+    </system:String>
+    <system:String x:Key="Step8">
+Ein Beispiel für AAD ist der Versand von Daten über einen unsicheren Kanal. Die Payload wird verschlüsselt und authentisiert, die IP-Adressen jedoch nur authentisiert. Diese dürfen für die Übertragung nicht verschlüsselt werden, da dem Router das Ziel sonst nicht bekannt ist.
+Werden keine Daten verschlüsselt, sondern nur die Integritätsprüfung durchlaufen, spricht man von einem Galois Message Authentication Code (GMAC).
+    </system:String>
+    <system:String x:Key="Step9Title">Ciphertext – Authentisierung</system:String>
+    <system:String x:Key="Step9">
+Die im vorherigen Schritt berechneten Daten aus der Galois-Feld Multiplikation werden mit dem ersten Ciphertext-Block mittels XOR verknüpft.
+    </system:String>
+    <system:String x:Key="Step10">
+Das Resultat der XOR-Verknüpfung von Ciphertext und der Galois-Feld Multiplikation wird ebenfalls wieder in einem Galois-Feld mit dem Hash-Subkey H multipliziert.
+    </system:String>
+    <system:String x:Key="Step11Title">Wiederholung</system:String>
+    <system:String x:Key="Step11">
+Der Schritt Verschlüsselung, sowie der Schritt Ciphertext-Authentisierung, werden nun so lange wiederholt, bis alle 128 Bit-Blöcke des Plaintextes verschlüsselt sind und der MAC darüber berechnet wurde.
+Ist der letzte Plaintext-Block kleiner als 128 Bit wird dessen Grösse zur Berechnung kein Padding angewendet, sondern der restliche Plaintext bitweise mittels XOR verschlüsselt.
+    </system:String>
+    <system:String x:Key="Step12Title">Abschluss und Rückgabe</system:String>
+    <system:String x:Key="Step12">
+Damit keine Attacken auf den MAC, welcher auf einer variablen Anzahl Input-Bits basiert, gemacht werden können, wird sowohl die Länge der AAD (len(A)), als auch die Ciphertext-Länge (len(C)) mitauthentisiert. 
+Dazu werden die beiden Längen, in 64 Bit-Repräsentation, aneinandergehängt. Es folgt eine XOR-Verknüpfung mit dem Resultat aus der Galois-Feld Multiplikation des allerletzten Ciphertextes. Nach der Verknüpfung wird dieser Wert nochmals in einem Galois-Feld mit dem Hash-Subkey multipliziert.
+    </system:String>
+    <system:String x:Key="Step13">
+Da der IV ebenfalls authentisiert werden soll, und dieser bereits im «Counter 0»-Block enthalten ist, wird dieser Block ebenfalls in den MAC miteinberechnet. 
+Dies geschieht indem der «Counter 0»-Block zuerst, wie alle anderen Blöcke, mit dem Schlüssel K AES-verschlüsselt wird. Anschliessend wird auf diese AES-Verschlüsselung und das Resultat der vorhergehenden Galois-Multiplikation die XOR-Funktion angewendet.
+    </system:String>
+    <system:String x:Key="Step14">
+Der berechnete MAC, bei AES-GCM Auth Tag genannt, ist nun fast berechnet. 
+Es findet nur noch ein Truncating, also eine Verkürzung, der Bit-Sequenz auf die gewünschte Länge statt. Dazu wird die verlangte Anzahl der Most Significant Bits aus dem Resultat der letzten XOR-Verknüpfung verwendet.
+Um eine grösstmögliche Sicherheit zu erreichen wird aber meist der ungekürzte 128 Bit grosse Auth Tag verwendet.
+    </system:String>
+    <system:String x:Key="Step15">
+Zuletzt werden Ciphertext und Authentication Tag zurückgegeben.
+Für die Entschlüsselung und Überprüfung des MAC wird nebst diesen beiden Werten auch der IV und die AAD benötigt. Ersterer für die erneute Berechnung aller Counter, der Zweite für die Berechnung und den anschliessenden Vergleich mit dem MAC.
+Der Ciphertext wird am Ende dieselbe Länge wie der zu Beginn eingegebene Plaintext besitzen.
+    </system:String>
+    <system:String x:Key="Step16Title">Erweiterung/Zu beachten</system:String>
+    <system:String x:Key="Step16">
+Der Initialisierungsvektor muss unique sein, ansonsten besteht die Möglichkeit Rückschlüsse auf den Plaintext zu machen. Dies deshalb, weil zwei gleiche Counter-Blöcke auch genau gleich verschlüsselt werden. Unterschiede im Ciphertext stammen allein daher, dass Unterschiede im Plaintext vorhanden sind.
+
+Die Grösse des zu verschlüsselnden Plaintextes pro IV ist genau aus diesem Grund beschränkt. Werden nämlich zu viele Counter-Blöcke gebildet, steigt die Wahrscheinlichkeit einer Wiederholung der Bit-Sequenzen immer mehr an. Der Plaintext darf deshalb eine Grösse von ungefähr 64GB (2^39 Bit - 256 Bit) nicht übersteigen.
+    </system:String>
+    <system:String x:Key="Step17Title">Rückblick</system:String>
+    <system:String x:Key="Step17">
+Der AES-GCM Algorithmus bietet eine Möglichkeit für die gleichzeitige Verschlüsselung und Authentisierung von Plaintext.
+Ein grosser Vorteil dabei ist die Geschwindigkeit. 
+Einerseits können alle Counter-Blöcke vorberechnet werden, sobald der IV und die Plaintext-Länge bekannt sind. Andererseits kann die Authentisierung von Ciphertext-Blöcken (grün markiert, mit Input Plaintext X) und die Verschlüsselung von weiteren Plaintext-Blöcken (orange markiert, mit Input Plaintext X + 1) unabhängig voneinander, und somit parallel, ablaufen.
+    </system:String>
+    <system:String x:Key="Step18">
+Weiter bietet die Verwendung des Counter-Block Mode (CTR) folgenden Vorteil gegenüber dem Electronic Codebook Mode (ECB-Mode): 
+Wird beispielsweise ein Bild, mit vielen gleichen Farbpunkten, verschlüsselt, so sehen die Plaintext-Blöcke mit gleichen Farbpunkten nach der Verschlüsselung beim ECB-Mode alle gleich aus. Beim Counter-Block Mode wird dies mittels jeweils unterschiedlichen Counter-Blöcken verhindert und es können beispielsweise bei Bildern keine Muster mehr erkannt werden.
+    </system:String>
+    
+        <!--StepByStepPage Input & Output-->
+    
+    <system:String x:Key="InputStep1">Zu verschlüsselnder 0128 Block: 00000000000000000000000000000000
+AES Schlüssel K: feffe9928665731c6d6a8f9467308308feffe9928665731c6d6a8f9467308308
+    </system:String>
+    
+    <system:String x:Key="OutputStep1">Hash Subkey H: acbef20579b4b8ebce889bac8732dad7
+    </system:String>
+    
+    <system:String x:Key="InputStep2">IV: cafebabefacedbaddecaf888
+    </system:String>
+    
+    <system:String x:Key="OutputStep2">Counter0: cafebabefacedbaddecaf88800000001
+    </system:String>
+    
+    <system:String x:Key="InputStep3">Counter0: cafebabefacedbaddecaf88800000001
+    </system:String>
+    
+    <system:String x:Key="OutputStep3">Counter1: cafebabefacedbaddecaf88800000002
+    </system:String>
+    
+    <system:String x:Key="InputStep4">Counter1: cafebabefacedbaddecaf88800000002
+AES Schlüssel K: feffe9928665731c6d6a8f9467308308feffe9928665731c6d6a8f9467308308
+    </system:String>
+    
+    <system:String x:Key="OutputStep4">128 pseudozufällige Bits resultierend aus der AES-Verschlüsselung: 8b1cf3d561d27be251263e66857164e7   
+    </system:String>
+    
+    <system:String x:Key="InputStep5">128 pseudozufällige Bits aus vorherigem Schritt: 8b1cf3d561d27be251263e66857164e7
+128 Bit Block Plaintext1: d9313225f88406e5a55909c5aff5269a
+    </system:String>
+    
+    <system:String x:Key="OutputStep5">128 Bit Block Ciphertext1: 522dc1f099567d07f47f37a32a84427d
+    </system:String>
+    
+    <system:String x:Key="InputStep6">Additional Authenticated Data: feedfacedeadbeeffeedfacedeadbeefabaddad2
+    </system:String>
+    
+    <system:String x:Key="OutputStep6">Hier wird noch nichts berechnet
+    </system:String>
+    
+    <system:String x:Key="InputStep7">Additional Authenticated Data: feedfacedeadbeeffeedfacedeadbeef
+Hash Subkey H: acbef20579b4b8ebce889bac8732dad7
+    </system:String>
+    
+    <system:String x:Key="OutputStep7">Wert nach Multiplikation innerhalb des Galois-Feldes: 5165d242c2592c0a6375e2622cf925d2
+    </system:String>
+    
+    <system:String x:Key="InputStep9">Wert nach Multiplikation innerhalb des Galois-Feldes: 5165d242c2592c0a6375e2622cf925d2
+Ciphertext1: 522dc1f099567d07f47f37a32a84427d
+    </system:String>
+    
+    <system:String x:Key="OutputStep9">Wert nach der XOR Verknüpfung: 34813b25b0f510d970ad5c1067d67af
+    </system:String>
+    
+    <system:String x:Key="InputStep10">Wert nach der XOR Verknüpfung: 34813b25b0f510d970ad5c1067d67af
+Hash Subkey H: acbef20579b4b8ebce889bac8732dad7
+    </system:String>
+    
+    <system:String x:Key="OutputStep10">Wert nach Multiplikation innerhalb des Galois-Feldes: abe07e0bb62354177480b550f9f6cdcc
+    </system:String>
+    
+    <system:String x:Key="InputStep11">Die jeweils notwendigen Inputs wurden bereits in den vorhergehenden Schritten einzeln
+aufgelistet. Natürlich ergeben sich bei den Wiederholungen andere Werte.
+    </system:String>
+    
+    <system:String x:Key="OutputStep11">Für Beispiele zum Output können die vorherigen Schritte angeschaut werden.
+Natürlich ergeben sich bei den Wiederholungen andere Werte.
+    </system:String>
+    
+    <system:String x:Key="InputStep12">Letzter Wert nach Multiplikation innerhalb des Galois-Feldes aus der Wiederholung: 9249beaf520c48b912fa120bbf391dc8
+Hash Subkey H: acbef20579b4b8ebce889bac8732dad7
+
+Zwischenberechnung:
+Längenangabe AAD 64 Bit-Repräsentation: 00000000000000a
+Längenangabe Ciphertext 64 Bit-Repräsentation: 000000000000001e0
+128 Bit Längenrepräsentation: 00000000000000a000000000000001e0
+
+XOR der Galois-Feld Multiplikation aus der Wiederholung und 128 Bit Längenrepräsentation: 9249beaf520c481912fa120bbf391c28
+    </system:String>
+    
+    <system:String x:Key="OutputStep12">Wert nach der Multiplikation des XOR Ergebnis innerhalb des Galois-Feldes: 8bd0c4d8aacd391e67cca447e8c38f65
+    </system:String>
+    
+    <system:String x:Key="InputStep13">Wert nach Multiplikation innerhalb des Galois-Feldes: 8bd0c4d8aacd391e67cca447e8c38f65
+Counter0: cafebabefacedbaddecaf88800000001
+AES Schlüssel K: feffe9928665731c6d6a8f9467308308feffe9928665731c6d6a8f9467308308
+128 pseudozufällige Bits resultierend aus der AES-Verschlüsselung: fd2caa16a5832e76aa132c1453eeda7e
+    </system:String>
+    
+    <system:String x:Key="OutputStep13">Auth Tag: 76fc6ece0f4e1768cddf8853bb2d551b
+    </system:String>
+    
+    <system:String x:Key="OutputStep14">Auth Tag: 76fc6ece0f4e1768cddf8853bb2d551b
+    </system:String>
+    
+    <system:String x:Key="OutputStep15">Gesamter Ciphertext: 522dc1f099567d07f47f37a32a84427d643a8cdcbfe5c0c97598a2bd2555d1aa8cb08e48590dbb3da7b08b1056828838c5f61e6393ba7a0abcc9f662
+resultierendes Auth Tag: 76fc6ece0f4e1768cddf8853bb2d551b
+    </system:String>
+    
+    
+    <!--Overview Ressources-->
+    
+        <!--Overview Text-->
+
+    <system:String x:Key="VorbereitungText">In der Vorbereitungsphase wird der Hash-Subkey H sowie der «Counter 0»-Block berechnet.</system:String>
+
+    <system:String x:Key="VerschlüsselungText">Bei der Verschlüsselung wird der erste Plaintextblock AES-verschlüsselt.</system:String>
+
+    <system:String x:Key="AdditionalAuthenticatedDataText">Dem Algorithmus werden weitere Daten, welche authentisiert, aber nicht verschlüsselt werden, hinzugefügt.</system:String>
+
+    <system:String x:Key="CiphertextAuthentisierungText">Die Authentisierung geschieht über eine Multiplikation in einem Galois-Feld.</system:String>
+
+    <system:String x:Key="WiederholungText">Die Verschlüsselung und Authentisierung werden wiederholt angewendet, bis der gesamte Plaintext verarbeitet ist.</system:String>
+
+    <system:String x:Key="AbschlussUndRückgabeText">Die Textlänge und der «Counter 0»-Block werden ebenfalls authentisiert. Am Ende wird der Ciphertext und das Tag zurückgegeben.</system:String>
+
+        <!--Overview Background-->
+    
+    <Image x:Key="BackgroundImage" Source="/Images/aead.png" RenderOptions.BitmapScalingMode="HighQuality" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    <SolidColorBrush x:Key="BackAreaBrush" Color="#AFC8E6C9"/>
+    <SolidColorBrush x:Key="NoBackAreaBrush" Color="White"/>
+    
+</ResourceDictionary>

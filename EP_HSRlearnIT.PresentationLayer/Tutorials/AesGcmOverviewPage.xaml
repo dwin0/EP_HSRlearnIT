@@ -1,0 +1,33 @@
+﻿<base:TutorialsComponents x:Class="EP_HSRlearnIT.PresentationLayer.Tutorials.AesGcmOverviewPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:base="clr-namespace:EP_HSRlearnIT.PresentationLayer.Tutorials"
+      mc:Ignorable="d"
+      Title="AesGcmOverviewPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Viewbox Grid.Row="0" Margin="0, 20">
+            <Canvas Name="OverviewCanvas" Height="720" Width="960" />
+        </Viewbox>
+        <Border Grid.Row="1" MaxHeight="120" MaxWidth="850" BorderThickness="2" BorderBrush="{StaticResource MenuBorderBrush}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="Erklärung" Background="{StaticResource MenuBorderBrush}" Foreground="White"
+                           TextAlignment="Center" FontSize="16" FontWeight="Bold" Padding="0, 3, 0, 0"/>
+                <ScrollViewer Grid.Row="1" Name="TextScrollViewer">
+                    <TextBlock Name="OverviewTextBlock" Text="Fahre mit der Maus über das Bild, um mehr zu erfahren."
+                               TextAlignment="Center" FontSize="16" HorizontalAlignment="Center" Margin="0, 10, 0, 0" TextWrapping="Wrap"/>
+                </ScrollViewer>
+            </Grid>
+        </Border>
+    </Grid>
+</base:TutorialsComponents>
