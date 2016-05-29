@@ -229,10 +229,6 @@
     <Resource Include="Images\rightArrow-icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\dragdrop-icon.png" />
-    <Resource Include="Images\encryption-icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\step-icon.png" />
   </ItemGroup>
   <ItemGroup>

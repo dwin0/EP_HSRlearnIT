@@ -26,7 +26,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
         #region Protected Methods
         protected void LoadBackground(Canvas canvas, string imageName)
         {
-            Image background = Application.Current.FindResource(imageName) as Image;
+            Image background = Application.Current.TryFindResource(imageName) as Image;
             if (background == null)
             {
                 ExceptionLogger.WriteToLogfile("LoadBackground", "Background was not found.", "Error from class TutorialsComponents");
@@ -48,7 +48,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
         {
             for (int i = 1; i <= NumOfStepPaths; i++)
             {
-                Path ressourcePath = Application.Current.FindResource("StepPath" + i) as Path;
+                Path ressourcePath = Application.Current.TryFindResource("StepPath" + i) as Path;
                 if (ressourcePath == null)
                 {
                     ExceptionLogger.WriteToLogfile("LoadStepPahts", "ressourcePath was null", "");
@@ -115,7 +115,14 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
 
             var parentPage = DependencyObjectExtension.GetParentPage(stepPath) as Page;
             if (parentPage == null || parentPage.Title != "AesGcmOverviewPage") return;
-            ShowExplanation(stepPath, e);
+            try
+            {
+                ShowExplanation(stepPath, e);
+            }
+            catch (NotImplementedException exception)
+            {
+                ExceptionLogger.WriteToLogfile("StepPath_OnMouseEnter", exception.Message, exception.StackTrace);
+            }
         }
 
         private void StepPath_OnMouseLeave(object sender, MouseEventArgs e)

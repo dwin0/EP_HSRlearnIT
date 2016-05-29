@@ -22,8 +22,8 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
         private int _step;
         private int _titleNumber;
         private const int StepMin = 0;
-        private const int SbsMin = 1;
-        private const int SbsMax = 15;
+        private const int PathMin = 1;
+        private const int PathMax = 15;
         private const int StepMax = 18;
         private readonly Dictionary<int, Path> _stepPaths = new Dictionary<int, Path>();
         private int _highlightedPath;
@@ -207,24 +207,41 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
 
         private void SetInputAndOutput(int stepNumber)
         {
-            Input.Text = Application.Current.TryFindResource("InputStep" + stepNumber) as string;
-            if (!Input.ClipToBounds)
+            var inputText = Application.Current.TryFindResource("InputStep" + stepNumber) as string;
+            if (inputText == null)
             {
-                InputScrollViewer.VerticalScrollBarVisibility = (ScrollBarVisibility)Visibility.Hidden;
+                Input.Text = "Hier wird nichts berechnet";
+            }
+            else
+            {
+                Input.Text = inputText;
+                if (!Input.ClipToBounds)
+                {
+                    InputScrollViewer.VerticalScrollBarVisibility = (ScrollBarVisibility)Visibility.Hidden;
+                }
             }
 
-            Output.Text = Application.Current.TryFindResource("OutputStep" + stepNumber) as string;
-            if (!Output.ClipToBounds)
+            
+            var outputText = Application.Current.TryFindResource("OutputStep" + stepNumber) as string;
+            if (outputText == null)
             {
-                OutputScrollViewer.VerticalScrollBarVisibility = (ScrollBarVisibility)Visibility.Hidden;
+                Output.Text = "Hier wird nichts berechnet";
+            } else
+            {
+                Output.Text = outputText;
+                if (!Output.ClipToBounds)
+                {
+                    OutputScrollViewer.VerticalScrollBarVisibility = (ScrollBarVisibility)Visibility.Hidden;
+                }
             }
 
-            if (stepNumber < SbsMin)
+
+            if (stepNumber < PathMin)
             {
                 Input.Text = "Hier wird noch nichts berechnet";
                 Output.Text = "Hier wird noch nichts berechnet";
             }
-            else if (stepNumber > SbsMax)
+            else if (stepNumber > PathMax)
             {
                 Input.Text = "Hier wird nichts mehr berechnet";
                 Output.Text = "Hier wird nichts mehr berechnet";
@@ -240,7 +257,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
                 Path toFillPath;
                 Path toEmptyPath;
                 bool newPath = _stepPaths.TryGetValue(stepNumber, out toFillPath);
-
                 bool oldPath = _stepPaths.TryGetValue(_highlightedPath, out toEmptyPath);
                 
                 if (newPath)
@@ -323,20 +339,16 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
         private string GetTitle(int titleNumber)
         {
             string titleName = "Step" + titleNumber + "Title";
-            if (Application.Current.Resources.Contains(titleName))
-            {
-                return Application.Current.FindResource(titleName) as string;
-            }
-            return null;
+            return Application.Current.TryFindResource(titleName) as string;
         }
 
         private string GetTitleNumber(int stepNumber)
         {
             string subtitle = "";
             int mainNumber = 0;
-            if (SbsMin <= stepNumber && stepNumber <= SbsMax)
+            if (PathMin <= stepNumber && stepNumber <= PathMax)
             {
-                for (int listIndex = SbsMin; listIndex <= stepNumber; listIndex++)
+                for (int listIndex = PathMin; listIndex <= stepNumber; listIndex++)
                 {
                     if (GetSubtitleNumber(listIndex) == 1)
                     {

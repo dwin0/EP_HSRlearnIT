@@ -22,7 +22,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
 
         #region Constructors
         /// <summary>
-        /// Methods to initialize the XAML and the Content.
+        /// Constructor to initialize the XAML and the Content.
         /// </summary>
         public AesGcmOverviewPage()
         {
@@ -87,7 +87,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
         {
             for (int i = 1; i <= NumOfAreas; i++)
             {
-                Path ressourcePath = Application.Current.FindResource("AreaPath" + i) as Path;
+                Path ressourcePath = Application.Current.TryFindResource("AreaPath" + i) as Path;
                 if (ressourcePath == null)
                 {
                     ExceptionLogger.WriteToLogfile("LoadAreaPahts", "ressourcePath was null", "");
@@ -123,7 +123,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
         protected void AreaPath_OnMouseEnter(object sender, MouseEventArgs e)
         {
             Path path = sender as Path;
-            string text = Application.Current.FindResource(path?.Name + "Text") as string;
+            string text = Application.Current.TryFindResource(path?.Name + "Text") as string;
             if (text != null)
             {
                 ShowAreaExplanation(text);

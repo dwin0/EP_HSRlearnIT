@@ -24,7 +24,7 @@ Schritt 6: Abschluss und Rückgabe
     </system:String>
     <system:String x:Key="Step1Title">Vorbereitung</system:String>
     <system:String x:Key="Step1">
-Der Hash-Subkey H wird berechnet. Dazu wird ein Block von 128 Nullen (0128) mit dem Schlüssel K AES-verschlüsselt.
+Der Hash-Subkey H wird berechnet. Dazu wird ein Block von 128 Nullen (0^128) mit dem Schlüssel K AES-verschlüsselt.
 Dieser Subkey wird für die Berechnung des Message Authentication Codes (MAC), also für die Authentisierung, benötigt. In AES-GCM wird dieser MAC «Auth-Tag» genannt.
     </system:String>
     <system:String x:Key="Step2">
@@ -151,12 +151,6 @@ Hash Subkey H: acbef20579b4b8ebce889bac8732dad7
     <system:String x:Key="OutputStep7">Wert nach Multiplikation innerhalb des Galois-Feldes: 5165d242c2592c0a6375e2622cf925d2
     </system:String>
     
-    <system:String x:Key="InputStep8">Hier wird nichts berechnet
-    </system:String>
-    
-    <system:String x:Key="OutputStep8">Hier wird nichts berechnet
-    </system:String>
-    
     <system:String x:Key="InputStep9">Wert nach Multiplikation innerhalb des Galois-Feldes: 5165d242c2592c0a6375e2622cf925d2
 Ciphertext1: 522dc1f099567d07f47f37a32a84427d
     </system:String>
@@ -202,13 +196,7 @@ AES Schlüssel K: feffe9928665731c6d6a8f9467308308feffe9928665731c6d6a8f94673083
     <system:String x:Key="OutputStep13">Auth Tag: 76fc6ece0f4e1768cddf8853bb2d551b
     </system:String>
     
-    <system:String x:Key="InputStep14">Hier wird nichts berechnet
-    </system:String>
-    
     <system:String x:Key="OutputStep14">Auth Tag: 76fc6ece0f4e1768cddf8853bb2d551b
-    </system:String>
-    
-    <system:String x:Key="InputStep15">Hier wird nichts berechnet
     </system:String>
     
     <system:String x:Key="OutputStep15">Gesamter Ciphertext: 522dc1f099567d07f47f37a32a84427d643a8cdcbfe5c0c97598a2bd2555d1aa8cb08e48590dbb3da7b08b1056828838c5f61e6393ba7a0abcc9f662
