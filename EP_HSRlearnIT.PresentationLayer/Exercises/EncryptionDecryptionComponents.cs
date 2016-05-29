@@ -21,7 +21,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
     /// </summary>
     public abstract class EncryptionDecryptionComponents : Page
     {
-
         #region Public Members
         public AesGcmAdapter Library;
 
@@ -104,7 +103,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         }
 
         #endregion
-
 
         #region Protected Methods
 

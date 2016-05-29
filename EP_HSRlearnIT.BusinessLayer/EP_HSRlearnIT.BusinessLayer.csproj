@@ -69,6 +69,7 @@
     </Compile>
     <Compile Include="Extensions\DependencyObjectExtension.cs" />
     <Compile Include="Extensions\FrameworkElementExtension.cs" />
+    <Compile Include="Extensions\StringExtension.cs" />
     <Compile Include="Persistence\Progress.cs" />
   </ItemGroup>
   <ItemGroup>

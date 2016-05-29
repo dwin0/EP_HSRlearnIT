@@ -18,10 +18,9 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
         #region Private Members
         private readonly Dictionary<string, Path> _highlightedPaths = new Dictionary<string, Path>();
         private Path _mouseDownPath;
-        protected const int NumOfStepPaths = 24;
+        private const int NumOfStepPaths = 24;
 
         #endregion
-
 
         #region Protected Methods
         protected void LoadBackground(Canvas canvas, string imageName)
@@ -84,7 +83,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
         }
 
         #endregion
-
 
         #region Private Methods
         private void StepPath_OnMouseEnter(object sender, MouseEventArgs e)

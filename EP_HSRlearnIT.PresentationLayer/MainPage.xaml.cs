@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using EP_HSRlearnIT.BusinessLayer.Extensions;
 using EP_HSRlearnIT.BusinessLayer.Persistence;
 using EP_HSRlearnIT.PresentationLayer.Games;
 using EP_HSRlearnIT.PresentationLayer.Exercises;
@@ -33,6 +34,7 @@ namespace EP_HSRlearnIT.PresentationLayer
         private readonly SolidColorBrush _greenBackgroundBrush = Application.Current.FindResource("TileBackgroundBrush") as SolidColorBrush;
         private readonly SolidColorBrush _blackBorderBrush = Application.Current.FindResource("TileBorderBrush") as SolidColorBrush;
         private MenuTile _mouseDownMenuTile;
+        
         #endregion
 
         #region Constructors
@@ -141,31 +143,4 @@ namespace EP_HSRlearnIT.PresentationLayer
 
         #endregion
     }
-
-
-    #region Extension Methods
-
-    /// <summary>
-    /// Extension Class for strings
-    /// </summary>
-    public static class StringExtender
-    {
-        /// <summary>
-        /// Extension Method to replace multiple strings within a text
-        /// </summary>
-        /// <param name="text">Text in which replacements are made</param>
-        /// <param name="replacements">Dictionary which contains a string-string - Pair.
-        /// First string: Pattern searched in text - Second string: Text to replace the pattern</param>
-        /// <returns>Text in which all found patterns are replaced with a given string</returns>
-        public static string MultipleReplace(this string text, Dictionary<string, string> replacements)
-        {
-            string returnValue = text;
-            foreach (string textToReplace in replacements.Keys)
-            {
-                returnValue = returnValue.Replace(textToReplace, replacements[textToReplace]);
-            }
-            return returnValue;
-        }
-    }
-    #endregion
 }

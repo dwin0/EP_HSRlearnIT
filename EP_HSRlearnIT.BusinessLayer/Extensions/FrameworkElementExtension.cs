@@ -9,6 +9,7 @@ namespace EP_HSRlearnIT.BusinessLayer.Extensions
     /// </summary>
     public static class FrameworkElementExtension
     {
+        #region Public Methods
         /// <summary>
         /// Method to clone any Framework Element
         /// </summary>
@@ -21,5 +22,7 @@ namespace EP_HSRlearnIT.BusinessLayer.Extensions
 
             return (FrameworkElement)XamlReader.Load(new XmlNodeReader(document));
         }
+
+        #endregion
     }
 }

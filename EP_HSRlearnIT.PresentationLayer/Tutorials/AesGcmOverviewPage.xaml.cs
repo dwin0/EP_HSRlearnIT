@@ -16,7 +16,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
     {
         #region Private Members
         private readonly Path[] _areaPaths = new Path[NumOfAreas];
-        protected const int NumOfAreas = 6;
+        private const int NumOfAreas = 6;
 
         #endregion
 
@@ -119,7 +119,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
         }
 
         #endregion
-
 
         #region Protected Methods
         protected override void ShowExplanation(Path stepPath, MouseEventArgs e)

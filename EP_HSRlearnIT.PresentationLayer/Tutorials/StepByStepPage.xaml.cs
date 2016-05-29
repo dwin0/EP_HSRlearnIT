@@ -84,7 +84,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
 
         #endregion
 
-
         #region Private Methods
         private void SetFocus(int step)
         {

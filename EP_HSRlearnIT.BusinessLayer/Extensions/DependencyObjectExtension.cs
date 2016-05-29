@@ -10,7 +10,6 @@ namespace EP_HSRlearnIT.BusinessLayer.Extensions
     /// </summary>
     public static class DependencyObjectExtension
     {
-
         #region Public Methods
         /// <summary>
         /// Method which creates a list of all xmal objects of a page.

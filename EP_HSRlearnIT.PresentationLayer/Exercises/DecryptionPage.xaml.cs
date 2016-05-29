@@ -29,7 +29,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
 
         #endregion
 
-
         #region Private Methods
         private async void DecryptionButton_OnClick(object sender, RoutedEventArgs e)
         {

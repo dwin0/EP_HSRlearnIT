@@ -11,7 +11,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
     /// </summary>>
     internal class SavedDataForProgress
     {
-
         #region Public Member
 
         public Rectangle DropRectangle; // Drop rectangle reference, there should be unique drop rectangles in whole _addedSavedData
@@ -23,7 +22,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         public int OriginalImageChildIndex; // Index of original child we made copy of, it's index of imagebrush
         public int DropRectangleIndex; // Index of original child we made copy of, it's index of imagebrush
         #endregion
-
 
         #region Internal Methods
 

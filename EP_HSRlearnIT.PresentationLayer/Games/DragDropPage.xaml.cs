@@ -33,7 +33,10 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         private bool _checkingFirstTime = true;
         #endregion
 
+        #region Public Attribute
         public static readonly Dictionary<int, List<string>> CorrectAnswers = new Dictionary<int, List<string>>();
+
+        #endregion
 
         #region Constructor
         /// <summary>
@@ -55,6 +58,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
 
         #endregion
 
+        #region Private Methods
         /// <summary>
         /// This method loads all Rectangles where a solution can be dropped.</summary>
         /// <param name="canvas">Is the Parent where the Rectangles have to be placed</param>
@@ -191,6 +195,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
             SetMouseEvents(resRect, leftButtonDown, leftButtonUp, moveMouse);
             return resRect;
         }
+
         private void SetMouseEvents(Rectangle resRect, bool leftButtonDown, bool leftButtonUp, bool moveMouse)
         {
             if (leftButtonDown) resRect.PreviewMouseLeftButtonDown += rectangle_PreviewMouseLeftButtonDown;
@@ -567,5 +572,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                     return;
             }
         }
+
+        #endregion
     }
 }

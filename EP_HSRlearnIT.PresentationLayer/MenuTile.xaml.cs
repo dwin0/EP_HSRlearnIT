@@ -9,13 +9,12 @@ namespace EP_HSRlearnIT.PresentationLayer
     public partial class MenuTile
     {
         #region Private Members
-
         private readonly string _text;
         private readonly string _imageSource;
+
         #endregion
 
         #region Constructors
-
         /// <summary>
         /// Create a Tile with a Text and an Image-Source
         /// </summary>
@@ -28,6 +27,7 @@ namespace EP_HSRlearnIT.PresentationLayer
             InitializeComponent();
             LoadTile();
         }
+
         #endregion
 
         #region Private Methods
@@ -36,6 +36,7 @@ namespace EP_HSRlearnIT.PresentationLayer
             TileImage.Source = new BitmapImage(new Uri(_imageSource, UriKind.RelativeOrAbsolute));
             TileText.Text = _text;
         }
+
         #endregion
     }
 }

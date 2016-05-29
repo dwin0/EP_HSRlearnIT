@@ -2,7 +2,6 @@
 using EP_HSRlearnIT.PresentationLayer.Games;
 using System.Windows;
 using System.Windows.Input;
-using System;
 using System.Windows.Media.Animation;
 using EP_HSRlearnIT.BusinessLayer.Persistence;
 using EP_HSRlearnIT.PresentationLayer.Exercises;
@@ -15,12 +14,11 @@ namespace EP_HSRlearnIT.PresentationLayer
     public partial class MainWindow
     {
         #region Private Members
-
         private string _mouseDownMenuItem;
+
         #endregion
 
         #region Constructors
-
         /// <summary>
         /// Method to initialize the XAML and load the first page
         /// </summary>
@@ -30,10 +28,10 @@ namespace EP_HSRlearnIT.PresentationLayer
             MainFrame.Navigate(new MainPage());
             Application.Current.MainWindow = this;
         }
+
         #endregion
 
         #region Private Methods
-
         private void MenuButton_OnClick(object sender, RoutedEventArgs e)
         {
             if (MenuStackPanel.IsVisible)
@@ -104,6 +102,7 @@ namespace EP_HSRlearnIT.PresentationLayer
                 e.Handled = true;
             }
         }
+
         #endregion
     }
 }

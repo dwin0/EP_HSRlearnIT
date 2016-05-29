@@ -18,7 +18,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
 
         #endregion
 
-
         #region Public Methods
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
