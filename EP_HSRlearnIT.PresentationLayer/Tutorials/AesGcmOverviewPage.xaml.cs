@@ -32,7 +32,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
 
         #endregion
 
-
         #region Private Methods
         private void InitCanvas(Canvas canvas)
         {
@@ -68,22 +67,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             return null;
         }
 
-        protected override void ShowExplanation(Path stepPath, MouseEventArgs e)
-        {
-            //Find Area Path to show the explanation
-            Path areaPath = FindAreaPath(stepPath);
-            if (areaPath != null)
-            {
-                AreaPath_OnMouseEnter(areaPath, e);
-            }
-        }
-
-        #endregion
-
-
-        #region Protected Methods
-
-        protected void LoadAreaPaths(Canvas canvas)
+        private void LoadAreaPaths(Canvas canvas)
         {
             for (int i = 1; i <= NumOfAreas; i++)
             {
@@ -120,7 +104,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             }
         }
 
-        protected void AreaPath_OnMouseEnter(object sender, MouseEventArgs e)
+        private void AreaPath_OnMouseEnter(object sender, MouseEventArgs e)
         {
             Path path = sender as Path;
             string text = Application.Current.TryFindResource(path?.Name + "Text") as string;
@@ -131,6 +115,20 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
             else
             {
                 ExceptionLogger.WriteToLogfile("AreaPathOnMouseEnter", "Text was not found.", "");
+            }
+        }
+
+        #endregion
+
+
+        #region Protected Methods
+        protected override void ShowExplanation(Path stepPath, MouseEventArgs e)
+        {
+            //Find Area Path to show the explanation
+            Path areaPath = FindAreaPath(stepPath);
+            if (areaPath != null)
+            {
+                AreaPath_OnMouseEnter(areaPath, e);
             }
         }
 
