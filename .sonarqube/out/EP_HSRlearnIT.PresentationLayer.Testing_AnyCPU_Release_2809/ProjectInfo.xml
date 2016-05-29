@@ -7,7 +7,7 @@
   <FullPath>C:\Programming\EP_HSRlearnIT\EP_HSRlearnIT.PresentationLayer.Testing\EP_HSRlearnIT.PresentationLayer.Testing.csproj</FullPath>
   <IsExcluded>false</IsExcluded>
   <AnalysisResults>
-    <AnalysisResult Id="FilesToAnalyze" Location="C:\Programming\EP_HSRlearnIT\.sonarqube\out\\EP_HSRlearnIT.PresentationLayer.Testing_AnyCPU_Release_2523\FilesToAnalyze.txt" />
+    <AnalysisResult Id="FilesToAnalyze" Location="C:\Programming\EP_HSRlearnIT\.sonarqube\out\\EP_HSRlearnIT.PresentationLayer.Testing_AnyCPU_Release_2809\FilesToAnalyze.txt" />
   </AnalysisResults>
   <AnalysisSettings>
     <Property Name="sonar.stylecop.projectFilePath">C:\Programming\EP_HSRlearnIT\EP_HSRlearnIT.PresentationLayer.Testing\EP_HSRlearnIT.PresentationLayer.Testing.csproj</Property>

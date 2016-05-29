@@ -21,9 +21,9 @@
     <Property Name="email.prefix">[SONARQUBE]</Property>
     <Property Name="sonar.allowUsersToSignUp">false</Property>
     <Property Name="sonar.forceAuthentication">true</Property>
-    <Property Name="sonar.core.id">20160525042303</Property>
+    <Property Name="sonar.core.id">20160529043533</Property>
     <Property Name="sonar.core.version">5.5</Property>
-    <Property Name="sonar.core.startTime">25.05.2016 04:23:03</Property>
+    <Property Name="sonar.core.startTime">29.05.2016 04:35:33</Property>
     <Property Name="sonar.cs.msbuild.testProjectPattern">[^\\]*test[^\\]*$</Property>
   </ServerSettings>
   <LocalSettings />

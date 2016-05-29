@@ -13,6 +13,7 @@
     <File>C:\Programming\EP_HSRlearnIT\EP_HSRlearnIT.BusinessLayer\App.xaml.cs</File>
     <File>C:\Programming\EP_HSRlearnIT\EP_HSRlearnIT.BusinessLayer\Extensions\DependencyObjectExtension.cs</File>
     <File>C:\Programming\EP_HSRlearnIT\EP_HSRlearnIT.BusinessLayer\Extensions\FrameworkElementExtension.cs</File>
+    <File>C:\Programming\EP_HSRlearnIT\EP_HSRlearnIT.BusinessLayer\Extensions\StringExtension.cs</File>
     <File>C:\Programming\EP_HSRlearnIT\EP_HSRlearnIT.BusinessLayer\Persistence\ExceptionLogger.cs</File>
     <File>C:\Programming\EP_HSRlearnIT\EP_HSRlearnIT.BusinessLayer\Persistence\FileManager.cs</File>
     <File>C:\Programming\EP_HSRlearnIT\EP_HSRlearnIT.BusinessLayer\Persistence\Progress.cs</File>
