@@ -18,7 +18,11 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
         #region Private Members
         private readonly Dictionary<string, Path> _highlightedPaths = new Dictionary<string, Path>();
         private Path _mouseDownPath;
-        private const int NumOfStepPaths = 24;
+
+        #endregion
+
+        #region Protected Members
+        protected const int NumOfStepPaths = 24;
 
         #endregion
 
