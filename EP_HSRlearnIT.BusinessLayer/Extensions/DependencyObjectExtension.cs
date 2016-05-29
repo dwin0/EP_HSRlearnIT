@@ -17,7 +17,7 @@ namespace EP_HSRlearnIT.BusinessLayer.Extensions
         /// </summary>
         /// <param name="root">Root is the reference to the page.</param>
         /// <returns>Returns a list of all xmal objects from root.</returns>
-        public static IEnumerable<DependencyObject> GetAllChildren(DependencyObject root)
+        public static IEnumerable<DependencyObject> GetAllChildren(this DependencyObject root)
         {
             if (root == null)
             {
@@ -30,7 +30,7 @@ namespace EP_HSRlearnIT.BusinessLayer.Extensions
             {
                 var child = VisualTreeHelper.GetChild(root, i);
 
-                foreach (var subChild in GetAllChildren(child))
+                foreach (var subChild in child.GetAllChildren())
                 {
                     yield return subChild;
                 }
@@ -43,9 +43,9 @@ namespace EP_HSRlearnIT.BusinessLayer.Extensions
         /// <typeparam name="T">Type which is searched in the object list.</typeparam>
         /// <param name="root">Is the reference to the page.</param>
         /// <returns>Returns a list of all xmal objects of the type T from root.</returns>
-        public static IEnumerable<T> GetAllChildren<T>(DependencyObject root) where T : class
+        public static IEnumerable<T> GetAllChildren<T>(this DependencyObject root) where T : class
         {
-            foreach (var element in GetAllChildren(root))
+            foreach (var element in root.GetAllChildren())
             {
                 if (element is T)
                 {
@@ -59,7 +59,7 @@ namespace EP_HSRlearnIT.BusinessLayer.Extensions
         /// </summary>
         /// <param name="element">The element for which the parent Page is searched.</param>
         /// <returns>The Page in which the element is existing.</returns>
-        public static DependencyObject GetParentPage(DependencyObject element)
+        public static DependencyObject GetParentPage(this DependencyObject element)
         {
             var parent = VisualTreeHelper.GetParent(element);
             while (!(parent is Page))

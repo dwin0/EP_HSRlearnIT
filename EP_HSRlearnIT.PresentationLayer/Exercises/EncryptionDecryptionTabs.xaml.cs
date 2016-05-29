@@ -57,7 +57,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         #region Private Methods
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            foreach (var sendingPage in DependencyObjectExtension.GetAllChildren<Page>(this))
+            foreach (var sendingPage in this.GetAllChildren<Page>())
             {
                 switch (sendingPage.Title)
                 {
@@ -75,7 +75,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
 
         private void TakeValuesToDecryption()
         {
-            foreach (var element in DependencyObjectExtension.GetAllChildren<TextBox>(this))
+            foreach (var element in this.GetAllChildren<TextBox>())
             {
                 if (element.Name != "HexPlaintextBox")
                 {
@@ -86,7 +86,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
 
         private void TakeValuesToEncryption()
         {
-            foreach (var element in DependencyObjectExtension.GetAllChildren<TextBox>(this))
+            foreach (var element in this.GetAllChildren<TextBox>())
             {
                 if (element.Name != "HexCiphertextBox" || element.Name != "HexTagBox")
                 {
@@ -117,7 +117,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         {
             if (grid == null) { return;}
 
-            foreach (var child in DependencyObjectExtension.GetAllChildren<FrameworkElement>(grid))
+            foreach (var child in grid.GetAllChildren<FrameworkElement>())
             {
                 if (child.Name.Contains("Hex"))
                 {

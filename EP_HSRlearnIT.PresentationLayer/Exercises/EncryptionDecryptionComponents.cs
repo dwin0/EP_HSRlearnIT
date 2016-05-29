@@ -154,7 +154,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         /// </summary>
         protected void ResetButton_OnClick(object sender, RoutedEventArgs e)
         {
-            foreach (var element in DependencyObjectExtension.GetAllChildren<TextBox>(this))
+            foreach (var element in this.GetAllChildren<TextBox>())
             {
                 element.Text = "";
                 SaveProgressHelper(element);
@@ -273,7 +273,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         protected void CheckIfHexIsOdd(Page page)
         {
             string triggeringField = "(Feld konnte leider nicht bestimmt werden)";
-            foreach (var elem in DependencyObjectExtension.GetAllChildren<TextBox>(page))
+            foreach (var elem in page.GetAllChildren<TextBox>())
             {
                 if (elem.Name.Contains("Hex") && (elem.Text.Length % 2 != 0))
                 {
@@ -321,7 +321,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
 
         private void ValidatePassword(TextBox textBox)
         {
-            foreach (var element in DependencyObjectExtension.GetAllChildren<TextBlock>(this))
+            foreach (var element in this.GetAllChildren<TextBlock>())
             {
                 if (element.Name == "PasswordBlock")
                 {
@@ -347,7 +347,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
 
         private void ValidateIv(TextBox textBox)
         {
-            foreach (var element in DependencyObjectExtension.GetAllChildren<TextBlock>(this))
+            foreach (var element in this.GetAllChildren<TextBlock>())
             {
                 if (element.Name == "IvBlock")
                 {
@@ -381,7 +381,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
 
         private void SaveProgressHelper(TextBox element)
         {
-            var parentPage = DependencyObjectExtension.GetParentPage(element) as Page;
+            var parentPage = element.GetParentPage() as Page;
             if (parentPage != null)
             {
                 string key = parentPage.Title + "_" + element.Name;
@@ -396,7 +396,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         private string PickoutField()
         {
             StringBuilder line = new StringBuilder();
-            foreach (TextBox element in DependencyObjectExtension.GetAllChildren<TextBox>(this))
+            foreach (TextBox element in this.GetAllChildren<TextBox>())
             {
                 if (Title.Contains("DecryptionPage"))
                 {
@@ -425,7 +425,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         {
             if (value.Length > 0)
             {
-                foreach (var element in DependencyObjectExtension.GetAllChildren<TextBox>(this))
+                foreach (var element in this.GetAllChildren<TextBox>())
                 {
                     if (Title.Equals("EncryptionPage"))
                     {
@@ -451,7 +451,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         /// </summary>
         private void FillingField(string filePath)
         {
-            foreach (var textBox in DependencyObjectExtension.GetAllChildren<TextBox>(this))
+            foreach (var textBox in this.GetAllChildren<TextBox>())
             {
                 if (textBox.Name.Contains("UtfPlaintext") || textBox.Name.Contains("UtfCiphertext"))
                 {

@@ -113,7 +113,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Tutorials
 
             highlightedPath.Fill = Application.Current.FindResource("BackAreaBrush") as SolidColorBrush;
 
-            var parentPage = DependencyObjectExtension.GetParentPage(stepPath) as Page;
+            var parentPage = stepPath.GetParentPage() as Page;
             if (parentPage == null || parentPage.Title != "AesGcmOverviewPage") return;
             try
             {
