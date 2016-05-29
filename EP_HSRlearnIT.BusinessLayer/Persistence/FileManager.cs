@@ -96,16 +96,28 @@ namespace EP_HSRlearnIT.BusinessLayer.Persistence
             return CreateFile(folderPath, fileName);
         }
 
-        public static void AvoidOverflow(string filePath, long maxSizeLogfile, int rowsToDelete)
+        /// <summary>
+        /// Method checks the size of a file and reduces it on the basis of rowsToDelete
+        /// </summary>
+        /// <param name="filePath">Path of the file which is checked.</param>
+        /// <param name="maxSizeLogfile">Defined the maximum of the Size for a file.</param>
+        /// <param name="rowsToDelete">Number of rows which are deleted.</param>
+        /// <param name="overflowMessage">Message which is notified the end of a reduced file. 
+        /// Default: File ends in "\n***\nThe oldest {rowsToDelete} rows were removed.\n***"</param>
+        public static void AvoidOverflow(string filePath, long maxSizeLogfile, int rowsToDelete, string overflowMessage)
         {
             if (GetSize(filePath) >= maxSizeLogfile)
             {
                 List<string> lines = ReadAllLines(filePath).ToList();
                 lines.RemoveRange(0, rowsToDelete);
                 SwapContents(filePath, lines);
-                AppendContent(filePath, $"{Environment.NewLine}***" +
-                                        $"{Environment.NewLine}The oldest {rowsToDelete} rows were removed." +
-                                        $"{Environment.NewLine}***");
+                if (overflowMessage == "")
+                {
+                    overflowMessage = $"{Environment.NewLine}***" +
+                                       $"{Environment.NewLine}The oldest {rowsToDelete} rows were removed." +
+                                       $"{Environment.NewLine}***";
+                }
+                AppendContent(filePath, overflowMessage);
             }
         }
 

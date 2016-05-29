@@ -31,8 +31,8 @@ namespace EP_HSRlearnIT.BusinessLayer.Testing.PersistenceTest
             }
 
             List<string> fileContent = FileManager.ReadAllLines(@"c:\logs\ExceptionLog.log").ToList();
-            int fileSize = fileContent.Count;
-            string strToCompare = fileContent[fileSize - 3] + Environment.NewLine + fileContent[fileSize - 2] + Environment.NewLine + fileContent[fileSize - 1];
+            int numberOfLines = fileContent.Count;
+            string strToCompare = fileContent[numberOfLines - 3] + Environment.NewLine + fileContent[numberOfLines - 2] + Environment.NewLine + fileContent[numberOfLines - 1];
             Assert.AreEqual(expectedStr, strToCompare);
         }
     }

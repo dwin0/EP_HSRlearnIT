@@ -85,15 +85,38 @@ namespace EP_HSRlearnIT.BusinessLayer.Testing.PersistenceTest
             string fileName = @"c:\temp\HSRlearnIT\Test\OverflowTest.txt";
             var sizeInMb = 5;
             byte[] data = new byte[(sizeInMb+1) * 1024 * 1024];
+
             Random random = new Random();
             random.NextBytes(data);
             File.WriteAllBytes(fileName, data);
-            FileManager.AvoidOverflow(fileName, sizeInMb, 20);
+
+            FileManager.AvoidOverflow(fileName, sizeInMb, 20, "");
             List<string> fileContent = FileManager.ReadAllLines(fileName).ToList();
             string lastSecondLine = fileContent[fileContent.Count - 2];
             Assert.AreEqual("The oldest 20 rows were removed.", lastSecondLine);
         }
 
+        [TestMethod]
+        public void AvoidOverflowOwnMessageTest()
+        {
+            string fileName = @"c:\temp\HSRlearnIT\Test\OverflowOwnMessageTest.txt";
+            int deleteRows = 200;
+            string message = $"Your file is full.{Environment.NewLine}I delete {deleteRows} lines.";
+            var sizeInMb = 5;
+
+            byte[] data = new byte[(sizeInMb + 1) * 1024 * 1024];
+            Random random = new Random();
+            random.NextBytes(data);
+            File.WriteAllBytes(fileName, data);
+
+            FileManager.AvoidOverflow(fileName, sizeInMb, deleteRows, message);
+
+            List<string> fileContent = FileManager.ReadAllLines(fileName).ToList();
+            int numberOfLines = fileContent.Count;
+            string lastLines = fileContent[numberOfLines - 2] + Environment.NewLine + fileContent[numberOfLines - 1];
+
+            Assert.AreEqual(message, lastLines);
+        }
 
         [ClassCleanup]
         public static void CleanUp()

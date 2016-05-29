@@ -222,8 +222,8 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                 string line = PickoutField();
 
                 FileManager.OverwriteContent(fullFilePath, line);
-                string message = "Der Export war erfolgreich.";
-                string title = "Export";
+                const string message = "Der Export war erfolgreich.";
+                const string title = "Export";
                 MessageBox.Show(message, title, MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
@@ -280,8 +280,8 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                 {
                         FillingField(filePath);
                 }
-                string message = "Der Import wurde erfolgreich abgeschlossen.";
-                string title = "Import";
+                const string message = "Der Import wurde erfolgreich abgeschlossen.";
+                const string title = "Import";
                 MessageBox.Show(message, title, MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }

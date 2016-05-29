@@ -414,7 +414,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
             }                
             _checkingFirstTime = false;
             string message = $"Alle Felder sind belegt. {Environment.NewLine}Klicke auf JA, um deine Lösung auszuwerten.";
-            string title = "Spiel beendet";
+            const string title = "Spiel beendet";
             if (MessageBox.Show(message, title, MessageBoxButton.YesNo, MessageBoxImage.Information, MessageBoxResult.Yes) ==
                 MessageBoxResult.Yes)
             {
@@ -522,14 +522,14 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
                 }
             if (correctAnswers == _addedSavedData.Count && correctAnswers == _dropLocationsRectangles.Count)
             {
-                string message ="Super, du hast das Spiel korrekt ausgefüllt. Gratuliere!";
-                string title = "Spielresultat";
+                const string message = "Super, du hast das Spiel korrekt ausgefüllt. Gratuliere!";
+                const string title = "Spielresultat";
                 MessageBox.Show(message, title, MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
             {
                 string message =$"Korrekte Antwort(en): {correctAnswers} {Environment.NewLine}Falsche Antwort(en): {wrongAnswers}";
-                string title = "Spielresultat";
+                const string title = "Spielresultat";
                 MessageBox.Show(message, title, MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }

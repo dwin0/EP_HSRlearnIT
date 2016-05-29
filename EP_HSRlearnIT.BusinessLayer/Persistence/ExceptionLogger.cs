@@ -31,7 +31,7 @@ namespace EP_HSRlearnIT.BusinessLayer.Persistence
             string filePath = FileManager.SaveFile(Path, FileName);
             string entry = $"Exception: {DateTime.Now.ToString(CultureInfo.CurrentCulture)}: {sourceMethod}{Environment.NewLine}{exceptionMessage}{Environment.NewLine}{stackTrace}{Environment.NewLine}";
             FileManager.AppendContent(filePath, entry);
-            FileManager.AvoidOverflow(filePath, MaxSizeLogfile, RowsToDelete);
+            FileManager.AvoidOverflow(filePath, MaxSizeLogfile, RowsToDelete, "");
         }
 
         #endregion       
