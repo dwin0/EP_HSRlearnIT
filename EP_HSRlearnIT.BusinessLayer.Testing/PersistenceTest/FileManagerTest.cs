@@ -76,7 +76,7 @@ namespace EP_HSRlearnIT.BusinessLayer.Testing.PersistenceTest
         public void IsExistTest()
         {
             FileManager.SaveFile(@"c:\temp\HSRlearnIT\Test\ExistTest.txt");
-            Assert.IsTrue(FileManager.IsExist(@"c:\temp\HSRlearnIT\Test\ExistTest.txt"));
+            Assert.IsTrue(FileManager.Exists(@"c:\temp\HSRlearnIT\Test\ExistTest.txt"));
         }
 
         [TestMethod]

@@ -66,7 +66,7 @@ namespace EP_HSRlearnIT.BusinessLayer.Persistence
             return File.ReadLines(filePath);
         }
 
-        public static bool IsExist(string filePath)
+        public static bool Exists(string filePath)
         {
             return File.Exists(filePath);
         }

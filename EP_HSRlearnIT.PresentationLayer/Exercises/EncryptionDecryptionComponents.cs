@@ -17,7 +17,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
 
 {
     /// <summary>
-    /// In this class are all components which can be called on both Encryption and Decryption in the same way.
+    /// This class contains all components which can be called on both Encryption and Decryption in the same way.
     /// </summary>
     public abstract class EncryptionDecryptionComponents : Page
     {
@@ -29,7 +29,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
 
         #region Constructors
         /// <summary>
-        /// Initializes a AesGcmAdapter, which can be used in this class.
+        /// Initializes a AesGcmAdapter, which is the connection to the external AES-GCM Library.
         /// </summary>
         protected EncryptionDecryptionComponents()
         {
@@ -41,33 +41,27 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         #region Public Methods
         /// <summary>
         /// This event is used to convert the TextBox input into Hex Values and update the correspondig HexTextBox.
-        /// The input will be validate, if it is a key or an iv. This validation checks if the key or iv is big enough
-        /// if it is not big enough a warning is shown. 
         /// </summary>
-        /// <param name="sender">Contains the control which raised the event.</param>
-        /// <param name="e"></param>
         public void TextBox_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            //Get control that raised this event
             var textBox = sender as TextBox;
 
-            //Get control that will be updated
             if (textBox != null)
             {
+                //Get control that will be updated
                 string hexFieldName = "Hex" + textBox.Name.Substring(3);
                 TextBox hexBox = (TextBox)FindName(hexFieldName);
                 ChangeHexBox(textBox.Text, hexBox);
-                SetShortInputWarning(hexBox);
+                ValidateInput(hexBox);
             }
         }
 
         /// <summary>
-        /// This Method is used to convert the TextBox input into Hex Values and update the correspondig HexTextBox.
-        /// It can be called, if there is no way to register an event.
+        /// This Method is used to convert the Utf-8 TextBox input into Hex Values and update the correspondig HexTextBox.
         /// </summary>
         /// <param name="values">String which is converted into hex.</param>
         /// <param name="hexBox">The hexBox which will be updated with the converted values.</param>
-        public void ChangeHexBox(string values, TextBox hexBox)
+        protected void ChangeHexBox(string values, TextBox hexBox)
         {
             if (hexBox == null) { return;}
 
@@ -78,59 +72,56 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         }
 
         /// <summary>
-        /// This event is used to convert the HexTextBox input into chars and update the corresponding TextBox.
+        /// This event is used to convert the HexTextBox input into Utf-8 chars and update the corresponding TextBox.
         /// If a non hex value is entered a warning will be shown.
-        /// The input will be validate, if it is a key or an iv. This validation checks if the key or iv is big enough
-        /// if it is not big enough a warning is shown. 
         /// </summary>
-        /// <param name="sender">Contains the control which raised the event.</param>
-        /// <param name="e"></param>
         public void HexTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
         {
             var hexTextBox = sender as TextBox;
-            if (hexTextBox != null)
+            if (hexTextBox == null) { return; }
+
+            ValidateInput(hexTextBox);
+
+            //Get the corresponding hexWarningBlock (Field above the HexBox).
+            //Ex: HexCiphertextBox/TextInputBox -> HexCiphertextBlock/WarningBlock
+            string hexTextBoxName = hexTextBox.Name;
+            string hexWarningBlockName = hexTextBoxName.Substring(0, hexTextBoxName.Length - 3) + "Block";
+            TextBlock hexWarningBlock = (TextBlock)FindName(hexWarningBlockName);
+
+            //Get textBox that will be updated. Ex: HexIvBox -> IvBox
+            string textBoxName = "Utf" + hexTextBoxName.Substring(3, hexTextBoxName.Length - 3);
+            TextBox textBox = (TextBox)FindName(textBoxName);
+
+            if (hexWarningBlock == null || textBox == null)
             {
-                SetShortInputWarning(hexTextBox);
+                ExceptionLogger.WriteToLogfile("HexTextBox_OnTextChanged", "hexWarningBlock OR textBox was null", "");
+                return;
+            }
 
-                //Get the corresponding hexWarningBlock (Field above the HexBox).
-                //The Box suffix (3 chars) is removed and Block is appended.
-                string hexTextBoxName = hexTextBox.Name;
-                string hexWarningBlockName = hexTextBoxName.Substring(0, hexTextBoxName.Length - 3) + "Block";
-                TextBlock hexWarningBlock = (TextBlock)FindName(hexWarningBlockName);
+            RemoveWarning(hexWarningBlock);
 
-                //Get textBox that will be updated. Ex: HexIvBox -> IvBox
-                string textBoxName = "Utf" + hexTextBoxName.Substring(3, hexTextBoxName.Length - 3);
-                TextBox textBox = (TextBox)FindName(textBoxName);
-                
-                if (hexWarningBlock == null || textBox == null) { return; }
+            //remove the event handler temporary, else a loop will occure
+            textBox.TextChanged -= TextBox_OnTextChanged;
 
-                CheckIfWarningIsAlreadySet(hexWarningBlock);
+            string hexValue = hexTextBox.Text;
 
-                //remove the event handler temporary, else a loop will occure
-                textBox.TextChanged -= TextBox_OnTextChanged;
+            if (FoundNonHexValues(hexValue, hexWarningBlock))
+            {
+                textBox.TextChanged += TextBox_OnTextChanged;
+                return;
+            }
 
-                string hexValue = hexTextBox.Text;
-
-                if (FoundNonHexValues(hexValue, hexWarningBlock))
-                {
-                    textBox.TextChanged += TextBox_OnTextChanged;
-                    return;
-                }
-
-                if (hexValue.Length % 2 == 0)
-                {
-                    textBox.Text = Library.BytesToString(Library.HexStringToDecimalByteArray(hexValue));
-                    textBox.TextChanged += TextBox_OnTextChanged;
-                }
+            if (hexValue.Length % 2 == 0)
+            {
+                textBox.Text = Library.BytesToString(Library.HexStringToDecimalByteArray(hexValue));
+                textBox.TextChanged += TextBox_OnTextChanged;
             }
         }
 
         /// <summary>
         /// This event is used to save the Progress of a HexTextBox.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e">Contains the control which raised the event.</param>
-        public void HexTextBox_OnLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        protected void HexTextBox_OnLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
             TextBox hexTextBox = e.Source as TextBox;
             if (hexTextBox != null)
@@ -142,9 +133,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         /// <summary>
         /// This event is used to save the Progress of a TextBox.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e">Contains the control which raised the event.</param>
-        public void TextBox_OnLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        protected void TextBox_OnLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
             TextBox textBox = e.Source as TextBox;
             if (textBox != null)
@@ -156,34 +145,13 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         }
 
         /// <summary>
-        /// A warning is shown for the Key and the Iv, if these parameter are to small.
-        /// </summary>
-        /// <param name="hexTextBox">The HexBox which should be checked</param>
-        public void SetShortInputWarning(TextBox hexTextBox)
-        {
-            if (hexTextBox.Name == "HexPasswordBox")
-            {
-                SetPasswordWarning(hexTextBox);
-            }
-            else if (hexTextBox.Name == "HexIvBox")
-            {
-                SetIvWarning(hexTextBox);
-            }
-        }
-
-        /// <summary>
         /// This event is used to reset all TextBoxes of the Encryption or the Decryption Page.
         /// </summary>
-        /// <param name="sender">is not used</param>
-        /// <param name="e">is not used</param>
-        public void ResetButton_OnClick(object sender, RoutedEventArgs e)
+        protected void ResetButton_OnClick(object sender, RoutedEventArgs e)
         {
             foreach (var element in DependencyObjectExtension.GetAllChildren<TextBox>(this))
             {
-                if (element.Text != "")
-                {
-                    element.Text = "";
-                }
+                element.Text = "";
                 SaveProgressHelper(element);
             }
         }
@@ -191,19 +159,17 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         /// <summary>
         /// This event starts the windows explorer to save a hex file.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        public void ExportButton_OnClick(object sender, RoutedEventArgs e)
+        protected void ExportButton_OnClick(object sender, RoutedEventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog()
             {
                 Filter = "Text File (*.txt)|*.txt",
-                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
                 OverwritePrompt = true,
                 AddExtension = true,
                 DefaultExt = "txt",
                 ValidateNames = true,
-                Title = "Exportieren der Verschlüsselungsparamter"
+                Title = "Datei exportieren"
             };
 
             if (saveFileDialog.ShowDialog() == true)
@@ -215,7 +181,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                     fullFilePath += ".txt";
                 }
 
-                if (!FileManager.IsExist(fullFilePath))
+                if (!FileManager.Exists(fullFilePath))
                 {
                     FileManager.SaveFile(fullFilePath);
                 }
@@ -231,17 +197,15 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         /// <summary>
         /// This event starts the windows explorer to import a file.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        public void ImportButton_OnClick(object sender, RoutedEventArgs e)
+        protected void ImportButton_OnClick(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog()
             {
                 Filter = "Text File (*.txt)|*.txt",
-                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
                 CheckFileExists = true,
                 CheckPathExists = true,
-                Title = "Importieren der Entschlüsselungsparameter"
+                Title = "Datei importieren"
             };
 
             if (openFileDialog.ShowDialog() == true && openFileDialog.SafeFileName != "")
@@ -276,6 +240,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                         break;
                     }
                 }
+
                 if (noHexData)
                 {
                         FillingField(filePath);
@@ -289,7 +254,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         /// <summary>
         /// Method to show a messageBox if a char is represented as more than one byte
         /// </summary>
-        public void ShowTooBigCharError()
+        protected void ShowTooBigCharError()
         {
             const string message = "Es wurde ein Zeichen, welches mit mehr als einem Byte repräsentiert wird, eingegeben. " +
                                     "Bitte überprüfe und korrigiere die Eingabe.";
@@ -300,7 +265,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         /// <summary>
         /// Method to check if an odd number of Hex-Values exists
         /// </summary>
-        public void CheckIfHexIsOdd(Page page)
+        protected void CheckIfHexIsOdd(Page page)
         {
             string triggeringField = "(Feld konnte leider nicht bestimmt werden)";
             foreach (var elem in DependencyObjectExtension.GetAllChildren<TextBox>(page))
@@ -319,11 +284,11 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         #endregion
 
         #region Private Method
-        private void CheckIfWarningIsAlreadySet(TextBlock hexWarningBlock)
+        private void RemoveWarning(TextBlock hexWarningBlock)
         {
             //check if the text was set to " Ungültige Eingabe!" in an earlier call of this method and reverse it 
             string textBlockName = hexWarningBlock.Text;
-            if (textBlockName.Contains(" Ungültige Eingabe!"))
+            if (textBlockName.Contains("Ungültige Eingabe!"))
             {
                 //19 is the length of suffix text " Ungültige Eingabe!"
                 textBlockName = textBlockName.Substring(0, textBlockName.Length - 19);
@@ -332,35 +297,38 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             }
         }
 
-        private void SetPasswordWarning(TextBox textBox)
+        /// <summary>
+        /// A warning is shown for the Key and the Iv, if these parameter are not i a valid range.
+        /// </summary>
+        /// <param name="hexTextBox">The HexBox which should be checked</param>
+        private void ValidateInput(TextBox hexTextBox)
+        {
+            switch (hexTextBox.Name)
+            {
+                case "HexPasswordBox":
+                    ValidatePassword(hexTextBox);
+                    break;
+                case "HexIvBox":
+                    ValidateIv(hexTextBox);
+                    break;
+            }
+        }
+
+        private void ValidatePassword(TextBox textBox)
         {
             foreach (var element in DependencyObjectExtension.GetAllChildren<TextBlock>(this))
             {
                 if (element.Name == "PasswordBlock")
                 {
-                    if (textBox.Text.Length % 32 != 0)
+                    if (textBox.Text.Length != 32 && textBox.Text.Length != 0)
                     {
-                        if (textBox.Text.Length < 16 && textBox.Text.Length != 0)
+                        if (textBox.Text.Length < 16)
                         {
-                            if (!element.Text.Contains("klein"))
-                            {
-                                if (element.Text.Contains("ok"))
-                                {
-                                    element.Text = element.Text.Substring(0, 4);
-                                }
-                                element.Text = element.Text + " kleiner 8 Byte ist nicht erlaubt.";
-                                element.Foreground = Brushes.Red;
-                            }
-                        } else { 
-                            if (!element.Text.Contains("ok"))
-                            {
-                                if (element.Text.Contains("klein"))
-                                {
-                                    element.Text = element.Text.Substring(0, 4);
-                                }
-                                element.Text = element.Text + " ok, Standard fordert allerdings 32 Byte.";
-                                element.Foreground = Brushes.DarkOrange;
-                            }
+                            element.Text = "Key: kleiner als 8 Byte ist nicht erlaubt.";
+                            element.Foreground = Brushes.Red;
+                        } else {
+                            element.Text = "Key: ok, Standard fordert allerdings 32 Byte.";
+                            element.Foreground = Brushes.DarkOrange;
                         }
                     }
                     else
@@ -372,19 +340,16 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             }
         }
 
-        private void SetIvWarning(TextBox textBox)
+        private void ValidateIv(TextBox textBox)
         {
             foreach (var element in DependencyObjectExtension.GetAllChildren<TextBlock>(this))
             {
                 if (element.Name == "IvBlock")
                 {
-                    if (textBox.Text.Length % 24 != 0 && textBox.Text.Length != 0)
+                    if (textBox.Text.Length != 24 && textBox.Text.Length != 0)
                     {
-                        if (!element.Text.Contains("muss"))
-                        {
-                            element.Text = element.Text + " falls selbstgewählt, muss IV 12 Byte sein.";
-                            element.Foreground = Brushes.Red;
-                        }
+                        element.Text ="IV: (optional) falls selbstgewählt, muss IV 12 Byte sein.";
+                        element.Foreground = Brushes.Red;
                     }
                     else
                     {
@@ -414,8 +379,7 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
             var parentPage = DependencyObjectExtension.GetParentPage(element) as Page;
             if (parentPage != null)
             {
-                string pageName = parentPage.Title;
-                string key = pageName + "_" + element.Name;
+                string key = parentPage.Title + "_" + element.Name;
                 Progress.SaveProgress(key, element.Text);
             }
         }
@@ -480,7 +444,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         /// <summary>
         /// Method is filling the whole file into the Plaintext or Ciphertext regulated by the activ page.
         /// </summary>
-        /// <param name="filePath"></param>
         private void FillingField(string filePath)
         {
             foreach (var textBox in DependencyObjectExtension.GetAllChildren<TextBox>(this))
@@ -500,10 +463,9 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         /// <param name="value">Content which is written.</param>
         private void PostContent(TextBox element, string value)
         {
-            TextBox fieldOnForm = FindName(element.Name) as TextBox;
-            if (fieldOnForm != null)
+            if (element != null)
             {
-                fieldOnForm.Text = value;
+                element.Text = value;
             }
         }
 

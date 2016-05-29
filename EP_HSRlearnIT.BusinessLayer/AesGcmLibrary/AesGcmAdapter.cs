@@ -212,9 +212,8 @@ namespace EP_HSRlearnIT.BusinessLayer.AesGcmLibrary
         public string ConvertToHexString(string values)
         {
             StringBuilder sb = new StringBuilder();
-            foreach (char letter in values)
+            foreach (int value in values.Select(Convert.ToInt32))
             {
-                int value = Convert.ToInt32(letter);
                 sb.AppendFormat("{0:x2}", value);
             }
             return sb.ToString();
