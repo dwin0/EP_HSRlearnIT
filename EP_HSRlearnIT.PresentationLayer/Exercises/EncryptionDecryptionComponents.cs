@@ -57,21 +57,6 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
         }
 
         /// <summary>
-        /// This Method is used to convert the Utf-8 TextBox input into Hex Values and update the correspondig HexTextBox.
-        /// </summary>
-        /// <param name="values">String which is converted into hex.</param>
-        /// <param name="hexBox">The hexBox which will be updated with the converted values.</param>
-        protected void ChangeHexBox(string values, TextBox hexBox)
-        {
-            if (hexBox == null) { return;}
-
-            //remove the event handler temporary, else a loop will occure
-            hexBox.TextChanged -= HexTextBox_OnTextChanged;
-            hexBox.Text = Library.ConvertToHexString(values);
-            hexBox.TextChanged += HexTextBox_OnTextChanged;
-        }
-
-        /// <summary>
         /// This event is used to convert the HexTextBox input into Utf-8 chars and update the corresponding TextBox.
         /// If a non hex value is entered a warning will be shown.
         /// </summary>
@@ -116,6 +101,26 @@ namespace EP_HSRlearnIT.PresentationLayer.Exercises
                 textBox.Text = Library.BytesToString(Library.HexStringToDecimalByteArray(hexValue));
                 textBox.TextChanged += TextBox_OnTextChanged;
             }
+        }
+
+        #endregion
+
+
+        #region Protected Methods
+
+        /// <summary>
+        /// This Method is used to convert the Utf-8 TextBox input into Hex Values and update the correspondig HexTextBox.
+        /// </summary>
+        /// <param name="values">String which is converted into hex.</param>
+        /// <param name="hexBox">The hexBox which will be updated with the converted values.</param>
+        protected void ChangeHexBox(string values, TextBox hexBox)
+        {
+            if (hexBox == null) { return;}
+
+            //remove the event handler temporary, else a loop will occure
+            hexBox.TextChanged -= HexTextBox_OnTextChanged;
+            hexBox.Text = Library.ConvertToHexString(values);
+            hexBox.TextChanged += HexTextBox_OnTextChanged;
         }
 
         /// <summary>

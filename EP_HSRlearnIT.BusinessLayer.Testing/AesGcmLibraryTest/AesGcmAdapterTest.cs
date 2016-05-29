@@ -19,17 +19,17 @@ namespace EP_HSRlearnIT.BusinessLayer.Testing.AesGcmLibraryTest
         [TestMethod]
         public void EncryptTestCase14Test()
         {
-            string key = "0000000000000000000000000000000000000000000000000000000000000000";
-            string plaintext = "00000000000000000000000000000000";
-            string iv = "000000000000000000000000";
-            string aad = "";
+            const string key = "0000000000000000000000000000000000000000000000000000000000000000";
+            const string plaintext = "00000000000000000000000000000000";
+            const string iv = "000000000000000000000000";
+            const string aad = "";
             Tuple<string, string> returnValue = Library.Encrypt(key, plaintext, iv, aad);
 
             string resultingTag = returnValue.Item1;
             string resultingCiphertext = returnValue.Item2;
 
-            string expectedTag = "d0d1c8a799996bf0265b98b5d48ab919";
-            string expectedCiphertext = "cea7403d4d606b6e074ec5d3baf39d18";
+            const string expectedTag = "d0d1c8a799996bf0265b98b5d48ab919";
+            const string expectedCiphertext = "cea7403d4d606b6e074ec5d3baf39d18";
 
             Assert.AreEqual(expectedTag, resultingTag);
             Assert.AreEqual(expectedCiphertext, resultingCiphertext);
@@ -38,27 +38,27 @@ namespace EP_HSRlearnIT.BusinessLayer.Testing.AesGcmLibraryTest
         [TestMethod, ExpectedException(typeof(CryptographicException))]
         public void EncryptWrongKeySizeTest()
         {
-            string key = "00";
-            string plaintext = "00000000000000000000000000000000";
-            string iv = "000000000000000000000000";
-            string aad = "";
+            const string key = "00";
+            const string plaintext = "00000000000000000000000000000000";
+            const string iv = "000000000000000000000000";
+            const string aad = "";
             Library.Encrypt(key, plaintext, iv, aad);
         }
 
         [TestMethod]
         public void EncryptOptionalIvTest()
         {
-            string key = "0000000000000000000000000000000000000000000000000000000000000000";
-            string plaintext = "00000000000000000000000000000000";
-            string iv = "";
-            string aad = "";
+            const string key = "0000000000000000000000000000000000000000000000000000000000000000";
+            const string plaintext = "00000000000000000000000000000000";
+            const string iv = "";
+            const string aad = "";
             Tuple<string, string> returnValue = Library.Encrypt(key, plaintext, iv, aad);
 
             string resultingTag = returnValue.Item1;
             string resultingCiphertext = returnValue.Item2;
 
-            string expectedTag = "d0d1c8a799996bf0265b98b5d48ab919";
-            string expectedCiphertext = "cea7403d4d606b6e074ec5d3baf39d18";
+            const string expectedTag = "d0d1c8a799996bf0265b98b5d48ab919";
+            const string expectedCiphertext = "cea7403d4d606b6e074ec5d3baf39d18";
 
             Assert.AreEqual(expectedTag, resultingTag);
             Assert.AreEqual(expectedCiphertext, resultingCiphertext);
@@ -67,15 +67,15 @@ namespace EP_HSRlearnIT.BusinessLayer.Testing.AesGcmLibraryTest
         [TestMethod]
         public void DecryptTestCase14Test()
         {
-            string key = "0000000000000000000000000000000000000000000000000000000000000000";
-            string cyphertext = "cea7403d4d606b6e074ec5d3baf39d18";
-            string iv = "000000000000000000000000";
-            string aad = "";
-            string tag = "d0d1c8a799996bf0265b98b5d48ab919";
+            const string key = "0000000000000000000000000000000000000000000000000000000000000000";
+            const string cyphertext = "cea7403d4d606b6e074ec5d3baf39d18";
+            const string iv = "000000000000000000000000";
+            const string aad = "";
+            const string tag = "d0d1c8a799996bf0265b98b5d48ab919";
 
             string returnValue = Library.Decrypt(key,cyphertext, iv, aad, tag);
 
-            string expectedPlaintext = "00000000000000000000000000000000";
+            const string expectedPlaintext = "00000000000000000000000000000000";
 
             Assert.AreEqual(expectedPlaintext, returnValue);
         }
@@ -83,11 +83,11 @@ namespace EP_HSRlearnIT.BusinessLayer.Testing.AesGcmLibraryTest
         [TestMethod, ExpectedException(typeof(ArgumentException))]
         public void DecryptWrongTagTest()
         {
-            string key = "0000000000000000000000000000000000000000000000000000000000000000";
-            string cyphertext = "cea7403d4d606b6e074ec5d3baf39d18";
-            string iv = "000000000000000000000000";
-            string aad = "";
-            string tag = "aa";
+            const string key = "0000000000000000000000000000000000000000000000000000000000000000";
+            const string cyphertext = "cea7403d4d606b6e074ec5d3baf39d18";
+            const string iv = "000000000000000000000000";
+            const string aad = "";
+            const string tag = "aa";
 
             Library.Decrypt(key, cyphertext, iv, aad, tag);
         }
@@ -95,15 +95,15 @@ namespace EP_HSRlearnIT.BusinessLayer.Testing.AesGcmLibraryTest
         [TestMethod]
         public void DecryptOptionalIvTest()
         {
-            string key = "0000000000000000000000000000000000000000000000000000000000000000";
-            string cyphertext = "cea7403d4d606b6e074ec5d3baf39d18";
-            string iv = "";
-            string aad = "";
-            string tag = "d0d1c8a799996bf0265b98b5d48ab919";
+            const string key = "0000000000000000000000000000000000000000000000000000000000000000";
+            const string cyphertext = "cea7403d4d606b6e074ec5d3baf39d18";
+            const string iv = "";
+            const string aad = "";
+            const string tag = "d0d1c8a799996bf0265b98b5d48ab919";
 
             string returnValue = Library.Decrypt(key, cyphertext, iv, aad, tag);
 
-            string expectedPlaintext = "00000000000000000000000000000000";
+            const string expectedPlaintext = "00000000000000000000000000000000";
 
             Assert.AreEqual(expectedPlaintext, returnValue);
         }

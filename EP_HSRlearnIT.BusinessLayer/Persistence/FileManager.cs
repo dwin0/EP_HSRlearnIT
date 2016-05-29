@@ -104,7 +104,7 @@ namespace EP_HSRlearnIT.BusinessLayer.Persistence
         /// <param name="rowsToDelete">Number of rows which are deleted.</param>
         /// <param name="overflowMessage">Message which is notified the end of a reduced file. 
         /// Default: File ends in "\n***\nThe oldest {rowsToDelete} rows were removed.\n***"</param>
-        public static void AvoidOverflow(string filePath, long maxSizeLogfile, int rowsToDelete, string overflowMessage)
+        public static void AvoidOverflow(string filePath, long maxSizeLogfile, int rowsToDelete, string overflowMessage = "")
         {
             if (GetSize(filePath) >= maxSizeLogfile)
             {

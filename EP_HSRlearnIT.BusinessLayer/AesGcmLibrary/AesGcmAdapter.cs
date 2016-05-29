@@ -20,7 +20,7 @@ namespace EP_HSRlearnIT.BusinessLayer.AesGcmLibrary
         /// To encrypt, we need to know the key, the plaintext, iv and additional authenticated data (aad).
         /// The encryption is used like it is explained here: https://blogs.msdn.microsoft.com/b/shawnfa/archive/2009/03/17/authenticated-symmetric-encryption-in-net.aspx
         /// </summary>
-        /// <param name="key">Has to be 32 Byte</param>
+        /// <param name="key">Has to be 32 Byte.</param>
         /// <param name="plaintext">The plaintext will be encrypted.</param>
         /// <param name="iv">Is an opitional parameter, if the iv is null the default iv with 12 zero Bytes is set. If the iv is set it has to be 12 Bytes.</param>
         /// <param name="aad">Is an optional parameter, the algorithm can be used without it. The additional authenticated data will not be encrypted but are used in the process of the generation of the tag.</param>

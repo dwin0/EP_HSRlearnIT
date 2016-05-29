@@ -73,7 +73,7 @@ namespace EP_HSRlearnIT.BusinessLayer.Testing.PersistenceTest
         }
 
         [TestMethod]
-        public void IsExistTest()
+        public void ExistsTest()
         {
             FileManager.SaveFile(@"c:\temp\HSRlearnIT\Test\ExistTest.txt");
             Assert.IsTrue(FileManager.Exists(@"c:\temp\HSRlearnIT\Test\ExistTest.txt"));
@@ -82,15 +82,15 @@ namespace EP_HSRlearnIT.BusinessLayer.Testing.PersistenceTest
         [TestMethod]
         public void AvoidOverflowTest()
         {
-            string fileName = @"c:\temp\HSRlearnIT\Test\OverflowTest.txt";
-            var sizeInMb = 5;
+            const string fileName = @"c:\temp\HSRlearnIT\Test\OverflowTest.txt";
+            const int sizeInMb = 5;
             byte[] data = new byte[(sizeInMb+1) * 1024 * 1024];
 
             Random random = new Random();
             random.NextBytes(data);
             File.WriteAllBytes(fileName, data);
 
-            FileManager.AvoidOverflow(fileName, sizeInMb, 20, "");
+            FileManager.AvoidOverflow(fileName, sizeInMb, 20);
             List<string> fileContent = FileManager.ReadAllLines(fileName).ToList();
             string lastSecondLine = fileContent[fileContent.Count - 2];
             Assert.AreEqual("The oldest 20 rows were removed.", lastSecondLine);
@@ -99,10 +99,10 @@ namespace EP_HSRlearnIT.BusinessLayer.Testing.PersistenceTest
         [TestMethod]
         public void AvoidOverflowOwnMessageTest()
         {
-            string fileName = @"c:\temp\HSRlearnIT\Test\OverflowOwnMessageTest.txt";
-            int deleteRows = 200;
-            string message = $"Your file is full.{Environment.NewLine}I delete {deleteRows} lines.";
-            var sizeInMb = 5;
+            const string fileName = @"c:\temp\HSRlearnIT\Test\OverflowOwnMessageTest.txt";
+            const int deleteRows = 200;
+            string message = $"Your file is full.{Environment.NewLine}I deleted {deleteRows} lines.";
+            const int sizeInMb = 5;
 
             byte[] data = new byte[(sizeInMb + 1) * 1024 * 1024];
             Random random = new Random();

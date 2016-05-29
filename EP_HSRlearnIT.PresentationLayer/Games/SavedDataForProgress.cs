@@ -11,6 +11,9 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
     /// </summary>>
     internal class SavedDataForProgress
     {
+
+        #region Public Member
+
         public Rectangle DropRectangle; // Drop rectangle reference, there should be unique drop rectangles in whole _addedSavedData
         public Rectangle ChildReference;
 
@@ -19,9 +22,12 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         public double StrokeDashArray;
         public int OriginalImageChildIndex; // Index of original child we made copy of, it's index of imagebrush
         public int DropRectangleIndex; // Index of original child we made copy of, it's index of imagebrush
+        #endregion
 
 
-        public SavedDataForProgress()
+        #region Internal Methods
+
+        internal SavedDataForProgress()
         {
             OriginalImageChildIndex = -1;
             DropRectangle = null;
@@ -33,11 +39,12 @@ namespace EP_HSRlearnIT.PresentationLayer.Games
         /// Method which is responsible for checking an solution for its correctness
         /// </summary>
         /// <returns>all correct drop rectangle locations from an dropped element</returns>
-        public bool IsAnswerCorrect()
+        internal bool IsAnswerCorrect()
         {
             List<string> isCorrect;
             DragDropPage.CorrectAnswers.TryGetValue(OriginalImageChildIndex, out isCorrect);
             return isCorrect != null && isCorrect.Contains(DropRectangle.Name);
         }
+        #endregion
     }
 }
