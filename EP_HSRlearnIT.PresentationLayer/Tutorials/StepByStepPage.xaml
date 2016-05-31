@@ -70,7 +70,7 @@
             <Image Grid.Column="1" Grid.Row="2" Name="EncryptionDirection" Source="/Images/rightArrow-icon.png" VerticalAlignment="Top" Margin="-20,5,40,0"></Image>
             
             <TextBlock Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="2" Name="OutputTitle" Text="Output in Hex" FontFamily="Bold" FontSize="18" Margin="0,5,0,0" />
-            <ScrollViewer Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="2" Name="OutputScrollViewer" Margin="5,30,0,0">
+            <ScrollViewer Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="2" Name="OutputScrollViewer" Margin="0,30,0,0">
                 <TextBlock Name="Output" Text="Output from Algorithmus" TextWrapping="Wrap" FontSize="15" />
             </ScrollViewer>
 

@@ -7,7 +7,7 @@
         Icon="images/icon.png"
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"
-        Title="HSRlearnIT" Height="620" Width="1000" MinWidth="1000" MinHeight="620">
+        Title="HSR learnIT" Height="620" Width="1000" MinWidth="1000" MinHeight="620">
     <Grid Name="MainGrid" Margin="80, 10, 30, 10" Background="White" PreviewMouseDown="CollapseMenu_OnPreviewMouseDown">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*" MinWidth="200" MaxWidth="300"/>

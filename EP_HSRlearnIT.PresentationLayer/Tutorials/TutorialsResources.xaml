@@ -105,7 +105,7 @@ Wird beispielsweise ein Bild, mit vielen gleichen Farbpunkten, verschlüsselt, s
     
         <!--StepByStepPage Input & Output-->
     
-    <system:String x:Key="InputStep1">Zu verschlüsselnder 0128 Block: 00000000000000000000000000000000
+    <system:String x:Key="InputStep1">Zu verschlüsselnder 0^128 Block: 00000000000000000000000000000000
 AES Schlüssel K: feffe9928665731c6d6a8f9467308308feffe9928665731c6d6a8f9467308308
     </system:String>
     
@@ -148,10 +148,10 @@ AES Schlüssel K: feffe9928665731c6d6a8f9467308308feffe9928665731c6d6a8f94673083
 Hash Subkey H: acbef20579b4b8ebce889bac8732dad7
     </system:String>
     
-    <system:String x:Key="OutputStep7">Wert nach Multiplikation innerhalb des Galois-Feldes: 5165d242c2592c0a6375e2622cf925d2
+    <system:String x:Key="OutputStep7">Zwischenwert des Auth Tags nach der Multiplikation innerhalb des Galois-Feldes: 5165d242c2592c0a6375e2622cf925d2
     </system:String>
     
-    <system:String x:Key="InputStep9">Wert nach Multiplikation innerhalb des Galois-Feldes: 5165d242c2592c0a6375e2622cf925d2
+    <system:String x:Key="InputStep9">Zwischenwert des Auth Tags nach der Multiplikation innerhalb des Galois-Feldes: 5165d242c2592c0a6375e2622cf925d2
 Ciphertext1: 522dc1f099567d07f47f37a32a84427d
     </system:String>
     
@@ -162,7 +162,7 @@ Ciphertext1: 522dc1f099567d07f47f37a32a84427d
 Hash Subkey H: acbef20579b4b8ebce889bac8732dad7
     </system:String>
     
-    <system:String x:Key="OutputStep10">Wert nach Multiplikation innerhalb des Galois-Feldes: abe07e0bb62354177480b550f9f6cdcc
+    <system:String x:Key="OutputStep10">Zwischenwert des Auth Tags nach der Multiplikation innerhalb des Galois-Feldes: abe07e0bb62354177480b550f9f6cdcc
     </system:String>
     
     <system:String x:Key="InputStep11">Die jeweils notwendigen Inputs wurden bereits in den vorhergehenden Schritten einzeln
@@ -173,7 +173,7 @@ aufgelistet. Natürlich ergeben sich bei den Wiederholungen andere Werte.
 Natürlich ergeben sich bei den Wiederholungen andere Werte.
     </system:String>
     
-    <system:String x:Key="InputStep12">Letzter Wert nach Multiplikation innerhalb des Galois-Feldes aus der Wiederholung: 9249beaf520c48b912fa120bbf391dc8
+    <system:String x:Key="InputStep12">Letzter Wert des Auth Tags nach der Multiplikation innerhalb des Galois-Feldes aus der Wiederholung: 9249beaf520c48b912fa120bbf391dc8
 Hash Subkey H: acbef20579b4b8ebce889bac8732dad7
 
 Zwischenberechnung:
@@ -184,10 +184,10 @@ Längenangabe Ciphertext 64 Bit-Repräsentation: 000000000000001e0
 XOR der Galois-Feld Multiplikation aus der Wiederholung und 128 Bit Längenrepräsentation: 9249beaf520c481912fa120bbf391c28
     </system:String>
     
-    <system:String x:Key="OutputStep12">Wert nach der Multiplikation des XOR Ergebnis innerhalb des Galois-Feldes: 8bd0c4d8aacd391e67cca447e8c38f65
+    <system:String x:Key="OutputStep12">Zwischenwert des Auth Tags nach der Multiplikation des XOR Ergebnis innerhalb des Galois-Feldes: 8bd0c4d8aacd391e67cca447e8c38f65
     </system:String>
     
-    <system:String x:Key="InputStep13">Wert nach Multiplikation innerhalb des Galois-Feldes: 8bd0c4d8aacd391e67cca447e8c38f65
+    <system:String x:Key="InputStep13">Zwischenwert des Auth Tags nach der Multiplikation innerhalb des Galois-Feldes: 8bd0c4d8aacd391e67cca447e8c38f65
 Counter0: cafebabefacedbaddecaf88800000001
 AES Schlüssel K: feffe9928665731c6d6a8f9467308308feffe9928665731c6d6a8f9467308308
 128 pseudozufällige Bits resultierend aus der AES-Verschlüsselung: fd2caa16a5832e76aa132c1453eeda7e
